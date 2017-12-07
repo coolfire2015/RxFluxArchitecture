@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-arch/core-arch.iml" filepath="$PROJECT_DIR$/core-arch/core-arch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-custom/core-common.iml" filepath="$PROJECT_DIR$/core-custom/core-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-main/module-main.iml" filepath="$PROJECT_DIR$/module-main/module-main.iml" />
+    </modules>
+  </component>
+</project>

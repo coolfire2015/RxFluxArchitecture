@@ -1,0 +1,118 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    //lint设置
+    lintOptions {
+        //lint 不被终止
+        abortOnError false
+        //打Release版本时,不进行检测
+        checkReleaseBuilds false
+    }
+    //签名配置,自定义,用在defaultConfig中
+    signingConfigs {
+        debug {
+            storeFile file(STORE_DEBUG_FILE)
+        }
+        release {
+            storeFile file(STORE_RELEASE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
+    //默认配置
+    defaultConfig {
+        applicationId "com.huyingbao.simple"
+        multiDexEnabled true//支持Multidex分包
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+        signingConfig signingConfigs.debug
+        vectorDrawables.useSupportLibrary = true//使用vector图片
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        debug {
+            //显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFile 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.debug
+            //配置ndk
+            ndk {
+                abiFilters "arm64-v8a"
+                abiFilters "armeabi"
+                abiFilters "armeabi-v7a"
+                abiFilters "x86"
+            }
+        }
+        //自定义buildType.name
+        release {
+            //不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+            //配置ndk
+            ndk {
+                abiFilters "arm64-v8a"
+                abiFilters "armeabi"
+                abiFilters "armeabi-v7a"
+            }
+        }
+    }
+
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if ("release".equals(variant.buildType.name))
+                outputFileName = "dm_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+        }
+    }
+
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+
+    //Dex分包
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"//增加java堆内存大小
+    }
+    //Lambda表达式需要
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':module-main')
+
+    implementation "com.android.support:multidex:${MULTIDEX}"
+
+    implementation "com.android.support:support-annotations:${SUPPORT_VERSION}"
+    implementation "com.android.support:support-vector-drawable:${SUPPORT_VERSION}"
+
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+
+    implementation "com.jakewharton:butterknife:${BUTTER_KNIFE}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题颜色-->
+    <color name="primary">#00BCD4</color>
+    <color name="primary_background">#F2F2F2</color>
+    <!--内容文字,文字主颜色-->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <!--分割线-->
+    <color name="divider">#BDBDBD</color>
+    <!--系统-->
+    <color name="accent">#FF9800</color>
+    <color name="icons">#FFFFFF</color>
+</resources>

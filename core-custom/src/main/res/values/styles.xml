@@ -1,0 +1,93 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item><!--工具栏颜色 -->
+        <item name="colorPrimaryDark">@color/primary</item><!--状态栏颜色 -->
+        <item name="colorAccent">@color/accent</item><!--给EditText着色,形成反差色.按钮组件不支持着色-->
+
+        <!-- 弹出框样式 -->
+        <item name="actionOverflowMenuStyle">@style/CustomActionOverflowMenuStyle</item>
+        <!-- 弹出框字体样式 -->
+        <item name="textAppearanceSmallPopupMenu">@style/CustomTextAppearanceSmallPopupMenu</item>
+        <!-- 弹出框字体样式 -->
+        <item name="textAppearanceLargePopupMenu">@style/CustomTextAppearanceLargePopupMenu</item>
+
+        <item name="android:icon">@color/icons</item>
+        <item name="android:divider">@color/divider</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowBackground">@color/primary_background</item><!-- 窗口的背景颜色 -->
+        <item name="android:colorBackground">@color/primary_background</item><!-- 窗口的背景颜色 -->
+        <!-- 所有字体颜色 该字体颜色会覆盖textAppearanceSmallPopupMenu中颜色 -->
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item><!--toolbar左侧标题字体颜色 -->
+        <!--toolbar右侧菜单字体字体颜色 -->
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:actionMenuTextColor">@color/accent</item><!--菜单的文字按钮颜色-->
+        <item name="android:homeAsUpIndicator">@android:drawable/ic_menu_delete</item><!--返回按钮-->
+
+        <!-- 弹出框list样式 -->
+        <item name="android:dropDownListViewStyle">@style/CustomDropDownListViewStyle</item>
+        <item name="android:buttonStyle">@style/CustomButtonStyle</item><!--button样式-->
+    </style>
+    <!--应用页面通用-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item><!-- 设置没有标题 -->
+        <item name="android:windowDisablePreview">true</item><!--不显示预览页面-->
+    </style>
+    <!--引导页-->
+    <style name="AppTheme.NoActionBar.Loading">
+        <item name="android:windowBackground">@null</item><!-- 设置透明 -->
+        <item name="android:windowIsTranslucent">true</item><!-- 设置透明 -->
+    </style>
+    <!--默认的AppBarLayout样式-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--默认的弹出框样式-->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="actionOverflowMenuStyle">@style/CustomActionOverflowMenuStyle</item>
+    </style>
+
+    <!-- 弹出框list样式 -->
+    <style name="CustomDropDownListViewStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/divider</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+    <!-- 弹出框字体样式 会被 android:textColor 颜色 覆盖-->
+    <style name="CustomTextAppearanceLargePopupMenu" parent="TextAppearance.AppCompat.Widget.PopupMenu.Large">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+    <!--弹出框字体样式-->
+    <style name="CustomTextAppearanceSmallPopupMenu" parent="TextAppearance.AppCompat.Widget.PopupMenu.Small">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+    <!--menu 弹出框-->
+    <style name="CustomActionOverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <!--设置这一个属性那么其弹出的样式就与其他APP一样不会覆盖标题栏-->
+        <item name="overlapAnchor">false</item>
+        <!--弹出菜单背景色为标题栏的背景色-->
+        <item name="android:popupBackground">?attr/colorPrimary</item>
+        <item name="android:dropDownWidth">@dimen/dp_10</item>
+        <!--弹出菜单与点击图标的水平间距-->
+        <item name="android:dropDownHorizontalOffset">-150dip</item>
+        <!--弹出菜单与点击图标的垂直间距-->
+        <item name="android:dropDownVerticalOffset">@dimen/dp_4</item>
+        <!--<item name="android:dropDownItemStyle">@style/OverflowMenuItemStyle</item>-->
+        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
+        <item name="android:actionOverflowButtonStyle">?android:attr/actionOverflowButtonStyle
+        </item>
+        <item name="android:paddingRight">@dimen/dp_10</item>
+        <item name="android:actionMenuTextAppearance">@style/CustomActionMenuTextAppearance</item>
+    </style>
+    <!--menu 弹出框字体-->
+    <style name="CustomActionMenuTextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+    <!--按钮样式-->
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+</resources>
