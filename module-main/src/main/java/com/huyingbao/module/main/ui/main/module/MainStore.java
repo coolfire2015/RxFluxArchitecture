@@ -7,6 +7,7 @@ import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
+import com.huyingbao.module.main.action.MainActionCreator;
 import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.model.Product;
 import com.huyingbao.module.main.ui.main.model.Shop;
@@ -21,9 +22,10 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class MainStore extends RxStore {
-    private MutableLiveData<List<Product>> mProductList;
-    private MutableLiveData<Shop> mShop;
-    private MutableLiveData<Integer> mShopId;
+    public final MutableLiveData<List<Product>> mProductList = new MutableLiveData<>();
+    public final MutableLiveData<Shop> mShop = new MutableLiveData<>();
+    @Inject
+    MainActionCreator mActionCreator;
 
     @Inject
     public MainStore(Dispatcher dispatcher) {
@@ -50,17 +52,7 @@ public class MainStore extends RxStore {
     }
 
     public MutableLiveData<List<Product>> getProductList() {
-        if (mProductList == null) mProductList = new MutableLiveData<>();
+        if (mProductList.getValue() == null) mActionCreator.getProductList();
         return mProductList;
-    }
-
-    public MutableLiveData<Shop> getShop() {
-        if (mShop == null) mShop = new MutableLiveData<>();
-        return mShop;
-    }
-
-    public MutableLiveData<Integer> getShopId() {
-        if (mShopId == null) mShopId = new MutableLiveData<>();
-        return mShopId;
     }
 }

@@ -45,8 +45,7 @@ public class ShopFragment extends CommonFragment {
     public void afterCreate(Bundle savedInstanceState) {
         initActionBar("店铺信息");
         mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(MainStore.class);
-        mStore.getShopId().observe(this, integer -> mActionCreator.getShop(mContext, integer));
-        mStore.getShop().observe(this, shop -> showShopInfo(shop));
+        mStore.mShop.observe(this, shop -> showShopInfo(shop));
     }
 
     /**
@@ -55,6 +54,7 @@ public class ShopFragment extends CommonFragment {
      * @param shop
      */
     private void showShopInfo(Shop shop) {
+        if (shop == null) return;
         mTvShopLogin.setText(shop.getCode() + "");
         mTvShopName.setText(shop.getShopName());
         mTvShopStatistics.setText(shop.getShopType() + "");
