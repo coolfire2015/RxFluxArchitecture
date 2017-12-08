@@ -7,7 +7,6 @@ import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.module.main.action.MainActionCreator;
 import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.model.Product;
 import com.huyingbao.module.main.ui.main.model.Shop;
@@ -24,8 +23,6 @@ import javax.inject.Singleton;
 public class MainStore extends RxStore {
     public final MutableLiveData<List<Product>> mProductList = new MutableLiveData<>();
     public final MutableLiveData<Shop> mShop = new MutableLiveData<>();
-    @Inject
-    MainActionCreator mActionCreator;
 
     @Inject
     public MainStore(Dispatcher dispatcher) {
@@ -49,10 +46,5 @@ public class MainStore extends RxStore {
                 return;
         }
         postChange(new RxStoreChange(getClass().getSimpleName(), action));
-    }
-
-    public MutableLiveData<List<Product>> getProductList() {
-        if (mProductList.getValue() == null) mActionCreator.getProductList();
-        return mProductList;
     }
 }
