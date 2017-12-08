@@ -104,6 +104,7 @@ android {
 
 dependencies {
     implementation project(':module-main')
+    implementation project(':module-git')
 
     implementation "com.android.support:multidex:${MULTIDEX}"
 
@@ -113,6 +114,5 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
 
-    implementation "com.jakewharton:butterknife:${BUTTER_KNIFE}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

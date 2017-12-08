@@ -1,15 +1,13 @@
-package com.huyingbao.module.main;
+package com.huyingbao.module.git;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.PerActivity;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.main.action.MainApi;
-import com.huyingbao.module.main.ui.main.MainActivity;
-import com.huyingbao.module.main.ui.main.module.MainActivityModule;
-import com.huyingbao.module.main.ui.main.module.MainStore;
-import com.huyingbao.module.main.ui.shop.ShopActivity;
-import com.huyingbao.module.main.ui.shop.module.ShopActivityModule;
+import com.huyingbao.module.git.action.GitApi;
+import com.huyingbao.module.git.ui.GitActivity;
+import com.huyingbao.module.git.ui.module.GitActivityModule;
+import com.huyingbao.module.git.ui.module.GitStore;
 
 import javax.inject.Singleton;
 
@@ -27,29 +25,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class MainModule {
+public abstract class GitModule {
     @Singleton
     @Provides
-    static MainApi provideMainApi(OkHttpClient client) {
+    static GitApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.124.215.205:1337/")
+                .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(MainApi.class);
+        return retrofit.create(GitApi.class);
     }
 
     @Binds
     @IntoMap
-    @RxStoreKey(MainStore.class)
-    abstract RxStore provideMainStore(MainStore mainStore);
+    @RxStoreKey(GitStore.class)
+    abstract RxStore provideGitStore(GitStore gitStore);
 
     @PerActivity
-    @ContributesAndroidInjector(modules = MainActivityModule.class)
-    abstract MainActivity injectMainActivity();
-
-    @PerActivity
-    @ContributesAndroidInjector(modules = ShopActivityModule.class)
-    abstract ShopActivity injectShopActivity();
+    @ContributesAndroidInjector(modules = GitActivityModule.class)
+    abstract GitActivity injectGitActivity();
 }
