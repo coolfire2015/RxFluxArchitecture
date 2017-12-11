@@ -1,7 +1,7 @@
 package com.huyingbao.module.main.ui.main.module;
 
 
-import com.huyingbao.core.scope.PerFragment;
+import com.huyingbao.core.scope.FragmentScope;
 import com.huyingbao.module.main.ui.main.MainFragment;
 import com.huyingbao.module.main.ui.main.ProductFragment;
 import com.huyingbao.module.main.ui.main.ShopFragment;
@@ -14,15 +14,15 @@ import dagger.android.ContributesAndroidInjector;
  */
 @Module
 public abstract class MainActivityModule {
-    @PerFragment
+    @FragmentScope
     @ContributesAndroidInjector
     abstract MainFragment injectMainFragment();
 
-    @PerFragment
+    @FragmentScope
     @ContributesAndroidInjector
     abstract ShopFragment injectShopFragment();
 
-    @PerFragment
+    @FragmentScope
     @ContributesAndroidInjector
     abstract ProductFragment injectProductListFragment();
 }

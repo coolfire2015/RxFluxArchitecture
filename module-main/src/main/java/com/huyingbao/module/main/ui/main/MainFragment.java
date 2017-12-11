@@ -3,7 +3,7 @@ package com.huyingbao.module.main.ui.main;
 import android.os.Bundle;
 
 import com.huyingbao.core.custom.CommonFragment;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.R2;
 import com.huyingbao.module.main.action.MainActionCreator;
@@ -16,7 +16,7 @@ import butterknife.OnClick;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@PerActivity
+@ActivityScope
 public class MainFragment extends CommonFragment {
     @Inject
     MainActionCreator mActionCreator;

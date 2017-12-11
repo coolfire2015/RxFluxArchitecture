@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.custom.CommonFragment;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.action.GitActionCreator;
 import com.huyingbao.module.git.action.GitActions;
@@ -29,19 +29,17 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@PerActivity
+@ActivityScope
 public class GitRepoFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
-
+    protected List<GitRepo> mDataList = new ArrayList();
+    protected BaseQuickAdapter mAdapter = new GitRepoAdapter(mDataList);
     @Inject
     GitActionCreator mActionCreator;
     private GitStore mStore;
-
-    protected List<GitRepo> mDataList = new ArrayList();
-    protected BaseQuickAdapter mAdapter = new GitRepoAdapter(mDataList);
 
     @Inject
     public GitRepoFragment() {
@@ -54,7 +52,7 @@ public class GitRepoFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("商品列表");
+        initActionBar("仓库列表");
         initRecyclerView();
 
         showData();

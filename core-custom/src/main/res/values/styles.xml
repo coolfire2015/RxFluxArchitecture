@@ -36,10 +36,6 @@
         <item name="android:windowDisablePreview">true</item><!--不显示预览页面-->
     </style>
     <!--引导页-->
-    <style name="AppTheme.NoActionBar.Loading">
-        <item name="android:windowBackground">@null</item><!-- 设置透明 -->
-        <item name="android:windowIsTranslucent">true</item><!-- 设置透明 -->
-    </style>
     <!--默认的AppBarLayout样式-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--默认的弹出框样式-->

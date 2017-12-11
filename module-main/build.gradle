@@ -60,6 +60,16 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            }
+        }
+    }
+
     //Lambda表达式需要
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

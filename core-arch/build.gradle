@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation "com.android.support:multidex:${MULTIDEX}"
+
     api "android.arch.lifecycle:extensions:${ARCH_LIFECYCLE_VERSION}"
 
     api "com.android.support:support-v4:${SUPPORT_VERSION}"
@@ -41,4 +43,6 @@ dependencies {
     api "com.google.dagger:dagger-android-support:${DAGGER}"
 
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
+
+    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
 }

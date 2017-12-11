@@ -43,7 +43,6 @@ dependencies {
     api "com.alibaba:fastjson:${FAST_JSON}"
     api "com.google.code.gson:gson:${GSON}"
 
-    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
 
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"

@@ -1,7 +1,7 @@
 package com.huyingbao.module.git;
 
 import com.google.gson.GsonBuilder;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
 import com.huyingbao.module.git.action.GitApi;
@@ -38,12 +38,13 @@ public abstract class GitModule {
         return retrofit.create(GitApi.class);
     }
 
+    @Singleton
     @Binds
     @IntoMap
     @RxStoreKey(GitStore.class)
     abstract RxStore provideGitStore(GitStore gitStore);
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = GitActivityModule.class)
     abstract GitActivity injectGitActivity();
 }

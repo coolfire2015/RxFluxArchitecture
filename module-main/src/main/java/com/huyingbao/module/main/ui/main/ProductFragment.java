@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.custom.CommonFragment;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.action.MainActionCreator;
 import com.huyingbao.module.main.action.MainActions;
@@ -29,19 +29,17 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@PerActivity
+@ActivityScope
 public class ProductFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
-
+    protected List<Product> mDataList = new ArrayList();
+    protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
     @Inject
     MainActionCreator mActionCreator;
     private MainStore mStore;
-
-    protected List<Product> mDataList = new ArrayList();
-    protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
 
     @Inject
     public ProductFragment() {

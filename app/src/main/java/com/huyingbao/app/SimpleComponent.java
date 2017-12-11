@@ -3,7 +3,6 @@ package com.huyingbao.app;
 import android.app.Application;
 
 import com.huyingbao.core.module.CustomModule;
-import com.huyingbao.module.git.GitModule;
 import com.huyingbao.module.main.MainModule;
 
 import javax.inject.Singleton;
@@ -19,15 +18,14 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules = {
         MainModule.class,
-        GitModule.class,
         CustomModule.class,
         AndroidSupportInjectionModule.class})
-public interface AppComponent extends AndroidInjector<RxFluxApplication> {
+public interface SimpleComponent extends AndroidInjector<SimpleApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        AppComponent.Builder application(Application application);
+        SimpleComponent.Builder application(Application application);
 
-        AppComponent build();
+        SimpleComponent build();
     }
 }

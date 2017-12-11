@@ -1,10 +1,10 @@
-package com.huyingbao.app;
+package com.huyingbao.core;
 
 
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
-import com.huyingbao.core.RxFlux;
+import com.huyingbao.core.arch.BuildConfig;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -12,32 +12,26 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class RxFluxApplication extends DaggerApplication {
+public abstract class RxFluxApp extends DaggerApplication {
     @Inject
     RxFlux mRxFlux;
-
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);// multidex分包
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(mRxFlux);
         initDebug();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);// multidex分包
     }
 
     /**

@@ -32,6 +32,7 @@ android {
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
         signingConfig signingConfigs.debug
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//使用vector图片
     }
     //构建过程
@@ -100,13 +101,28 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //单元测试
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
-    implementation project(':module-main')
-    implementation project(':module-git')
-
-    implementation "com.android.support:multidex:${MULTIDEX}"
+    if (isBuildModule.toBoolean()) {
+        compile project(':core-custom')
+    } else {
+        implementation project(':module-main')
+        implementation project(':module-git')
+    }
 
     implementation "com.android.support:support-annotations:${SUPPORT_VERSION}"
     implementation "com.android.support:support-vector-drawable:${SUPPORT_VERSION}"

@@ -1,7 +1,7 @@
 package com.huyingbao.module.main;
 
 import com.google.gson.GsonBuilder;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
 import com.huyingbao.module.main.action.MainApi;
@@ -40,16 +40,17 @@ public abstract class MainModule {
         return retrofit.create(MainApi.class);
     }
 
+    @Singleton
     @Binds
     @IntoMap
     @RxStoreKey(MainStore.class)
     abstract RxStore provideMainStore(MainStore mainStore);
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = MainActivityModule.class)
     abstract MainActivity injectMainActivity();
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = ShopActivityModule.class)
     abstract ShopActivity injectShopActivity();
 }

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.huyingbao.core.custom.CommonFragment;
-import com.huyingbao.core.scope.PerActivity;
+import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.R2;
 import com.huyingbao.module.main.action.MainActionCreator;
@@ -19,7 +19,7 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@PerActivity
+@ActivityScope
 public class ShopFragment extends CommonFragment {
     @Inject
     MainActionCreator mActionCreator;

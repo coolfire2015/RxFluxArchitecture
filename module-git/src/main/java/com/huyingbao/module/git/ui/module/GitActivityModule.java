@@ -1,7 +1,7 @@
 package com.huyingbao.module.git.ui.module;
 
 
-import com.huyingbao.core.scope.PerFragment;
+import com.huyingbao.core.scope.FragmentScope;
 import com.huyingbao.module.git.ui.GitRepoFragment;
 import com.huyingbao.module.git.ui.GitUserFragment;
 
@@ -13,11 +13,11 @@ import dagger.android.ContributesAndroidInjector;
  */
 @Module
 public abstract class GitActivityModule {
-    @PerFragment
+    @FragmentScope
     @ContributesAndroidInjector
     abstract GitUserFragment injectGitUserFragment();
 
-    @PerFragment
+    @FragmentScope
     @ContributesAndroidInjector
     abstract GitRepoFragment injectGitRepoListFragment();
 }
