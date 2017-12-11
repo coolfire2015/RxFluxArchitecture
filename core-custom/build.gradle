@@ -37,16 +37,16 @@ dependencies {
 
     api "com.squareup.okio:okio:${OKIO}"
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
+
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
     api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+
     api "com.alibaba:fastjson:${FAST_JSON}"
     api "com.google.code.gson:gson:${GSON}"
 
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
 
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

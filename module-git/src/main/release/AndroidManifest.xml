@@ -5,8 +5,6 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-        <activity
-            android:name=".ui.GitActivity"
-            android:label="@string/app_name" />
+        <activity android:name=".ui.GitActivity"/>
     </application>
 </manifest>
