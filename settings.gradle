@@ -1,4 +1,4 @@
-include ':app'
+if (!isDebug) include ':app'
 include ':core-arch'
 include ':core-custom'
 include ':module-main'

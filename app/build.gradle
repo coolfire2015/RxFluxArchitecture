@@ -100,7 +100,7 @@ repositories {
 }
 
 dependencies {
-    if (!isBuildModule.toBoolean()) {
+    if (!isDebug.toBoolean()) {
         implementation project(':module-main')
         implementation project(':module-git')
     }
