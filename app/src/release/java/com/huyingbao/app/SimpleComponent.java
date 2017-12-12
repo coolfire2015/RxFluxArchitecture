@@ -22,7 +22,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         GitModule.class,
         CustomModule.class,
         AndroidSupportInjectionModule.class})
-public interface SimpleComponent extends AndroidInjector<SimpleApplication> {
+public interface SimpleComponent extends AndroidInjector<com.huyingbao.app.SimpleApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance

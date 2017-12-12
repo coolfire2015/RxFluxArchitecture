@@ -91,6 +91,18 @@ android {
             includeAndroidResources = true
         }
     }
+
+    sourceSets {
+        main {
+            if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/release/AndroidManifest.xml'
+                java.srcDirs 'src/release/java'
+                res.srcDirs 'src/release/res'
+            }
+        }
+    }
 }
 
 //仓库
