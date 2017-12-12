@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.huyingbao.core.custom.CommonToolbarActivity;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
+import com.huyingbao.module.main.MainModuleActivity;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.module.MainStore;
@@ -24,7 +24,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class MainActivity extends CommonToolbarActivity {
+public class MainActivity extends MainModuleActivity {
     @Inject
     Lazy<MainFragment> mMainFragmentLazy;
     @Inject

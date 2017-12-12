@@ -100,6 +100,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':core-arch')
+    implementation project(':core-custom')
+
     if (!isDebug.toBoolean()) {
         implementation project(':module-main')
         implementation project(':module-git')

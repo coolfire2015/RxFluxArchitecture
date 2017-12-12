@@ -1,11 +1,12 @@
 package com.huyingbao.module.git.ui;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.huyingbao.core.custom.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
+import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.R2;
 import com.huyingbao.module.git.action.GitActionCreator;
@@ -20,15 +21,14 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitUserFragment extends CommonFragment {
-    @Inject
-    GitActionCreator mActionCreator;
+public class GitUserFragment extends GitModuleFragment {
     @BindView(R2.id.tv_git_user_name)
     TextView mTvGitUserName;
     @BindView(R2.id.tv_git_user_login)
     TextView mTvGitUserLogin;
     @BindView(R2.id.tv_git_user_statistics)
     TextView mTvGitUserStatistics;
+
     private GitStore mStore;
 
     @Inject

@@ -1,25 +1,20 @@
 package com.huyingbao.core.view;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.support.DaggerFragment;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class BaseFragment extends DaggerFragment implements BaseView {
-    @Inject
-    protected ViewModelProvider.Factory mViewModelFactory;
+public abstract class BaseFragment extends Fragment implements BaseView {
     protected Context mContext;
     private Unbinder mUnbinder;
 

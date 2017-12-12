@@ -10,10 +10,9 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.custom.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
+import com.huyingbao.module.main.MainModuleFragment;
 import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.action.MainActionCreator;
 import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.adapter.ProductAdapter;
 import com.huyingbao.module.main.ui.main.model.Product;
@@ -30,15 +29,14 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ProductFragment extends CommonFragment {
+public class ProductFragment extends MainModuleFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
+
     protected List<Product> mDataList = new ArrayList();
     protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
-    @Inject
-    MainActionCreator mActionCreator;
     private MainStore mStore;
 
     @Inject

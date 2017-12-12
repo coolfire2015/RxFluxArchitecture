@@ -1,23 +1,18 @@
 package com.huyingbao.core.view;
 
 import android.app.Dialog;
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.support.DaggerAppCompatDialogFragment;
 
-public abstract class BaseDialogFragment extends DaggerAppCompatDialogFragment implements BaseView {
-    @Inject
-    protected ViewModelProvider.Factory mViewModelFactory;
+public abstract class BaseDialogFragment extends AppCompatDialogFragment implements BaseView {
     protected Context mContext;
     private Unbinder mUnbinder;
 

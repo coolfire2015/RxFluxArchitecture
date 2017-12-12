@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    api project(':core-arch')
+    implementation project(':core-arch')
 
     api "com.android.support:design:${SUPPORT_VERSION}"
     api "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"

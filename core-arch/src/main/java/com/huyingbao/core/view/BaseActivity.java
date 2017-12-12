@@ -1,21 +1,18 @@
 package com.huyingbao.core.view;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.os.Bundle;
-
-import javax.inject.Inject;
+import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerAppCompatActivity;
+import dagger.android.HasFragmentInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class BaseActivity extends DaggerAppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView, HasFragmentInjector, HasSupportFragmentInjector {
     protected Context mContext;
-    @Inject
-    protected ViewModelProvider.Factory mViewModelFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

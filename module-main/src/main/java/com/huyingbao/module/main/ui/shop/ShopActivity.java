@@ -7,10 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.huyingbao.core.action.RxError;
-import com.huyingbao.core.custom.CommonToolbarActivity;
-import com.huyingbao.core.dispatcher.RxViewDispatch;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
+import com.huyingbao.module.main.MainModuleActivity;
 import com.huyingbao.module.main.action.MainActionCreator;
 
 import java.util.List;
@@ -20,7 +19,7 @@ import javax.inject.Inject;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class ShopActivity extends CommonToolbarActivity implements RxViewDispatch {
+public class ShopActivity extends MainModuleActivity {
     @Inject
     MainActionCreator mActionCreator;
 

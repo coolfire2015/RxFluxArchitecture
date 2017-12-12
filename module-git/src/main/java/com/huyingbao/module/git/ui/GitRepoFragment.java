@@ -1,5 +1,6 @@
 package com.huyingbao.module.git.ui;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,8 +11,8 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.custom.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
+import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.action.GitActionCreator;
 import com.huyingbao.module.git.action.GitActions;
@@ -30,16 +31,15 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitRepoFragment extends CommonFragment {
+public class GitRepoFragment extends GitModuleFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
+
+    private GitStore mStore;
     protected List<GitRepo> mDataList = new ArrayList();
     protected BaseQuickAdapter mAdapter = new GitRepoAdapter(mDataList);
-    @Inject
-    GitActionCreator mActionCreator;
-    private GitStore mStore;
 
     @Inject
     public GitRepoFragment() {

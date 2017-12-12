@@ -2,11 +2,10 @@ package com.huyingbao.module.main.ui.main;
 
 import android.os.Bundle;
 
-import com.huyingbao.core.custom.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
+import com.huyingbao.module.main.MainModuleFragment;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.R2;
-import com.huyingbao.module.main.action.MainActionCreator;
 import com.huyingbao.module.main.action.MainActions;
 
 import javax.inject.Inject;
@@ -17,10 +16,7 @@ import butterknife.OnClick;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class MainFragment extends CommonFragment {
-    @Inject
-    MainActionCreator mActionCreator;
-
+public class MainFragment extends MainModuleFragment {
     @Inject
     public MainFragment() {
     }

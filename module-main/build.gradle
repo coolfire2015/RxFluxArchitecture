@@ -43,15 +43,6 @@ android {
             //签名配置
             signingConfig signingConfigs.debug
         }
-        //自定义buildType.name
-        release {
-            //混淆开关
-            minifyEnabled false
-            //Zipalign优化
-            zipAlignEnabled true
-            //混淆文件
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     sourceSets {
@@ -72,7 +63,8 @@ android {
 }
 
 dependencies {
-    api project(':core-custom')
+    implementation project(':core-arch')
+    implementation project(':core-custom')
 
     api "com.android.support:cardview-v7:${SUPPORT_VERSION}"
 
