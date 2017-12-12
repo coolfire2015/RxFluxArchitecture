@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-arch/core-arch.iml" filepath="$PROJECT_DIR$/core-arch/core-arch.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-custom/core-custom.iml" filepath="$PROJECT_DIR$/core-custom/core-custom.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-git/module-git.iml" filepath="$PROJECT_DIR$/module-git/module-git.iml" />
