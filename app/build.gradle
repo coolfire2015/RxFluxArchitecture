@@ -60,7 +60,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
     //修改生成的apk名字
     applicationVariants.all { variant ->
         variant.outputs.all {
@@ -68,12 +67,10 @@ android {
                 outputFileName = "dm_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
         }
     }
-
     //数据绑定
     dataBinding {
         enabled = true
     }
-
     //Dex分包
     dexOptions {
         jumboMode = true
@@ -84,14 +81,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     //单元测试
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
     }
-
+    //代码目录设置
     sourceSets {
         main {
             if (isDebug.toBoolean()) {

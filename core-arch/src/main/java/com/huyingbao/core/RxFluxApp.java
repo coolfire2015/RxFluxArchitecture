@@ -4,6 +4,7 @@ package com.huyingbao.core;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.BuildConfig;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -26,6 +27,7 @@ public abstract class RxFluxApp extends DaggerApplication {
         super.onCreate();
         registerActivityLifecycleCallbacks(mRxFlux);
         initDebug();
+        initArouter();
     }
 
     @Override
@@ -51,5 +53,16 @@ public abstract class RxFluxApp extends DaggerApplication {
                 return BuildConfig.DEBUG;
             }
         });
+    }
+
+    /**
+     * 初始化Arouter
+     */
+    private void initArouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
 }

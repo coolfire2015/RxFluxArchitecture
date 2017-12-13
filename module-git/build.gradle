@@ -1,6 +1,5 @@
 if (isDebug.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
-
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -83,4 +82,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
 
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+
+    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
 }

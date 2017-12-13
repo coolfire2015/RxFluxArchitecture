@@ -45,4 +45,6 @@ dependencies {
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
 
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+
+    api "com.alibaba:arouter-api:${AROUTER_API}"
 }
