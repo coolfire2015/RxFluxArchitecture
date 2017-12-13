@@ -1,4 +1,4 @@
-package com.huyingbao.core.custom;
+package com.huyingbao.core.common;
 
 import com.huyingbao.core.view.BaseFragment;
 import com.huyingbao.core.view.BaseView;

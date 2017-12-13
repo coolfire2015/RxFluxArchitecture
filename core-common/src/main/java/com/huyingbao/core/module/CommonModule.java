@@ -20,7 +20,7 @@ import okhttp3.OkHttpClient;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module(includes = BaseModule.class)
-public abstract class CustomModule {
+public abstract class CommonModule {
     @Singleton
     @Provides
     static OkHttpClient provideClient(CookieJar cookieJar, HttpInterceptor interceptor) {

@@ -2,7 +2,7 @@ package com.huyingbao.app;
 
 import android.app.Application;
 
-import com.huyingbao.core.module.CustomModule;
+import com.huyingbao.core.module.CommonModule;
 import com.huyingbao.module.git.GitModule;
 import com.huyingbao.module.main.MainModule;
 
@@ -20,7 +20,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         MainModule.class,
         GitModule.class,
-        CustomModule.class,
+        CommonModule.class,
         AndroidSupportInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<com.huyingbao.app.SimpleApplication> {
     @Component.Builder

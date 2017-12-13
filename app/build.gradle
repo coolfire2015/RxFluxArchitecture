@@ -88,7 +88,7 @@ android {
     //代码目录设置
     sourceSets {
         main {
-            if (isDebug.toBoolean()) {
+            if (isModuleAsApp.toBoolean()) {
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/release/AndroidManifest.xml'
@@ -125,9 +125,9 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${TEST_ESPRESSO}"
 
     implementation project(':core-arch')
-    implementation project(':core-custom')
+    implementation project(':core-common')
 
-    if (!isDebug.toBoolean()) {
+    if (!isModuleAsApp.toBoolean()) {
         implementation project(':module-main')
         implementation project(':module-git')
     }

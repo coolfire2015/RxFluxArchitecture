@@ -1,4 +1,4 @@
-package com.huyingbao.core.custom;
+package com.huyingbao.core.common;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huyingbao.core.action.RxError;
-import com.huyingbao.core.common.R;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.core.dispatcher.RxViewDispatch;
 import com.huyingbao.core.model.RxHttpException;
 import com.huyingbao.core.view.BaseActivity;

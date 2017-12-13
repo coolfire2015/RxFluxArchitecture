@@ -20,7 +20,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.huyingbao.core.custom.CommonFragment;
+import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.module.main.action.MainActionCreator;
 
 import javax.inject.Inject;

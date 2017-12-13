@@ -1,5 +1,5 @@
 include ':app'
 include ':core-arch'
-include ':core-custom'
+include ':core-common'
 include ':module-main'
 include ':module-git'

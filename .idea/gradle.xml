@@ -10,7 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core-arch" />
-            <option value="$PROJECT_DIR$/core-custom" />
+            <option value="$PROJECT_DIR$/core-common" />
             <option value="$PROJECT_DIR$/module-git" />
             <option value="$PROJECT_DIR$/module-main" />
           </set>
