@@ -18,16 +18,28 @@ android {
         debug {
             storeFile file(STORE_DEBUG_FILE)
         }
+        release {
+            storeFile file(STORE_RELEASE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
     }
     //默认配置
     defaultConfig {
+        multiDexEnabled true//支持Multidex分包
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
         signingConfig signingConfigs.debug
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//使用vector图片
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
     //构建过程
     buildTypes {
@@ -45,14 +57,36 @@ android {
         //自定义buildType.name
         release {
             //混淆开关
-            minifyEnabled false
+            minifyEnabled true
             //Zipalign优化
             zipAlignEnabled true
             //混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
         }
     }
-
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+    //Dex分包
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"//增加java堆内存大小
+    }
+    //Lambda表达式需要
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //单元测试
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    //代码目录设置
     sourceSets {
         main {
             if (isDebug.toBoolean()) {
@@ -62,15 +96,35 @@ android {
             }
         }
     }
-
-    //Lambda表达式需要
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    //修改生成的apk名字
+    if (isDebug.toBoolean()) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                if ("release".equals(variant.buildType.name))
+                    outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            }
+        }
     }
 }
 
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
+}
+
 dependencies {
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-multidex:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-supportv4:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+
+    androidTestImplementation "org.mockito:mockito-android:${TEST_MOCKITO}"
+    androidTestImplementation "com.android.support.test:runner:${TEST_RUNNER}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${TEST_ESPRESSO}"
+
     implementation project(':core-arch')
     implementation project(':core-custom')
 
