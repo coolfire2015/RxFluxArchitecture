@@ -56,7 +56,7 @@ android {
         //自定义buildType.name
         release {
             //混淆开关
-            minifyEnabled true
+            minifyEnabled false
             //Zipalign优化
             zipAlignEnabled true
             //混淆文件

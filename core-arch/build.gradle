@@ -12,6 +12,11 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
 
     buildTypes {

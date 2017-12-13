@@ -59,7 +59,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:replace="android:icon,android:name">
-    </application>
+        tools:replace="android:icon,android:name"></application>
 
 </manifest>

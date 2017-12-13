@@ -1,6 +1,5 @@
 package com.huyingbao.module.git.ui;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,7 +13,6 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
-import com.huyingbao.module.git.action.GitActionCreator;
 import com.huyingbao.module.git.action.GitActions;
 import com.huyingbao.module.git.ui.adapter.GitRepoAdapter;
 import com.huyingbao.module.git.ui.model.GitRepo;
@@ -36,10 +34,9 @@ public class GitRepoFragment extends GitModuleFragment {
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
-
-    private GitStore mStore;
     protected List<GitRepo> mDataList = new ArrayList();
     protected BaseQuickAdapter mAdapter = new GitRepoAdapter(mDataList);
+    private GitStore mStore;
 
     @Inject
     public GitRepoFragment() {

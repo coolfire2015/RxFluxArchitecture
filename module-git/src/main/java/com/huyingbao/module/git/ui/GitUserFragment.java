@@ -1,6 +1,5 @@
 package com.huyingbao.module.git.ui;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.R2;
-import com.huyingbao.module.git.action.GitActionCreator;
 import com.huyingbao.module.git.ui.model.GitUser;
 import com.huyingbao.module.git.ui.module.GitStore;
 

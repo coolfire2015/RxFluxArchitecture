@@ -103,8 +103,6 @@
   **[] $VALUES;
   public *;
 }
-# for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 #Arouter
 -keep public class com.alibaba.android.arouter.routes.**{*;}
