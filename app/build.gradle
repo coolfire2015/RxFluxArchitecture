@@ -91,9 +91,9 @@ android {
             if (isModuleAsApp.toBoolean()) {
                 manifest.srcFile 'src/module/AndroidManifest.xml'
             } else {
-                manifest.srcFile 'src/release/AndroidManifest.xml'
-                java.srcDirs 'src/release/java'
-                res.srcDirs 'src/release/res'
+                manifest.srcFile 'src/app/AndroidManifest.xml'
+                java.srcDirs 'src/app/java'
+                res.srcDirs 'src/app/res'
             }
         }
     }
