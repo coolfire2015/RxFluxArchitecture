@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
@@ -23,6 +24,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
+@Route(path = "/git/GitActivity")
 public class GitActivity extends GitModuleActivity {
     @Inject
     Lazy<GitRepoFragment> mGitRepoFragmentLazy;

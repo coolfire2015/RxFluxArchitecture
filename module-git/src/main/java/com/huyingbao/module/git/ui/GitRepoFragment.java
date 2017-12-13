@@ -49,9 +49,9 @@ public class GitRepoFragment extends GitModuleFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
         initActionBar("仓库列表");
         initRecyclerView();
-
         showData();
     }
 
@@ -72,7 +72,6 @@ public class GitRepoFragment extends GitModuleFragment {
     }
 
     private void showData() {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
         if (mStore.mGitRepoList.getValue() == null) mActionCreator.getGitRepoList();
         mStore.mGitRepoList.observe(this, products -> {
             mDataList.clear();

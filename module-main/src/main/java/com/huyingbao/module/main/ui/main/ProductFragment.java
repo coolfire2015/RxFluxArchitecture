@@ -50,9 +50,9 @@ public class ProductFragment extends MainModuleFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(MainStore.class);
         initActionBar("商品列表");
         initRecyclerView();
-
         showData();
     }
 
@@ -73,7 +73,6 @@ public class ProductFragment extends MainModuleFragment {
     }
 
     private void showData() {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(MainStore.class);
         if (mStore.mProductList.getValue() == null) mActionCreator.getProductList();
         mStore.mProductList.observe(this, products -> {
             mDataList.clear();

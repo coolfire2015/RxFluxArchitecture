@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
@@ -12,7 +13,6 @@ import com.huyingbao.module.main.MainModuleActivity;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.module.MainStore;
-import com.huyingbao.module.main.ui.shop.ShopActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +42,7 @@ public class MainActivity extends MainModuleActivity {
     public void onRxStoreChanged(@NonNull RxStoreChange change) {
         switch (change.getType()) {
             case MainActions.TO_GITHUB:
-                startActivity(ShopActivity.newIntent(mContext));
+                ARouter.getInstance().build("/git/GitActivity").navigation();
                 break;
             case MainActions.TO_PRODUCT_LIST:
                 ActivityUtils.addAndHideFragment(getSupportFragmentManager(), mProductListFragmentLazy.get(), R.id.fl_content);

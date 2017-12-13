@@ -40,8 +40,8 @@ public class ShopFragment extends MainModuleFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("店铺信息");
         mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(MainStore.class);
+        initActionBar("店铺信息");
         mStore.mShop.observe(this, shop -> showShopInfo(shop));
     }
 

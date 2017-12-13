@@ -41,8 +41,8 @@ public class GitUserFragment extends GitModuleFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("店铺信息");
         mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
+        initActionBar("用户信息");
         mStore.mGitUser.observe(this, shop -> showGitUserInfo(shop));
     }
 
