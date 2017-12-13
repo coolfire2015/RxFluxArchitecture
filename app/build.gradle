@@ -89,7 +89,7 @@ android {
     sourceSets {
         main {
             if (isModuleAsApp.toBoolean()) {
-                manifest.srcFile 'src/debug/AndroidManifest.xml'
+                manifest.srcFile 'src/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/release/AndroidManifest.xml'
                 java.srcDirs 'src/release/java'
