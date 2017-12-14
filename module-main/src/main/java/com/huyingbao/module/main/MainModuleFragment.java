@@ -25,32 +25,14 @@ import com.huyingbao.module.main.action.MainActionCreator;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
-
 /**
  * A {@link Fragment} that injects its members in {@link #onAttach(Context)} and can be used to
  * inject child {@link Fragment}s attached to it. Note that when this fragment gets reattached, its
  * members will be injected again.
  */
-public abstract class MainModuleFragment extends CommonFragment implements HasSupportFragmentInjector {
+public abstract class MainModuleFragment extends CommonFragment {
     @Inject
     protected MainActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
-    @Inject
-    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return mChildFragmentInjector;
-    }
 }

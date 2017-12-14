@@ -1,4 +1,4 @@
-package com.huyingbao.core.view;
+package com.huyingbao.core.lifecycle;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,15 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huyingbao.core.RxFluxView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.DispatchingAndroidInjector;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class RxFluxFragment extends Fragment implements RxFluxView {
+
     protected Context mContext;
     private Unbinder mUnbinder;
+    DispatchingAndroidInjector<Fragment> mSupportFragmentInjector;
 
     @NonNull
     @Override
@@ -33,5 +38,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mSupportFragmentInjector;
     }
 }

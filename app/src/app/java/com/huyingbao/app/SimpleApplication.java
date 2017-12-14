@@ -1,6 +1,8 @@
 package com.huyingbao.app;
 
 
+import android.app.Application;
+
 import com.huyingbao.core.RxFluxApp;
 
 import dagger.android.AndroidInjector;

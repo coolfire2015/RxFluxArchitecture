@@ -2,6 +2,7 @@ package com.huyingbao.core;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,9 +11,9 @@ import android.support.v4.app.FragmentManager;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
 import com.huyingbao.core.dispatcher.RxViewDispatch;
-import com.huyingbao.core.store.RxStore;
+import com.huyingbao.core.lifecycle.ActivityLifecycleObserver;
+import com.huyingbao.core.lifecycle.FragmentLifecycleObserver;
 
-import java.util.List;
 import java.util.Stack;
 
 import javax.inject.Inject;
@@ -45,22 +46,17 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     public void onActivityCreated(Activity activity, Bundle bundle) {
         mActivityCounter++;
         mActivityStack.add(activity);
-        if (activity instanceof RxViewDispatch && activity instanceof FragmentActivity) {
-            List<RxStore> rxStoreList = ((RxViewDispatch) activity).getLifecycleRxStoreList();
-            if (rxStoreList != null && rxStoreList.size() > 0)
-                for (RxStore rxStore : rxStoreList)
-                    ((FragmentActivity) activity).getLifecycle().addObserver(rxStore);
-        }
+        if (activity instanceof FragmentActivity)
+            ((FragmentActivity) activity).getLifecycle().addObserver(new ActivityLifecycleObserver(activity));
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
         if (activity instanceof RxViewDispatch)
             mDispatcher.subscribeRxView((RxViewDispatch) activity);
-        if (activity instanceof FragmentActivity) {
+        if (activity instanceof FragmentActivity)
             ((FragmentActivity) activity).getSupportFragmentManager()
                     .registerFragmentLifecycleCallbacks(this, true);
-        }
     }
 
     @Override
@@ -91,21 +87,15 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     @Override
-    public void onFragmentCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        super.onFragmentCreated(fm, f, savedInstanceState);
-        if (f instanceof RxViewDispatch) {
-            List<RxStore> rxStoreList = ((RxViewDispatch) f).getLifecycleRxStoreList();
-            if (rxStoreList != null && rxStoreList.size() > 0)
-                for (RxStore rxStore : rxStoreList)
-                    f.getLifecycle().addObserver(rxStore);
-        }
+    public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
+        super.onFragmentAttached(fm, f, context);
+        if (f instanceof RxFluxView) f.getLifecycle().addObserver(new FragmentLifecycleObserver(f));
     }
 
     @Override
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
-        if (f instanceof RxViewDispatch)
-            mDispatcher.subscribeRxView((RxViewDispatch) f);
+        if (f instanceof RxViewDispatch) mDispatcher.subscribeRxView((RxViewDispatch) f);
     }
 
     @Override

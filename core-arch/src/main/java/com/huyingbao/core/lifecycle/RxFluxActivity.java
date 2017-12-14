@@ -1,18 +1,21 @@
-package com.huyingbao.core.view;
+package com.huyingbao.core.lifecycle;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import com.huyingbao.core.RxFluxView;
+
 import butterknife.ButterKnife;
-import dagger.android.HasFragmentInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+import dagger.android.DispatchingAndroidInjector;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView, HasFragmentInjector, HasSupportFragmentInjector {
+public abstract class RxFluxActivity extends AppCompatActivity implements RxFluxView{
     protected Context mContext;
+    DispatchingAndroidInjector<Fragment> mSupportFragmentInjector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,5 +24,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         afterCreate(savedInstanceState);
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mSupportFragmentInjector;
     }
 }

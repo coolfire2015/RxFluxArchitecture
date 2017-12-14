@@ -1,12 +1,12 @@
 package com.huyingbao.core.common;
 
-import com.huyingbao.core.view.BaseFragment;
-import com.huyingbao.core.view.BaseView;
+import com.huyingbao.core.RxFluxView;
+import com.huyingbao.core.lifecycle.RxFluxFragment;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonFragment extends BaseFragment implements BaseView {
+public abstract class CommonFragment extends RxFluxFragment implements RxFluxView {
     private String mTitle;
     private boolean isVisibleToUser;
     private boolean mBackAble = true;

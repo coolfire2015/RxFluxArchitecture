@@ -18,8 +18,6 @@ package com.huyingbao.module.git;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.huyingbao.core.common.CommonToolbarActivity;
@@ -27,40 +25,14 @@ import com.huyingbao.module.git.action.GitActionCreator;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasFragmentInjector;
-import dagger.android.support.HasSupportFragmentInjector;
-
 /**
  * An {@link AppCompatActivity} that injects its members in {@link #onCreate(Bundle)} and can be
  * used to inject {@code Fragment}s attached to it.
  */
-public abstract class GitModuleActivity extends CommonToolbarActivity
-        implements HasFragmentInjector, HasSupportFragmentInjector {
+public abstract class GitModuleActivity extends CommonToolbarActivity {
     @Inject
     protected GitActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
-    @Inject
-    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
-    @Inject
-    DispatchingAndroidInjector<android.app.Fragment> frameworkFragmentInjector;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return supportFragmentInjector;
-    }
-
-    @Override
-    public AndroidInjector<android.app.Fragment> fragmentInjector() {
-        return frameworkFragmentInjector;
-    }
 }
+

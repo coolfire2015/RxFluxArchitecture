@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.huyingbao.core.action.RxError;
 import com.huyingbao.core.dispatcher.RxViewDispatch;
+import com.huyingbao.core.lifecycle.RxFluxActivity;
 import com.huyingbao.core.model.RxHttpException;
-import com.huyingbao.core.view.BaseActivity;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
@@ -26,7 +26,7 @@ import butterknife.BindView;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonToolbarActivity extends BaseActivity implements RxViewDispatch {
+public abstract class CommonToolbarActivity extends RxFluxActivity implements RxViewDispatch {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
