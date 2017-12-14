@@ -17,7 +17,6 @@
 package com.huyingbao.module.git;
 
 import android.arch.lifecycle.ViewModelProvider;
-import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.huyingbao.core.common.CommonFragment;
@@ -25,14 +24,18 @@ import com.huyingbao.module.git.action.GitActionCreator;
 
 import javax.inject.Inject;
 
-/**
- * A {@link Fragment} that injects its members in {@link #onAttach(Context)} and can be used to
- * inject child {@link Fragment}s attached to it. Note that when this fragment gets reattached, its
- * members will be injected again.
- */
+import dagger.android.DispatchingAndroidInjector;
+
 public abstract class GitModuleFragment extends CommonFragment {
     @Inject
     protected GitActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mChildFragmentInjector;
+    }
 }

@@ -27,18 +27,18 @@ public abstract class CommonFragment extends RxFluxFragment implements RxFluxVie
     protected void initActionBar(String title, boolean backAble) {
         mTitle = title;
         mBackAble = backAble;
-        if (mContext instanceof CommonToolbarActivity)
-            ((CommonToolbarActivity) mContext).initActionBar(title, backAble);
+        if (mContext instanceof CommonActivity)
+            ((CommonActivity) mContext).initActionBar(title, backAble);
     }
 
     protected void initActionBar(String title) {
         mTitle = title;
-        if (mContext instanceof CommonToolbarActivity)
-            ((CommonToolbarActivity) mContext).initActionBar(title, mBackAble);
+        if (mContext instanceof CommonActivity)
+            ((CommonActivity) mContext).initActionBar(title, mBackAble);
     }
 
     protected void initActionBar() {
-        if (mContext instanceof CommonToolbarActivity)
-            ((CommonToolbarActivity) mContext).initActionBar(mTitle, mBackAble);
+        if (mContext instanceof CommonActivity)
+            ((CommonActivity) mContext).initActionBar(mTitle, mBackAble);
     }
 }

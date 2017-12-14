@@ -17,22 +17,26 @@
 package com.huyingbao.module.git;
 
 import android.arch.lifecycle.ViewModelProvider;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 
-import com.huyingbao.core.common.CommonToolbarActivity;
+import com.huyingbao.core.common.CommonActivity;
 import com.huyingbao.module.git.action.GitActionCreator;
 
 import javax.inject.Inject;
 
-/**
- * An {@link AppCompatActivity} that injects its members in {@link #onCreate(Bundle)} and can be
- * used to inject {@code Fragment}s attached to it.
- */
-public abstract class GitModuleActivity extends CommonToolbarActivity {
+import dagger.android.DispatchingAndroidInjector;
+
+public abstract class GitModuleActivity extends CommonActivity {
     @Inject
     protected GitActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mChildFragmentInjector;
+    }
 }
 

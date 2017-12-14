@@ -15,7 +15,7 @@ android {
         versionName rootProject.getGitVersionName()
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
     }

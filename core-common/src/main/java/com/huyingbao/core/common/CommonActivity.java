@@ -26,7 +26,7 @@ import butterknife.BindView;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonToolbarActivity extends RxFluxActivity implements RxViewDispatch {
+public abstract class CommonActivity extends RxFluxActivity implements RxViewDispatch {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }

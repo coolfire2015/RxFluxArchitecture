@@ -12,16 +12,13 @@ import com.huyingbao.core.RxFluxView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.DispatchingAndroidInjector;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
 public abstract class RxFluxFragment extends Fragment implements RxFluxView {
-
     protected Context mContext;
     private Unbinder mUnbinder;
-    DispatchingAndroidInjector<Fragment> mSupportFragmentInjector;
 
     @NonNull
     @Override
@@ -38,10 +35,5 @@ public abstract class RxFluxFragment extends Fragment implements RxFluxView {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
-    }
-
-    @Override
-    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
-        return mSupportFragmentInjector;
     }
 }

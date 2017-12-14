@@ -17,21 +17,25 @@
 package com.huyingbao.module.main;
 
 import android.arch.lifecycle.ViewModelProvider;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 
-import com.huyingbao.core.common.CommonToolbarActivity;
+import com.huyingbao.core.common.CommonActivity;
 import com.huyingbao.module.main.action.MainActionCreator;
 
 import javax.inject.Inject;
 
-/**
- * An {@link AppCompatActivity} that injects its members in {@link #onCreate(Bundle)} and can be
- * used to inject {@code Fragment}s attached to it.
- */
-public abstract class MainModuleActivity extends CommonToolbarActivity {
+import dagger.android.DispatchingAndroidInjector;
+
+public abstract class MainModuleActivity extends CommonActivity {
     @Inject
     protected MainActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mChildFragmentInjector;
+    }
 }

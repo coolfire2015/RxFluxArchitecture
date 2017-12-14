@@ -10,9 +10,6 @@ import com.huyingbao.core.store.RxStore;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -20,15 +17,10 @@ import dagger.android.support.AndroidSupportInjection;
  */
 public class FragmentLifecycleObserver implements LifecycleObserver {
     private final Fragment mFragment;
-    @Inject
-    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     public FragmentLifecycleObserver(Fragment fragment) {
-        if (fragment instanceof RxFluxFragment) {
-            ((RxFluxFragment) fragment).mSupportFragmentInjector = childFragmentInjector;
-            AndroidSupportInjection.inject(fragment);
-        }
         this.mFragment = fragment;
+        if (fragment instanceof RxFluxFragment) AndroidSupportInjection.inject(fragment);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
