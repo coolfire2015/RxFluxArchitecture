@@ -28,8 +28,6 @@ public final class DisposableManager {
     }
 
     /**
-     * Given an action and a disposable, add the new disposable and unSubscribe if there
-     * was an existing one.
      * 添加一个action和disposable,如果已经有了一个对应action 的订阅,则取消订阅
      */
     public void add(RxAction action, Disposable disposable) {
@@ -38,7 +36,6 @@ public final class DisposableManager {
     }
 
     /**
-     * Remove an rxAction and unSubscribe from it
      * 从管理器中取消订阅
      */
     public void remove(RxAction action) {
@@ -47,10 +44,7 @@ public final class DisposableManager {
     }
 
     /**
-     * Checks if the action (with the same params) is already running a disposable
      * 检查action是否已经运行一个disposable
-     *
-     * @return true if the exact action is inside the map and running
      */
     public boolean contains(RxAction action) {
         Pair<Integer, Disposable> old = mMap.get(action.getType());
@@ -58,7 +52,6 @@ public final class DisposableManager {
     }
 
     /**
-     * Clear all the disposables
      * 清除所有的disposables
      */
     public synchronized void clear() {

@@ -1,5 +1,7 @@
 package com.huyingbao.module.main.ui.main.model;
 
+import com.huyingbao.module.main.ui.shop.model.Shop;
+
 /**
  * Created by liujunfeng on 2017/12/7.
  */

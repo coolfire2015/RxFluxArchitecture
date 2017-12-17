@@ -12,6 +12,7 @@ import com.huyingbao.core.RxFluxView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by liujunfeng on 2017/12/7.
@@ -19,6 +20,12 @@ import butterknife.Unbinder;
 public abstract class RxFluxFragment extends Fragment implements RxFluxView {
     protected Context mContext;
     private Unbinder mUnbinder;
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
 
     @NonNull
     @Override

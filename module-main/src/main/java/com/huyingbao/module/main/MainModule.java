@@ -10,6 +10,7 @@ import com.huyingbao.module.main.ui.main.module.MainActivityModule;
 import com.huyingbao.module.main.ui.main.module.MainStore;
 import com.huyingbao.module.main.ui.shop.ShopActivity;
 import com.huyingbao.module.main.ui.shop.module.ShopActivityModule;
+import com.huyingbao.module.main.ui.shop.module.ShopStore;
 
 import javax.inject.Singleton;
 
@@ -45,6 +46,12 @@ public abstract class MainModule {
     @IntoMap
     @RxStoreKey(MainStore.class)
     abstract RxStore provideMainStore(MainStore mainStore);
+
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(ShopStore.class)
+    abstract RxStore provideShopStore(ShopStore shopStore);
 
     @ActivityScope
     @ContributesAndroidInjector(modules = MainActivityModule.class)

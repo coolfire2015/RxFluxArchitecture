@@ -1,7 +1,5 @@
 package com.huyingbao.module.main.action;
 
-import android.content.Context;
-
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
@@ -26,13 +24,14 @@ public class MainActionCreator extends RxActionCreator implements MainActions {
     }
 
     @Override
-    public void getProductList() {
+    public void getProductList(int page) {
+        //TODO 添加分页
         RxAction action = newRxAction(GET_PRODUCT_LIST);
         postHttpAction(action, mMainApi.getProductList());
     }
 
     @Override
-    public void getShop(Context context, int userId) {
+    public void getShop(int userId) {
         RxAction action = newRxAction(GET_SHOP);
         postHttpAction(action, mMainApi.getShop(userId));
     }

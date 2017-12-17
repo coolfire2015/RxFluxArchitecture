@@ -1,19 +1,21 @@
-package com.huyingbao.module.main.ui.main;
+package com.huyingbao.module.main.ui.shop;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.main.MainModuleFragment;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.R2;
-import com.huyingbao.module.main.ui.main.model.Shop;
-import com.huyingbao.module.main.ui.main.module.MainStore;
+import com.huyingbao.module.main.ui.shop.model.Shop;
+import com.huyingbao.module.main.ui.shop.module.ShopStore;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by liujunfeng on 2017/12/7.
@@ -26,7 +28,8 @@ public class ShopFragment extends MainModuleFragment {
     TextView mTvShopLogin;
     @BindView(R2.id.tv_shop_statistics)
     TextView mTvShopStatistics;
-    private MainStore mStore;
+
+    private ShopStore mStore;
 
     @Inject
     public ShopFragment() {
@@ -40,9 +43,16 @@ public class ShopFragment extends MainModuleFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(MainStore.class);
+        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(ShopStore.class);
         initActionBar("店铺信息");
-        mStore.mShop.observe(this, shop -> showShopInfo(shop));
+        mStore.mShopTrans.observe(this, shop -> {
+            if (shop != null) showShopInfo(shop);
+        });
+    }
+
+    @OnClick(R2.id.btn_test)
+    public void test() {
+        mStore.setShopId(1);
     }
 
     /**
@@ -50,10 +60,19 @@ public class ShopFragment extends MainModuleFragment {
      *
      * @param shop
      */
-    private void showShopInfo(Shop shop) {
-        if (shop == null) return;
+    private void showShopInfo(@NonNull Shop shop) {
         mTvShopLogin.setText(shop.getCode() + "");
         mTvShopName.setText(shop.getShopName());
         mTvShopStatistics.setText(shop.getShopType() + "");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

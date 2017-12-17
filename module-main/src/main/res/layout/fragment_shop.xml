@@ -37,4 +37,9 @@
         android:lineSpacingExtra="@dimen/dp_4"
         tools:text="Public repos: 5\nPublic gist 2" />
 
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

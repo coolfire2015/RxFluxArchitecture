@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.ui.main.model;
+package com.huyingbao.module.main.ui.shop.model;
 
 /**
  * Created by liujunfeng on 2017/12/7.

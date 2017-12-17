@@ -1,7 +1,5 @@
 package com.huyingbao.module.main.action;
 
-import android.content.Context;
-
 /**
  * Created by liujunfeng on 2017/12/7.
  */
@@ -13,7 +11,7 @@ public interface MainActions {
     String GET_PRODUCT_LIST = "get_product_list";
     String GET_SHOP = "get_shop";
 
-    void getProductList();
+    void getProductList(int page);
 
-    void getShop(Context context, int userId);
+    void getShop(int userId);
 }

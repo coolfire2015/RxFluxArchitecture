@@ -29,8 +29,6 @@ public class MainActivity extends MainModuleActivity {
     Lazy<MainFragment> mMainFragmentLazy;
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
-    @Inject
-    Lazy<ShopFragment> mShopFragmentLazy;
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class MainActivity extends MainModuleActivity {
                 ActivityUtils.addAndHideFragment(getSupportFragmentManager(), mProductListFragmentLazy.get(), R.id.fl_content);
                 break;
             case MainActions.TO_SHOP:
-                ActivityUtils.addAndHideFragment(getSupportFragmentManager(), mShopFragmentLazy.get(), R.id.fl_content);
                 break;
         }
     }

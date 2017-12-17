@@ -13,7 +13,6 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.main.MainModuleFragment;
 import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.action.MainActions;
 import com.huyingbao.module.main.ui.main.adapter.ProductAdapter;
 import com.huyingbao.module.main.ui.main.model.Product;
 import com.huyingbao.module.main.ui.main.module.MainStore;
@@ -54,6 +53,7 @@ public class ProductFragment extends MainModuleFragment {
         initActionBar("商品列表");
         initRecyclerView();
         showData();
+        mStore.setPage(0);
     }
 
     /**
@@ -67,23 +67,16 @@ public class ProductFragment extends MainModuleFragment {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                toShop(position);
+                mStore.mShop.setValue(mDataList.get(position).getShopId());
             }
         });
     }
 
     private void showData() {
-        if (mStore.mProductList.getValue() == null) mActionCreator.getProductList();
-        mStore.mProductList.observe(this, products -> {
+        mStore.mProductTrans.observe(this, products -> {
             mDataList.clear();
             if (products != null && products.size() > 0) mDataList.addAll(products);
             mAdapter.notifyDataSetChanged();
         });
-    }
-
-    private void toShop(int position) {
-        mStore.mShop.setValue(null);
-        mActionCreator.getShop(mContext, mDataList.get(position).getShopId().getShopId());
-        mActionCreator.postLocalAction(MainActions.TO_SHOP);
     }
 }

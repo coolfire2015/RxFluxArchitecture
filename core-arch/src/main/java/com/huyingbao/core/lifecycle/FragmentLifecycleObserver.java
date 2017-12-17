@@ -10,8 +10,6 @@ import com.huyingbao.core.store.RxStore;
 
 import java.util.List;
 
-import dagger.android.support.AndroidSupportInjection;
-
 /**
  * Created by liujunfeng on 2017/12/13.
  */
@@ -20,7 +18,6 @@ public class FragmentLifecycleObserver implements LifecycleObserver {
 
     public FragmentLifecycleObserver(Fragment fragment) {
         this.mFragment = fragment;
-        if (fragment instanceof RxFluxFragment) AndroidSupportInjection.inject(fragment);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

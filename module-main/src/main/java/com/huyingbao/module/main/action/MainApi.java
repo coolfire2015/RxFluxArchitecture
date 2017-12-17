@@ -1,7 +1,7 @@
 package com.huyingbao.module.main.action;
 
 import com.huyingbao.module.main.ui.main.model.Product;
-import com.huyingbao.module.main.ui.main.model.Shop;
+import com.huyingbao.module.main.ui.shop.model.Shop;
 
 import java.util.ArrayList;
 

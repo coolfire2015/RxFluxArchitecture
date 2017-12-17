@@ -11,8 +11,6 @@ import com.huyingbao.core.store.RxStore;
 
 import java.util.List;
 
-import dagger.android.AndroidInjection;
-
 /**
  * Created by liujunfeng on 2017/12/13.
  */
@@ -21,7 +19,6 @@ public class ActivityLifecycleObserver implements LifecycleObserver {
 
     public ActivityLifecycleObserver(Activity activity) {
         this.mActivity = activity;
-        if (activity instanceof RxFluxActivity) AndroidInjection.inject(activity);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
