@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/.idea/RxFluxDaggerArchitecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-arch/core-arch.iml" filepath="$PROJECT_DIR$/core-arch/core-arch.iml" />
