@@ -1,11 +1,11 @@
-package com.huyingbao.module.main.ui.main.adapter;
+package com.huyingbao.module.gan.ui.main.adapter;
 
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.huyingbao.module.gan.ui.main.model.Product;
 import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.ui.main.model.Product;
 
 import java.util.List;
 

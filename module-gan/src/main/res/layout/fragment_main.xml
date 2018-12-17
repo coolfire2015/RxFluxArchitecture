@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/dp_64"
-    tools:context="com.huyingbao.module.main.ui.main.MainFragment">
+    tools:context="com.huyingbao.module.main.com.huyingbao.module.gan.main.ui.main.MainFragment">
 
     <Button
         android:id="@+id/btn_main_to_product"

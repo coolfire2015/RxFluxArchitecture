@@ -1,9 +1,9 @@
-package com.huyingbao.module.main.ui.main.module;
+package com.huyingbao.module.gan.ui.main.module;
 
 
 import com.huyingbao.core.scope.FragmentScope;
-import com.huyingbao.module.main.ui.main.MainFragment;
-import com.huyingbao.module.main.ui.main.ProductFragment;
+import com.huyingbao.module.gan.ui.main.GanFragment;
+import com.huyingbao.module.gan.ui.main.ProductFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -15,7 +15,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class MainActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
-    abstract MainFragment injectMainFragment();
+    abstract GanFragment injectMainFragment();
 
     @FragmentScope
     @ContributesAndroidInjector

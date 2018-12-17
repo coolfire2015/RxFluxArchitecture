@@ -1,6 +1,6 @@
-package com.huyingbao.module.main.ui.main.model;
+package com.huyingbao.module.gan.ui.main.model;
 
-import com.huyingbao.module.main.ui.shop.model.Shop;
+import com.huyingbao.module.gan.ui.shop.model.Shop;
 
 /**
  * Created by liujunfeng on 2017/12/7.

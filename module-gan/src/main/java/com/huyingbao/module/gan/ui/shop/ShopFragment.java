@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.ui.shop;
+package com.huyingbao.module.gan.ui.shop;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.module.main.MainModuleFragment;
+import com.huyingbao.module.gan.GanModuleFragment;
+import com.huyingbao.module.gan.ui.shop.model.Shop;
+import com.huyingbao.module.gan.ui.shop.module.ShopStore;
 import com.huyingbao.module.main.R;
 import com.huyingbao.module.main.R2;
-import com.huyingbao.module.main.ui.shop.model.Shop;
-import com.huyingbao.module.main.ui.shop.module.ShopStore;
 
 import javax.inject.Inject;
 
@@ -21,7 +21,7 @@ import butterknife.OnClick;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ShopFragment extends MainModuleFragment {
+public class ShopFragment extends GanModuleFragment {
     @BindView(R2.id.tv_shop_name)
     TextView mTvShopName;
     @BindView(R2.id.tv_shop_login)

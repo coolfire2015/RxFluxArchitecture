@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.action;
+package com.huyingbao.module.gan.action;
 
 /**
  * Created by liujunfeng on 2017/12/7.

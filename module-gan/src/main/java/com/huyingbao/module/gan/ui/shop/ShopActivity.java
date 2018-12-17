@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.ui.shop;
+package com.huyingbao.module.gan.ui.shop;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -10,9 +10,9 @@ import android.support.annotation.Nullable;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
-import com.huyingbao.module.main.MainModuleActivity;
+import com.huyingbao.module.gan.GanModuleActivity;
+import com.huyingbao.module.gan.ui.shop.module.ShopStore;
 import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.ui.shop.module.ShopStore;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class ShopActivity extends MainModuleActivity {
+public class ShopActivity extends GanModuleActivity {
     private static final String SHOP_ID = "shopId";
     @Inject
     Lazy<ShopFragment> mShopFragmentLazy;

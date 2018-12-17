@@ -1,8 +1,8 @@
-package com.huyingbao.module.main.ui.shop.module;
+package com.huyingbao.module.gan.ui.shop.module;
 
 
 import com.huyingbao.core.scope.FragmentScope;
-import com.huyingbao.module.main.ui.shop.ShopFragment;
+import com.huyingbao.module.gan.ui.shop.ShopFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

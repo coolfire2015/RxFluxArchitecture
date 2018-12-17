@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.ui.main;
+package com.huyingbao.module.gan.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,11 +11,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.module.main.MainModuleFragment;
+import com.huyingbao.module.gan.GanModuleFragment;
 import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.ui.main.adapter.ProductAdapter;
-import com.huyingbao.module.main.ui.main.model.Product;
-import com.huyingbao.module.main.ui.main.module.MainStore;
+import com.huyingbao.module.gan.ui.main.adapter.ProductAdapter;
+import com.huyingbao.module.gan.ui.main.model.Product;
+import com.huyingbao.module.gan.ui.main.module.MainStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ProductFragment extends MainModuleFragment {
+public class ProductFragment extends GanModuleFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)

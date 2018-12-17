@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.ui.shop.module;
+package com.huyingbao.module.gan.ui.shop.module;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -8,9 +8,9 @@ import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
-import com.huyingbao.module.main.action.MainActionCreator;
-import com.huyingbao.module.main.action.MainActions;
-import com.huyingbao.module.main.ui.shop.model.Shop;
+import com.huyingbao.module.gan.action.MainActions;
+import com.huyingbao.module.gan.action.MainActionCreator;
+import com.huyingbao.module.gan.ui.shop.model.Shop;
 
 import com.google.common.base.Objects;
 

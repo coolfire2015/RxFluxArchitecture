@@ -1,16 +1,16 @@
-package com.huyingbao.module.main;
+package com.huyingbao.module.gan;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.main.action.MainApi;
-import com.huyingbao.module.main.ui.main.MainActivity;
-import com.huyingbao.module.main.ui.main.module.MainActivityModule;
-import com.huyingbao.module.main.ui.main.module.MainStore;
-import com.huyingbao.module.main.ui.shop.ShopActivity;
-import com.huyingbao.module.main.ui.shop.module.ShopActivityModule;
-import com.huyingbao.module.main.ui.shop.module.ShopStore;
+import com.huyingbao.module.gan.ui.main.GanActivity;
+import com.huyingbao.module.gan.action.MainApi;
+import com.huyingbao.module.gan.ui.main.module.MainActivityModule;
+import com.huyingbao.module.gan.ui.main.module.MainStore;
+import com.huyingbao.module.gan.ui.shop.ShopActivity;
+import com.huyingbao.module.gan.ui.shop.module.ShopActivityModule;
+import com.huyingbao.module.gan.ui.shop.module.ShopStore;
 
 import javax.inject.Singleton;
 
@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class MainModule {
+public abstract class GanModule {
     @Singleton
     @Provides
     static MainApi provideMainApi(OkHttpClient client) {
@@ -55,7 +55,7 @@ public abstract class MainModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = MainActivityModule.class)
-    abstract MainActivity injectMainActivity();
+    abstract GanActivity injectMainActivity();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = ShopActivityModule.class)

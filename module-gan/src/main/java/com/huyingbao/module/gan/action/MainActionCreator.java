@@ -1,4 +1,4 @@
-package com.huyingbao.module.main.action;
+package com.huyingbao.module.gan.action;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
