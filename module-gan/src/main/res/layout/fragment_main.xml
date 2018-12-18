@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_64"
+    tools:context="com.huyingbao.module.main.com.huyingbao.module.gan.main.ui.main.MainFragment">
+
+    <Button
+        android:id="@+id/btn_main_to_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取店铺商品列表数据" />
+
+    <Button
+        android:id="@+id/btn_main_to_github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_64"
+        android:text="获取GitHub列表数据" />
+</LinearLayout>
