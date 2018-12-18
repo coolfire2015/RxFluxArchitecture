@@ -102,7 +102,7 @@ public abstract class CommonActivity extends RxFluxActivity implements RxViewDis
      * @param text
      */
     protected void showShortToast(String text) {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     private void setToolbar(boolean backAble) {

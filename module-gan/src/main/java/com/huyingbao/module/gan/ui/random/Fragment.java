@@ -3,11 +3,11 @@ package com.huyingbao.module.gan.ui.random;
 import android.os.Bundle;
 
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.common.GanModuleFragment;
+import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.R2;
-import com.huyingbao.module.gan.ui.random.module.RandomActionCreator;
-import com.huyingbao.module.gan.ui.random.module.RandomActions;
+import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
+import com.huyingbao.module.gan.ui.random.action.RandomActions;
 
 import javax.inject.Inject;
 
@@ -17,12 +17,12 @@ import butterknife.OnClick;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GanFragment extends GanModuleFragment {
+public class Fragment extends CommonFragment {
     @Inject
     RandomActionCreator mActionCreator;
 
     @Inject
-    public GanFragment() {
+    public Fragment() {
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.huyingbao.module.gan.action;
 
-import com.huyingbao.module.gan.GanResponse;
 import com.huyingbao.module.gan.ui.random.model.Product;
 
 import io.reactivex.Observable;

@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random.module;
+package com.huyingbao.module.gan.ui.random.store;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -10,7 +10,9 @@ import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.module.gan.GanResponse;
+import com.huyingbao.module.gan.action.GanResponse;
+import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
+import com.huyingbao.module.gan.ui.random.action.RandomActions;
 import com.huyingbao.module.gan.ui.random.model.Product;
 
 import javax.inject.Inject;
@@ -21,12 +23,12 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class RandomStore extends RxStore {
+    @Inject
+    RandomActionCreator mActionCreator;
+
     public LiveData<GanResponse<Product>> mProductTrans;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
-
-    @Inject
-    RandomActionCreator mActionCreator;
 
     @Inject
     public RandomStore(Dispatcher dispatcher) {

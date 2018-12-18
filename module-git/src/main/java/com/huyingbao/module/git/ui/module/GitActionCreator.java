@@ -1,4 +1,4 @@
-package com.huyingbao.module.git.action;
+package com.huyingbao.module.git.ui.module;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
+import com.huyingbao.module.git.action.GitApi;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

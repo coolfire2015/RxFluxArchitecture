@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random.module;
+package com.huyingbao.module.gan.ui.random.action;
 
 /**
  * Created by liujunfeng on 2017/12/7.

@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random.module;
+package com.huyingbao.module.gan.ui.random.action;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
@@ -28,7 +28,6 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
 
     @Override
     public void getProductList(int page) {
-        //TODO 添加分页
         RxAction action = newRxAction(GET_PRODUCT_LIST);
         postHttpAction(action, mMainApi.getProductList().delay(5, TimeUnit.SECONDS));
     }

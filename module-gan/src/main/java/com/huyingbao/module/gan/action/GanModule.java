@@ -1,13 +1,12 @@
-package com.huyingbao.module.git;
+package com.huyingbao.module.gan.action;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.git.action.GitApi;
-import com.huyingbao.module.git.ui.GitActivity;
-import com.huyingbao.module.git.ui.module.GitActivityModule;
-import com.huyingbao.module.git.ui.module.GitStore;
+import com.huyingbao.module.gan.ui.random.RandomActivity;
+import com.huyingbao.module.gan.ui.random.module.RandomActivityModule;
+import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import javax.inject.Singleton;
 
@@ -25,26 +24,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class GitModule {
+public abstract class GanModule {
     @Singleton
     @Provides
-    static GitApi provideMainApi(OkHttpClient client) {
+    static MainApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl("https://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(GitApi.class);
+        return retrofit.create(MainApi.class);
     }
 
     @Singleton
     @Binds
     @IntoMap
-    @RxStoreKey(GitStore.class)
-    abstract RxStore provideGitStore(GitStore gitStore);
+    @RxStoreKey(RandomStore.class)
+    abstract RxStore provideMainStore(RandomStore randomStore);
+
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = GitActivityModule.class)
-    abstract GitActivity injectGitActivity();
+    @ContributesAndroidInjector(modules = RandomActivityModule.class)
+    abstract RandomActivity injectMainActivity();
 }

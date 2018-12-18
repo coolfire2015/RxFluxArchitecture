@@ -7,7 +7,6 @@ import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.module.git.action.GitActions;
 import com.huyingbao.module.git.ui.model.GitRepo;
 import com.huyingbao.module.git.ui.model.GitUser;
 

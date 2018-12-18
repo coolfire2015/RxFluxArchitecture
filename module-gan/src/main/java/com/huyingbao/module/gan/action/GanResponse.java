@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan;
+package com.huyingbao.module.gan.action;
 
 import java.util.ArrayList;
 

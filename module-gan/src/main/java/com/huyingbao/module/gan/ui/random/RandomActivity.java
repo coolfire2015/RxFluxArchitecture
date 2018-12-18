@@ -6,13 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.huyingbao.core.common.CommonActivity;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
-import com.huyingbao.core.common.GanModuleActivity;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.ui.random.module.RandomActions;
-import com.huyingbao.module.gan.ui.random.module.RandomStore;
+import com.huyingbao.module.gan.ui.random.action.RandomActions;
+import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,9 +24,9 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class RandomActivity extends GanModuleActivity {
+public class RandomActivity extends CommonActivity {
     @Inject
-    Lazy<GanFragment> mMainFragmentLazy;
+    Lazy<Fragment> mMainFragmentLazy;
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
 

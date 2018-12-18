@@ -4,8 +4,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.R2;
 import com.huyingbao.module.git.ui.model.GitUser;
@@ -19,7 +19,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitUserFragment extends GitModuleFragment {
+public class GitUserFragment extends CommonFragment {
     @BindView(R2.id.tv_git_user_name)
     TextView mTvGitUserName;
     @BindView(R2.id.tv_git_user_login)

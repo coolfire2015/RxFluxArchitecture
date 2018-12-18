@@ -11,11 +11,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.common.GanModuleFragment;
+import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
 import com.huyingbao.module.gan.ui.random.model.Product;
-import com.huyingbao.module.gan.ui.random.module.RandomStore;
+import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ProductFragment extends GanModuleFragment {
+public class ProductFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
@@ -60,7 +60,7 @@ public class ProductFragment extends GanModuleFragment {
      * 实例化RecyclerView,并设置adapter
      */
     protected void initRecyclerView() {
-        mRvContent.setLayoutManager(new LinearLayoutManager(mContext));
+        mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setAdapter(mAdapter);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速

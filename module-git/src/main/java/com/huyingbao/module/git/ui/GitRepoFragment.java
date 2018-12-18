@@ -9,13 +9,14 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.module.git.GitModuleFragment;
 import com.huyingbao.module.git.R;
-import com.huyingbao.module.git.action.GitActions;
 import com.huyingbao.module.git.ui.adapter.GitRepoAdapter;
 import com.huyingbao.module.git.ui.model.GitRepo;
+import com.huyingbao.module.git.ui.module.GitActionCreator;
+import com.huyingbao.module.git.ui.module.GitActions;
 import com.huyingbao.module.git.ui.module.GitStore;
 
 import java.util.ArrayList;
@@ -29,7 +30,10 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitRepoFragment extends GitModuleFragment {
+public class GitRepoFragment extends CommonFragment {
+    @Inject
+    GitActionCreator mActionCreator;
+
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
@@ -59,7 +63,7 @@ public class GitRepoFragment extends GitModuleFragment {
      * 实例化RecyclerView,并设置adapter
      */
     protected void initRecyclerView() {
-        mRvContent.setLayoutManager(new LinearLayoutManager(mContext));
+        mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setAdapter(mAdapter);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
@@ -82,7 +86,7 @@ public class GitRepoFragment extends GitModuleFragment {
 
     private void toGitUser(int position) {
         mStore.mGitUser.setValue(null);
-        mActionCreator.gitGitUser(mContext, mDataList.get(position).getOwner().getId());
+        mActionCreator.gitGitUser(getActivity(), mDataList.get(position).getOwner().getId());
         mActionCreator.postLocalAction(GitActions.TO_GIT_USER);
     }
 }

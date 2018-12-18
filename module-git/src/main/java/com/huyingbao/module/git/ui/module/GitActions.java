@@ -1,4 +1,4 @@
-package com.huyingbao.module.git.action;
+package com.huyingbao.module.git.ui.module;
 
 import android.content.Context;
 

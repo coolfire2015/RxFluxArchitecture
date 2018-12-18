@@ -1,13 +1,12 @@
-package com.huyingbao.module.gan;
+package com.huyingbao.module.git.action;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.gan.action.MainApi;
-import com.huyingbao.module.gan.ui.random.RandomActivity;
-import com.huyingbao.module.gan.ui.random.module.RandomActivityModule;
-import com.huyingbao.module.gan.ui.random.module.RandomStore;
+import com.huyingbao.module.git.ui.GitActivity;
+import com.huyingbao.module.git.ui.module.GitActivityModule;
+import com.huyingbao.module.git.ui.module.GitStore;
 
 import javax.inject.Singleton;
 
@@ -25,27 +24,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class GanModule {
+public abstract class GitModule {
     @Singleton
     @Provides
-    static MainApi provideMainApi(OkHttpClient client) {
+    static GitApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://gank.io/api/")
+                .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(MainApi.class);
+        return retrofit.create(GitApi.class);
     }
 
     @Singleton
     @Binds
     @IntoMap
-    @RxStoreKey(RandomStore.class)
-    abstract RxStore provideMainStore(RandomStore randomStore);
-
+    @RxStoreKey(GitStore.class)
+    abstract RxStore provideGitStore(GitStore gitStore);
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = RandomActivityModule.class)
-    abstract RandomActivity injectMainActivity();
+    @ContributesAndroidInjector(modules = GitActivityModule.class)
+    abstract GitActivity injectGitActivity();
 }
