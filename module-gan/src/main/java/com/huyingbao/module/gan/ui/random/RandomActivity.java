@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.main;
+package com.huyingbao.module.gan.ui.random;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
 import com.huyingbao.module.gan.GanModuleActivity;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.action.MainActions;
-import com.huyingbao.module.gan.ui.main.module.MainStore;
+import com.huyingbao.module.gan.ui.random.module.RandomActions;
+import com.huyingbao.module.gan.ui.random.module.RandomStore;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class GanActivity extends GanModuleActivity {
+public class RandomActivity extends GanModuleActivity {
     @Inject
     Lazy<GanFragment> mMainFragmentLazy;
     @Inject
@@ -39,13 +39,13 @@ public class GanActivity extends GanModuleActivity {
     @Override
     public void onRxStoreChanged(@NonNull RxStoreChange change) {
         switch (change.getType()) {
-            case MainActions.TO_GITHUB:
+            case RandomActions.TO_GITHUB:
                 ARouter.getInstance().build("/git/GitActivity").navigation();
                 break;
-            case MainActions.TO_PRODUCT_LIST:
+            case RandomActions.TO_PRODUCT_LIST:
                 ActivityUtils.addAndHideFragment(getSupportFragmentManager(), mProductListFragmentLazy.get(), R.id.fl_content);
                 break;
-            case MainActions.TO_SHOP:
+            case RandomActions.TO_SHOP:
                 break;
         }
     }
@@ -53,6 +53,6 @@ public class GanActivity extends GanModuleActivity {
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
-        return Collections.singletonList(ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class));
+        return Collections.singletonList(ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class));
     }
 }

@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.main.module;
+package com.huyingbao.module.gan.ui.random.module;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -10,12 +10,8 @@ import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.module.gan.action.MainActionCreator;
-import com.huyingbao.module.gan.action.MainActions;
-import com.huyingbao.module.gan.ui.main.model.Product;
-import com.huyingbao.module.gan.ui.shop.model.Shop;
-
-import java.util.List;
+import com.huyingbao.module.gan.GanResponse;
+import com.huyingbao.module.gan.ui.random.model.Product;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,17 +20,16 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class MainStore extends RxStore {
-    public LiveData<List<Product>> mProductTrans;
-    public final MutableLiveData<Shop> mShop = new MutableLiveData<>();
+public class RandomStore extends RxStore {
+    public LiveData<GanResponse<Product>> mProductTrans;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
-    private final MutableLiveData<List<Product>> mProductList = new MutableLiveData<>();
+    private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
 
     @Inject
-    MainActionCreator mActionCreator;
+    RandomActionCreator mActionCreator;
 
     @Inject
-    public MainStore(Dispatcher dispatcher) {
+    public RandomStore(Dispatcher dispatcher) {
         super(dispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
             if (page != null) mActionCreator.getProductList(page);
@@ -45,12 +40,12 @@ public class MainStore extends RxStore {
     @Override
     public void onRxAction(RxAction action) {
         switch (action.getType()) {
-            case MainActions.GET_PRODUCT_LIST:
+            case RandomActions.GET_PRODUCT_LIST:
                 mProductList.setValue(action.get(RxActionCreator.RESPONSE));
                 return;
-            case MainActions.TO_GITHUB:
-            case MainActions.TO_PRODUCT_LIST:
-            case MainActions.TO_SHOP:
+            case RandomActions.TO_GITHUB:
+            case RandomActions.TO_PRODUCT_LIST:
+            case RandomActions.TO_SHOP:
                 break;
             default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
                 return;

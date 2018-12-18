@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 
 /**
+ * action封装类，用于传递数据，使用Builder创建
  * Created by liujunfeng on 2017/12/7.
  */
 public class RxAction {

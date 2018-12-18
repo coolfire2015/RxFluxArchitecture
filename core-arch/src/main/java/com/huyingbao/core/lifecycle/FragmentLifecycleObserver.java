@@ -20,6 +20,12 @@ public class FragmentLifecycleObserver implements LifecycleObserver {
         this.mFragment = fragment;
     }
 
+    /**
+     * fragment创建成功之后调用,
+     * 若fragment是RxViewDispatch的子类,
+     * 获取需要关联的RxStoreList
+     * 将RxStoreList同fragment生命周期关联
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
         if (mFragment instanceof RxViewDispatch) {

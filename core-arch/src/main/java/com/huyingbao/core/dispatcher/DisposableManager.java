@@ -13,12 +13,15 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 订阅管理类
+ * 将action与action处理事件连接起来，
+ * action的type作为key
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
 public final class DisposableManager {
     /**
      * 管理订阅的ArrayMap
+     * action的type作为key
      */
     private ArrayMap<String, Pair<Integer, Disposable>> mMap;
 
@@ -32,7 +35,8 @@ public final class DisposableManager {
      */
     public void add(RxAction action, Disposable disposable) {
         Pair<Integer, Disposable> old = mMap.put(action.getType(), getPair(action, disposable));
-        if (old != null && !old.second.isDisposed()) old.second.dispose();
+        if (old != null && old.second != null && !old.second.isDisposed())
+            old.second.dispose();
     }
 
     /**
@@ -40,7 +44,8 @@ public final class DisposableManager {
      */
     public void remove(RxAction action) {
         Pair<Integer, Disposable> old = mMap.remove(action.getType());
-        if (old != null && !old.second.isDisposed()) old.second.dispose();
+        if (old != null && old.second != null && !old.second.isDisposed())
+            old.second.dispose();
     }
 
     /**
@@ -48,7 +53,11 @@ public final class DisposableManager {
      */
     public boolean contains(RxAction action) {
         Pair<Integer, Disposable> old = mMap.get(action.getType());
-        return old != null && old.first == action.hashCode() && !old.second.isDisposed();
+        return old != null
+                && old.first != null
+                && old.first == action.hashCode()
+                && old.second != null
+                && !old.second.isDisposed();
     }
 
     /**
@@ -57,7 +66,7 @@ public final class DisposableManager {
     public synchronized void clear() {
         if (mMap.isEmpty()) return;
         for (Pair<Integer, Disposable> pair : mMap.values())
-            if (!pair.second.isDisposed())
+            if (pair.second != null && !pair.second.isDisposed())
                 pair.second.dispose();
     }
 

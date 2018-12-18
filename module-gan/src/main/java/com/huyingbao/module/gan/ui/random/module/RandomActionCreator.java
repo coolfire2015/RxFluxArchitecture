@@ -1,9 +1,12 @@
-package com.huyingbao.module.gan.action;
+package com.huyingbao.module.gan.ui.random.module;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
+import com.huyingbao.module.gan.action.MainApi;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,12 +17,12 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class MainActionCreator extends RxActionCreator implements MainActions {
+public class RandomActionCreator extends RxActionCreator implements RandomActions {
     @Inject
     MainApi mMainApi;
 
     @Inject
-    public MainActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
+    public RandomActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
         super(dispatcher, disposableManager);
     }
 
@@ -27,12 +30,6 @@ public class MainActionCreator extends RxActionCreator implements MainActions {
     public void getProductList(int page) {
         //TODO 添加分页
         RxAction action = newRxAction(GET_PRODUCT_LIST);
-        postHttpAction(action, mMainApi.getProductList());
-    }
-
-    @Override
-    public void getShop(int userId) {
-        RxAction action = newRxAction(GET_SHOP);
-        postHttpAction(action, mMainApi.getShop(userId));
+        postHttpAction(action, mMainApi.getProductList().delay(5, TimeUnit.SECONDS));
     }
 }

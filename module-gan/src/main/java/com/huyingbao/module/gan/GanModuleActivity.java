@@ -20,15 +20,12 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.v4.app.Fragment;
 
 import com.huyingbao.core.common.CommonActivity;
-import com.huyingbao.module.gan.action.MainActionCreator;
 
 import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
 
 public abstract class GanModuleActivity extends CommonActivity {
-    @Inject
-    protected MainActionCreator mActionCreator;
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
     @Inject

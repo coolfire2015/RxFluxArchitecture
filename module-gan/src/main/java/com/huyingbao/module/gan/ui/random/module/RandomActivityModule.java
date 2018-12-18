@@ -1,9 +1,9 @@
-package com.huyingbao.module.gan.ui.main.module;
+package com.huyingbao.module.gan.ui.random.module;
 
 
 import com.huyingbao.core.scope.FragmentScope;
-import com.huyingbao.module.gan.ui.main.GanFragment;
-import com.huyingbao.module.gan.ui.main.ProductFragment;
+import com.huyingbao.module.gan.ui.random.GanFragment;
+import com.huyingbao.module.gan.ui.random.ProductFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -12,7 +12,7 @@ import dagger.android.ContributesAndroidInjector;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class MainActivityModule {
+public abstract class RandomActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
     abstract GanFragment injectMainFragment();

@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 import dagger.MapKey;
 
 /**
+ * 区分不同的RxStore子类
  * Created by liujunfeng on 2017/12/7.
  */
 @Documented

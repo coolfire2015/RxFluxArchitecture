@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.huyingbao.core.action.RxError;
 import com.huyingbao.core.dispatcher.RxViewDispatch;
-import com.huyingbao.core.lifecycle.RxFluxActivity;
 import com.huyingbao.core.model.RxHttpException;
 
 import java.net.SocketException;

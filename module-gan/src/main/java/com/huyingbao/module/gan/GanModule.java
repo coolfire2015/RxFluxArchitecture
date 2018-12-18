@@ -4,13 +4,10 @@ import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.gan.ui.main.GanActivity;
 import com.huyingbao.module.gan.action.MainApi;
-import com.huyingbao.module.gan.ui.main.module.MainActivityModule;
-import com.huyingbao.module.gan.ui.main.module.MainStore;
-import com.huyingbao.module.gan.ui.shop.ShopActivity;
-import com.huyingbao.module.gan.ui.shop.module.ShopActivityModule;
-import com.huyingbao.module.gan.ui.shop.module.ShopStore;
+import com.huyingbao.module.gan.ui.random.RandomActivity;
+import com.huyingbao.module.gan.ui.random.module.RandomActivityModule;
+import com.huyingbao.module.gan.ui.random.module.RandomStore;
 
 import javax.inject.Singleton;
 
@@ -33,7 +30,7 @@ public abstract class GanModule {
     @Provides
     static MainApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.124.215.205:1337/")
+                .baseUrl("https://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
@@ -44,20 +41,11 @@ public abstract class GanModule {
     @Singleton
     @Binds
     @IntoMap
-    @RxStoreKey(MainStore.class)
-    abstract RxStore provideMainStore(MainStore mainStore);
+    @RxStoreKey(RandomStore.class)
+    abstract RxStore provideMainStore(RandomStore randomStore);
 
-    @Singleton
-    @Binds
-    @IntoMap
-    @RxStoreKey(ShopStore.class)
-    abstract RxStore provideShopStore(ShopStore shopStore);
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = MainActivityModule.class)
-    abstract GanActivity injectMainActivity();
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = ShopActivityModule.class)
-    abstract ShopActivity injectShopActivity();
+    @ContributesAndroidInjector(modules = RandomActivityModule.class)
+    abstract RandomActivity injectMainActivity();
 }

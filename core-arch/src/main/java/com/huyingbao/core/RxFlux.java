@@ -47,7 +47,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         mActivityCounter++;
         mActivityStack.add(activity);
         if (activity instanceof FragmentActivity)
-            ((FragmentActivity) activity).getLifecycle().addObserver(new ActivityLifecycleObserver(activity));
+            ((FragmentActivity) activity).getLifecycle()
+                    .addObserver(new ActivityLifecycleObserver(activity));
     }
 
     @Override
@@ -89,13 +90,15 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
         super.onFragmentAttached(fm, f, context);
-        if (f instanceof RxFluxView) f.getLifecycle().addObserver(new FragmentLifecycleObserver(f));
+        if (f instanceof RxFluxView)
+            f.getLifecycle().addObserver(new FragmentLifecycleObserver(f));
     }
 
     @Override
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
-        if (f instanceof RxViewDispatch) mDispatcher.subscribeRxView((RxViewDispatch) f);
+        if (f instanceof RxViewDispatch)
+            mDispatcher.subscribeRxView((RxViewDispatch) f);
     }
 
     @Override

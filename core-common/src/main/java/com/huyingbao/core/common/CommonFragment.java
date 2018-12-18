@@ -1,7 +1,6 @@
 package com.huyingbao.core.common;
 
 import com.huyingbao.core.RxFluxView;
-import com.huyingbao.core.lifecycle.RxFluxFragment;
 
 /**
  * Created by liujunfeng on 2017/12/7.

@@ -25,6 +25,8 @@ public abstract class RxFluxApp extends DaggerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        //application创建的时候调用该方法，
+        //使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
         initDebug();
         initArouter();

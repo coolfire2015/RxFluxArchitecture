@@ -1,4 +1,4 @@
-package com.huyingbao.core.lifecycle;
+package com.huyingbao.core.common;
 
 import android.content.Context;
 import android.os.Bundle;

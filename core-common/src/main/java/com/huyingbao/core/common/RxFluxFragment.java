@@ -1,4 +1,4 @@
-package com.huyingbao.core.lifecycle;
+package com.huyingbao.core.common;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import dagger.android.support.AndroidSupportInjection;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxFluxFragment extends Fragment implements RxFluxView {
+public abstract class  RxFluxFragment extends Fragment implements RxFluxView {
     protected Context mContext;
     private Unbinder mUnbinder;
 

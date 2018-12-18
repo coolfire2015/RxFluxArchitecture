@@ -21,6 +21,12 @@ public class ActivityLifecycleObserver implements LifecycleObserver {
         this.mActivity = activity;
     }
 
+    /**
+     * activity创建成功之后调用,
+     * 若activity是RxViewDispatch的子类,
+     * 获取需要关联的RxStoreList
+     * 将RxStoreList同activity生命周期关联
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
         if (mActivity instanceof RxViewDispatch) {
