@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.gan.GanModuleFragment;
-import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.R2;
+import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.MainActions;
+import com.huyingbao.module.gan.R2;
 
 import javax.inject.Inject;
 

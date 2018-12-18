@@ -10,7 +10,7 @@ import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
 import com.huyingbao.module.gan.GanModuleActivity;
-import com.huyingbao.module.main.R;
+import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.MainActions;
 import com.huyingbao.module.gan.ui.main.module.MainStore;
 

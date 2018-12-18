@@ -12,7 +12,7 @@ import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
 import com.huyingbao.module.gan.GanModuleActivity;
 import com.huyingbao.module.gan.ui.shop.module.ShopStore;
-import com.huyingbao.module.main.R;
+import com.huyingbao.module.gan.R;
 
 import java.util.Collections;
 import java.util.List;

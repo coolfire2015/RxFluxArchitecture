@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.gan.GanModuleFragment;
-import com.huyingbao.module.main.R;
+import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.main.adapter.ProductAdapter;
 import com.huyingbao.module.gan.ui.main.model.Product;
 import com.huyingbao.module.gan.ui.main.module.MainStore;

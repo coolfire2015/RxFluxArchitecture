@@ -1,4 +1,4 @@
-package com.huyingbao.module.main;
+package com.huyingbao.module.gan;
 
 import com.huyingbao.core.RxFluxApp;
 

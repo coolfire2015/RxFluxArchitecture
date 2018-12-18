@@ -9,8 +9,8 @@ import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.gan.GanModuleFragment;
 import com.huyingbao.module.gan.ui.shop.model.Shop;
 import com.huyingbao.module.gan.ui.shop.module.ShopStore;
-import com.huyingbao.module.main.R;
-import com.huyingbao.module.main.R2;
+import com.huyingbao.module.gan.R;
+import com.huyingbao.module.gan.R2;
 
 import javax.inject.Inject;
 
