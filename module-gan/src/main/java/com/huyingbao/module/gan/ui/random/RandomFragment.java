@@ -17,12 +17,12 @@ import butterknife.OnClick;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class Fragment extends CommonFragment {
+public class RandomFragment extends CommonFragment {
     @Inject
     RandomActionCreator mActionCreator;
 
     @Inject
-    public Fragment() {
+    public RandomFragment() {
     }
 
     @Override

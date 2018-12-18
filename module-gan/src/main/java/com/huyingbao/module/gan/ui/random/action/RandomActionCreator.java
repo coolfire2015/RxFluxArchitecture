@@ -4,9 +4,7 @@ import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
-import com.huyingbao.module.gan.action.MainApi;
-
-import java.util.concurrent.TimeUnit;
+import com.huyingbao.module.gan.action.GanApi;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,7 +17,7 @@ import javax.inject.Singleton;
 @Singleton
 public class RandomActionCreator extends RxActionCreator implements RandomActions {
     @Inject
-    MainApi mMainApi;
+    GanApi mGanApi;
 
     @Inject
     public RandomActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
@@ -29,6 +27,6 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
     @Override
     public void getProductList(int page) {
         RxAction action = newRxAction(GET_PRODUCT_LIST);
-        postHttpAction(action, mMainApi.getProductList().delay(5, TimeUnit.SECONDS));
+        postHttpAction(action, mGanApi.getProductList());
     }
 }

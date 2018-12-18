@@ -26,14 +26,14 @@ import dagger.Lazy;
  */
 public class RandomActivity extends CommonActivity {
     @Inject
-    Lazy<Fragment> mMainFragmentLazy;
+    Lazy<RandomFragment> mRandomFragmentLazy;
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         if (getSupportFragmentManager().findFragmentById(R.id.fl_content) == null)
-            ActivityUtils.addFragment(getSupportFragmentManager(), mMainFragmentLazy.get(), R.id.fl_content);
+            ActivityUtils.addFragment(getSupportFragmentManager(), mRandomFragmentLazy.get(), R.id.fl_content);
     }
 
     @Override

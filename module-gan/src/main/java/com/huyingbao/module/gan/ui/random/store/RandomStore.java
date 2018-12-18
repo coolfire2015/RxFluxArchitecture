@@ -22,6 +22,7 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
+
 public class RandomStore extends RxStore {
     @Inject
     RandomActionCreator mActionCreator;
@@ -31,7 +32,7 @@ public class RandomStore extends RxStore {
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
 
     @Inject
-    public RandomStore(Dispatcher dispatcher) {
+    RandomStore(Dispatcher dispatcher) {
         super(dispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
             if (page != null) mActionCreator.getProductList(page);

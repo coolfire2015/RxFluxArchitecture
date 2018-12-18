@@ -27,14 +27,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class GanModule {
     @Singleton
     @Provides
-    static MainApi provideMainApi(OkHttpClient client) {
+    static GanApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(MainApi.class);
+        return retrofit.create(GanApi.class);
     }
 
     @Singleton

@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public interface MainApi {
+public interface GanApi {
     @GET("random/data/福利/2000 ")
     Observable<GanResponse<Product>> getProductList();
 }
