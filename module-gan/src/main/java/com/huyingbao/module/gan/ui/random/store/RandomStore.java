@@ -35,7 +35,7 @@ public class RandomStore extends RxStore {
     RandomStore(Dispatcher dispatcher) {
         super(dispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
-            if (page != null) mActionCreator.getProductList(page);
+            if (page != null) mActionCreator.getProductList("Android", page);
             return mProductList;
         });
     }

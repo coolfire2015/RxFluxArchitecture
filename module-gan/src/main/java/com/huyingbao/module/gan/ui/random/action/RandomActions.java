@@ -10,5 +10,5 @@ public interface RandomActions {
 
     String GET_PRODUCT_LIST = "get_product_list";
 
-    void getProductList(int page);
+    void getProductList(String category, int count);
 }

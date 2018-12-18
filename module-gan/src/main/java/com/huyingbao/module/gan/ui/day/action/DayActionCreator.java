@@ -1,10 +1,11 @@
-package com.huyingbao.module.gan.ui.random.action;
+package com.huyingbao.module.gan.ui.day.action;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
 import com.huyingbao.module.gan.action.GanApi;
+import com.huyingbao.module.gan.ui.random.action.RandomActions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,12 +16,12 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class RandomActionCreator extends RxActionCreator implements RandomActions {
+public class DayActionCreator extends RxActionCreator implements RandomActions {
     @Inject
     GanApi mGanApi;
 
     @Inject
-    public RandomActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
+    public DayActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
         super(dispatcher, disposableManager);
     }
 
