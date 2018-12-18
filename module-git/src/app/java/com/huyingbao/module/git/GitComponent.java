@@ -3,6 +3,7 @@ package com.huyingbao.module.git;
 import android.app.Application;
 
 import com.huyingbao.core.module.CommonModule;
+import com.huyingbao.module.git.action.GitModule;
 
 import javax.inject.Singleton;
 

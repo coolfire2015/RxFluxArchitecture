@@ -3,6 +3,7 @@ package com.huyingbao.module.gan;
 import android.app.Application;
 
 import com.huyingbao.core.module.CommonModule;
+import com.huyingbao.module.gan.action.GanModule;
 
 import javax.inject.Singleton;
 
@@ -19,12 +20,12 @@ import dagger.android.support.AndroidSupportInjectionModule;
         GanModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
-public interface MainComponent extends AndroidInjector<com.huyingbao.module.gan.MainApplication> {
+public interface GanComponent extends AndroidInjector<GanApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        MainComponent.Builder application(Application application);
+        GanComponent.Builder application(Application application);
 
-        MainComponent build();
+        GanComponent build();
     }
 }
