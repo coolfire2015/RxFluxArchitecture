@@ -4,7 +4,6 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     //lint设置
     lintOptions {

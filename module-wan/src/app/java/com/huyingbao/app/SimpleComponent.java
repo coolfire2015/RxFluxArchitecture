@@ -3,8 +3,8 @@ package com.huyingbao.app;
 import android.app.Application;
 
 import com.huyingbao.core.module.CommonModule;
+import com.huyingbao.module.gan.GanModule;
 import com.huyingbao.module.git.GitModule;
-import com.huyingbao.module.main.MainModule;
 
 import javax.inject.Singleton;
 
@@ -18,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @Singleton
 @Component(modules = {
-        MainModule.class,
+        GanModule.class,
         GitModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})

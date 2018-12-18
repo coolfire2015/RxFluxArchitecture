@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     //lint设置
     lintOptions {
@@ -36,7 +35,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -128,7 +127,7 @@ dependencies {
     implementation project(':core-common')
 
     if (!isModuleAsApp.toBoolean()) {
-        implementation project(':module-main')
+        implementation project(':module-gan')
         implementation project(':module-git')
     }
 

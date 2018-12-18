@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.huyingbao.module.gan;
+package com.huyingbao.core.common;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.v4.app.Fragment;
-
-import com.huyingbao.core.common.CommonActivity;
 
 import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
 
-public abstract class GanModuleActivity extends CommonActivity {
+public abstract class GanModuleFragment extends CommonFragment {
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
     @Inject

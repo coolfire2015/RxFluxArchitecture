@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
-import com.huyingbao.module.gan.GanModuleActivity;
+import com.huyingbao.core.common.GanModuleActivity;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.module.RandomActions;
 import com.huyingbao.module.gan.ui.random.module.RandomStore;

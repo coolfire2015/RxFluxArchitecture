@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.module.gan.GanModuleFragment;
+import com.huyingbao.core.common.GanModuleFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
 import com.huyingbao.module.gan.ui.random.model.Product;

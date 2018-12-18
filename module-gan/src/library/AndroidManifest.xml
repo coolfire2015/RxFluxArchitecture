@@ -6,8 +6,7 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name="com.huyingbao.module.gan.ui.shop.ShopActivity"
-            android:label="@string/app_name">
+            android:name="com.huyingbao.module.gan.ui.random.RandomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

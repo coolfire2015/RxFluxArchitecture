@@ -5,7 +5,6 @@ group = "com.github.coolfire2015"
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION as int
