@@ -36,15 +36,14 @@ import butterknife.BindView;
  */
 @ActivityScope
 public class GitRepoFragment extends CommonFragment {
-    @Inject
-    GitActionCreator mActionCreator;
-
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
     protected CoordinatorLayout mClContent;
     protected List<GitRepo> mDataList = new ArrayList();
     protected BaseQuickAdapter mAdapter = new GitRepoAdapter(mDataList);
+    @Inject
+    GitActionCreator mActionCreator;
     private GitStore mStore;
 
     @Inject

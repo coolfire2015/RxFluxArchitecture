@@ -23,12 +23,11 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class RandomStore extends RxStore {
-    @Inject
-    RandomActionCreator mActionCreator;
-
-    public LiveData<GanResponse<Product>> mProductTrans;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
+    public LiveData<GanResponse<Product>> mProductTrans;
+    @Inject
+    RandomActionCreator mActionCreator;
 
     @Inject
     RandomStore(RxDispatcher rxDispatcher) {

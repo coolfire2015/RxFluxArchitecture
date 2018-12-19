@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
-import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.action.RxActionManager;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.module.git.action.GitApi;
 
 import javax.inject.Inject;

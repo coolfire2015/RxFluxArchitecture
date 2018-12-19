@@ -8,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.action.RxActionManager;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.lifecycle.RxActivityLifecycleObserver;
 import com.huyingbao.core.lifecycle.RxFragmentLifecycleObserver;
 import com.huyingbao.core.view.RxFluxView;

@@ -4,8 +4,8 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.huyingbao.module.gan.ui.random.model.Product;
 import com.huyingbao.module.gan.R;
+import com.huyingbao.module.gan.ui.random.model.Product;
 
 import java.util.List;
 

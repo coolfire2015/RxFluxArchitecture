@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huyingbao.core.view.RxFluxActivity;
 import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.model.RxHttpException;
+import com.huyingbao.core.view.RxFluxActivity;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
