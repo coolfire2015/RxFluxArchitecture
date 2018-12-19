@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 import dagger.MapKey;
 
 /**
- * 区分不同的RxStore子类
+ * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法
+ * 区分不同的RxStore子类 对ClassKey注解的扩展
  * Created by liujunfeng on 2017/12/7.
  */
 @Documented

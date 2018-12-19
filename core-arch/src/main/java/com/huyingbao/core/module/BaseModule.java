@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.huyingbao.core.store.RxStoreFactory;
 
+import javax.inject.Singleton;
+
 import dagger.Binds;
 import dagger.Module;
 
@@ -14,9 +16,17 @@ import dagger.Module;
  */
 @Module
 public abstract class BaseModule {
+    @Singleton
     @Binds
     abstract Context privateContext(Application application);
 
+    /**
+     * 提供ViewModelProvider.Factory的实现类RxStoreFactory
+     *
+     * @param rxStoreFactory
+     * @return
+     */
+    @Singleton
     @Binds
     abstract ViewModelProvider.Factory privateViewModelFactory(RxStoreFactory rxStoreFactory);
 }

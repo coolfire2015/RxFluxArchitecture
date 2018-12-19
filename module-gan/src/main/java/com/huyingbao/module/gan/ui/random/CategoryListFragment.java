@@ -2,7 +2,6 @@ package com.huyingbao.module.gan.ui.random;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,11 +12,11 @@ import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
-import com.huyingbao.module.gan.ui.random.model.Product;
+import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,17 +24,16 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
+ * 内容类型列表展示页面
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
 public class CategoryListFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
     protected RecyclerView mRvContent;
-    @BindView(R2.id.cl_content)
-    protected CoordinatorLayout mClContent;
 
-    protected List<Product> mDataList = new ArrayList();
-    protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
+    protected List<String> mDataList = new ArrayList();
+    protected BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
     private RandomStore mStore;
 
     @Inject
@@ -72,11 +70,7 @@ public class CategoryListFragment extends CommonFragment {
     }
 
     private void showData() {
-        mStore.mProductTrans.observe(this, products -> {
-            mDataList.clear();
-            if (products != null && products.getResults().size() > 0)
-                mDataList.addAll(products.getResults());
-            mAdapter.notifyDataSetChanged();
-        });
+        mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.gan_category)));
+        mAdapter.notifyDataSetChanged();
     }
 }

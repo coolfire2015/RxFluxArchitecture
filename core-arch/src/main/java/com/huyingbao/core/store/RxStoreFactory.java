@@ -2,6 +2,7 @@ package com.huyingbao.core.store;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
 
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 
 /**
+ * 实现ViewModelProvider.Factory
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
@@ -23,7 +25,7 @@ public class RxStoreFactory implements ViewModelProvider.Factory {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends ViewModel> T create(Class<T> modelClass) {
+    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         Provider<? extends RxStore> creator = creators.get(modelClass);
         if (creator == null) {
             for (Map.Entry<Class<? extends RxStore>, Provider<RxStore>> entry : creators.entrySet()) {

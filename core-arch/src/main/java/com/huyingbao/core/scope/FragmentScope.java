@@ -7,7 +7,7 @@ import javax.inject.Scope;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * PerFragment创建出来的单例保留在FragmentComponent实例中
+ * FragmentScope创建出来的单例保留在FragmentComponent实例中
  * Created by liujunfeng on 2017/12/7.
  */
 @Scope

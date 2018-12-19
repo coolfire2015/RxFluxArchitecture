@@ -24,10 +24,17 @@ import javax.inject.Singleton;
  * 必须在application创建的时候调用该类的实例方法, 并仅调用一次.
  * 这个类会自动跟踪应用程序的生命周期,
  * 并且注销每个activity剩余的订阅subscriptions
+ * <p>
+ * 抽象的类并不能实例化
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
 public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
+    /**
+     * @Inject 用来标记需要注入的依赖
+     * 被标注的属性不能使用private修饰，否则无法注入
+     * @param rxBus
+     */
     @Inject
     Dispatcher mDispatcher;
     @Inject
@@ -36,6 +43,13 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     private int mActivityCounter;
     private Stack<Activity> mActivityStack;
 
+    /**
+     * @Inject 标记用于提供依赖的方法
+     * <p>
+     * 构造器注入的局限：如果有多个构造器，我们只能标注其中一个，无法标注多个
+     * <p>
+     * 标注在public方法上，Dagger2会在构造器执行之后立即调用这个方法，可以提供this对象
+     */
     @Inject
     public RxFlux() {
         mActivityCounter = 0;
