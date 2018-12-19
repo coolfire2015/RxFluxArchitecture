@@ -2,9 +2,7 @@ package com.huyingbao.module.gan.ui.random.module;
 
 
 import com.huyingbao.core.scope.FragmentScope;
-import com.huyingbao.module.gan.ui.random.CategoryListFragment;
-import com.huyingbao.module.gan.ui.random.ProductFragment;
-import com.huyingbao.module.gan.ui.random.RandomFragment;
+import com.huyingbao.module.gan.ui.random.view.ProductFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -16,13 +14,5 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class RandomActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
-    abstract RandomFragment injectRandomFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
     abstract ProductFragment injectProductListFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract CategoryListFragment injectCategoryListFragment();
 }

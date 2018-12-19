@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.day.action;
+package com.huyingbao.module.gan.ui.category.action;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
@@ -16,12 +16,12 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class DayActionCreator extends RxActionCreator implements RandomActions {
+public class CategoryActionCreator extends RxActionCreator implements RandomActions {
     @Inject
     GanApi mGanApi;
 
     @Inject
-    public DayActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    public CategoryActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
 

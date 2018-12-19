@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random;
+package com.huyingbao.module.gan.ui.random.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;

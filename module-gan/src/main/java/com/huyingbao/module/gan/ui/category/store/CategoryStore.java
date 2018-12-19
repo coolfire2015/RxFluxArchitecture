@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random.store;
+package com.huyingbao.module.gan.ui.category.store;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -21,7 +21,7 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class RandomStore extends RxStore {
+public class CategoryStore extends RxStore {
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     public LiveData<GanResponse<Product>> mProductTrans;
@@ -29,7 +29,7 @@ public class RandomStore extends RxStore {
     RandomActionCreator mActionCreator;
 
     @Inject
-    RandomStore(RxDispatcher rxDispatcher) {
+    CategoryStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
             if (page != null) mActionCreator.getProductList("Android", page);

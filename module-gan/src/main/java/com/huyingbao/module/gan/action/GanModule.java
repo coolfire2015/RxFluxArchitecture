@@ -4,9 +4,12 @@ import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
-import com.huyingbao.module.gan.ui.random.RandomActivity;
+import com.huyingbao.module.gan.ui.category.module.CategoryActivityModule;
+import com.huyingbao.module.gan.ui.category.store.CategoryStore;
+import com.huyingbao.module.gan.ui.category.view.CategoryActivity;
 import com.huyingbao.module.gan.ui.random.module.RandomActivityModule;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import javax.inject.Singleton;
 
@@ -54,6 +57,12 @@ public abstract class GanModule {
     @RxStoreKey(RandomStore.class)
     abstract RxStore provideRandomStore(RandomStore randomStore);
 
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(CategoryStore.class)
+    abstract RxStore provideCategoryStore(CategoryStore categoryStore);
+
 
     /**
      * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomActivity）的注射器
@@ -80,4 +89,8 @@ public abstract class GanModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = RandomActivityModule.class)
     abstract RandomActivity injectRandomActivity();
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = CategoryActivityModule.class)
+    abstract CategoryActivity injectCategoryActivity();
 }

@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random;
+package com.huyingbao.module.gan.ui.category.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.view.CommonFragment;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
+import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.ArrayList;
@@ -73,5 +73,4 @@ public class CategoryListFragment extends CommonFragment {
         mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.gan_category)));
         mAdapter.notifyDataSetChanged();
     }
-
 }

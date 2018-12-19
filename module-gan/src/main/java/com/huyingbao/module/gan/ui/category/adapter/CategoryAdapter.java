@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.random.adapter;
+package com.huyingbao.module.gan.ui.category.adapter;
 
 import android.support.annotation.Nullable;
 
