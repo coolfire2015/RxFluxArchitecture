@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.huyingbao.app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.huyingbao.app.SimpleApplication"
         android:allowBackup="true"
