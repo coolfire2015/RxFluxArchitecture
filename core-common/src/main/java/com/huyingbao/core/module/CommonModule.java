@@ -19,7 +19,7 @@ import okhttp3.OkHttpClient;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@Module(includes = BaseModule.class)
+@Module(includes = RxFluxModule.class)
 public abstract class CommonModule {
     @Singleton
     @Provides

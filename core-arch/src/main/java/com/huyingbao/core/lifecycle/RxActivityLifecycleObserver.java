@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by liujunfeng on 2017/12/13.
  */
-public class ActivityLifecycleObserver implements LifecycleObserver {
+public class RxActivityLifecycleObserver implements LifecycleObserver {
     private final Activity mActivity;
 
-    public ActivityLifecycleObserver(Activity activity) {
+    public RxActivityLifecycleObserver(Activity activity) {
         this.mActivity = activity;
     }
 

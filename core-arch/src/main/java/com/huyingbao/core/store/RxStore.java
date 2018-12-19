@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 
-import com.huyingbao.core.dispatcher.Dispatcher;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 
 
 /**
@@ -19,7 +19,7 @@ import com.huyingbao.core.dispatcher.Dispatcher;
  * <p>
  * Action通过ActionCreator的帮助类产生并传递给Dispatcher，
  * Action大部分情况下是在用户和View交互的时候产生。
- * 然后Dispatcher会调用Store注册在其(Dispatcher)中的回调方法,
+ * 然后Dispatcher会调用Store注册在其(RxDispatcher)中的回调方法,
  * 把Action发送到所有注册的Store。
  * <p>
  * 在Store的回调方法内，Store可以处理任何和自身状态有关联的Action。
@@ -32,10 +32,10 @@ import com.huyingbao.core.dispatcher.Dispatcher;
  * Created by liujunfeng on 2017/12/7.
  */
 public abstract class RxStore extends ViewModel implements RxStoreActionDispatch, LifecycleObserver {
-    private final Dispatcher mDispatcher;
+    private final RxDispatcher mRxDispatcher;
 
-    public RxStore(Dispatcher dispatcher) {
-        this.mDispatcher = dispatcher;
+    public RxStore(RxDispatcher rxDispatcher) {
+        this.mRxDispatcher = rxDispatcher;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class RxStore extends ViewModel implements RxStoreActionDispatch
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void register() {
-        mDispatcher.subscribeRxStore(this);
+        mRxDispatcher.subscribeRxStore(this);
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class RxStore extends ViewModel implements RxStoreActionDispatch
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {
-        mDispatcher.unsubscribeRxStore(this);
+        mRxDispatcher.unsubscribeRxStore(this);
     }
 
     /**
@@ -63,6 +63,6 @@ public abstract class RxStore extends ViewModel implements RxStoreActionDispatch
      * @param change
      */
     protected void postChange(RxStoreChange change) {
-        mDispatcher.postRxStoreChange(change);
+        mRxDispatcher.postRxStoreChange(change);
     }
 }

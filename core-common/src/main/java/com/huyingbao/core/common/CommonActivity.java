@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huyingbao.core.view.RxFluxFluxActivity;
+import com.huyingbao.core.view.RxFluxActivity;
 import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.model.RxHttpException;
 
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonActivity extends RxFluxFluxActivity implements CommonView {
+public abstract class CommonActivity extends RxFluxActivity implements CommonView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }

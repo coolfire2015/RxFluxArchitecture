@@ -2,7 +2,7 @@ package com.huyingbao.core.action;
 
 import android.support.annotation.NonNull;
 
-import com.huyingbao.core.dispatcher.Dispatcher;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,11 +22,11 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class RxActionCreator {
     public static final String RESPONSE = "response";
 
-    private final Dispatcher mDispatcher;
+    private final RxDispatcher mRxDispatcher;
     private final RxActionManager mRxActionManager;
 
-    public RxActionCreator(Dispatcher dispatcher, RxActionManager rxActionManager) {
-        this.mDispatcher = dispatcher;
+    public RxActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+        this.mRxDispatcher = rxDispatcher;
         this.mRxActionManager = rxActionManager;
     }
 
@@ -89,7 +89,7 @@ public abstract class RxActionCreator {
      * @param action
      */
     private void postRxAction(@NonNull RxAction action) {
-        mDispatcher.postRxAction(action);
+        mRxDispatcher.postRxAction(action);
         removeRxAction(action);
     }
 
@@ -100,7 +100,7 @@ public abstract class RxActionCreator {
      * @param throwable
      */
     private void postError(@NonNull RxAction action, Throwable throwable) {
-        mDispatcher.postRxAction(RxActionError.newRxError(action, throwable));
+        mRxDispatcher.postRxAction(RxActionError.newRxError(action, throwable));
         removeRxAction(action);
     }
 

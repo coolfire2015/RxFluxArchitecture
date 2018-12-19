@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
-import com.huyingbao.core.dispatcher.Dispatcher;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.module.git.ui.model.GitRepo;
@@ -24,8 +24,8 @@ public class GitStore extends RxStore {
     public final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
 
     @Inject
-    GitStore(Dispatcher dispatcher) {
-        super(dispatcher);
+    GitStore(RxDispatcher rxDispatcher) {
+        super(rxDispatcher);
     }
 
     @Override

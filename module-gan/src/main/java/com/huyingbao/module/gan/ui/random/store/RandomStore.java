@@ -7,7 +7,7 @@ import android.arch.lifecycle.Transformations;
 import com.google.common.base.Objects;
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
-import com.huyingbao.core.dispatcher.Dispatcher;
+import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.module.gan.action.GanResponse;
@@ -31,8 +31,8 @@ public class RandomStore extends RxStore {
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
 
     @Inject
-    RandomStore(Dispatcher dispatcher) {
-        super(dispatcher);
+    RandomStore(RxDispatcher rxDispatcher) {
+        super(rxDispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
             if (page != null) mActionCreator.getProductList("Android", page);
             return mProductList;

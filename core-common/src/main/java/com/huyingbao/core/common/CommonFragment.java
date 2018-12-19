@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.huyingbao.core.view.RxFluxFluxFragment;
+import com.huyingbao.core.view.RxFluxFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -14,7 +14,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonFragment extends RxFluxFluxFragment implements CommonView {
+public abstract class CommonFragment extends RxFluxFragment implements CommonView {
     private boolean mBackAble = true;
     private boolean isVisibleToUser;
     private Unbinder mUnbinder;

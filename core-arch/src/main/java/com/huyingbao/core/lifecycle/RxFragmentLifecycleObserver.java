@@ -13,10 +13,10 @@ import java.util.List;
 /**
  * Created by liujunfeng on 2017/12/13.
  */
-public class FragmentLifecycleObserver implements LifecycleObserver {
+public class RxFragmentLifecycleObserver implements LifecycleObserver {
     private final Fragment mFragment;
 
-    public FragmentLifecycleObserver(Fragment fragment) {
+    public RxFragmentLifecycleObserver(Fragment fragment) {
         this.mFragment = fragment;
     }
 

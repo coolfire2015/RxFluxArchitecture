@@ -15,7 +15,7 @@ import dagger.Module;
  * Created by liujunfeng on 2017/12/7.
  */
 @Module
-public abstract class BaseModule {
+public abstract class RxFluxModule {
     @Singleton
     @Binds
     abstract Context privateContext(Application application);

@@ -22,13 +22,13 @@ import io.reactivex.disposables.Disposable;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class Dispatcher {
+public class RxDispatcher {
     private final RxBus mRxBus;
     private ArrayMap<String, Disposable> mRxActionMap;
     private ArrayMap<String, Disposable> mRxStoreMap;
 
     @Inject
-    public Dispatcher(RxBus rxBus) {
+    public RxDispatcher(RxBus rxBus) {
         this.mRxBus = rxBus;
         this.mRxActionMap = new ArrayMap<>();
         this.mRxStoreMap = new ArrayMap<>();
