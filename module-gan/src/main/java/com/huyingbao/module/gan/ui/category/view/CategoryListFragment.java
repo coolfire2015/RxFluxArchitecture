@@ -14,6 +14,7 @@ import com.huyingbao.core.view.CommonFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +66,7 @@ public class CategoryListFragment extends CommonFragment {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(RandomActivity.newIntent(getActivity(), mDataList.get(position)));
             }
         });
     }

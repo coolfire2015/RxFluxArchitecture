@@ -22,6 +22,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class RandomStore extends RxStore {
+    private String mCategory;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     public LiveData<GanResponse<Product>> mProductTrans;
@@ -32,7 +33,7 @@ public class RandomStore extends RxStore {
     RandomStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
         mProductTrans = Transformations.switchMap(mPage, page -> {
-            if (page != null) mActionCreator.getProductList("Android", page);
+            if (page != null) mActionCreator.getProductList(getCategory(), 20);
             return mProductList;
         });
     }
@@ -63,5 +64,13 @@ public class RandomStore extends RxStore {
 
     public void refresh() {
         this.mPage.setValue(0);
+    }
+
+    public void setCategory(String stringExtra) {
+        mCategory = stringExtra;
+    }
+
+    public String getCategory() {
+        return mCategory;
     }
 }

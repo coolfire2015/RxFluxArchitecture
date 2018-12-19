@@ -1,18 +1,8 @@
 package com.huyingbao.module.gan.ui.category.store;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Transformations;
-
-import com.google.common.base.Objects;
 import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.RxDispatcher;
 import com.huyingbao.core.store.RxStore;
-import com.huyingbao.module.gan.action.GanResponse;
-import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
-import com.huyingbao.module.gan.ui.random.action.RandomActions;
-import com.huyingbao.module.gan.ui.random.model.Product;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,27 +12,15 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class CategoryStore extends RxStore {
-    private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
-    private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
-    public LiveData<GanResponse<Product>> mProductTrans;
-    @Inject
-    RandomActionCreator mActionCreator;
 
     @Inject
     CategoryStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
-        mProductTrans = Transformations.switchMap(mPage, page -> {
-            if (page != null) mActionCreator.getProductList("Android", page);
-            return mProductList;
-        });
     }
 
     @Override
     public void onRxAction(RxAction action) {
         switch (action.getType()) {
-            case RandomActions.GET_PRODUCT_LIST:
-                mProductList.setValue(action.get(RxActionCreator.RESPONSE));
-                return;
             default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
                 return;
         }
@@ -52,16 +30,5 @@ public class CategoryStore extends RxStore {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mPage.setValue(null);
-        mProductList.setValue(null);
-    }
-
-    public void setPage(int page) {
-        if (Objects.equal(this.mPage.getValue(), page)) return;
-        this.mPage.setValue(page);
-    }
-
-    public void refresh() {
-        this.mPage.setValue(0);
     }
 }
