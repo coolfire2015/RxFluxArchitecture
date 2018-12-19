@@ -10,9 +10,9 @@ import android.support.v4.app.FragmentManager;
 
 import com.huyingbao.core.dispatcher.Dispatcher;
 import com.huyingbao.core.dispatcher.DisposableManager;
-import com.huyingbao.core.dispatcher.RxViewDispatch;
 import com.huyingbao.core.lifecycle.ActivityLifecycleObserver;
 import com.huyingbao.core.lifecycle.FragmentLifecycleObserver;
+import com.huyingbao.core.view.RxViewDispatch;
 
 import java.util.Stack;
 
@@ -104,8 +104,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
         super.onFragmentAttached(fm, f, context);
-        if (f instanceof RxFluxView)
-            f.getLifecycle().addObserver(new FragmentLifecycleObserver(f));
+        f.getLifecycle().addObserver(new FragmentLifecycleObserver(f));
     }
 
     @Override

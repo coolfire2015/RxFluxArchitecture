@@ -1,4 +1,4 @@
-package com.huyingbao.core.dispatcher;
+package com.huyingbao.core.view;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

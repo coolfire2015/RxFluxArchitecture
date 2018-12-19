@@ -55,6 +55,7 @@ public class RandomActivity extends CommonActivity {
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
-        return Collections.singletonList(ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class));
+        RandomStore randomStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
+        return Collections.singletonList(randomStore);
     }
 }

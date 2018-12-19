@@ -6,7 +6,7 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.v4.app.FragmentActivity;
 
-import com.huyingbao.core.dispatcher.RxViewDispatch;
+import com.huyingbao.core.view.RxViewDispatch;
 import com.huyingbao.core.store.RxStore;
 
 import java.util.List;

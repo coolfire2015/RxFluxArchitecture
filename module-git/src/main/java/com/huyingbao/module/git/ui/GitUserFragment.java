@@ -2,14 +2,21 @@ package com.huyingbao.module.git.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.TextView;
 
+import com.huyingbao.core.action.RxError;
 import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
+import com.huyingbao.core.store.RxStore;
+import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.R2;
 import com.huyingbao.module.git.ui.model.GitUser;
 import com.huyingbao.module.git.ui.module.GitStore;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -56,5 +63,21 @@ public class GitUserFragment extends CommonFragment {
         mTvGitUserLogin.setText(gitUser.getLogin() + "");
         mTvGitUserName.setText(gitUser.getName());
         mTvGitUserStatistics.setText(gitUser.getFollowers() + "");
+    }
+
+    @Override
+    public void onRxStoreChanged(@NonNull RxStoreChange change) {
+
+    }
+
+    @Override
+    public void onRxError(@NonNull RxError error) {
+
+    }
+
+    @Nullable
+    @Override
+    public List<RxStore> getLifecycleRxStoreList() {
+        return null;
     }
 }

@@ -24,7 +24,7 @@ public class GitStore extends RxStore {
     public final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
 
     @Inject
-    public GitStore(Dispatcher dispatcher) {
+    GitStore(Dispatcher dispatcher) {
         super(dispatcher);
     }
 

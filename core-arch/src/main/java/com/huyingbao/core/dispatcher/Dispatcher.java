@@ -5,6 +5,7 @@ import android.support.v4.util.ArrayMap;
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxError;
 import com.huyingbao.core.store.RxStoreChange;
+import com.huyingbao.core.view.RxViewDispatch;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

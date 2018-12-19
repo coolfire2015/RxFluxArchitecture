@@ -1,14 +1,40 @@
 package com.huyingbao.core.common;
 
-import com.huyingbao.core.RxFluxView;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.huyingbao.core.view.RxFluxFragment;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonFragment extends RxFluxFragment implements RxFluxView {
-    private String mTitle;
-    private boolean isVisibleToUser;
+public abstract class CommonFragment extends RxFluxFragment implements CommonView {
     private boolean mBackAble = true;
+    private boolean isVisibleToUser;
+    private Unbinder mUnbinder;
+    private String mTitle;
+
+    @NonNull
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);// fragment中创建菜单
+        View rootView = inflater.inflate(getLayoutId(), container, false);
+        mUnbinder = ButterKnife.bind(this, rootView);
+        afterCreate(savedInstanceState);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

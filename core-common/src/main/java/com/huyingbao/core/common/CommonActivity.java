@@ -1,5 +1,6 @@
 package com.huyingbao.core.common;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
@@ -10,8 +11,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.huyingbao.core.view.RxFluxActivity;
 import com.huyingbao.core.action.RxError;
-import com.huyingbao.core.dispatcher.RxViewDispatch;
 import com.huyingbao.core.model.RxHttpException;
 
 import java.net.SocketException;
@@ -19,13 +20,14 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonActivity extends RxFluxActivity implements RxViewDispatch {
+public abstract class CommonActivity extends RxFluxActivity implements CommonView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -36,6 +38,14 @@ public abstract class CommonActivity extends RxFluxActivity implements RxViewDis
     protected Toolbar mToolbarTop;
     @BindView(R2.id.abl_top)
     protected AppBarLayout mAppBarLayoutTop;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
+        afterCreate(savedInstanceState);
+    }
 
     @Override
     public int getLayoutId() {

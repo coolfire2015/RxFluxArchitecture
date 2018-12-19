@@ -22,7 +22,6 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-
 public class RandomStore extends RxStore {
     @Inject
     RandomActionCreator mActionCreator;
