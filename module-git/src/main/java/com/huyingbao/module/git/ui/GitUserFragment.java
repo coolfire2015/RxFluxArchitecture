@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.huyingbao.core.action.RxActionError;
-import com.huyingbao.core.common.CommonFragment;
+import com.huyingbao.core.view.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;

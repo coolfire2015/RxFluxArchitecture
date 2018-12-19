@@ -1,12 +1,10 @@
-package com.huyingbao.core.common;
+package com.huyingbao.core.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.huyingbao.core.view.RxFluxFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

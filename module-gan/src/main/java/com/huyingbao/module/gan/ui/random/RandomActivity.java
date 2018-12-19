@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.huyingbao.core.common.CommonActivity;
+import com.huyingbao.core.view.CommonActivity;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;

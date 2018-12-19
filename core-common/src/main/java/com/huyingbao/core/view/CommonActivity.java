@@ -1,4 +1,4 @@
-package com.huyingbao.core.common;
+package com.huyingbao.core.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huyingbao.core.action.RxActionError;
+import com.huyingbao.core.common.R;
+import com.huyingbao.core.common.R2;
 import com.huyingbao.core.model.CommonHttpException;
-import com.huyingbao.core.view.RxFluxActivity;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
