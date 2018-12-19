@@ -1,15 +1,8 @@
 package com.huyingbao.core;
 
 
-import android.content.Context;
-import android.support.multidex.MultiDex;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.BuildConfig;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
-import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
 
 import javax.inject.Inject;
 
@@ -34,33 +27,7 @@ public abstract class RxFluxApp extends DaggerApplication {
         //application创建的时候调用该方法，
         //使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
-        initDebug();
         initArouter();
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);// multidex分包
-    }
-
-    /**
-     * 初始化debug工具
-     */
-    private void initDebug() {
-        //.logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
-        //.methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(2)         // (Optional) How many method line to show. Default 2
-                .tag("RxFlux")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
-                .build();
-        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
-            @Override
-            public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
     }
 
     /**

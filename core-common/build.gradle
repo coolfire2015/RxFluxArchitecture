@@ -34,13 +34,19 @@ android {
 
 dependencies {
     implementation project(':core-arch')
+    implementation "com.android.support:multidex:${MULTIDEX}"
+
+    api "android.arch.lifecycle:extensions:${ARCH_LIFECYCLE_VERSION}"
+    api "android.arch.lifecycle:reactivestreams:${ARCH_LIFECYCLE_VERSION}"
+
+    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
 
     api "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
     api "com.android.support:design:${SUPPORT_VERSION}"
     api "com.google.guava:guava:${GUAVA_VERSION}"
 
-    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
     api "com.squareup.okio:okio:${OKIO}"
+    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
 
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"

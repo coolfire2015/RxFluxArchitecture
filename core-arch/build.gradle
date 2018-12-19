@@ -32,11 +32,6 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:multidex:${MULTIDEX}"
-
-    api "android.arch.lifecycle:extensions:${ARCH_LIFECYCLE_VERSION}"
-    api "android.arch.lifecycle:reactivestreams:${ARCH_LIFECYCLE_VERSION}"
-
     api "com.android.support:support-v4:${SUPPORT_VERSION}"
     api "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
 
@@ -47,6 +42,5 @@ dependencies {
     api "com.google.dagger:dagger-android:${DAGGER}"
     api "com.google.dagger:dagger-android-support:${DAGGER}"
 
-    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     api "com.alibaba:arouter-api:${AROUTER_API}"
 }
