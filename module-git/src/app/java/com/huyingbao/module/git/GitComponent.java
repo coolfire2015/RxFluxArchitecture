@@ -20,7 +20,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         GitModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
-public interface GitComponent extends AndroidInjector<com.huyingbao.module.git.GitApplication> {
+public interface GitComponent extends AndroidInjector<GitApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance

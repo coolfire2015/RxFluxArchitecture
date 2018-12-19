@@ -9,6 +9,8 @@ android {
         abortOnError false
         //打Release版本时,不进行检测
         checkReleaseBuilds false
+        //关闭检索的功能
+        disable 'GoogleAppIndexingWarning'
     }
     //签名配置,自定义,用在defaultConfig中
     signingConfigs {
