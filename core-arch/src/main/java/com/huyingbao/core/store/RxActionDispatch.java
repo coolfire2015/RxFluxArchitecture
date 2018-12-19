@@ -1,4 +1,4 @@
-package com.huyingbao.core.dispatcher;
+package com.huyingbao.core.store;
 
 import com.huyingbao.core.action.RxAction;
 

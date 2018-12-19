@@ -6,7 +6,6 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 
 import com.huyingbao.core.dispatcher.Dispatcher;
-import com.huyingbao.core.dispatcher.RxActionDispatch;
 
 
 /**
