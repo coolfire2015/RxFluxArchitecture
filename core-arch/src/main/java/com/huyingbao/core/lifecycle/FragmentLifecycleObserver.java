@@ -5,8 +5,8 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.v4.app.Fragment;
 
-import com.huyingbao.core.view.RxViewDispatch;
 import com.huyingbao.core.store.RxStore;
+import com.huyingbao.core.view.RxFluxView;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class FragmentLifecycleObserver implements LifecycleObserver {
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
-        if (mFragment instanceof RxViewDispatch) {
-            List<RxStore> rxStoreList = ((RxViewDispatch) mFragment).getLifecycleRxStoreList();
+        if (mFragment instanceof RxFluxView) {
+            List<RxStore> rxStoreList = ((RxFluxView) mFragment).getLifecycleRxStoreList();
             if (rxStoreList != null && rxStoreList.size() > 0)
                 for (RxStore rxStore : rxStoreList)
                     mFragment.getLifecycle().addObserver(rxStore);

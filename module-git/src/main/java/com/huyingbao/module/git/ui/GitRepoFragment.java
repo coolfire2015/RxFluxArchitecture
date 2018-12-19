@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.action.RxError;
+import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.scope.ActivityScope;
@@ -101,7 +101,7 @@ public class GitRepoFragment extends CommonFragment {
     }
 
     @Override
-    public void onRxError(@NonNull RxError error) {
+    public void onRxError(@NonNull RxActionError error) {
 
     }
 

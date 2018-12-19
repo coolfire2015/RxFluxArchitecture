@@ -1,9 +1,7 @@
-package com.huyingbao.core.dispatcher;
+package com.huyingbao.core.action;
 
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.Pair;
-
-import com.huyingbao.core.action.RxAction;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,7 +16,7 @@ import io.reactivex.disposables.Disposable;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public final class DisposableManager {
+public final class RxActionManager {
     /**
      * 管理订阅的ArrayMap
      * action的type作为key
@@ -26,7 +24,7 @@ public final class DisposableManager {
     private ArrayMap<String, Pair<Integer, Disposable>> mMap;
 
     @Inject
-    public DisposableManager() {
+    public RxActionManager() {
         mMap = new ArrayMap<>();
     }
 

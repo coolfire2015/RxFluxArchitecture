@@ -3,7 +3,6 @@ package com.huyingbao.core.action;
 import android.support.annotation.NonNull;
 
 import com.huyingbao.core.dispatcher.Dispatcher;
-import com.huyingbao.core.dispatcher.DisposableManager;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,11 +23,11 @@ public abstract class RxActionCreator {
     public static final String RESPONSE = "response";
 
     private final Dispatcher mDispatcher;
-    private final DisposableManager mDisposableManager;
+    private final RxActionManager mRxActionManager;
 
-    public RxActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
+    public RxActionCreator(Dispatcher dispatcher, RxActionManager rxActionManager) {
         this.mDispatcher = dispatcher;
-        this.mDisposableManager = disposableManager;
+        this.mRxActionManager = rxActionManager;
     }
 
     /**
@@ -40,7 +39,7 @@ public abstract class RxActionCreator {
      * @param disposable
      */
     private void addRxAction(RxAction rxAction, Disposable disposable) {
-        mDisposableManager.add(rxAction, disposable);
+        mRxActionManager.add(rxAction, disposable);
     }
 
     /**
@@ -50,7 +49,7 @@ public abstract class RxActionCreator {
      * @return
      */
     private boolean hasRxAction(RxAction rxAction) {
-        return mDisposableManager.contains(rxAction);
+        return mRxActionManager.contains(rxAction);
     }
 
     /**
@@ -59,7 +58,7 @@ public abstract class RxActionCreator {
      * @param rxAction
      */
     private void removeRxAction(RxAction rxAction) {
-        mDisposableManager.remove(rxAction);
+        mRxActionManager.remove(rxAction);
     }
 
     /**
@@ -101,7 +100,7 @@ public abstract class RxActionCreator {
      * @param throwable
      */
     private void postError(@NonNull RxAction action, Throwable throwable) {
-        mDispatcher.postRxAction(RxError.newRxError(action, throwable));
+        mDispatcher.postRxAction(RxActionError.newRxError(action, throwable));
         removeRxAction(action);
     }
 

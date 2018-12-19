@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
-import com.huyingbao.core.action.RxError;
+import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.common.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
@@ -71,7 +71,7 @@ public class GitUserFragment extends CommonFragment {
     }
 
     @Override
-    public void onRxError(@NonNull RxError error) {
+    public void onRxError(@NonNull RxActionError error) {
 
     }
 

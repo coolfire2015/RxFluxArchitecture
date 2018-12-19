@@ -5,7 +5,7 @@ import android.content.Context;
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.Dispatcher;
-import com.huyingbao.core.dispatcher.DisposableManager;
+import com.huyingbao.core.action.RxActionManager;
 import com.huyingbao.module.git.action.GitApi;
 
 import javax.inject.Inject;
@@ -22,8 +22,8 @@ public class GitActionCreator extends RxActionCreator implements GitActions {
     GitApi mGitApi;
 
     @Inject
-    public GitActionCreator(Dispatcher dispatcher, DisposableManager disposableManager) {
-        super(dispatcher, disposableManager);
+    public GitActionCreator(Dispatcher dispatcher, RxActionManager rxActionManager) {
+        super(dispatcher, rxActionManager);
     }
 
     @Override

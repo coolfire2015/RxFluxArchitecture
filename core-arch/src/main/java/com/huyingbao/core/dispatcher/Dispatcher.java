@@ -3,10 +3,10 @@ package com.huyingbao.core.dispatcher;
 import android.support.v4.util.ArrayMap;
 
 import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.action.RxError;
-import com.huyingbao.core.store.RxActionDispatch;
+import com.huyingbao.core.action.RxActionError;
+import com.huyingbao.core.store.RxStoreActionDispatch;
 import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.core.view.RxViewDispatch;
+import com.huyingbao.core.view.RxFluxView;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +40,7 @@ public class Dispatcher {
      * @param rxStore
      * @param <T>     实现RxActionDispatch的RxStore
      */
-    public <T extends RxActionDispatch> void subscribeRxStore(final T rxStore) {
+    public <T extends RxStoreActionDispatch> void subscribeRxStore(final T rxStore) {
         //获取对象的类名
         final String rxStoreTag = rxStore.getClass().getSimpleName();
         //获取key(类名)对应的value(Subscription)
@@ -52,7 +52,7 @@ public class Dispatcher {
                     .onBackpressureBuffer()
                     .filter(o -> o instanceof RxAction)
                     .observeOn(AndroidSchedulers.mainThread())
-                    //Post RxAction (RxStore extends RxActionDispatch)object调用onRxAction方法
+                    //Post RxAction (RxStore extends RxStoreActionDispatch)object调用onRxAction方法
                     .subscribe(o -> rxStore.onRxAction((RxAction) o)));
         }
     }
@@ -63,15 +63,15 @@ public class Dispatcher {
      * @param rxView
      * @param <T>
      */
-    public <T extends RxViewDispatch> void subscribeRxError(final T rxView) {
+    public <T extends RxFluxView> void subscribeRxError(final T rxView) {
         final String rxViewErrorTag = rxView.getClass().getSimpleName() + "_error";
         Disposable disposable = mRxActionMap.get(rxViewErrorTag);
         if (disposable == null || disposable.isDisposed()) {
             mRxActionMap.put(rxViewErrorTag, mRxBus.get()
                     .onBackpressureBuffer()
-                    .filter(o -> o instanceof RxError)
+                    .filter(o -> o instanceof RxActionError)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(o -> rxView.onRxError((RxError) o)));
+                    .subscribe(o -> rxView.onRxError((RxActionError) o)));
         }
     }
 
@@ -87,7 +87,7 @@ public class Dispatcher {
      * @param rxView
      * @param <T>
      */
-    public <T extends RxViewDispatch> void subscribeRxView(final T rxView) {
+    public <T extends RxFluxView> void subscribeRxView(final T rxView) {
         //获取传入的Object的名字
         final String rxViewTag = rxView.getClass().getSimpleName();
         //获取Map中Object名字对应的value 监听者
@@ -114,7 +114,7 @@ public class Dispatcher {
      * @param <T>
      * @return {@code true} object对应的Subscription不为空且已经注册, {@code false} otherwise
      */
-    public <T extends RxViewDispatch> boolean isSubscribeRxView(final T object) {
+    public <T extends RxFluxView> boolean isSubscribeRxView(final T object) {
         //获取传入的Object的名字
         final String tag = object.getClass().getSimpleName();
         //获取Map中Object名字对应的value 监听者
@@ -128,7 +128,7 @@ public class Dispatcher {
      * @param object
      * @param <T>
      */
-    public <T extends RxActionDispatch> void unsubscribeRxStore(final T object) {
+    public <T extends RxStoreActionDispatch> void unsubscribeRxStore(final T object) {
         String tag = object.getClass().getSimpleName();
         Disposable disposable = mRxActionMap.get(tag);
         if (disposable != null && !disposable.isDisposed()) {
@@ -143,7 +143,7 @@ public class Dispatcher {
      * @param object
      * @param <T>
      */
-    public <T extends RxViewDispatch> void unsubscribeRxError(final T object) {
+    public <T extends RxFluxView> void unsubscribeRxError(final T object) {
         String tag = object.getClass().getSimpleName() + "_error";
         Disposable disposable = mRxActionMap.get(tag);
         if (disposable != null && !disposable.isDisposed()) {
@@ -158,7 +158,7 @@ public class Dispatcher {
      * @param object
      * @param <T>
      */
-    public <T extends RxViewDispatch> void unsubscribeRxView(final T object) {
+    public <T extends RxFluxView> void unsubscribeRxView(final T object) {
         String tag = object.getClass().getSimpleName();
         Disposable disposable = mRxStoreMap.get(tag);
         if (disposable != null && !disposable.isDisposed()) {

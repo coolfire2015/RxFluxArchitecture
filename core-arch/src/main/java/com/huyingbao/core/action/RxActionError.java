@@ -6,7 +6,7 @@ import android.support.v4.util.ArrayMap;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class RxError extends RxAction {
+public class RxActionError extends RxAction {
 
     private static final String ERROR_TYPE = "RxError_Type";
 
@@ -14,15 +14,15 @@ public class RxError extends RxAction {
 
     private static final String ERROR_THROWABLE = "RxError_Throwable";
 
-    private RxError(String type, ArrayMap<String, Object> data) {
+    private RxActionError(String type, ArrayMap<String, Object> data) {
         super(type, data);
     }
 
-    public static RxError newRxError(@NonNull RxAction action, Throwable throwable) {
+    public static RxActionError newRxError(@NonNull RxAction action, Throwable throwable) {
         ArrayMap<String, Object> data = new ArrayMap<>();
         data.put(ERROR_ACTION, action);
         data.put(ERROR_THROWABLE, throwable);
-        return new RxError(ERROR_TYPE, data);
+        return new RxActionError(ERROR_TYPE, data);
     }
 
     public RxAction getAction() {

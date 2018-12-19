@@ -11,8 +11,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huyingbao.core.view.RxFluxActivity;
-import com.huyingbao.core.action.RxError;
+import com.huyingbao.core.view.RxFluxFluxActivity;
+import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.model.RxHttpException;
 
 import java.net.SocketException;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonActivity extends RxFluxActivity implements CommonView {
+public abstract class CommonActivity extends RxFluxFluxActivity implements CommonView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -77,7 +77,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
      * rxflux中对错误的处理
      */
     @Override
-    public void onRxError(@NonNull RxError error) {
+    public void onRxError(@NonNull RxActionError error) {
         switch (error.getAction().getType()) {
             default:
                 handleThrowable(error);
@@ -85,7 +85,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
         }
     }
 
-    private void handleThrowable(@NonNull RxError error) {
+    private void handleThrowable(@NonNull RxActionError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常
         if (throwable instanceof RxHttpException) {

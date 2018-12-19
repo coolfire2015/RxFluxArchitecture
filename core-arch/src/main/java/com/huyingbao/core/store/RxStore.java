@@ -31,7 +31,7 @@ import com.huyingbao.core.dispatcher.Dispatcher;
  * 实现LifecycleObserver，可以关联Activity/Fragment生命周期
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxStore extends ViewModel implements RxActionDispatch, LifecycleObserver {
+public abstract class RxStore extends ViewModel implements RxStoreActionDispatch, LifecycleObserver {
     private final Dispatcher mDispatcher;
 
     public RxStore(Dispatcher dispatcher) {

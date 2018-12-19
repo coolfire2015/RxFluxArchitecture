@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.huyingbao.core.dispatcher.Dispatcher;
-import com.huyingbao.core.dispatcher.DisposableManager;
+import com.huyingbao.core.action.RxActionManager;
 import com.huyingbao.core.lifecycle.ActivityLifecycleObserver;
 import com.huyingbao.core.lifecycle.FragmentLifecycleObserver;
-import com.huyingbao.core.view.RxViewDispatch;
+import com.huyingbao.core.view.RxFluxView;
 
 import java.util.Stack;
 
@@ -38,7 +38,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Inject
     Dispatcher mDispatcher;
     @Inject
-    DisposableManager mDisposableManager;
+    RxActionManager mRxActionManager;
 
     private int mActivityCounter;
     private Stack<Activity> mActivityStack;
@@ -67,8 +67,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
     @Override
     public void onActivityStarted(Activity activity) {
-        if (activity instanceof RxViewDispatch)
-            mDispatcher.subscribeRxView((RxViewDispatch) activity);
+        if (activity instanceof RxFluxView)
+            mDispatcher.subscribeRxView((RxFluxView) activity);
         if (activity instanceof FragmentActivity)
             ((FragmentActivity) activity).getSupportFragmentManager()
                     .registerFragmentLifecycleCallbacks(this, true);
@@ -84,8 +84,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
     @Override
     public void onActivityStopped(Activity activity) {
-        if (activity instanceof RxViewDispatch)
-            mDispatcher.unsubscribeRxView((RxViewDispatch) activity);
+        if (activity instanceof RxFluxView)
+            mDispatcher.unsubscribeRxView((RxFluxView) activity);
     }
 
     @Override
@@ -110,15 +110,15 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
-        if (f instanceof RxViewDispatch)
-            mDispatcher.subscribeRxView((RxViewDispatch) f);
+        if (f instanceof RxFluxView)
+            mDispatcher.subscribeRxView((RxFluxView) f);
     }
 
     @Override
     public void onFragmentStopped(FragmentManager fm, Fragment f) {
         super.onFragmentStopped(fm, f);
-        if (f instanceof RxViewDispatch)
-            mDispatcher.unsubscribeRxView((RxViewDispatch) f);
+        if (f instanceof RxFluxView)
+            mDispatcher.unsubscribeRxView((RxFluxView) f);
     }
 
     public void finishAllActivity() {
@@ -131,7 +131,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     private void shutdown() {
-        mDisposableManager.clear();
+        mRxActionManager.clear();
         mDispatcher.unsubscribeAll();
     }
 
