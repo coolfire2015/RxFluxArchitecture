@@ -2,7 +2,6 @@ package com.huyingbao.core.okhttp;
 
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 
 import java.io.ByteArrayInputStream;
@@ -18,6 +17,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.collection.ArrayMap;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 

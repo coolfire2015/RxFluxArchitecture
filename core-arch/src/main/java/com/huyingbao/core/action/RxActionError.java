@@ -1,7 +1,7 @@
 package com.huyingbao.core.action;
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
 
 /**
  * Created by liujunfeng on 2017/12/7.

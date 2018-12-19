@@ -1,7 +1,7 @@
 package com.huyingbao.core.action;
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
 
 /**
  * action封装类，用于传递数据，使用Builder创建

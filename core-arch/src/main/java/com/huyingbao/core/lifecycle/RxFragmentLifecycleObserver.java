@@ -1,14 +1,14 @@
 package com.huyingbao.core.lifecycle;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.support.v4.app.Fragment;
-
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.view.RxFluxView;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 /**
  * Created by liujunfeng on 2017/12/13.

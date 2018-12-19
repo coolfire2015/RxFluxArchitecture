@@ -34,15 +34,15 @@ android {
 
 dependencies {
     implementation project(':core-arch')
-    implementation "com.android.support:multidex:${MULTIDEX}"
+    implementation "androidx.multidex:multidex:${MULTIDEX_X}"
 
-    api "android.arch.lifecycle:extensions:${ARCH_LIFECYCLE_VERSION}"
-    api "android.arch.lifecycle:reactivestreams:${ARCH_LIFECYCLE_VERSION}"
+    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
+    api "androidx.lifecycle:lifecycle-reactivestreams:${ARCH_LIFECYCLE_VERSION_X}"
 
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
 
-    api "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
-    api "com.android.support:design:${SUPPORT_VERSION}"
+    api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
+    api "com.google.android.material:material:${SUPPORT_VERSION_X}"
     api "com.google.guava:guava:${GUAVA_VERSION}"
 
     api "com.squareup.okio:okio:${OKIO}"

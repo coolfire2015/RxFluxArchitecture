@@ -1,7 +1,5 @@
 package com.huyingbao.module.git.ui.module;
 
-import android.arch.lifecycle.MutableLiveData;
-
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
 import com.huyingbao.core.dispatcher.RxDispatcher;
@@ -14,6 +12,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by liujunfeng on 2017/12/7.

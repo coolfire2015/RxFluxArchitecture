@@ -1,7 +1,5 @@
 package com.huyingbao.core.dispatcher;
 
-import android.support.v4.util.ArrayMap;
-
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionError;
 import com.huyingbao.core.store.RxStoreActionDispatch;
@@ -11,6 +9,7 @@ import com.huyingbao.core.view.RxFluxView;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.collection.ArrayMap;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 

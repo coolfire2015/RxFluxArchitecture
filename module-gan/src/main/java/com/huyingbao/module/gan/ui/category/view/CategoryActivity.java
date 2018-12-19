@@ -1,9 +1,6 @@
 package com.huyingbao.module.gan.ui.category.view;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreChange;
@@ -17,6 +14,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
 
 /**

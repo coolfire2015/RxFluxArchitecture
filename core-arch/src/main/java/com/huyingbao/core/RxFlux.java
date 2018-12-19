@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 
 import com.huyingbao.core.action.RxActionManager;
 import com.huyingbao.core.dispatcher.RxDispatcher;
@@ -18,6 +15,10 @@ import java.util.Stack;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * 主类

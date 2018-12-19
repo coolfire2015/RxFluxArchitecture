@@ -1,11 +1,10 @@
 package com.huyingbao.core.action;
 
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.Pair;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.collection.ArrayMap;
+import androidx.core.util.Pair;
 import io.reactivex.disposables.Disposable;
 
 

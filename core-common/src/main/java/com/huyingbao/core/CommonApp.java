@@ -2,13 +2,14 @@ package com.huyingbao.core;
 
 
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.huyingbao.core.arch.BuildConfig;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+
+import androidx.multidex.MultiDex;
 
 /**
  * Application实现相应的接口
@@ -28,6 +29,7 @@ public abstract class CommonApp extends RxFluxApp {
 
     /**
      * multidex分包
+     *
      * @param base
      */
     @Override

@@ -35,7 +35,7 @@ android {
         versionName rootProject.getGitVersionName()
         signingConfig signingConfigs.debug
         vectorDrawables.useSupportLibrary = true//使用vector图片
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -114,9 +114,9 @@ dependencies {
     implementation project(':core-arch')
     implementation project(':core-common')
 
-    implementation "com.android.support:cardview-v7:${SUPPORT_VERSION}"
+    implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
 
-    annotationProcessor "android.arch.lifecycle:compiler:${ARCH_LIFECYCLE_VERSION}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_LIFECYCLE_VERSION_X}"
 
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"

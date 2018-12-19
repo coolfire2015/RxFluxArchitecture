@@ -1,9 +1,8 @@
 package com.huyingbao.core.action;
 
-import android.support.annotation.NonNull;
-
 import com.huyingbao.core.dispatcher.RxDispatcher;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

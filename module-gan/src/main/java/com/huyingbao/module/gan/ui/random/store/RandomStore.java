@@ -1,9 +1,5 @@
 package com.huyingbao.module.gan.ui.random.store;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Transformations;
-
 import com.google.common.base.Objects;
 import com.huyingbao.core.action.RxAction;
 import com.huyingbao.core.action.RxActionCreator;
@@ -17,17 +13,21 @@ import com.huyingbao.module.gan.ui.random.model.Product;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
+
 /**
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
 public class RandomStore extends RxStore {
-    private String mCategory;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     public LiveData<GanResponse<Product>> mProductTrans;
     @Inject
     RandomActionCreator mActionCreator;
+    private String mCategory;
 
     @Inject
     RandomStore(RxDispatcher rxDispatcher) {
@@ -66,11 +66,11 @@ public class RandomStore extends RxStore {
         this.mPage.setValue(0);
     }
 
-    public void setCategory(String stringExtra) {
-        mCategory = stringExtra;
-    }
-
     public String getCategory() {
         return mCategory;
+    }
+
+    public void setCategory(String stringExtra) {
+        mCategory = stringExtra;
     }
 }
