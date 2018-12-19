@@ -65,19 +65,4 @@ public class GitUserFragment extends CommonFragment {
         mTvGitUserStatistics.setText(gitUser.getFollowers() + "");
     }
 
-    @Override
-    public void onRxStoreChanged(@NonNull RxStoreChange change) {
-
-    }
-
-    @Override
-    public void onRxError(@NonNull RxActionError error) {
-
-    }
-
-    @Nullable
-    @Override
-    public List<RxStore> getLifecycleRxStoreList() {
-        return null;
-    }
 }

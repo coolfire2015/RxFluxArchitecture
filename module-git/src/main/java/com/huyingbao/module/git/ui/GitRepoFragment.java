@@ -94,19 +94,4 @@ public class GitRepoFragment extends CommonFragment {
         mActionCreator.postLocalAction(GitActions.TO_GIT_USER);
     }
 
-    @Override
-    public void onRxStoreChanged(@NonNull RxStoreChange change) {
-
-    }
-
-    @Override
-    public void onRxError(@NonNull RxActionError error) {
-
-    }
-
-    @Nullable
-    @Override
-    public List<RxStore> getLifecycleRxStoreList() {
-        return null;
-    }
 }

@@ -1,20 +1,13 @@
 package com.huyingbao.module.gan.ui.random;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.huyingbao.core.action.RxActionError;
-import com.huyingbao.core.view.CommonFragment;
 import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreChange;
+import com.huyingbao.core.view.CommonFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.R2;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -52,19 +45,4 @@ public class RandomFragment extends CommonFragment {
         mActionCreator.postLocalAction(RandomActions.TO_GITHUB);
     }
 
-    @Override
-    public void onRxStoreChanged(@NonNull RxStoreChange change) {
-
-    }
-
-    @Override
-    public void onRxError(@NonNull RxActionError error) {
-
-    }
-
-    @Nullable
-    @Override
-    public List<RxStore> getLifecycleRxStoreList() {
-        return null;
-    }
 }
