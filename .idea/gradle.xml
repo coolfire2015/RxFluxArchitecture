@@ -10,9 +10,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/core-arch" />
             <option value="$PROJECT_DIR$/core-common" />
+            <option value="$PROJECT_DIR$/module-app" />
             <option value="$PROJECT_DIR$/module-gan" />
             <option value="$PROJECT_DIR$/module-git" />
-            <option value="$PROJECT_DIR$/module-wan" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,4 +1,4 @@
-package com.huyingbao.wan;
+package com.huyingbao.app;
 
 
 import com.huyingbao.core.RxFluxApp;

@@ -1,4 +1,4 @@
-include ':module-wan'
+include ':module-app'
 include ':core-arch'
 include ':core-common'
 include ':module-gan'
