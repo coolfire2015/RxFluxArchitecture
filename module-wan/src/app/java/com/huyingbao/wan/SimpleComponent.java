@@ -1,4 +1,4 @@
-package com.huyingbao.app;
+package com.huyingbao.wan;
 
 import android.app.Application;
 

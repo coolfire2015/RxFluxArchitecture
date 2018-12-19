@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.huyingbao.app">
+    package="com.huyingbao.wan">
 
     <!-- region 权限 -->
     <!-- 允许程序访问有关GSM网络信息,获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -52,7 +52,7 @@
     <!-- endregion -->
 
     <application
-        android:name="com.huyingbao.app.SimpleApplication"
+        android:name="com.huyingbao.wan.SimpleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
