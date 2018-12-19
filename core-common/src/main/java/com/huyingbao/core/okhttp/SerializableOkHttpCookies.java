@@ -11,16 +11,16 @@ import okhttp3.Cookie;
  * 序列化cooke
  * Created by liujunfeng on 2017/12/7.
  */
-public class SerializableOkHttpCookies implements Serializable {
+class SerializableOkHttpCookies implements Serializable {
 
     private transient final Cookie cookies;
     private transient Cookie clientCookies;
 
-    public SerializableOkHttpCookies(Cookie cookies) {
+    SerializableOkHttpCookies(Cookie cookies) {
         this.cookies = cookies;
     }
 
-    public Cookie getCookies() {
+    Cookie getCookies() {
         Cookie bestCookies = cookies;
         if (clientCookies != null) bestCookies = clientCookies;
         return bestCookies;

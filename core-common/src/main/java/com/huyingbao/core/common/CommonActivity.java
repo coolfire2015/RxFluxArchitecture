@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huyingbao.core.action.RxActionError;
-import com.huyingbao.core.model.RxHttpException;
+import com.huyingbao.core.model.CommonHttpException;
 import com.huyingbao.core.view.RxFluxActivity;
 
 import java.net.SocketException;
@@ -88,8 +88,8 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
     private void handleThrowable(@NonNull RxActionError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常
-        if (throwable instanceof RxHttpException) {
-            String message = ((RxHttpException) throwable).message();
+        if (throwable instanceof CommonHttpException) {
+            String message = ((CommonHttpException) throwable).message();
             showShortToast(message);
         } else if (throwable instanceof retrofit2.HttpException) {
             showShortToast(((retrofit2.HttpException) throwable).code() + ":服务器问题");

@@ -7,12 +7,12 @@ import java.io.IOException;
  * 自定义HttpException
  * Created by liujunfeng on 2017/12/7.
  */
-public class RxHttpException extends IOException {
+public class CommonHttpException extends IOException {
     private final int mCode;
     private final String mMessage;
 
 
-    public RxHttpException(int code, String message) {
+    public CommonHttpException(int code, String message) {
         super("HTTP " + code + " " + message);
         this.mCode = code;
         this.mMessage = message;
