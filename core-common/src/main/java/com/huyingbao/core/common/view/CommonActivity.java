@@ -1,4 +1,4 @@
-package com.huyingbao.core.view;
+package com.huyingbao.core.common.view;
 
 import android.os.Bundle;
 import android.util.MalformedJsonException;
@@ -7,10 +7,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.huyingbao.core.action.RxActionError;
+import com.huyingbao.core.arch.action.RxActionError;
+import com.huyingbao.core.arch.view.RxFluxActivity;
+import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.model.CommonHttpException;
+import com.huyingbao.core.common.model.CommonHttpException;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;

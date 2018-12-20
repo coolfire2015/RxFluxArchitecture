@@ -1,4 +1,4 @@
-package com.huyingbao.core.okhttp;
+package com.huyingbao.core.common.okhttp;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

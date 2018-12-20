@@ -1,4 +1,4 @@
-package com.huyingbao.core.util;
+package com.huyingbao.core.common.util;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;

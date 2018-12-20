@@ -1,4 +1,4 @@
-package com.huyingbao.core.model;
+package com.huyingbao.core.common.model;
 
 
 import java.io.IOException;
