@@ -1,9 +1,10 @@
-package com.huyingbao.module.gan.action;
+package com.huyingbao.module.gan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.scope.ActivityScope;
 import com.huyingbao.core.store.RxStore;
 import com.huyingbao.core.store.RxStoreKey;
+import com.huyingbao.module.gan.action.GanApi;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
 import com.huyingbao.module.gan.ui.category.view.CategoryActivity;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
@@ -45,13 +46,21 @@ public abstract class GanModule {
      * 2:通过用Inject注解标注的构造函数来创建（以下简称Inject维度）
      * <p>
      * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法，类似MapKey
+     * <p>
+     * Provider需要写明具体的实现，
+     * Binds只是告诉Dagger2谁是谁实现的，
+     * <p>
+     * Dagger2会根据这些信息自动生成一个关键的Map。
+     * key为ViewModel的Class，
+     * value则为提供ViewModel实例的Provider对象，
+     * 通过provider.get()方法就可以获取到相应的ViewModel对象。
      *
      * @param randomStore
      * @return
      */
     @Singleton
     @Binds//当参数和返回值类型相同时，将方法写成抽象方法，用Binds注解。
-    @IntoMap
+    @IntoMap//可以让Dagger2将多个元素依赖注入到Map之中
     @RxStoreKey(RandomStore.class)
     abstract RxStore provideRandomStore(RandomStore randomStore);
 

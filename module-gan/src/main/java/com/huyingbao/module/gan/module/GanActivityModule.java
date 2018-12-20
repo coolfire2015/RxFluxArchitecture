@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.action;
+package com.huyingbao.module.gan.module;
 
 
 import com.huyingbao.core.scope.FragmentScope;

@@ -3,7 +3,7 @@ package com.huyingbao.app;
 import android.app.Application;
 
 import com.huyingbao.core.module.CommonModule;
-import com.huyingbao.module.gan.action.GanModule;
+import com.huyingbao.module.gan.module.GanModule;
 import com.huyingbao.module.git.action.GitModule;
 
 import javax.inject.Singleton;

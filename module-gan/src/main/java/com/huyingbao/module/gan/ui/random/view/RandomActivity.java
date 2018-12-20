@@ -9,7 +9,7 @@ import com.huyingbao.core.store.RxStoreChange;
 import com.huyingbao.core.util.ActivityUtils;
 import com.huyingbao.core.view.CommonActivity;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.action.GanContants;
+import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.Collections;
@@ -32,14 +32,14 @@ public class RandomActivity extends CommonActivity {
 
     public static Intent newIntent(Context context, String category) {
         Intent intent = new Intent(context, RandomActivity.class);
-        intent.putExtra(GanContants.Key.CATEGORY, category);
+        intent.putExtra(GanConstants.Key.CATEGORY, category);
         return intent;
     }
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         mRandomStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
-        mRandomStore.setCategory(getIntent().getStringExtra(GanContants.Key.CATEGORY));
+        mRandomStore.setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
         ActivityUtils.addFragment(getSupportFragmentManager(),
                 mProductListFragmentLazy.get(),
                 R.id.fl_content);
