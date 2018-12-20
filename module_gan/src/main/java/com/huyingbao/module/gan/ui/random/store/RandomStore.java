@@ -1,6 +1,5 @@
 package com.huyingbao.module.gan.ui.random.store;
 
-import com.google.common.base.Objects;
 import com.huyingbao.core.arch.action.RxAction;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
@@ -9,6 +8,8 @@ import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
 import com.huyingbao.module.gan.ui.random.model.Product;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -50,6 +51,11 @@ public class RandomStore extends RxStore {
         //postChange(new RxStoreChange(getClass().getSimpleName(), action));
     }
 
+    @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
+    public void showProductList(RxAction action) {
+        mProductList.setValue(action.get(RxActionCreator.RESPONSE));
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -58,7 +64,6 @@ public class RandomStore extends RxStore {
     }
 
     public void setPage(int page) {
-        if (Objects.equal(this.mPage.getValue(), page)) return;
         this.mPage.setValue(page);
     }
 

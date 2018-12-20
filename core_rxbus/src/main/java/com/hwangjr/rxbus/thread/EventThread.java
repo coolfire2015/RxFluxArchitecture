@@ -17,7 +17,7 @@ public enum EventThread {
     /**
      * Creates and returns a {@link Scheduler} that creates a new {@link Thread} for each unit of work.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
      */
     NEW_THREAD,
 
@@ -30,7 +30,7 @@ public enum EventThread {
      * <p/>
      * Do not perform computational work on this scheduler. Use computation() instead.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
      */
     IO,
 
@@ -41,7 +41,7 @@ public enum EventThread {
      * <p/>
      * Do not perform IO-bound work on this scheduler. Use io() instead.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
      */
     COMPUTATION,
 

@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    api project(':core_rxbus')
     api "androidx.appcompat:appcompat:${APPCOMPAT_X}"
 
     api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
