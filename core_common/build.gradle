@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation project(':core-arch')
+    implementation project(':core_arch')
     implementation "androidx.multidex:multidex:${MULTIDEX_X}"
 
     api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
