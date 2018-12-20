@@ -82,19 +82,6 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
      */
     @Subscribe
     public void onRxError(@NonNull RxError error) {
-        switch (error.getTag()) {
-            default:
-                handleThrowable(error);
-                break;
-        }
-    }
-
-    /**
-     * 处理异常
-     *
-     * @param error
-     */
-    private void handleThrowable(@NonNull RxError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常
         if (throwable instanceof CommonHttpException) {
