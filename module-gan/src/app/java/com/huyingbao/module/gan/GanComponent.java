@@ -2,7 +2,7 @@ package com.huyingbao.module.gan;
 
 import android.app.Application;
 
-import com.huyingbao.core.module.CommonModule;
+import com.huyingbao.core.arch.module.CommonModule;
 import com.huyingbao.module.gan.action.GanModule;
 
 import javax.inject.Singleton;

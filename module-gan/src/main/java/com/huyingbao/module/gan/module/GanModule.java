@@ -1,9 +1,9 @@
 package com.huyingbao.module.gan.module;
 
 import com.google.gson.GsonBuilder;
-import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreKey;
+import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.gan.action.GanApi;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
 import com.huyingbao.module.gan.ui.category.view.CategoryActivity;

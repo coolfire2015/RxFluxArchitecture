@@ -1,9 +1,9 @@
 package com.huyingbao.module.gan.ui.random.action;
 
-import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.action.RxActionCreator;
-import com.huyingbao.core.action.RxActionManager;
-import com.huyingbao.core.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.action.RxAction;
+import com.huyingbao.core.arch.action.RxActionCreator;
+import com.huyingbao.core.arch.action.RxActionManager;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.gan.action.GanApi;
 
 import javax.inject.Inject;

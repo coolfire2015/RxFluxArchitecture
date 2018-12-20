@@ -1,8 +1,8 @@
 package com.huyingbao.module.gan.ui.category.store;
 
-import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.dispatcher.RxDispatcher;
-import com.huyingbao.core.store.RxStore;
+import com.huyingbao.core.arch.action.RxAction;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.store.RxStore;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

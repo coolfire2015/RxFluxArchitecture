@@ -5,9 +5,9 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.view.CommonFragment;
+import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
@@ -31,11 +31,11 @@ import butterknife.BindView;
 @ActivityScope
 public class CategoryListFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
-    protected RecyclerView mRvContent;
+    RecyclerView mRvContent;
 
-    protected List<String> mDataList = new ArrayList();
-    protected BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
     private RandomStore mStore;
+    private List<String> mDataList = new ArrayList();
+    private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
 
     @Inject
     public CategoryListFragment() {

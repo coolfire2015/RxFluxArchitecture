@@ -2,10 +2,10 @@ package com.huyingbao.module.gan.ui.category.view;
 
 import android.os.Bundle;
 
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.core.util.ActivityUtils;
-import com.huyingbao.core.view.CommonActivity;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreChange;
+import com.huyingbao.core.common.util.ActivityUtils;
+import com.huyingbao.core.common.view.CommonActivity;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
 

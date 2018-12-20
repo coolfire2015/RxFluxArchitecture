@@ -1,10 +1,10 @@
 package com.huyingbao.module.gan.ui.random.store;
 
 import com.google.common.base.Objects;
-import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.action.RxActionCreator;
-import com.huyingbao.core.dispatcher.RxDispatcher;
-import com.huyingbao.core.store.RxStore;
+import com.huyingbao.core.arch.action.RxAction;
+import com.huyingbao.core.arch.action.RxActionCreator;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
