@@ -2,7 +2,7 @@ package com.huyingbao.module.gan.ui.category.view;
 
 import android.os.Bundle;
 
-import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.common.util.ActivityUtils;
 import com.huyingbao.core.common.view.CommonActivity;
@@ -47,11 +47,9 @@ public class CategoryActivity extends CommonActivity {
 
     /**
      * 跳转随机列表页面，传送类别
-     *
-     * @param action
      */
     @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
-    public void toRandomList(RxAction action) {
+    public void toRandomList(RxChange rxChange) {
         startActivity(RandomActivity.newIntent(this, mStore.getCategory()));
     }
 }
