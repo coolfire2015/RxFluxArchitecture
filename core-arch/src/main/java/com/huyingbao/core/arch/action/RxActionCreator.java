@@ -1,6 +1,6 @@
-package com.huyingbao.core.action;
+package com.huyingbao.core.arch.action;
 
-import com.huyingbao.core.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;

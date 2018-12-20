@@ -1,4 +1,4 @@
-package com.huyingbao.core.action;
+package com.huyingbao.core.arch.action;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

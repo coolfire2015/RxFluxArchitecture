@@ -1,4 +1,4 @@
-package com.huyingbao.core.store;
+package com.huyingbao.core.arch.store;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,9 +1,9 @@
-package com.huyingbao.core.module;
+package com.huyingbao.core.arch.module;
 
 import android.app.Application;
 import android.content.Context;
 
-import com.huyingbao.core.store.RxStoreFactory;
+import com.huyingbao.core.arch.store.RxStoreFactory;
 
 import javax.inject.Singleton;
 

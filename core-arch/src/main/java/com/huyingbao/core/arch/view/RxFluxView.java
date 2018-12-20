@@ -1,8 +1,8 @@
-package com.huyingbao.core.view;
+package com.huyingbao.core.arch.view;
 
-import com.huyingbao.core.action.RxActionError;
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreChange;
+import com.huyingbao.core.arch.action.RxActionError;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreChange;
 
 import java.util.List;
 

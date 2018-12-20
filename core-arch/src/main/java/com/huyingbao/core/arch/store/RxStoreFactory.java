@@ -1,4 +1,4 @@
-package com.huyingbao.core.store;
+package com.huyingbao.core.arch.store;
 
 import java.util.Map;
 

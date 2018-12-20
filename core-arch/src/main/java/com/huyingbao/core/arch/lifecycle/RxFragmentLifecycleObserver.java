@@ -1,7 +1,7 @@
-package com.huyingbao.core.lifecycle;
+package com.huyingbao.core.arch.lifecycle;
 
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.view.RxFluxView;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.view.RxFluxView;
 
 import java.util.List;
 

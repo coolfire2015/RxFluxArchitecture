@@ -1,6 +1,6 @@
-package com.huyingbao.core.store;
+package com.huyingbao.core.arch.store;
 
-import com.huyingbao.core.action.RxAction;
+import com.huyingbao.core.arch.action.RxAction;
 
 /**
  * 所有的Store必须实现该接口

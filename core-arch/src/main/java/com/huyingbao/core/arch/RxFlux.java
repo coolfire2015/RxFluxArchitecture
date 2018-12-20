@@ -1,15 +1,15 @@
-package com.huyingbao.core;
+package com.huyingbao.core.arch;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.huyingbao.core.action.RxActionManager;
-import com.huyingbao.core.dispatcher.RxDispatcher;
-import com.huyingbao.core.lifecycle.RxActivityLifecycleObserver;
-import com.huyingbao.core.lifecycle.RxFragmentLifecycleObserver;
-import com.huyingbao.core.view.RxFluxView;
+import com.huyingbao.core.arch.action.RxActionManager;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver;
+import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver;
+import com.huyingbao.core.arch.view.RxFluxView;
 
 import java.util.Stack;
 

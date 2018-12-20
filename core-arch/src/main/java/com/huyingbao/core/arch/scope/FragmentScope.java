@@ -1,4 +1,4 @@
-package com.huyingbao.core.scope;
+package com.huyingbao.core.arch.scope;
 
 import java.lang.annotation.Retention;
 

@@ -1,8 +1,7 @@
-package com.huyingbao.core;
+package com.huyingbao.core.arch;
 
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.huyingbao.core.arch.BuildConfig;
 
 import javax.inject.Inject;
 

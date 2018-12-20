@@ -1,6 +1,6 @@
-package com.huyingbao.core.store;
+package com.huyingbao.core.arch.store;
 
-import com.huyingbao.core.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;

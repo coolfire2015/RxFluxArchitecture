@@ -1,10 +1,10 @@
-package com.huyingbao.core.dispatcher;
+package com.huyingbao.core.arch.dispatcher;
 
-import com.huyingbao.core.action.RxAction;
-import com.huyingbao.core.action.RxActionError;
-import com.huyingbao.core.store.RxStoreActionDispatch;
-import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.core.view.RxFluxView;
+import com.huyingbao.core.arch.action.RxAction;
+import com.huyingbao.core.arch.action.RxActionError;
+import com.huyingbao.core.arch.store.RxStoreActionDispatch;
+import com.huyingbao.core.arch.store.RxStoreChange;
+import com.huyingbao.core.arch.view.RxFluxView;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

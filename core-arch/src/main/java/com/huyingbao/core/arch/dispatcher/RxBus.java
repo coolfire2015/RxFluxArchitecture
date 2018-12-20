@@ -1,4 +1,4 @@
-package com.huyingbao.core.dispatcher;
+package com.huyingbao.core.arch.dispatcher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
