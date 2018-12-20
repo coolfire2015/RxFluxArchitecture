@@ -1,7 +1,7 @@
-package com.huyingbao.app;
+package com.huyingbao.module.app;
 
 
-import com.huyingbao.core.CommonApp;
+import com.huyingbao.core.common.CommonApp;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;

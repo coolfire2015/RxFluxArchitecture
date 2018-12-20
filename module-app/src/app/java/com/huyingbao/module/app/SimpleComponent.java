@@ -1,8 +1,8 @@
-package com.huyingbao.app;
+package com.huyingbao.module.app;
 
 import android.app.Application;
 
-import com.huyingbao.core.module.CommonModule;
+import com.huyingbao.core.common.module.CommonModule;
 import com.huyingbao.module.gan.module.GanModule;
 import com.huyingbao.module.git.action.GitModule;
 
