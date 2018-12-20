@@ -110,9 +110,26 @@ android {
     }
 }
 
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
+}
+
 dependencies {
-    implementation project(':core-arch')
-    implementation project(':core-common')
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-multidex:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-supportv4:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+
+    androidTestImplementation "org.mockito:mockito-android:${TEST_MOCKITO}"
+    androidTestImplementation "androidx.test:runner:${TEST_RUNNER_X}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${TEST_ESPRESSO_X}"
+
+    implementation project(':core_arch')
+    implementation project(':core_common')
 
     implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
 
