@@ -1,4 +1,4 @@
-package com.huyingbao.core.arch.action;
+package com.huyingbao.core.arch.model;
 
 import androidx.annotation.NonNull;
 import androidx.collection.ArrayMap;
@@ -7,17 +7,12 @@ import androidx.collection.ArrayMap;
  * action封装类，用于传递数据，使用Builder创建
  * Created by liujunfeng on 2017/12/7.
  */
-public class RxAction {
-    private final String mType;
+public class RxAction extends RxEvent {
     private final ArrayMap<String, Object> mData;
 
-    RxAction(@NonNull String type, ArrayMap<String, Object> data) {
-        this.mType = type;
+    private RxAction(@NonNull String tag, ArrayMap<String, Object> data) {
+        super(tag);
         this.mData = data;
-    }
-
-    public String getType() {
-        return mType;
     }
 
     public ArrayMap<String, Object> getData() {
@@ -34,23 +29,23 @@ public class RxAction {
         if (this == obj) return true;
         if (!(obj instanceof RxAction)) return false;
         RxAction rxAction = (RxAction) obj;
-        if (!mType.equals(rxAction.mType)) return false;
+        if (!mTag.equals(rxAction.mTag)) return false;
         return !(mData != null ? !mData.equals(rxAction.mData) : rxAction.mData != null);
     }
 
     @Override
     public int hashCode() {
-        int result = mType.hashCode();
+        int result = mTag.hashCode();
         result = 31 * result + (mData != null ? mData.hashCode() : 0);
         return result;
     }
 
     public static class Builder {
-        private String mType;
+        private String mTag;
         private ArrayMap<String, Object> mData;
 
-        public Builder(@NonNull String type) {
-            this.mType = type;
+        public Builder(@NonNull String tag) {
+            this.mTag = tag;
             this.mData = new ArrayMap<>();
         }
 
@@ -60,7 +55,7 @@ public class RxAction {
         }
 
         public RxAction build() {
-            return new RxAction(mType, mData);
+            return new RxAction(mTag, mData);
         }
     }
 }

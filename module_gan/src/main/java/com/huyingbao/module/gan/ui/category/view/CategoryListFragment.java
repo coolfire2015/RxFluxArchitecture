@@ -9,9 +9,10 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.gan.R;
+import com.huyingbao.module.gan.action.GanConstants;
+import com.huyingbao.module.gan.ui.category.action.CategoryAction;
+import com.huyingbao.module.gan.ui.category.action.CategoryActionCreator;
 import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
-import com.huyingbao.module.gan.ui.random.store.RandomStore;
-import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -30,10 +30,11 @@ import butterknife.BindView;
  */
 @ActivityScope
 public class CategoryListFragment extends CommonFragment {
+    @Inject
+    CategoryActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private RandomStore mStore;
     private List<String> mDataList = new ArrayList();
     private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
 
@@ -48,17 +49,15 @@ public class CategoryListFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(RandomStore.class);
-        initActionBar("首页");
+        initActionBar("首页", false);
         initRecyclerView();
         showData();
-        mStore.setPage(0);
     }
 
     /**
      * 实例化RecyclerView,并设置adapter
      */
-    protected void initRecyclerView() {
+    private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setAdapter(mAdapter);
@@ -66,11 +65,15 @@ public class CategoryListFragment extends CommonFragment {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(RandomActivity.newIntent(getActivity(), mDataList.get(position)));
+                mActionCreator.postLocalAction(CategoryAction.TO_RANDOM_LIST,
+                        GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });
     }
 
+    /**
+     * 显示数据
+     */
     private void showData() {
         mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.gan_category)));
         mAdapter.notifyDataSetChanged();

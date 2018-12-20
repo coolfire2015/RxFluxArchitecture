@@ -1,8 +1,8 @@
 package com.huyingbao.module.gan.ui.random.store;
 
-import com.huyingbao.core.arch.action.RxAction;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
@@ -39,18 +39,11 @@ public class RandomStore extends RxStore {
         });
     }
 
-    @Override
-    public void onRxAction(RxAction action) {
-        switch (action.getType()) {
-            case RandomActions.GET_PRODUCT_LIST:
-                mProductList.setValue(action.get(RxActionCreator.RESPONSE));
-                return;
-            default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
-                return;
-        }
-        //postChange(new RxStoreChange(getClass().getSimpleName(), action));
-    }
-
+    /**
+     * postChange(new RxChange(getClass().getSimpleName(), action));
+     *
+     * @param action
+     */
     @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
     public void showProductList(RxAction action) {
         mProductList.setValue(action.get(RxActionCreator.RESPONSE));

@@ -1,6 +1,7 @@
 package com.huyingbao.core.arch.store;
 
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxChange;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -31,7 +32,7 @@ import androidx.lifecycle.ViewModel;
  * 实现LifecycleObserver，可以关联Activity/Fragment生命周期
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxStore extends ViewModel implements RxStoreActionDispatch, LifecycleObserver {
+public abstract class RxStore extends ViewModel implements LifecycleObserver {
     private final RxDispatcher mRxDispatcher;
 
     public RxStore(RxDispatcher rxDispatcher) {
@@ -62,7 +63,7 @@ public abstract class RxStore extends ViewModel implements RxStoreActionDispatch
      *
      * @param change
      */
-    protected void postChange(RxStoreChange change) {
-        mRxDispatcher.postRxStoreChange(change);
+    protected void postChange(RxChange change) {
+        mRxDispatcher.postRxChange(change);
     }
 }

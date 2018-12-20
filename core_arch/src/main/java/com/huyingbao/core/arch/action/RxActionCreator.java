@@ -1,6 +1,8 @@
 package com.huyingbao.core.arch.action;
 
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxError;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
@@ -63,16 +65,16 @@ public abstract class RxActionCreator {
     /**
      * 创建新的RxAction
      *
-     * @param actionId action type对应具体是什么样的方法
-     * @param data     键值对型的参数pair-value parameters(Key - Object))
+     * @param tag  action tag对应具体是什么样的方法
+     * @param data 键值对型的参数pair-value parameters(Key - Object))
      * @return
      */
-    protected RxAction newRxAction(@NonNull String actionId, Object... data) {
+    protected RxAction newRxAction(@NonNull String tag, Object... data) {
         if (data != null) {
             if (data.length % 2 != 0)
                 throw new IllegalArgumentException("Data must be a valid list of key,value pairs");
         }
-        RxAction.Builder actionBuilder = new RxAction.Builder(actionId);
+        RxAction.Builder actionBuilder = new RxAction.Builder(tag);
         int i = 0;
         while (i < data.length) {
             String key = (String) data[i++];
@@ -99,7 +101,7 @@ public abstract class RxActionCreator {
      * @param throwable
      */
     private void postError(@NonNull RxAction action, Throwable throwable) {
-        mRxDispatcher.postRxAction(RxActionError.newRxError(action, throwable));
+        mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
         removeRxAction(action);
     }
 

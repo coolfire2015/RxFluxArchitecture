@@ -2,19 +2,22 @@ package com.huyingbao.module.gan.ui.category.view;
 
 import android.os.Bundle;
 
+import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.core.arch.store.RxStoreChange;
 import com.huyingbao.core.common.util.ActivityUtils;
 import com.huyingbao.core.common.view.CommonActivity;
 import com.huyingbao.module.gan.R;
+import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
@@ -26,21 +29,29 @@ public class CategoryActivity extends CommonActivity {
     @Inject
     Lazy<CategoryListFragment> mCategoryListFragmentLazy;
 
+    private CategoryStore mStore;
+
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        mStore = ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
         ActivityUtils.addFragment(getSupportFragmentManager(),
                 mCategoryListFragmentLazy.get(),
                 R.id.fl_content);
     }
 
-    @Override
-    public void onRxStoreChanged(@NonNull RxStoreChange change) {
-    }
-
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
-        CategoryStore randomStore = ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
-        return Collections.singletonList(randomStore);
+        return Collections.singletonList(mStore);
+    }
+
+    /**
+     * 跳转随机列表页面，传送类别
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
+    public void toRandomList(RxAction action) {
+        startActivity(RandomActivity.newIntent(this, mStore.getCategory()));
     }
 }

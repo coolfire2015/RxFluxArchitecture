@@ -1,8 +1,9 @@
 package com.huyingbao.core.arch.dispatcher;
 
-import com.huyingbao.core.arch.action.RxAction;
-import com.huyingbao.core.arch.store.RxStoreActionDispatch;
-import com.huyingbao.core.arch.store.RxStoreChange;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
+import com.huyingbao.core.arch.model.RxError;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.hwangjr.rxbus.RxBus;
 
@@ -28,7 +29,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>     实现RxActionDispatch的RxStore
      */
-    public <T extends RxStoreActionDispatch> void subscribeRxStore(final T rxStore) {
+    public <T extends RxStore> void subscribeRxStore(final T rxStore) {
         RxBus.get().register(rxStore);
     }
 
@@ -48,7 +49,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>
      */
-    public <T extends RxStoreActionDispatch> void unsubscribeRxStore(final T rxStore) {
+    public <T extends RxStore> void unsubscribeRxStore(final T rxStore) {
         RxBus.get().unregister(rxStore);
     }
 
@@ -85,15 +86,24 @@ public class RxDispatcher {
      * @param action
      */
     public void postRxAction(final RxAction action) {
-        RxBus.get().post(action.getType(), action);
+        RxBus.get().post(action.getTag(), action);
     }
 
     /**
      * 2:发送store变化
      *
-     * @param storeChange
+     * @param rxChange
      */
-    public void postRxStoreChange(final RxStoreChange storeChange) {
-        RxBus.get().post(storeChange.getType(), storeChange);
+    public void postRxChange(final RxChange rxChange) {
+        RxBus.get().post(rxChange.getTag(), rxChange);
+    }
+
+    /**
+     * 3:发送action变化,到所有订阅的store
+     *
+     * @param rxError
+     */
+    public void postRxError(final RxError rxError) {
+        RxBus.get().post(rxError.getTag(), rxError);
     }
 }

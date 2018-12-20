@@ -1,8 +1,13 @@
 package com.huyingbao.module.gan.ui.category.store;
 
-import com.huyingbao.core.arch.action.RxAction;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.module.gan.action.GanConstants;
+import com.huyingbao.module.gan.ui.category.action.CategoryAction;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,23 +17,25 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class CategoryStore extends RxStore {
+    private String mCategory;
 
     @Inject
     CategoryStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
     }
 
-    @Override
-    public void onRxAction(RxAction action) {
-        switch (action.getType()) {
-            default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
-                return;
-        }
-        //postChange(new RxStoreChange(getClass().getSimpleName(), action));
+    public String getCategory() {
+        return mCategory;
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
+    /**
+     * postChange(new RxChange(getClass().getSimpleName(), action));
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
+    public void setCategory(RxAction action) {
+        mCategory = action.get(GanConstants.Key.CATEGORY);
+        postChange(RxChange.newRxChange(action.getTag()));
     }
 }

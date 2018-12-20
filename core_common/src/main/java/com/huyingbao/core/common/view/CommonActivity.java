@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.huyingbao.core.arch.action.RxActionError;
+import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.view.RxFluxActivity;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
@@ -75,20 +75,20 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
         mTvTopTitle.setText(title == null ? getTitle() : title);
     }
 
-    /**
-     * 该方法不经过store,由activity直接处理
-     * rxflux中对错误的处理
-     */
-    @Override
-    public void onRxError(@NonNull RxActionError error) {
-        switch (error.getAction().getType()) {
-            default:
-                handleThrowable(error);
-                break;
-        }
-    }
+//    /**
+//     * 该方法不经过store,由activity直接处理
+//     * rxflux中对错误的处理
+//     */
+//    @Override
+//    public void onRxError(@NonNull RxError error) {
+//        switch (error.getAction().getTag()) {
+//            default:
+//                handleThrowable(error);
+//                break;
+//        }
+//    }
 
-    private void handleThrowable(@NonNull RxActionError error) {
+    private void handleThrowable(@NonNull RxError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常
         if (throwable instanceof CommonHttpException) {

@@ -5,8 +5,8 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.ui.adapter.GitRepoAdapter;

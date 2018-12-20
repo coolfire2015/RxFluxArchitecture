@@ -1,11 +1,8 @@
 package com.huyingbao.module.gan.ui.category.action;
 
-import com.huyingbao.core.arch.action.RxAction;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.module.gan.action.GanApi;
-import com.huyingbao.module.gan.ui.random.action.RandomActions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,20 +13,9 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class CategoryActionCreator extends RxActionCreator implements RandomActions {
+public class CategoryActionCreator extends RxActionCreator implements CategoryAction {
     @Inject
-    GanApi mGanApi;
-
-    @Inject
-    public CategoryActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    CategoryActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
-    }
-
-    @Override
-    public void getProductList(String category, int count) {
-        RxAction action = newRxAction(GET_PRODUCT_LIST);
-        postHttpAction(action, mGanApi.getProductList(
-                category,
-                count));
     }
 }

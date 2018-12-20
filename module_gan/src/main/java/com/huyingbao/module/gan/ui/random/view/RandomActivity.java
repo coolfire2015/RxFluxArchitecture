@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.core.arch.store.RxStoreChange;
 import com.huyingbao.core.common.util.ActivityUtils;
 import com.huyingbao.core.common.view.CommonActivity;
 import com.huyingbao.module.gan.R;
@@ -17,7 +16,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
@@ -45,13 +43,13 @@ public class RandomActivity extends CommonActivity {
                 R.id.fl_content);
     }
 
-    @Override
-    public void onRxStoreChanged(@NonNull RxStoreChange change) {
-    }
-
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
         return Collections.singletonList(mRandomStore);
     }
+
+    //    @Override
+//    public void onRxStoreChanged(@NonNull RxChange change) {
+//    }
 }
