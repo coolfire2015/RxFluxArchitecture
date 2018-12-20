@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="gan_category">
+    <string-array name="category_module">
+        <item>Github</item>
+        <item>干货</item>
+        <item>玩安卓</item>
+    </string-array>
+    <string-array name="category_gan">
         <item>all</item>
         <item>Android</item>
         <item>iOS</item>

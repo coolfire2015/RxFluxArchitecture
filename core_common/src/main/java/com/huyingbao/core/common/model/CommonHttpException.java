@@ -11,7 +11,6 @@ public class CommonHttpException extends IOException {
     private final int mCode;
     private final String mMessage;
 
-
     public CommonHttpException(int code, String message) {
         super("HTTP " + code + " " + message);
         this.mCode = code;

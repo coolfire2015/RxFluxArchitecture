@@ -33,7 +33,7 @@ public class PersistentCookieStore {
     private final SharedPreferences cookiePrefs;
 
     @Inject
-    public PersistentCookieStore(Application application) {
+    PersistentCookieStore(Application application) {
         cookiePrefs = application.getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new ArrayMap<>();
 

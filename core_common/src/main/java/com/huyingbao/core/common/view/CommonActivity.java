@@ -13,6 +13,7 @@ import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
+import com.hwangjr.rxbus.annotation.Subscribe;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
@@ -75,19 +76,24 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
         mTvTopTitle.setText(title == null ? getTitle() : title);
     }
 
-//    /**
-//     * 该方法不经过store,由activity直接处理
-//     * rxflux中对错误的处理
-//     */
-//    @Override
-//    public void onRxError(@NonNull RxError error) {
-//        switch (error.getAction().getTag()) {
-//            default:
-//                handleThrowable(error);
-//                break;
-//        }
-//    }
+    /**
+     * 该方法不经过store,由activity直接处理
+     * rxflux中对错误的处理
+     */
+    @Subscribe
+    public void onRxError(@NonNull RxError error) {
+        switch (error.getTag()) {
+            default:
+                handleThrowable(error);
+                break;
+        }
+    }
 
+    /**
+     * 处理异常
+     *
+     * @param error
+     */
     private void handleThrowable(@NonNull RxError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常

@@ -15,8 +15,8 @@ import butterknife.Unbinder;
  * Created by liujunfeng on 2017/12/7.
  */
 public abstract class CommonFragment extends RxFluxFragment implements CommonView {
+    protected boolean mIsVisibleToUser;
     private boolean mBackAble = true;
-    private boolean isVisibleToUser;
     private Unbinder mUnbinder;
     private String mTitle;
 
@@ -39,7 +39,7 @@ public abstract class CommonFragment extends RxFluxFragment implements CommonVie
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
+        this.mIsVisibleToUser = isVisibleToUser;
     }
 
     @Override

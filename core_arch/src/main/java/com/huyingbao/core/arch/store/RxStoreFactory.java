@@ -22,7 +22,7 @@ public class RxStoreFactory implements ViewModelProvider.Factory {
     private final Map<Class<? extends RxStore>, Provider<RxStore>> creators;
 
     @Inject
-    public RxStoreFactory(Map<Class<? extends RxStore>, Provider<RxStore>> creators) {
+    RxStoreFactory(Map<Class<? extends RxStore>, Provider<RxStore>> creators) {
         this.creators = creators;
     }
 

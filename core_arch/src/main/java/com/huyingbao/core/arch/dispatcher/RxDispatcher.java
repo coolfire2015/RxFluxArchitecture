@@ -20,7 +20,7 @@ import javax.inject.Singleton;
 @Singleton
 public class RxDispatcher {
     @Inject
-    public RxDispatcher() {
+    RxDispatcher() {
     }
 
     /**

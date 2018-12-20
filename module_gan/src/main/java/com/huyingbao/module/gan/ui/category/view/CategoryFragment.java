@@ -29,7 +29,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryListFragment extends CommonFragment {
+public class CategoryFragment extends CommonFragment {
     @Inject
     CategoryActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -39,7 +39,7 @@ public class CategoryListFragment extends CommonFragment {
     private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
 
     @Inject
-    public CategoryListFragment() {
+    public CategoryFragment() {
     }
 
     @Override

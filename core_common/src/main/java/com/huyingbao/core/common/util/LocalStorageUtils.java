@@ -22,7 +22,7 @@ public class LocalStorageUtils {
     private static SharedPreferences sSharedPreferences;
 
     @Inject
-    public LocalStorageUtils(Application application) {
+    LocalStorageUtils(Application application) {
         sSharedPreferences = application.getSharedPreferences(SETTING_NAME, Context.MODE_PRIVATE);
     }
 
