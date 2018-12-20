@@ -1,9 +1,9 @@
 package com.huyingbao.module.git.action;
 
 import com.google.gson.GsonBuilder;
-import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreKey;
+import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.git.ui.GitActivity;
 import com.huyingbao.module.git.ui.module.GitActivityModule;
 import com.huyingbao.module.git.ui.module.GitStore;

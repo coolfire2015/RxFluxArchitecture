@@ -1,7 +1,7 @@
 package com.huyingbao.module.git.ui.module;
 
 
-import com.huyingbao.core.scope.FragmentScope;
+import com.huyingbao.core.arch.scope.FragmentScope;
 import com.huyingbao.module.git.ui.GitRepoFragment;
 import com.huyingbao.module.git.ui.GitUserFragment;
 

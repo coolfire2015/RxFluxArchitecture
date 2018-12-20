@@ -3,8 +3,8 @@ package com.huyingbao.module.git.ui;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.huyingbao.core.scope.ActivityScope;
-import com.huyingbao.core.view.CommonFragment;
+import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.R2;
 import com.huyingbao.module.git.ui.model.GitUser;

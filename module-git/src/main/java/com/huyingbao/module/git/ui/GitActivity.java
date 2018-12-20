@@ -3,10 +3,10 @@ package com.huyingbao.module.git.ui;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.huyingbao.core.store.RxStore;
-import com.huyingbao.core.store.RxStoreChange;
-import com.huyingbao.core.util.ActivityUtils;
-import com.huyingbao.core.view.CommonActivity;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreChange;
+import com.huyingbao.core.common.util.ActivityUtils;
+import com.huyingbao.core.common.view.CommonActivity;
 import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.ui.module.GitActions;
 import com.huyingbao.module.git.ui.module.GitStore;
