@@ -1,34 +1,143 @@
-apply plugin: 'com.android.library'
+if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
+else apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 28
-
-
-
-    defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+    //编译版本
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    //lint设置
+    lintOptions {
+        //lint 不被终止
+        abortOnError false
+        //打Release版本时,不进行检测
+        checkReleaseBuilds false
+        //关闭检索的功能
+        disable 'GoogleAppIndexingWarning'
     }
-
-    buildTypes {
+    //签名配置,自定义,用在defaultConfig中
+    signingConfigs {
+        debug {
+            storeFile file(STORE_DEBUG_FILE)
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file(STORE_RELEASE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
         }
     }
+    //默认配置
+    defaultConfig {
+        multiDexEnabled true//支持Multidex分包
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+        signingConfig signingConfigs.debug
+        vectorDrawables.useSupportLibrary = true//使用vector图片
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        debug {
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFile 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.debug
+        }
+        //自定义buildType.name
+        release {
+            //混淆开关
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+        }
+    }
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+    //Dex分包
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"//增加java堆内存大小
+    }
+    //Lambda表达式需要
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //单元测试
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    //代码目录设置
+    sourceSets {
+        main {
+            if (isModuleAsApp.toBoolean()) {
+                manifest.srcFile 'src/app/AndroidManifest.xml'
+                java.srcDirs 'src/app/java'
+                res.srcDirs 'src/app/res'
+            } else {
+                manifest.srcFile 'src/library/AndroidManifest.xml'
+            }
+        }
+    }
+    //修改生成的apk名字
+    if (isModuleAsApp.toBoolean()) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                if ("release".equals(variant.buildType.name))
+                    outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            }
+        }
+    }
+}
 
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-multidex:${TEST_ROBOLECTRIC}"
+    testImplementation "org.robolectric:shadows-supportv4:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    //Android框架测试
+    androidTestImplementation "org.mockito:mockito-android:${TEST_MOCKITO}"
+    androidTestImplementation "androidx.test:runner:${TEST_RUNNER_X}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${TEST_ESPRESSO_X}"
+    //内核
+    implementation project(':core_arch')
+    //通用依赖模块
+    implementation project(':core_common')
+    //CardView
+    implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
+    //编译时生成
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_LIFECYCLE_VERSION_X}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
 }

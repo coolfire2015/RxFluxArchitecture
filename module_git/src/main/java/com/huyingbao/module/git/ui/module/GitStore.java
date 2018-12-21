@@ -1,9 +1,15 @@
 package com.huyingbao.module.git.ui.module;
 
+import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.module.git.ui.action.GitAction;
 import com.huyingbao.module.git.ui.model.GitRepo;
 import com.huyingbao.module.git.ui.model.GitUser;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 
 import java.util.List;
 
@@ -25,20 +31,33 @@ public class GitStore extends RxStore {
         super(rxDispatcher);
     }
 
-//    @Override
-//    public void onRxAction(RxAction action) {
-//        switch (action.getTag()) {
-//            case GitActions.GET_GIT_REPO_LIST:
-//                mGitRepoList.setValue(action.get(RxActionCreator.RESPONSE));
-//                return;
-//            case GitActions.GET_GIT_USER:
-//                mGitUser.setValue(action.get(RxActionCreator.RESPONSE));
-//                return;
-//            case GitActions.TO_GIT_USER:
-//                break;
-//            default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
-//                return;
-//        }
-//        postChange(new RxChange(getClass().getSimpleName(), action));
-//    }
+    /**
+     * 接收需要跳转的页面的类别，并通知页面跳转
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(GitAction.GET_GIT_REPO_LIST)})
+    public void setGitRepoList(RxAction action) {
+        mGitRepoList.setValue(action.get(RxActionCreator.RESPONSE));
+    }
+
+    /**
+     * 接收需要跳转的页面的类别，并通知页面跳转
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(GitAction.GET_GIT_USER)})
+    public void receiveGitUser(RxAction action) {
+        mGitUser.setValue(action.get(RxActionCreator.RESPONSE));
+    }
+
+    /**
+     * 接收需要跳转的页面的类别，并通知页面跳转
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(GitAction.TO_GIT_USER)})
+    public void receive(RxAction action) {
+        postChange(RxChange.newRxChange(action.getTag()));
+    }
 }

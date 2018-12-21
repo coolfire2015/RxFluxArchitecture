@@ -1,9 +1,9 @@
-package com.huyingbao.module.git;
+package com.huyingbao.module.wan;
 
 import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
-import com.huyingbao.module.git.module.GitModule;
+import com.huyingbao.module.wan.module.WanModule;
 
 import javax.inject.Singleton;
 
@@ -17,15 +17,15 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @Singleton
 @Component(modules = {
-        GitModule.class,
+        WanModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
-public interface GitComponent extends AndroidInjector<GitApplication> {
+public interface WanComponent extends AndroidInjector<WanApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        GitComponent.Builder application(Application application);
+        WanComponent.Builder application(Application application);
 
-        GitComponent build();
+        WanComponent build();
     }
 }
