@@ -6,5 +6,5 @@ package com.huyingbao.module.gan.ui.random.action;
 public interface RandomActions {
     String GET_PRODUCT_LIST = "get_product_list";
 
-    void getProductList(String category, int count);
+    void getProductList(String category, int count, int page);
 }

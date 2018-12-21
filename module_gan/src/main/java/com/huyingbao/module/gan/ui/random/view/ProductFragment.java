@@ -9,6 +9,7 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.gan.R;
+import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
 import com.huyingbao.module.gan.ui.random.model.Product;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
@@ -29,6 +30,8 @@ import butterknife.BindView;
  */
 @ActivityScope
 public class ProductFragment extends CommonFragment {
+    @Inject
+    RandomActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
@@ -53,7 +56,7 @@ public class ProductFragment extends CommonFragment {
         initActionBar("商品列表");
         initRecyclerView();
         showData();
-        mStore.setPage(0);
+        mActionCreator.getProductList(mStore.getCategory(), 20, 1);
     }
 
     /**
@@ -75,12 +78,12 @@ public class ProductFragment extends CommonFragment {
      * 显示数据
      */
     private void showData() {
-        mStore.mProductTrans.observe(this, products -> {
-            mDataList.clear();
-            if (products != null && products.getResults().size() > 0)
-                mDataList.addAll(products.getResults());
-            mAdapter.notifyDataSetChanged();
-        });
+//        mStore.mProductTrans.observe(this, products -> {
+//            mDataList.clear();
+//            if (products != null && products.getResults().size() > 0)
+//                mDataList.addAll(products.getResults());
+//            mAdapter.notifyDataSetChanged();
+//        });
     }
 
 }

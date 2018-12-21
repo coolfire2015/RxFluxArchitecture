@@ -10,8 +10,9 @@ import retrofit2.http.Path;
  * Created by liujunfeng on 2017/12/7.
  */
 public interface GanApi {
-    @GET("random/data/{category}/{count} ")
-    Observable<GanResponse<Product>> getProductList(
+    @GET("data/{category}/{count}/{page} ")
+    Observable<GanResponse<Product>> getDataList(
             @Path("category") String category,
-            @Path("count") int count);
+            @Path("count") int count,
+            @Path("page") int page);
 }
