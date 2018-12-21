@@ -4,7 +4,6 @@ import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
 import com.huyingbao.module.gan.ui.random.model.Product;
@@ -23,7 +22,7 @@ import androidx.lifecycle.MutableLiveData;
 @Singleton
 public class RandomStore extends RxStore {
     private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
-    private Integer mPage;
+    private boolean mIsCreated;
     private String mCategory;
 
     @Inject
@@ -45,7 +44,7 @@ public class RandomStore extends RxStore {
      */
     @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
     public void receiveProductList(RxAction action) {
-        mPage = action.get(GanConstants.Key.PAGE);
+        mIsCreated = true;
         mProductList.setValue(action.get(RxActionCreator.RESPONSE));
     }
 
@@ -61,7 +60,7 @@ public class RandomStore extends RxStore {
         mCategory = stringExtra;
     }
 
-    public Integer getPage() {
-        return mPage;
+    public boolean isCreated() {
+        return mIsCreated;
     }
 }

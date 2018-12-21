@@ -32,34 +32,13 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 主要是为了和RxJava整合,用在调用网络接口api获取数据之后,被观察者得到数据,发生订阅关系,将返回的数据
-     * 或者error封装成action,postAction或者postError出去
-     * 订阅管理,将RxAction和Disposable添加到DisposableManager
+     * 发送本地action
      *
-     * @param rxAction
-     * @param disposable
+     * @param actionId
+     * @param data
      */
-    private void addRxAction(RxAction rxAction, Disposable disposable) {
-        mRxActionManager.add(rxAction, disposable);
-    }
-
-    /**
-     * 订阅管理器是否已经有了该action
-     *
-     * @param rxAction
-     * @return
-     */
-    private boolean hasRxAction(RxAction rxAction) {
-        return mRxActionManager.contains(rxAction);
-    }
-
-    /**
-     * 订阅管理器,移除该action
-     *
-     * @param rxAction
-     */
-    private void removeRxAction(RxAction rxAction) {
-        mRxActionManager.remove(rxAction);
+    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
+        postRxAction(newRxAction(actionId, data));
     }
 
     /**
@@ -85,6 +64,37 @@ public abstract class RxActionCreator {
     }
 
     /**
+     * 订阅管理器是否已经有了该action
+     *
+     * @param rxAction
+     * @return
+     */
+    private boolean hasRxAction(RxAction rxAction) {
+        return mRxActionManager.contains(rxAction);
+    }
+
+    /**
+     * 主要是为了和RxJava整合,用在调用网络接口api获取数据之后,被观察者得到数据,发生订阅关系,将返回的数据
+     * 或者error封装成action,postAction或者postError出去
+     * 订阅管理,将RxAction和Disposable添加到DisposableManager
+     *
+     * @param rxAction
+     * @param disposable
+     */
+    private void addRxAction(RxAction rxAction, Disposable disposable) {
+        mRxActionManager.add(rxAction, disposable);
+    }
+
+    /**
+     * 订阅管理器,移除该action
+     *
+     * @param rxAction
+     */
+    private void removeRxAction(RxAction rxAction) {
+        mRxActionManager.remove(rxAction);
+    }
+
+    /**
      * 通过调度器dispatcher将action推出去
      *
      * @param action
@@ -106,16 +116,6 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 发送LocalAction
-     *
-     * @param actionId
-     * @param data
-     */
-    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
-        postRxAction(newRxAction(actionId, data));
-    }
-
-    /**
      * 发送网络action
      *
      * @param rxAction
@@ -127,7 +127,7 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 调用网络接口,传入接口自己的回调(非RxFlux模式接口,无法发送接口数据,eg:新闻模块获取新闻列表接口)调用接口,发送接口返回数据
+     * 调用网络接口,传入接口自己的回调
      *
      * @param rxAction
      * @param httpObservable
