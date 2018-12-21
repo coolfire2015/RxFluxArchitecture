@@ -5,8 +5,8 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.git.action.GitApi;
-import com.huyingbao.module.git.ui.view.GitActivity;
 import com.huyingbao.module.git.ui.module.GitStore;
+import com.huyingbao.module.git.ui.view.GitActivity;
 
 import javax.inject.Singleton;
 
@@ -41,7 +41,7 @@ public abstract class GitModule {
     @Binds
     @IntoMap
     @RxStoreKey(GitStore.class)
-    abstract RxStore provideGitStore(GitStore gitStore);
+    abstract RxStore bindGitStore(GitStore gitStore);
 
     @ActivityScope
     @ContributesAndroidInjector(modules = GitActivityModule.class)

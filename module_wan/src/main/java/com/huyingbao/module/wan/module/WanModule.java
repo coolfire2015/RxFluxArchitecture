@@ -41,7 +41,7 @@ public abstract class WanModule {
     @Binds//当参数和返回值类型相同时，将方法写成抽象方法，用Binds注解。
     @IntoMap//可以让Dagger2将多个元素依赖注入到Map之中
     @RxStoreKey(CategoryStore.class)
-    abstract RxStore provideCategoryStore(CategoryStore randomStore);
+    abstract RxStore bindCategoryStore(CategoryStore randomStore);
 
     /**
      * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomActivity）的注射器
