@@ -49,7 +49,7 @@ public class CategoryListFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("首页", false);
+        initActionBar("首页");
         initRecyclerView();
         showData();
     }

@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.category.view;
+package com.huyingbao.module.gan.ui.random.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,37 +9,37 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.gan.R;
-import com.huyingbao.module.gan.action.GanConstants;
-import com.huyingbao.module.gan.ui.category.action.CategoryAction;
-import com.huyingbao.module.gan.ui.category.action.CategoryActionCreator;
-import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
+import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
+import com.huyingbao.module.gan.ui.random.model.Product;
+import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * 内容类型列表展示页面
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryFragment extends CommonFragment {
-    @Inject
-    CategoryActionCreator mActionCreator;
+public class GanListFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
+    @BindView(R2.id.cl_content)
+    CoordinatorLayout mClContent;
 
-    private List<String> mDataList = new ArrayList();
-    private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
+    protected List<Product> mDataList = new ArrayList();
+    protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
+    private RandomStore mStore;
 
     @Inject
-    public CategoryFragment() {
+    public GanListFragment() {
     }
 
     @Override
@@ -49,9 +49,11 @@ public class CategoryFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("首页", false);
+        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(RandomStore.class);
+        initActionBar("商品列表");
         initRecyclerView();
         showData();
+        mStore.setPage(0);
     }
 
     /**
@@ -65,8 +67,6 @@ public class CategoryFragment extends CommonFragment {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mActionCreator.postLocalAction(CategoryAction.TO_RANDOM_LIST,
-                        GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });
     }
@@ -75,7 +75,11 @@ public class CategoryFragment extends CommonFragment {
      * 显示数据
      */
     private void showData() {
-        mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.category_gan)));
-        mAdapter.notifyDataSetChanged();
+        mStore.mProductTrans.observe(this, products -> {
+            mDataList.clear();
+            if (products != null && products.getResults().size() > 0)
+                mDataList.addAll(products.getResults());
+            mAdapter.notifyDataSetChanged();
+        });
     }
 }

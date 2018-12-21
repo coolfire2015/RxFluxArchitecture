@@ -26,7 +26,8 @@ import dagger.Lazy;
 public class RandomActivity extends CommonActivity {
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
-    private RandomStore mRandomStore;
+
+    private RandomStore mStore;
 
     public static Intent newIntent(Context context, String category) {
         Intent intent = new Intent(context, RandomActivity.class);
@@ -36,8 +37,8 @@ public class RandomActivity extends CommonActivity {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mRandomStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
-        mRandomStore.setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
+        mStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
+        mStore.setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
         ActivityUtils.addFragment(getSupportFragmentManager(),
                 mProductListFragmentLazy.get(),
                 R.id.fl_content);
@@ -46,10 +47,6 @@ public class RandomActivity extends CommonActivity {
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
-        return Collections.singletonList(mRandomStore);
+        return Collections.singletonList(mStore);
     }
-
-    //    @Override
-//    public void onRxStoreChanged(@NonNull RxChange change) {
-//    }
 }

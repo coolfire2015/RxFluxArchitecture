@@ -3,6 +3,7 @@ package com.huyingbao.module.gan.module;
 
 import com.huyingbao.core.arch.scope.FragmentScope;
 import com.huyingbao.module.gan.ui.category.view.CategoryListFragment;
+import com.huyingbao.module.gan.ui.random.view.GanListFragment;
 import com.huyingbao.module.gan.ui.random.view.ProductFragment;
 
 import dagger.Module;
@@ -19,5 +20,9 @@ abstract class GanActivityModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract ProductFragment injectProductListFragment();
+    abstract ProductFragment injectProductFragment();
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract GanListFragment injectGanListFragment();
 }

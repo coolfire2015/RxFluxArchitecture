@@ -24,18 +24,18 @@ public class CategoryStore extends RxStore {
         super(rxDispatcher);
     }
 
-    public String getCategory() {
-        return mCategory;
-    }
-
     /**
-     * postChange(new RxChange(getClass().getSimpleName(), action));
+     * 接收需要跳转的页面的类别，并通知页面跳转
      *
      * @param action
      */
     @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
-    public void setCategory(RxAction action) {
+    public void receiveCategory(RxAction action) {
         mCategory = action.get(GanConstants.Key.CATEGORY);
         postChange(RxChange.newRxChange(action.getTag()));
+    }
+
+    public String getCategory() {
+        return mCategory;
     }
 }

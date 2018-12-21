@@ -30,9 +30,9 @@ import butterknife.BindView;
 @ActivityScope
 public class ProductFragment extends CommonFragment {
     @BindView(R2.id.rv_content)
-    protected RecyclerView mRvContent;
+    RecyclerView mRvContent;
     @BindView(R2.id.cl_content)
-    protected CoordinatorLayout mClContent;
+    CoordinatorLayout mClContent;
 
     protected List<Product> mDataList = new ArrayList();
     protected BaseQuickAdapter mAdapter = new ProductAdapter(mDataList);
@@ -59,7 +59,7 @@ public class ProductFragment extends CommonFragment {
     /**
      * 实例化RecyclerView,并设置adapter
      */
-    protected void initRecyclerView() {
+    private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setAdapter(mAdapter);
@@ -71,6 +71,9 @@ public class ProductFragment extends CommonFragment {
         });
     }
 
+    /**
+     * 显示数据
+     */
     private void showData() {
         mStore.mProductTrans.observe(this, products -> {
             mDataList.clear();

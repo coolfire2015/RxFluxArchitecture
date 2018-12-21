@@ -23,11 +23,11 @@ import androidx.lifecycle.Transformations;
  */
 @Singleton
 public class RandomStore extends RxStore {
+    @Inject
+    RandomActionCreator mActionCreator;
     private final MutableLiveData<Integer> mPage = new MutableLiveData<>();
     private final MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     public LiveData<GanResponse<Product>> mProductTrans;
-    @Inject
-    RandomActionCreator mActionCreator;
     private String mCategory;
 
     @Inject
@@ -39,21 +39,21 @@ public class RandomStore extends RxStore {
         });
     }
 
-    /**
-     * postChange(new RxChange(getClass().getSimpleName(), action));
-     *
-     * @param action
-     */
-    @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
-    public void showProductList(RxAction action) {
-        mProductList.setValue(action.get(RxActionCreator.RESPONSE));
-    }
-
     @Override
     protected void onCleared() {
         super.onCleared();
         mPage.setValue(null);
         mProductList.setValue(null);
+    }
+
+    /**
+     * 接收接口返回的数据
+     *
+     * @param action
+     */
+    @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
+    public void receiveProductList(RxAction action) {
+        mProductList.setValue(action.get(RxActionCreator.RESPONSE));
     }
 
     public void setPage(int page) {

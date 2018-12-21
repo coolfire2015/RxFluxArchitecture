@@ -1,6 +1,6 @@
 package com.huyingbao.module.gan;
 
-import com.huyingbao.core.CommonApp;
+import com.huyingbao.core.common.CommonApp;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
