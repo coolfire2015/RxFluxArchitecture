@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
@@ -56,6 +55,7 @@ public class ProductFragment extends CommonFragment {
         initActionBar("商品列表");
         initRecyclerView();
         showData();
+        if (mStore.getPage() != null) return;
         mActionCreator.getProductList(mStore.getCategory(), 20, 1);
     }
 
@@ -67,23 +67,17 @@ public class ProductFragment extends CommonFragment {
         mRvContent.setHasFixedSize(true);
         mRvContent.setAdapter(mAdapter);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
-        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-            }
-        });
     }
 
     /**
      * 显示数据
      */
     private void showData() {
-//        mStore.mProductTrans.observe(this, products -> {
-//            mDataList.clear();
-//            if (products != null && products.getResults().size() > 0)
-//                mDataList.addAll(products.getResults());
-//            mAdapter.notifyDataSetChanged();
-//        });
+        mStore.getProductList().observe(this, products -> {
+            mDataList.clear();
+            if (products != null && products.getResults().size() > 0)
+                mDataList.addAll(products.getResults());
+            mAdapter.notifyDataSetChanged();
+        });
     }
-
 }

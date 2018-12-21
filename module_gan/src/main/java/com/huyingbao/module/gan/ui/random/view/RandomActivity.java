@@ -38,6 +38,7 @@ public class RandomActivity extends CommonActivity {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         mStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
+        //TODO 需要优化
         mStore.setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
         ActivityUtils.addFragment(getSupportFragmentManager(),
                 mProductListFragmentLazy.get(),

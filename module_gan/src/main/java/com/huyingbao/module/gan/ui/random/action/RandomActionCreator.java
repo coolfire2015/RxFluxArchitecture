@@ -4,17 +4,18 @@ import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.module.gan.action.GanApi;
+import com.huyingbao.module.gan.action.GanConstants;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 
 /**
  * rxAction创建发送管理类
  * Created by liujunfeng on 2017/12/7.
  */
-@Singleton
+@ActivityScope
 public class RandomActionCreator extends RxActionCreator implements RandomActions {
     @Inject
     GanApi mGanApi;
@@ -26,7 +27,9 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
 
     @Override
     public void getProductList(String category, int count, int page) {
-        RxAction action = newRxAction(GET_PRODUCT_LIST);
+        RxAction action = newRxAction(GET_PRODUCT_LIST,
+                GanConstants.Key.COUNT,count,
+                GanConstants.Key.PAGE,page);
         postHttpAction(action, mGanApi.getDataList(category, count, page));
     }
 }
