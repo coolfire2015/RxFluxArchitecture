@@ -45,7 +45,7 @@ public class ProductFragment extends CommonFragment {
 
     private RandomStore mStore;
     private List<Product> mDataList;
-    private ProductAdapter mAdapter;
+    private BaseQuickAdapter mAdapter;
 
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 20;
@@ -65,7 +65,7 @@ public class ProductFragment extends CommonFragment {
         initActionBar("商品列表");
         initRecyclerView();
         initAdapter();
-        addHeadView();
+        //addHeadView();
         initRefreshLayout();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
@@ -83,20 +83,26 @@ public class ProductFragment extends CommonFragment {
     }
 
     /**
-     * 实例化dapter
+     * 实例化adapter
      */
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new ProductAdapter(mDataList);
+        //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
+        //设置加载动画
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }
 
+    /**
+     * 添加头部view
+     */
     private void addHeadView() {
-        View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRvContent.getParent(), false);
-        headView.findViewById(R.id.iv).setVisibility(View.GONE);
-        ((TextView) headView.findViewById(R.id.tv)).setText("change load view");
+        View headView = getLayoutInflater().inflate(R.layout.view_head, (ViewGroup) mRvContent.getParent(), false);
+        headView.findViewById(R.id.iv_head).setVisibility(View.GONE);
+        ((TextView) headView.findViewById(R.id.tv_head)).setText("change load view");
         headView.setOnClickListener(v -> {
             mAdapter.setNewData(null);
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
@@ -108,6 +114,9 @@ public class ProductFragment extends CommonFragment {
         mAdapter.addHeaderView(headView);
     }
 
+    /**
+     * 实例化view
+     */
     private void initRefreshLayout() {
         mSrlContent.setColorSchemeColors(Color.rgb(47, 223, 189));
         mSrlContent.setOnRefreshListener(() -> refresh());
@@ -118,6 +127,7 @@ public class ProductFragment extends CommonFragment {
      */
     private void showData() {
         mStore.getProductList().observe(this, products -> {
+            if(products==null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = mNextRequestPage == 1;
             setData(isRefresh, products.getResults());
@@ -143,6 +153,7 @@ public class ProductFragment extends CommonFragment {
     }
 
     /**
+     * 设置数据
      * @param isRefresh
      * @param data
      */

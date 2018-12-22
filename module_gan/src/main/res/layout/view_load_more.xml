@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_4"
             android:text="@string/brvah_loading"
-            android:textColor="#0dddb8"
+            android:textColor="@android:color/holo_green_light"
             android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/brvah_load_failed"
-            android:textColor="#0dddb8" />
+            android:textColor="@android:color/holo_red_light" />
 
     </FrameLayout>
 

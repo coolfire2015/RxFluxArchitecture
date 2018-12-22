@@ -30,6 +30,10 @@ import androidx.lifecycle.ViewModel;
  * 重建后数据可以继续使用。
  * <p>
  * 实现LifecycleObserver，可以关联Activity/Fragment生命周期
+ * <p>
+ * ViewModel类旨在存储和管理与UI相关的数据，
+ * 以便数据在诸如屏幕旋转之类的配置更改中生存下来。
+ * 它还处理Activity/Fragment与应用程序的其余部分的通信（例如调用业务逻辑类）。
  * Created by liujunfeng on 2017/12/7.
  */
 public abstract class RxStore extends ViewModel implements LifecycleObserver {
