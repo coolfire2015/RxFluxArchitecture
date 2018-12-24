@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.core.common.util.ActivityUtils;
 import com.huyingbao.core.common.view.CommonActivity;
-import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
@@ -17,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
 
@@ -40,14 +39,16 @@ public class RandomActivity extends CommonActivity {
         mStore = ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
         //TODO 需要优化
         mStore.setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
-        ActivityUtils.addFragment(getSupportFragmentManager(),
-                mProductListFragmentLazy.get(),
-                R.id.fl_content);
     }
 
     @Nullable
     @Override
     public List<RxStore> getLifecycleRxStoreList() {
         return Collections.singletonList(mStore);
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        return mProductListFragmentLazy.get();
     }
 }

@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -47,6 +49,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        setFragment();
         ButterKnife.bind(this);
         afterCreate(savedInstanceState);
     }
@@ -103,14 +106,31 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
     }
 
     /**
-     * 显示短暂的Toast
-     *
-     * @param text
+     * 设置Activity需要显示的第一个Fragment
      */
-    protected void showShortToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    private void setFragment() {
+        //1:管理fragment队列
+        //2:管理fragment事务回退栈
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        //从fragment队列中获取资源ID标识的fragment
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fl_content);
+        if (fragment == null) {
+            fragment = createFragment();
+            //fragment事务被用来添加,移除,附加,分离或替换fragment队列中的fragment
+            //资源ID标识UI fragment是FragmentManager的一种内部实现机制
+            //添加fragment供FragmentManager管理时
+            //onAttach(Context),onCreate(Bundle)和onCreateView(...)方法会被调用
+            fragmentManager.beginTransaction()
+                    .add(R.id.fl_content, fragment)
+                    .commit();
+        }
     }
 
+    /**
+     * 设置toolbar
+     *
+     * @param backAble true：显示返回按钮
+     */
     private void setToolbar(boolean backAble) {
         //取代原本的actionbar
         setSupportActionBar(mToolbarTop);
@@ -126,6 +146,19 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
         actionBar.setDisplayShowTitleEnabled(false);
     }
 
+    /**
+     * 显示短暂的Toast
+     *
+     * @param text
+     */
+    protected void showShortToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param title    需要显示的标题
+     * @param backAble true:带有返回按钮，可以返回
+     */
     public void initActionBar(String title, boolean backAble) {
         //设置标题
         setTitle(title);
@@ -133,11 +166,21 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
         setToolbar(backAble);
     }
 
+    /**
+     * @param title
+     */
     public void initActionBar(String title) {
-        this.initActionBar(title, true);
+        initActionBar(title, true);
     }
 
     public void initActionBar() {
-        this.initActionBar(null, true);
+        initActionBar(null, true);
     }
+
+    /**
+     * 提供activity需要显示的fragment
+     *
+     * @return
+     */
+    protected abstract Fragment createFragment();
 }
