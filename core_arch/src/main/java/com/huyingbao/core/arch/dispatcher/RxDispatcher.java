@@ -104,6 +104,6 @@ public class RxDispatcher {
      * @param rxError
      */
     public void postRxError(final RxError rxError) {
-        RxBus.get().post(rxError.getTag(), rxError);
+        RxBus.get().post(rxError.getTag(),rxError);
     }
 }

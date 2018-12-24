@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
@@ -19,6 +20,9 @@ import com.huyingbao.module.wan.ui.action.WanActionCreator;
 import com.huyingbao.module.wan.ui.adapter.GitRepoAdapter;
 import com.huyingbao.module.wan.ui.model.GitRepo;
 import com.huyingbao.module.wan.ui.module.GitStore;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +76,11 @@ public class GitRepoFragment extends CommonFragment {
         if (mStore.isCreated()) return;
         mSrlContent.setRefreshing(true);
         refresh();
+    }
+
+    @Subscribe(tags = {@Tag(WanAction.GET_ARTICLE_LIST)})
+    public void getGitRepoList(RxError action) {
+        Logger.e("asdf");
     }
 
     /**
@@ -159,14 +168,14 @@ public class GitRepoFragment extends CommonFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getGitRepoList();
+        mActionCreator.getArticleList(mNextRequestPage);
     }
 
     /**
      * 加载更多
      */
     private void loadMore() {
-        mActionCreator.getGitRepoList();
+        mActionCreator.getArticleList(mNextRequestPage);
     }
 
     /**

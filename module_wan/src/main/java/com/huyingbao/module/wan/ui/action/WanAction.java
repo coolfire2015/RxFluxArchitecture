@@ -8,9 +8,9 @@ import android.content.Context;
 public interface WanAction {
     String TO_GIT_USER = "to_git_user";
 
-    String GET_GIT_REPO_LIST = "get_git_repo_list";
+    String GET_ARTICLE_LIST = "get_article_list";
 
-    void getGitRepoList();
+    void getArticleList(int page);
 
     String GET_GIT_USER = "get_git_user";
 

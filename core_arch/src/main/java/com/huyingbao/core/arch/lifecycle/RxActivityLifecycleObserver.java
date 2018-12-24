@@ -1,6 +1,7 @@
 package com.huyingbao.core.arch.lifecycle;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.view.RxFluxView;
@@ -30,6 +31,7 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
+        Log.e("RxFlux", "3-onCreateLifecycle ");
         if (mActivity instanceof RxFluxView) {
             List<RxStore> rxStoreList = ((RxFluxView) mActivity).getLifecycleRxStoreList();
             if (rxStoreList != null && rxStoreList.size() > 0)

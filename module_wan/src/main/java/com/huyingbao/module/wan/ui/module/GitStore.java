@@ -50,7 +50,7 @@ public class GitStore extends RxStore {
      *
      * @param action
      */
-    @Subscribe(tags = {@Tag(WanAction.GET_GIT_REPO_LIST)})
+    @Subscribe(tags = {@Tag(WanAction.GET_ARTICLE_LIST)})
     public void setGitRepoList(RxAction action) {
         mGitRepoList.setValue(action.get(RxActionCreator.RESPONSE));
     }

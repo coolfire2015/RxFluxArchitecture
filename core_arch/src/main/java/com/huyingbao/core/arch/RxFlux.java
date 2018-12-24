@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver;
-import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 import java.util.Stack;
@@ -16,6 +17,8 @@ import java.util.Stack;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -60,43 +63,110 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
+        Log.e("RxFlux", "1-onActivityCreated");
         mActivityCounter++;
         mActivityStack.add(activity);
-        if (activity instanceof FragmentActivity)
+        if (activity instanceof FragmentActivity) {
             ((FragmentActivity) activity).getLifecycle()
                     .addObserver(new RxActivityLifecycleObserver(activity));
+            ((FragmentActivity) activity).getSupportFragmentManager()
+                    .registerFragmentLifecycleCallbacks(this, true);
+        }
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
+        Log.e("RxFlux", "4-onActivityStarted");
         if (activity instanceof RxFluxView)
             mRxDispatcher.subscribeRxView((RxFluxView) activity);
-        if (activity instanceof FragmentActivity)
-            ((FragmentActivity) activity).getSupportFragmentManager()
-                    .registerFragmentLifecycleCallbacks(this, true);
     }
+
+    @Override
+    public void onFragmentPreAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
+        super.onFragmentPreAttached(fm, f, context);
+        Log.e("RxFlux", "5-onFragmentPreAttached");
+    }
+
+    @Override
+    public void onFragmentAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
+        super.onFragmentAttached(fm, f, context);
+        Log.e("RxFlux", "6-onFragmentAttached");
+    }
+
+    @Override
+    public void onFragmentPreCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+        super.onFragmentPreCreated(fm, f, savedInstanceState);
+        Log.e("RxFlux", "7-onFragmentPreCreated");
+    }
+
+    @Override
+    public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+        super.onFragmentCreated(fm, f, savedInstanceState);
+        Log.e("RxFlux", "8-onFragmentCreated");
+    }
+
+    @Override
+    public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onFragmentViewCreated(fm, f, v, savedInstanceState);
+        Log.e("RxFlux", "9-onFragmentViewCreated");
+    }
+
+    @Override
+    public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+        super.onFragmentActivityCreated(fm, f, savedInstanceState);
+        Log.e("RxFlux", "10-onFragmentActivityCreated");
+    }
+
+    @Override
+    public void onFragmentStarted(FragmentManager fm, Fragment f) {
+        super.onFragmentStarted(fm, f);
+        Log.e("RxFlux", "11-onFragmentStarted");
+        if (f instanceof RxFluxView)
+            mRxDispatcher.subscribeRxView((RxFluxView) f);
+    }
+
 
     @Override
     public void onActivityResumed(Activity activity) {
+        Log.e("RxFlux", "12-onActivityResumed");
     }
 
     @Override
+    public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentResumed(fm, f);
+        Log.e("RxFlux", "13-onFragmentResumed");
+    }
+
+
+    @Override
     public void onActivityPaused(Activity activity) {
+        Log.e("RxFlux", "14-onActivityPaused");
+    }
+
+    @Override
+    public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentPaused(fm, f);
+        Log.e("RxFlux", "15-onFragmentPaused");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
+        Log.e("RxFlux", "16-onActivityStopped");
         if (activity instanceof RxFluxView)
             mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-
+    public void onFragmentStopped(FragmentManager fm, Fragment f) {
+        super.onFragmentStopped(fm, f);
+        Log.e("RxFlux", "17-onFragmentStopped");
+        if (f instanceof RxFluxView)
+            mRxDispatcher.unsubscribeRxView((RxFluxView) f);
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        Log.e("RxFlux", "18-onActivityDestroyed");
         mActivityCounter--;
         mActivityStack.remove(activity);
         if (mActivityCounter == 0 || mActivityStack.size() == 0)
@@ -104,23 +174,32 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     @Override
-    public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
-        super.onFragmentAttached(fm, f, context);
-        f.getLifecycle().addObserver(new RxFragmentLifecycleObserver(f));
+    public void onFragmentViewDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentViewDestroyed(fm, f);
+        Log.e("RxFlux", "19-onFragmentViewDestroyed");
     }
 
     @Override
-    public void onFragmentStarted(FragmentManager fm, Fragment f) {
-        super.onFragmentStarted(fm, f);
-        if (f instanceof RxFluxView)
-            mRxDispatcher.subscribeRxView((RxFluxView) f);
+    public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentDestroyed(fm, f);
+        Log.e("RxFlux", "20-onFragmentDestroyed");
     }
 
     @Override
-    public void onFragmentStopped(FragmentManager fm, Fragment f) {
-        super.onFragmentStopped(fm, f);
-        if (f instanceof RxFluxView)
-            mRxDispatcher.unsubscribeRxView((RxFluxView) f);
+    public void onFragmentDetached(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentDetached(fm, f);
+        Log.e("RxFlux", "21-onFragmentDetached");
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+        Log.e("RxFlux", "22-onActivitySaveInstanceState");
+    }
+
+    @Override
+    public void onFragmentSaveInstanceState(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Bundle outState) {
+        super.onFragmentSaveInstanceState(fm, f, outState);
+        Log.e("RxFlux", "23-onFragmentSaveInstanceState");
     }
 
     public void finishAllActivity() {

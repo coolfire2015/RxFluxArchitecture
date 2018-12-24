@@ -1,6 +1,7 @@
 package com.huyingbao.core.common.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.MalformedJsonException;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -9,7 +10,6 @@ import android.widget.Toast;
 import com.google.android.material.appbar.AppBarLayout;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.view.RxFluxActivity;
-import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
@@ -20,7 +20,6 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -33,7 +32,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonActivity extends RxFluxActivity implements CommonView, RxFluxView {
+public abstract class CommonActivity extends RxFluxActivity implements CommonView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -48,6 +47,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("RxFlux", "2-onCreate");
         setContentView(getLayoutId());
         addFragmentNoExisting(createFragment());
         ButterKnife.bind(this);
@@ -84,7 +84,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
      * rxflux中对错误的处理
      */
     @Subscribe
-    public void onRxError(@NonNull RxError error) {
+    public void onRxError(RxError error) {
         Throwable throwable = error.getThrowable();
         // 自定义异常
         if (throwable instanceof CommonHttpException) {

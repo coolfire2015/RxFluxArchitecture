@@ -22,14 +22,14 @@ public class WanActionCreator extends RxActionCreator implements WanAction {
     WanApi mWanApi;
 
     @Inject
-    public WanActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    WanActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
 
     @Override
-    public void getGitRepoList() {
-        RxAction action = newRxAction(GET_GIT_REPO_LIST);
-        postHttpAction(action, mWanApi.getGitRepoList());
+    public void getArticleList(int page) {
+        RxAction action = newRxAction(GET_ARTICLE_LIST);
+        postHttpAction(action, mWanApi.getArticleList(page));
     }
 
     @Override
