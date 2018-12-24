@@ -11,8 +11,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
+import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.action.WanAction;
@@ -29,6 +31,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +42,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitRepoFragment extends CommonFragment {
+public class GitRepoFragment extends CommonRxFragment<GitStore> {
     @Inject
     WanActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -47,7 +50,6 @@ public class GitRepoFragment extends CommonFragment {
     @BindView(R2.id.srl_content)
     SwipeRefreshLayout mSrlContent;
 
-    private GitStore mStore;
     private List<GitRepo> mDataList;
     private BaseQuickAdapter mAdapter;
 
@@ -58,6 +60,12 @@ public class GitRepoFragment extends CommonFragment {
     public GitRepoFragment() {
     }
 
+    @Nullable
+    @Override
+    public GitStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_base_list;
@@ -65,7 +73,6 @@ public class GitRepoFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
         initActionBar("仓库列表");
         initRecyclerView();
         initAdapter();
@@ -73,7 +80,7 @@ public class GitRepoFragment extends CommonFragment {
         initRefreshLayout();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (mStore.isCreated()) return;
+        if (getRxStore().isCreated()) return;
         mSrlContent.setRefreshing(true);
         refresh();
     }
@@ -143,7 +150,7 @@ public class GitRepoFragment extends CommonFragment {
      * * @param position
      */
     private void toGitUser(int position) {
-        mStore.getGitUser().setValue(null);
+        getRxStore().getGitUser().setValue(null);
         mActionCreator.gitGitUser(getActivity(), mDataList.get(position).getOwner().getId());
         mActionCreator.postLocalAction(WanAction.TO_GIT_USER);
     }
@@ -152,7 +159,7 @@ public class GitRepoFragment extends CommonFragment {
      * 显示数据
      */
     private void showData() {
-        mStore.getGitRepoList().observe(this, products -> {
+        getRxStore().getGitRepoList().observe(this, products -> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = mNextRequestPage == 1;

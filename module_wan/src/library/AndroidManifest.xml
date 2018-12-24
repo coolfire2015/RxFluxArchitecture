@@ -5,6 +5,6 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-        <activity android:name="com.huyingbao.module.wan.ui.view.GitActivity" />
+        <activity android:name="com.huyingbao.module.wan.ui.view.GitFxActivity" />
     </application>
 </manifest>

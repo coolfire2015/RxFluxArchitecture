@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public interface RxFluxView {
+public interface RxFluxView<T extends RxStore>{
     @Nullable
-    List<RxStore> getLifecycleRxStoreList();
+    T getRxStore();
 }

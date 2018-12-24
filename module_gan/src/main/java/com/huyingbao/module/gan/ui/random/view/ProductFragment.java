@@ -10,8 +10,11 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
+import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
@@ -24,6 +27,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +38,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ProductFragment extends CommonFragment {
+public class ProductFragment extends CommonRxFragment<RandomStore> {
     @Inject
     RandomActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -42,7 +46,6 @@ public class ProductFragment extends CommonFragment {
     @BindView(R2.id.srl_content)
     SwipeRefreshLayout mSrlContent;
 
-    private RandomStore mStore;
     private List<Product> mDataList;
     private BaseQuickAdapter mAdapter;
 
@@ -53,6 +56,12 @@ public class ProductFragment extends CommonFragment {
     public ProductFragment() {
     }
 
+    @Nullable
+    @Override
+    public RandomStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(RandomStore.class);
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_base_list;
@@ -60,7 +69,6 @@ public class ProductFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(RandomStore.class);
         initActionBar("商品列表");
         initRecyclerView();
         initAdapter();
@@ -68,7 +76,7 @@ public class ProductFragment extends CommonFragment {
         initRefreshLayout();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (mStore.isCreated()) return;
+        if (getRxStore().isCreated()) return;
         mSrlContent.setRefreshing(true);
         refresh();
     }
@@ -132,7 +140,7 @@ public class ProductFragment extends CommonFragment {
      * 显示数据
      */
     private void showData() {
-        mStore.getProductList().observe(this, products -> {
+        getRxStore().getProductList().observe(this, products -> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = mNextRequestPage == 1;
@@ -148,14 +156,14 @@ public class ProductFragment extends CommonFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getProductList(mStore.getCategory(), PAGE_SIZE, mNextRequestPage);
+        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, mNextRequestPage);
     }
 
     /**
      * 加载更多
      */
     private void loadMore() {
-        mActionCreator.getProductList(mStore.getCategory(), PAGE_SIZE, mNextRequestPage);
+        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, mNextRequestPage);
     }
 
     /**

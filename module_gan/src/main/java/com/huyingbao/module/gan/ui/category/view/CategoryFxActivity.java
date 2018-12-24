@@ -3,16 +3,12 @@ package com.huyingbao.module.gan.ui.category.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.core.common.view.CommonActivity;
+import com.huyingbao.core.common.view.CommonFxActivity;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
-import com.huyingbao.module.gan.ui.random.view.RandomActivity;
+import com.huyingbao.module.gan.ui.random.view.RandomFxActivity;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
-
-import java.util.Collections;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,21 +20,18 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class CategoryActivity extends CommonActivity {
+public class CategoryFxActivity extends CommonFxActivity<CategoryStore> {
     @Inject
     Lazy<CategoryListFragment> mCategoryListFragmentLazy;
 
-    private CategoryStore mStore;
+    @Nullable
+    @Override
+    public CategoryStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
+    }
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
-    }
-
-    @Nullable
-    @Override
-    public List<RxStore> getLifecycleRxStoreList() {
-        return Collections.singletonList(mStore);
     }
 
     @Override
@@ -51,6 +44,6 @@ public class CategoryActivity extends CommonActivity {
      */
     @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
     public void toRandomList(RxChange rxChange) {
-        startActivity(RandomActivity.newIntent(this, mStore.getCategory()));
+        startActivity(RandomFxActivity.newIntent(this, getRxStore().getCategory()));
     }
 }

@@ -21,7 +21,7 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
     GanApi mGanApi;
 
     @Inject
-    public RandomActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    RandomActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
 

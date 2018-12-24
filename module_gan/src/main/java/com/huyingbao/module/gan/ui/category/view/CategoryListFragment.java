@@ -6,6 +6,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.module.gan.R;
@@ -13,6 +14,7 @@ import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 import com.huyingbao.module.gan.ui.category.action.CategoryActionCreator;
 import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
+import com.huyingbao.module.gan.ui.category.store.CategoryStore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +22,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -29,7 +33,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryListFragment extends CommonFragment {
+public class CategoryListFragment extends CommonFragment{
     @Inject
     CategoryActionCreator mActionCreator;
     @BindView(R2.id.rv_content)

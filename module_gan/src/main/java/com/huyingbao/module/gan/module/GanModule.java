@@ -6,9 +6,9 @@ import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.gan.action.GanApi;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
-import com.huyingbao.module.gan.ui.category.view.CategoryActivity;
+import com.huyingbao.module.gan.ui.category.view.CategoryFxActivity;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
-import com.huyingbao.module.gan.ui.random.view.RandomActivity;
+import com.huyingbao.module.gan.ui.random.view.RandomFxActivity;
 
 import javax.inject.Singleton;
 
@@ -71,7 +71,7 @@ public abstract class GanModule {
     abstract RxStore bindCategoryStore(CategoryStore categoryStore);
 
     /**
-     * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomActivity）的注射器
+     * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomFxActivity）的注射器
      * 自动生成注射器AndroidInjector子类RandomActivitySubcomponent
      * <p>
      * ContributesAndroidInjector用来简化Subcomponent的书写
@@ -94,9 +94,9 @@ public abstract class GanModule {
      */
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)
-    abstract CategoryActivity injectCategoryActivity();
+    abstract CategoryFxActivity injectCategoryActivity();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)
-    abstract RandomActivity injectRandomActivity();
+    abstract RandomFxActivity injectRandomActivity();
 }

@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.huyingbao.core.arch.model.RxError;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.view.RxFluxActivity;
+import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
@@ -20,10 +22,12 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,7 +36,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonActivity extends RxFluxActivity implements CommonView {
+public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity implements CommonView,RxFluxView{
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -196,4 +200,9 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
      * @return
      */
     protected abstract Fragment createFragment();
+
+    @Nullable
+    @Override
+    public abstract T getRxStore();
+
 }

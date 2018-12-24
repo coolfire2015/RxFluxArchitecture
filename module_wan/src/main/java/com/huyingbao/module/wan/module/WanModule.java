@@ -6,7 +6,7 @@ import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.ui.module.GitStore;
-import com.huyingbao.module.wan.ui.view.GitActivity;
+import com.huyingbao.module.wan.ui.view.GitFxActivity;
 
 import javax.inject.Singleton;
 
@@ -45,5 +45,5 @@ public abstract class WanModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = WanActivityModule.class)
-    abstract GitActivity injectGitActivity();
+    abstract GitFxActivity injectGitActivity();
 }

@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.view.CommonFragment;
+import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.model.GitUser;
@@ -12,6 +13,7 @@ import com.huyingbao.module.wan.ui.module.GitStore;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 
@@ -19,7 +21,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitUserFragment extends CommonFragment {
+public class GitUserFragment extends CommonRxFragment<GitStore> {
     @BindView(R2.id.tv_git_user_name)
     TextView mTvGitUserName;
     @BindView(R2.id.tv_git_user_login)
@@ -27,11 +29,15 @@ public class GitUserFragment extends CommonFragment {
     @BindView(R2.id.tv_git_user_statistics)
     TextView mTvGitUserStatistics;
 
-    private GitStore mStore;
-
     @Inject
     public GitUserFragment() {
 
+    }
+
+    @Nullable
+    @Override
+    public GitStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
     }
 
     @Override
@@ -41,9 +47,8 @@ public class GitUserFragment extends CommonFragment {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
         initActionBar("用户信息");
-        mStore.getGitUser().observe(this, shop -> showGitUserInfo(shop));
+        getRxStore().getGitUser().observe(this, shop -> showGitUserInfo(shop));
     }
 
     /**

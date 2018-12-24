@@ -6,16 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.view.RxFluxFragment;
+import com.huyingbao.core.arch.view.RxFluxView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonFragment extends RxFluxFragment implements CommonView{
+public abstract class CommonRxFragment<T extends RxStore> extends RxFluxFragment implements CommonView,RxFluxView {
     protected boolean mIsVisibleToUser;
     private boolean mBackAble = true;
     private Unbinder mUnbinder;
@@ -68,4 +71,8 @@ public abstract class CommonFragment extends RxFluxFragment implements CommonVie
         if (getActivity() instanceof CommonFxActivity)
             ((CommonFxActivity) getActivity()).initActionBar(mTitle, mBackAble);
     }
+
+    @Nullable
+    @Override
+    public abstract T getRxStore();
 }
