@@ -5,9 +5,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxStore;
-import com.huyingbao.core.common.util.ActivityUtils;
 import com.huyingbao.core.common.view.CommonActivity;
-import com.huyingbao.module.git.R;
 import com.huyingbao.module.git.ui.action.GitAction;
 import com.huyingbao.module.git.ui.module.GitStore;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -19,6 +17,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
 
@@ -37,8 +36,6 @@ public class GitActivity extends CommonActivity {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         mStore = ViewModelProviders.of(this, mViewModelFactory).get(GitStore.class);
-        if (getSupportFragmentManager().findFragmentById(R.id.fl_content) == null)
-            ActivityUtils.addFragment(getSupportFragmentManager(), mGitRepoFragmentLazy.get(), R.id.fl_content);
     }
 
     @Nullable
@@ -52,6 +49,11 @@ public class GitActivity extends CommonActivity {
      */
     @Subscribe(tags = {@Tag(GitAction.TO_GIT_USER)})
     public void toGitUser(RxChange rxChange) {
-        ActivityUtils.addAndHideFragment(getSupportFragmentManager(), mGitUserFragmentLazy.get(), R.id.fl_content);
+        addFragmentHideExisting(mGitUserFragmentLazy.get());
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        return mGitRepoFragmentLazy.get();
     }
 }
