@@ -10,6 +10,7 @@ import com.huyingbao.module.git.ui.model.GitRepo;
 import com.huyingbao.module.git.ui.model.GitUser;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -23,12 +24,25 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class GitStore extends RxStore {
-    public final MutableLiveData<List<GitRepo>> mGitRepoList = new MutableLiveData<>();
-    public final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
+    private final MutableLiveData<List<GitRepo>> mGitRepoList = new MutableLiveData<>();
+    private final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
+    private boolean mIsCreated;
 
     @Inject
     GitStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
+    }
+
+    /**
+     * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
+     */
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mIsCreated = false;
+        mGitRepoList.setValue(null);
+        mGitUser.setValue(null);
+        Logger.e("store cleared");
     }
 
     /**
@@ -59,5 +73,17 @@ public class GitStore extends RxStore {
     @Subscribe(tags = {@Tag(GitAction.TO_GIT_USER)})
     public void receive(RxAction action) {
         postChange(RxChange.newRxChange(action.getTag()));
+    }
+
+    public MutableLiveData<List<GitRepo>> getGitRepoList() {
+        return mGitRepoList;
+    }
+
+    public MutableLiveData<GitUser> getGitUser() {
+        return mGitUser;
+    }
+
+    public boolean isCreated() {
+        return mIsCreated;
     }
 }

@@ -43,7 +43,7 @@ public class GitUserFragment extends CommonFragment {
     public void afterCreate(Bundle savedInstanceState) {
         mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
         initActionBar("用户信息");
-        mStore.mGitUser.observe(this, shop -> showGitUserInfo(shop));
+        mStore.getGitUser().observe(this, shop -> showGitUserInfo(shop));
     }
 
     /**

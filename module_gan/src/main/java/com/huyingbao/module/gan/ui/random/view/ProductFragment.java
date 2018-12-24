@@ -8,9 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonFragment;
+import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
@@ -22,7 +24,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +41,6 @@ public class ProductFragment extends CommonFragment {
     RecyclerView mRvContent;
     @BindView(R2.id.srl_content)
     SwipeRefreshLayout mSrlContent;
-    @BindView(R2.id.cl_content)
-    CoordinatorLayout mClContent;
 
     private RandomStore mStore;
     private List<Product> mDataList;
@@ -80,6 +79,13 @@ public class ProductFragment extends CommonFragment {
     private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
+        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //TODO 点击事件;
+            }
+        });
     }
 
     /**
@@ -105,7 +111,7 @@ public class ProductFragment extends CommonFragment {
         ((TextView) headView.findViewById(R.id.tv_head)).setText("change load view");
         headView.setOnClickListener(v -> {
             mAdapter.setNewData(null);
-            mAdapter.setLoadMoreView(new CustomLoadMoreView());
+            mAdapter.setLoadMoreView(new CommonLoadMoreView());
             mRvContent.setAdapter(mAdapter);
             Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
             mSrlContent.setRefreshing(true);
@@ -127,7 +133,7 @@ public class ProductFragment extends CommonFragment {
      */
     private void showData() {
         mStore.getProductList().observe(this, products -> {
-            if(products==null) return;
+            if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = mNextRequestPage == 1;
             setData(isRefresh, products.getResults());
@@ -154,12 +160,15 @@ public class ProductFragment extends CommonFragment {
 
     /**
      * 设置数据
+     *
      * @param isRefresh
      * @param data
      */
     private void setData(boolean isRefresh, List<Product> data) {
         mNextRequestPage++;
-        final int size = data == null ? 0 : data.size();
+        final int size = data == null
+                ? 0
+                : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);
         } else {

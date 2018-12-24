@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/module_app" />
             <option value="$PROJECT_DIR$/module_gan" />
             <option value="$PROJECT_DIR$/module_git" />
-            <option value="$PROJECT_DIR$/module_wan" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
