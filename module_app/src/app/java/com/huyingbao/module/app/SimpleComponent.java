@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
 import com.huyingbao.module.gan.module.GanModule;
-import com.huyingbao.module.git.action.GitModule;
+import com.huyingbao.module.wan.action.WanModule;
 
 import javax.inject.Singleton;
 
@@ -33,7 +33,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules = {
         GanModule.class,
-        GitModule.class,
+        WanModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {
