@@ -1,6 +1,7 @@
 package com.huyingbao.core.common.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public abstract class CommonFragment extends RxFluxFragment implements CommonVie
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e("RxFlux","6.1-onCreateView");
         setHasOptionsMenu(true);// fragment中创建菜单
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);

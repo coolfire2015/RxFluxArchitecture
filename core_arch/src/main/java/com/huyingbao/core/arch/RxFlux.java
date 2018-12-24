@@ -76,7 +76,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
     @Override
     public void onActivityStarted(Activity activity) {
-        Log.e("RxFlux", "4-onActivityStarted");
+        Log.e("RxFlux", "2-onActivityStarted");
         if (activity instanceof RxFluxView)
             mRxDispatcher.subscribeRxView((RxFluxView) activity);
     }
@@ -84,43 +84,43 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentPreAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
         super.onFragmentPreAttached(fm, f, context);
-        Log.e("RxFlux", "5-onFragmentPreAttached");
+        Log.e("RxFlux", "3-onFragmentPreAttached");
     }
 
     @Override
     public void onFragmentAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
         super.onFragmentAttached(fm, f, context);
-        Log.e("RxFlux", "6-onFragmentAttached");
+        Log.e("RxFlux", "4-onFragmentAttached");
     }
 
     @Override
     public void onFragmentPreCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentPreCreated(fm, f, savedInstanceState);
-        Log.e("RxFlux", "7-onFragmentPreCreated");
+        Log.e("RxFlux", "5-onFragmentPreCreated");
     }
 
     @Override
     public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentCreated(fm, f, savedInstanceState);
-        Log.e("RxFlux", "8-onFragmentCreated");
+        Log.e("RxFlux", "6-onFragmentCreated");
     }
 
     @Override
     public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onFragmentViewCreated(fm, f, v, savedInstanceState);
-        Log.e("RxFlux", "9-onFragmentViewCreated");
+        Log.e("RxFlux", "7-onFragmentViewCreated");
     }
 
     @Override
     public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentActivityCreated(fm, f, savedInstanceState);
-        Log.e("RxFlux", "10-onFragmentActivityCreated");
+        Log.e("RxFlux", "8-onFragmentActivityCreated");
     }
 
     @Override
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
-        Log.e("RxFlux", "11-onFragmentStarted");
+        Log.e("RxFlux", "9-onFragmentStarted");
         if (f instanceof RxFluxView)
             mRxDispatcher.subscribeRxView((RxFluxView) f);
     }
@@ -128,30 +128,30 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
     @Override
     public void onActivityResumed(Activity activity) {
-        Log.e("RxFlux", "12-onActivityResumed");
+        Log.e("RxFlux", "10-onActivityResumed");
     }
 
     @Override
     public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentResumed(fm, f);
-        Log.e("RxFlux", "13-onFragmentResumed");
+        Log.e("RxFlux", "11-onFragmentResumed");
     }
 
 
     @Override
     public void onActivityPaused(Activity activity) {
-        Log.e("RxFlux", "14-onActivityPaused");
+        Log.e("RxFlux", "12-onActivityPaused");
     }
 
     @Override
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentPaused(fm, f);
-        Log.e("RxFlux", "15-onFragmentPaused");
+        Log.e("RxFlux", "13-onFragmentPaused");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        Log.e("RxFlux", "16-onActivityStopped");
+        Log.e("RxFlux", "14-onActivityStopped");
         if (activity instanceof RxFluxView)
             mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
     }
@@ -159,9 +159,20 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentStopped(FragmentManager fm, Fragment f) {
         super.onFragmentStopped(fm, f);
-        Log.e("RxFlux", "17-onFragmentStopped");
+        Log.e("RxFlux", "15-onFragmentStopped");
         if (f instanceof RxFluxView)
             mRxDispatcher.unsubscribeRxView((RxFluxView) f);
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+        Log.e("RxFlux", "16-onActivitySaveInstanceState");
+    }
+
+    @Override
+    public void onFragmentSaveInstanceState(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Bundle outState) {
+        super.onFragmentSaveInstanceState(fm, f, outState);
+        Log.e("RxFlux", "17-onFragmentSaveInstanceState");
     }
 
     @Override
@@ -191,16 +202,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         Log.e("RxFlux", "21-onFragmentDetached");
     }
 
-    @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-        Log.e("RxFlux", "22-onActivitySaveInstanceState");
-    }
 
-    @Override
-    public void onFragmentSaveInstanceState(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Bundle outState) {
-        super.onFragmentSaveInstanceState(fm, f, outState);
-        Log.e("RxFlux", "23-onFragmentSaveInstanceState");
-    }
 
     public void finishAllActivity() {
         while (!mActivityStack.empty())

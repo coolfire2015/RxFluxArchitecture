@@ -47,7 +47,7 @@ public abstract class CommonActivity extends RxFluxActivity implements CommonVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("RxFlux", "2-onCreate");
+        Log.e("RxFlux", "1.1-onCreate");
         setContentView(getLayoutId());
         addFragmentNoExisting(createFragment());
         ButterKnife.bind(this);
