@@ -8,26 +8,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.view.RxFluxActivity;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
 import com.huyingbao.core.common.util.ActivityUtils;
-import com.hwangjr.rxbus.annotation.Subscribe;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,7 +40,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity implements CommonView,RxFluxView{
+public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxFluxActivity implements CommonView, RxFluxView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -48,10 +52,21 @@ public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity
     @BindView(R2.id.abl_top)
     protected AppBarLayout mAppBarLayoutTop;
 
+    @Nullable
+    @Override
+    public abstract T getRxStore();
+
+    /**
+     * 提供activity需要显示的fragment
+     *
+     * @return
+     */
+    protected abstract Fragment createFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("RxFlux", "1.1-onCreate");
+        Log.e("RxFlux", "1.1-onCreateActivity");
         setContentView(getLayoutId());
         addFragmentNoExisting(createFragment());
         ButterKnife.bind(this);
@@ -61,6 +76,46 @@ public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity
     @Override
     public int getLayoutId() {
         return R.layout.activity_fragment_base;
+    }
+
+    /**
+     * 接收RxChange，粘性
+     */
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        Logger.e("2");
+        EventBus.getDefault().removeStickyEvent(rxChange);
+    }
+
+    /**
+     * 接收RxError，粘性
+     * 该方法不经过store,
+     * 由activity直接处理
+     * rxflux中对错误的处理
+     */
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxError(@NonNull RxError error) {
+        EventBus.getDefault().removeStickyEvent(error);
+        Throwable throwable = error.getThrowable();
+        // 自定义异常
+        if (throwable instanceof CommonHttpException) {
+            String message = ((CommonHttpException) throwable).message();
+            showShortToast(message);
+        } else if (throwable instanceof retrofit2.HttpException) {
+            showShortToast(((retrofit2.HttpException) throwable).code() + ":服务器问题");
+        } else if (throwable instanceof SocketException) {
+            showShortToast("连接服务器失败，请检查网络状态和服务器地址配置！");
+        } else if (throwable instanceof SocketTimeoutException) {
+            showShortToast("连接服务器超时，请检查网络状态和服务器地址配置！");
+        } else if (throwable instanceof UnknownHostException) {
+            showShortToast("请输入正确的服务器地址！");
+        } else if (throwable instanceof MalformedJsonException) {
+            showShortToast("请检查网络状态！");
+        } else {
+            showShortToast(throwable == null ? "未知错误" : throwable.toString());
+        }
     }
 
     @Override
@@ -81,32 +136,6 @@ public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity
     @Override
     public void setTitle(CharSequence title) {
         mTvTopTitle.setText(title == null ? getTitle() : title);
-    }
-
-    /**
-     * 该方法不经过store,由activity直接处理
-     * rxflux中对错误的处理
-     */
-    @Subscribe
-    public void onRxError(RxError error) {
-        Throwable throwable = error.getThrowable();
-        // 自定义异常
-        if (throwable instanceof CommonHttpException) {
-            String message = ((CommonHttpException) throwable).message();
-            showShortToast(message);
-        } else if (throwable instanceof retrofit2.HttpException) {
-            showShortToast(((retrofit2.HttpException) throwable).code() + ":服务器问题");
-        } else if (throwable instanceof SocketException) {
-            showShortToast("连接服务器失败，请检查网络状态和服务器地址配置！");
-        } else if (throwable instanceof SocketTimeoutException) {
-            showShortToast("连接服务器超时，请检查网络状态和服务器地址配置！");
-        } else if (throwable instanceof UnknownHostException) {
-            showShortToast("请输入正确的服务器地址！");
-        } else if (throwable instanceof MalformedJsonException) {
-            showShortToast("请检查网络状态！");
-        } else {
-            showShortToast(throwable == null ? "未知错误" : throwable.toString());
-        }
     }
 
     /**
@@ -193,16 +222,4 @@ public abstract class CommonFxActivity<T extends RxStore> extends RxFluxActivity
     protected void showShortToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-
-    /**
-     * 提供activity需要显示的fragment
-     *
-     * @return
-     */
-    protected abstract Fragment createFragment();
-
-    @Nullable
-    @Override
-    public abstract T getRxStore();
-
 }

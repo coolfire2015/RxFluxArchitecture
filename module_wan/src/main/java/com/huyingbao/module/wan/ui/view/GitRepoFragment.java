@@ -11,17 +11,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.action.WanAction;
 import com.huyingbao.module.wan.ui.action.WanActionCreator;
-import com.huyingbao.module.wan.ui.adapter.GitRepoAdapter;
+import com.huyingbao.module.wan.ui.adapter.WanAdapter;
 import com.huyingbao.module.wan.ui.model.GitRepo;
-import com.huyingbao.module.wan.ui.module.GitStore;
+import com.huyingbao.module.wan.ui.module.WanStore;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.orhanobut.logger.Logger;
@@ -42,7 +40,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitRepoFragment extends CommonRxFragment<GitStore> {
+public class GitRepoFragment extends CommonRxFragment<WanStore> {
     @Inject
     WanActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -62,8 +60,8 @@ public class GitRepoFragment extends CommonRxFragment<GitStore> {
 
     @Nullable
     @Override
-    public GitStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
+    public WanStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(WanStore.class);
     }
 
     @Override
@@ -110,7 +108,7 @@ public class GitRepoFragment extends CommonRxFragment<GitStore> {
      */
     private void initAdapter() {
         mDataList = new ArrayList();
-        mAdapter = new GitRepoAdapter(mDataList);
+        mAdapter = new WanAdapter(mDataList);
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //设置加载动画

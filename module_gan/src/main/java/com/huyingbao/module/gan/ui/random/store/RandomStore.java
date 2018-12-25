@@ -3,13 +3,12 @@ package com.huyingbao.module.gan.ui.random.store;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
 import com.huyingbao.module.gan.ui.random.model.Product;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
-import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,7 +28,7 @@ import androidx.lifecycle.MutableLiveData;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class RandomStore extends RxStore {
+public class RandomStore extends RxStoreForActivity {
     private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     private boolean mIsCreated;
     private String mCategory;
@@ -47,18 +46,23 @@ public class RandomStore extends RxStore {
         super.onCleared();
         mIsCreated = false;
         mProductList.setValue(null);
-        Logger.e("store cleared");
     }
 
     /**
-     * 接收接口返回的数据
+     * 接收RxAction
+     * 处理RxAction携带的数据
+     * 发送RxChange通知RxView
      *
-     * @param action
+     * @param rxAction
      */
-    @Subscribe(tags = {@Tag(RandomActions.GET_PRODUCT_LIST)})
-    public void receiveProductList(RxAction action) {
-        mIsCreated = true;
-        mProductList.setValue(action.get(RxActionCreator.RESPONSE));
+    @Subscribe()
+    public void onRxAction(RxAction rxAction) {
+        switch (rxAction.getTag()) {
+            case RandomActions.GET_PRODUCT_LIST:
+                mIsCreated = true;
+                mProductList.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                break;
+        }
     }
 
     public MutableLiveData<GanResponse<Product>> getProductList() {

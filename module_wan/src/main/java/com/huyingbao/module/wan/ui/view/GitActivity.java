@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.view.CommonFxActivity;
+import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.wan.ui.action.WanAction;
-import com.huyingbao.module.wan.ui.module.GitStore;
+import com.huyingbao.module.wan.ui.module.WanStore;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 
@@ -20,8 +20,8 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@Route(path = "/git/GitFxActivity")
-public class GitFxActivity extends CommonFxActivity<GitStore> {
+@Route(path = "/git/GitActivity")
+public class GitActivity extends CommonRxActivity<WanStore> {
     @Inject
     Lazy<GitRepoFragment> mGitRepoFragmentLazy;
     @Inject
@@ -33,8 +33,8 @@ public class GitFxActivity extends CommonFxActivity<GitStore> {
 
     @Nullable
     @Override
-    public GitStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(GitStore.class);
+    public WanStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(WanStore.class);
     }
 
     /**

@@ -3,15 +3,15 @@ package com.huyingbao.module.gan.ui.category.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.view.CommonFxActivity;
+import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
-import com.huyingbao.module.gan.ui.random.view.RandomFxActivity;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,9 +20,11 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class CategoryFxActivity extends CommonFxActivity<CategoryStore> {
+public class CategoryActivity extends CommonRxActivity<CategoryStore> {
     @Inject
     Lazy<CategoryListFragment> mCategoryListFragmentLazy;
+    @Inject
+    Lazy<CategoryFragment> mCategoryCategoryFragment;
 
     @Nullable
     @Override
@@ -40,10 +42,17 @@ public class CategoryFxActivity extends CommonFxActivity<CategoryStore> {
     }
 
     /**
-     * 跳转随机列表页面，传送类别
+     * 接收RxChange，粘性
      */
-    @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
-    public void toRandomList(RxChange rxChange) {
-        startActivity(RandomFxActivity.newIntent(this, getRxStore().getCategory()));
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+        switch (rxChange.getTag()) {
+            case CategoryAction.TO_RANDOM_LIST:
+//                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
+                addFragmentHideExisting(mCategoryCategoryFragment.get());
+                break;
+        }
     }
 }

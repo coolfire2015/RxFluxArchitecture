@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.common.view.CommonFragment;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.model.GitUser;
-import com.huyingbao.module.wan.ui.module.GitStore;
+import com.huyingbao.module.wan.ui.module.WanStore;
 
 import javax.inject.Inject;
 
@@ -21,7 +20,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitUserFragment extends CommonRxFragment<GitStore> {
+public class GitUserFragment extends CommonRxFragment<WanStore> {
     @BindView(R2.id.tv_git_user_name)
     TextView mTvGitUserName;
     @BindView(R2.id.tv_git_user_login)
@@ -36,8 +35,8 @@ public class GitUserFragment extends CommonRxFragment<GitStore> {
 
     @Nullable
     @Override
-    public GitStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(GitStore.class);
+    public WanStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(WanStore.class);
     }
 
     @Override

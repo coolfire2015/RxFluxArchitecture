@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-        <activity android:name="com.huyingbao.module.gan.ui.category.view.CategoryFxActivity" />
-        <activity android:name="com.huyingbao.module.gan.ui.random.view.RandomFxActivity" />
+        <activity android:name="com.huyingbao.module.gan.ui.category.view.CategoryActivity" />
+        <activity android:name="com.huyingbao.module.gan.ui.random.view.RandomActivity" />
     </application>
 </manifest>

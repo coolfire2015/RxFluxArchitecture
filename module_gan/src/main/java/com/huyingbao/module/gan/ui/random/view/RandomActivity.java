@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.huyingbao.core.common.view.CommonFxActivity;
+import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
@@ -18,12 +18,12 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class RandomFxActivity extends CommonFxActivity<RandomStore> {
+public class RandomActivity extends CommonRxActivity<RandomStore> {
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
 
     public static Intent newIntent(Context context, String category) {
-        Intent intent = new Intent(context, RandomFxActivity.class);
+        Intent intent = new Intent(context, RandomActivity.class);
         intent.putExtra(GanConstants.Key.CATEGORY, category);
         return intent;
     }

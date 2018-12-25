@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class GitRepoAdapter extends BaseQuickAdapter<GitRepo, BaseViewHolder> {
-    public GitRepoAdapter(@Nullable List<GitRepo> data) {
+public class WanAdapter extends BaseQuickAdapter<GitRepo, BaseViewHolder> {
+    public WanAdapter(@Nullable List<GitRepo> data) {
         super(R.layout.item_git_repo, data);
     }
 

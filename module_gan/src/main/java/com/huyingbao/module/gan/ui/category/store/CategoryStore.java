@@ -3,11 +3,11 @@ package com.huyingbao.module.gan.ui.category.store;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,7 +16,7 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class CategoryStore extends RxStore {
+public class CategoryStore extends RxStoreForActivity {
     private String mCategory;
 
     @Inject
@@ -25,14 +25,29 @@ public class CategoryStore extends RxStore {
     }
 
     /**
-     * 接收需要跳转的页面的类别，并通知页面跳转
-     *
-     * @param action
+     * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
      */
-    @Subscribe(tags = {@Tag(CategoryAction.TO_RANDOM_LIST)})
-    public void receiveCategory(RxAction action) {
-        mCategory = action.get(GanConstants.Key.CATEGORY);
-        postChange(RxChange.newRxChange(action.getTag()));
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mCategory = null;
+    }
+
+    /**
+     * 接收RxAction
+     * 处理RxAction携带的数据
+     * 发送RxChange通知RxView
+     *
+     * @param rxAction
+     */
+    @Subscribe()
+    public void onRxAction(RxAction rxAction) {
+        switch (rxAction.getTag()) {
+            case CategoryAction.TO_RANDOM_LIST:
+                mCategory = rxAction.get(GanConstants.Key.CATEGORY);
+                postChange(RxChange.newRxChange(rxAction.getTag()));
+                break;
+        }
     }
 
     public String getCategory() {

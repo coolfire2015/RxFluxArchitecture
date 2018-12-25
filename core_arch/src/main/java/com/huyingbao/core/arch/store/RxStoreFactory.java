@@ -19,20 +19,20 @@ import androidx.lifecycle.ViewModelProvider;
  */
 @Singleton
 public class RxStoreFactory implements ViewModelProvider.Factory {
-    private final Map<Class<? extends RxStore>, Provider<RxStore>> creators;
+    private final Map<Class<? extends RxStoreForActivity>, Provider<RxStoreForActivity>> creators;
 
     @Inject
-    RxStoreFactory(Map<Class<? extends RxStore>, Provider<RxStore>> creators) {
+    RxStoreFactory(Map<Class<? extends RxStoreForActivity>, Provider<RxStoreForActivity>> creators) {
         this.creators = creators;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        Provider<? extends RxStore> creator = creators.get(modelClass);
+        Provider<? extends RxStoreForActivity> creator = creators.get(modelClass);
         //通过class找到相应ViewModel的Provider
         if (creator == null) {
-            for (Map.Entry<Class<? extends RxStore>, Provider<RxStore>> entry : creators.entrySet()) {
+            for (Map.Entry<Class<? extends RxStoreForActivity>, Provider<RxStoreForActivity>> entry : creators.entrySet()) {
                 if (modelClass.isAssignableFrom(entry.getKey())) {
                     creator = entry.getValue();
                     break;

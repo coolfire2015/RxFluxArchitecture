@@ -2,13 +2,13 @@ package com.huyingbao.module.gan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.gan.action.GanApi;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
-import com.huyingbao.module.gan.ui.category.view.CategoryFxActivity;
+import com.huyingbao.module.gan.ui.category.view.CategoryActivity;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
-import com.huyingbao.module.gan.ui.random.view.RandomFxActivity;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import javax.inject.Singleton;
 
@@ -62,16 +62,16 @@ public abstract class GanModule {
     @Binds//当参数和返回值类型相同时，将方法写成抽象方法，用Binds注解。
     @IntoMap//可以让Dagger2将多个元素依赖注入到Map之中
     @RxStoreKey(RandomStore.class)
-    abstract RxStore bindRandomStore(RandomStore randomStore);
+    abstract RxStoreForActivity bindRandomStore(RandomStore randomStore);
 
     @Singleton
     @Binds
     @IntoMap
     @RxStoreKey(CategoryStore.class)
-    abstract RxStore bindCategoryStore(CategoryStore categoryStore);
+    abstract RxStoreForActivity bindCategoryStore(CategoryStore categoryStore);
 
     /**
-     * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomFxActivity）的注射器
+     * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomActivity）的注射器
      * 自动生成注射器AndroidInjector子类RandomActivitySubcomponent
      * <p>
      * ContributesAndroidInjector用来简化Subcomponent的书写
@@ -94,9 +94,9 @@ public abstract class GanModule {
      */
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)
-    abstract CategoryFxActivity injectCategoryActivity();
+    abstract CategoryActivity injectCategoryActivity();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)
-    abstract RandomFxActivity injectRandomActivity();
+    abstract RandomActivity injectRandomActivity();
 }

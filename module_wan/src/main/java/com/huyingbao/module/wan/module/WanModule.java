@@ -2,11 +2,11 @@ package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.module.wan.ui.module.GitStore;
-import com.huyingbao.module.wan.ui.view.GitFxActivity;
+import com.huyingbao.module.wan.ui.module.WanStore;
+import com.huyingbao.module.wan.ui.view.GitActivity;
 
 import javax.inject.Singleton;
 
@@ -40,10 +40,10 @@ public abstract class WanModule {
     @Singleton
     @Binds
     @IntoMap
-    @RxStoreKey(GitStore.class)
-    abstract RxStore bindGitStore(GitStore gitStore);
+    @RxStoreKey(WanStore.class)
+    abstract RxStoreForActivity bindGitStore(WanStore wanStore);
 
     @ActivityScope
     @ContributesAndroidInjector(modules = WanActivityModule.class)
-    abstract GitFxActivity injectGitActivity();
+    abstract GitActivity injectGitActivity();
 }

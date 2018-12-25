@@ -18,5 +18,5 @@ import dagger.MapKey;
 @Retention(RetentionPolicy.RUNTIME)
 @MapKey
 public @interface RxStoreKey {
-    Class<? extends RxStore> value();
+    Class<? extends RxStoreForActivity> value();
 }

@@ -78,8 +78,11 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onActivityStarted(Activity activity) {
         Log.e("RxFlux", "2-onActivityStarted");
-        if (activity instanceof RxFluxView)
+        if (activity instanceof RxFluxView) {
+            if (mRxDispatcher.isSubscribe(this)) return;
+            Log.e("RxFlux", "2.1-onActivityRegistered");
             mRxDispatcher.subscribeRxView((RxFluxView) activity);
+        }
     }
 
     @Override
@@ -123,8 +126,11 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
         Log.e("RxFlux", "9-onFragmentStarted");
-        if (f instanceof RxFluxView)
+        if (f instanceof RxFluxView) {
+            if (mRxDispatcher.isSubscribe(this)) return;
+            Log.e("RxFlux", "9.1-onFragmentRegistered");
             mRxDispatcher.subscribeRxView((RxFluxView) f);
+        }
     }
 
 
@@ -203,7 +209,6 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         super.onFragmentDetached(fm, f);
         Log.e("RxFlux", "21-onFragmentDetached");
     }
-
 
 
     public void finishAllActivity() {

@@ -4,13 +4,12 @@ import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.arch.store.RxStore;
+import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.module.wan.ui.action.WanAction;
 import com.huyingbao.module.wan.ui.model.GitRepo;
 import com.huyingbao.module.wan.ui.model.GitUser;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
-import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -23,13 +22,13 @@ import androidx.lifecycle.MutableLiveData;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class GitStore extends RxStore {
+public class WanStore extends RxStoreForActivity {
     private final MutableLiveData<List<GitRepo>> mGitRepoList = new MutableLiveData<>();
     private final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
     private boolean mIsCreated;
 
     @Inject
-    GitStore(RxDispatcher rxDispatcher) {
+    WanStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
     }
 
@@ -42,37 +41,30 @@ public class GitStore extends RxStore {
         mIsCreated = false;
         mGitRepoList.setValue(null);
         mGitUser.setValue(null);
-        Logger.e("store cleared");
     }
 
     /**
-     * 接收需要跳转的页面的类别，并通知页面跳转
+     * 接收RxAction
+     * 处理RxAction携带的数据
+     * 发送RxChange通知RxView
      *
-     * @param action
+     * @param rxAction
      */
-    @Subscribe(tags = {@Tag(WanAction.GET_ARTICLE_LIST)})
-    public void setGitRepoList(RxAction action) {
-        mGitRepoList.setValue(action.get(RxActionCreator.RESPONSE));
-    }
-
-    /**
-     * 接收需要跳转的页面的类别，并通知页面跳转
-     *
-     * @param action
-     */
-    @Subscribe(tags = {@Tag(WanAction.GET_GIT_USER)})
-    public void receiveGitUser(RxAction action) {
-        mGitUser.setValue(action.get(RxActionCreator.RESPONSE));
-    }
-
-    /**
-     * 接收需要跳转的页面的类别，并通知页面跳转
-     *
-     * @param action
-     */
-    @Subscribe(tags = {@Tag(WanAction.TO_GIT_USER)})
-    public void receive(RxAction action) {
-        postChange(RxChange.newRxChange(action.getTag()));
+    @Subscribe()
+    public void onRxAction(RxAction rxAction) {
+        switch (rxAction.getTag()) {
+            case WanAction.GET_ARTICLE_LIST:
+                mGitRepoList.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                break;
+            case WanAction.GET_GIT_USER:
+                mGitUser.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                break;
+            case WanAction.TO_GIT_USER:
+                postChange(RxChange.newRxChange(rxAction.getTag()));
+                break;
+            default://此处不能省略，不是本模块的逻辑，直接返回，不发送RxStoreChange
+                return;
+        }
     }
 
     public MutableLiveData<List<GitRepo>> getGitRepoList() {
