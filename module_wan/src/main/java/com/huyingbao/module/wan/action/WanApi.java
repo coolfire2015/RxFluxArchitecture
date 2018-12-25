@@ -1,6 +1,8 @@
 package com.huyingbao.module.wan.action;
 
+import com.huyingbao.module.wan.ui.model.Article;
 import com.huyingbao.module.wan.ui.model.GitUser;
+import com.huyingbao.module.wan.ui.model.WanPage;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.action;
+package com.huyingbao.module.wan.ui.model;
 
 import java.util.ArrayList;
 

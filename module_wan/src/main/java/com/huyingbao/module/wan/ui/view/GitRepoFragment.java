@@ -18,7 +18,7 @@ import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.action.WanAction;
 import com.huyingbao.module.wan.ui.action.WanActionCreator;
 import com.huyingbao.module.wan.ui.adapter.WanAdapter;
-import com.huyingbao.module.wan.ui.model.GitRepo;
+import com.huyingbao.module.wan.ui.model.Article;
 import com.huyingbao.module.wan.ui.store.WanStore;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -48,7 +48,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
     @BindView(R2.id.srl_content)
     SwipeRefreshLayout mSrlContent;
 
-    private List<GitRepo> mDataList;
+    private List<Article> mDataList;
     private BaseQuickAdapter mAdapter;
 
     private int mNextRequestPage = 1;
@@ -158,7 +158,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
      */
     private void toGitUser(int position) {
         getRxStore().getGitUser().setValue(null);
-        mActionCreator.gitGitUser(getActivity(), mDataList.get(position).getOwner().getId());
+        mActionCreator.gitGitUser(getActivity(), mDataList.get(position).getUserId());
         mActionCreator.postLocalAction(WanAction.TO_GIT_USER);
     }
 
@@ -170,7 +170,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = mNextRequestPage == 1;
-            setData(isRefresh, products);
+            setData(isRefresh, products.getData().getDatas());
             mAdapter.setEnableLoadMore(true);
             mSrlContent.setRefreshing(false);
         });
@@ -198,7 +198,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
      * @param isRefresh
      * @param data
      */
-    private void setData(boolean isRefresh, List<GitRepo> data) {
+    private void setData(boolean isRefresh, List<Article> data) {
         mNextRequestPage++;
         final int size = data == null
                 ? 0

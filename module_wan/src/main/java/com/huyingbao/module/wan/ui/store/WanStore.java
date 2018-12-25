@@ -5,13 +5,13 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.module.wan.ui.model.Article;
+import com.huyingbao.module.wan.ui.model.WanPage;
+import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.action.WanAction;
-import com.huyingbao.module.wan.ui.model.GitRepo;
 import com.huyingbao.module.wan.ui.model.GitUser;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -23,7 +23,7 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class WanStore extends RxStoreForActivity {
-    private final MutableLiveData<List<GitRepo>> mGitRepoList = new MutableLiveData<>();
+    private final MutableLiveData<WanResponse<WanPage<Article>>> mGitRepoList = new MutableLiveData<>();
     private final MutableLiveData<GitUser> mGitUser = new MutableLiveData<>();
     private boolean mIsCreated;
 
@@ -67,7 +67,7 @@ public class WanStore extends RxStoreForActivity {
         }
     }
 
-    public MutableLiveData<List<GitRepo>> getGitRepoList() {
+    public MutableLiveData<WanResponse<WanPage<Article>>> getGitRepoList() {
         return mGitRepoList;
     }
 
