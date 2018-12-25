@@ -6,12 +6,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.wan.ui.action.WanAction;
-import com.huyingbao.module.wan.ui.module.WanStore;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
+import com.huyingbao.module.wan.ui.store.WanStore;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -38,11 +39,17 @@ public class GitActivity extends CommonRxActivity<WanStore> {
     }
 
     /**
-     * 跳转用户页面
+     * 接收RxChange，粘性
      */
-    @Subscribe(tags = {@Tag(WanAction.TO_GIT_USER)})
-    public void toGitUser(RxChange rxChange) {
-        addFragmentHideExisting(mGitUserFragmentLazy.get());
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+        switch (rxChange.getTag()) {
+            case WanAction.TO_GIT_USER:
+                addFragmentHideExisting(mGitUserFragmentLazy.get());
+                break;
+        }
     }
 
     @Override

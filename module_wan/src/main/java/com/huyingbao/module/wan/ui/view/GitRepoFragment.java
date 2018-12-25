@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.arch.model.RxError;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
@@ -19,16 +19,16 @@ import com.huyingbao.module.wan.ui.action.WanAction;
 import com.huyingbao.module.wan.ui.action.WanActionCreator;
 import com.huyingbao.module.wan.ui.adapter.WanAdapter;
 import com.huyingbao.module.wan.ui.model.GitRepo;
-import com.huyingbao.module.wan.ui.module.WanStore;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
-import com.orhanobut.logger.Logger;
+import com.huyingbao.module.wan.ui.store.WanStore;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -83,9 +83,18 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
         refresh();
     }
 
-    @Subscribe(tags = {@Tag(WanAction.GET_ARTICLE_LIST)})
-    public void getGitRepoList(RxError action) {
-        Logger.e("asdf");
+    /**
+     * 接收RxChange，粘性
+     */
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+        switch (rxChange.getTag()) {
+            case WanAction.GET_ARTICLE_LIST:
+//                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
+                break;
+        }
     }
 
     /**

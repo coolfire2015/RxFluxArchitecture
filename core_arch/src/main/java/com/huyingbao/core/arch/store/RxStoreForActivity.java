@@ -62,13 +62,13 @@ public abstract class RxStoreForActivity extends ViewModel implements RxActionDi
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {
-        Log.e("RxFlux", "19.1-storeForActivity unregister");
+        Log.e("RxFlux", "18.1-storeForActivity unregister");
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
     @Override
     protected void onCleared() {
-        Log.e("RxFlux", "19.2-storeForActivity cleared");
+        Log.e("RxFlux", "18.2-storeForActivity cleared");
     }
 
     /**

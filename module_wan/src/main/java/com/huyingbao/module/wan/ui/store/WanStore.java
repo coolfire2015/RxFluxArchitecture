@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.module;
+package com.huyingbao.module.wan.ui.store;
 
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;

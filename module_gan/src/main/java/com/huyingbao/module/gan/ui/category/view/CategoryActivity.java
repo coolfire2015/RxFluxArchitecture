@@ -6,6 +6,7 @@ import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 import com.huyingbao.module.gan.ui.category.store.CategoryStore;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -50,8 +51,8 @@ public class CategoryActivity extends CommonRxActivity<CategoryStore> {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {
             case CategoryAction.TO_RANDOM_LIST:
-//                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
-                addFragmentHideExisting(mCategoryCategoryFragment.get());
+                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
+//                addFragmentHideExisting(mCategoryCategoryFragment.get());
                 break;
         }
     }

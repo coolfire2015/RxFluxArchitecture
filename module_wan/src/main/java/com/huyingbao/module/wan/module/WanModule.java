@@ -5,7 +5,7 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.module.wan.ui.module.WanStore;
+import com.huyingbao.module.wan.ui.store.WanStore;
 import com.huyingbao.module.wan.ui.view.GitActivity;
 
 import javax.inject.Singleton;

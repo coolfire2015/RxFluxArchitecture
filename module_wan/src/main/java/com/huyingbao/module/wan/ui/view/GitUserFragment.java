@@ -8,7 +8,7 @@ import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.model.GitUser;
-import com.huyingbao.module.wan.ui.module.WanStore;
+import com.huyingbao.module.wan.ui.store.WanStore;
 
 import javax.inject.Inject;
 
