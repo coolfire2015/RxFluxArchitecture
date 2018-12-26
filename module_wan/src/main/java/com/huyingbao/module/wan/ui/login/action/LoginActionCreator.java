@@ -16,4 +16,14 @@ public class LoginActionCreator extends RxActionCreator implements LoginAction {
     LoginActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
+
+    @Override
+    public void register(String username, String password, String repassword) {
+
+    }
+
+    @Override
+    public void login(String username, String password) {
+
+    }
 }

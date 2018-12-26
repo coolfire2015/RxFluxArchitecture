@@ -11,6 +11,7 @@ import org.greenrobot.eventbus.Subscribe;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by liujunfeng on 2018/12/26.
@@ -19,7 +20,7 @@ public class TreeActivity extends CommonRxActivity<TreeStore> {
     @Nullable
     @Override
     public TreeStore getRxStore() {
-        return null;
+        return ViewModelProviders.of(this, mViewModelFactory).get(TreeStore.class);
     }
 
     @Override
