@@ -13,7 +13,7 @@ public interface RxActionDispatch extends LifecycleObserver {
     /**
      * store在接收到RxAction时,调用该方法
      *
-     * @param action
+     * @param rxAction
      */
-    void onRxAction(RxAction action);
+    void onRxAction(RxAction rxAction);
 }

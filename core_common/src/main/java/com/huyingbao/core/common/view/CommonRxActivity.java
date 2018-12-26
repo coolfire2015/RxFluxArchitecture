@@ -17,7 +17,6 @@ import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
 import com.huyingbao.core.common.util.ActivityUtils;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,6 +25,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -82,9 +82,9 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
      * 接收RxChange，粘性
      */
     @Override
+    @CallSuper//强制子类复写该方法时调用父方法
     @Subscribe(sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
-        Logger.e("2");
         EventBus.getDefault().removeStickyEvent(rxChange);
     }
 

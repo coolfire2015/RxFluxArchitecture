@@ -1,11 +1,11 @@
-package com.huyingbao.module.wan.ui.view;
+package com.huyingbao.module.wan.ui.article.view;
 
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
-import com.huyingbao.module.wan.ui.store.WanStore;
+import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -20,8 +20,8 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@Route(path = "/git/WanActivity")
-public class WanActivity extends CommonRxActivity<WanStore> {
+@Route(path = "/git/ArticleActivity")
+public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     @Inject
     Lazy<ArticleListFragment> mGitRepoFragmentLazy;
 
@@ -31,8 +31,8 @@ public class WanActivity extends CommonRxActivity<WanStore> {
 
     @Nullable
     @Override
-    public WanStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(WanStore.class);
+    public ArticleStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(ArticleStore.class);
     }
 
 

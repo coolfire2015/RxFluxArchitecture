@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.model;
+package com.huyingbao.module.wan.ui.article.model;
 
 /**
  * Created by liujunfeng on 2018/12/24.

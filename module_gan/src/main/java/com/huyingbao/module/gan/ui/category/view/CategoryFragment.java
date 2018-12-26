@@ -31,6 +31,12 @@ public class CategoryFragment extends CommonRxFragment<CategoryStore> {
     public CategoryFragment() {
     }
 
+    @Nullable
+    @Override
+    public CategoryStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.common_fragment_base_list;
@@ -41,9 +47,4 @@ public class CategoryFragment extends CommonRxFragment<CategoryStore> {
         initActionBar("第二页");
     }
 
-    @Nullable
-    @Override
-    public CategoryStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
-    }
 }

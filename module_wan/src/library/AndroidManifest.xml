@@ -5,6 +5,6 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true">
-        <activity android:name="com.huyingbao.module.wan.ui.view.WanActivity" />
+        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
     </application>
 </manifest>

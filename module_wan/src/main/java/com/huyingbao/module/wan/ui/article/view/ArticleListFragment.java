@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.view;
+package com.huyingbao.module.wan.ui.article.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,11 +15,11 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.action.WanAction;
-import com.huyingbao.module.wan.ui.action.WanActionCreator;
-import com.huyingbao.module.wan.ui.adapter.WanAdapter;
-import com.huyingbao.module.wan.ui.model.Article;
-import com.huyingbao.module.wan.ui.store.WanStore;
+import com.huyingbao.module.wan.ui.article.action.ArticleAction;
+import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
+import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
+import com.huyingbao.module.wan.ui.article.model.Article;
+import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -40,9 +40,9 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ArticleListFragment extends CommonRxFragment<WanStore> {
+public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     @Inject
-    WanActionCreator mActionCreator;
+    ArticleActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
     @BindView(R2.id.srl_content)
@@ -60,8 +60,8 @@ public class ArticleListFragment extends CommonRxFragment<WanStore> {
 
     @Nullable
     @Override
-    public WanStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(WanStore.class);
+    public ArticleStore getRxStore() {
+        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(ArticleStore.class);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class ArticleListFragment extends CommonRxFragment<WanStore> {
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {
-            case WanAction.GET_ARTICLE_LIST:
+            case ArticleAction.GET_ARTICLE_LIST:
 //                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
                 break;
         }
@@ -116,7 +116,7 @@ public class ArticleListFragment extends CommonRxFragment<WanStore> {
      */
     private void initAdapter() {
         mDataList = new ArrayList();
-        mAdapter = new WanAdapter(mDataList);
+        mAdapter = new ArticleAdapter(mDataList);
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //设置加载动画

@@ -1,13 +1,13 @@
-package com.huyingbao.module.wan.ui.store;
+package com.huyingbao.module.wan.ui.article.store;
 
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.module.wan.action.WanResponse;
-import com.huyingbao.module.wan.ui.action.WanAction;
-import com.huyingbao.module.wan.ui.model.Article;
-import com.huyingbao.module.wan.ui.model.Page;
+import com.huyingbao.module.wan.ui.article.action.ArticleAction;
+import com.huyingbao.module.wan.ui.article.model.Article;
+import com.huyingbao.module.wan.ui.article.model.Page;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -20,12 +20,12 @@ import androidx.lifecycle.MutableLiveData;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class WanStore extends RxStoreForActivity {
+public class ArticleStore extends RxStoreForActivity {
     private final MutableLiveData<WanResponse<Page<Article>>> mGitRepoList = new MutableLiveData<>();
     private boolean mIsCreated;
 
     @Inject
-    WanStore(RxDispatcher rxDispatcher) {
+    ArticleStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
     }
 
@@ -49,7 +49,7 @@ public class WanStore extends RxStoreForActivity {
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
-            case WanAction.GET_ARTICLE_LIST:
+            case ArticleAction.GET_ARTICLE_LIST:
                 mGitRepoList.setValue(rxAction.get(RxActionCreator.RESPONSE));
                 break;
         }

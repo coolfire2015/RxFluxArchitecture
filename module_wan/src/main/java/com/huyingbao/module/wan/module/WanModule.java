@@ -5,8 +5,8 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.module.wan.ui.store.WanStore;
-import com.huyingbao.module.wan.ui.view.WanActivity;
+import com.huyingbao.module.wan.ui.article.store.ArticleStore;
+import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 
 import javax.inject.Singleton;
 
@@ -40,10 +40,10 @@ public abstract class WanModule {
     @Singleton
     @Binds
     @IntoMap
-    @RxStoreKey(WanStore.class)
-    abstract RxStoreForActivity bindGitStore(WanStore wanStore);
+    @RxStoreKey(ArticleStore.class)
+    abstract RxStoreForActivity bindArticleStore(ArticleStore articleStore);
 
     @ActivityScope
     @ContributesAndroidInjector(modules = WanActivityModule.class)
-    abstract WanActivity injectGitActivity();
+    abstract ArticleActivity injectArticleActivity();
 }

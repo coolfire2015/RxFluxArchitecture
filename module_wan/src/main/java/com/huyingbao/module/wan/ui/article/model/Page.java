@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.model;
+package com.huyingbao.module.wan.ui.article.model;
 
 import java.util.ArrayList;
 

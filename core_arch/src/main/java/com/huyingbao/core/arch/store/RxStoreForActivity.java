@@ -5,6 +5,7 @@ import android.util.Log;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxChange;
 
+import androidx.annotation.CallSuper;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
@@ -67,6 +68,7 @@ public abstract class RxStoreForActivity extends ViewModel implements RxActionDi
     }
 
     @Override
+    @CallSuper//强制子类复写该方法时调用父方法
     protected void onCleared() {
         Log.e("RxFlux", "18.2-storeForActivity cleared");
     }

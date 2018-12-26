@@ -1,9 +1,9 @@
-package com.huyingbao.module.wan.ui.adapter;
+package com.huyingbao.module.wan.ui.article.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.model.Article;
+import com.huyingbao.module.wan.ui.article.model.Article;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class WanAdapter extends BaseQuickAdapter<Article, BaseViewHolder> {
-    public WanAdapter(@Nullable List<Article> data) {
+public class ArticleAdapter extends BaseQuickAdapter<Article, BaseViewHolder> {
+    public ArticleAdapter(@Nullable List<Article> data) {
         super(R.layout.wan_recycle_item_article, data);
     }
 

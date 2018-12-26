@@ -45,6 +45,12 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
     public CategoryListFragment() {
     }
 
+    @Nullable
+    @Override
+    public CategoryStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.common_fragment_base_list;
@@ -80,11 +86,5 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
     private void showData() {
         mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.category_gan)));
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Nullable
-    @Override
-    public CategoryStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
     }
 }

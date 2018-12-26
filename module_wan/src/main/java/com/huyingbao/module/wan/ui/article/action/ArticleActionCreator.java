@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.action;
+package com.huyingbao.module.wan.ui.article.action;
 
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
@@ -15,12 +15,12 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class WanActionCreator extends RxActionCreator implements WanAction {
+public class ArticleActionCreator extends RxActionCreator implements ArticleAction {
     @Inject
     WanApi mWanApi;
 
     @Inject
-    WanActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    ArticleActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
 
