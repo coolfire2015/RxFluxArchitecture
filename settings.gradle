@@ -1,5 +1,5 @@
 //RxBus 用法类似EventBus，带有Tag
-include ':core_rxbus'
+//include ':core_rxbus'
 include ':core_arch'
 include ':core_common'
 include ':module_app'
