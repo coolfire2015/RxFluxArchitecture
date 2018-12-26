@@ -40,7 +40,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class GitRepoFragment extends CommonRxFragment<WanStore> {
+public class ArticleListFragment extends CommonRxFragment<WanStore> {
     @Inject
     WanActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -55,7 +55,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
     private static final int PAGE_SIZE = 20;
 
     @Inject
-    public GitRepoFragment() {
+    public ArticleListFragment() {
     }
 
     @Nullable
@@ -66,7 +66,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_base_list;
+        return R.layout.common_fragment_base_list;
     }
 
     @Override
@@ -107,7 +107,6 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                toGitUser(position);
             }
         });
     }
@@ -130,7 +129,7 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
      * 添加头部view
      */
     private void addHeadView() {
-        View headView = getLayoutInflater().inflate(R.layout.view_head, (ViewGroup) mRvContent.getParent(), false);
+        View headView = getLayoutInflater().inflate(R.layout.common_view_head, (ViewGroup) mRvContent.getParent(), false);
         headView.findViewById(R.id.iv_head).setVisibility(View.GONE);
         ((TextView) headView.findViewById(R.id.tv_head)).setText("change load view");
         headView.setOnClickListener(v -> {
@@ -150,16 +149,6 @@ public class GitRepoFragment extends CommonRxFragment<WanStore> {
     private void initRefreshLayout() {
         mSrlContent.setColorSchemeColors(Color.rgb(47, 223, 189));
         mSrlContent.setOnRefreshListener(() -> refresh());
-    }
-
-    /**
-     * 页面跳转
-     * * @param position
-     */
-    private void toGitUser(int position) {
-        getRxStore().getGitUser().setValue(null);
-        mActionCreator.gitGitUser(getActivity(), mDataList.get(position).getUserId());
-        mActionCreator.postLocalAction(WanAction.TO_GIT_USER);
     }
 
     /**

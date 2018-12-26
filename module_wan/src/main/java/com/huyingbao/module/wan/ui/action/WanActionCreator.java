@@ -1,7 +1,5 @@
 package com.huyingbao.module.wan.ui.action;
 
-import android.content.Context;
-
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
@@ -30,11 +28,5 @@ public class WanActionCreator extends RxActionCreator implements WanAction {
     public void getArticleList(int page) {
         RxAction action = newRxAction(GET_ARTICLE_LIST);
         postHttpAction(action, mWanApi.getArticleList(page));
-    }
-
-    @Override
-    public void gitGitUser(Context context, int userId) {
-        RxAction action = newRxAction(GET_GIT_USER);
-        postHttpAction(action, mWanApi.getGitUser(userId));
     }
 }

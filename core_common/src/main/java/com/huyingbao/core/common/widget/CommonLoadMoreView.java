@@ -10,7 +10,7 @@ public class CommonLoadMoreView extends LoadMoreView {
 
     @Override
     public int getLayoutId() {
-        return R.layout.view_load_more;
+        return R.layout.common_view_load_more;
     }
 
     @Override

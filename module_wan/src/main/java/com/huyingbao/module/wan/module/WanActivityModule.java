@@ -2,8 +2,7 @@ package com.huyingbao.module.wan.module;
 
 
 import com.huyingbao.core.arch.scope.FragmentScope;
-import com.huyingbao.module.wan.ui.view.GitRepoFragment;
-import com.huyingbao.module.wan.ui.view.GitUserFragment;
+import com.huyingbao.module.wan.ui.view.ArticleListFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -15,9 +14,5 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class WanActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
-    abstract GitUserFragment injectGitUserFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract GitRepoFragment injectGitRepoListFragment();
+    abstract ArticleListFragment injectGitRepoListFragment();
 }

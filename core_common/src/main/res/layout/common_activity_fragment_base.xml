@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     app:navigationIcon="@android:drawable/alert_dark_frame">
 
-    <include layout="@layout/view_tool_bar" />
+    <include layout="@layout/common_include_tool_bar" />
 
     <FrameLayout
         android:id="@+id/fl_content"

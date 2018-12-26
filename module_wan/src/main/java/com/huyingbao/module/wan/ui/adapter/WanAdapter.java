@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
  */
 public class WanAdapter extends BaseQuickAdapter<Article, BaseViewHolder> {
     public WanAdapter(@Nullable List<Article> data) {
-        super(R.layout.item_git_repo, data);
+        super(R.layout.wan_recycle_item_article, data);
     }
 
     @Override

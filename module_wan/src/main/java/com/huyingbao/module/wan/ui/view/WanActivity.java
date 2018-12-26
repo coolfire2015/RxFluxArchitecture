@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
-import com.huyingbao.module.wan.ui.action.WanAction;
 import com.huyingbao.module.wan.ui.store.WanStore;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -21,12 +20,10 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@Route(path = "/git/GitActivity")
-public class GitActivity extends CommonRxActivity<WanStore> {
+@Route(path = "/git/WanActivity")
+public class WanActivity extends CommonRxActivity<WanStore> {
     @Inject
-    Lazy<GitRepoFragment> mGitRepoFragmentLazy;
-    @Inject
-    Lazy<GitUserFragment> mGitUserFragmentLazy;
+    Lazy<ArticleListFragment> mGitRepoFragmentLazy;
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
@@ -38,6 +35,17 @@ public class GitActivity extends CommonRxActivity<WanStore> {
         return ViewModelProviders.of(this, mViewModelFactory).get(WanStore.class);
     }
 
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+    }
+
     /**
      * 接收RxChange，粘性
      */
@@ -46,9 +54,7 @@ public class GitActivity extends CommonRxActivity<WanStore> {
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {
-            case WanAction.TO_GIT_USER:
-                addFragmentHideExisting(mGitUserFragmentLazy.get());
-                break;
+
         }
     }
 

@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
  */
 public class ProductAdapter extends BaseQuickAdapter<Product, BaseViewHolder> {
     public ProductAdapter(@Nullable List<Product> data) {
-        super(R.layout.item_product, data);
+        super(R.layout.gan_recycle_item_product, data);
     }
 
     @Override

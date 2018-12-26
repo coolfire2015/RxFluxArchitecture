@@ -75,7 +75,7 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_fragment_base;
+        return R.layout.common_activity_fragment_base;
     }
 
     /**

@@ -7,14 +7,14 @@
     <!--一定要使用明文通信-->
     <application
         android:name="com.huyingbao.module.wan.WanApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.wan.ui.view.GitActivity">
+        <activity android:name="com.huyingbao.module.wan.ui.view.WanActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

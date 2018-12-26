@@ -7,7 +7,7 @@
     <!--一定要使用明文通信-->
     <application
         android:name="com.huyingbao.module.gan.GanApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"

@@ -33,7 +33,7 @@ public class CategoryFragment extends CommonRxFragment<CategoryStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_base_list;
+        return R.layout.common_fragment_base_list;
     }
 
     @Override

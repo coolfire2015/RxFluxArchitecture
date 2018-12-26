@@ -61,7 +61,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_base_list;
+        return R.layout.common_fragment_base_list;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * 添加头部view
      */
     private void addHeadView() {
-        View headView = getLayoutInflater().inflate(R.layout.view_head, (ViewGroup) mRvContent.getParent(), false);
+        View headView = getLayoutInflater().inflate(R.layout.common_view_head, (ViewGroup) mRvContent.getParent(), false);
         headView.findViewById(R.id.iv_head).setVisibility(View.GONE);
         ((TextView) headView.findViewById(R.id.tv_head)).setText("change load view");
         headView.setOnClickListener(v -> {
