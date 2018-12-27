@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxFragment;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.orhanobut.logger.Logger;
@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonRxFragment<T extends RxStoreForActivity> extends RxFluxFragment implements CommonView, RxFluxView {
+public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFluxFragment implements CommonView, RxFluxView {
     protected boolean mIsVisibleToUser;
     private boolean mBackAble = true;
     private Unbinder mUnbinder;

@@ -14,13 +14,13 @@ import androidx.annotation.Nullable;
  */
 public class ArticleAdapter extends BaseQuickAdapter<Article, BaseViewHolder> {
     public ArticleAdapter(@Nullable List<Article> data) {
-        super(R.layout.wan_recycle_item_article, data);
+        super(R.layout.wan_recycle_item, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, Article item) {
-        helper.setText(R.id.tv_git_repo_name, item.getAuthor())
-                .setText(R.id.tv_git_repo_description, item.getDesc())
-                .setText(R.id.tv_git_repo_id, "GithubId" + item.getId());
+        helper.setText(R.id.tv_item_name, item.getAuthor())
+                .setText(R.id.tv_item_description, item.getDesc())
+                .setText(R.id.tv_item_id, "GithubId" + item.getId());
     }
 }

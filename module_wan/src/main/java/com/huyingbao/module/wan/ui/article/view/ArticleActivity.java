@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
+import com.huyingbao.module.wan.ui.common.friend.view.FriendFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -24,6 +25,8 @@ import dagger.Lazy;
 public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     @Inject
     Lazy<ArticleListFragment> mGitRepoFragmentLazy;
+    @Inject
+    Lazy<FriendFragment> mFriendFragmentLazy;
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
 
     @Override
     protected Fragment createFragment() {
-        return mGitRepoFragmentLazy.get();
+        //return mGitRepoFragmentLazy.get();
+        return mFriendFragmentLazy.get();
     }
 }

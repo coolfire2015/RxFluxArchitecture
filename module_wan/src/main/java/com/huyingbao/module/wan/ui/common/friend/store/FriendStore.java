@@ -1,0 +1,58 @@
+package com.huyingbao.module.wan.ui.common.friend.store;
+
+import com.huyingbao.core.arch.action.RxActionCreator;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.store.RxStoreForFragment;
+import com.huyingbao.module.wan.action.WanResponse;
+import com.huyingbao.module.wan.ui.common.friend.action.FriendAction;
+import com.huyingbao.module.wan.ui.common.friend.model.WebSite;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import androidx.lifecycle.MutableLiveData;
+
+/**
+ * Created by liujunfeng on 2018/12/27.
+ */
+@Singleton
+public class FriendStore extends RxStoreForFragment {
+    private final MutableLiveData<WanResponse<ArrayList<WebSite>>> mWebSiteListData = new MutableLiveData<>();
+    private boolean mIsCreated;
+
+    @Inject
+    FriendStore(RxDispatcher rxDispatcher) {
+        super(rxDispatcher);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mIsCreated = false;
+        mWebSiteListData.setValue(null);
+    }
+
+    @Override
+    @Subscribe
+    public void onRxAction(RxAction rxAction) {
+        switch (rxAction.getTag()) {
+            case FriendAction.GET_FRIEND_LIST:
+                mIsCreated = true;
+                mWebSiteListData.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                break;
+        }
+    }
+
+    public MutableLiveData<WanResponse<ArrayList<WebSite>>> getWebSiteListData() {
+        return mWebSiteListData;
+    }
+
+    public boolean isCreated() {
+        return mIsCreated;
+    }
+}

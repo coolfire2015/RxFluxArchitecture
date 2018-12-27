@@ -2,14 +2,15 @@ package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
+import com.huyingbao.module.wan.ui.common.friend.store.FriendStore;
 
 import javax.inject.Singleton;
 
+import androidx.lifecycle.ViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -41,7 +42,13 @@ public abstract class WanModule {
     @Binds
     @IntoMap
     @RxStoreKey(ArticleStore.class)
-    abstract RxStoreForActivity bindArticleStore(ArticleStore articleStore);
+    abstract ViewModel bindArticleStore(ArticleStore articleStore);
+
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(FriendStore.class)
+    abstract ViewModel bindFriendStore(FriendStore friendStore);
 
     @ActivityScope
     @ContributesAndroidInjector(modules = WanActivityModule.class)

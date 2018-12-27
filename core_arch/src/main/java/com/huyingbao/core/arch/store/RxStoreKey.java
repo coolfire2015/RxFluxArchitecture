@@ -6,6 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import androidx.lifecycle.ViewModel;
 import dagger.MapKey;
 
 /**
@@ -18,5 +19,5 @@ import dagger.MapKey;
 @Retention(RetentionPolicy.RUNTIME)
 @MapKey
 public @interface RxStoreKey {
-    Class<? extends RxStoreForActivity> value();
+    Class<? extends ViewModel> value();
 }

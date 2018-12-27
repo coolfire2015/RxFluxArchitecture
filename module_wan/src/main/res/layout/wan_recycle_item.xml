@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_git_repo_name"
+            android:id="@+id/tv_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dp_4"
@@ -23,7 +23,7 @@
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/tv_git_repo_description"
+            android:id="@+id/tv_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dp_4"
@@ -31,10 +31,10 @@
             tools:text="Long description" />
 
         <TextView
-            android:id="@+id/tv_git_repo_id"
+            android:id="@+id/tv_item_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            tools:text="Github id: 2" />
+            tools:text="ID" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
