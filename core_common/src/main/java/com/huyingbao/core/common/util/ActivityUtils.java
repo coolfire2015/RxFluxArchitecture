@@ -1,6 +1,6 @@
 package com.huyingbao.core.common.util;
 
-import com.orhanobut.logger.Logger;
+import android.text.TextUtils;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -15,18 +15,17 @@ public class ActivityUtils {
     /**
      * 设置需要显示的Fragment
      *
-     * @param activity                  宿主Activity
-     * @param contentId                 容器ID
-     * @param fragmentNew               需要显示的Fragment
-     * @param isHideExistingFragment    true：隐藏并可回退到已经存在的Fragment
-     * @param isReplaceExistingFragment true：替换已经存在的Fragment
+     * @param activity        宿主Activity
+     * @param contentId       容器ID
+     * @param fragmentNew     需要显示的Fragment
+     * @param isHideOrReplace {@code true} 隐藏并可回退到已经存在；
+     *                        {@code false} 替换已经存在
      */
     public static void setFragment(
             FragmentActivity activity,
             @IdRes int contentId,
             @NonNull Fragment fragmentNew,
-            boolean isHideExistingFragment,
-            boolean isReplaceExistingFragment) {
+            boolean isHideOrReplace) {
         //1:管理fragment队列
         //2:管理fragment事务回退栈
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -43,22 +42,23 @@ public class ActivityUtils {
                     .commit();
             return;
         }
-        //隐藏并可回退到已经存在的Fragment
-        if (isHideExistingFragment) {
+        //存在旧的Fragment
+        String fragmentName = fragment.getClass().getSimpleName();
+        String fragmentNewName = fragmentNew.getClass().getSimpleName();
+        //旧的Fragment和新的Fragment同为同一个Fragment的实例对象
+        if (TextUtils.equals(fragmentName, fragmentNewName)) return;
+        //旧的Fragment和新的不同
+        if (isHideOrReplace) {//隐藏并可回退到已经存在的Fragment
             fragmentManager.beginTransaction()
                     .addToBackStack(fragment.getClass().getName())
                     .hide(fragment)
                     .add(contentId, fragmentNew)
                     .commit();
-            return;
-        }
-        //替换已经存在的Fragment
-        if (isReplaceExistingFragment) {
+
+        } else {//替换已经存在的Fragment
             fragmentManager.beginTransaction()
                     .replace(contentId, fragmentNew)
                     .commit();
-        } else {
-            Logger.e("旧的Fragment正在显示，不显示新的Fragment");
         }
     }
 }

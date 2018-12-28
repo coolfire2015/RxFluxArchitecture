@@ -1,6 +1,8 @@
 package com.huyingbao.module.wan.ui.article.view;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
@@ -24,9 +26,11 @@ import dagger.Lazy;
 @Route(path = "/git/ArticleActivity")
 public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     @Inject
-    Lazy<ArticleListFragment> mGitRepoFragmentLazy;
+    Lazy<ArticleListFragment> mArticleListFragmentLazy;
     @Inject
     Lazy<FriendFragment> mFriendFragmentLazy;
+    @Inject
+    Lazy<BannerFragment> mBannerFragmentLazy;
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
@@ -40,30 +44,27 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
 
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "Friend");
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 0) {
+            addFragmentHideExisting(mBannerFragmentLazy.get());
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 接收RxChange，粘性
-     */
     @Override
     @Subscribe(sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-
-        }
     }
 
     @Override
     protected Fragment createFragment() {
-        //return mGitRepoFragmentLazy.get();
-        return mFriendFragmentLazy.get();
+        return mArticleListFragmentLazy.get();
     }
 }

@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:navigationIcon="@android:drawable/alert_dark_frame">
-
-    <include layout="@layout/common_include_tool_bar" />
-
-    <FrameLayout
-        android:id="@+id/fl_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />

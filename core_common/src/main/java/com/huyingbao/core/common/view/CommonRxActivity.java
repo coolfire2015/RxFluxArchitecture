@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.MalformedJsonException;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.core.arch.view.RxFluxActivity;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.model.CommonHttpException;
 import com.huyingbao.core.common.util.ActivityUtils;
 
@@ -28,11 +25,8 @@ import java.net.UnknownHostException;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -44,13 +38,6 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
-
-    @BindView(R2.id.tv_top_title)
-    protected TextView mTvTopTitle;
-    @BindView(R2.id.tlb_top)
-    protected Toolbar mToolbarTop;
-    @BindView(R2.id.abl_top)
-    protected AppBarLayout mAppBarLayoutTop;
 
     @Nullable
     @Override
@@ -68,7 +55,7 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
         super.onCreate(savedInstanceState);
         Log.e("RxFlux", "1.1-onCreateActivity");
         setContentView(getLayoutId());
-        addFragmentNoExisting(createFragment());
+        addFragmentReplaceExisting(createFragment());
         ButterKnife.bind(this);
         afterCreate(savedInstanceState);
     }
@@ -133,42 +120,6 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
         }
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        mTvTopTitle.setText(title == null ? getTitle() : title);
-    }
-
-    /**
-     * 设置toolbar
-     *
-     * @param backAble true：显示返回按钮
-     */
-    private void setToolbar(boolean backAble) {
-        //取代原本的actionbar
-        setSupportActionBar(mToolbarTop);
-        //设置actionbar
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar == null) return;
-        //显示右侧返回图标
-        actionBar.setDisplayHomeAsUpEnabled(backAble);
-        if (backAble) actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
-        //不显示home图标
-        actionBar.setDisplayShowHomeEnabled(false);
-        //不显示标题
-        actionBar.setDisplayShowTitleEnabled(false);
-    }
-
-    /**
-     * 无旧的Fragment，添加新的Fragment
-     * 有旧的Fragment，不显示新的Fragment
-     *
-     * @param fragment
-     */
-    protected void addFragmentNoExisting(Fragment fragment) {
-        ActivityUtils.setFragment(this, R.id.fl_content, fragment,
-                false, false);
-    }
-
     /**
      * 无旧的Fragment，添加新的Fragment
      * 有旧的Fragment，隐藏旧的Fragment，添加新的Fragment
@@ -176,8 +127,7 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
      * @param fragment
      */
     protected void addFragmentHideExisting(Fragment fragment) {
-        ActivityUtils.setFragment(this, R.id.fl_content, fragment,
-                true, false);
+        ActivityUtils.setFragment(this, R.id.fl_content, fragment, true);
     }
 
     /**
@@ -186,32 +136,8 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
      *
      * @param fragment
      */
-    protected void addFragmentReplactExisting(Fragment fragment) {
-        ActivityUtils.setFragment(this, R.id.fl_content, fragment,
-                false, true);
-    }
-
-
-    /**
-     * @param title    需要显示的标题
-     * @param backAble true:带有返回按钮，可以返回
-     */
-    protected void initActionBar(String title, boolean backAble) {
-        //设置标题
-        setTitle(title);
-        // 设置toolbar
-        setToolbar(backAble);
-    }
-
-    /**
-     * @param title
-     */
-    protected void initActionBar(String title) {
-        initActionBar(title, true);
-    }
-
-    protected void initActionBar() {
-        initActionBar(null, true);
+    protected void addFragmentReplaceExisting(Fragment fragment) {
+        ActivityUtils.setFragment(this, R.id.fl_content, fragment, false);
     }
 
     /**

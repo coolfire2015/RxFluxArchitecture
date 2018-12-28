@@ -1,6 +1,5 @@
 package com.huyingbao.module.wan.ui.common.friend.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,7 +10,6 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.common.friend.action.FriendAction;
 import com.huyingbao.module.wan.ui.common.friend.action.FriendActionCreator;
 import com.huyingbao.module.wan.ui.common.friend.adapter.WebSiteAdapter;
 import com.huyingbao.module.wan.ui.common.friend.model.WebSite;
@@ -29,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 
 /**
@@ -39,10 +36,9 @@ import butterknife.BindView;
 public class FriendFragment extends CommonRxFragment<FriendStore> {
     @Inject
     FriendActionCreator mActionCreator;
+
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
-    @BindView(R2.id.srl_content)
-    SwipeRefreshLayout mSrlContent;
 
     private List<WebSite> mDataList;
     private BaseQuickAdapter mAdapter;
@@ -57,7 +53,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
         return ViewModelProviders.of(this, mViewModelFactory).get(FriendStore.class);
     }
 
-
     @Override
     public int getLayoutId() {
         return R.layout.common_fragment_base_list;
@@ -65,30 +60,18 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("仓库列表");
         initRecyclerView();
         initAdapter();
-        //addHeadView();
-        initRefreshLayout();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
         if (getRxStore().isCreated()) return;
-        mSrlContent.setRefreshing(true);
         refresh();
     }
 
-    /**
-     * 接收RxChange，粘性
-     */
     @Override
     @Subscribe(sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case FriendAction.GET_FRIEND_LIST:
-//                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
-                break;
-        }
     }
 
     /**
@@ -118,14 +101,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
     }
 
     /**
-     * 实例化view
-     */
-    private void initRefreshLayout() {
-        mSrlContent.setColorSchemeColors(Color.rgb(47, 223, 189));
-        mSrlContent.setOnRefreshListener(() -> refresh());
-    }
-
-    /**
      * 显示数据
      */
     private void showData() {
@@ -133,7 +108,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
             if (products == null) return;
             setData(products.getData());
             mAdapter.setEnableLoadMore(true);
-            mSrlContent.setRefreshing(false);
         });
     }
 

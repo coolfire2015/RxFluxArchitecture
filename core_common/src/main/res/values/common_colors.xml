@@ -3,10 +3,10 @@
     <!--主题颜色-->
     <color name="common_primary">#00BCD4</color>
     <color name="common_primary_background">#F2F2F2</color>
-    <!--内容文字,文字主颜色-->
+    <!--文字颜色-->
     <color name="common_text_primary">#212121</color>
     <color name="common_text_secondary">#757575</color>
-    <!--分割线-->
+    <!--分割线颜色-->
     <color name="common_divider">#BDBDBD</color>
     <!--系统-->
     <color name="common_accent">#FF9800</color>

@@ -2,7 +2,6 @@ package com.huyingbao.module.wan.ui.article.view;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -12,8 +11,8 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
-import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
-import com.huyingbao.module.wan.ui.article.model.Article;
+import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter;
+import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,26 +33,24 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
+public class BannerFragment extends CommonRxFragment<ArticleStore> {
     @Inject
     ArticleActionCreator mActionCreator;
+
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private List<Article> mDataList;
+    private List<Banner> mDataList;
     private BaseQuickAdapter mAdapter;
 
-    private int mNextRequestPage = 1;
-    private static final int PAGE_SIZE = 20;
-
     @Inject
-    public ArticleListFragment() {
+    public BannerFragment() {
     }
 
     @Nullable
     @Override
     public ArticleStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(ArticleStore.class);
+        return ViewModelProviders.of(this, mViewModelFactory).get(ArticleStore.class);
     }
 
     @Override
@@ -96,9 +93,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      */
     private void initAdapter() {
         mDataList = new ArrayList();
-        mAdapter = new ArticleAdapter(mDataList);
-        //设置加载更多监听器
-        mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
+        mAdapter = new BannerAdapter(mDataList);
         //设置加载动画
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //view设置适配器
@@ -109,11 +104,9 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * 显示数据
      */
     private void showData() {
-        getRxStore().getArticleLiveData().observe(this, products -> {
+        getRxStore().getBannerLiveData().observe(this, products -> {
             if (products == null) return;
-            //判断获取回来的数据是否是刷新的数据
-            boolean isRefresh = mNextRequestPage == 1;
-            setData(isRefresh, products.getData().getDatas());
+            setData(products.getData());
             mAdapter.setEnableLoadMore(true);
         });
     }
@@ -122,42 +115,15 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * 刷新
      */
     private void refresh() {
-        mNextRequestPage = 1;
-        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getArticleList(mNextRequestPage);
-    }
-
-    /**
-     * 加载更多
-     */
-    private void loadMore() {
-        mActionCreator.getArticleList(mNextRequestPage);
+        mActionCreator.getBannerList();
     }
 
     /**
      * 设置数据
      *
-     * @param isRefresh
      * @param data
      */
-    private void setData(boolean isRefresh, List<Article> data) {
-        mNextRequestPage++;
-        final int size = data == null
-                ? 0
-                : data.size();
-        if (isRefresh) {
-            mAdapter.setNewData(data);
-        } else {
-            if (size > 0) {
-                mAdapter.addData(data);
-            }
-        }
-        if (size < PAGE_SIZE) {
-            //第一页如果不够一页就不显示没有更多数据布局
-            mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getContext(), "no more data", Toast.LENGTH_SHORT).show();
-        } else {
-            mAdapter.loadMoreComplete();
-        }
+    private void setData(List<Banner> data) {
+        mAdapter.setNewData(data);
     }
 }

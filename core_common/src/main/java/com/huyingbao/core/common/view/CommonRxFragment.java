@@ -11,7 +11,6 @@ import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxFragment;
 import com.huyingbao.core.arch.view.RxFluxView;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,9 +25,7 @@ import butterknife.Unbinder;
  */
 public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFluxFragment implements CommonView, RxFluxView {
     protected boolean mIsVisibleToUser;
-    private boolean mBackAble = true;
     private Unbinder mUnbinder;
-    private String mTitle;
 
     @Nullable
     @Override
@@ -38,7 +35,7 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e("RxFlux", "6.1-onCreateView");
-        setHasOptionsMenu(true);// fragment中创建菜单
+        //setHasOptionsMenu(true);// fragment中创建菜单
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
         afterCreate(savedInstanceState);
@@ -51,7 +48,6 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     @Subscribe(sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
-        Logger.e("1");
         EventBus.getDefault().removeStickyEvent(rxChange);
     }
 
@@ -73,34 +69,24 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
         mUnbinder.unbind();
     }
 
+    /**
+     * 可见状态转变
+     *
+     * @param isVisibleToUser
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         this.mIsVisibleToUser = isVisibleToUser;
     }
 
+    /**
+     * 隐藏状态转变
+     *
+     * @param hidden
+     */
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        //从隐藏转为非隐藏的时候调用
-        if (!hidden) initActionBar();
-    }
-
-    protected void initActionBar(String title, boolean backAble) {
-        mTitle = title;
-        mBackAble = backAble;
-        if (getActivity() instanceof CommonRxActivity)
-            ((CommonRxActivity) getActivity()).initActionBar(title, backAble);
-    }
-
-    protected void initActionBar(String title) {
-        mTitle = title;
-        if (getActivity() instanceof CommonRxActivity)
-            ((CommonRxActivity) getActivity()).initActionBar(title, mBackAble);
-    }
-
-    protected void initActionBar() {
-        if (getActivity() instanceof CommonRxActivity)
-            ((CommonRxActivity) getActivity()).initActionBar(mTitle, mBackAble);
     }
 }

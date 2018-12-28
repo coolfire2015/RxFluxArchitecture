@@ -7,9 +7,12 @@ import com.huyingbao.core.arch.store.RxStoreForActivity;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.model.Article;
+import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +24,8 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class ArticleStore extends RxStoreForActivity {
-    private final MutableLiveData<WanResponse<Page<Article>>> mGitRepoList = new MutableLiveData<>();
+    private final MutableLiveData<WanResponse<Page<Article>>> mArticleLiveData = new MutableLiveData<>();
+    private final MutableLiveData<WanResponse<ArrayList<Banner>>> mBannerLiveData = new MutableLiveData<>();
     private boolean mIsCreated;
 
     @Inject
@@ -36,7 +40,7 @@ public class ArticleStore extends RxStoreForActivity {
     protected void onCleared() {
         super.onCleared();
         mIsCreated = false;
-        mGitRepoList.setValue(null);
+        mArticleLiveData.setValue(null);
     }
 
     /**
@@ -50,13 +54,20 @@ public class ArticleStore extends RxStoreForActivity {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:
-                mGitRepoList.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                mArticleLiveData.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                break;
+            case ArticleAction.GET_BANNER_LIST:
+                mBannerLiveData.setValue(rxAction.get(RxActionCreator.RESPONSE));
                 break;
         }
     }
 
-    public MutableLiveData<WanResponse<Page<Article>>> getGitRepoList() {
-        return mGitRepoList;
+    public MutableLiveData<WanResponse<Page<Article>>> getArticleLiveData() {
+        return mArticleLiveData;
+    }
+
+    public MutableLiveData<WanResponse<ArrayList<Banner>>> getBannerLiveData() {
+        return mBannerLiveData;
     }
 
     public boolean isCreated() {

@@ -9,7 +9,9 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.squareup.leakcanary.LeakCanary;
 
+import androidx.annotation.CallSuper;
 import androidx.multidex.MultiDex;
 
 /**
@@ -23,6 +25,7 @@ import androidx.multidex.MultiDex;
  */
 public abstract class CommonApp extends RxFluxApp {
     @Override
+    @CallSuper//强制子类复写该方法时调用父方法
     public void onCreate() {
         super.onCreate();
         initDebug();
@@ -56,5 +59,9 @@ public abstract class CommonApp extends RxFluxApp {
                 return BuildConfig.DEBUG;
             }
         });
+        if (BuildConfig.DEBUG) {
+            if (LeakCanary.isInAnalyzerProcess(this)) return;
+            LeakCanary.install(this);
+        }
     }
 }

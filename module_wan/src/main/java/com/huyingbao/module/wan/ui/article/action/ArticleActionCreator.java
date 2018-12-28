@@ -29,4 +29,10 @@ public class ArticleActionCreator extends RxActionCreator implements ArticleActi
         RxAction action = newRxAction(GET_ARTICLE_LIST);
         postHttpAction(action, mWanApi.getArticleList(page));
     }
+
+    @Override
+    public void getBannerList() {
+        RxAction action = newRxAction(GET_BANNER_LIST);
+        postHttpAction(action, mWanApi.getBannerList());
+    }
 }
