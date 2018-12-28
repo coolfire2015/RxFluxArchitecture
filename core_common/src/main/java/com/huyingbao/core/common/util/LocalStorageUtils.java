@@ -19,7 +19,7 @@ import javax.inject.Singleton;
 @Singleton
 public class LocalStorageUtils {
     private static final String SETTING_NAME = "Setting";
-    private static SharedPreferences sSharedPreferences;
+    private SharedPreferences sSharedPreferences;
 
     @Inject
     LocalStorageUtils(Application application) {

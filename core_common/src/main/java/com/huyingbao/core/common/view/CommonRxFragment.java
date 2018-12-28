@@ -48,18 +48,19 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     @Subscribe(sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
+        //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange);
     }
 
     /**
      * 接收RxError，粘性
      * 该方法不经过store,
-     * 由activity直接处理
-     * rxflux中对错误的处理
+     * 由fragment直接处理
      */
     @Override
     @Subscribe(sticky = true)
     public void onRxError(@NonNull RxError error) {
+        //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(error);
     }
 

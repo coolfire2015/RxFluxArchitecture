@@ -18,7 +18,7 @@ import dagger.Module;
 public abstract class RxFluxModule {
     @Singleton
     @Binds
-    abstract Context privateContext(Application application);
+    abstract Context bindApplication(Application application);
 
     /**
      * 提供ViewModelProvider.Factory的实现类RxStoreFactory
@@ -28,6 +28,6 @@ public abstract class RxFluxModule {
      */
     @Singleton
     @Binds
-    abstract ViewModelProvider.Factory privateViewModelFactory(RxStoreFactory rxStoreFactory);
+    abstract ViewModelProvider.Factory bindViewModelFactory(RxStoreFactory rxStoreFactory);
 }
 
