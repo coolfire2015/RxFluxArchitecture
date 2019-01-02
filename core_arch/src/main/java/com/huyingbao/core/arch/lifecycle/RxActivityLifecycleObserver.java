@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.huyingbao.core.arch.store.RxActionDispatch;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -33,7 +33,7 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
         Log.e("RxFlux", "1.2-onCreateLifecycle ");
         if (mActivity instanceof RxFluxView) {
             RxActionDispatch rxStore = ((RxFluxView) mActivity).getRxStore();
-            if (rxStore instanceof RxStoreForActivity) {
+            if (rxStore instanceof RxActivityStore) {
                 ((FragmentActivity) mActivity).getLifecycle().addObserver(rxStore);
             }
         }

@@ -8,6 +8,7 @@ import androidx.collection.ArrayMap;
  * Created by liujunfeng on 2017/12/7.
  */
 public class RxAction extends RxEvent {
+    private static final String RESPONSE = "response";
     private final ArrayMap<String, Object> mData;
 
     private RxAction(@NonNull String tag, ArrayMap<String, Object> data) {
@@ -22,6 +23,16 @@ public class RxAction extends RxEvent {
     @SuppressWarnings("unchecked")
     public <T> T get(String tag) {
         return (T) mData.get(tag);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> void setResponse(T response) {
+        getData().put(RESPONSE, response);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getResponse() {
+        return get(RESPONSE);
     }
 
     @Override

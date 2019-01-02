@@ -5,6 +5,7 @@ import android.util.Log;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxChange;
 
+import androidx.annotation.CallSuper;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
@@ -37,10 +38,10 @@ import androidx.lifecycle.ViewModel;
  * 它还处理Activity/Fragment与应用程序的其余部分的通信（例如调用业务逻辑类）。
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxStoreForFragment extends ViewModel implements RxActionDispatch{
+public abstract class RxActivityStore extends ViewModel implements RxActionDispatch {
     private final RxDispatcher mRxDispatcher;
 
-    public RxStoreForFragment(RxDispatcher rxDispatcher) {
+    public RxActivityStore(RxDispatcher rxDispatcher) {
         this.mRxDispatcher = rxDispatcher;
     }
 
@@ -51,7 +52,7 @@ public abstract class RxStoreForFragment extends ViewModel implements RxActionDi
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void register() {
         if (mRxDispatcher.isSubscribe(this)) return;
-        Log.e("RxFlux", "1.3-storeForFragment register");
+        Log.e("RxFlux", "1.3-storeForActivity register");
         mRxDispatcher.subscribeRxStore(this);
     }
 
@@ -62,13 +63,14 @@ public abstract class RxStoreForFragment extends ViewModel implements RxActionDi
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {
-        Log.e("RxFlux", "19.1-storeForFragment unregister");
+        Log.e("RxFlux", "18.1-storeForActivity unregister");
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
     @Override
+    @CallSuper//强制子类复写该方法时调用父方法
     protected void onCleared() {
-        Log.e("RxFlux", "19.2-storeForFragment cleared");
+        Log.e("RxFlux", "18.2-storeForActivity cleared");
     }
 
     /**

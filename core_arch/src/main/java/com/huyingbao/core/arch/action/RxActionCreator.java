@@ -21,8 +21,6 @@ import io.reactivex.schedulers.Schedulers;
  * Created by liujunfeng on 2017/12/7.
  */
 public abstract class RxActionCreator {
-    public static final String RESPONSE = "response";
-
     private final RxDispatcher mRxDispatcher;
     private final RxActionManager mRxActionManager;
 
@@ -138,8 +136,8 @@ public abstract class RxActionCreator {
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
                 .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
                 .subscribe(// 2:指定主线程
-                        richHttpResponse -> {
-                            rxAction.getData().put(RESPONSE, richHttpResponse);
+                        response -> {
+                            rxAction.setResponse(response);
                             postRxAction(rxAction);
                         },
                         throwable -> postError(rxAction, throwable)
