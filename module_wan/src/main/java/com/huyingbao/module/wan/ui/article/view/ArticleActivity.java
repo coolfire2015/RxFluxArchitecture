@@ -32,16 +32,26 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     @Inject
     Lazy<BannerFragment> mBannerFragmentLazy;
 
-    @Override
-    public void afterCreate(Bundle savedInstanceState) {
-    }
-
     @Nullable
     @Override
     public ArticleStore getRxStore() {
         return ViewModelProviders.of(this, mViewModelFactory).get(ArticleStore.class);
     }
 
+    @Override
+    protected Fragment createFragment() {
+        return mArticleListFragmentLazy.get();
+    }
+
+    @Override
+    public void afterCreate(Bundle savedInstanceState) {
+    }
+
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,14 +67,4 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    @Subscribe(sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-    }
-
-    @Override
-    protected Fragment createFragment() {
-        return mArticleListFragmentLazy.get();
-    }
 }

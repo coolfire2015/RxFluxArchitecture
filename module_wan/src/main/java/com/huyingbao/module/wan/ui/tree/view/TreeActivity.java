@@ -30,7 +30,6 @@ public class TreeActivity extends CommonRxActivity<TreeStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-
     }
 
     @Override

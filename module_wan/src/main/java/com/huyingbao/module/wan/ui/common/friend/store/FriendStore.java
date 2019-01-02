@@ -1,9 +1,8 @@
 package com.huyingbao.module.wan.ui.common.friend.store;
 
-import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
-import com.huyingbao.core.arch.store.RxStoreForFragment;
+import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.common.friend.action.FriendAction;
 import com.huyingbao.module.wan.ui.common.friend.model.WebSite;
@@ -21,7 +20,7 @@ import androidx.lifecycle.MutableLiveData;
  * Created by liujunfeng on 2018/12/27.
  */
 @Singleton
-public class FriendStore extends RxStoreForFragment {
+public class FriendStore extends RxFragmentStore {
     private final MutableLiveData<WanResponse<ArrayList<WebSite>>> mWebSiteListData = new MutableLiveData<>();
     private boolean mIsCreated;
 
@@ -43,7 +42,7 @@ public class FriendStore extends RxStoreForFragment {
         switch (rxAction.getTag()) {
             case FriendAction.GET_FRIEND_LIST:
                 mIsCreated = true;
-                mWebSiteListData.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                mWebSiteListData.setValue(rxAction.getResponse());
                 break;
         }
     }

@@ -7,6 +7,8 @@ import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.common.friend.store.FriendStore;
+import com.huyingbao.module.wan.ui.login.store.LoginStore;
+import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import javax.inject.Singleton;
 
@@ -44,13 +46,23 @@ public abstract class WanModule {
     @RxStoreKey(ArticleStore.class)
     abstract ViewModel bindArticleStore(ArticleStore articleStore);
 
+    @ActivityScope
+    @ContributesAndroidInjector(modules = WanActivityModule.class)
+    abstract ArticleActivity injectArticleActivity();
+
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(LoginStore.class)
+    abstract ViewModel bindLoginStore(LoginStore loginStore);
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = WanActivityModule.class)
+    abstract LoginActivity injectLoginActivity();
+
     @Singleton
     @Binds
     @IntoMap
     @RxStoreKey(FriendStore.class)
     abstract ViewModel bindFriendStore(FriendStore friendStore);
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = WanActivityModule.class)
-    abstract ArticleActivity injectArticleActivity();
 }
