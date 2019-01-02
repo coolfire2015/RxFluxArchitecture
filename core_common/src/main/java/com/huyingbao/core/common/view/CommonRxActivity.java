@@ -3,13 +3,15 @@ package com.huyingbao.core.common.view;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxActivity;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
+import com.huyingbao.core.common.model.CommonHttpException;
 import com.huyingbao.core.common.util.ActivityUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,7 +29,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxFluxActivity implements CommonView, RxFluxView {
+public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFluxActivity implements CommonView, RxFluxView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -79,6 +81,14 @@ public abstract class CommonRxActivity<T extends RxStoreForActivity> extends RxF
     public void onRxError(@NonNull RxError error) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(error);
+        Throwable throwable = error.getThrowable();
+        // 自定义异常
+        if (throwable instanceof CommonHttpException) {
+            String message = ((CommonHttpException) throwable).message();
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, throwable.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
