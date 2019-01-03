@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.category.view;
+package com.huyingbao.module.gan.ui.random.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +10,10 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
-import com.huyingbao.module.gan.ui.category.action.CategoryAction;
-import com.huyingbao.module.gan.ui.category.action.CategoryActionCreator;
-import com.huyingbao.module.gan.ui.category.adapter.CategoryAdapter;
-import com.huyingbao.module.gan.ui.category.store.CategoryStore;
+import com.huyingbao.module.gan.ui.main.action.MainAction;
+import com.huyingbao.module.gan.ui.main.action.MainActionCreator;
+import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
+import com.huyingbao.module.gan.ui.main.store.MainStore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,9 +32,9 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
+public class CategoryListFragment extends CommonRxFragment<MainStore> {
     @Inject
-    CategoryActionCreator mActionCreator;
+    MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
@@ -47,8 +47,8 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
 
     @Nullable
     @Override
-    public CategoryStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
+    public MainStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mActionCreator.postLocalAction(CategoryAction.TO_RANDOM_LIST,
+                mActionCreator.postLocalAction(MainAction.TO_WAN_MODULE,
                         GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });
@@ -83,7 +83,7 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
      * 显示数据
      */
     private void showData() {
-        mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.category_gan)));
+        mDataList.addAll(Arrays.asList(getResources().getStringArray(R.array.gan_array_category)));
         mAdapter.notifyDataSetChanged();
     }
 }

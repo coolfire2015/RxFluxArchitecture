@@ -2,5 +2,5 @@
 <resources>
     <!--当前module作为library时，该文件不可见-->
     <!-- 当前module作为app时，该文件可见，可自定义app名字-->
-    <string name="app_name">RxFluxGan</string>
+    <string name="app_name">干货集中营</string>
 </resources>

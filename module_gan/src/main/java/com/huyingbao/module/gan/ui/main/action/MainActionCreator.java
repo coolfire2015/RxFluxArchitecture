@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.category.action;
+package com.huyingbao.module.gan.ui.main.action;
 
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
@@ -13,9 +13,9 @@ import javax.inject.Inject;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryActionCreator extends RxActionCreator implements CategoryAction {
+public class MainActionCreator extends RxActionCreator implements MainAction {
     @Inject
-    CategoryActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    MainActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }
 }

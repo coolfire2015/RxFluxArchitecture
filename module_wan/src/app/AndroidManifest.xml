@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
+        <activity
+            android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity"
+            android:label="@string/wan_label_article" />
     </application>
 </manifest>

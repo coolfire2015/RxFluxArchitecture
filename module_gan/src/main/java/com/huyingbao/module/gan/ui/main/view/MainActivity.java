@@ -1,12 +1,12 @@
-package com.huyingbao.module.gan.ui.category.view;
+package com.huyingbao.module.gan.ui.main.view;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
-import com.huyingbao.module.gan.ui.category.action.CategoryAction;
-import com.huyingbao.module.gan.ui.category.store.CategoryStore;
-import com.huyingbao.module.gan.ui.random.view.RandomActivity;
+import com.huyingbao.module.gan.ui.main.action.MainAction;
+import com.huyingbao.module.gan.ui.main.store.MainStore;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -21,21 +21,19 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public class CategoryActivity extends CommonRxActivity<CategoryStore> {
+public class MainActivity extends CommonRxActivity<MainStore> {
     @Inject
-    Lazy<CategoryListFragment> mCategoryListFragmentLazy;
-    @Inject
-    Lazy<CategoryFragment> mCategoryCategoryFragment;
+    Lazy<MainFragment> mMainFragmentLazy;
 
     @Override
     protected Fragment createFragment() {
-        return mCategoryListFragmentLazy.get();
+        return mMainFragmentLazy.get();
     }
 
     @Nullable
     @Override
-    public CategoryStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(CategoryStore.class);
+    public MainStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class);
     }
 
     @Override
@@ -50,8 +48,10 @@ public class CategoryActivity extends CommonRxActivity<CategoryStore> {
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {
-            case CategoryAction.TO_RANDOM_LIST:
-                startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
+            case MainAction.TO_GAN_MODULE:
+                break;
+            case MainAction.TO_WAN_MODULE:
+                ARouter.getInstance().build("/wan/ArticleActivity").navigation();
                 break;
         }
     }

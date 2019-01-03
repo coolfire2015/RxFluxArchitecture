@@ -23,7 +23,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-@Route(path = "/git/ArticleActivity")
+@Route(path = "/wan/ArticleActivity")
 public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     @Inject
     Lazy<ArticleListFragment> mArticleListFragmentLazy;

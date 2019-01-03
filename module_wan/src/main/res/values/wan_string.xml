@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wan_label_article">文章</string>
+    <string name="wan_label_login">登录</string>
+</resources>

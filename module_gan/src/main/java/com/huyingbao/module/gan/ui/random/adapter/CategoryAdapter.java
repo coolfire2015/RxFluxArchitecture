@@ -1,4 +1,4 @@
-package com.huyingbao.module.gan.ui.category.adapter;
+package com.huyingbao.module.gan.ui.random.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

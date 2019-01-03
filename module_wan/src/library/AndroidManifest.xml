@@ -5,7 +5,11 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true">
-        <activity android:name="com.huyingbao.module.wan.ui.login.view.LoginActivity"/>
-        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
+        <activity
+            android:name="com.huyingbao.module.wan.ui.login.view.LoginActivity"
+            android:label="@string/wan_label_login" />
+        <activity
+            android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity"
+            android:label="@string/wan_label_article" />
     </application>
 </manifest>
