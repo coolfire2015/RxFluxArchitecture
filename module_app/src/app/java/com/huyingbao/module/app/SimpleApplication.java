@@ -7,6 +7,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
 /**
+ * 主Application
  * Created by liujunfeng on 2017/12/7.
  */
 public class SimpleApplication extends CommonApp {

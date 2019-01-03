@@ -114,12 +114,11 @@ repositories {
 }
 
 dependencies {
-    implementation project(':core_arch')
+    //通用依赖模块
     implementation project(':core_common')
-
-    if (!isModuleAsApp.toBoolean()) {
-        implementation project(':module_gan')
-        implementation project(':module_wan')
-    }
+    //功能模块
+    implementation project(':module_gan')
+    implementation project(':module_wan')
+    //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
 }

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * 内容类型列表展示页面
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope

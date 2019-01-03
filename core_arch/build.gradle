@@ -39,10 +39,6 @@ android {
 }
 
 dependencies {
-    //RxBus用法类似EventBus，带有Tag
-//    api("com.hwangjr.rxbus:rxbus:${RX_BUS}") {
-//        exclude group: 'com.jakewharton.timber', module: 'timber'
-//    }
     //使用
     api "org.greenrobot:eventbus:${EVENTBUS}"
     //版本兼容包

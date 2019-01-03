@@ -117,19 +117,6 @@ repositories {
 }
 
 dependencies {
-    //单元测试
-    testImplementation "junit:junit:${TEST_JUNIT}"
-    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
-    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
-    testImplementation "org.robolectric:shadows-multidex:${TEST_ROBOLECTRIC}"
-    testImplementation "org.robolectric:shadows-supportv4:${TEST_ROBOLECTRIC}"
-    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
-    //Android框架测试
-    androidTestImplementation "org.mockito:mockito-android:${TEST_MOCKITO}"
-    androidTestImplementation "androidx.test:runner:${TEST_RUNNER_X}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${TEST_ESPRESSO_X}"
-    //内核
-    implementation project(':core_arch')
     //通用依赖模块
     implementation project(':core_common')
     //CardView

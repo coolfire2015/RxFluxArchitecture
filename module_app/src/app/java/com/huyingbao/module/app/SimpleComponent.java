@@ -14,6 +14,8 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
+ * 主Module
+ * <p>
  * 在AppComponent中将dagger2库里的AndroidSupportInjectionModule注入到Application中，
  * 并将Application实现相应的接口（例如：HasActivityInjector、HasFragmentInjector、
  * HasServiceInjector、HasBroadcastReceiverInjector等等很多），
@@ -32,9 +34,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @Singleton
 @Component(modules = {
-        GanModule.class,
-        WanModule.class,
-        CommonModule.class,
+        GanModule.class,//模块module
+        WanModule.class,//模块module
+        CommonModule.class,//通用module
         AndroidSupportInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {
     @Component.Builder

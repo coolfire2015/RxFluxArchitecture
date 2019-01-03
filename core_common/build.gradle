@@ -41,9 +41,9 @@ android {
 
 dependencies {
     //内核
-    implementation project(':core_arch')
+    api project(':core_arch')
     //分包
-    implementation "androidx.multidex:multidex:${MULTIDEX_X}"
+    api "androidx.multidex:multidex:${MULTIDEX_X}"
     //Lifecycle和ViewModel
     api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
     api "androidx.lifecycle:lifecycle-reactivestreams:${ARCH_LIFECYCLE_VERSION_X}"
@@ -70,7 +70,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:${LEAK_CANARY}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY}"
 }
