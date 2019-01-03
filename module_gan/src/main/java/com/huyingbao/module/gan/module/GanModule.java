@@ -68,7 +68,7 @@ public abstract class GanModule {
     @Binds
     @IntoMap
     @RxStoreKey(MainStore.class)
-    abstract ViewModel bindCategoryStore(MainStore mainStore);
+    abstract ViewModel bindMainStore(MainStore mainStore);
 
     /**
      * ContributesAndroidInjector注解帮助我们生成方法的返回值类型（RandomActivity）的注射器
@@ -94,7 +94,7 @@ public abstract class GanModule {
      */
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)
-    abstract MainActivity injectCategoryActivity();
+    abstract MainActivity injectMainActivity();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = GanActivityModule.class)

@@ -2,9 +2,11 @@ package com.huyingbao.module.gan.ui.random.store;
 
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxActivityStore;
+import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.action.GanResponse;
-import com.huyingbao.module.gan.ui.random.action.RandomActions;
+import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.model.Product;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -58,9 +60,13 @@ public class RandomStore extends RxActivityStore {
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
-            case RandomActions.GET_PRODUCT_LIST:
+            case RandomAction.GET_PRODUCT_LIST:
                 mIsCreated = true;
                 mProductList.setValue(rxAction.getResponse());
+                break;
+            case RandomAction.TO_SHOW_DATA:
+                mCategory = rxAction.get(GanConstants.Key.CATEGORY);
+                postChange(RxChange.newRxChange(rxAction.getTag()));
                 break;
         }
     }

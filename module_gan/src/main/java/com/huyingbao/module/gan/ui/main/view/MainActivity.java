@@ -1,5 +1,6 @@
 package com.huyingbao.module.gan.ui.main.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -8,6 +9,7 @@ import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
 import com.huyingbao.module.gan.ui.main.store.MainStore;
+import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -51,6 +53,7 @@ public class MainActivity extends CommonRxActivity<MainStore> {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {
             case MainAction.TO_GAN_MODULE:
+                startActivity(new Intent(this, RandomActivity.class));
                 break;
             case MainAction.TO_WAN_MODULE:
                 ARouter.getInstance().build("/wan/ArticleActivity").navigation();

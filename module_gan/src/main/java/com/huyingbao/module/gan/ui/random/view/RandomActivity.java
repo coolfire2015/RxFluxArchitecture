@@ -1,15 +1,17 @@
 package com.huyingbao.module.gan.ui.random.view;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
-import com.huyingbao.module.gan.action.GanConstants;
+import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,17 +22,13 @@ import dagger.Lazy;
  */
 public class RandomActivity extends CommonRxActivity<RandomStore> {
     @Inject
+    Lazy<CategoryListFragment> mCategoryListFragmentLazy;
+    @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
-
-    public static Intent newIntent(Context context, String category) {
-        Intent intent = new Intent(context, RandomActivity.class);
-        intent.putExtra(GanConstants.Key.CATEGORY, category);
-        return intent;
-    }
 
     @Override
     protected Fragment createFragment() {
-        return mProductListFragmentLazy.get();
+        return mCategoryListFragmentLazy.get();
     }
 
     @Nullable
@@ -41,6 +39,16 @@ public class RandomActivity extends CommonRxActivity<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        getRxStore().setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
+    }
+
+    @Override
+    @Subscribe(sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+        switch (rxChange.getTag()) {
+            case RandomAction.TO_SHOW_DATA:
+                addFragmentHideExisting(mProductListFragmentLazy.get());
+                break;
+        }
     }
 }

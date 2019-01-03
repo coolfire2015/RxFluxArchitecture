@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class RandomActionCreator extends RxActionCreator implements RandomActions {
+public class RandomActionCreator extends RxActionCreator implements RandomAction {
     @Inject
     GanApi mGanApi;
 

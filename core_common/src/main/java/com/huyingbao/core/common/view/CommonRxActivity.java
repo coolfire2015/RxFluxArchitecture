@@ -50,9 +50,10 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFlux
         super.onCreate(savedInstanceState);
         Log.e("RxFlux", "1.1-onCreateActivity");
         setContentView(getLayoutId());
-        addFragmentReplaceExisting(createFragment());
-        ButterKnife.bind(this);
         afterCreate(savedInstanceState);
+        ButterKnife.bind(this);
+        //添加显示的Fragment
+        addFragmentReplaceExisting(createFragment());
     }
 
     @Override

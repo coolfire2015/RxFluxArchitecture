@@ -10,10 +10,10 @@ import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
-import com.huyingbao.module.gan.ui.main.action.MainAction;
 import com.huyingbao.module.gan.ui.main.action.MainActionCreator;
+import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
-import com.huyingbao.module.gan.ui.main.store.MainStore;
+import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryListFragment extends CommonRxFragment<MainStore> {
+public class CategoryListFragment extends CommonRxFragment<RandomStore> {
     @Inject
     MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -47,8 +47,8 @@ public class CategoryListFragment extends CommonRxFragment<MainStore> {
 
     @Nullable
     @Override
-    public MainStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class);
+    public RandomStore getRxStore() {
+        return ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CategoryListFragment extends CommonRxFragment<MainStore> {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mActionCreator.postLocalAction(MainAction.TO_WAN_MODULE,
+                mActionCreator.postLocalAction(RandomAction.TO_SHOW_DATA,
                         GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });

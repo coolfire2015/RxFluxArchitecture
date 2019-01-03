@@ -16,7 +16,7 @@ import dagger.android.ContributesAndroidInjector;
 abstract class GanActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
-    abstract MainFragment injectCategoryFragment();
+    abstract MainFragment injectMainFragment();
 
     @FragmentScope
     @ContributesAndroidInjector
