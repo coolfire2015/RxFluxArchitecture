@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
+import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
 import com.huyingbao.module.gan.ui.main.store.MainStore;
 
@@ -38,6 +39,7 @@ public class MainActivity extends CommonRxActivity<MainStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        setTitle(R.string.gan_label_main);
     }
 
     /**
