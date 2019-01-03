@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.common.friend.action;
+package com.huyingbao.module.wan.ui.friend.action;
 
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;

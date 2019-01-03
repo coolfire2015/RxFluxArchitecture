@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.common.friend.view;
+package com.huyingbao.module.wan.ui.friend.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +10,10 @@ import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.common.friend.action.FriendActionCreator;
-import com.huyingbao.module.wan.ui.common.friend.adapter.WebSiteAdapter;
-import com.huyingbao.module.wan.ui.common.friend.model.WebSite;
-import com.huyingbao.module.wan.ui.common.friend.store.FriendStore;
+import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator;
+import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter;
+import com.huyingbao.module.wan.ui.friend.model.WebSite;
+import com.huyingbao.module.wan.ui.friend.store.FriendStore;
 
 import org.greenrobot.eventbus.Subscribe;
 

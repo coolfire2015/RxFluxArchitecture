@@ -1,9 +1,9 @@
-package com.huyingbao.module.wan.ui.common.friend.adapter;
+package com.huyingbao.module.wan.ui.friend.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.common.friend.model.WebSite;
+import com.huyingbao.module.wan.ui.friend.model.WebSite;
 
 import java.util.List;
 

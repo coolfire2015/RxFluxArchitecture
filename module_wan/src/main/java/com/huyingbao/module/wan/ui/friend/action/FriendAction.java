@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.common.friend.action;
+package com.huyingbao.module.wan.ui.friend.action;
 
 /**
  * Created by liujunfeng on 2018/12/26.

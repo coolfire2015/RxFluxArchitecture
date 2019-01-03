@@ -4,7 +4,7 @@ package com.huyingbao.module.wan.module;
 import com.huyingbao.core.arch.scope.FragmentScope;
 import com.huyingbao.module.wan.ui.article.view.ArticleListFragment;
 import com.huyingbao.module.wan.ui.article.view.BannerFragment;
-import com.huyingbao.module.wan.ui.common.friend.view.FriendFragment;
+import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
 import com.huyingbao.module.wan.ui.login.view.LoginFragment;
 
 import dagger.Module;

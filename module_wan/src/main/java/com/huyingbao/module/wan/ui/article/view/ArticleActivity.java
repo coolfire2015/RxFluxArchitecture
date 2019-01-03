@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.common.view.CommonRxActivity;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
-import com.huyingbao.module.wan.ui.common.friend.view.FriendFragment;
+import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -66,5 +66,4 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -6,7 +6,7 @@ import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
-import com.huyingbao.module.wan.ui.common.friend.store.FriendStore;
+import com.huyingbao.module.wan.ui.friend.store.FriendStore;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
 import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
