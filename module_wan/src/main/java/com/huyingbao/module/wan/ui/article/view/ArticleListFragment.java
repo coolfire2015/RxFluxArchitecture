@@ -35,16 +35,14 @@ import butterknife.BindView;
  */
 @ActivityScope
 public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
+    private static final int PAGE_SIZE = 20;
     @Inject
     ArticleActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
-
     private List<Article> mDataList;
     private BaseQuickAdapter mAdapter;
-
     private int mNextRequestPage = 1;
-    private static final int PAGE_SIZE = 20;
 
     @Inject
     public ArticleListFragment() {

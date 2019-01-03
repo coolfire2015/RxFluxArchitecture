@@ -26,13 +26,13 @@ public class RxAction extends RxEvent {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> void setResponse(T response) {
-        getData().put(RESPONSE, response);
+    public <T> T getResponse() {
+        return get(RESPONSE);
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getResponse() {
-        return get(RESPONSE);
+    public <T> void setResponse(T response) {
+        getData().put(RESPONSE, response);
     }
 
     @Override

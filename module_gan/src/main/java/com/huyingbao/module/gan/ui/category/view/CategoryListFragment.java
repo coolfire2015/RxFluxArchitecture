@@ -58,7 +58,6 @@ public class CategoryListFragment extends CommonRxFragment<CategoryStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("首页");
         initRecyclerView();
         showData();
     }

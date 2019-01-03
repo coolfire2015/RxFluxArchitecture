@@ -3,7 +3,7 @@ package com.huyingbao.module.gan.ui.category.store;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.category.action.CategoryAction;
 
@@ -16,7 +16,7 @@ import javax.inject.Singleton;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class CategoryStore extends RxStoreForActivity {
+public class CategoryStore extends RxActivityStore {
     private String mCategory;
 
     @Inject
@@ -40,6 +40,7 @@ public class CategoryStore extends RxStoreForActivity {
      *
      * @param rxAction
      */
+    @Override
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {

@@ -114,30 +114,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation "junit:junit:${TEST_JUNIT}"
-    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
-    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
-    testImplementation "org.robolectric:shadows-multidex:${TEST_ROBOLECTRIC}"
-    testImplementation "org.robolectric:shadows-supportv4:${TEST_ROBOLECTRIC}"
-    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
-
-    androidTestImplementation "org.mockito:mockito-android:${TEST_MOCKITO}"
-    androidTestImplementation "androidx.test:runner:${TEST_RUNNER_X}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${TEST_ESPRESSO_X}"
-
     implementation project(':core_arch')
     implementation project(':core_common')
 
     if (!isModuleAsApp.toBoolean()) {
         implementation project(':module_gan')
-        implementation project(':module_git')
+        implementation project(':module_wan')
     }
-
-    implementation "androidx.annotation:annotation:${SUPPORT_VERSION_X}"
-    implementation "androidx.vectordrawable:vectordrawable:${VECTOR_X}"
-
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

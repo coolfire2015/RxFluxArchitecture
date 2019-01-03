@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
 import com.huyingbao.module.gan.module.GanModule;
-import com.huyingbao.module.wan.action.WanModule;
+import com.huyingbao.module.wan.module.WanModule;
 
 import javax.inject.Singleton;
 

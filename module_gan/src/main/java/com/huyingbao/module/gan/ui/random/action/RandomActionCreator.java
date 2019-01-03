@@ -28,8 +28,8 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
     @Override
     public void getProductList(String category, int count, int page) {
         RxAction action = newRxAction(GET_PRODUCT_LIST,
-                GanConstants.Key.COUNT,count,
-                GanConstants.Key.PAGE,page);
+                GanConstants.Key.COUNT, count,
+                GanConstants.Key.PAGE, page);
         postHttpAction(action, mGanApi.getDataList(category, count, page));
     }
 }

@@ -1,10 +1,7 @@
 package com.huyingbao.module.gan.ui.random.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,7 +9,6 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
-import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
@@ -28,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 
 /**
@@ -36,18 +31,14 @@ import butterknife.BindView;
  */
 @ActivityScope
 public class ProductFragment extends CommonRxFragment<RandomStore> {
+    private static final int PAGE_SIZE = 20;
     @Inject
     RandomActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
-    @BindView(R2.id.srl_content)
-    SwipeRefreshLayout mSrlContent;
-
     private List<Product> mDataList;
     private BaseQuickAdapter mAdapter;
-
     private int mNextRequestPage = 1;
-    private static final int PAGE_SIZE = 20;
 
     @Inject
     public ProductFragment() {
@@ -66,15 +57,11 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("商品列表");
         initRecyclerView();
         initAdapter();
-        //addHeadView();
-        initRefreshLayout();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
         if (getRxStore().isCreated()) return;
-        mSrlContent.setRefreshing(true);
         refresh();
     }
 
@@ -108,32 +95,6 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     }
 
     /**
-     * 添加头部view
-     */
-    private void addHeadView() {
-        View headView = getLayoutInflater().inflate(R.layout.common_view_head, (ViewGroup) mRvContent.getParent(), false);
-        headView.findViewById(R.id.iv_head).setVisibility(View.GONE);
-        ((TextView) headView.findViewById(R.id.tv_head)).setText("change load view");
-        headView.setOnClickListener(v -> {
-            mAdapter.setNewData(null);
-            mAdapter.setLoadMoreView(new CommonLoadMoreView());
-            mRvContent.setAdapter(mAdapter);
-            Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
-            mSrlContent.setRefreshing(true);
-            refresh();
-        });
-        mAdapter.addHeaderView(headView);
-    }
-
-    /**
-     * 实例化view
-     */
-    private void initRefreshLayout() {
-        mSrlContent.setColorSchemeColors(Color.rgb(47, 223, 189));
-        mSrlContent.setOnRefreshListener(() -> refresh());
-    }
-
-    /**
      * 显示数据
      */
     private void showData() {
@@ -143,7 +104,6 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
             boolean isRefresh = mNextRequestPage == 1;
             setData(isRefresh, products.getResults());
             mAdapter.setEnableLoadMore(true);
-            mSrlContent.setRefreshing(false);
         });
     }
 

@@ -27,6 +27,11 @@ public class CategoryActivity extends CommonRxActivity<CategoryStore> {
     @Inject
     Lazy<CategoryFragment> mCategoryCategoryFragment;
 
+    @Override
+    protected Fragment createFragment() {
+        return mCategoryListFragmentLazy.get();
+    }
+
     @Nullable
     @Override
     public CategoryStore getRxStore() {
@@ -35,11 +40,6 @@ public class CategoryActivity extends CommonRxActivity<CategoryStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-    }
-
-    @Override
-    protected Fragment createFragment() {
-        return mCategoryListFragmentLazy.get();
     }
 
     /**
@@ -52,7 +52,6 @@ public class CategoryActivity extends CommonRxActivity<CategoryStore> {
         switch (rxChange.getTag()) {
             case CategoryAction.TO_RANDOM_LIST:
                 startActivity(RandomActivity.newIntent(this, getRxStore().getCategory()));
-//                addFragmentHideExisting(mCategoryCategoryFragment.get());
                 break;
         }
     }

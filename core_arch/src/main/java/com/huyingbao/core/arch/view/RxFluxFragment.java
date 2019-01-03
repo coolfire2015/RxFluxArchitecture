@@ -13,7 +13,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxFluxFragment extends Fragment implements HasSupportFragmentInjector{
+public abstract class RxFluxFragment extends Fragment implements HasSupportFragmentInjector {
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
     @Inject

@@ -1,9 +1,8 @@
 package com.huyingbao.module.gan.ui.random.store;
 
-import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
-import com.huyingbao.core.arch.store.RxStoreForActivity;
+import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.gan.action.GanResponse;
 import com.huyingbao.module.gan.ui.random.action.RandomActions;
 import com.huyingbao.module.gan.ui.random.model.Product;
@@ -28,7 +27,7 @@ import androidx.lifecycle.MutableLiveData;
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
-public class RandomStore extends RxStoreForActivity {
+public class RandomStore extends RxActivityStore {
     private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
     private boolean mIsCreated;
     private String mCategory;
@@ -55,12 +54,13 @@ public class RandomStore extends RxStoreForActivity {
      *
      * @param rxAction
      */
+    @Override
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case RandomActions.GET_PRODUCT_LIST:
                 mIsCreated = true;
-                mProductList.setValue(rxAction.get(RxActionCreator.RESPONSE));
+                mProductList.setValue(rxAction.getResponse());
                 break;
         }
     }

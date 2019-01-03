@@ -28,6 +28,11 @@ public class RandomActivity extends CommonRxActivity<RandomStore> {
         return intent;
     }
 
+    @Override
+    protected Fragment createFragment() {
+        return mProductListFragmentLazy.get();
+    }
+
     @Nullable
     @Override
     public RandomStore getRxStore() {
@@ -37,10 +42,5 @@ public class RandomActivity extends CommonRxActivity<RandomStore> {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         getRxStore().setCategory(getIntent().getStringExtra(GanConstants.Key.CATEGORY));
-    }
-
-    @Override
-    protected Fragment createFragment() {
-        return mProductListFragmentLazy.get();
     }
 }

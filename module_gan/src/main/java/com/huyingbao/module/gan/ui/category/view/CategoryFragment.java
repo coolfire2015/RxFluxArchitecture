@@ -44,7 +44,5 @@ public class CategoryFragment extends CommonRxFragment<CategoryStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        initActionBar("第二页");
     }
-
 }

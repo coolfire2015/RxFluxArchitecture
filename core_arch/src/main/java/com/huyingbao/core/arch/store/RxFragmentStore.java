@@ -37,7 +37,7 @@ import androidx.lifecycle.ViewModel;
  * 它还处理Activity/Fragment与应用程序的其余部分的通信（例如调用业务逻辑类）。
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class RxFragmentStore extends ViewModel implements RxActionDispatch{
+public abstract class RxFragmentStore extends ViewModel implements RxActionDispatch {
     private final RxDispatcher mRxDispatcher;
 
     public RxFragmentStore(RxDispatcher rxDispatcher) {
