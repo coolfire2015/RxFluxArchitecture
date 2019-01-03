@@ -25,7 +25,7 @@ import androidx.lifecycle.MutableLiveData;
 public class ArticleStore extends RxActivityStore {
     private final MutableLiveData<WanResponse<Page<Article>>> mArticleLiveData = new MutableLiveData<>();
     private final MutableLiveData<WanResponse<ArrayList<Banner>>> mBannerLiveData = new MutableLiveData<>();
-    private boolean mIsCreated;
+    private boolean mIsHasData;
 
     @Inject
     ArticleStore(RxDispatcher rxDispatcher) {
@@ -38,7 +38,7 @@ public class ArticleStore extends RxActivityStore {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mIsCreated = false;
+        mIsHasData = false;
         mArticleLiveData.setValue(null);
     }
 
@@ -53,9 +53,11 @@ public class ArticleStore extends RxActivityStore {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:
+                mIsHasData = true;
                 mArticleLiveData.setValue(rxAction.getResponse());
                 break;
             case ArticleAction.GET_BANNER_LIST:
+                mIsHasData = true;
                 mBannerLiveData.setValue(rxAction.getResponse());
                 break;
         }
@@ -69,7 +71,7 @@ public class ArticleStore extends RxActivityStore {
         return mBannerLiveData;
     }
 
-    public boolean isCreated() {
-        return mIsCreated;
+    public boolean isHasData() {
+        return mIsHasData;
     }
 }

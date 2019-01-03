@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2017/12/7.
  */
 @ActivityScope
-public class CategoryListFragment extends CommonRxFragment<RandomStore> {
+public class CategoryFragment extends CommonRxFragment<RandomStore> {
     @Inject
     MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -42,7 +42,7 @@ public class CategoryListFragment extends CommonRxFragment<RandomStore> {
     private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
 
     @Inject
-    public CategoryListFragment() {
+    public CategoryFragment() {
     }
 
     @Nullable
@@ -58,6 +58,7 @@ public class CategoryListFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        setTitle("目录");
         initRecyclerView();
         showData();
     }

@@ -22,13 +22,13 @@ import dagger.Lazy;
  */
 public class RandomActivity extends CommonRxActivity<RandomStore> {
     @Inject
-    Lazy<CategoryListFragment> mCategoryListFragmentLazy;
+    Lazy<CategoryFragment> mCategoryFragmentLazy;
     @Inject
     Lazy<ProductFragment> mProductListFragmentLazy;
 
     @Override
     protected Fragment createFragment() {
-        return mCategoryListFragmentLazy.get();
+        return mCategoryFragmentLazy.get();
     }
 
     @Nullable

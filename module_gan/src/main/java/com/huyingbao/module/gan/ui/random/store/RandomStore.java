@@ -31,7 +31,7 @@ import androidx.lifecycle.MutableLiveData;
 @Singleton
 public class RandomStore extends RxActivityStore {
     private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
-    private boolean mIsCreated;
+    private boolean mIsHasData;//true：已经获取到数据
     private String mCategory;
 
     @Inject
@@ -45,7 +45,8 @@ public class RandomStore extends RxActivityStore {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mIsCreated = false;
+        mCategory = null;
+        mIsHasData = false;
         mProductList.setValue(null);
     }
 
@@ -61,10 +62,11 @@ public class RandomStore extends RxActivityStore {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case RandomAction.GET_PRODUCT_LIST:
-                mIsCreated = true;
+                mIsHasData = true;
                 mProductList.setValue(rxAction.getResponse());
                 break;
             case RandomAction.TO_SHOW_DATA:
+                onCleared();//跳转页面，先清除旧数据
                 mCategory = rxAction.get(GanConstants.Key.CATEGORY);
                 postChange(RxChange.newRxChange(rxAction.getTag()));
                 break;
@@ -83,7 +85,7 @@ public class RandomStore extends RxActivityStore {
         mCategory = stringExtra;
     }
 
-    public boolean isCreated() {
-        return mIsCreated;
+    public boolean isHasData() {
+        return mIsHasData;
     }
 }

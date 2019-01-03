@@ -65,7 +65,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isCreated()) return;
+        if (getRxStore().isHasData()) return;
         refresh();
     }
 
@@ -97,8 +97,6 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         mAdapter = new ArticleAdapter(mDataList);
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
-        //设置加载动画
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }

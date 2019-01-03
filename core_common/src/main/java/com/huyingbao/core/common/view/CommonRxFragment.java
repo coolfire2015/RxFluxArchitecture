@@ -26,6 +26,7 @@ import butterknife.Unbinder;
 public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFluxFragment implements CommonView, RxFluxView {
     protected boolean mIsVisibleToUser;
     private Unbinder mUnbinder;
+    private String mTitle;
 
     @Nullable
     @Override
@@ -35,7 +36,7 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e("RxFlux", "6.1-onCreateView");
-        //setHasOptionsMenu(true);// fragment中创建菜单
+        setHasOptionsMenu(true);// fragment中创建菜单
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
         afterCreate(savedInstanceState);
@@ -89,5 +90,19 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        //从隐藏转为非隐藏的时候调用
+        if (!hidden) {//当前页面显示时，显示对应的标题
+            getActivity().setTitle(mTitle);
+        }
+    }
+
+    /**
+     * 设置页面标题
+     *
+     * @param title
+     */
+    protected void setTitle(String title) {
+        mTitle = title;
+        getActivity().setTitle(mTitle);
     }
 }

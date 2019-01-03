@@ -16,7 +16,6 @@ import io.reactivex.functions.Function;
  */
 public abstract class WanActionCreator extends RxActionCreator {
 
-
     public WanActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         super(rxDispatcher, rxActionManager);
     }

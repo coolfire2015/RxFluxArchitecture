@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
+import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
@@ -57,11 +58,12 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        setTitle(getRxStore().getCategory());
         initRecyclerView();
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isCreated()) return;
+        if (getRxStore().isHasData()) return;
         refresh();
     }
 
@@ -86,10 +88,9 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new ProductAdapter(mDataList);
+        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
-        //设置加载动画
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }

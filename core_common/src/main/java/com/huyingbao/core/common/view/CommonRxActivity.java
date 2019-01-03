@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.ButterKnife;
 
 
@@ -53,7 +54,11 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFlux
         afterCreate(savedInstanceState);
         ButterKnife.bind(this);
         //添加显示的Fragment
-        addFragmentReplaceExisting(createFragment());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        //从fragment队列中获取资源ID标识的fragment
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fl_content);
+        if (fragment != null) return;
+        fragmentManager.beginTransaction().add(R.id.fl_content, createFragment()).commit();
     }
 
     @Override

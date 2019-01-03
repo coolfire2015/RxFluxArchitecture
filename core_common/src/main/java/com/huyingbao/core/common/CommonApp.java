@@ -9,7 +9,6 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-import com.squareup.leakcanary.LeakCanary;
 
 import androidx.annotation.CallSuper;
 import androidx.multidex.MultiDex;
@@ -59,9 +58,10 @@ public abstract class CommonApp extends RxFluxApp {
                 return BuildConfig.DEBUG;
             }
         });
-        if (BuildConfig.DEBUG) {
-            if (LeakCanary.isInAnalyzerProcess(this)) return;
-            LeakCanary.install(this);
-        }
+        //TODO 使用Lazy加载Fragment导致内存泄露
+//        if (BuildConfig.DEBUG) {
+//            if (LeakCanary.isInAnalyzerProcess(this)) return;
+//            LeakCanary.install(this);
+//        }
     }
 }

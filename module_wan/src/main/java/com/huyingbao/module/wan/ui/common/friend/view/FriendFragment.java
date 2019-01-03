@@ -94,8 +94,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new WebSiteAdapter(mDataList);
-        //设置加载动画
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }

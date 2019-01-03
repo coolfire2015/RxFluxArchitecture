@@ -64,7 +64,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isCreated()) return;
+        if (getRxStore().isHasData()) return;
         refresh();
     }
 
