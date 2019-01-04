@@ -5,15 +5,12 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true">
-        <activity
-            android:name="com.huyingbao.module.gan.ui.main.view.MainActivity">
+        <activity android:name="com.huyingbao.module.gan.ui.main.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.huyingbao.module.gan.ui.random.view.RandomActivity"
-            android:label="@string/gan_category_gan" />
+        <activity android:name="com.huyingbao.module.gan.ui.random.view.RandomActivity" />
     </application>
 </manifest>
