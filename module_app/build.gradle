@@ -119,7 +119,7 @@ dependencies {
     //功能模块
     if (!isModuleAsApp.toBoolean()) {
         implementation project(':module_gan')
-        implementation project(':module_git')
+        implementation project(':module_wan')
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"

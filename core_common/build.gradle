@@ -70,7 +70,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
-    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:${LEAK_CANARY}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY}"
+//    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
+//    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:${LEAK_CANARY}"
+//    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY}"
 }
