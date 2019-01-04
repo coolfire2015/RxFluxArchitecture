@@ -38,14 +38,10 @@ dependencies {
     api project(':core_arch')
     //分包
     api "androidx.multidex:multidex:${MULTIDEX_X}"
-    //Lifecycle和ViewModel
-    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
-    api "androidx.lifecycle:lifecycle-reactivestreams:${ARCH_LIFECYCLE_VERSION_X}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //RecyclerView
     api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
-    api "com.google.android.material:material:${SUPPORT_VERSION_X}"
     //OkHttp
     api "com.squareup.okio:okio:${OKIO}"
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
