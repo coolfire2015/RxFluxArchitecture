@@ -95,8 +95,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new BannerAdapter(mDataList);
-        //设置加载动画
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }
