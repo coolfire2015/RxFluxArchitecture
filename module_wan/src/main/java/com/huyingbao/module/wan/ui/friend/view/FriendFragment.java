@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
@@ -82,11 +81,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
-        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-            }
-        });
     }
 
     /**
@@ -106,7 +100,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
         getRxStore().getWebSiteListData().observe(this, products -> {
             if (products == null) return;
             setData(products.getData());
-            mAdapter.setEnableLoadMore(true);
         });
     }
 

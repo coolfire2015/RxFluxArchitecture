@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
+import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
@@ -99,11 +99,6 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
-        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-            }
-        });
     }
 
     /**
@@ -112,6 +107,8 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new ArticleAdapter(mDataList);
+        //设置更多view
+        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //view设置适配器

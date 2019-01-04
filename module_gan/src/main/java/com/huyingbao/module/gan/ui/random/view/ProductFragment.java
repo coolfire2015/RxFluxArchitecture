@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
@@ -39,7 +38,6 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     RecyclerView mRvContent;
     private List<Product> mDataList;
     private BaseQuickAdapter mAdapter;
-    private int mNextRequestPage = 1;
 
     @Inject
     public ProductFragment() {
@@ -63,7 +61,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isHasData()) return;
+        if (getRxStore().getProductList().getValue() != null) return;
         refresh();
     }
 
@@ -74,12 +72,6 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
-        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //TODO 点击事件;
-            }
-        });
     }
 
     /**
@@ -88,6 +80,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     private void initAdapter() {
         mDataList = new ArrayList();
         mAdapter = new ProductAdapter(mDataList);
+        //设置更多view
         mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
@@ -102,7 +95,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
         getRxStore().getProductList().observe(this, products -> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
-            boolean isRefresh = mNextRequestPage == 1;
+            boolean isRefresh = getRxStore().getNextRequestPage() == 1;
             setData(isRefresh, products.getResults());
             mAdapter.setEnableLoadMore(true);
         });
@@ -112,16 +105,16 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * 刷新
      */
     private void refresh() {
-        mNextRequestPage = 1;
+        getRxStore().setNextRequestPage(1);
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, mNextRequestPage);
+        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, getRxStore().getNextRequestPage());
     }
 
     /**
      * 加载更多
      */
     private void loadMore() {
-        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, mNextRequestPage);
+        mActionCreator.getProductList(getRxStore().getCategory(), PAGE_SIZE, getRxStore().getNextRequestPage());
     }
 
     /**
@@ -131,10 +124,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * @param data
      */
     private void setData(boolean isRefresh, List<Product> data) {
-        mNextRequestPage++;
-        final int size = data == null
-                ? 0
-                : data.size();
+        final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);
         } else {

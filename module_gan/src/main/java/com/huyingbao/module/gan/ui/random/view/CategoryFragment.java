@@ -38,8 +38,8 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private List<String> mDataList = new ArrayList();
-    private BaseQuickAdapter mAdapter = new CategoryAdapter(mDataList);
+    private List<String> mDataList;
+    private BaseQuickAdapter mAdapter;
 
     @Inject
     public CategoryFragment() {
@@ -60,6 +60,7 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
     public void afterCreate(Bundle savedInstanceState) {
         setTitle(R.string.gan_label_category);
         initRecyclerView();
+        initAdapter();
         showData();
     }
 
@@ -69,7 +70,6 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
     private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        mRvContent.setAdapter(mAdapter);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
@@ -78,6 +78,16 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
                         GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });
+    }
+
+    /**
+     * 实例化adapter
+     */
+    private void initAdapter() {
+        mDataList = new ArrayList();
+        mAdapter = new CategoryAdapter(mDataList);
+        //view设置适配器
+        mRvContent.setAdapter(mAdapter);
     }
 
     /**

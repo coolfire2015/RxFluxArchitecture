@@ -24,9 +24,9 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class ArticleStore extends RxActivityStore {
-    private final MutableLiveData<WanResponse<Page<Article>>> mArticleLiveData = new MutableLiveData<>();
-    private final MutableLiveData<WanResponse<ArrayList<Banner>>> mBannerLiveData = new MutableLiveData<>();
-    private int mNextRequestPage = 1;//article 列表页数
+    private MutableLiveData<WanResponse<Page<Article>>> mArticleLiveData = new MutableLiveData<>();
+    private MutableLiveData<WanResponse<ArrayList<Banner>>> mBannerLiveData = new MutableLiveData<>();
+    private int mNextRequestPage = 1;//列表页数
 
     @Inject
     ArticleStore(RxDispatcher rxDispatcher) {
@@ -39,6 +39,7 @@ public class ArticleStore extends RxActivityStore {
     @Override
     protected void onCleared() {
         super.onCleared();
+        mNextRequestPage = 1;
         mArticleLiveData.setValue(null);
     }
 

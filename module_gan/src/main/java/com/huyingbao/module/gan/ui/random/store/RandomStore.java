@@ -31,6 +31,7 @@ import androidx.lifecycle.MutableLiveData;
 @Singleton
 public class RandomStore extends RxActivityStore {
     private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
+    private int mNextRequestPage = 1;//列表页数
     private String mCategory;
 
     @Inject
@@ -44,6 +45,7 @@ public class RandomStore extends RxActivityStore {
     @Override
     protected void onCleared() {
         super.onCleared();
+        mNextRequestPage = 1;
         mCategory = null;
         mProductList.setValue(null);
     }
@@ -60,6 +62,7 @@ public class RandomStore extends RxActivityStore {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case RandomAction.GET_PRODUCT_LIST:
+                mNextRequestPage++;
                 mProductList.setValue(rxAction.getResponse());
                 break;
             case RandomAction.TO_SHOW_DATA:
@@ -80,5 +83,13 @@ public class RandomStore extends RxActivityStore {
 
     public void setCategory(String stringExtra) {
         mCategory = stringExtra;
+    }
+
+    public int getNextRequestPage() {
+        return mNextRequestPage;
+    }
+
+    public void setNextRequestPage(int nextRequestPage) {
+        mNextRequestPage = nextRequestPage;
     }
 }

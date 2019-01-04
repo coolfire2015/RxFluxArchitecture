@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
@@ -15,14 +13,11 @@ import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,12 +64,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
         refresh();
     }
 
-    @Override
-    @Subscribe(sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-    }
-
     /**
      * 实例化RecyclerView
      */
@@ -82,11 +71,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
-        mRvContent.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-            }
-        });
     }
 
     /**
@@ -106,7 +90,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
         getRxStore().getBannerLiveData().observe(this, products -> {
             if (products == null) return;
             setData(products.getData());
-            mAdapter.setEnableLoadMore(true);
         });
     }
 
