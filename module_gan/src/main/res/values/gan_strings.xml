@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="gan_category_gan">干货集中营</string>
-    <string name="gan_category_wan">玩安卓</string>
-
     <string name="gan_label_main">主页</string>
-    <string name="gan_label_gan">@string/gan_category_gan</string>
+    <string name="gan_label_gan">干货集中营</string>
+    <string name="gan_label_category">目录</string>
+
+    <string name="gan_category_wan">玩安卓</string>
+    <string name="gan_category_gan">@string/gan_label_gan</string>
 
     <string-array name="gan_array_category">
         <item>all</item>

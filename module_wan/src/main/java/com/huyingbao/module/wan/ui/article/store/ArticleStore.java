@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.ui.article.store;
 
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
@@ -59,6 +60,11 @@ public class ArticleStore extends RxActivityStore {
             case ArticleAction.GET_BANNER_LIST:
                 mIsHasData = true;
                 mBannerLiveData.setValue(rxAction.getResponse());
+                break;
+            case ArticleAction.TO_BANNER:
+            case ArticleAction.TO_FRIEND:
+            case ArticleAction.TO_LOGIN:
+                postChange(RxChange.newRxChange(rxAction.getTag()));
                 break;
         }
     }

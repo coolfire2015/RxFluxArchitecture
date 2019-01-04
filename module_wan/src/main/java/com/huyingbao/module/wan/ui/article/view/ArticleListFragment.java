@@ -1,29 +1,29 @@
 package com.huyingbao.module.wan.ui.article.view;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
 import com.huyingbao.module.wan.R;
+import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
 import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
 import com.huyingbao.module.wan.ui.article.model.Article;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,6 +61,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
+        setTitle(R.string.wan_label_article);
         initRecyclerView();
         initAdapter();
         showData();
@@ -70,9 +71,26 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     }
 
     @Override
-    @Subscribe(sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        //菜单布局文件名同界面布局文件名
+        inflater.inflate(R.menu.wan_fragment_article_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_to_banner) {
+            mActionCreator.postLocalAction(ArticleAction.TO_BANNER);
+            return true;
+        } else if (item.getItemId() == R.id.menu_to_friend) {
+            mActionCreator.postLocalAction(ArticleAction.TO_FRIEND);
+            return true;
+        } else if (item.getItemId() == R.id.menu_to_login) {
+            mActionCreator.postLocalAction(ArticleAction.TO_LOGIN);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

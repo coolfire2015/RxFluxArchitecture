@@ -26,7 +26,7 @@ import butterknife.Unbinder;
 public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFluxFragment implements CommonView, RxFluxView {
     protected boolean mIsVisibleToUser;
     private Unbinder mUnbinder;
-    private String mTitle;
+    private CharSequence mTitle;
 
     @Nullable
     @Override
@@ -36,6 +36,7 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e("RxFlux", "6.1-onCreateView");
+        //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
         setHasOptionsMenu(true);// fragment中创建菜单
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
@@ -101,8 +102,12 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFlu
      *
      * @param title
      */
-    protected void setTitle(String title) {
+    protected void setTitle(CharSequence title) {
         mTitle = title;
         getActivity().setTitle(mTitle);
+    }
+
+    protected void setTitle(int titleId) {
+        setTitle(getText(titleId));
     }
 }
