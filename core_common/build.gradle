@@ -15,12 +15,6 @@ android {
         //版本信息
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
-        //Arouter
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
     //构建过程
     buildTypes {
@@ -64,6 +58,8 @@ dependencies {
     api "com.google.code.gson:gson:${GSON}"
     //Butterknife
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
+    //Arouter
+    api "com.alibaba:arouter-api:${AROUTER_API}"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //编译时生成

@@ -3,6 +3,7 @@ package com.huyingbao.core.common;
 
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.BuildConfig;
 import com.huyingbao.core.arch.RxFluxApp;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -27,6 +28,7 @@ public abstract class CommonApp extends RxFluxApp {
     @CallSuper//强制子类复写该方法时调用父方法
     public void onCreate() {
         super.onCreate();
+        initArouter();
         initDebug();
     }
 
@@ -39,6 +41,17 @@ public abstract class CommonApp extends RxFluxApp {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    /**
+     * 初始化Arouter
+     */
+    private void initArouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
 
     /**

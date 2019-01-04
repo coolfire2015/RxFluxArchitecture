@@ -27,7 +27,7 @@ public class ActivityUtils {
             @NonNull Fragment fragmentNew,
             boolean isHideOrReplace) {
         //如果已经添加则返回
-        if(fragmentNew.isAdded()) return;
+        if (fragmentNew.isAdded()) return;
         //1:管理fragment队列
         //2:管理fragment事务回退栈
         FragmentManager fragmentManager = activity.getSupportFragmentManager();

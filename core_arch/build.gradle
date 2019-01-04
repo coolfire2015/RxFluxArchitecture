@@ -14,12 +14,6 @@ android {
         //版本信息
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
-        //Arouter
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
     //构建过程
     buildTypes {
@@ -51,6 +45,4 @@ dependencies {
     //Dagger-Android
     api "com.google.dagger:dagger-android:${DAGGER}"
     api "com.google.dagger:dagger-android-support:${DAGGER}"
-    //Arouter
-    api "com.alibaba:arouter-api:${AROUTER_API}"
 }

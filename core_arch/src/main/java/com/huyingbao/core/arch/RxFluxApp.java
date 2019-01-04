@@ -1,8 +1,6 @@
 package com.huyingbao.core.arch;
 
 
-import com.alibaba.android.arouter.launcher.ARouter;
-
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerApplication;
@@ -26,17 +24,5 @@ public abstract class RxFluxApp extends DaggerApplication {
         //application创建的时候调用该方法，
         //使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
-        initArouter();
-    }
-
-    /**
-     * 初始化Arouter
-     */
-    private void initArouter() {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog();
-            ARouter.openDebug();
-        }
-        ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
 }

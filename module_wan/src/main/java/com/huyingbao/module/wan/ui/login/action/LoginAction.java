@@ -8,7 +8,7 @@ public interface LoginAction {
 
     void register(String username, String password, String repassword);
 
-    String LOGIN="login";
+    String LOGIN = "login";
 
     void login(String username, String password);
 }
