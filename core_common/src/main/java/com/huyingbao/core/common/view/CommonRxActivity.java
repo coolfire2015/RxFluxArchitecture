@@ -49,7 +49,7 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFlux
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("RxFlux", "1.1-onCreateActivity");
+        Log.v("RxFlux", "1.1-onCreateActivity");
         setContentView(getLayoutId());
         afterCreate(savedInstanceState);
         ButterKnife.bind(this);

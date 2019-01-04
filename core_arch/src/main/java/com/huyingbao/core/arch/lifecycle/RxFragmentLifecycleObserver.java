@@ -29,7 +29,7 @@ public class RxFragmentLifecycleObserver implements LifecycleObserver {
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
-        Log.e("RxFlux", "5.1-onCreateFragment");
+        Log.v("RxFlux", "5.1-onCreateFragment");
         if (mFragment instanceof RxFluxView) {
             RxActionDispatch rxStore = ((RxFluxView) mFragment).getRxStore();
             if (rxStore instanceof RxFragmentStore) {

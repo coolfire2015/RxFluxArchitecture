@@ -66,7 +66,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isHasData()) return;
+        if (getRxStore().getArticleLiveData().getValue() != null) return;
         refresh();
     }
 
@@ -145,6 +145,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * 加载更多
      */
     private void loadMore() {
+        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         mActionCreator.getArticleList(mNextRequestPage);
     }
 

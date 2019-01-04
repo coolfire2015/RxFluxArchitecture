@@ -30,7 +30,7 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
-        Log.e("RxFlux", "1.2-onCreateLifecycle ");
+        Log.v("RxFlux", "1.2-onCreateLifecycle ");
         if (mActivity instanceof RxFluxView) {
             RxActionDispatch rxStore = ((RxFluxView) mActivity).getRxStore();
             if (rxStore instanceof RxActivityStore) {
