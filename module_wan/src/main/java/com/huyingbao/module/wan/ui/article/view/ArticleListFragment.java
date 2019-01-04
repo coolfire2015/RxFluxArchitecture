@@ -42,7 +42,6 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     RecyclerView mRvContent;
     private List<Article> mDataList;
     private BaseQuickAdapter mAdapter;
-    private int mNextRequestPage = 1;
 
     @Inject
     public ArticleListFragment() {
@@ -126,7 +125,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         getRxStore().getArticleLiveData().observe(this, products -> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
-            boolean isRefresh = mNextRequestPage == 1;
+            boolean isRefresh = getRxStore().getNextRequestPage() == 1;
             setData(isRefresh, products.getData().getDatas());
             mAdapter.setEnableLoadMore(true);
         });
@@ -136,17 +135,16 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * 刷新
      */
     private void refresh() {
-        mNextRequestPage = 1;
+        getRxStore().setNextRequestPage(1);
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getArticleList(mNextRequestPage);
+        mActionCreator.getArticleList(getRxStore().getNextRequestPage());
     }
 
     /**
      * 加载更多
      */
     private void loadMore() {
-        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator.getArticleList(mNextRequestPage);
+        mActionCreator.getArticleList(getRxStore().getNextRequestPage());
     }
 
     /**
@@ -156,10 +154,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * @param data
      */
     private void setData(boolean isRefresh, List<Article> data) {
-        mNextRequestPage++;
-        final int size = data == null
-                ? 0
-                : data.size();
+        final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);
         } else {
