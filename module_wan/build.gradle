@@ -130,8 +130,8 @@ repositories {
 
 dependencies {
     //通用依赖模块
-    //api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.0.1'
-    api project(':core_common')
+    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.0.1'
+    //api project(':core_common')
     //CardView
     implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
     //编译时生成
