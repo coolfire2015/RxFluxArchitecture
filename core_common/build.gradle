@@ -50,7 +50,7 @@ dependencies {
     api "com.google.dagger:dagger-android-support:${DAGGER}"
 
     //内核
-    api 'com.github.coolfire2015.RxFluxArchitecture:core_arch:1.0.0'
+    api project(':core_arch')
 
     //分包
     api "androidx.multidex:multidex:${MULTIDEX_X}"
