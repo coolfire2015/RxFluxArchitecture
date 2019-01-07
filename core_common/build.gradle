@@ -34,8 +34,24 @@ android {
 }
 
 dependencies {
+    //使用
+    api "org.greenrobot:eventbus:${EVENTBUS}"
+    //版本兼容包
+    api "androidx.appcompat:appcompat:${APPCOMPAT_X}"
+    //ViewModelProviders
+    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
+    //RxJava
+    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
+    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
+    //Dagger
+    api "com.google.dagger:dagger:${DAGGER}"
+    //Dagger-Android
+    api "com.google.dagger:dagger-android:${DAGGER}"
+    api "com.google.dagger:dagger-android-support:${DAGGER}"
+
     //内核
     api 'com.github.coolfire2015.RxFluxArchitecture:core_arch:1.0.0'
+
     //分包
     api "androidx.multidex:multidex:${MULTIDEX_X}"
     //日志展示
@@ -61,8 +77,4 @@ dependencies {
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-
-//    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
-//    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:${LEAK_CANARY}"
-//    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY}"
 }

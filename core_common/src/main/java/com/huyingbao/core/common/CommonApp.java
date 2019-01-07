@@ -71,10 +71,5 @@ public abstract class CommonApp extends RxFluxApp {
                 return BuildConfig.DEBUG;
             }
         });
-        //TODO 使用Lazy加载Fragment导致内存泄露
-//        if (BuildConfig.DEBUG) {
-//            if (LeakCanary.isInAnalyzerProcess(this)) return;
-//            LeakCanary.install(this);
-//        }
     }
 }
