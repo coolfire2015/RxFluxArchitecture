@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = "com.github.coolfire2015"
+//apply plugin: 'com.github.dcendents.android-maven'
+//
+//group = "com.github.coolfire2015"
 
 android {
     //编译版本
