@@ -116,10 +116,10 @@ repositories {
 dependencies {
     //功能模块
     if (!isModuleAsApp.toBoolean()) {
-        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:1.0.0'
-        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:1.0.0'
-//        implementation project(':module_gan')
-//        implementation project(':module_wan')
+//        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:1.0.0'
+//        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:1.0.0'
+        implementation project(':module_gan')
+        implementation project(':module_wan')
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
