@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-//apply plugin: 'com.github.dcendents.android-maven'
-//
-//group = "com.github.coolfire2015"
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = "com.github.coolfire2015"
 
 android {
     //编译版本
@@ -34,26 +34,8 @@ android {
 }
 
 dependencies {
-    //使用
-    api "org.greenrobot:eventbus:${EVENTBUS}"
-    //版本兼容包
-    api "androidx.appcompat:appcompat:${APPCOMPAT_X}"
-    //ViewModelProviders
-    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
-    //RxJava
-    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
-    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
-    //Dagger
-    api "com.google.dagger:dagger:${DAGGER}"
-    //Dagger-Android
-    api "com.google.dagger:dagger-android:${DAGGER}"
-    api "com.google.dagger:dagger-android-support:${DAGGER}"
-
     //内核
-//    api project(':core_arch')
-//    api 'com.github.coolfire2015.RxFluxArchitecture:core_arch:1.0.0'
-    api(name: 'core_arch-release', ext: 'aar')
-
+    api project(':core_arch')
     //分包
     api "androidx.multidex:multidex:${MULTIDEX_X}"
     //日志展示
