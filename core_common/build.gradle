@@ -35,7 +35,7 @@ android {
 
 dependencies {
     //内核
-    api project(':core_arch')
+    api 'com.github.coolfire2015.RxFluxArchitecture:core_arch:1.0.0'
     //分包
     api "androidx.multidex:multidex:${MULTIDEX_X}"
     //日志展示
