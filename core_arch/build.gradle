@@ -34,17 +34,17 @@ android {
 
 dependencies {
     //使用
-    implementation "org.greenrobot:eventbus:${EVENTBUS}"
+    api "org.greenrobot:eventbus:${EVENTBUS}"
     //版本兼容包
-    implementation "androidx.appcompat:appcompat:${APPCOMPAT_X}"
+    api "androidx.appcompat:appcompat:${APPCOMPAT_X}"
     //ViewModelProviders
-    implementation "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
+    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
     //RxJava
-    implementation "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
-    implementation "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
+    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
+    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
     //Dagger
-    implementation "com.google.dagger:dagger:${DAGGER}"
+    api "com.google.dagger:dagger:${DAGGER}"
     //Dagger-Android
-    implementation "com.google.dagger:dagger-android:${DAGGER}"
-    implementation "com.google.dagger:dagger-android-support:${DAGGER}"
+    api "com.google.dagger:dagger-android:${DAGGER}"
+    api "com.google.dagger:dagger-android-support:${DAGGER}"
 }

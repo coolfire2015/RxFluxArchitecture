@@ -113,12 +113,15 @@ android {
 //仓库
 repositories {
     //本地仓库,添加aar支持
-    flatDir { dirs 'libs' }
+    flatDir { dirs '../libs' }
 }
 
 dependencies {
     //通用依赖模块
-    implementation project(':core_common')
+    //implementation project(':core_common')
+    api(name: 'core_arch-release', ext: 'aar')
+    api(name: 'core_common-release', ext: 'aar')
+//    implementation 'com.github.coolfire2015.RxFluxArchitecture:core_common:1.0.0'
     //CardView
     implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
     //编译时生成
