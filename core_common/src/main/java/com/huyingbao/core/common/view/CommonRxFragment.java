@@ -1,5 +1,6 @@
 package com.huyingbao.core.common.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,24 +10,46 @@ import android.view.ViewGroup;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.store.RxActionDispatch;
-import com.huyingbao.core.arch.view.RxFluxFragment;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonRxFragment<T extends RxActionDispatch> extends RxFluxFragment implements CommonView, RxFluxView {
+public abstract class CommonRxFragment<T extends RxActionDispatch> extends Fragment implements CommonView, RxFluxView, HasSupportFragmentInjector {
+    @Inject
+    protected ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+
     protected boolean mIsVisibleToUser;
     private Unbinder mUnbinder;
     private CharSequence mTitle;
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mChildFragmentInjector;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
 
     @Nullable
     @Override

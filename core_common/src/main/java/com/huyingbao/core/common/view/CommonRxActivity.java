@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.store.RxActivityStore;
-import com.huyingbao.core.arch.view.RxFluxActivity;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.model.CommonHttpException;
@@ -17,22 +16,39 @@ import com.huyingbao.core.common.util.ActivityUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 
 /**
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFluxActivity implements CommonView, RxFluxView {
+public abstract class CommonRxActivity<T extends RxActivityStore> extends AppCompatActivity implements CommonView, RxFluxView, HasSupportFragmentInjector {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
+    @Inject
+    protected ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return mChildFragmentInjector;
     }
 
     @Nullable
@@ -48,6 +64,7 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends RxFlux
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         Log.v("RxFlux", "1.1-onCreateActivity");
         setContentView(getLayoutId());

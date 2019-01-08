@@ -52,6 +52,7 @@ dependencies {
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //RecyclerView
     api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
+    api "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
     //OkHttp
     api "com.squareup.okio:okio:${OKIO}"
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
@@ -70,5 +71,6 @@ dependencies {
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

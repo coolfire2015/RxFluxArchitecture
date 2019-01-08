@@ -132,8 +132,6 @@ repositories {
 dependencies {
     //通用依赖模块
     api project(':core_common')
-    //CardView
-    implementation "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
     //编译时生成
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_LIFECYCLE_VERSION_X}"
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
