@@ -48,7 +48,7 @@ dependencies {
     //版本兼容包
     api "androidx.appcompat:appcompat:${APPCOMPAT_X}"
     //ViewModelProviders
-    api "androidx.lifecycle:lifecycle-extensions:${ARCH_LIFECYCLE_VERSION_X}"
+    api "androidx.lifecycle:lifecycle-extensions:${ARCH_X}"
     //RxJava
     api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
     api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"

@@ -16,6 +16,8 @@ import com.huyingbao.core.common.util.ActivityUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.lang.reflect.ParameterizedType;
+
 import javax.inject.Inject;
 
 import androidx.annotation.CallSuper;
@@ -26,6 +28,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
@@ -46,6 +49,8 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends AppCom
     @Inject
     DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
 
+    private T mStore;
+
     @Override
     public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
         return mChildFragmentInjector;
@@ -53,7 +58,13 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends AppCom
 
     @Nullable
     @Override
-    public abstract T getRxStore();
+    public T getRxStore() {
+        if (mStore == null) {
+            Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            mStore = ViewModelProviders.of(this, mViewModelFactory).get(tClass);
+        }
+        return mStore;
+    }
 
     /**
      * 提供activity需要显示的fragment

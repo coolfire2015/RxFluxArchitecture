@@ -22,8 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -44,12 +42,6 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
 
     @Inject
     public FriendFragment() {
-    }
-
-    @Nullable
-    @Override
-    public FriendStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(FriendStore.class);
     }
 
     @Override

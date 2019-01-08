@@ -56,7 +56,6 @@ public abstract class RxActivityStore extends ViewModel implements RxActionDispa
         mRxDispatcher.subscribeRxStore(this);
     }
 
-
     /**
      * 所关联对象（Activity/Fragment）销毁时调用该方法
      * 从dispatcher中解除注册

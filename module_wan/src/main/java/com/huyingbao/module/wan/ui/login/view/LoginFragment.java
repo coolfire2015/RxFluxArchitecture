@@ -15,8 +15,6 @@ import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -38,12 +36,6 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     @Inject
     public LoginFragment() {
 
-    }
-
-    @Nullable
-    @Override
-    public LoginStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(LoginStore.class);
     }
 
     @Override

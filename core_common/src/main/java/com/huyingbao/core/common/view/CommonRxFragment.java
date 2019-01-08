@@ -9,18 +9,21 @@ import android.view.ViewGroup;
 
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
-import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.lang.reflect.ParameterizedType;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.DispatchingAndroidInjector;
@@ -30,19 +33,32 @@ import dagger.android.support.HasSupportFragmentInjector;
 /**
  * Created by liujunfeng on 2017/12/7.
  */
-public abstract class CommonRxFragment<T extends RxActionDispatch> extends Fragment implements CommonView, RxFluxView, HasSupportFragmentInjector {
+public abstract class CommonRxFragment<T extends ViewModel> extends Fragment implements CommonView, RxFluxView, HasSupportFragmentInjector {
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
     @Inject
     DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
 
-    protected boolean mIsVisibleToUser;
+    private T mStore;
+
     private Unbinder mUnbinder;
     private CharSequence mTitle;
+
+    protected boolean mIsVisibleToUser;
 
     @Override
     public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
         return mChildFragmentInjector;
+    }
+
+    @Nullable
+    @Override
+    public T getRxStore() {
+        if (mStore == null) {
+            Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
+        }
+        return mStore;
     }
 
     @Override
@@ -50,10 +66,6 @@ public abstract class CommonRxFragment<T extends RxActionDispatch> extends Fragm
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
-
-    @Nullable
-    @Override
-    public abstract T getRxStore();
 
     @NonNull
     @Override

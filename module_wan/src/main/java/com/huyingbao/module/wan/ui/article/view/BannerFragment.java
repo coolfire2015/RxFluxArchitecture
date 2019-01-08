@@ -18,8 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -40,12 +38,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
 
     @Inject
     public BannerFragment() {
-    }
-
-    @Nullable
-    @Override
-    public ArticleStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(ArticleStore.class);
     }
 
     @Override
@@ -87,9 +79,9 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
      * 显示数据
      */
     private void showData() {
-        getRxStore().getBannerLiveData().observe(this, products -> {
-            if (products == null) return;
-            setData(products.getData());
+        getRxStore().getBannerLiveData().observe(this, bannerArrayList -> {
+            if (bannerArrayList == null) return;
+            setData(bannerArrayList);
         });
     }
 

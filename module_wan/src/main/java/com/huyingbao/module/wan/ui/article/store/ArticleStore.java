@@ -6,6 +6,7 @@ import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
+import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
 import com.huyingbao.module.wan.ui.article.model.Article;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
@@ -18,15 +19,23 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.paging.PagedList;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
 public class ArticleStore extends RxActivityStore {
-    private MutableLiveData<WanResponse<Page<Article>>> mArticleLiveData = new MutableLiveData<>();
-    private MutableLiveData<WanResponse<ArrayList<Banner>>> mBannerLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Article>> mArticleLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Banner>> mBannerLiveData = new MutableLiveData<>();
+    private ArticleAdapter mAdapter = new ArticleAdapter(new ArrayList());
     private int mNextRequestPage = 1;//列表页数
+
+    PagedList.Config myPagingConfig = new PagedList.Config.Builder()
+            .setPageSize(20)
+            .setPrefetchDistance(150)
+            .setEnablePlaceholders(true)
+            .build();
 
     @Inject
     ArticleStore(RxDispatcher rxDispatcher) {
@@ -41,6 +50,8 @@ public class ArticleStore extends RxActivityStore {
         super.onCleared();
         mNextRequestPage = 1;
         mArticleLiveData.setValue(null);
+        mBannerLiveData.setValue(null);
+        if (mAdapter.getData() != null) mAdapter.getData().clear();
     }
 
     /**
@@ -55,10 +66,12 @@ public class ArticleStore extends RxActivityStore {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:
                 mNextRequestPage++;
-                mArticleLiveData.setValue(rxAction.getResponse());
+                WanResponse<Page<Article>> articleResponse = rxAction.getResponse();
+                mArticleLiveData.setValue(articleResponse.getData().getDatas());
                 break;
             case ArticleAction.GET_BANNER_LIST:
-                mBannerLiveData.setValue(rxAction.getResponse());
+                WanResponse<ArrayList<Banner>> bannerResponse = rxAction.getResponse();
+                mBannerLiveData.setValue(bannerResponse.getData());
                 break;
             case ArticleAction.TO_BANNER:
             case ArticleAction.TO_FRIEND:
@@ -68,12 +81,16 @@ public class ArticleStore extends RxActivityStore {
         }
     }
 
-    public MutableLiveData<WanResponse<Page<Article>>> getArticleLiveData() {
+    public MutableLiveData<ArrayList<Article>> getArticleLiveData() {
         return mArticleLiveData;
     }
 
-    public MutableLiveData<WanResponse<ArrayList<Banner>>> getBannerLiveData() {
+    public MutableLiveData<ArrayList<Banner>> getBannerLiveData() {
         return mBannerLiveData;
+    }
+
+    public ArticleAdapter getAdapter() {
+        return mAdapter;
     }
 
     public int getNextRequestPage() {
