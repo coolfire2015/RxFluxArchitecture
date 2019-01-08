@@ -131,9 +131,10 @@ repositories {
 
 dependencies {
     //通用依赖模块
-    api project(':core_common')
+    //api project(':core_common')
+    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.2'
     //编译时生成
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_LIFECYCLE_VERSION_X}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_X}"
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
