@@ -57,4 +57,7 @@ dependencies {
     //Dagger-Android
     api "com.google.dagger:dagger-android:${DAGGER}"
     api "com.google.dagger:dagger-android-support:${DAGGER}"
+    //编译时生成
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
 }
