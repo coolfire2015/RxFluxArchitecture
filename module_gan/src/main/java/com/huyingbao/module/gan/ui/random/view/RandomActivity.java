@@ -31,12 +31,6 @@ public class RandomActivity extends CommonRxActivity<RandomStore> {
         return mCategoryFragmentLazy.get();
     }
 
-    @Nullable
-    @Override
-    public RandomStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(RandomStore.class);
-    }
-
     @Override
     public void afterCreate(Bundle savedInstanceState) {
     }

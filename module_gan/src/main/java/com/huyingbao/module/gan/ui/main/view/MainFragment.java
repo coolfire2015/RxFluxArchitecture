@@ -12,8 +12,6 @@ import com.huyingbao.module.gan.ui.main.store.MainStore;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import butterknife.OnClick;
 
 /**
@@ -28,11 +26,6 @@ public class MainFragment extends CommonRxFragment<MainStore> {
     public MainFragment() {
     }
 
-    @Nullable
-    @Override
-    public MainStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class);
-    }
 
     @Override
     public int getLayoutId() {

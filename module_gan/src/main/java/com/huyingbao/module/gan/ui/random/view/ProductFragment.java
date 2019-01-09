@@ -43,12 +43,6 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     public ProductFragment() {
     }
 
-    @Nullable
-    @Override
-    public RandomStore getRxStore() {
-        return ViewModelProviders.of(getActivity(), mViewModelFactory).get(RandomStore.class);
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.common_fragment_base_list;

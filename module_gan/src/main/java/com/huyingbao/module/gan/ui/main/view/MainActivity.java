@@ -15,9 +15,7 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
 
 /**
@@ -30,12 +28,6 @@ public class MainActivity extends CommonRxActivity<MainStore> {
     @Override
     protected Fragment createFragment() {
         return mMainFragmentLazy.get();
-    }
-
-    @Nullable
-    @Override
-    public MainStore getRxStore() {
-        return ViewModelProviders.of(this, mViewModelFactory).get(MainStore.class);
     }
 
     @Override
