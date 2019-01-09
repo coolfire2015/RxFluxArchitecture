@@ -15,13 +15,10 @@ import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
 import com.huyingbao.module.gan.ui.random.model.Product;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -36,7 +33,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
     RandomActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
-    private List<Product> mDataList;
+
     private BaseQuickAdapter mAdapter;
 
     @Inject
@@ -55,7 +52,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().getProductList().getValue() != null) return;
+        if (getRxStore().getProductListLiveData().getValue() != null) return;
         refresh();
     }
 
@@ -72,8 +69,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * 实例化adapter
      */
     private void initAdapter() {
-        mDataList = new ArrayList();
-        mAdapter = new ProductAdapter(mDataList);
+        mAdapter = new ProductAdapter(null);
         //设置更多view
         mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
@@ -86,7 +82,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * 显示数据
      */
     private void showData() {
-        getRxStore().getProductList().observe(this, products -> {
+        getRxStore().getProductListLiveData().observe(this, products -> {
             if (products == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = getRxStore().getNextRequestPage() == 1;
@@ -118,20 +114,14 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * @param data
      */
     private void setData(boolean isRefresh, List<Product> data) {
-        final int size = data == null ? 0 : data.size();
-        if (isRefresh) {
-            mAdapter.setNewData(data);
-        } else {
-            if (size > 0) {
-                mAdapter.addData(data);
-            }
-        }
-        if (size < PAGE_SIZE) {
+        final int size = data == null || data.size() == 0 ? 0 : data.size() % PAGE_SIZE;
+        mAdapter.setNewData(data);
+        if (size == 0) {
+            mAdapter.loadMoreComplete();
+        } else {//最后一页取回的数据不到PAGE_SIZE，说明没有更多数据，结束加载更多操作
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
             Toast.makeText(getContext(), "no more data", Toast.LENGTH_SHORT).show();
-        } else {
-            mAdapter.loadMoreComplete();
         }
     }
 }

@@ -132,8 +132,7 @@ repositories {
 dependencies {
     //通用依赖模块
     api project(':core_common')
-    //api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.2'
-    implementation "androidx.paging:paging-runtime:${ARCH_X}"
+    //api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.3'
     //编译时生成
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_X}"
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"

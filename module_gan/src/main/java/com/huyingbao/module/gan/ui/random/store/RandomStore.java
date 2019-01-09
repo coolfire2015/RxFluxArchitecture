@@ -11,6 +11,8 @@ import com.huyingbao.module.gan.ui.random.model.Product;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -30,7 +32,7 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class RandomStore extends RxActivityStore {
-    private MutableLiveData<GanResponse<Product>> mProductList = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mProductListLiveData = new MutableLiveData<>();
     private int mNextRequestPage = 1;//列表页数
     private String mCategory;
 
@@ -47,7 +49,7 @@ public class RandomStore extends RxActivityStore {
         super.onCleared();
         mNextRequestPage = 1;
         mCategory = null;
-        mProductList.setValue(null);
+        mProductListLiveData.setValue(null);
     }
 
     /**
@@ -63,7 +65,16 @@ public class RandomStore extends RxActivityStore {
         switch (rxAction.getTag()) {
             case RandomAction.GET_PRODUCT_LIST:
                 mNextRequestPage++;
-                mProductList.setValue(rxAction.getResponse());
+                mProductListLiveData.setValue(rxAction.getResponse());
+
+                GanResponse<Product> response = rxAction.getResponse();
+                if (mArticleLiveData.getValue() == null) {
+                    mArticleLiveData.setValue(response.getData().getDatas());
+                } else {
+                    mArticleLiveData.getValue().addAll(response.getData().getDatas());
+                    mArticleLiveData.setValue(mArticleLiveData.getValue());
+                }
+                mNextRequestPage++;
                 break;
             case RandomAction.TO_SHOW_DATA:
                 onCleared();//跳转页面，先清除旧数据
@@ -73,8 +84,8 @@ public class RandomStore extends RxActivityStore {
         }
     }
 
-    public MutableLiveData<GanResponse<Product>> getProductList() {
-        return mProductList;
+    public MutableLiveData<GanResponse<Product>> getProductListLiveData() {
+        return mProductListLiveData;
     }
 
     public String getCategory() {

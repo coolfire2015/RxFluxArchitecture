@@ -6,7 +6,6 @@ import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
-import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
 import com.huyingbao.module.wan.ui.article.model.Article;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
@@ -14,28 +13,21 @@ import com.huyingbao.module.wan.ui.article.model.Page;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.paging.PagedList;
 
 /**
  * Created by liujunfeng on 2017/12/7.
  */
 @Singleton
 public class ArticleStore extends RxActivityStore {
-    private MutableLiveData<ArrayList<Article>> mArticleLiveData = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<Banner>> mBannerLiveData = new MutableLiveData<>();
-    private ArticleAdapter mAdapter = new ArticleAdapter(new ArrayList());
+    private MutableLiveData<List<Article>> mArticleLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Banner>> mBannerLiveData = new MutableLiveData<>();
     private int mNextRequestPage = 1;//列表页数
-
-    PagedList.Config myPagingConfig = new PagedList.Config.Builder()
-            .setPageSize(20)
-            .setPrefetchDistance(150)
-            .setEnablePlaceholders(true)
-            .build();
 
     @Inject
     ArticleStore(RxDispatcher rxDispatcher) {
@@ -51,7 +43,6 @@ public class ArticleStore extends RxActivityStore {
         mNextRequestPage = 1;
         mArticleLiveData.setValue(null);
         mBannerLiveData.setValue(null);
-        if (mAdapter.getData() != null) mAdapter.getData().clear();
     }
 
     /**
@@ -65,9 +56,14 @@ public class ArticleStore extends RxActivityStore {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:
-                mNextRequestPage++;
                 WanResponse<Page<Article>> articleResponse = rxAction.getResponse();
-                mArticleLiveData.setValue(articleResponse.getData().getDatas());
+                if (mArticleLiveData.getValue() == null) {
+                    mArticleLiveData.setValue(articleResponse.getData().getDatas());
+                } else {
+                    mArticleLiveData.getValue().addAll(articleResponse.getData().getDatas());
+                    mArticleLiveData.setValue(mArticleLiveData.getValue());
+                }
+                mNextRequestPage++;
                 break;
             case ArticleAction.GET_BANNER_LIST:
                 WanResponse<ArrayList<Banner>> bannerResponse = rxAction.getResponse();
@@ -81,16 +77,12 @@ public class ArticleStore extends RxActivityStore {
         }
     }
 
-    public MutableLiveData<ArrayList<Article>> getArticleLiveData() {
+    public MutableLiveData<List<Article>> getArticleLiveData() {
         return mArticleLiveData;
     }
 
-    public MutableLiveData<ArrayList<Banner>> getBannerLiveData() {
+    public MutableLiveData<List<Banner>> getBannerLiveData() {
         return mBannerLiveData;
-    }
-
-    public ArticleAdapter getAdapter() {
-        return mAdapter;
     }
 
     public int getNextRequestPage() {

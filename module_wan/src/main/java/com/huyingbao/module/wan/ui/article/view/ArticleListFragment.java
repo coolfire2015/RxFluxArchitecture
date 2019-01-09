@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.view.CommonRxFragment;
@@ -14,6 +15,7 @@ import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
+import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter;
 import com.huyingbao.module.wan.ui.article.model.Article;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
@@ -35,6 +37,8 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     ArticleActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
+
+    private BaseQuickAdapter mAdapter;
 
     @Inject
     public ArticleListFragment() {
@@ -92,12 +96,13 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * 实例化adapter
      */
     private void initAdapter() {
+        mAdapter = new ArticleAdapter(null);
         //设置更多view
-        getRxStore().getAdapter().setLoadMoreView(new CommonLoadMoreView());
+        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
-        getRxStore().getAdapter().setOnLoadMoreListener(() -> loadMore(), mRvContent);
+        mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //view设置适配器
-        mRvContent.setAdapter(getRxStore().getAdapter());
+        mRvContent.setAdapter(mAdapter);
     }
 
     /**
@@ -109,7 +114,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = getRxStore().getNextRequestPage() == 1;
             setData(isRefresh, articleArrayList);
-            getRxStore().getAdapter().setEnableLoadMore(true);
+            mAdapter.setEnableLoadMore(true);
         });
     }
 
@@ -118,7 +123,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      */
     private void refresh() {
         getRxStore().setNextRequestPage(1);
-        getRxStore().getAdapter().setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
+        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         mActionCreator.getArticleList(getRxStore().getNextRequestPage());
     }
 
@@ -136,20 +141,14 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      * @param data
      */
     private void setData(boolean isRefresh, List<Article> data) {
-        final int size = data == null ? 0 : data.size();
-        if (isRefresh) {
-            getRxStore().getAdapter().setNewData(data);
-        } else {
-            if (size > 0) {
-                getRxStore().getAdapter().addData(data);
-            }
-        }
-        if (size < PAGE_SIZE) {
+        final int size = data == null || data.size() == 0 ? 0 : data.size() % PAGE_SIZE;
+        mAdapter.setNewData(data);
+        if (size == 0) {
+            mAdapter.loadMoreComplete();
+        } else {//最后一页取回的数据不到PAGE_SIZE，说明没有更多数据，结束加载更多操作
             //第一页如果不够一页就不显示没有更多数据布局
-            getRxStore().getAdapter().loadMoreEnd(isRefresh);
+            mAdapter.loadMoreEnd(isRefresh);
             Toast.makeText(getContext(), "no more data", Toast.LENGTH_SHORT).show();
-        } else {
-            getRxStore().getAdapter().loadMoreComplete();
         }
     }
 }
