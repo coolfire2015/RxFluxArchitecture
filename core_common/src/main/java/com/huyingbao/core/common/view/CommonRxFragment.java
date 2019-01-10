@@ -31,7 +31,7 @@ import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonRxFragment<T extends ViewModel> extends Fragment implements CommonView, RxFluxView, HasSupportFragmentInjector {
     @Inject

@@ -14,7 +14,7 @@ import io.reactivex.disposables.Disposable;
  * 订阅管理类
  * 将action与action处理事件连接起来，
  * action的tag作为key
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public final class RxActionManager {

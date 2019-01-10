@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by liujunfeng on 2019/1/2.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class LoginStore extends RxActivityStore {

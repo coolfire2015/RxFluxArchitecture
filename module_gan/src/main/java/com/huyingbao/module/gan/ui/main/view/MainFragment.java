@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import butterknife.OnClick;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class MainFragment extends CommonRxFragment<MainStore> {

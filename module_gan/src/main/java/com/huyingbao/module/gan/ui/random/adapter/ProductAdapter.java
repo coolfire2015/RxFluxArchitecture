@@ -10,7 +10,7 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public class ProductAdapter extends BaseQuickAdapter<Product, BaseViewHolder> {
     public ProductAdapter(@Nullable List<Product> data) {

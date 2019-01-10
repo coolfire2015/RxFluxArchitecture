@@ -12,7 +12,7 @@ import dagger.android.support.DaggerApplication;
  * HasSupportFragmentInjector、
  * HasServiceInjector、
  * HasBroadcastReceiverInjector
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class RxFluxApp extends DaggerApplication {
     @Inject

@@ -37,7 +37,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * 带有toolbar的Activity父类
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonRxActivity<T extends RxActivityStore> extends AppCompatActivity implements CommonView, RxFluxView, HasSupportFragmentInjector {
     static {//Vector使用

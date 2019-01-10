@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  * 所有订阅了这个Action的Store会接收到订阅的Action并消化Action，
  * 然后Store会发送UI状态改变的事件给相关的Activity（或Fragment)，
  * Activity在收到状态发生改变的事件之后，开始更新UI（更新UI的过程中会从Store获取所有需要的数据）。
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class RxActionCreator {
     private final RxDispatcher mRxDispatcher;

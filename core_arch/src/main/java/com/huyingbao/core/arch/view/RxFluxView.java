@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface RxFluxView<T extends ViewModel> {
     @Nullable

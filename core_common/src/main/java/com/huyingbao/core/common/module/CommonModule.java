@@ -18,7 +18,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module(includes = RxFluxModule.class)
 public abstract class CommonModule {

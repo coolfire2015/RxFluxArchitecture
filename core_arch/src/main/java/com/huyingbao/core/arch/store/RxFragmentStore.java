@@ -35,7 +35,7 @@ import androidx.lifecycle.ViewModel;
  * ViewModel类旨在存储和管理与UI相关的数据，
  * 以便数据在诸如屏幕旋转之类的配置更改中生存下来。
  * 它还处理Activity/Fragment与应用程序的其余部分的通信（例如调用业务逻辑类）。
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class RxFragmentStore extends ViewModel implements RxActionDispatch {
     private final RxDispatcher mRxDispatcher;

@@ -31,7 +31,7 @@ import androidx.fragment.app.FragmentManager;
  * 并且注销每个activity剩余的订阅subscriptions
  * <p>
  * 抽象的类并不能实例化
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {

@@ -16,7 +16,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface WanApi {
     @FormUrlEncoded
