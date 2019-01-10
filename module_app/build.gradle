@@ -124,4 +124,5 @@ dependencies {
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }
