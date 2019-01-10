@@ -82,11 +82,11 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
      * 显示数据
      */
     private void showData() {
-        getRxStore().getProductListLiveData().observe(this, products -> {
-            if (products == null) return;
+        getRxStore().getProductListLiveData().observe(this, productList -> {
+            if (productList == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = getRxStore().getNextRequestPage() == 1;
-            setData(isRefresh, products.getResults());
+            setData(isRefresh, productList);
             mAdapter.setEnableLoadMore(true);
         });
     }

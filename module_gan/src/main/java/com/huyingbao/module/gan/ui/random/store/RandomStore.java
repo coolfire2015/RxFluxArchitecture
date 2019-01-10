@@ -64,15 +64,12 @@ public class RandomStore extends RxActivityStore {
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case RandomAction.GET_PRODUCT_LIST:
-                mNextRequestPage++;
-                mProductListLiveData.setValue(rxAction.getResponse());
-
                 GanResponse<Product> response = rxAction.getResponse();
-                if (mArticleLiveData.getValue() == null) {
-                    mArticleLiveData.setValue(response.getData().getDatas());
+                if (mProductListLiveData.getValue() == null) {
+                    mProductListLiveData.setValue(response.getResults());
                 } else {
-                    mArticleLiveData.getValue().addAll(response.getData().getDatas());
-                    mArticleLiveData.setValue(mArticleLiveData.getValue());
+                    mProductListLiveData.getValue().addAll(response.getResults());
+                    mProductListLiveData.setValue(mProductListLiveData.getValue());
                 }
                 mNextRequestPage++;
                 break;
@@ -84,7 +81,7 @@ public class RandomStore extends RxActivityStore {
         }
     }
 
-    public MutableLiveData<GanResponse<Product>> getProductListLiveData() {
+    public MutableLiveData<List<Product>> getProductListLiveData() {
         return mProductListLiveData;
     }
 
