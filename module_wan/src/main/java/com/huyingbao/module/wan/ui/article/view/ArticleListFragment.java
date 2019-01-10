@@ -51,7 +51,7 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_article);
+        setTitle(R.string.wan_label_article,true);
         initRecyclerView();
         initAdapter();
         showData();

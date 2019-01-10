@@ -45,7 +45,7 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_login);
+        setTitle(R.string.wan_label_login,true);
     }
 
     @OnClick(R2.id.btn_login)

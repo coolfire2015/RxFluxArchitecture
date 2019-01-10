@@ -47,7 +47,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_banner);
+        setTitle(R.string.wan_label_banner,true);
         initRecyclerView();
         initAdapter();
         showData();

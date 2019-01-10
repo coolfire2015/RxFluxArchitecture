@@ -34,7 +34,7 @@ public class MainFragment extends CommonRxFragment<MainStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.gan_label_main);
+        setTitle(R.string.gan_label_main,false);
     }
 
     @OnClick(R2.id.btn_category_gan)

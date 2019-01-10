@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.common.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,6 +22,9 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -42,7 +47,13 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
     private T mStore;
 
     private Unbinder mUnbinder;
+
+    private boolean mBackAble;
     private CharSequence mTitle;
+
+    private TextView mTvTop;
+    private Toolbar mToolbarTop;
+    private ActionBar mActionBarTop;
 
     protected boolean mIsVisibleToUser;
 
@@ -63,6 +74,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
 
     @Override
     public void onAttach(Context context) {
+        initActionBar();
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
@@ -128,21 +140,39 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
         super.onHiddenChanged(hidden);
         //从隐藏转为非隐藏的时候调用
         if (!hidden) {//当前页面显示时，显示对应的标题
-            getActivity().setTitle(mTitle);
+            setTitle(mTitle,mBackAble);
         }
     }
 
-    /**
-     * 设置页面标题
-     *
-     * @param title
-     */
-    protected void setTitle(CharSequence title) {
-        mTitle = title;
-        getActivity().setTitle(mTitle);
+    private void initActionBar() {
+        View view = getActivity().getWindow().getDecorView();
+        mToolbarTop = view.findViewById(R.id.tlb_top);
+        mTvTop = view.findViewById(R.id.tv_top_title);
+        if(mToolbarTop==null) return;
+        //取代原本的actionbar
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbarTop);
+        //设置actionbar
+        mActionBarTop = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        if (mActionBarTop == null) return;
+        //不显示home图标
+        mActionBarTop.setDisplayShowHomeEnabled(false);
+        //不显示标题
+        mActionBarTop.setDisplayShowTitleEnabled(false);
     }
 
-    protected void setTitle(int titleId) {
-        setTitle(getText(titleId));
+    protected void setTitle(CharSequence title,boolean backAble) {
+        mBackAble=backAble;
+        mTitle = title;
+        if(mTvTop==null) return;
+        //设置标题
+        mTvTop.setText(mTitle);
+        if(mActionBarTop==null) return;
+        //显示右侧返回图标
+        mActionBarTop.setDisplayHomeAsUpEnabled(backAble);
+        if (backAble) mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
+    }
+
+    protected void setTitle(int titleId,boolean backAble) {
+        setTitle(getText(titleId),backAble);
     }
 }

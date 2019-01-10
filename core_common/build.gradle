@@ -51,8 +51,9 @@ dependencies {
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //RecyclerView
-    api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
     api "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
+    api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
+    api "com.google.android.material:material:${SUPPORT_VERSION_X}"
     //OkHttp
     api "com.squareup.okio:okio:${OKIO}"
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
