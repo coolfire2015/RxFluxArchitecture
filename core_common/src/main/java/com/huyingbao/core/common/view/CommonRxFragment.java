@@ -74,7 +74,6 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
 
     @Override
     public void onAttach(Context context) {
-        initActionBar();
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
@@ -85,6 +84,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
         Log.v("RxFlux", "6.1-onCreateView");
         //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
         setHasOptionsMenu(true);// fragment中创建菜单
+        initActionBar();//实例化宿主Activity中的ActionBar
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
         afterCreate(savedInstanceState);
@@ -140,7 +140,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
         super.onHiddenChanged(hidden);
         //从隐藏转为非隐藏的时候调用
         if (!hidden) {//当前页面显示时，显示对应的标题
-            setTitle(mTitle,mBackAble);
+            setTitle(mTitle, mBackAble);
         }
     }
 
@@ -148,11 +148,11 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
         View view = getActivity().getWindow().getDecorView();
         mToolbarTop = view.findViewById(R.id.tlb_top);
         mTvTop = view.findViewById(R.id.tv_top_title);
-        if(mToolbarTop==null) return;
+        if (mToolbarTop == null || !(getActivity() instanceof AppCompatActivity)) return;
         //取代原本的actionbar
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbarTop);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbarTop);
         //设置actionbar
-        mActionBarTop = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBarTop = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (mActionBarTop == null) return;
         //不显示home图标
         mActionBarTop.setDisplayShowHomeEnabled(false);
@@ -160,19 +160,19 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
         mActionBarTop.setDisplayShowTitleEnabled(false);
     }
 
-    protected void setTitle(CharSequence title,boolean backAble) {
-        mBackAble=backAble;
+    protected void setTitle(CharSequence title, boolean backAble) {
+        mBackAble = backAble;
         mTitle = title;
-        if(mTvTop==null) return;
+        if (mTvTop == null) return;
         //设置标题
         mTvTop.setText(mTitle);
-        if(mActionBarTop==null) return;
+        if (mActionBarTop == null) return;
         //显示右侧返回图标
         mActionBarTop.setDisplayHomeAsUpEnabled(backAble);
         if (backAble) mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
     }
 
-    protected void setTitle(int titleId,boolean backAble) {
-        setTitle(getText(titleId),backAble);
+    protected void setTitle(int titleId, boolean backAble) {
+        setTitle(getText(titleId), backAble);
     }
 }
