@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public class ActivityUtils {
     /**

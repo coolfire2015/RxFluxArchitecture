@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2019/1/2.
+ * Created by liujunfeng on 2019/1/1.
  */
 public class LoginActivity extends CommonRxActivity<LoginStore> {
     @Inject

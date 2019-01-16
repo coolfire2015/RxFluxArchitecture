@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Route(path = "/wan/ArticleActivity")
 public class ArticleActivity extends CommonRxActivity<ArticleStore> {

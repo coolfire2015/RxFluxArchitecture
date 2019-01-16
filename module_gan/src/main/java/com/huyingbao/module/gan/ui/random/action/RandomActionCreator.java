@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 /**
  * rxAction创建发送管理类
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class RandomActionCreator extends RxActionCreator implements RandomAction {

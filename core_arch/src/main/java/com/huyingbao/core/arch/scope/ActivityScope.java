@@ -49,7 +49,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Component dependencies 可以很清楚的得知他依赖哪个Component，
  * 而Subcomponent不知道它自己的谁的孩子
  * <p>
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Scope
 @Retention(RUNTIME)//编译检测，防止不规范使用，SubComponent必须使用和父Component不同的Scope标示

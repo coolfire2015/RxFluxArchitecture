@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  * 所有订阅了这个Action的Store会接收到订阅的Action并消化Action，
  * 然后Store会发送UI状态改变的事件给相关的Activity（或Fragment)，
  * Activity在收到状态发生改变的事件之后，开始更新UI（更新UI的过程中会从Store获取所有需要的数据）。
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class RxActionCreator {
     private final RxDispatcher mRxDispatcher;
@@ -27,16 +27,6 @@ public abstract class RxActionCreator {
     public RxActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
         this.mRxDispatcher = rxDispatcher;
         this.mRxActionManager = rxActionManager;
-    }
-
-    /**
-     * 发送本地action
-     *
-     * @param actionId
-     * @param data
-     */
-    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
-        postRxAction(newRxAction(actionId, data));
     }
 
     /**
@@ -108,7 +98,7 @@ public abstract class RxActionCreator {
      * @param action
      * @param throwable
      */
-    private void postError(@NonNull RxAction action, Throwable throwable) {
+    protected void postError(@NonNull RxAction action, Throwable throwable) {
         mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
         removeRxAction(action);
     }
@@ -121,18 +111,7 @@ public abstract class RxActionCreator {
      */
     protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
         if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, getDisposable(rxAction, httpObservable));
-    }
-
-    /**
-     * 调用网络接口,传入接口自己的回调
-     *
-     * @param rxAction
-     * @param httpObservable
-     * @return
-     */
-    private <T> Disposable getDisposable(RxAction rxAction, Observable<T> httpObservable) {
-        return httpObservable// 1:指定IO线程
+        addRxAction(rxAction, httpObservable// 1:指定IO线程
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
                 .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
                 .subscribe(// 2:指定主线程
@@ -140,7 +119,19 @@ public abstract class RxActionCreator {
                             rxAction.setResponse(response);
                             postRxAction(rxAction);
                         },
-                        throwable -> postError(rxAction, throwable)
-                );
+                        throwable -> {
+                            postError(rxAction, throwable);
+                        }
+                ));
+    }
+
+    /**
+     * 发送本地action
+     *
+     * @param actionId
+     * @param data
+     */
+    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
+        postRxAction(newRxAction(actionId, data));
     }
 }

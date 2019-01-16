@@ -1,7 +1,7 @@
 package com.huyingbao.module.gan.ui.random.action;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface RandomAction {
     String TO_SHOW_DATA = "to_show_data";

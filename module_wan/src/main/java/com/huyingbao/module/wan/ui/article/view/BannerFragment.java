@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class BannerFragment extends CommonRxFragment<ArticleStore> {
@@ -47,7 +47,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_banner);
+        setTitle(R.string.wan_label_banner,true);
         initRecyclerView();
         initAdapter();
         showData();

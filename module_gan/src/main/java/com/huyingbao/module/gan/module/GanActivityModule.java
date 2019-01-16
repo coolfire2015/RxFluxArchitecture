@@ -10,7 +10,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module
 abstract class GanActivityModule {

@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class FriendFragment extends CommonRxFragment<FriendStore> {
@@ -51,7 +51,7 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_friend);
+        setTitle(R.string.wan_label_friend,true);
         initRecyclerView();
         initAdapter();
         showData();

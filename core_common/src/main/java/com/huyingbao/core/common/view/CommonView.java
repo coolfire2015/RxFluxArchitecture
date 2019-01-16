@@ -3,7 +3,7 @@ package com.huyingbao.core.common.view;
 import android.os.Bundle;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface CommonView {
     int getLayoutId();

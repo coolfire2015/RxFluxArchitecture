@@ -28,7 +28,7 @@ import androidx.lifecycle.MutableLiveData;
  * ViewModel对象在获取ViewModel时被限定为传递给ViewModelProvider的生命周期。
  * ViewModel保留在内存中，直到Activity销毁或Fragment分离之前。
  * <p>
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class RandomStore extends RxActivityStore {

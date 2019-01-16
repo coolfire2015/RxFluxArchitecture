@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class ProductFragment extends CommonRxFragment<RandomStore> {
@@ -47,7 +47,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(getRxStore().getCategory());
+        setTitle(getRxStore().getCategory(),true);
         initRecyclerView();
         initAdapter();
         showData();

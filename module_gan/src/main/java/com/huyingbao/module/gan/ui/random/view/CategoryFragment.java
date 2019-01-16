@@ -21,15 +21,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
  * 内容类型列表展示页面
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class CategoryFragment extends CommonRxFragment<RandomStore> {
@@ -52,7 +50,7 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.gan_label_category);
+        setTitle(R.string.gan_label_category,true);
         initRecyclerView();
         initAdapter();
         showData();

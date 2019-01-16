@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Module其实是一个简单工厂模式，Module里面的方法基本都是创建类实例的方法。
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module
 public abstract class GanModule {

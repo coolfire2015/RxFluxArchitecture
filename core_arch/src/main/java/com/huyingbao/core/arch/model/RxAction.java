@@ -5,7 +5,7 @@ import androidx.collection.ArrayMap;
 
 /**
  * action封装类，用于传递数据，使用Builder创建
- * Created by liujunfeng on 2017/12/7.
+ * Created by liujunfeng on 2019/1/1.
  */
 public class RxAction extends RxEvent {
     private static final String RESPONSE = "response";
