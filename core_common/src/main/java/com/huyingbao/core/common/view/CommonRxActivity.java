@@ -45,7 +45,7 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends AppCom
     }
 
     @Inject
-    protected ViewModelProvider.Factory mViewModelFactory;
+    ViewModelProvider.Factory mViewModelFactory;
     @Inject
     DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
 

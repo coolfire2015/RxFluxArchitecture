@@ -2,7 +2,6 @@ package com.huyingbao.core.common.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,21 +30,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonRxFragment<T extends ViewModel> extends Fragment implements CommonView, RxFluxView, HasSupportFragmentInjector {
+public abstract class CommonRxFragment<T extends ViewModel> extends Fragment implements CommonView, RxFluxView {
     @Inject
-    protected ViewModelProvider.Factory mViewModelFactory;
-    @Inject
-    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
+    ViewModelProvider.Factory mViewModelFactory;
 
     private T mStore;
-
     private Unbinder mUnbinder;
 
     private boolean mBackAble;
@@ -56,11 +50,6 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
     private ActionBar mActionBarTop;
 
     protected boolean mIsVisibleToUser;
-
-    @Override
-    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
-        return mChildFragmentInjector;
-    }
 
     @Nullable
     @Override
@@ -74,21 +63,34 @@ public abstract class CommonRxFragment<T extends ViewModel> extends Fragment imp
 
     @Override
     public void onAttach(Context context) {
+        //依赖注入
         AndroidSupportInjection.inject(this);
+        //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
+        //fragment中创建菜单
+        setHasOptionsMenu(true);
+        //实例化宿主Activity中的ActionBar
+        initActionBar();
         super.onAttach(context);
     }
 
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v("RxFlux", "6.1-onCreateView");
-        //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
-        setHasOptionsMenu(true);// fragment中创建菜单
-        initActionBar();//实例化宿主Activity中的ActionBar
-        View rootView = inflater.inflate(getLayoutId(), container, false);
-        mUnbinder = ButterKnife.bind(this, rootView);
+        return inflater.inflate(getLayoutId(), container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //ButterKnife绑定
+        mUnbinder = ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // view创建之后的操作
         afterCreate(savedInstanceState);
-        return rootView;
     }
 
     /**

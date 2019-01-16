@@ -21,8 +21,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;

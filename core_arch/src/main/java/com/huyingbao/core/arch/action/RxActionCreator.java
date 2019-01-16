@@ -30,16 +30,6 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 发送本地action
-     *
-     * @param actionId
-     * @param data
-     */
-    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
-        postRxAction(newRxAction(actionId, data));
-    }
-
-    /**
      * 创建新的RxAction
      *
      * @param tag  action tag对应具体是什么样的方法
@@ -108,7 +98,7 @@ public abstract class RxActionCreator {
      * @param action
      * @param throwable
      */
-    private void postError(@NonNull RxAction action, Throwable throwable) {
+    protected void postError(@NonNull RxAction action, Throwable throwable) {
         mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
         removeRxAction(action);
     }
@@ -121,18 +111,7 @@ public abstract class RxActionCreator {
      */
     protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
         if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, getDisposable(rxAction, httpObservable));
-    }
-
-    /**
-     * 调用网络接口,传入接口自己的回调
-     *
-     * @param rxAction
-     * @param httpObservable
-     * @return
-     */
-    private <T> Disposable getDisposable(RxAction rxAction, Observable<T> httpObservable) {
-        return httpObservable// 1:指定IO线程
+        addRxAction(rxAction, httpObservable// 1:指定IO线程
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
                 .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
                 .subscribe(// 2:指定主线程
@@ -140,7 +119,19 @@ public abstract class RxActionCreator {
                             rxAction.setResponse(response);
                             postRxAction(rxAction);
                         },
-                        throwable -> postError(rxAction, throwable)
-                );
+                        throwable -> {
+                            postError(rxAction, throwable);
+                        }
+                ));
+    }
+
+    /**
+     * 发送本地action
+     *
+     * @param actionId
+     * @param data
+     */
+    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
+        postRxAction(newRxAction(actionId, data));
     }
 }
