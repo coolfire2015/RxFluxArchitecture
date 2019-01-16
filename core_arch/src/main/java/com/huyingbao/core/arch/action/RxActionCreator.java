@@ -87,7 +87,7 @@ public abstract class RxActionCreator {
      *
      * @param action
      */
-    private void postRxAction(@NonNull RxAction action) {
+    protected void postRxAction(@NonNull RxAction action) {
         mRxDispatcher.postRxAction(action);
         removeRxAction(action);
     }
@@ -98,7 +98,7 @@ public abstract class RxActionCreator {
      * @param action
      * @param throwable
      */
-    protected void postError(@NonNull RxAction action, Throwable throwable) {
+    protected void postRxError(@NonNull RxAction action, Throwable throwable) {
         mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
         removeRxAction(action);
     }
@@ -120,7 +120,7 @@ public abstract class RxActionCreator {
                             postRxAction(rxAction);
                         },
                         throwable -> {
-                            postError(rxAction, throwable);
+                            postRxError(rxAction, throwable);
                         }
                 ));
     }
