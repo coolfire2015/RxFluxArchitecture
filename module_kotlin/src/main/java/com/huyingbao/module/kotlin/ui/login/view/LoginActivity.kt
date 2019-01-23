@@ -1,0 +1,38 @@
+package com.huyingbao.module.kotlin.ui.login.view
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.common.view.CommonRxActivity
+import com.huyingbao.module.kotlin.ui.article.view.ArticleActivity
+import com.huyingbao.module.kotlin.ui.login.action.LoginAction
+import com.huyingbao.module.kotlin.ui.login.store.LoginStore
+import dagger.Lazy
+import org.greenrobot.eventbus.Subscribe
+import javax.inject.Inject
+
+/**
+ * Created by liujunfeng on 2019/1/1.
+ */
+class LoginActivity : CommonRxActivity<LoginStore>() {
+    @Inject
+    internal var mLoginFragmentLazy: Lazy<LoginFragment>? = null
+
+    override fun createFragment(): Fragment {
+        return mLoginFragmentLazy!!.get()
+    }
+
+    override fun afterCreate(savedInstanceState: Bundle) {}
+
+    @Subscribe(sticky = true)
+    override fun onRxChanged(rxChange: RxChange) {
+        super.onRxChanged(rxChange)
+        when (rxChange.tag) {
+            LoginAction.LOGIN -> {
+                startActivity(Intent(this, ArticleActivity::class.java))
+                finish()
+            }
+        }
+    }
+}
