@@ -17,17 +17,17 @@ import dagger.android.ContributesAndroidInjector
 abstract class KotlinActivityModule {
     @FragmentScope
     @ContributesAndroidInjector
-    internal abstract fun injectArticleListFragment(): ArticleListFragment
+    abstract fun injectArticleListFragment(): ArticleListFragment
 
     @FragmentScope
     @ContributesAndroidInjector
-    internal abstract fun injectBannerFragment(): BannerFragment
+    abstract fun injectBannerFragment(): BannerFragment
 
     @FragmentScope
     @ContributesAndroidInjector
-    internal abstract fun injectFriendFragment(): FriendFragment
+    abstract fun injectFriendFragment(): FriendFragment
 
     @FragmentScope
     @ContributesAndroidInjector
-    internal abstract fun injectLoginFragment(): LoginFragment
+    abstract fun injectLoginFragment(): LoginFragment
 }

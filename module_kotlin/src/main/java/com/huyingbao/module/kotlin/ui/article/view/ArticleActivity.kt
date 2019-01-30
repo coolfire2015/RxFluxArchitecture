@@ -20,11 +20,11 @@ import javax.inject.Inject
 @Route(path = "/kotlin/ArticleActivity")
 class ArticleActivity : CommonRxActivity<ArticleStore>() {
     @Inject
-    internal var mArticleListFragmentLazy: Lazy<ArticleListFragment>? = null
+    lateinit var mArticleListFragmentLazy: Lazy<ArticleListFragment>
     @Inject
-    internal var mFriendFragmentLazy: Lazy<FriendFragment>? = null
+    lateinit var mFriendFragmentLazy: Lazy<FriendFragment>
     @Inject
-    internal var mBannerFragmentLazy: Lazy<BannerFragment>? = null
+    lateinit var mBannerFragmentLazy: Lazy<BannerFragment>
 
     override fun createFragment(): Fragment {
         return mArticleListFragmentLazy!!.get()

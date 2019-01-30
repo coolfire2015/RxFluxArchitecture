@@ -26,14 +26,14 @@ abstract class KotlinActionCreator(rxDispatcher: RxDispatcher, rxActionManager: 
      * 2:有数据,返回code不是成功码,返回自定义异常
      */
     private fun <T> verifyResponse(): Function<T, Observable<T>> {
-        return { response ->
+        return Function{ response ->
             if (response !is KotlinResponse<*>)
-                return Observable.error<T>(CommonHttpException(600, "未知异常！"))
+                return@Function Observable.error<T>(CommonHttpException(600, "未知异常！"))
             val errorCode = (response as KotlinResponse<*>).errorCode
             if (errorCode != 0) {
                 val errorMsg = (response as KotlinResponse<*>).errorMsg
                 val exception = CommonHttpException(errorCode, errorMsg)
-                return Observable.error<T>(exception)
+                return@Function Observable.error<T>(exception)
             }
             Observable.just<T>(response)
         }

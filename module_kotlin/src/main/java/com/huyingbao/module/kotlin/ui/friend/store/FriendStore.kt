@@ -17,7 +17,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class FriendStore @Inject
-internal constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher) {
+constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher) {
     val webSiteListData = MutableLiveData<KotlinResponse<ArrayList<WebSite>>>()
     var isCreated: Boolean = false
         private set

@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 class LoginActivity : CommonRxActivity<LoginStore>() {
     @Inject
-    internal var mLoginFragmentLazy: Lazy<LoginFragment>? = null
+    lateinit var mLoginFragmentLazy: Lazy<LoginFragment>
 
     override fun createFragment(): Fragment {
         return mLoginFragmentLazy!!.get()

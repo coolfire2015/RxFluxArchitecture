@@ -2,8 +2,10 @@ package com.huyingbao.module.kotlin.ui.friend.view
 
 import android.os.Bundle
 import android.view.View
-
-import com.chad.library.adapter.base.BaseQuickAdapter
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.R2
@@ -13,15 +15,9 @@ import com.huyingbao.module.kotlin.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.kotlin.ui.friend.adapter.WebSiteAdapter
 import com.huyingbao.module.kotlin.ui.friend.model.WebSite
 import com.huyingbao.module.kotlin.ui.friend.store.FriendStore
-
 import org.greenrobot.eventbus.Subscribe
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -30,13 +26,13 @@ import butterknife.BindView
 class FriendFragment @Inject
 constructor() : CommonRxFragment<FriendStore>() {
     @Inject
-    internal var mActionCreator: FriendActionCreator? = null
+    lateinit var mActionCreator: FriendActionCreator
 
     @BindView(R2.id.rv_content)
-    internal var mRvContent: RecyclerView? = null
+    lateinit var mRvContent: RecyclerView
 
     private var mDataList: List<WebSite>? = null
-    private var mAdapter: BaseQuickAdapter<*, *>? = null
+    private var mAdapter: WebSiteAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.common_fragment_base_list
@@ -80,9 +76,10 @@ constructor() : CommonRxFragment<FriendStore>() {
      * 显示数据
      */
     private fun showData() {
-        rxStore!!.webSiteListData.observe(this, { products ->
-            if (products == null) return@getRxStore ().getWebSiteListData().observe
-            setData(products!!.data)
+        rxStore!!.webSiteListData.observe(this, Observer { arrayListWanResponse ->
+            if (arrayListWanResponse != null) {
+                setData(arrayListWanResponse.data)
+            }
         })
     }
 

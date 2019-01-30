@@ -15,9 +15,9 @@ import javax.inject.Inject
  */
 @ActivityScope
 class FriendActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager), FriendAction {
+constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager), FriendAction {
     @Inject
-    internal var mKotlinApi: KotlinApi? = null
+    var mKotlinApi: KotlinApi? = null
 
     override fun getFriendList() {
         val action = newRxAction(FriendAction.GET_FRIEND_LIST)

@@ -19,9 +19,9 @@ import javax.inject.Singleton
  */
 @Singleton
 class ArticleActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager), ArticleAction {
+constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager), ArticleAction {
     @Inject
-    internal var mKotlinApi: KotlinApi? = null
+    lateinit var mKotlinApi: KotlinApi
 
     override fun getArticleList(page: Int) {
         val action = newRxAction(ArticleAction.GET_ARTICLE_LIST)

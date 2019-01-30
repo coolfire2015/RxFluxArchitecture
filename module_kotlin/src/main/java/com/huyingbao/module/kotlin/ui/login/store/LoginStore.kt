@@ -18,7 +18,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class LoginStore @Inject
-internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
+constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
     private var mUser: KotlinResponse<User>? = null
 
     @Subscribe

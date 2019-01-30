@@ -4,6 +4,7 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 group = "com.github.coolfire2015"
 
@@ -138,10 +139,10 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
     implementation "androidx.core:core-ktx:${CORE_X}"
     //编译时生成
-    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${ARCH_X}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${ARCH_X}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }

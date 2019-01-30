@@ -15,9 +15,9 @@ import javax.inject.Inject
  */
 @ActivityScope
 class LoginActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : KotlinActionCreator(rxDispatcher, rxActionManager), LoginAction {
+constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : KotlinActionCreator(rxDispatcher, rxActionManager), LoginAction {
     @Inject
-    internal var mKotlinApi: KotlinApi? = null
+    lateinit var mKotlinApi: KotlinApi
 
     override fun register(username: String, password: String, repassword: String) {
 

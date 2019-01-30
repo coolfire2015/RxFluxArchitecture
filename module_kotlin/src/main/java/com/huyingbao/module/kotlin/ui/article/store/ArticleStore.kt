@@ -24,7 +24,7 @@ import androidx.lifecycle.MutableLiveData
  */
 @Singleton
 class ArticleStore @Inject
-internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
+constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
     val articleLiveData = MutableLiveData<List<Article>>()
     val bannerLiveData = MutableLiveData<List<Banner>>()
     var nextRequestPage = 1//列表页数

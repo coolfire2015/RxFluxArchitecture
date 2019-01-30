@@ -22,14 +22,14 @@ import javax.inject.Inject
 class LoginFragment @Inject
 constructor() : CommonRxFragment<LoginStore>() {
     @Inject
-    internal var mActionCreator: LoginActionCreator? = null
+    lateinit var mActionCreator: LoginActionCreator
 
     @BindView(R2.id.et_username)
-    internal var mEtUsername: EditText? = null
+    lateinit var mEtUsername: EditText
     @BindView(R2.id.et_password)
-    internal var mEtPassword: EditText? = null
+    lateinit var mEtPassword: EditText
     @BindView(R2.id.btn_login)
-    internal var mBtnLogin: Button? = null
+    lateinit var mBtnLogin: Button
 
     override fun getLayoutId(): Int {
         return R.layout.kotlin_fragment_login
