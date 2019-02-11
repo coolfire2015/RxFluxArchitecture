@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
@@ -46,25 +47,36 @@ artifacts {
 }
 
 dependencies {
-    //Kotlin支持
-    api "androidx.core:core-ktx:${X_CORE}"
-    api "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
-    //使用
-    api "org.greenrobot:eventbus:${EVENTBUS}"
-    //版本兼容包
-    api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
-    //Arch
-    api "androidx.lifecycle:lifecycle-extensions:${X_ARCH}"
-    //RxJava
-    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
-    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
-    //Dagger
-    api "com.google.dagger:dagger:${DAGGER}"
-    //Dagger-Android
-    api "com.google.dagger:dagger-android:${DAGGER}"
-    api "com.google.dagger:dagger-android-support:${DAGGER}"
+    //内核
+    api project(':core_arch_kotlin')
+    //分包
+    api "androidx.multidex:multidex:${X_MULTIDEX}"
+    //日志展示
+    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //CardView
+    api "androidx.cardview:cardview:${X_CARD_VIEW}"
+    //RecyclerView
+    api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
+    //Material
+    api "com.google.android.material:material:${X_MATERIAL}"
+    //OkHttp
+    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
+    //Retrofit
+    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    //Json
+    api "com.alibaba:fastjson:${FAST_JSON}"
+    api "com.google.code.gson:gson:${GSON}"
+    //ButterKnife
+    api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
+    //Arouter
+    api "com.alibaba:arouter-api:${AROUTER_API}"
+    //RecyclerView适配器
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

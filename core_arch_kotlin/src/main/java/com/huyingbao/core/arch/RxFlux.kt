@@ -51,9 +51,9 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
      * @param rxBus
      */
     @Inject
-    internal var mRxDispatcher: RxDispatcher? = null
+    lateinit var mRxDispatcher: RxDispatcher
     @Inject
-    internal var mRxActionManager: RxActionManager? = null
+    lateinit var mRxActionManager: RxActionManager
 
     private var mActivityCounter: Int = 0
     private val mActivityStack: Stack<Activity>
