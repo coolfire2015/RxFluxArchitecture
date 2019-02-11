@@ -144,10 +144,10 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
-    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    kapt "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
+    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
 }

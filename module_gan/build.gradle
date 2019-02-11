@@ -134,10 +134,10 @@ dependencies {
     api project(':core_common')
     //api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.5'
     //编译时生成
-    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
 }
