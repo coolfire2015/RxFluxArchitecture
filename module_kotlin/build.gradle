@@ -1,10 +1,10 @@
 if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
 
@@ -132,16 +132,21 @@ repositories {
     flatDir { dirs 'libs' }
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     //通用依赖模块
-//    api project(':core_common')
-    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.7'
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
-    implementation "androidx.core:core-ktx:${CORE_X}"
+    api project(':core_common')
+//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.7'
+    implementation "androidx.core:core-ktx:${X_CORE}"
+    implementation"org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    kapt "androidx.lifecycle:lifecycle-compiler:${ARCH_X}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"

@@ -13,7 +13,10 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-@Component(modules = arrayOf(KotlinModule::class, CommonModule::class, AndroidSupportInjectionModule::class))
+@Component(modules = [
+    KotlinModule::class,
+    CommonModule::class,
+    AndroidSupportInjectionModule::class])
 interface KotlinComponent : AndroidInjector<KotlinApplication> {
     @Component.Builder
     interface Builder {

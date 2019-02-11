@@ -13,7 +13,7 @@ import javax.inject.Singleton
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Module(includes = arrayOf(KotlinBindsModule::class))
+@Module(includes = [KotlinActivityModule::class])
 class KotlinModule {
     @Singleton
     @Provides

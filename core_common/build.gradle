@@ -47,13 +47,15 @@ dependencies {
     //内核
     api project(':core_arch')
     //分包
-    api "androidx.multidex:multidex:${MULTIDEX_X}"
+    api "androidx.multidex:multidex:${X_MULTIDEX}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //CardView
+    api "androidx.cardview:cardview:${X_CARD_VIEW}"
     //RecyclerView
-    api "androidx.cardview:cardview:${SUPPORT_VERSION_X}"
-    api "androidx.recyclerview:recyclerview:${SUPPORT_VERSION_X}"
-    api "com.google.android.material:material:${SUPPORT_VERSION_X}"
+    api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
+    //Material
+    api "com.google.android.material:material:${X_MATERIAL}"
     //OkHttp
     api "com.squareup.okio:okio:${OKIO}"
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
@@ -64,7 +66,7 @@ dependencies {
     //Json
     api "com.alibaba:fastjson:${FAST_JSON}"
     api "com.google.code.gson:gson:${GSON}"
-    //Butterknife
+    //ButterKnife
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
     //Arouter
     api "com.alibaba:arouter-api:${AROUTER_API}"

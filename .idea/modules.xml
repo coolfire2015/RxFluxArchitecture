@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module_kotlin/module_kotlin.iml" filepath="$PROJECT_DIR$/module_kotlin/module_kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_arch/core_arch.iml" filepath="$PROJECT_DIR$/core_arch/core_arch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_common/core_common.iml" filepath="$PROJECT_DIR$/core_common/core_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_wan/module_wan.iml" filepath="$PROJECT_DIR$/module_wan/module_wan.iml" />
     </modules>
   </component>
