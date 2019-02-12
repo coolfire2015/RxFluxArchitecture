@@ -114,6 +114,9 @@ repositories {
 }
 
 dependencies {
+    //通用依赖模块
+    api project(':core_common')
+//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.5'
     //功能模块
     if (!isModuleAsApp.toBoolean()) {
         implementation project(':module_gan')
