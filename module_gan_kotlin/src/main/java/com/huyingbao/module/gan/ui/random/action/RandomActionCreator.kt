@@ -7,6 +7,8 @@ import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.module.gan.action.GanApi
 import com.huyingbao.module.gan.action.GanConstants
+import com.huyingbao.module.gan.action.GanResponse
+import com.huyingbao.module.gan.ui.random.model.Product
 
 import javax.inject.Inject
 
@@ -25,6 +27,6 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
         val action = newRxAction(RandomAction.GET_PRODUCT_LIST,
                 GanConstants.Key.COUNT, count,
                 GanConstants.Key.PAGE, page)
-        postHttpAction<GanResponse<Product>>(action, mGanApi!!.getDataList(category, count, page))
+        postHttpAction(action, mGanApi!!.getDataList(category, count, page))
     }
 }

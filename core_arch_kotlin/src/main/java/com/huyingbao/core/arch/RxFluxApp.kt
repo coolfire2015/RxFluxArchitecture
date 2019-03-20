@@ -15,7 +15,7 @@ import javax.inject.Inject
  */
 abstract class RxFluxApp : DaggerApplication() {
     @Inject
-    internal var mRxFlux: RxFlux? = null
+    lateinit var mRxFlux: RxFlux
 
     override fun onCreate() {
         super.onCreate()

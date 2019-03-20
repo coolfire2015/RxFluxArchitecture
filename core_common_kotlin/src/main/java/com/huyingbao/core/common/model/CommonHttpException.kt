@@ -7,7 +7,7 @@ import java.io.IOException
  * 自定义HttpException
  * Created by liujunfeng on 2019/1/1.
  */
-class CommonHttpException(private val mCode: Int, private val mMessage: String) : IOException("HTTP $mCode $mMessage") {
+class CommonHttpException(private val mCode: Int, private val mMessage: String?) : IOException("HTTP $mCode $mMessage") {
 
     /**
      * HTTP status mCode.
@@ -19,7 +19,7 @@ class CommonHttpException(private val mCode: Int, private val mMessage: String) 
     /**
      * HTTP status mMessage.
      */
-    fun message(): String {
+    fun message(): String? {
         return mMessage
     }
 }

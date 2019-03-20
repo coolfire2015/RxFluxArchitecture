@@ -8,11 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/core_arch_kotlin" />
-            <option value="$PROJECT_DIR$/core_common_kotlin" />
-            <option value="$PROJECT_DIR$/module_app_kotlin" />
-            <option value="$PROJECT_DIR$/module_gan_kotlin" />
-            <option value="$PROJECT_DIR$/module_wan_kotlin" />
+            <option value="$PROJECT_DIR$/core_arch" />
+            <option value="$PROJECT_DIR$/core_common" />
+            <option value="$PROJECT_DIR$/module_app" />
+            <option value="$PROJECT_DIR$/module_gan" />
+            <option value="$PROJECT_DIR$/module_wan" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

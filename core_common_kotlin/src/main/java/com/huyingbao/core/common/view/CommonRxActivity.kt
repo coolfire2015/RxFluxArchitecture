@@ -4,7 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-
+import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import butterknife.ButterKnife
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.model.RxError
 import com.huyingbao.core.arch.store.RxActivityStore
@@ -12,37 +18,25 @@ import com.huyingbao.core.arch.view.RxFluxView
 import com.huyingbao.core.common.R
 import com.huyingbao.core.common.model.CommonHttpException
 import com.huyingbao.core.common.util.ActivityUtils
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-
-import java.lang.reflect.ParameterizedType
-
-import javax.inject.Inject
-
-import androidx.annotation.CallSuper
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import butterknife.ButterKnife
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import java.lang.reflect.ParameterizedType
+import javax.inject.Inject
 
 
 /**
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class CommonRxActivity<T : RxActivityStore> : AppCompatActivity(), CommonView, RxFluxView<*>, HasSupportFragmentInjector {
+abstract class CommonRxActivity<T : RxActivityStore> : AppCompatActivity(), CommonView, RxFluxView<T>, HasSupportFragmentInjector {
 
     @Inject
-    internal var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var mViewModelFactory: ViewModelProvider.Factory
     @Inject
-    internal var mChildFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
+    lateinit var mChildFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     private var mStore: T? = null
 

@@ -79,10 +79,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
      * 显示数据
      */
     private void showData() {
-        getRxStore().getBannerLiveData().observe(this, bannerArrayList -> {
-            if (bannerArrayList == null) return;
-            setData(bannerArrayList);
-        });
+        getRxStore().getBannerLiveData().observe(this, bannerArrayList -> setData(bannerArrayList));
     }
 
     /**

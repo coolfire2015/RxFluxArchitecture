@@ -3,15 +3,18 @@ package com.huyingbao.core.common.model;
 
 import java.io.IOException;
 
+import androidx.annotation.Nullable;
+
 /**
  * 自定义HttpException
  * Created by liujunfeng on 2019/1/1.
  */
 public class CommonHttpException extends IOException {
     private final int mCode;
+
     private final String mMessage;
 
-    public CommonHttpException(int code, String message) {
+    public CommonHttpException(int code, @Nullable String message) {
         super("HTTP " + code + " " + message);
         this.mCode = code;
         this.mMessage = message;

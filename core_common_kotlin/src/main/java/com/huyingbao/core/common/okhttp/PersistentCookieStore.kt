@@ -3,21 +3,14 @@ package com.huyingbao.core.common.okhttp
 import android.app.Application
 import android.content.SharedPreferences
 import android.text.TextUtils
-
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
-import java.util.ArrayList
-import java.util.Locale
-
-import javax.inject.Inject
-import javax.inject.Singleton
-
 import androidx.collection.ArrayMap
 import okhttp3.Cookie
 import okhttp3.HttpUrl
+import java.io.*
+import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
+import kotlin.experimental.and
 
 /**
  * 缓存cookies
@@ -143,7 +136,7 @@ internal constructor(application: Application) {
         var cookie: Cookie? = null
         try {
             val objectInputStream = ObjectInputStream(byteArrayInputStream)
-            cookie = (objectInputStream.readObject() as SerializableOkHttpCookies).cookies
+            cookie = (objectInputStream.readObject() as SerializableOkHttpCookies).getCookies()
         } catch (e: IOException) {
         } catch (e: ClassNotFoundException) {
         }
@@ -160,9 +153,9 @@ internal constructor(application: Application) {
     private fun byteArrayToHexString(bytes: ByteArray): String {
         val sb = StringBuilder(bytes.size * 2)
         for (element in bytes) {
-            val v = element and 0xff
+            val v = element and 0xff.toByte()
             if (v < 16) sb.append('0')
-            sb.append(Integer.toHexString(v))
+            sb.append(Integer.toHexString(v.toInt()))
         }
         return sb.toString().toUpperCase(Locale.US)
     }

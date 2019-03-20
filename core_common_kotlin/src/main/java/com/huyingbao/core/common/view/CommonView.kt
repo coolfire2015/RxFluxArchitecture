@@ -6,7 +6,7 @@ import android.os.Bundle
  * Created by liujunfeng on 2019/1/1.
  */
 interface CommonView {
-    val layoutId: Int
+    fun getLayoutId(): Int
 
-    fun afterCreate(savedInstanceState: Bundle)
+    fun afterCreate(savedInstanceState: Bundle?)
 }

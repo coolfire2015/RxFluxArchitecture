@@ -6,20 +6,17 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver
 import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver
 import com.huyingbao.core.arch.view.RxFluxView
-
-import java.util.Stack
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 
 /**
  * 主类
@@ -80,7 +77,7 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
         if (activity is RxFluxView<*>) {
             if (mRxDispatcher!!.isSubscribe(this)) return
             Log.v("RxFlux", "2.1-onActivityRegistered")
-            mRxDispatcher!!.subscribeRxView<RxFluxView>(activity as RxFluxView<*>)
+            mRxDispatcher!!.subscribeRxView(activity as RxFluxView<*>)
         }
     }
 
@@ -121,7 +118,7 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
         if (f is RxFluxView<*>) {
             if (mRxDispatcher!!.isSubscribe(this)) return
             Log.v("RxFlux", "9.1-onFragmentRegistered")
-            mRxDispatcher!!.subscribeRxView<RxFluxView>(f as RxFluxView<*>)
+            mRxDispatcher!!.subscribeRxView(f as RxFluxView<*>)
         }
     }
 
@@ -148,14 +145,14 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
     override fun onActivityStopped(activity: Activity) {
         Log.v("RxFlux", "14-onActivityStopped")
         if (activity is RxFluxView<*>)
-            mRxDispatcher!!.unsubscribeRxView<RxFluxView>(activity as RxFluxView<*>)
+            mRxDispatcher!!.unsubscribeRxView(activity as RxFluxView<*>)
     }
 
     override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
         super.onFragmentStopped(fm, f)
         Log.v("RxFlux", "15-onFragmentStopped")
         if (f is RxFluxView<*>)
-            mRxDispatcher!!.unsubscribeRxView<RxFluxView>(f as RxFluxView<*>)
+            mRxDispatcher!!.unsubscribeRxView(f as RxFluxView<*>)
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {

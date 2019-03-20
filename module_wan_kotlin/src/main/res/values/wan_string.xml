@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wan_label_article">文章</string>
+    <string name="wan_label_login">登录</string>
+    <string name="wan_label_friend">常用网站</string>
+    <string name="wan_label_banner">横幅</string>
+</resources>

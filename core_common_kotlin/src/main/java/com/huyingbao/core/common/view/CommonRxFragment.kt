@@ -6,18 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.arch.model.RxError
-import com.huyingbao.core.arch.view.RxFluxView
-import com.huyingbao.core.common.R
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-
-import java.lang.reflect.ParameterizedType
-
-import javax.inject.Inject
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -27,14 +15,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.arch.model.RxError
+import com.huyingbao.core.arch.view.RxFluxView
+import com.huyingbao.core.common.R
 import dagger.android.support.AndroidSupportInjection
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import java.lang.reflect.ParameterizedType
+import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class CommonRxFragment<T : ViewModel> : Fragment(), CommonView, RxFluxView<*> {
+abstract class CommonRxFragment<T : ViewModel> : Fragment(), CommonView, RxFluxView<T> {
     @Inject
-    internal var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var mViewModelFactory: ViewModelProvider.Factory
 
     private var mStore: T? = null
     private var mUnbinder: Unbinder? = null
@@ -69,7 +65,7 @@ abstract class CommonRxFragment<T : ViewModel> : Fragment(), CommonView, RxFluxV
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(layoutId, container, false)
+        return inflater.inflate(getLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

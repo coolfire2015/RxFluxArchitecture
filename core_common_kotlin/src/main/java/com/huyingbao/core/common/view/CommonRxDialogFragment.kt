@@ -4,18 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-
-import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.arch.model.RxError
-import com.huyingbao.core.arch.view.RxFluxView
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-
-import java.lang.reflect.ParameterizedType
-
-import javax.inject.Inject
 import androidx.appcompat.app.AppCompatDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModel
@@ -23,14 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.arch.model.RxError
+import com.huyingbao.core.arch.view.RxFluxView
 import dagger.android.support.AndroidSupportInjection
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import java.lang.reflect.ParameterizedType
+import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class CommonRxDialogFragment<T : ViewModel> : AppCompatDialogFragment(), CommonView, RxFluxView<*> {
+abstract class CommonRxDialogFragment<T : ViewModel> : AppCompatDialogFragment(), CommonView, RxFluxView<T> {
     @Inject
-    internal var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var mViewModelFactory: ViewModelProvider.Factory
 
     private var mStore: T? = null
     private var mUnbinder: Unbinder? = null

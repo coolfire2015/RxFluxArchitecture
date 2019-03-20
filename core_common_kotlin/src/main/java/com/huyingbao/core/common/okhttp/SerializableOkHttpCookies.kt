@@ -1,11 +1,10 @@
 package com.huyingbao.core.common.okhttp
 
+import okhttp3.Cookie
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.io.Serializable
-
-import okhttp3.Cookie
 
 /**
  * 序列化cooke
@@ -17,7 +16,7 @@ internal class SerializableOkHttpCookies(@field:Transient private val cookies: C
 
     fun getCookies(): Cookie {
         var bestCookies = cookies
-        if (clientCookies != null) bestCookies = clientCookies
+        if (clientCookies != null) bestCookies = clientCookies as Cookie
         return bestCookies
     }
 

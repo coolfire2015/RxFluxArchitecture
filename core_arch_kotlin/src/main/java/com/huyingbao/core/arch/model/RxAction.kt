@@ -9,7 +9,7 @@ import androidx.collection.ArrayMap
 class RxAction private constructor(tag: String, val data: ArrayMap<String, Any>?) : RxEvent(tag) {
 
     operator fun <T> get(tag: String): T {
-        return data!![tag] as T?
+        return data!![tag] as T
     }
 
     fun <T> getResponse(): T {

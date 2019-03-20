@@ -110,7 +110,6 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      */
     private void showData() {
         getRxStore().getArticleLiveData().observe(this, articleArrayList -> {
-            if (articleArrayList == null) return;
             //判断获取回来的数据是否是刷新的数据
             boolean isRefresh = getRxStore().getNextRequestPage() == 1;
             setData(isRefresh, articleArrayList);
