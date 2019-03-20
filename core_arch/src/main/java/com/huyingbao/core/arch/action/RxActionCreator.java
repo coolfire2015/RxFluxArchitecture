@@ -3,6 +3,7 @@ package com.huyingbao.core.arch.action;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxError;
+import com.huyingbao.core.arch.model.RxLoading;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
@@ -89,6 +90,7 @@ public abstract class RxActionCreator {
      */
     protected void postRxAction(@NonNull RxAction action) {
         mRxDispatcher.postRxAction(action);
+        //发送通知，移除Action
         removeRxAction(action);
     }
 
@@ -100,6 +102,7 @@ public abstract class RxActionCreator {
      */
     protected void postRxError(@NonNull RxAction action, Throwable throwable) {
         mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
+        //发送通知，移除Action
         removeRxAction(action);
     }
 
@@ -120,6 +123,32 @@ public abstract class RxActionCreator {
                             postRxAction(rxAction);
                         },
                         throwable -> {
+                            postRxError(rxAction, throwable);
+                        }
+                ));
+    }
+
+    /**
+     * 发送网络action
+     *
+     * @param rxAction
+     * @param httpObservable
+     */
+    protected <T> void postLoadingHttpAction(RxAction rxAction, Observable<T> httpObservable) {
+        if (hasRxAction(rxAction)) return;
+        addRxAction(rxAction, httpObservable// 1:指定IO线程
+                .subscribeOn(Schedulers.io())// 1:指定IO线程
+                .doOnSubscribe(subscription -> mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), true)))// 2:指定主线程
+                .subscribeOn(AndroidSchedulers.mainThread())// 2:在doOnSubscribe()之后，使用subscribeOn()就可以指定其运行在哪中线程。
+                .observeOn(AndroidSchedulers.mainThread())// 3:指定主线程
+                .subscribe(// 3:指定主线程
+                        response -> {
+                            mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), false));
+                            rxAction.setResponse(response);
+                            postRxAction(rxAction);
+                        },
+                        throwable -> {
+                            mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), false));
                             postRxError(rxAction, throwable);
                         }
                 ));

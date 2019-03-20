@@ -3,6 +3,7 @@ package com.huyingbao.core.arch.dispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
+import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxView;
 
@@ -94,6 +95,7 @@ public class RxDispatcher {
 
     /**
      * 2:发送RxChange,通知所有订阅的RxView,粘性通知
+     * 发送：操作完成，正常执行状态
      *
      * @param rxChange
      */
@@ -103,10 +105,19 @@ public class RxDispatcher {
 
     /**
      * 3:发送RxError,到所有订阅的RxView,粘性通知
-     *
+     * 发送：操作完成，异常执行状态
      * @param rxError
      */
     public void postRxError(final RxError rxError) {
         EventBus.getDefault().postSticky(rxError);
+    }
+
+    /**
+     * 4:发送RxLoading,到所有订阅的RxView,粘性通知
+     * 发送：操作操作进度，
+     * @param rxLoading
+     */
+    public void postRxLoading(final RxLoading rxLoading) {
+        EventBus.getDefault().postSticky(rxLoading);
     }
 }
