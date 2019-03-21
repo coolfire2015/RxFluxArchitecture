@@ -8,6 +8,7 @@ import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 

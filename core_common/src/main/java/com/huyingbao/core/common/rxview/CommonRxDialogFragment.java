@@ -10,6 +10,7 @@ import com.huyingbao.core.common.view.CommonDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -22,8 +23,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.AndroidSupportInjection;
-
-import static org.greenrobot.eventbus.ThreadMode.MAIN;
 
 /**
  * Created by liujunfeng on 2019/1/1.

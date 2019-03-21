@@ -15,6 +15,7 @@ import com.huyingbao.module.wan.ui.friend.model.WebSite;
 import com.huyingbao.module.wan.ui.friend.store.FriendStore;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wan_label_friend,true);
+        setTitle(R.string.wan_label_friend, true);
         initRecyclerView();
         initAdapter();
         showData();

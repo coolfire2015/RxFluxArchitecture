@@ -48,7 +48,7 @@ public class ArticleActionCreator extends WanActionCreator implements ArticleAct
         RxAction action = newRxAction(GET_BANNER_LIST);
         //接口调用失败，自动重复调用5次，每次间隔2s
         Observable<WanResponse<ArrayList<Banner>>> httpObservable = mWanApi.getBannerList()
-                .retryWhen(retryAction(action, 5, 1));
+                .retryWhen(retryAction(5, 1));
         postRetryHttpAction(action, httpObservable);
     }
 }

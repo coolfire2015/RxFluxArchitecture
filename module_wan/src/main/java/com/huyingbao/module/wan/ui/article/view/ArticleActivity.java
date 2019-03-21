@@ -12,6 +12,7 @@ import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
 import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 

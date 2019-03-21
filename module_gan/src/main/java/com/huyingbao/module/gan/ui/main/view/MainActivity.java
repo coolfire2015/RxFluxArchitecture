@@ -11,6 +11,7 @@ import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 

@@ -14,6 +14,7 @@ import com.huyingbao.core.common.view.CommonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -33,8 +34,6 @@ import dagger.Lazy;
 import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-
-import static org.greenrobot.eventbus.ThreadMode.MAIN;
 
 
 /**
