@@ -15,7 +15,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonDialogFragment extends AppCompatDialogFragment implements CommonView{
+public abstract class CommonDialogFragment extends AppCompatDialogFragment implements CommonView {
     private Unbinder mUnbinder;
 
     @NonNull

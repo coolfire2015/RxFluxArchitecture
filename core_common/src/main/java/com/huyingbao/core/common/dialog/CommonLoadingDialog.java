@@ -1,8 +1,11 @@
 package com.huyingbao.core.common.dialog;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -46,6 +49,19 @@ public class CommonLoadingDialog extends CommonDialogFragment implements DialogI
     @Override
     public void afterCreate(@Nullable Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog == null) {
+            return;
+        }
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dp_120);
+        window.setAttributes(layoutParams);
     }
 
     @Override
