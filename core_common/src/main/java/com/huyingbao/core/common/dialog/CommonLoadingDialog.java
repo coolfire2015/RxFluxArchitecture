@@ -9,8 +9,11 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.huyingbao.core.arch.action.RxActionManager;
+import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
+import com.huyingbao.core.common.util.CommonUtils;
 import com.huyingbao.core.common.view.CommonDialogFragment;
 
 import javax.inject.Inject;
@@ -19,6 +22,7 @@ import javax.inject.Singleton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 进度提示
@@ -26,6 +30,11 @@ import butterknife.BindView;
  */
 @Singleton
 public class CommonLoadingDialog extends CommonDialogFragment implements DialogInterface.OnShowListener {
+    @Inject
+    RxActionManager mRxActionManager;
+    @Inject
+    CommonUtils mCommonUtils;
+
     @BindView(R2.id.progress_bar_loading)
     ProgressBar mProgressBarLoading;
     @BindView(R2.id.tv_loading_notice)
@@ -35,6 +44,7 @@ public class CommonLoadingDialog extends CommonDialogFragment implements DialogI
 
     private CharSequence message;
     private int messageInt;
+    private RxLoading mRxLoading;
 
     @Inject
     public CommonLoadingDialog() {
@@ -87,5 +97,16 @@ public class CommonLoadingDialog extends CommonDialogFragment implements DialogI
 
     public void setMessage(CharSequence message) {
         this.message = message;
+    }
+
+    public void setRxLoading(RxLoading rxLoading) {
+        mRxLoading = rxLoading;
+    }
+
+    @OnClick(R2.id.tv_loading_cancel)
+    public void cancel() {
+        mRxActionManager.clear();
+        mCommonUtils.showShortToast(getContext(), "取消操作！");
+        dismiss();
     }
 }

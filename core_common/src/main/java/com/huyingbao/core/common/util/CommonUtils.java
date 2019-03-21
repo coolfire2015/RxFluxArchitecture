@@ -1,6 +1,7 @@
 package com.huyingbao.core.common.util;
 
 import android.app.Application;
+import android.content.Context;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -28,6 +29,11 @@ public class CommonUtils {
     public void showShortToast(String text) {
         toast.cancel();
         toast.setText(text);
+        toast.show();
+    }
+
+    public void showShortToast(Context context, String text) {
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.show();
     }
 }

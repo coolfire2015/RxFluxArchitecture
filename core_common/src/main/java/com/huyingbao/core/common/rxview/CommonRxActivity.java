@@ -120,6 +120,7 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxLoading);
         if (rxLoading.isLoading()) {//显示进度框
+            mCommonLoadingDialogLazy.get().setRxLoading(rxLoading);
             mCommonLoadingDialogLazy.get().show(getSupportFragmentManager(), rxLoading.getTag());
         } else {//隐藏进度框
             mCommonLoadingDialogLazy.get().dismiss();
