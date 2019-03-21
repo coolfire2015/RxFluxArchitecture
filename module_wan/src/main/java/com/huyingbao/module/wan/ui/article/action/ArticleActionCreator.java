@@ -27,7 +27,7 @@ public class ArticleActionCreator extends RxActionCreator implements ArticleActi
     @Override
     public void getArticleList(int page) {
         RxAction action = newRxAction(GET_ARTICLE_LIST);
-        postHttpAction(action, mWanApi.getArticleList(page));
+        postLoadingHttpAction(action, mWanApi.getArticleList(page));
     }
 
     @Override

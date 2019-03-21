@@ -32,7 +32,7 @@ public final class RxActionManager {
     /**
      * 添加一个action和disposable,如果已经有了一个对应action 的订阅,则取消订阅
      */
-    public void add(RxAction action, Disposable disposable) {
+    void add(RxAction action, Disposable disposable) {
         Pair<Integer, Disposable> old = mMap.put(action.getTag(), getPair(action, disposable));
         if (old != null && old.second != null && !old.second.isDisposed())
             old.second.dispose();
@@ -41,7 +41,7 @@ public final class RxActionManager {
     /**
      * 从管理器中取消订阅
      */
-    public void remove(RxAction action) {
+    void remove(RxAction action) {
         Pair<Integer, Disposable> old = mMap.remove(action.getTag());
         if (old != null && old.second != null && !old.second.isDisposed())
             old.second.dispose();
@@ -49,8 +49,10 @@ public final class RxActionManager {
 
     /**
      * 检查action是否已经运行一个disposable
+     * @param action
+     * @return
      */
-    public boolean contains(RxAction action) {
+    boolean contains(RxAction action) {
         Pair<Integer, Disposable> old = mMap.get(action.getTag());
         return old != null
                 && old.first != null

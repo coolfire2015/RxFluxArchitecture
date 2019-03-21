@@ -107,6 +107,16 @@ public abstract class RxActionCreator {
     }
 
     /**
+     * 通过调度器dispatcher将action对应的RxLoading事件推出去
+     *
+     * @param rxAction
+     * @param isLoading true:显示，false:消失
+     */
+    protected void postRxLoading(RxAction rxAction, boolean isLoading) {
+        mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), isLoading));
+    }
+
+    /**
      * 发送网络action
      *
      * @param rxAction
@@ -138,17 +148,17 @@ public abstract class RxActionCreator {
         if (hasRxAction(rxAction)) return;
         addRxAction(rxAction, httpObservable// 1:指定IO线程
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
-                .doOnSubscribe(subscription -> mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), true)))// 2:指定主线程
+                .doOnSubscribe(subscription -> postRxLoading(rxAction, true))// 2:指定主线程
                 .subscribeOn(AndroidSchedulers.mainThread())// 2:在doOnSubscribe()之后，使用subscribeOn()就可以指定其运行在哪中线程。
                 .observeOn(AndroidSchedulers.mainThread())// 3:指定主线程
                 .subscribe(// 3:指定主线程
                         response -> {
-                            mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), false));
+                            postRxLoading(rxAction, false);
                             rxAction.setResponse(response);
                             postRxAction(rxAction);
                         },
                         throwable -> {
-                            mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), false));
+                            postRxLoading(rxAction, false);
                             postRxError(rxAction, throwable);
                         }
                 ));
@@ -160,7 +170,7 @@ public abstract class RxActionCreator {
      * @param actionId
      * @param data
      */
-    public void postLocalAction(@NonNull String actionId, @NonNull Object... data) {
+    public void postLocalAction(@NonNull String actionId, Object... data) {
         postRxAction(newRxAction(actionId, data));
     }
 }

@@ -114,7 +114,7 @@ public class RxDispatcher {
 
     /**
      * 4:发送RxLoading,到所有订阅的RxView,粘性通知
-     * 发送：操作操作进度，
+     * 发送：操作操作进度
      * @param rxLoading
      */
     public void postRxLoading(final RxLoading rxLoading) {

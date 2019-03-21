@@ -78,11 +78,6 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onActivityStarted(Activity activity) {
         Log.v("RxFlux", "2-onActivityStarted");
-        if (activity instanceof RxFluxView) {
-            if (mRxDispatcher.isSubscribe(this)) return;
-            Log.v("RxFlux", "2.1-onActivityRegistered");
-            mRxDispatcher.subscribeRxView((RxFluxView) activity);
-        }
     }
 
     @Override
@@ -126,50 +121,81 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
         super.onFragmentStarted(fm, f);
         Log.v("RxFlux", "9-onFragmentStarted");
+    }
+
+
+    /**
+     * RxFluxView能响应时，注册订阅
+     *
+     * @param activity
+     */
+    @Override
+    public void onActivityResumed(Activity activity) {
+        Log.v("RxFlux", "10-onActivityResumed");
+        if (activity instanceof RxFluxView) {
+            if (mRxDispatcher.isSubscribe(this)) return;
+            Log.v("RxFlux", "10.1-subscribe RxActivity : " + activity.getClass().getSimpleName());
+            mRxDispatcher.subscribeRxView((RxFluxView) activity);
+        }
+    }
+
+    /**
+     * RxFluxView能响应时，注册订阅
+     *
+     * @param fm
+     * @param f
+     */
+    @Override
+    public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentResumed(fm, f);
+        Log.v("RxFlux", "11-onFragmentResumed");
         if (f instanceof RxFluxView) {
             if (mRxDispatcher.isSubscribe(this)) return;
-            Log.v("RxFlux", "9.1-onFragmentRegistered");
+            Log.v("RxFlux", "11.1-subscribe RxFragment : " + f.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxFluxView) f);
         }
     }
 
 
-    @Override
-    public void onActivityResumed(Activity activity) {
-        Log.v("RxFlux", "10-onActivityResumed");
-    }
-
-    @Override
-    public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
-        super.onFragmentResumed(fm, f);
-        Log.v("RxFlux", "11-onFragmentResumed");
-    }
-
-
+    /**
+     * RxFluxView不能响应时，取消订阅
+     *
+     * @param activity
+     */
     @Override
     public void onActivityPaused(Activity activity) {
         Log.v("RxFlux", "12-onActivityPaused");
+        if (activity instanceof RxFluxView) {
+            mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
+            Log.d("RxFlux", "12.1-unsubscribe RxActivity : " + activity.getClass().getSimpleName());
+        }
     }
 
+    /**
+     * RxFluxView不能响应时，取消订阅
+     *
+     * @param fm
+     * @param f
+     */
     @Override
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentPaused(fm, f);
         Log.v("RxFlux", "13-onFragmentPaused");
+        if (f instanceof RxFluxView) {
+            mRxDispatcher.unsubscribeRxView((RxFluxView) f);
+            Log.d("RxFlux", "13.1-unsubscribe RxFragment : " + f.getClass().getSimpleName());
+        }
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
         Log.v("RxFlux", "14-onActivityStopped");
-        if (activity instanceof RxFluxView)
-            mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
     }
 
     @Override
     public void onFragmentStopped(FragmentManager fm, Fragment f) {
         super.onFragmentStopped(fm, f);
         Log.v("RxFlux", "15-onFragmentStopped");
-        if (f instanceof RxFluxView)
-            mRxDispatcher.unsubscribeRxView((RxFluxView) f);
     }
 
     @Override
