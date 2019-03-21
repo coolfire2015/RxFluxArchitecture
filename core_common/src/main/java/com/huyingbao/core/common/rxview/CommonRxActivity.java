@@ -34,7 +34,6 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 
 /**
- * 带有toolbar的Activity父类
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonRxActivity<T extends RxActivityStore> extends CommonActivity implements RxFluxView, HasSupportFragmentInjector {
@@ -92,8 +91,8 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
 
     /**
      * 接收RxError，粘性
-     * 该方法不经过store,
-     * 由activity直接处理
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
      */
     @Override
     @Subscribe(sticky = true)
@@ -111,9 +110,9 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
     }
 
     /**
-     * 接收RxError，粘性
-     * 该方法不经过store,
-     * 由activity直接处理
+     * 接收RxRxLoading，粘性
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
      */
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)

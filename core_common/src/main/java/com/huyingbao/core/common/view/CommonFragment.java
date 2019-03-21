@@ -21,7 +21,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonFragment extends Fragment implements CommonView{
+public abstract class CommonFragment extends Fragment implements CommonView {
     private Unbinder mUnbinder;
 
     private boolean mBackAble;
@@ -94,6 +94,9 @@ public abstract class CommonFragment extends Fragment implements CommonView{
         }
     }
 
+    /**
+     * 实例化宿主Activity中的ActionBar
+     */
     private void initActionBar() {
         View view = getActivity().getWindow().getDecorView();
         mToolbarTop = view.findViewById(R.id.tlb_top);
@@ -110,6 +113,12 @@ public abstract class CommonFragment extends Fragment implements CommonView{
         mActionBarTop.setDisplayShowTitleEnabled(false);
     }
 
+    /**
+     * 设置Toolbar
+     *
+     * @param title    Toolbar标题
+     * @param backAble true：显示返回箭头，false：不显示
+     */
     protected void setTitle(CharSequence title, boolean backAble) {
         mBackAble = backAble;
         mTitle = title;
@@ -122,6 +131,12 @@ public abstract class CommonFragment extends Fragment implements CommonView{
         if (backAble) mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
     }
 
+    /**
+     * 设置Toolbar
+     *
+     * @param titleId  Toolbar标题
+     * @param backAble true：显示返回箭头，false：不显示
+     */
     protected void setTitle(int titleId, boolean backAble) {
         setTitle(getText(titleId), backAble);
     }

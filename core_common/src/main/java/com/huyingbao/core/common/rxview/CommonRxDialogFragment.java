@@ -73,8 +73,8 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
 
     /**
      * 接收RxError，粘性
-     * 该方法不经过store,
-     * 由fragment直接处理
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
      */
     @Override
     @Subscribe(sticky = true)
@@ -84,9 +84,9 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
     }
 
     /**
-     * 接收RxError，粘性
-     * 该方法不经过store,
-     * 由fragment直接处理
+     * 接收RxLoading，粘性
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
      */
     @Override
     @Subscribe(sticky = true)
