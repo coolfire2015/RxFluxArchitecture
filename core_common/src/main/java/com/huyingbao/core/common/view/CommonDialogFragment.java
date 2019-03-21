@@ -1,11 +1,9 @@
-package com.huyingbao.core.common.dialog;
+package com.huyingbao.core.common.view;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import com.huyingbao.core.common.view.CommonView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

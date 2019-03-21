@@ -3,7 +3,7 @@ package com.huyingbao.module.gan.ui.random.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.view.CommonRxActivity;
+import com.huyingbao.core.common.rxview.CommonRxActivity;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
@@ -12,9 +12,7 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import dagger.Lazy;
 
 /**

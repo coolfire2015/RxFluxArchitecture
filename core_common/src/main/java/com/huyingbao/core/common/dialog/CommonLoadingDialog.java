@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
+import com.huyingbao.core.common.view.CommonDialogFragment;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

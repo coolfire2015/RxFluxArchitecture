@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.view.CommonRxActivity;
+import com.huyingbao.core.common.rxview.CommonRxActivity;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
 import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;

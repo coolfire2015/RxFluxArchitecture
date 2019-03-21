@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.view.CommonRxFragment;
+import com.huyingbao.core.common.rxview.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
