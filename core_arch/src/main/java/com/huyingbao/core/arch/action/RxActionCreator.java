@@ -88,7 +88,7 @@ public abstract class RxActionCreator {
      *
      * @param action
      */
-    protected void postRxAction(@NonNull RxAction action) {
+    private void postRxAction(@NonNull RxAction action) {
         mRxDispatcher.postRxAction(action);
         //发送通知，移除Action
         removeRxAction(action);
@@ -100,8 +100,8 @@ public abstract class RxActionCreator {
      * @param action
      * @param throwable
      */
-    protected void postRxError(@NonNull RxAction action, Throwable throwable) {
-        mRxDispatcher.postRxError(RxError.newRxError(action.getTag(), throwable));
+    private void postRxError(@NonNull RxAction action, Throwable throwable) {
+        mRxDispatcher.postRxError(RxError.newRxError(action, throwable));
         //发送通知，移除Action
         removeRxAction(action);
     }
@@ -112,7 +112,7 @@ public abstract class RxActionCreator {
      * @param rxAction
      * @param isLoading true:显示，false:消失
      */
-    protected void postRxLoading(RxAction rxAction, boolean isLoading) {
+    private void postRxLoading(RxAction rxAction, boolean isLoading) {
         mRxDispatcher.postRxLoading(RxLoading.newRxLoading(rxAction.getTag(), isLoading));
     }
 
@@ -159,28 +159,6 @@ public abstract class RxActionCreator {
                         },
                         throwable -> {
                             postRxLoading(rxAction, false);
-                            postRxError(rxAction, throwable);
-                        }
-                ));
-    }
-
-    /**
-     * 发送网络action
-     *
-     * @param rxAction
-     * @param httpObservable
-     */
-    protected <T> void postRetryHttpAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, httpObservable// 1:指定IO线程
-                .subscribeOn(Schedulers.io())// 1:指定IO线程
-                .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
-                .subscribe(// 2:指定主线程
-                        response -> {
-                            rxAction.setResponse(response);
-                            postRxAction(rxAction);
-                        },
-                        throwable -> {
                             postRxError(rxAction, throwable);
                         }
                 ));
