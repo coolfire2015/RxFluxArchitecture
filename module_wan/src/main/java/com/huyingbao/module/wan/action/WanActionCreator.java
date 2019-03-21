@@ -6,6 +6,10 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.common.model.CommonHttpException;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
@@ -42,5 +46,28 @@ public abstract class WanActionCreator extends RxActionCreator {
             }
             return Observable.just(response);
         };
+    }
+
+    /**
+     * 操作重试
+     *
+     * @param action
+     * @param retryNub       失败重试次数
+     * @param retryDelayTime 每次重新调用间隔
+     * @return
+     */
+    public Function<Observable<? extends Throwable>, Observable<?>> retryAction(RxAction action, int retryNub, long retryDelayTime) {
+        return observable -> observable
+                .map(throwable -> {
+                    //如果是网络异常，发送异常通知，通知网络用户
+                    if (throwable instanceof SocketException
+                            || throwable instanceof UnknownHostException
+                            || throwable instanceof CommonHttpException) {
+                        postRxError(action, throwable);
+                    }
+                    return throwable;
+                })
+                .zipWith(Observable.range(1, retryNub), (throwable, i) -> i)
+                .flatMap(retryCount -> Observable.timer(retryDelayTime, TimeUnit.SECONDS));
     }
 }

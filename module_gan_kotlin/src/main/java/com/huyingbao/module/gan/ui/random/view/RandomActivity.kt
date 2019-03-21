@@ -29,7 +29,7 @@ class RandomActivity : CommonRxActivity<RandomStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle) {}
 
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxChanged(rxChange: RxChange) {
         super.onRxChanged(rxChange)
         when (rxChange.tag) {

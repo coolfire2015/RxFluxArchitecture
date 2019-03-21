@@ -32,7 +32,7 @@ class MainActivity : CommonRxActivity<MainStore>() {
     /**
      * 接收RxChange，粘性
      */
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxChanged(rxChange: RxChange) {
         super.onRxChanged(rxChange)
         when (rxChange.tag) {

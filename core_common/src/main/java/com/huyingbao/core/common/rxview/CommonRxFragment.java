@@ -10,6 +10,7 @@ import com.huyingbao.core.common.view.CommonFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -65,7 +66,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
      * 接收RxChange，粘性
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange);
@@ -77,7 +78,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
      * 由RxFluxView直接处理
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxError(@NonNull RxError rxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxError);
@@ -89,7 +90,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
      * 由RxFluxView直接处理
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxLoading(@NonNull RxLoading rxLoading) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxLoading);

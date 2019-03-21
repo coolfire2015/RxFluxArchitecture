@@ -23,6 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.AndroidSupportInjection;
 
+import static org.greenrobot.eventbus.ThreadMode.MAIN;
+
 /**
  * Created by liujunfeng on 2019/1/1.
  */
@@ -65,7 +67,7 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
      * 接收RxChange，粘性
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange);
@@ -77,7 +79,7 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
      * 由RxFluxView直接处理
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxError(@NonNull RxError rxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxError);
@@ -89,7 +91,7 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
      * 由RxFluxView直接处理
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxLoading(@NonNull RxLoading rxLoading) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxLoading);

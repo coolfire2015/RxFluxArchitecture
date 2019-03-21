@@ -1,14 +1,16 @@
 package com.huyingbao.module.wan.ui.article.action;
 
-import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.module.wan.action.WanActionCreator;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.action.WanResponse;
 import com.huyingbao.module.wan.ui.article.model.Article;
+import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -22,7 +24,7 @@ import io.reactivex.Observable;
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-public class ArticleActionCreator extends RxActionCreator implements ArticleAction {
+public class ArticleActionCreator extends WanActionCreator implements ArticleAction {
     @Inject
     WanApi mWanApi;
 
@@ -44,6 +46,9 @@ public class ArticleActionCreator extends RxActionCreator implements ArticleActi
     @Override
     public void getBannerList() {
         RxAction action = newRxAction(GET_BANNER_LIST);
-        postHttpAction(action, mWanApi.getBannerList());
+        //接口调用失败，自动重复调用5次，每次间隔2s
+        Observable<WanResponse<ArrayList<Banner>>> httpObservable = mWanApi.getBannerList()
+                .retryWhen(retryAction(action, 5, 1));
+        postRetryHttpAction(action, httpObservable);
     }
 }

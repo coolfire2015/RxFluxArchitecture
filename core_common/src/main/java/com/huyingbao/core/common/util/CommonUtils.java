@@ -32,6 +32,12 @@ public class CommonUtils {
         toast.show();
     }
 
+    /**
+     * 显示短暂的Toast
+     *
+     * @param context
+     * @param text
+     */
     public void showShortToast(Context context, String text) {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.show();

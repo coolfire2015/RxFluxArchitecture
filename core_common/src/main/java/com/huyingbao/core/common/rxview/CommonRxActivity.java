@@ -14,10 +14,12 @@ import com.huyingbao.core.common.view.CommonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import javax.inject.Inject;
 
@@ -31,6 +33,8 @@ import dagger.Lazy;
 import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+
+import static org.greenrobot.eventbus.ThreadMode.MAIN;
 
 
 /**
@@ -83,7 +87,7 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
      */
     @Override
     @CallSuper//强制子类复写该方法时调用父方法
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange);
@@ -95,15 +99,21 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
      * 由RxFluxView直接处理
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxError(@NonNull RxError rxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxError);
         Throwable throwable = rxError.getThrowable();
-        // 自定义异常
         if (throwable instanceof CommonHttpException) {
-            String message = ((CommonHttpException) throwable).message();
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ((CommonHttpException) throwable).message(), Toast.LENGTH_SHORT).show();
+        } else if (throwable instanceof retrofit2.HttpException) {
+            Toast.makeText(this, ((retrofit2.HttpException) throwable).code() + ":服务器问题", Toast.LENGTH_SHORT).show();
+        } else if (throwable instanceof SocketException) {
+            Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show();
+        } else if (throwable instanceof UnknownHostException) {
+            Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show();
+        } else if (throwable instanceof SocketTimeoutException) {
+            Toast.makeText(this, "连接超时!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, throwable.toString(), Toast.LENGTH_SHORT).show();
         }

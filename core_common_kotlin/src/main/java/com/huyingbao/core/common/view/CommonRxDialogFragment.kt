@@ -65,7 +65,7 @@ abstract class CommonRxDialogFragment<T : ViewModel> : AppCompatDialogFragment()
     /**
      * 接收RxChange，粘性
      */
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxChanged(rxChange: RxChange) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange)
@@ -76,7 +76,7 @@ abstract class CommonRxDialogFragment<T : ViewModel> : AppCompatDialogFragment()
      * 该方法不经过store,
      * 由fragment直接处理
      */
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxError(error: RxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(error)

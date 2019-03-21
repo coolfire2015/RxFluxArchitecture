@@ -61,7 +61,7 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
     }
 
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
     }

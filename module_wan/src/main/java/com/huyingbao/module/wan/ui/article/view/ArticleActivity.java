@@ -41,7 +41,7 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
     }
 
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {

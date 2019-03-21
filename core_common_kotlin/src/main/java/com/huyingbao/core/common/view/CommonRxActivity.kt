@@ -82,7 +82,7 @@ abstract class CommonRxActivity<T : RxActivityStore> : AppCompatActivity(), Comm
      * 接收RxChange，粘性
      */
     @CallSuper//强制子类复写该方法时调用父方法
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxChanged(rxChange: RxChange) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxChange)
@@ -93,7 +93,7 @@ abstract class CommonRxActivity<T : RxActivityStore> : AppCompatActivity(), Comm
      * 该方法不经过store,
      * 由activity直接处理
      */
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     override fun onRxError(error: RxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(error)

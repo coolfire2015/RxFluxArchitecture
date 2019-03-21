@@ -38,7 +38,7 @@ public class MainActivity extends CommonRxActivity<MainStore> {
      * 接收RxChange，粘性
      */
     @Override
-    @Subscribe(sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {

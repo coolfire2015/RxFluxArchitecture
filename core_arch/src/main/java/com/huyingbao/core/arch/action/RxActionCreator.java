@@ -165,6 +165,28 @@ public abstract class RxActionCreator {
     }
 
     /**
+     * 发送网络action
+     *
+     * @param rxAction
+     * @param httpObservable
+     */
+    protected <T> void postRetryHttpAction(RxAction rxAction, Observable<T> httpObservable) {
+        if (hasRxAction(rxAction)) return;
+        addRxAction(rxAction, httpObservable// 1:指定IO线程
+                .subscribeOn(Schedulers.io())// 1:指定IO线程
+                .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
+                .subscribe(// 2:指定主线程
+                        response -> {
+                            rxAction.setResponse(response);
+                            postRxAction(rxAction);
+                        },
+                        throwable -> {
+                            postRxError(rxAction, throwable);
+                        }
+                ));
+    }
+
+    /**
      * 发送本地action
      *
      * @param actionId
