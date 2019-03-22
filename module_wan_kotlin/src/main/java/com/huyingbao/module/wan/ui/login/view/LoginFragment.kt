@@ -43,7 +43,7 @@ constructor() : CommonRxFragment<LoginStore>() {
     fun onViewClicked() {
         val username = mEtUsername!!.text.toString()
         val password = mEtPassword!!.text.toString()
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+        if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
             Toast.makeText(activity, "请输入密码！", Toast.LENGTH_SHORT).show()
             return
         }

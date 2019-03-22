@@ -32,8 +32,6 @@ import butterknife.OnClick;
 public class CommonLoadingDialog extends CommonDialogFragment implements DialogInterface.OnShowListener {
     @Inject
     RxActionManager mRxActionManager;
-    @Inject
-    CommonUtils mCommonUtils;
 
     @BindView(R2.id.progress_bar_loading)
     ProgressBar mProgressBarLoading;
@@ -103,10 +101,13 @@ public class CommonLoadingDialog extends CommonDialogFragment implements DialogI
         mRxLoading = rxLoading;
     }
 
+    /**
+     * 取消所有注册的订阅Action
+     */
     @OnClick(R2.id.tv_loading_cancel)
     public void cancel() {
         mRxActionManager.clear();
-        mCommonUtils.showShortToast(getContext(), "取消操作！");
+        CommonUtils.showShortToast(getContext(), "取消操作！");
         dismiss();
     }
 }

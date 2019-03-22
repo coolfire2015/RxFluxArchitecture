@@ -1,8 +1,7 @@
 package com.huyingbao.core.common.okhttp;
 
-import android.text.TextUtils;
-
 import com.huyingbao.core.common.BuildConfig;
+import com.huyingbao.core.common.util.CommonUtils;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class HttpInterceptor implements Interceptor {
                 .addHeader("Accept", "application/json;charset=UTF-8")
                 .addHeader("X-Requested-With", "XMLHttpRequest");
         //设置hostUrl地址
-        if (!TextUtils.isEmpty(mBaseUrl)) {
+        if (!CommonUtils.isEmpty(mBaseUrl)) {
             HttpUrl newHttpUrl = HttpUrl.parse(mBaseUrl);
             builder.url(oldRequest.url().newBuilder()
                     .scheme(newHttpUrl.scheme())

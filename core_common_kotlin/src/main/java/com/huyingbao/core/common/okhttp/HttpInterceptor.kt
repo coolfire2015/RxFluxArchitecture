@@ -37,7 +37,7 @@ internal constructor() : Interceptor {
                 .addHeader("Accept", "application/json;charset=UTF-8")
                 .addHeader("X-Requested-With", "XMLHttpRequest")
         //设置hostUrl地址
-        if (!TextUtils.isEmpty(mBaseUrl)) {
+        if (!CommonUtils.isEmpty(mBaseUrl)) {
             val newHttpUrl = HttpUrl.parse(mBaseUrl)
             builder.url(oldRequest.url().newBuilder()
                     .scheme(newHttpUrl!!.scheme())

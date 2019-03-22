@@ -1,7 +1,5 @@
 package com.huyingbao.core.common.util;
 
-import android.text.TextUtils;
-
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -48,7 +46,7 @@ public class ActivityUtils {
         String fragmentName = fragment.getClass().getSimpleName();
         String fragmentNewName = fragmentNew.getClass().getSimpleName();
         //旧的Fragment和新的Fragment同为同一个Fragment的实例对象
-        if (TextUtils.equals(fragmentName, fragmentNewName)) return;
+        if (CommonUtils.equals(fragmentName, fragmentNewName)) return;
         //旧的Fragment和新的不同
         if (isHideOrReplace) {//隐藏并可回退到已经存在的Fragment
             fragmentManager.beginTransaction()

@@ -47,7 +47,7 @@ object ActivityUtils {
         val fragmentName = fragment.javaClass.getSimpleName()
         val fragmentNewName = fragmentNew.javaClass.getSimpleName()
         //旧的Fragment和新的Fragment同为同一个Fragment的实例对象
-        if (TextUtils.equals(fragmentName, fragmentNewName)) return
+        if (CommonUtils.equals(fragmentName, fragmentNewName)) return
         //旧的Fragment和新的不同
         if (isHideOrReplace) {//隐藏并可回退到已经存在的Fragment
             fragmentManager.beginTransaction()

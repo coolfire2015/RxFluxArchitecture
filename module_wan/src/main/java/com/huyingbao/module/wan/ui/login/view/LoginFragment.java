@@ -1,13 +1,13 @@
 package com.huyingbao.module.wan.ui.login.view;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.rxview.CommonRxFragment;
+import com.huyingbao.core.common.util.CommonUtils;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator;
@@ -52,7 +52,7 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     public void onViewClicked() {
         String username = mEtUsername.getText().toString();
         String password = mEtPassword.getText().toString();
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+        if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
             Toast.makeText(getActivity(), "请输入密码！", Toast.LENGTH_SHORT).show();
             return;
         }
