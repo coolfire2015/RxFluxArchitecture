@@ -4,26 +4,20 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.rxview.CommonRxFragment;
 import com.huyingbao.module.wan.R;
-import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -60,15 +54,6 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
         if (getRxStore().getBannerLiveData().getValue() != null) return;
         refresh();
-    }
-
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onRxError(@NonNull RxError rxError) {
-        super.onRxError(rxError);
-        if(rxError.getTag()== ArticleAction.GET_BANNER_LIST){
-            mActionCreator.po(rxError);
-        }
     }
 
     /**

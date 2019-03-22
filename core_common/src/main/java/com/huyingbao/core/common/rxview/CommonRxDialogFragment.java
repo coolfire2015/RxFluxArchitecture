@@ -5,6 +5,7 @@ import android.content.Context;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
+import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.view.CommonDialogFragment;
 
@@ -82,6 +83,18 @@ public abstract class CommonRxDialogFragment<T extends ViewModel> extends Common
     public void onRxError(@NonNull RxError rxError) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxError);
+    }
+
+    /**
+     * 接收RxLoading，粘性
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
+     */
+    @Override
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onRxRetry(@NonNull RxRetry rxRetry) {
+        //收到后，移除粘性通知
+        EventBus.getDefault().removeStickyEvent(rxRetry);
     }
 
     /**

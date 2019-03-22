@@ -3,11 +3,15 @@ package com.huyingbao.core.common.rxview;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
+import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.common.R;
+import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonHttpException;
 import com.huyingbao.core.common.view.CommonActivity;
@@ -27,6 +31,7 @@ import javax.inject.Inject;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -46,6 +51,8 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
     DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
     @Inject
     Lazy<CommonLoadingDialog> mCommonLoadingDialogLazy;
+    @Inject
+    Lazy<CommonActionCreator> mCommonActionCreatorLazy;
 
     private T mStore;
 
@@ -119,7 +126,25 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
     }
 
     /**
-     * 接收RxRxLoading，粘性
+     * 接收RxLoading，粘性
+     * 该方法不经过RxStore,
+     * 由RxFluxView直接处理
+     */
+    @Override
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onRxRetry(@NonNull RxRetry rxRetry) {
+        //收到后，移除粘性通知
+        EventBus.getDefault().removeStickyEvent(rxRetry);
+        CoordinatorLayout coordinatorLayout = findViewById(R.id.cdl_content);
+        if (coordinatorLayout == null) {
+            return;
+        }
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, rxRetry.getTag(), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("Retry", v -> mCommonActionCreatorLazy.get().postRetryAction(rxRetry)).show();
+    }
+
+    /**
+     * 接收RxLoading，粘性
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */

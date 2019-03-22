@@ -49,7 +49,8 @@ public final class RxActionManager {
 
     /**
      * 检查action是否已经运行一个disposable
-     * @param action
+     *
+     * @param action 获取action的tag，tag的hashcode对应一个disposable
      * @return
      */
     boolean contains(RxAction action) {

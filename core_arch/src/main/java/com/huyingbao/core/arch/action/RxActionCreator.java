@@ -180,7 +180,7 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 发送网络action
+     * 发送网络action，如果有异常，可以重试
      *
      * @param rxAction
      * @param httpObservable
@@ -209,5 +209,16 @@ public abstract class RxActionCreator {
      */
     public void postLocalAction(@NonNull String actionId, Object... data) {
         postRxAction(newRxAction(actionId, data));
+    }
+
+    /**
+     * 发送重试action
+     *
+     * @param rxRetry
+     */
+    public void postRetryAction(@NonNull RxRetry rxRetry) {
+        RxAction rxAction = newRxAction(rxRetry.getTag());
+        if (hasRxAction(rxAction)) return;
+        postRetryHttpAction(rxAction, rxRetry.getObservable());
     }
 }

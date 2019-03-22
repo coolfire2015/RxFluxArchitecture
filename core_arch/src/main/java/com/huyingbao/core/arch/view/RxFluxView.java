@@ -3,6 +3,7 @@ package com.huyingbao.core.arch.view;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
+import com.huyingbao.core.arch.model.RxRetry;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,14 @@ public interface RxFluxView<T extends ViewModel> {
      * @param rxError
      */
     void onRxError(@NonNull RxError rxError);
+
+    /**
+     * 注册订阅之后，接收RxActionCreator发送的RxRetry事件，
+     * 响应操作异常，重试操作。
+     *
+     * @param rxRetry
+     */
+    void onRxRetry(@NonNull RxRetry rxRetry);
 
     /**
      * 注册订阅之后，接收RxActionCreator发送的RxLoading事件，
