@@ -7,7 +7,7 @@ public class RxChange extends RxEvent {
         super(tag);
     }
 
-    public static RxChange newRxChange(@NonNull String tag) {
-        return new RxChange(tag);
+    public static RxChange newInstance(@NonNull RxEvent rxEvent) {
+        return new RxChange(rxEvent.getTag());
     }
 }

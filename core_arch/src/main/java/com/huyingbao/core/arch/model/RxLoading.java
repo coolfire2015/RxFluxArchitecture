@@ -6,6 +6,10 @@ import androidx.annotation.NonNull;
  * Created by liujunfeng on 2019/1/1.
  */
 public class RxLoading extends RxEvent {
+    /**
+     * true：操作进行中，用于显示操作进度提示
+     * false：操作结束，用于隐藏操作进度提示
+     */
     private final boolean mIsLoading;
 
     private RxLoading(@NonNull String tag, boolean isLoading) {
@@ -13,8 +17,8 @@ public class RxLoading extends RxEvent {
         mIsLoading = isLoading;
     }
 
-    public static RxLoading newRxLoading(@NonNull String tag, boolean isLoading) {
-        return new RxLoading(tag, isLoading);
+    public static RxLoading newInstance(@NonNull RxEvent rxEvent, boolean isLoading) {
+        return new RxLoading(rxEvent.getTag(), isLoading);
     }
 
     public boolean isLoading() {

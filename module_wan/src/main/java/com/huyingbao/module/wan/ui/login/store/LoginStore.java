@@ -31,7 +31,7 @@ public class LoginStore extends RxActivityStore {
         switch (rxAction.getTag()) {
             case LoginAction.LOGIN:
                 mUser = rxAction.getResponse();
-                postChange(RxChange.newRxChange(rxAction.getTag()));
+                postChange(RxChange.newInstance(rxAction));
                 break;
             case LoginAction.REGISTER:
                 break;

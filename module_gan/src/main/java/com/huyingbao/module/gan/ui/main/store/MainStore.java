@@ -34,7 +34,7 @@ public class MainStore extends RxActivityStore {
         switch (rxAction.getTag()) {
             case MainAction.TO_WAN_MODULE:
             case MainAction.TO_GAN_MODULE:
-                postChange(RxChange.newRxChange(rxAction.getTag()));
+                postChange(RxChange.newInstance(rxAction));
                 break;
         }
     }

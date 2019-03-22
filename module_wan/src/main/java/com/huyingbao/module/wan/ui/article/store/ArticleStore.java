@@ -72,7 +72,7 @@ public class ArticleStore extends RxActivityStore {
             case ArticleAction.TO_BANNER:
             case ArticleAction.TO_FRIEND:
             case ArticleAction.TO_LOGIN:
-                postChange(RxChange.newRxChange(rxAction.getTag()));
+                postChange(RxChange.newInstance(rxAction));
                 break;
         }
     }

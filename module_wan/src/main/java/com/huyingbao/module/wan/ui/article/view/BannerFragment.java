@@ -67,7 +67,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
     public void onRxError(@NonNull RxError rxError) {
         super.onRxError(rxError);
         if(rxError.getTag()== ArticleAction.GET_BANNER_LIST){
-
+            mActionCreator.po(rxError);
         }
     }
 

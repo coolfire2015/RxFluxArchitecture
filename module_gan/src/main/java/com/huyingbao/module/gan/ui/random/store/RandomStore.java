@@ -76,7 +76,7 @@ public class RandomStore extends RxActivityStore {
             case RandomAction.TO_SHOW_DATA:
                 onCleared();//跳转页面，先清除旧数据
                 mCategory = rxAction.get(GanConstants.Key.CATEGORY);
-                postChange(RxChange.newRxChange(rxAction.getTag()));
+                postChange(RxChange.newInstance(rxAction));
                 break;
         }
     }

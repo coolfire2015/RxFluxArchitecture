@@ -4,6 +4,7 @@ import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
+import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxView;
 
@@ -113,7 +114,16 @@ public class RxDispatcher {
     }
 
     /**
-     * 4:发送RxLoading,到所有订阅的RxView,粘性通知
+     * 4:发送RxRetry,到所有订阅的RxView,粘性通知
+     * 发送：操作完成，异常执行状态
+     * @param rxRetry
+     */
+    public void postRxRetry(final RxRetry rxRetry) {
+        EventBus.getDefault().postSticky(rxRetry);
+    }
+
+    /**
+     * 5:发送RxLoading,到所有订阅的RxView,粘性通知
      * 发送：操作操作进度
      * @param rxLoading
      */
