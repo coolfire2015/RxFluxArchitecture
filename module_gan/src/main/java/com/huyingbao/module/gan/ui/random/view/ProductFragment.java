@@ -47,7 +47,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(getRxStore().getCategory(),true);
+        setTitle(getRxStore().getCategory(), true);
         initRecyclerView();
         initAdapter();
         showData();

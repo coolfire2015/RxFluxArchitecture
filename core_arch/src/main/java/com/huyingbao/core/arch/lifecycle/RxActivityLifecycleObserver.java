@@ -34,7 +34,7 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
         if (mActivity instanceof RxFluxView) {
             ViewModel rxStore = ((RxFluxView) mActivity).getRxStore();
             if (rxStore instanceof RxActivityStore) {
-                ((FragmentActivity) mActivity).getLifecycle().addObserver((RxActivityStore)rxStore);
+                ((FragmentActivity) mActivity).getLifecycle().addObserver((RxActivityStore) rxStore);
             }
         }
     }

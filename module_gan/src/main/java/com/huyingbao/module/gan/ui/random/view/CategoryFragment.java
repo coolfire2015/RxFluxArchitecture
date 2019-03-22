@@ -50,7 +50,7 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        setTitle(R.string.gan_label_category,true);
+        setTitle(R.string.gan_label_category, true);
         initRecyclerView();
         initAdapter();
         showData();

@@ -107,6 +107,7 @@ public class RxDispatcher {
     /**
      * 3:发送RxError,到所有订阅的RxView,粘性通知
      * 发送：操作完成，异常执行状态
+     *
      * @param rxError
      */
     public void postRxError(final RxError rxError) {
@@ -116,6 +117,7 @@ public class RxDispatcher {
     /**
      * 4:发送RxRetry,到所有订阅的RxView,粘性通知
      * 发送：操作完成，异常执行状态
+     *
      * @param rxRetry
      */
     public void postRxRetry(final RxRetry rxRetry) {
@@ -125,6 +127,7 @@ public class RxDispatcher {
     /**
      * 5:发送RxLoading,到所有订阅的RxView,粘性通知
      * 发送：操作操作进度
+     *
      * @param rxLoading
      */
     public void postRxLoading(final RxLoading rxLoading) {

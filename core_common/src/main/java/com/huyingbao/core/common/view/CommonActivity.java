@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * 带有toolbar的Activity父类
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonActivity extends AppCompatActivity implements CommonView{
+public abstract class CommonActivity extends AppCompatActivity implements CommonView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
