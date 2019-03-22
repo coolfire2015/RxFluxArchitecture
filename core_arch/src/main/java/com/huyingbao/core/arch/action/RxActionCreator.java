@@ -159,7 +159,7 @@ public abstract class RxActionCreator {
      * @param rxAction
      * @param httpObservable
      */
-    protected <T> void postLoadingHttpAction(RxAction rxAction, Observable<T> httpObservable) {
+    protected <T> void postHttpLoadingAction(RxAction rxAction, Observable<T> httpObservable) {
         if (hasRxAction(rxAction)) return;
         addRxAction(rxAction, httpObservable// 1:指定IO线程
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
@@ -185,7 +185,7 @@ public abstract class RxActionCreator {
      * @param rxAction
      * @param httpObservable
      */
-    protected <T> void postRetryHttpAction(RxAction rxAction, Observable<T> httpObservable) {
+    protected <T> void postHttpRetryAction(RxAction rxAction, Observable<T> httpObservable) {
         if (hasRxAction(rxAction)) return;
         addRxAction(rxAction, httpObservable// 1:指定IO线程
                 .subscribeOn(Schedulers.io())// 1:指定IO线程
@@ -219,6 +219,6 @@ public abstract class RxActionCreator {
     public void postRetryAction(@NonNull RxRetry rxRetry) {
         RxAction rxAction = newRxAction(rxRetry.getTag());
         if (hasRxAction(rxAction)) return;
-        postRetryHttpAction(rxAction, rxRetry.getObservable());
+        postHttpRetryAction(rxAction, rxRetry.getObservable());
     }
 }

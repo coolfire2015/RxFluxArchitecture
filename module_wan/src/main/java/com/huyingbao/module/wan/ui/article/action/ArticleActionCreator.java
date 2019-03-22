@@ -40,7 +40,7 @@ public class ArticleActionCreator extends WanActionCreator implements ArticleAct
         Observable<WanResponse<Page<Article>>> article = Observable.just("Article")
                 .delay(5, TimeUnit.SECONDS)
                 .flatMap(s -> mWanApi.getArticleList(page));
-        postLoadingHttpAction(action, article);
+        postHttpLoadingAction(action, article);
     }
 
     @Override
