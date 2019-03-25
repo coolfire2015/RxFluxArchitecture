@@ -2,11 +2,9 @@ package com.huyingbao.module.wan.ui.login.action
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.module.wan.action.WanActionCreator
 import com.huyingbao.module.wan.action.WanApi
-
 import javax.inject.Inject
 
 /**
@@ -16,7 +14,7 @@ import javax.inject.Inject
 class LoginActionCreator @Inject
 internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : WanActionCreator(rxDispatcher, rxActionManager), LoginAction {
     @Inject
-    internal var mWanApi: WanApi? = null
+    lateinit var mWanApi: WanApi
 
     override fun register(username: String, password: String, repassword: String) {
 
@@ -24,6 +22,6 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
 
     override fun login(username: String, password: String) {
         val action = newRxAction(LoginAction.LOGIN)
-        postHttpAction<WanResponse<User>>(action, mWanApi!!.login(username, password))
+        postHttpAction(action, mWanApi.login(username, password))
     }
 }

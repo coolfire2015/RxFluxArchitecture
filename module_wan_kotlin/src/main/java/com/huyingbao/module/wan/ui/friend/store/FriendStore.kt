@@ -1,20 +1,16 @@
 package com.huyingbao.module.wan.ui.friend.store
 
+import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxFragmentStore
 import com.huyingbao.module.wan.action.WanResponse
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import com.huyingbao.module.wan.ui.friend.model.WebSite
-
 import org.greenrobot.eventbus.Subscribe
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-
-import androidx.lifecycle.MutableLiveData
 
 /**
  * Created by liujunfeng on 2018/12/27.

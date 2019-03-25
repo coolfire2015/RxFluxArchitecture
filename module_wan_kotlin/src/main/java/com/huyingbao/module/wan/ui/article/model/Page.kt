@@ -1,6 +1,6 @@
 package com.huyingbao.module.wan.ui.article.model
 
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by liujunfeng on 2018/12/24.

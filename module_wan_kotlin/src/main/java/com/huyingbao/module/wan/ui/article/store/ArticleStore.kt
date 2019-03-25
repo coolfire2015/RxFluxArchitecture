@@ -1,5 +1,6 @@
 package com.huyingbao.module.wan.ui.article.store
 
+import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.model.RxChange
@@ -9,15 +10,10 @@ import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
-
 import org.greenrobot.eventbus.Subscribe
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-
-import androidx.lifecycle.MutableLiveData
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -25,8 +21,8 @@ import androidx.lifecycle.MutableLiveData
 @Singleton
 class ArticleStore @Inject
 internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
-    val articleLiveData = MutableLiveData<List<Article>>()
-    val bannerLiveData = MutableLiveData<List<Banner>>()
+    val articleLiveData = MutableLiveData<ArrayList<Article>>()
+    val bannerLiveData = MutableLiveData<ArrayList<Banner>>()
     var nextRequestPage = 1//列表页数
 
     /**

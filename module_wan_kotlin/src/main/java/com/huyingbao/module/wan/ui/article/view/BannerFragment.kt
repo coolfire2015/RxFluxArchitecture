@@ -2,8 +2,10 @@ package com.huyingbao.module.wan.ui.article.view
 
 import android.os.Bundle
 import android.view.View
-
-import com.chad.library.adapter.base.BaseQuickAdapter
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.R2
 import com.huyingbao.core.common.rxview.CommonRxFragment
@@ -12,14 +14,8 @@ import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
-
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -28,13 +24,13 @@ import butterknife.BindView
 class BannerFragment @Inject
 constructor() : CommonRxFragment<ArticleStore>() {
     @Inject
-    internal var mActionCreator: ArticleActionCreator? = null
+    lateinit var mActionCreator: ArticleActionCreator
 
     @BindView(R2.id.rv_content)
-    internal var mRvContent: RecyclerView? = null
+    lateinit var mRvContent: RecyclerView
 
     private var mDataList: List<Banner>? = null
-    private var mAdapter: BaseQuickAdapter<*, *>? = null
+    private var mAdapter: BannerAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.common_fragment_base_list
@@ -54,9 +50,9 @@ constructor() : CommonRxFragment<ArticleStore>() {
      * 实例化RecyclerView
      */
     private fun initRecyclerView() {
-        mRvContent!!.layoutManager = LinearLayoutManager(activity)
-        mRvContent!!.setHasFixedSize(true)
-        mRvContent!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
+        mRvContent.layoutManager = LinearLayoutManager(activity)
+        mRvContent.setHasFixedSize(true)
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
     }
 
     /**
@@ -66,21 +62,25 @@ constructor() : CommonRxFragment<ArticleStore>() {
         mDataList = ArrayList()
         mAdapter = BannerAdapter(mDataList)
         //view设置适配器
-        mRvContent!!.adapter = mAdapter
+        mRvContent.adapter = mAdapter
     }
 
     /**
      * 显示数据
      */
     private fun showData() {
-        rxStore!!.bannerLiveData.observe(this, { bannerArrayList -> setData(bannerArrayList) })
+        rxStore!!.bannerLiveData.observe(this, Observer { bannerArrayList ->
+            if (bannerArrayList != null) {
+                setData(bannerArrayList)
+            }
+        })
     }
 
     /**
      * 刷新
      */
     private fun refresh() {
-        mActionCreator!!.getBannerList()
+        mActionCreator.getBannerList()
     }
 
     /**
@@ -88,7 +88,7 @@ constructor() : CommonRxFragment<ArticleStore>() {
      *
      * @param data
      */
-    private fun setData(data: List<Banner>) {
+    private fun setData(data: List<Banner>?) {
         mAdapter!!.setNewData(data)
     }
 }

@@ -6,8 +6,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-
-import com.chad.library.adapter.base.BaseQuickAdapter
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.R2
 import com.huyingbao.core.common.rxview.CommonRxFragment
@@ -18,12 +20,7 @@ import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter
 import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
-
 import javax.inject.Inject
-
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -32,11 +29,11 @@ import butterknife.BindView
 class ArticleListFragment @Inject
 constructor() : CommonRxFragment<ArticleStore>() {
     @Inject
-    internal var mActionCreator: ArticleActionCreator? = null
+    lateinit var mActionCreator: ArticleActionCreator
     @BindView(R2.id.rv_content)
-    internal var mRvContent: RecyclerView? = null
+    lateinit var mRvContent: RecyclerView
 
-    private var mAdapter: BaseQuickAdapter<*, *>? = null
+    private var mAdapter: ArticleAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.common_fragment_base_list
@@ -60,13 +57,13 @@ constructor() : CommonRxFragment<ArticleStore>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_to_banner) {
-            mActionCreator!!.postLocalAction(ArticleAction.TO_BANNER)
+            mActionCreator.postLocalAction(ArticleAction.TO_BANNER)
             return true
         } else if (item.itemId == R.id.menu_to_friend) {
-            mActionCreator!!.postLocalAction(ArticleAction.TO_FRIEND)
+            mActionCreator.postLocalAction(ArticleAction.TO_FRIEND)
             return true
         } else if (item.itemId == R.id.menu_to_login) {
-            mActionCreator!!.postLocalAction(ArticleAction.TO_LOGIN)
+            mActionCreator.postLocalAction(ArticleAction.TO_LOGIN)
             return true
         } else {
             return super.onOptionsItemSelected(item)
@@ -77,9 +74,9 @@ constructor() : CommonRxFragment<ArticleStore>() {
      * 实例化RecyclerView
      */
     private fun initRecyclerView() {
-        mRvContent!!.layoutManager = LinearLayoutManager(activity)
-        mRvContent!!.setHasFixedSize(true)
-        mRvContent!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
+        mRvContent.layoutManager = LinearLayoutManager(activity)
+        mRvContent.setHasFixedSize(true)
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
     }
 
     /**
@@ -99,11 +96,13 @@ constructor() : CommonRxFragment<ArticleStore>() {
      * 显示数据
      */
     private fun showData() {
-        rxStore!!.articleLiveData.observe(this, { articleArrayList ->
-            //判断获取回来的数据是否是刷新的数据
-            val isRefresh = rxStore!!.nextRequestPage == 1
-            setData(isRefresh, articleArrayList)
-            mAdapter!!.setEnableLoadMore(true)
+        rxStore!!.articleLiveData.observe(this, Observer { articleArrayList ->
+            if (articleArrayList != null) {
+                //判断获取回来的数据是否是刷新的数据
+                val isRefresh = rxStore!!.nextRequestPage == 1
+                setData(isRefresh, articleArrayList)
+                mAdapter!!.setEnableLoadMore(true)
+            }
         })
     }
 

@@ -5,12 +5,10 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.common.model.CommonHttpException
-
-import java.util.concurrent.TimeUnit
-
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function
+import java.util.concurrent.TimeUnit
 
 /**
  * 模块自定义的ActionCreator
@@ -29,7 +27,7 @@ abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxA
      * 2:有数据,返回code不是成功码,返回自定义异常
      */
     private fun <T> verifyResponse(): Function<T, Observable<T>> {
-        return Function{ response ->
+        return Function { response ->
             if (response !is WanResponse<*>)
                 return@Function Observable.error<T>(CommonHttpException(600, "未知异常！"))
             val errorCode = (response as WanResponse<*>).errorCode
@@ -42,7 +40,7 @@ abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxA
         }
     }
 
-/**
+    /**
      * 操作重试
      *
      * @param retryNub       失败重试次数
@@ -50,14 +48,14 @@ abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxA
      * @return
      */
     fun retryAction(retryNub: Int, retryDelayTime: Long): Function<Observable<out Throwable>, Observable<*>> {
+        val value = object : BiFunction<Throwable, Int, Any> {
+            override fun apply(t1: Throwable, t2: Int): Any {
+                return t2
+            }
+        }
         return Function { observable ->
             observable
-                    .zipWith(Observable.range(1, retryNub), object : BiFunction<Throwable, Int, Any> {
-                        @Throws(Exception::class)
-                        override fun apply(throwable: Throwable, integer: Int?): Any? {
-                            return integer
-                        }
-                    })
+                    .zipWith(Observable.range(1, retryNub), value)
                     .flatMap { Observable.timer(retryDelayTime, TimeUnit.SECONDS) }
         }
     }

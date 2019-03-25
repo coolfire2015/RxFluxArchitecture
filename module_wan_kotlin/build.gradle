@@ -42,11 +42,6 @@ android {
         signingConfig signingConfigs.debug
         vectorDrawables.useSupportLibrary = true//使用vector图片
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
     //构建过程
     buildTypes {
@@ -130,10 +125,13 @@ artifacts {
 repositories {
     //本地仓库,添加aar支持
     flatDir { dirs 'libs' }
-    mavenCentral()
 }
+
 //Kapt编译支持
 kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
     generateStubs = true
 }
 
@@ -141,7 +139,7 @@ dependencies {
     //通用依赖模块
 //    api project(':core_common')
     api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"

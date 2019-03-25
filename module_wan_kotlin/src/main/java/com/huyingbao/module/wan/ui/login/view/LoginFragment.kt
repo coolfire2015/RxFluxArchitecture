@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-
+import butterknife.BindView
+import butterknife.OnClick
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.rxview.CommonRxFragment
 import com.huyingbao.core.common.util.CommonUtils
@@ -12,11 +13,7 @@ import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.R2
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator
 import com.huyingbao.module.wan.ui.login.store.LoginStore
-
 import javax.inject.Inject
-
-import butterknife.BindView
-import butterknife.OnClick
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -25,14 +22,14 @@ import butterknife.OnClick
 class LoginFragment @Inject
 constructor() : CommonRxFragment<LoginStore>() {
     @Inject
-    internal var mActionCreator: LoginActionCreator? = null
+    lateinit var mActionCreator: LoginActionCreator
 
     @BindView(R2.id.et_username)
-    internal var mEtUsername: EditText? = null
+    lateinit var mEtUsername: EditText
     @BindView(R2.id.et_password)
-    internal var mEtPassword: EditText? = null
+    lateinit var mEtPassword: EditText
     @BindView(R2.id.btn_login)
-    internal var mBtnLogin: Button? = null
+    lateinit var mBtnLogin: Button
 
     override fun getLayoutId(): Int {
         return R.layout.wan_fragment_login
@@ -44,12 +41,12 @@ constructor() : CommonRxFragment<LoginStore>() {
 
     @OnClick(R2.id.btn_login)
     fun onViewClicked() {
-        val username = mEtUsername!!.text.toString()
-        val password = mEtPassword!!.text.toString()
+        val username = mEtUsername.text.toString()
+        val password = mEtPassword.text.toString()
         if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
             Toast.makeText(activity, "请输入密码！", Toast.LENGTH_SHORT).show()
             return
         }
-        mActionCreator!!.login(username, password)
+        mActionCreator.login(username, password)
     }
 }
