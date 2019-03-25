@@ -1,8 +1,16 @@
-apply plugin: 'com.android.application'
+if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
+else apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'//Kotlin支持
+apply plugin: 'kotlin-android'////Kotlin支持
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = "com.github.coolfire2015"
 
 android {
+    //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
-
     //lint设置
     lintOptions {
         //lint 不被终止
@@ -26,7 +34,6 @@ android {
     }
     //默认配置
     defaultConfig {
-        applicationId "com.huyingbao.app"
         multiDexEnabled true//支持Multidex分包
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
@@ -90,38 +97,56 @@ android {
     sourceSets {
         main {
             if (isModuleAsApp.toBoolean()) {
-                manifest.srcFile 'src/module/AndroidManifest.xml'
-            } else {
                 manifest.srcFile 'src/app/AndroidManifest.xml'
                 java.srcDirs 'src/app/java'
                 res.srcDirs 'src/app/res'
+            } else {
+                manifest.srcFile 'src/library/AndroidManifest.xml'
             }
         }
     }
     //修改生成的apk名字
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            if ("release".equals(variant.buildType.name))
-                outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+    if (isModuleAsApp.toBoolean()) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                if ("release".equals(variant.buildType.name))
+                    outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            }
         }
     }
+}
+
+//将源代码打包进aar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.javaDirectories
+}
+
+artifacts {
+    archives sourcesJar
 }
 
 //仓库
 repositories {
     //本地仓库,添加aar支持
     flatDir { dirs 'libs' }
+    mavenCentral()
+}
+//Kapt编译支持
+kapt {
+    generateStubs = true
 }
 
 dependencies {
-    //功能模块
-    if (!isModuleAsApp.toBoolean()) {
-//        implementation project(':module_gan')
-//        implementation project(':module_wan')
-        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:0.1.8'
-        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:0.1.8'
-    }
+    //通用依赖模块
+//    api project(':core_common')
+    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
     //编译时生成
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }

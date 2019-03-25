@@ -131,8 +131,8 @@ repositories {
 
 dependencies {
     //通用依赖模块
-    api project(':core_common')
-    //api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.5'
+//    api project(':core_common')
+    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
