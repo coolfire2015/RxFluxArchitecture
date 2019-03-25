@@ -49,7 +49,7 @@ dependencies {
     api "androidx.core:core:${X_CORE}"
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
     //Arch
-    api "androidx.lifecycle:lifecycle-extensions:${X_ARCH}"
+    api "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
     //RxJava
     api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
     api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"

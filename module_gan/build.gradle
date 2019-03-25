@@ -139,5 +139,5 @@ dependencies {
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_ARCH}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }
