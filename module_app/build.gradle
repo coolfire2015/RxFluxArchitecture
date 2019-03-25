@@ -116,13 +116,13 @@ repositories {
 dependencies {
     //通用依赖模块
 //    api project(':core_common')
-//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.5'
+//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
     //功能模块
     if (!isModuleAsApp.toBoolean()) {
-        implementation project(':module_gan')
-        implementation project(':module_wan')
-//        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:0.1.7'
-//        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:0.1.7'
+//        implementation project(':module_gan')
+//        implementation project(':module_wan')
+        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:0.1.8'
+        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:0.1.8'
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
