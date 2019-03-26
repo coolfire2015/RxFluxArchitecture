@@ -6,7 +6,8 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class WanApplication extends CommonApp {
     @Override

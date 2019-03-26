@@ -5,7 +5,9 @@ import androidx.collection.ArrayMap;
 
 /**
  * action封装类，用于传递数据，使用Builder创建
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class RxAction extends RxEvent {
     private static final String RESPONSE = "response";
@@ -37,10 +39,16 @@ public class RxAction extends RxEvent {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof RxAction)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof RxAction)) {
+            return false;
+        }
         RxAction rxAction = (RxAction) obj;
-        if (!mTag.equals(rxAction.mTag)) return false;
+        if (!mTag.equals(rxAction.mTag)) {
+            return false;
+        }
         return !(mData != null ? !mData.equals(rxAction.mData) : rxAction.mData != null);
     }
 
@@ -61,7 +69,9 @@ public class RxAction extends RxEvent {
         }
 
         public Builder put(@NonNull String key, Object value) {
-            if (value != null) mData.put(key, value);
+            if (value != null) {
+                mData.put(key, value);
+            }
             return this;
         }
 

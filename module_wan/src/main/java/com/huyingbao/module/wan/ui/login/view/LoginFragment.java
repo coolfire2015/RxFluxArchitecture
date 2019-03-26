@@ -19,7 +19,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 public class LoginFragment extends CommonRxFragment<LoginStore> {

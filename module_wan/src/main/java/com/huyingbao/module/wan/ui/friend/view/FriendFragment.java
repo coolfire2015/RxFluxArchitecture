@@ -28,7 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 public class FriendFragment extends CommonRxFragment<FriendStore> {
@@ -57,7 +58,9 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().isCreated()) return;
+        if (getRxStore().isCreated()) {
+            return;
+        }
         refresh();
     }
 
@@ -73,7 +76,8 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
     private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     /**
@@ -91,7 +95,9 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
      */
     private void showData() {
         getRxStore().getWebSiteListData().observe(this, products -> {
-            if (products == null) return;
+            if (products == null) {
+                return;
+            }
             setData(products.getData());
         });
     }

@@ -24,7 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Module其实是一个简单工厂模式，Module里面的方法基本都是创建类实例的方法。
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Module
 public abstract class GanModule {
@@ -54,13 +56,15 @@ public abstract class GanModule {
      * key为ViewModel的Class，
      * value则为提供ViewModel实例的Provider对象，
      * 通过provider.get()方法就可以获取到相应的ViewModel对象。
+     * 注解Binds当参数和返回值类型相同时，将方法写成抽象方法，用。
+     * 注解IntoMap可以让Dagger2将多个元素依赖注入到Map之中
      *
      * @param randomStore
      * @return
      */
     @Singleton
-    @Binds//当参数和返回值类型相同时，将方法写成抽象方法，用Binds注解。
-    @IntoMap//可以让Dagger2将多个元素依赖注入到Map之中
+    @Binds
+    @IntoMap
     @RxStoreKey(RandomStore.class)
     abstract ViewModel bindRandomStore(RandomStore randomStore);
 

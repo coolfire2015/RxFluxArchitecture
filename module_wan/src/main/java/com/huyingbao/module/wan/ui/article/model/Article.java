@@ -3,7 +3,8 @@ package com.huyingbao.module.wan.ui.article.model;
 import java.util.List;
 
 /**
- * Created by liujunfeng on 2018/12/24.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class Article {
 

@@ -21,7 +21,8 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Route(path = "/wan/ArticleActivity")
 public class ArticleActivity extends CommonRxActivity<ArticleStore> {
@@ -54,6 +55,8 @@ public class ArticleActivity extends CommonRxActivity<ArticleStore> {
                 break;
             case ArticleAction.TO_LOGIN:
                 startActivity(new Intent(this, LoginActivity.class));
+                break;
+            default:
                 break;
         }
     }

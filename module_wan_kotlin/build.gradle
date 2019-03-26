@@ -1,7 +1,7 @@
 if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
 apply plugin: 'kotlin-kapt'//Kotlin支持
-apply plugin: 'kotlin-android'////Kotlin支持
+apply plugin: 'kotlin-android'//Kotlin支持
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
@@ -139,7 +139,7 @@ dependencies {
     //通用依赖模块
 //    api project(':core_common')
     api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"

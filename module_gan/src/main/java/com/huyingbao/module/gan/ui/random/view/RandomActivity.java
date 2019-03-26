@@ -17,7 +17,8 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class RandomActivity extends CommonRxActivity<RandomStore> {
     @Inject
@@ -41,6 +42,8 @@ public class RandomActivity extends CommonRxActivity<RandomStore> {
         switch (rxChange.getTag()) {
             case RandomAction.TO_SHOW_DATA:
                 addFragmentHideExisting(mProductListFragmentLazy.get());
+                break;
+            default:
                 break;
         }
     }

@@ -1,11 +1,11 @@
 package com.huyingbao.module.gan.ui.random.model;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class Product {
     /**
-     * _id : 5b196d0b421aa910ab3d6b3c
      * createdAt : 2018-06-08T01:36:11.740Z
      * desc : 2018-06-08
      * publishedAt : 2018-06-08T00:00:00.0Z
@@ -15,8 +15,6 @@ public class Product {
      * used : true
      * who : lijinshanmx
      */
-
-    private String _id;
     private String createdAt;
     private String desc;
     private String publishedAt;
@@ -25,14 +23,6 @@ public class Product {
     private String url;
     private boolean used;
     private String who;
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
 
     public String getCreatedAt() {
         return createdAt;

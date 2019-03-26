@@ -13,7 +13,9 @@ import javax.inject.Inject;
 
 /**
  * rxAction创建发送管理类
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 public class RandomActionCreator extends RxActionCreator implements RandomAction {
@@ -26,8 +28,8 @@ public class RandomActionCreator extends RxActionCreator implements RandomAction
     }
 
     @Override
-    public void getProductList(String category, int count, int page) {
-        RxAction action = newRxAction(GET_PRODUCT_LIST,
+    public void getDataList(String category, int count, int page) {
+        RxAction action = newRxAction(GET_DATA_LIST,
                 GanConstants.Key.COUNT, count,
                 GanConstants.Key.PAGE, page);
         postHttpAction(action, mGanApi.getDataList(category, count, page));

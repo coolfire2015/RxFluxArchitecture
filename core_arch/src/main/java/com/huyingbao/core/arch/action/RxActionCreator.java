@@ -20,7 +20,9 @@ import io.reactivex.schedulers.Schedulers;
  * 所有订阅了这个Action的Store会接收到订阅的Action并消化Action，
  * 然后Store会发送UI状态改变的事件给相关的Activity（或Fragment)，
  * Activity在收到状态发生改变的事件之后，开始更新UI（更新UI的过程中会从Store获取所有需要的数据）。
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class RxActionCreator {
     private final RxDispatcher mRxDispatcher;
@@ -40,8 +42,9 @@ public abstract class RxActionCreator {
      */
     protected RxAction newRxAction(@NonNull String tag, Object... data) {
         if (data != null) {
-            if (data.length % 2 != 0)
+            if (data.length % 2 != 0) {
                 throw new IllegalArgumentException("Data must be a valid list of key,value pairs");
+            }
         }
         RxAction.Builder actionBuilder = new RxAction.Builder(tag);
         int i = 0;
@@ -138,11 +141,17 @@ public abstract class RxActionCreator {
      * @param httpObservable
      */
     protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, httpObservable// 1:指定IO线程
-                .subscribeOn(Schedulers.io())// 1:指定IO线程
-                .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
-                .subscribe(// 2:指定主线程
+        if (hasRxAction(rxAction)) {
+            return;
+        }
+        // 1:指定IO线程
+        addRxAction(rxAction, httpObservable
+                // 1:指定IO线程
+                .subscribeOn(Schedulers.io())
+                // 2:指定主线程
+                .observeOn(AndroidSchedulers.mainThread())
+                // 2:指定主线程
+                .subscribe(
                         response -> {
                             rxAction.setResponse(response);
                             postRxAction(rxAction);
@@ -160,12 +169,19 @@ public abstract class RxActionCreator {
      * @param httpObservable
      */
     protected <T> void postHttpLoadingAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, httpObservable// 1:指定IO线程
-                .subscribeOn(Schedulers.io())// 1:指定IO线程
-                .doOnSubscribe(subscription -> postRxLoading(rxAction, true))// 2:指定主线程
-                .subscribeOn(AndroidSchedulers.mainThread())// 2:在doOnSubscribe()之后，使用subscribeOn()就可以指定其运行在哪中线程。
-                .observeOn(AndroidSchedulers.mainThread())// 3:指定主线程
+        if (hasRxAction(rxAction)) {
+            return;
+        }
+        // 1:指定IO线程
+        addRxAction(rxAction, httpObservable
+                // 1:指定IO线程
+                .subscribeOn(Schedulers.io())
+                // 2:指定主线程
+                .doOnSubscribe(subscription -> postRxLoading(rxAction, true))
+                // 2:在doOnSubscribe()之后，使用subscribeOn()就可以指定其运行在哪中线程。
+                .subscribeOn(AndroidSchedulers.mainThread())
+                // 3:指定主线程
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(// 3:指定主线程
                         response -> {
                             postRxLoading(rxAction, false);
@@ -186,11 +202,17 @@ public abstract class RxActionCreator {
      * @param httpObservable
      */
     protected <T> void postHttpRetryAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) return;
-        addRxAction(rxAction, httpObservable// 1:指定IO线程
-                .subscribeOn(Schedulers.io())// 1:指定IO线程
-                .observeOn(AndroidSchedulers.mainThread())// 2:指定主线程
-                .subscribe(// 2:指定主线程
+        if (hasRxAction(rxAction)) {
+            return;
+        }
+        // 1:指定IO线程
+        addRxAction(rxAction, httpObservable
+                // 1:指定IO线程
+                .subscribeOn(Schedulers.io())
+                // 2:指定主线程
+                .observeOn(AndroidSchedulers.mainThread())
+                // 2:指定主线程
+                .subscribe(
                         response -> {
                             rxAction.setResponse(response);
                             postRxAction(rxAction);
@@ -199,6 +221,7 @@ public abstract class RxActionCreator {
                             postRxRetry(rxAction, throwable, httpObservable);
                         }
                 ));
+
     }
 
     /**
@@ -218,7 +241,9 @@ public abstract class RxActionCreator {
      */
     public void postRetryAction(@NonNull RxRetry rxRetry) {
         RxAction rxAction = newRxAction(rxRetry.getTag());
-        if (hasRxAction(rxAction)) return;
+        if (hasRxAction(rxAction)) {
+            return;
+        }
         postHttpRetryAction(rxAction, rxRetry.getObservable());
     }
 }

@@ -27,7 +27,9 @@ import butterknife.BindView;
 
 /**
  * 内容类型列表展示页面
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 public class CategoryFragment extends CommonRxFragment<RandomStore> {
@@ -62,7 +64,8 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
     private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {

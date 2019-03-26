@@ -12,10 +12,18 @@ import dagger.Binds;
 import dagger.Module;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
+
 @Module
 public abstract class RxFluxModule {
+    /**
+     * 提供Application对象
+     *
+     * @param application
+     * @return
+     */
     @Singleton
     @Binds
     abstract Context bindApplication(Application application);

@@ -13,7 +13,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2018/12/27.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 class FriendStore @Inject

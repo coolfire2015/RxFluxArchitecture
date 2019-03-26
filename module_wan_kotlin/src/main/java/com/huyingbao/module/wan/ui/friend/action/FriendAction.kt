@@ -1,7 +1,8 @@
 package com.huyingbao.module.wan.ui.friend.action
 
 /**
- * Created by liujunfeng on 2018/12/26.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 interface FriendAction {
 

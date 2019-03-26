@@ -21,13 +21,17 @@ import javax.inject.Singleton;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class ArticleStore extends RxActivityStore {
     private MutableLiveData<List<Article>> mArticleLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Banner>> mBannerLiveData = new MutableLiveData<>();
-    private int mNextRequestPage = 1;//列表页数
+    /**
+     * 列表页数
+     */
+    private int mNextRequestPage = 1;
 
     @Inject
     ArticleStore(RxDispatcher rxDispatcher) {
@@ -52,6 +56,7 @@ public class ArticleStore extends RxActivityStore {
      *
      * @param rxAction
      */
+    @Override
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
@@ -73,6 +78,8 @@ public class ArticleStore extends RxActivityStore {
             case ArticleAction.TO_FRIEND:
             case ArticleAction.TO_LOGIN:
                 postChange(RxChange.newInstance(rxAction));
+                break;
+            default:
                 break;
         }
     }

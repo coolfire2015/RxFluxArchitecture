@@ -9,7 +9,9 @@ import okhttp3.Cookie;
 
 /**
  * 序列化cooke
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 class SerializableOkHttpCookies implements Serializable {
 
@@ -22,7 +24,9 @@ class SerializableOkHttpCookies implements Serializable {
 
     Cookie getCookies() {
         Cookie bestCookies = cookies;
-        if (clientCookies != null) bestCookies = clientCookies;
+        if (clientCookies != null) {
+            bestCookies = clientCookies;
+        }
         return bestCookies;
     }
 

@@ -19,7 +19,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonFragment extends Fragment implements CommonView {
     private Unbinder mUnbinder;
@@ -89,7 +90,8 @@ public abstract class CommonFragment extends Fragment implements CommonView {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         //从隐藏转为非隐藏的时候调用
-        if (!hidden) {//当前页面显示时，显示对应的标题
+        //当前页面显示时，显示对应的标题
+        if (!hidden) {
             setTitle(mTitle, mBackAble);
         }
     }
@@ -101,12 +103,16 @@ public abstract class CommonFragment extends Fragment implements CommonView {
         View view = getActivity().getWindow().getDecorView();
         mToolbarTop = view.findViewById(R.id.tlb_top);
         mTvTop = view.findViewById(R.id.tv_top_title);
-        if (mToolbarTop == null || !(getActivity() instanceof AppCompatActivity)) return;
+        if (mToolbarTop == null || !(getActivity() instanceof AppCompatActivity)) {
+            return;
+        }
         //取代原本的actionbar
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbarTop);
         //设置actionbar
         mActionBarTop = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (mActionBarTop == null) return;
+        if (mActionBarTop == null) {
+            return;
+        }
         //不显示home图标
         mActionBarTop.setDisplayShowHomeEnabled(false);
         //不显示标题
@@ -122,13 +128,19 @@ public abstract class CommonFragment extends Fragment implements CommonView {
     protected void setTitle(CharSequence title, boolean backAble) {
         mBackAble = backAble;
         mTitle = title;
-        if (mTvTop == null) return;
+        if (mTvTop == null) {
+            return;
+        }
         //设置标题
         mTvTop.setText(mTitle);
-        if (mActionBarTop == null) return;
+        if (mActionBarTop == null) {
+            return;
+        }
         //显示右侧返回图标
         mActionBarTop.setDisplayHomeAsUpEnabled(backAble);
-        if (backAble) mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
+        if (backAble) {
+            mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
+        }
     }
 
     /**

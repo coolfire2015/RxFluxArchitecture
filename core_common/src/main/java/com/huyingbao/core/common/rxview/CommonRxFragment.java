@@ -26,7 +26,8 @@ import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragment implements RxFluxView {
     @Inject

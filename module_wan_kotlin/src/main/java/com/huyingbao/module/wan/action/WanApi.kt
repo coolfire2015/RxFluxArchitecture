@@ -10,7 +10,8 @@ import retrofit2.http.*
 import java.util.*
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 interface WanApi {
 

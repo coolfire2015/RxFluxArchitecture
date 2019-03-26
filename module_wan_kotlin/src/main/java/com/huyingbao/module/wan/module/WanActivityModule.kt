@@ -15,7 +15,8 @@ import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Module
 abstract class WanActivityModule {

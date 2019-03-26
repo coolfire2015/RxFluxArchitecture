@@ -6,7 +6,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 /**
- * Created by liujunfeng on 2018/12/28.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class CommonUtils {
 
@@ -30,14 +31,18 @@ public class CommonUtils {
      * @return true if a and b are equal
      */
     public static boolean equals(CharSequence a, CharSequence b) {
-        if (a == b) return true;
+        if (a == b) {
+            return true;
+        }
         int length;
         if (a != null && b != null && (length = a.length()) == b.length()) {
             if (a instanceof String && b instanceof String) {
                 return a.equals(b);
             } else {
                 for (int i = 0; i < length; i++) {
-                    if (a.charAt(i) != b.charAt(i)) return false;
+                    if (a.charAt(i) != b.charAt(i)) {
+                        return false;
+                    }
                 }
                 return true;
             }

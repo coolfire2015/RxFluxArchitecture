@@ -10,7 +10,8 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class BannerAdapter extends BaseQuickAdapter<Banner, BaseViewHolder> {
     public BannerAdapter(@Nullable List<Banner> data) {

@@ -1,7 +1,8 @@
 package com.huyingbao.module.wan.ui.article.action
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 interface ArticleAction {
 

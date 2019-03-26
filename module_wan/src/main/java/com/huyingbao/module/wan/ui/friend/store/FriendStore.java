@@ -17,7 +17,8 @@ import javax.inject.Singleton;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * Created by liujunfeng on 2018/12/27.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class FriendStore extends RxFragmentStore {
@@ -43,6 +44,8 @@ public class FriendStore extends RxFragmentStore {
             case FriendAction.GET_FRIEND_LIST:
                 mIsCreated = true;
                 mWebSiteListData.setValue(rxAction.getResponse());
+                break;
+            default:
                 break;
         }
     }

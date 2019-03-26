@@ -12,7 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class MainStore extends RxActivityStore {
@@ -35,6 +36,8 @@ public class MainStore extends RxActivityStore {
             case MainAction.TO_WAN_MODULE:
             case MainAction.TO_GAN_MODULE:
                 postChange(RxChange.newInstance(rxAction));
+                break;
+            default:
                 break;
         }
     }

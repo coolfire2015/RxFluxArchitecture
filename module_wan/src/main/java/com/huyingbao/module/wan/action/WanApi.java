@@ -16,25 +16,43 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public interface WanApi {
+    /**
+     * 登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/login")
     Observable<WanResponse<User>> login(@Field("username") String username,
                                         @Field("password") String password);
 
 
+    /**
+     * 获取友站列表
+     *
+     * @return
+     */
     @GET("friend/json")
     Observable<WanResponse<ArrayList<WebSite>>> getFriendList();
 
+    /**
+     * 获取Banner列表
+     *
+     * @return
+     */
     @GET("banner/json")
     Observable<WanResponse<ArrayList<Banner>>> getBannerList();
 
     /**
-     * 首页文章列表
+     * 获取文章列表
      *
-     * @param page
+     * @param page 页码
      * @return
      */
     @GET("article/list/{page}/json")

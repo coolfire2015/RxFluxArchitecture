@@ -4,7 +4,6 @@ package com.huyingbao.core.common;
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.huyingbao.core.arch.BuildConfig;
 import com.huyingbao.core.arch.RxFluxApp;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -21,11 +20,16 @@ import androidx.multidex.MultiDex;
  * HasSupportFragmentInjector、
  * HasServiceInjector、
  * HasBroadcastReceiverInjector
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonApp extends RxFluxApp {
+    /**
+     * 注解CallSuper强制子类复写该方法时调用父方法
+     */
     @Override
-    @CallSuper//强制子类复写该方法时调用父方法
+    @CallSuper
     public void onCreate() {
         super.onCreate();
         initArouter();
@@ -51,7 +55,8 @@ public abstract class CommonApp extends RxFluxApp {
             ARouter.openLog();
             ARouter.openDebug();
         }
-        ARouter.init(this); // 尽可能早，推荐在Application中初始化
+        // 尽可能早，推荐在Application中初始化
+        ARouter.init(this);
     }
 
     /**
@@ -61,9 +66,12 @@ public abstract class CommonApp extends RxFluxApp {
         //.logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
         //.methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(2)         // (Optional) How many method line to show. Default 2
-                .tag("RxFlux")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                // (Optional) Whether to show thread info or not. Default true
+                .showThreadInfo(false)
+                // (Optional) How many method line to show. Default 2
+                .methodCount(2)
+                // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .tag("RxFlux")
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override

@@ -8,7 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/core_arch" />
+            <option value="$PROJECT_DIR$/core_common" />
             <option value="$PROJECT_DIR$/module_app" />
+            <option value="$PROJECT_DIR$/module_gan" />
             <option value="$PROJECT_DIR$/module_wan" />
             <option value="$PROJECT_DIR$/module_wan_kotlin" />
           </set>

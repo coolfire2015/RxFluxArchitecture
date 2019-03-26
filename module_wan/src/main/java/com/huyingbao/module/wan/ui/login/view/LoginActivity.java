@@ -19,7 +19,8 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class LoginActivity extends CommonRxActivity<LoginStore> {
     @Inject
@@ -42,6 +43,8 @@ public class LoginActivity extends CommonRxActivity<LoginStore> {
             case LoginAction.LOGIN:
                 startActivity(new Intent(this, ArticleActivity.class));
                 finish();
+                break;
+            default:
                 break;
         }
     }

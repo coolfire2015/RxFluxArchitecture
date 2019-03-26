@@ -16,7 +16,8 @@ import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Route(path = "/wan/ArticleActivity")
 class ArticleActivity : CommonRxActivity<ArticleStore>() {

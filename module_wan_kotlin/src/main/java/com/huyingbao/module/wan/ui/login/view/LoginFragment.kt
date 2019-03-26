@@ -10,13 +10,13 @@ import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.rxview.CommonRxFragment
 import com.huyingbao.core.common.util.CommonUtils
 import com.huyingbao.module.wan.R
-import com.huyingbao.module.wan.R2
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator
 import com.huyingbao.module.wan.ui.login.store.LoginStore
 import javax.inject.Inject
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 class LoginFragment @Inject

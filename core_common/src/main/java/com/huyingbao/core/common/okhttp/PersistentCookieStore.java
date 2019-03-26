@@ -23,7 +23,9 @@ import okhttp3.HttpUrl;
 
 /**
  * 缓存cookies
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class PersistentCookieStore {
@@ -46,8 +48,9 @@ public class PersistentCookieStore {
                 if (encodedCookie != null) {
                     Cookie decodedCookie = decodeCookie(encodedCookie);
                     if (decodedCookie != null) {
-                        if (!cookies.containsKey(entry.getKey()))
+                        if (!cookies.containsKey(entry.getKey())) {
                             cookies.put(entry.getKey(), new ArrayMap<>());
+                        }
                         cookies.get(entry.getKey()).put(name, decodedCookie);
                     }
                 }
@@ -64,10 +67,14 @@ public class PersistentCookieStore {
 
         //将cookies缓存到内存中 如果缓存过期 就重置此cookie
         if (!cookie.persistent()) {
-            if (!cookies.containsKey(url.host())) cookies.put(url.host(), new ArrayMap<>());
+            if (!cookies.containsKey(url.host())) {
+                cookies.put(url.host(), new ArrayMap<>());
+            }
             cookies.get(url.host()).put(name, cookie);
         } else {
-            if (cookies.containsKey(url.host())) cookies.get(url.host()).remove(name);
+            if (cookies.containsKey(url.host())) {
+                cookies.get(url.host()).remove(name);
+            }
         }
 
         //讲cookies持久化到本地
@@ -79,8 +86,9 @@ public class PersistentCookieStore {
 
     public List<Cookie> get(HttpUrl url) {
         ArrayList<Cookie> ret = new ArrayList<>();
-        if (cookies.containsKey(url.host()))
+        if (cookies.containsKey(url.host())) {
             ret.addAll(cookies.get(url.host()).values());
+        }
         return ret;
     }
 
@@ -99,7 +107,9 @@ public class PersistentCookieStore {
             cookies.get(url.host()).remove(name);
 
             SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-            if (cookiePrefs.contains(name)) prefsWriter.remove(name);
+            if (cookiePrefs.contains(name)) {
+                prefsWriter.remove(name);
+            }
             prefsWriter.putString(url.host(), TextUtils.join(",", cookies.get(url.host()).keySet()));
             prefsWriter.apply();
             return true;
@@ -110,8 +120,9 @@ public class PersistentCookieStore {
 
     public List<Cookie> getCookies() {
         ArrayList<Cookie> ret = new ArrayList<>();
-        for (String key : cookies.keySet())
+        for (String key : cookies.keySet()) {
             ret.addAll(cookies.get(key).values());
+        }
         return ret;
     }
 
@@ -122,7 +133,9 @@ public class PersistentCookieStore {
      * @return 序列化之后的string
      */
     private String encodeCookie(SerializableOkHttpCookies cookie) {
-        if (cookie == null) return null;
+        if (cookie == null) {
+            return null;
+        }
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(os);
@@ -162,7 +175,9 @@ public class PersistentCookieStore {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
         for (byte element : bytes) {
             int v = element & 0xff;
-            if (v < 16) sb.append('0');
+            if (v < 16) {
+                sb.append('0');
+            }
             sb.append(Integer.toHexString(v));
         }
         return sb.toString().toUpperCase(Locale.US);
@@ -177,8 +192,9 @@ public class PersistentCookieStore {
     private byte[] hexStringToByteArray(String hexString) {
         int len = hexString.length();
         byte[] data = new byte[len / 2];
-        for (int i = 0; i < len; i += 2)
+        for (int i = 0; i < len; i += 2) {
             data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4) + Character.digit(hexString.charAt(i + 1), 16));
+        }
         return data;
     }
 }

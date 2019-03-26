@@ -3,7 +3,8 @@ package com.huyingbao.core.arch.model;
 import androidx.annotation.NonNull;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class RxLoading extends RxEvent {
     /**

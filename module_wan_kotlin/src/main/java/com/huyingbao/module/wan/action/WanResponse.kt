@@ -1,7 +1,8 @@
 package com.huyingbao.module.wan.action
 
 /**
- * Created by liujunfeng on 2018/12/24.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 class WanResponse<T> {
     /**

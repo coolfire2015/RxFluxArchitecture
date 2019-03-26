@@ -28,7 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
@@ -56,7 +57,9 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
         initAdapter();
         showData();
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (getRxStore().getArticleLiveData().getValue() != null) return;
+        if (getRxStore().getArticleLiveData().getValue() != null) {
+            return;
+        }
         refresh();
     }
 
@@ -89,7 +92,8 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
     private void initRecyclerView() {
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     /**
@@ -122,7 +126,8 @@ public class ArticleListFragment extends CommonRxFragment<ArticleStore> {
      */
     private void refresh() {
         getRxStore().setNextRequestPage(1);
-        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
+        //这里的作用是防止下拉刷新的时候还可以上拉加载
+        mAdapter.setEnableLoadMore(false);
         mActionCreator.getArticleList(getRxStore().getNextRequestPage());
     }
 

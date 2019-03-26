@@ -6,7 +6,8 @@ import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.model.Article
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 class ArticleAdapter(data: List<Article>?) : BaseQuickAdapter<Article, BaseViewHolder>(R.layout.wan_recycle_item, data) {
 

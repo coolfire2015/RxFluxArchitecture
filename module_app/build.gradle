@@ -118,9 +118,9 @@ dependencies {
     if (!isModuleAsApp.toBoolean()) {
 //        implementation project(':module_gan')
 //        implementation project(':module_wan')
-        implementation project(':module_wan_kotlin')
+//        implementation project(':module_wan_kotlin')
         implementation 'com.github.coolfire2015.RxFluxArchitecture:module_gan:0.1.8'
-//        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:0.1.8'
+        implementation 'com.github.coolfire2015.RxFluxArchitecture:module_wan:0.1.8'
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"

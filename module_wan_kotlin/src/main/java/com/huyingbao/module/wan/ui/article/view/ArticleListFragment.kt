@@ -23,7 +23,8 @@ import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import javax.inject.Inject
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @ActivityScope
 class ArticleListFragment @Inject
@@ -89,7 +90,7 @@ constructor() : CommonRxFragment<ArticleStore>() {
         //设置加载更多监听器
         mAdapter!!.setOnLoadMoreListener({ loadMore() }, mRvContent)
         //view设置适配器
-        mRvContent!!.adapter = mAdapter
+        mRvContent.adapter = mAdapter
     }
 
     /**
@@ -112,14 +113,14 @@ constructor() : CommonRxFragment<ArticleStore>() {
     private fun refresh() {
         rxStore!!.nextRequestPage = 1
         mAdapter!!.setEnableLoadMore(false)//这里的作用是防止下拉刷新的时候还可以上拉加载
-        mActionCreator!!.getArticleList(rxStore!!.nextRequestPage)
+        mActionCreator.getArticleList(rxStore!!.nextRequestPage)
     }
 
     /**
      * 加载更多
      */
     private fun loadMore() {
-        mActionCreator!!.getArticleList(rxStore!!.nextRequestPage)
+        mActionCreator.getArticleList(rxStore!!.nextRequestPage)
     }
 
     /**

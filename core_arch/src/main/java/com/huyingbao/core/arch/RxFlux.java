@@ -31,8 +31,11 @@ import androidx.fragment.app.FragmentManager;
  * 并且注销每个activity剩余的订阅subscriptions
  * <p>
  * 抽象的类并不能实例化
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
+
 @Singleton
 public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     /**
@@ -133,7 +136,9 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     public void onActivityResumed(Activity activity) {
         Log.v("RxFlux", "10-onActivityResumed");
         if (activity instanceof RxFluxView) {
-            if (mRxDispatcher.isSubscribe(this)) return;
+            if (mRxDispatcher.isSubscribe(this)) {
+                return;
+            }
             Log.v("RxFlux", "10.1-subscribe RxActivity : " + activity.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxFluxView) activity);
         }
@@ -150,7 +155,9 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         super.onFragmentResumed(fm, f);
         Log.v("RxFlux", "11-onFragmentResumed");
         if (f instanceof RxFluxView) {
-            if (mRxDispatcher.isSubscribe(this)) return;
+            if (mRxDispatcher.isSubscribe(this)) {
+                return;
+            }
             Log.v("RxFlux", "11.1-subscribe RxFragment : " + f.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxFluxView) f);
         }
@@ -214,8 +221,9 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         Log.v("RxFlux", "18-onActivityDestroyed");
         mActivityCounter--;
         mActivityStack.remove(activity);
-        if (mActivityCounter == 0 || mActivityStack.size() == 0)
+        if (mActivityCounter == 0 || mActivityStack.size() == 0) {
             shutdown();
+        }
     }
 
     @Override
@@ -238,8 +246,9 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
 
     public void finishAllActivity() {
-        while (!mActivityStack.empty())
+        while (!mActivityStack.empty()) {
             mActivityStack.pop().finish();
+        }
     }
 
     public void finishActivity(Class<?> cls) {
@@ -259,9 +268,11 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     private Activity getActivity(Class<?> cls) {
-        for (Activity activity : mActivityStack)
-            if (activity.getClass().equals(cls))
+        for (Activity activity : mActivityStack) {
+            if (activity.getClass().equals(cls)) {
                 return activity;
+            }
+        }
         return null;
     }
 }

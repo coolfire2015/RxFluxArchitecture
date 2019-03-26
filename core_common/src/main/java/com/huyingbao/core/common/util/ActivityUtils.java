@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class ActivityUtils {
     /**
@@ -25,7 +26,9 @@ public class ActivityUtils {
             @NonNull Fragment fragmentNew,
             boolean isHideOrReplace) {
         //如果已经添加则返回
-        if (fragmentNew.isAdded()) return;
+        if (fragmentNew.isAdded()) {
+            return;
+        }
         //1:管理fragment队列
         //2:管理fragment事务回退栈
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -46,9 +49,12 @@ public class ActivityUtils {
         String fragmentName = fragment.getClass().getSimpleName();
         String fragmentNewName = fragmentNew.getClass().getSimpleName();
         //旧的Fragment和新的Fragment同为同一个Fragment的实例对象
-        if (CommonUtils.equals(fragmentName, fragmentNewName)) return;
+        if (CommonUtils.equals(fragmentName, fragmentNewName)) {
+            return;
+        }
         //旧的Fragment和新的不同
-        if (isHideOrReplace) {//隐藏并可回退到已经存在的Fragment
+        //隐藏并可回退到已经存在的Fragment
+        if (isHideOrReplace) {
             fragmentManager.beginTransaction()
                     .addToBackStack(fragment.getClass().getName())
                     .hide(fragment)

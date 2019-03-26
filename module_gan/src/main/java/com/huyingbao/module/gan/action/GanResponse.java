@@ -3,7 +3,8 @@ package com.huyingbao.module.gan.action;
 import java.util.ArrayList;
 
 /**
- * Created by liujunfeng on 2018/12/17.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class GanResponse<T> {
 

@@ -20,7 +20,8 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class MainActivity extends CommonRxActivity<MainStore> {
     @Inject
@@ -48,6 +49,8 @@ public class MainActivity extends CommonRxActivity<MainStore> {
                 break;
             case MainAction.TO_WAN_MODULE:
                 ARouter.getInstance().build("/wan/ArticleActivity").navigation();
+                break;
+            default:
                 break;
         }
     }

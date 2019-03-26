@@ -42,7 +42,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonRxActivity<T extends RxActivityStore> extends CommonActivity implements RxFluxView, HasSupportFragmentInjector {
     @Inject
@@ -90,9 +91,10 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
 
     /**
      * 接收RxChange，粘性
+     * 注解CallSuper强制子类复写该方法时调用父方法
      */
     @Override
-    @CallSuper//强制子类复写该方法时调用父方法
+    @CallSuper
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onRxChanged(@NonNull RxChange rxChange) {
         //收到后，移除粘性通知
@@ -153,7 +155,8 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
     public void onRxLoading(@NonNull RxLoading rxLoading) {
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxLoading);
-        if (rxLoading.isLoading()) {//显示进度框
+        //显示进度框
+        if (rxLoading.isLoading()) {
             mCommonLoadingDialogLazy.get().setRxLoading(rxLoading);
             mCommonLoadingDialogLazy.get().show(getSupportFragmentManager(), rxLoading.getTag());
         } else {//隐藏进度框

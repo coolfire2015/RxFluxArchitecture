@@ -18,8 +18,11 @@ import javax.inject.Singleton;
  * 而是通过通过一个ActionCreator来封装Dispatcher，
  * 并提供便捷的方法来分发View中产生的事件，
  * 消息的传递通过Action（Action是一个普通的POJO类）来封装。
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
+
 @Singleton
 public class RxDispatcher {
     @Inject

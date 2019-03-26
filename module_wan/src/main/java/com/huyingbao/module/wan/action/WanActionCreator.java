@@ -14,7 +14,9 @@ import io.reactivex.functions.Function;
 /**
  * 模块自定义的ActionCreator
  * 对所有的接口添加返回结果检查
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class WanActionCreator extends RxActionCreator {
 
@@ -34,8 +36,9 @@ public abstract class WanActionCreator extends RxActionCreator {
      */
     private <T> Function<T, Observable<T>> verifyResponse() {
         return response -> {
-            if (!(response instanceof WanResponse))
+            if (!(response instanceof WanResponse)) {
                 return Observable.error(new CommonHttpException(600, "未知异常！"));
+            }
             int errorCode = ((WanResponse) response).getErrorCode();
             if (errorCode != 0) {
                 String errorMsg = ((WanResponse) response).getErrorMsg();

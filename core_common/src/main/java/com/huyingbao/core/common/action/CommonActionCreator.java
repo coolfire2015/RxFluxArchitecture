@@ -8,7 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by liujunfeng on 2019/3/22.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class CommonActionCreator extends RxActionCreator {

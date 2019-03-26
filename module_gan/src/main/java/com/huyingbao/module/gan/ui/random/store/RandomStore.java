@@ -28,12 +28,17 @@ import androidx.lifecycle.MutableLiveData;
  * ViewModel对象在获取ViewModel时被限定为传递给ViewModelProvider的生命周期。
  * ViewModel保留在内存中，直到Activity销毁或Fragment分离之前。
  * <p>
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class RandomStore extends RxActivityStore {
     private MutableLiveData<List<Product>> mProductListLiveData = new MutableLiveData<>();
-    private int mNextRequestPage = 1;//列表页数
+    /**
+     * 列表页数
+     */
+    private int mNextRequestPage = 1;
     private String mCategory;
 
     @Inject
@@ -63,7 +68,7 @@ public class RandomStore extends RxActivityStore {
     @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
-            case RandomAction.GET_PRODUCT_LIST:
+            case RandomAction.GET_DATA_LIST:
                 GanResponse<Product> response = rxAction.getResponse();
                 if (mProductListLiveData.getValue() == null) {
                     mProductListLiveData.setValue(response.getResults());
@@ -77,6 +82,8 @@ public class RandomStore extends RxActivityStore {
                 onCleared();//跳转页面，先清除旧数据
                 mCategory = rxAction.get(GanConstants.Key.CATEGORY);
                 postChange(RxChange.newInstance(rxAction));
+                break;
+            default:
                 break;
         }
     }

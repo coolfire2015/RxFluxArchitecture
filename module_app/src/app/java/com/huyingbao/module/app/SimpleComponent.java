@@ -30,7 +30,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
  * 剩下的工作就是初始化该属性的实例并把实例进行赋值。
  * 因此我们也可以给Component叫另外一个名字注入器Injector，
  * 事实上Component必须继承的父类就叫做AndroidInjector
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 @Component(modules = {

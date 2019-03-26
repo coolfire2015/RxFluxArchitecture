@@ -13,7 +13,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonDialogFragment extends AppCompatDialogFragment implements CommonView {
     private Unbinder mUnbinder;

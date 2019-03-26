@@ -12,7 +12,9 @@ import dagger.MapKey;
 /**
  * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法
  * 区分不同的RxStore子类 对ClassKey注解的扩展
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Documented
 @Target({ElementType.METHOD})

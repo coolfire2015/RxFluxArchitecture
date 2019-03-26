@@ -14,7 +14,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public class LoginStore extends RxActivityStore {
@@ -34,6 +35,8 @@ public class LoginStore extends RxActivityStore {
                 postChange(RxChange.newInstance(rxAction));
                 break;
             case LoginAction.REGISTER:
+                break;
+            default:
                 break;
         }
     }

@@ -15,7 +15,9 @@ import butterknife.ButterKnife;
 
 /**
  * 带有toolbar的Activity父类
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public abstract class CommonActivity extends AppCompatActivity implements CommonView {
     static {//Vector使用
@@ -39,7 +41,9 @@ public abstract class CommonActivity extends AppCompatActivity implements Common
         FragmentManager fragmentManager = getSupportFragmentManager();
         //从fragment队列中获取资源ID标识的fragment
         Fragment fragment = fragmentManager.findFragmentById(R.id.fl_content);
-        if (fragment != null) return;
+        if (fragment != null) {
+            return;
+        }
         fragmentManager.beginTransaction().add(R.id.fl_content, createFragment()).commit();
     }
 
@@ -51,7 +55,8 @@ public abstract class CommonActivity extends AppCompatActivity implements Common
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:// 点击返回图标事件
+            // 点击返回图标事件
+            case android.R.id.home:
                 if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     getSupportFragmentManager().popBackStack();
                     return true;

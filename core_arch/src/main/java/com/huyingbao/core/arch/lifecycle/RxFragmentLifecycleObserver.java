@@ -12,7 +12,8 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
 /**
- * Created by liujunfeng on 2018/12/13.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 public class RxFragmentLifecycleObserver implements LifecycleObserver {
     private final Fragment mFragment;

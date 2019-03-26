@@ -18,7 +18,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Module(includes = RxFluxModule.class)
 public abstract class CommonModule {
@@ -40,9 +41,11 @@ public abstract class CommonModule {
         CookieJar cookieJar = new CookieJar() {
             @Override
             public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                if (cookies.size() > 0)
-                    for (Cookie item : cookies)
+                if (cookies.size() > 0) {
+                    for (Cookie item : cookies) {
                         cookieStore.add(url, item);
+                    }
+                }
             }
 
             @Override

@@ -14,7 +14,9 @@ import io.reactivex.disposables.Disposable;
  * 订阅管理类
  * 将action与action处理事件连接起来，
  * action的tag作为key
- * Created by liujunfeng on 2019/1/1.
+ *
+ * @author liujunfeng
+ * @date 2019/1/1
  */
 @Singleton
 public final class RxActionManager {
@@ -34,8 +36,9 @@ public final class RxActionManager {
      */
     void add(RxAction action, Disposable disposable) {
         Pair<Integer, Disposable> old = mMap.put(action.getTag(), getPair(action, disposable));
-        if (old != null && old.second != null && !old.second.isDisposed())
+        if (old != null && old.second != null && !old.second.isDisposed()) {
             old.second.dispose();
+        }
     }
 
     /**
@@ -43,8 +46,9 @@ public final class RxActionManager {
      */
     void remove(RxAction action) {
         Pair<Integer, Disposable> old = mMap.remove(action.getTag());
-        if (old != null && old.second != null && !old.second.isDisposed())
+        if (old != null && old.second != null && !old.second.isDisposed()) {
             old.second.dispose();
+        }
     }
 
     /**
@@ -66,10 +70,14 @@ public final class RxActionManager {
      * 清除所有的disposables
      */
     public synchronized void clear() {
-        if (mMap.isEmpty()) return;
-        for (Pair<Integer, Disposable> pair : mMap.values())
-            if (pair.second != null && !pair.second.isDisposed())
+        if (mMap.isEmpty()) {
+            return;
+        }
+        for (Pair<Integer, Disposable> pair : mMap.values()) {
+            if (pair.second != null && !pair.second.isDisposed()) {
                 pair.second.dispose();
+            }
+        }
     }
 
     /**
