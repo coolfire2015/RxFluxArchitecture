@@ -137,8 +137,9 @@ kapt {
 
 dependencies {
     //通用依赖模块
-//    api project(':core_common')
-    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
+    api project(':core_common')
+//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
+    //Kotlin支持
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
