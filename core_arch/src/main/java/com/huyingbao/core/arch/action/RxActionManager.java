@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposable;
  * @date 2019/1/1
  */
 @Singleton
-public final class RxActionManager {
+public class RxActionManager {
     /**
      * 管理订阅的ArrayMap
      * action的tag作为key
