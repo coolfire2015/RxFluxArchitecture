@@ -15,10 +15,6 @@ public class RxJavaTestSchedulerRule implements TestRule {
 
     private final TestScheduler mTestScheduler = new TestScheduler();
 
-    public TestScheduler getTestScheduler() {
-        return mTestScheduler;
-    }
-
     @Override
     public Statement apply(final Statement base, Description description) {
         return new Statement() {
