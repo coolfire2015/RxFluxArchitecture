@@ -116,7 +116,7 @@ repositories {
 dependencies {
     //功能模块
     if (!isModuleAsApp.toBoolean()) {
-        if (isUseMaven) {
+        if (isUseMaven.toBoolean()) {
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_gan:${RX_FLUX_ARCHITECTURE}"
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_wan:${RX_FLUX_ARCHITECTURE}"
         } else {

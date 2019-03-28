@@ -39,17 +39,18 @@ public class ArticleActionCreator extends WanActionCreator implements ArticleAct
     public void getArticleList(int page) {
         RxAction action = newRxAction(GET_ARTICLE_LIST);
         //延迟5s调用接口，测试取消操作
-        Observable<WanResponse<Page<Article>>> article = Observable.just("Article")
-                .delay(5, TimeUnit.SECONDS)
+        Observable<WanResponse<Page<Article>>> httpObservable = Observable
+                .timer(5, TimeUnit.SECONDS)
                 .flatMap(s -> mWanApi.getArticleList(page));
-        postHttpLoadingAction(action, article);
+        postHttpLoadingAction(action, httpObservable);
     }
 
     @Override
     public void getBannerList() {
         RxAction action = newRxAction(GET_BANNER_LIST);
         //接口调用失败，自动重复调用5次，每次间隔3s
-        Observable<WanResponse<ArrayList<Banner>>> httpObservable = mWanApi.getBannerList()
+        Observable<WanResponse<ArrayList<Banner>>> httpObservable = mWanApi
+                .getBannerList()
                 .retryWhen(retryAction(5, 3));
         postHttpAction(action, httpObservable);
     }
