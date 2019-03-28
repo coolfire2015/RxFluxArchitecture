@@ -1,5 +1,5 @@
-include ':core_arch'
-include ':core_common'
+//include ':core_arch'
+//include ':core_common'
 //include ':module_app'
 //include ':module_gan'
 include ':module_wan'

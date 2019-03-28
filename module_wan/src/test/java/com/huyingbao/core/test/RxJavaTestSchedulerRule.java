@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.article.action;
+package com.huyingbao.core.test;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

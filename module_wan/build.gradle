@@ -131,10 +131,14 @@ repositories {
 
 dependencies {
     //通用依赖模块
-    api project(':core_common')
-//    api 'com.github.coolfire2015.RxFluxArchitecture:core_common:0.1.8'
+    if (isUseMaven) {
+        api "com.github.coolfire2015.RxFluxArchitecture:core_common:${RX_FLUX_ARCHITECTURE}"
+    } else {
+        api project(':core_common')
+    }
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
