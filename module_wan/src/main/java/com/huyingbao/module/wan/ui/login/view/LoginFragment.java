@@ -50,7 +50,7 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     }
 
     @OnClick(R2.id.btn_login)
-    public void onViewClicked() {
+    public void login() {
         String username = mEtUsername.getText().toString();
         String password = mEtPassword.getText().toString();
         if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {

@@ -84,7 +84,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //单元测试
+    //单元测试,robolectric支持
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -136,9 +136,17 @@ dependencies {
     } else {
         api project(':core_common')
     }
+    //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
