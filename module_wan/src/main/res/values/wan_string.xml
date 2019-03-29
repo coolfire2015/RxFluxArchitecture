@@ -4,4 +4,7 @@
     <string name="wan_label_login">登录</string>
     <string name="wan_label_friend">常用网站</string>
     <string name="wan_label_banner">横幅</string>
+
+    <string name="wan_username">用户名</string>
+    <string name="wan_password">密码</string>
 </resources>

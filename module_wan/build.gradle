@@ -147,6 +147,7 @@ dependencies {
     testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
     testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
     testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    implementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"

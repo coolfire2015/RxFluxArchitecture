@@ -2,6 +2,8 @@ package com.huyingbao.module.wan.ui.login.view;
 
 import android.content.Context;
 
+import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -9,12 +11,16 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 /**
  * Created by liujunfeng on 2019/3/28.
  */
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
+    @Rule
+    public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
+
     @Test
     public void onRxChanged() {
         Context applicationContext = ApplicationProvider.getApplicationContext();
@@ -23,7 +29,6 @@ public class LoginActivityTest {
         // WHEN
         launch.moveToState(Lifecycle.State.CREATED);
         // THEN
-        launch.onActivity(activity -> {
-        });
+        launch.onActivity(activity -> Assert.assertNotNull(activity.mLoginFragmentLazy));
     }
 }

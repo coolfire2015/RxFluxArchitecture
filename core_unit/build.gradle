@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api "junit:junit:${TEST_JUNIT}"
+    api "org.mockito:mockito-core:${TEST_MOCKITO}"
+    api "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    api "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+
+    api "androidx.test:core:${TEST_X_CORE}"
+    api "androidx.test:rules:${TEST_X_RULES}"
+    api "androidx.test:runner:${TEST_X_RUNNER}"
+    api "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    api "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    api "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
+}
