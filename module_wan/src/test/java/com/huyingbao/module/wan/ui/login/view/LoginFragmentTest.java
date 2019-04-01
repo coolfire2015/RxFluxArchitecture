@@ -11,6 +11,11 @@ import org.robolectric.annotation.Config;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 
 /**
  * Created by liujunfeng on 2019/3/28.
@@ -25,6 +30,6 @@ public class LoginFragmentTest {
                 null,
                 R.style.AppTheme,
                 null);
-//        onView(withId(R.id.btn_login)).check(matches(withText(R.string.wan_label_login)));
+        onView(withId(R.id.btn_login)).check(matches(withText(R.string.wan_label_login)));
     }
 }

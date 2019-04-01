@@ -8,6 +8,7 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.view.CommonFragment;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +43,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
             return mStore;
         }
         Type genericSuperclass = getClass().getGenericSuperclass();
-        if (!(genericSuperclass instanceof ParameterizedType)) {
+        if (!(genericSuperclass instanceof ParameterizedType) || mViewModelFactory == null) {
             return null;
         }
         Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
@@ -60,7 +61,11 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
     @Override
     public void onAttach(Context context) {
         //依赖注入
-        AndroidSupportInjection.inject(this);
+        try {
+            AndroidSupportInjection.inject(this);
+        } catch (IllegalArgumentException e) {
+            Logger.e("依赖注入失败");
+        }
         super.onAttach(context);
     }
 
