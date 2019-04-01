@@ -1,6 +1,7 @@
 package com.huyingbao.module.wan.ui.login.view;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.huyingbao.module.wan.FakeWanApplication;
 
@@ -8,19 +9,20 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 /**
  * Created by liujunfeng on 2019/3/28.
  */
-@Config(application = FakeWanApplication.class)
-@RunWith(AndroidJUnit4.class)
+@Config(sdk = Build.VERSION_CODES.P,
+        application = FakeWanApplication.class)
+@RunWith(RobolectricTestRunner.class)
 public class LoginActivityTest {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);

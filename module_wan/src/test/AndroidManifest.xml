@@ -6,7 +6,7 @@
 
     <!--一定要使用明文通信-->
     <application
-        android:name="com.huyingbao.module.wan.WanApplication"
+        android:name="com.huyingbao.module.wan.FakeWanApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
         android:label="@string/app_name"
