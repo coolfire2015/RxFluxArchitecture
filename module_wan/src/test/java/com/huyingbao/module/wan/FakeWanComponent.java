@@ -21,12 +21,12 @@ import dagger.android.support.AndroidSupportInjectionModule;
         WanAppModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
-public interface WanComponent extends AndroidInjector<WanApplication> {
+public interface FakeWanComponent extends AndroidInjector<FakeWanApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        WanComponent.Builder application(Application application);
+        FakeWanComponent.Builder application(Application application);
 
-        WanComponent build();
+        FakeWanComponent build();
     }
 }

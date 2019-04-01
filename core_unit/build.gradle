@@ -44,6 +44,8 @@ artifacts {
 }
 
 dependencies {
+    //内核
+    implementation project(':core_arch')
     api "junit:junit:${TEST_JUNIT}"
     api "org.mockito:mockito-core:${TEST_MOCKITO}"
     api "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"

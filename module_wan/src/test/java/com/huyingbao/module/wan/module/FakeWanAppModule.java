@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author liujunfeng
  * @date 2019/1/1
  */
-@Module(includes = WanActivityModule.class)
-public class WanModule {
+@Module(includes = {WanActivityModule.class, WanStoreModule.class})
+public class FakeWanAppModule {
     @Singleton
     @Provides
     WanApi provideMainApi(OkHttpClient client) {
