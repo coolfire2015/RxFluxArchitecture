@@ -3,7 +3,7 @@ package com.huyingbao.module.wan;
 import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
-import com.huyingbao.module.wan.module.WanAppModule;
+import com.huyingbao.module.wan.module.FakeWanAppModule;
 
 import javax.inject.Singleton;
 
@@ -18,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @Singleton
 @Component(modules = {
-        WanAppModule.class,
+        FakeWanAppModule.class,
         CommonModule.class,
         AndroidSupportInjectionModule.class})
 public interface FakeWanComponent extends AndroidInjector<FakeWanApplication> {

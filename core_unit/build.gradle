@@ -46,13 +46,18 @@ artifacts {
 dependencies {
     //内核
     implementation project(':core_arch')
+    //junit
     api "junit:junit:${TEST_JUNIT}"
+    //mockito
     api "org.mockito:mockito-core:${TEST_MOCKITO}"
+    //robolectric
     api "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    //power mock
     api "org.powermock:powermock-api-mockito2:${TEST_POWERMOCK}"
     api "org.powermock:powermock-module-junit4:${TEST_POWERMOCK}"
     api "org.powermock:powermock-module-junit4-rule:${TEST_POWERMOCK}"
     api "org.powermock:powermock-classloading-xstream:${TEST_POWERMOCK}"
+    //dagger mock
     api "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
 
     api "androidx.test:core:${TEST_X_CORE}"

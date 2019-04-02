@@ -88,14 +88,17 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 通过调度器dispatcher将action推出去
+     * 通过调度器dispatcher将action事件推出去
      *
-     * @param action
+     * @param rxAction
+     * @param response
+     * @param <T>
      */
-    private void postRxAction(@NonNull RxAction action) {
-        mRxDispatcher.postRxAction(action);
+    private <T> void postRxAction(@NonNull RxAction rxAction, T response) {
+        rxAction.setResponse(response);
+        mRxDispatcher.postRxAction(rxAction);
         //发送通知，移除Action
-        removeRxAction(action);
+        removeRxAction(rxAction);
     }
 
     /**
@@ -144,7 +147,6 @@ public abstract class RxActionCreator {
         if (hasRxAction(rxAction)) {
             return;
         }
-        // 1:指定IO线程
         addRxAction(rxAction, httpObservable
                 // 1:指定IO线程
                 .subscribeOn(Schedulers.io())
@@ -152,13 +154,8 @@ public abstract class RxActionCreator {
                 .observeOn(AndroidSchedulers.mainThread())
                 // 2:指定主线程
                 .subscribe(
-                        response -> {
-                            rxAction.setResponse(response);
-                            postRxAction(rxAction);
-                        },
-                        throwable -> {
-                            postRxError(rxAction, throwable);
-                        }
+                        response -> postRxAction(rxAction, response),
+                        throwable -> postRxError(rxAction, throwable)
                 ));
     }
 
@@ -172,26 +169,19 @@ public abstract class RxActionCreator {
         if (hasRxAction(rxAction)) {
             return;
         }
-        // 1:指定IO线程
         addRxAction(rxAction, httpObservable
                 // 1:指定IO线程
                 .subscribeOn(Schedulers.io())
-                // 2:指定主线程
+                // 调用开始
                 .doOnSubscribe(subscription -> postRxLoading(rxAction, true))
-                // 2:在doOnSubscribe()之后，使用subscribeOn()就可以指定其运行在哪中线程。
-                .subscribeOn(AndroidSchedulers.mainThread())
-                // 3:指定主线程
+                // 调用结束
+                .doAfterTerminate(() -> postRxLoading(rxAction, false))
+                // 2:指定主线程
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(// 3:指定主线程
-                        response -> {
-                            postRxLoading(rxAction, false);
-                            rxAction.setResponse(response);
-                            postRxAction(rxAction);
-                        },
-                        throwable -> {
-                            postRxLoading(rxAction, false);
-                            postRxError(rxAction, throwable);
-                        }
+                // 2:指定主线程
+                .subscribe(
+                        response -> postRxAction(rxAction, response),
+                        throwable -> postRxError(rxAction, throwable)
                 ));
     }
 
@@ -205,7 +195,6 @@ public abstract class RxActionCreator {
         if (hasRxAction(rxAction)) {
             return;
         }
-        // 1:指定IO线程
         addRxAction(rxAction, httpObservable
                 // 1:指定IO线程
                 .subscribeOn(Schedulers.io())
@@ -213,13 +202,8 @@ public abstract class RxActionCreator {
                 .observeOn(AndroidSchedulers.mainThread())
                 // 2:指定主线程
                 .subscribe(
-                        response -> {
-                            rxAction.setResponse(response);
-                            postRxAction(rxAction);
-                        },
-                        throwable -> {
-                            postRxRetry(rxAction, throwable, httpObservable);
-                        }
+                        response -> postRxAction(rxAction, response),
+                        throwable -> postRxRetry(rxAction, throwable, httpObservable)
                 ));
 
     }
@@ -231,10 +215,14 @@ public abstract class RxActionCreator {
      * @param data
      */
     public void postLocalAction(@NonNull String actionId, Object... data) {
-        postRxAction(newRxAction(actionId, data));
+        RxAction action = newRxAction(actionId, data);
+        mRxDispatcher.postRxAction(action);
+        //发送通知，移除Action
+        removeRxAction(action);
     }
 
     /**
+     * 接收到重试action之后,进行重试操作
      * 发送重试action
      *
      * @param rxRetry
