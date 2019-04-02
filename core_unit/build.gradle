@@ -49,6 +49,10 @@ dependencies {
     api "junit:junit:${TEST_JUNIT}"
     api "org.mockito:mockito-core:${TEST_MOCKITO}"
     api "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    api "org.powermock:powermock-api-mockito2:${TEST_POWERMOCK}"
+    api "org.powermock:powermock-module-junit4:${TEST_POWERMOCK}"
+    api "org.powermock:powermock-module-junit4-rule:${TEST_POWERMOCK}"
+    api "org.powermock:powermock-classloading-xstream:${TEST_POWERMOCK}"
     api "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
 
     api "androidx.test:core:${TEST_X_CORE}"
