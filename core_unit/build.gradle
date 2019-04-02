@@ -46,19 +46,25 @@ artifacts {
 dependencies {
     //内核
     implementation project(':core_arch')
-    //junit
+    //Junit
     api "junit:junit:${TEST_JUNIT}"
-    //mockito
+    //Mockito
     api "org.mockito:mockito-core:${TEST_MOCKITO}"
-    //robolectric
+    //Robolectric
     api "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
-    //power mock
-    api "org.powermock:powermock-api-mockito2:${TEST_POWERMOCK}"
-    api "org.powermock:powermock-module-junit4:${TEST_POWERMOCK}"
-    api "org.powermock:powermock-module-junit4-rule:${TEST_POWERMOCK}"
-    api "org.powermock:powermock-classloading-xstream:${TEST_POWERMOCK}"
-    //dagger mock
+    //PowerMock
+    api "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+    api "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+    api "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+    api "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
+    //DaggerMock
     api "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    //RestMock
+    api "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+    //AssertJ
+    api "org.assertj:assertj-core:${TEST_ASSERT_J}"
+    //AssertJ-Android
+    api "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
 
     api "androidx.test:core:${TEST_X_CORE}"
     api "androidx.test:rules:${TEST_X_RULES}"
