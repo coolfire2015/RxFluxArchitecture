@@ -25,4 +25,11 @@
         android:layout_marginTop="@dimen/dp_48"
         android:text="@string/wan_label_login" />
 
+    <Button
+        android:id="@+id/btn_identify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_48"
+        android:text="@string/wan_info_identify" />
+
 </LinearLayout>

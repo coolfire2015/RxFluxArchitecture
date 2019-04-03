@@ -3,7 +3,7 @@ package com.huyingbao.module.wan.ui.login.action;
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.test.RxJavaTestSchedulerRule2;
+import com.huyingbao.core.test.RxJavaTestSchedulerRule;
 import com.huyingbao.module.wan.action.WanApi;
 
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class LoginActionCreatorTest {
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule
-    public RxJavaTestSchedulerRule2 mRxJavaTestSchedulerRule = new RxJavaTestSchedulerRule2();
+    public RxJavaTestSchedulerRule mRxJavaTestSchedulerRule = new RxJavaTestSchedulerRule();
     @Spy
     private RxDispatcher mRxDispatcher;
     @Spy
@@ -72,10 +72,19 @@ public class LoginActionCreatorTest {
 
     @Test
     public void getIdentify() {
+        //调用待测试方法
         mLoginActionCreator.getIdentify();
-        //调用调度器方法,调整时间
+        //调用调度器方法,时间到10秒
         mRxJavaTestSchedulerRule.getTestScheduler().advanceTimeTo(10, TimeUnit.SECONDS);
-        //验证方法被调用次数
+        // 验证倒计时完成方法 未被调用
+        Mockito.verify(mRxActionManager, Mockito.never()).remove(Mockito.any());
+        //验证方法被调用10次
         Mockito.verify(mRxDispatcher, Mockito.times(10)).postRxAction(Mockito.any());
+        //调用调度器方法,时间到60秒
+        mRxJavaTestSchedulerRule.getTestScheduler().advanceTimeTo(60, TimeUnit.SECONDS);
+        //验证方法被调用60次
+        Mockito.verify(mRxDispatcher, Mockito.times(60)).postRxAction(Mockito.any());
+        // 验证倒计时完成方法 被调用
+        Mockito.verify(mRxActionManager).remove(Mockito.any());
     }
 }

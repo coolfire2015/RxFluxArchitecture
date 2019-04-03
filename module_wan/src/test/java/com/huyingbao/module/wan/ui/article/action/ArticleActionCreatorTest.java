@@ -3,7 +3,7 @@ package com.huyingbao.module.wan.ui.article.action;
 import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.test.RxJavaTestSchedulerRule;
+import com.huyingbao.core.test.RxJavaTestSchedulerRuleStatic;
 import com.huyingbao.module.wan.action.WanApi;
 
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class ArticleActionCreatorTest {
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @ClassRule
-    public static RxJavaTestSchedulerRule mRxJavaTestSchedulerRule = new RxJavaTestSchedulerRule();
+    public static RxJavaTestSchedulerRuleStatic sMRxJavaTestSchedulerRuleStatic = new RxJavaTestSchedulerRuleStatic();
     @Spy
     private RxDispatcher mRxDispatcher;
     @Spy

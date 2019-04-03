@@ -13,12 +13,15 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.lifecycle.MutableLiveData;
+
 /**
  * @author liujunfeng
  * @date 2019/1/1
  */
 @Singleton
 public class LoginStore extends RxActivityStore {
+    private MutableLiveData<Integer> mIntervalLiveData = new MutableLiveData<>();
     private WanResponse<User> mUser;
 
     @Inject
@@ -37,9 +40,14 @@ public class LoginStore extends RxActivityStore {
             case LoginAction.REGISTER:
                 break;
             case LoginAction.GET_IDENTIFY:
+                mIntervalLiveData.setValue(rxAction.getResponse());
                 break;
             default:
                 break;
         }
+    }
+
+    public MutableLiveData<Integer> getIntervalLiveData() {
+        return mIntervalLiveData;
     }
 }

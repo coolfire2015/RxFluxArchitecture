@@ -4,50 +4,31 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.NonNull;
-import io.reactivex.Scheduler;
 import io.reactivex.android.plugins.RxAndroidPlugins;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.TestScheduler;
 
 /**
- * 切换RxJava异步为同步
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by weilu on 2018/1/6..
  */
 public class RxJavaTestSchedulerRule implements TestRule {
 
-    /**
-     * 立即执行的调度器
-     */
-    private Scheduler mImmediate = new Scheduler() {
+    private final TestScheduler mTestScheduler = new TestScheduler();
 
-        @Override
-        public Disposable scheduleDirect(@NonNull Runnable run, long delay, @NonNull TimeUnit unit) {
-            return super.scheduleDirect(run, 0, unit);
-        }
-
-        @Override
-        public Worker createWorker() {
-            return new ExecutorScheduler.ExecutorWorker(command -> command.run(), true);
-        }
-    };
+    public TestScheduler getTestScheduler() {
+        return mTestScheduler;
+    }
 
     @Override
     public Statement apply(final Statement base, Description description) {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                RxJavaPlugins.setInitIoSchedulerHandler(schedulerCallable -> mImmediate);
-                RxJavaPlugins.setInitComputationSchedulerHandler(schedulerCallable -> mImmediate);
-                RxJavaPlugins.setInitNewThreadSchedulerHandler(schedulerCallable -> mImmediate);
-                RxJavaPlugins.setInitSingleSchedulerHandler(schedulerCallable -> mImmediate);
-                RxAndroidPlugins.setInitMainThreadSchedulerHandler(schedulerCallable -> mImmediate);
-
+                RxJavaPlugins.setIoSchedulerHandler(scheduler -> mTestScheduler);
+                RxJavaPlugins.setComputationSchedulerHandler(scheduler -> mTestScheduler);
+                RxJavaPlugins.setNewThreadSchedulerHandler(scheduler -> mTestScheduler);
+                RxJavaPlugins.setSingleSchedulerHandler(scheduler -> mTestScheduler);
+                RxAndroidPlugins.setMainThreadSchedulerHandler(scheduler -> mTestScheduler);
                 try {
                     base.evaluate();
                 } finally {

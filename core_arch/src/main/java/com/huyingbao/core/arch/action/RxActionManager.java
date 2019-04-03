@@ -41,7 +41,7 @@ public class RxActionManager {
      * @param rxAction
      * @param disposable
      */
-    void add(RxAction rxAction, Disposable disposable) {
+    public void add(RxAction rxAction, Disposable disposable) {
         Pair<Integer, Disposable> old = mMap.put(rxAction.getTag(), getPair(rxAction, disposable));
         if (old != null && old.second != null && !old.second.isDisposed()) {
             old.second.dispose();
@@ -53,7 +53,7 @@ public class RxActionManager {
      *
      * @param rxAction
      */
-    void remove(RxAction rxAction) {
+    public void remove(RxAction rxAction) {
         Pair<Integer, Disposable> old = mMap.remove(rxAction.getTag());
         if (old != null && old.second != null && !old.second.isDisposed()) {
             old.second.dispose();
@@ -70,7 +70,7 @@ public class RxActionManager {
      * @param rxAction 获取rxAction的tag，tag的hashcode对应一个disposable
      * @return
      */
-    boolean contains(RxAction rxAction) {
+    public boolean contains(RxAction rxAction) {
         Pair<Integer, Disposable> old = mMap.get(rxAction.getTag());
         return old != null
                 && old.first != null

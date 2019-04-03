@@ -1,18 +1,26 @@
 package com.huyingbao.module.wan.ui.login.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.rxview.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
+import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -31,6 +39,8 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     EditText mEtPassword;
     @BindView(R2.id.btn_login)
     Button mBtnLogin;
+    @BindView(R2.id.btn_identify)
+    Button mBtnIdentify;
 
     @Inject
     public LoginFragment() {
@@ -45,17 +55,43 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         setTitle(R.string.wan_label_login, true);
+        getRxStore().getIntervalLiveData().observe(this, interval -> {
+            if (interval == 0) {
+                mBtnIdentify.setEnabled(true);
+                mBtnIdentify.setText(R.string.wan_info_identify);
+            } else {
+                mBtnIdentify.setEnabled(false);
+                mBtnLogin.setText(R.string.wan_info_timeout);
+            }
+        });
+    }
+
+    @Override
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onRxChanged(@NonNull RxChange rxChange) {
+        super.onRxChanged(rxChange);
+        switch (rxChange.getTag()) {
+            case LoginAction.GET_IDENTIFY:
+                break;
+        }
     }
 
     @OnClick(R2.id.btn_login)
     public void login() {
-//        String username = mEtUsername.getText().toString();
-//        String password = mEtPassword.getText().toString();
-//        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-//            Toast.makeText(getActivity(), "请输入密码！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        mActionCreator.login(username, password);
+        String username = mEtUsername.getText().toString();
+        String password = mEtPassword.getText().toString();
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            Toast.makeText(getActivity(), "请输入密码！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mActionCreator.login(username, password);
+        mActionCreator.getIdentify();
+    }
+
+
+    @OnClick(R2.id.btn_identify)
+    public void identify() {
+        mBtnIdentify.setEnabled(false);
         mActionCreator.getIdentify();
     }
 }
