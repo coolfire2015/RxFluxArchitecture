@@ -17,6 +17,10 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.concurrent.TimeUnit;
 
+import io.appflate.restmock.JVMFileParser;
+import io.appflate.restmock.RESTMockServer;
+import io.appflate.restmock.RESTMockServerStarter;
+import io.appflate.restmock.utils.RequestMatchers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -36,27 +40,35 @@ public class ArticleActionTest {
     @Spy
     private RxActionManager mRxActionManager;
 
+    private WanApi mWanApi;
     private ArticleAction mArticleAction;
 
     @Before
     public void setUp() {
-        mArticleAction = new ArticleActionCreator(mRxDispatcher, mRxActionManager);
+        //启动服务
+        RESTMockServerStarter.startSync(new JVMFileParser());
+        //定义HttpClient,并添加拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(15, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build();
+        //设置HttpClient
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.wanandroid.com/")
+                //设置mock的Url地址
+                .baseUrl(RESTMockServer.getUrl())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
-        ((ArticleActionCreator) mArticleAction).mWanApi = retrofit.create(WanApi.class);
+        mWanApi = retrofit.create(WanApi.class);
+        mArticleAction = new ArticleActionCreator(mRxDispatcher, mRxActionManager, mWanApi);
     }
 
     @Test
     public void getArticleList() {
+        RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
+                .thenReturnFile(200, "json/articleList.json");
         mArticleAction.getArticleList(1);
         Mockito.verify(mRxDispatcher).postRxAction(Mockito.any());
     }

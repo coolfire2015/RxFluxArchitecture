@@ -24,7 +24,7 @@ public class HttpInterceptor implements Interceptor {
     private volatile String mBaseUrl;
 
     @Inject
-    HttpInterceptor() {
+    public HttpInterceptor() {
     }
 
     public void setBaseUrl(String baseUrl) {

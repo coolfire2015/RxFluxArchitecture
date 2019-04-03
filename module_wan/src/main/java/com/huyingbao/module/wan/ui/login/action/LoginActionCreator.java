@@ -15,12 +15,12 @@ import javax.inject.Inject;
  */
 @ActivityScope
 public class LoginActionCreator extends WanActionCreator implements LoginAction {
-    @Inject
-    WanApi mWanApi;
+    private WanApi mWanApi;
 
     @Inject
-    LoginActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    LoginActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager, WanApi wanApi) {
         super(rxDispatcher, rxActionManager);
+        mWanApi = wanApi;
     }
 
     @Override

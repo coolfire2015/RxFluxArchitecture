@@ -27,12 +27,12 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class ArticleActionCreator extends WanActionCreator implements ArticleAction {
-    @Inject
-    WanApi mWanApi;
+    private WanApi mWanApi;
 
     @Inject
-    ArticleActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    ArticleActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager, WanApi wanApi) {
         super(rxDispatcher, rxActionManager);
+        mWanApi = wanApi;
     }
 
     @Override
