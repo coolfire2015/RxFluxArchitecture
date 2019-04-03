@@ -8,8 +8,6 @@ import com.huyingbao.core.arch.model.RxRetry;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -34,9 +32,62 @@ public abstract class RxActionCreator {
     }
 
     /**
+     * 发送网络action，通知View操作进度更新
+     *
+     * @param rxAction
+     * @param httpObservable
+     */
+    private <T> void postRxAction(RxAction rxAction, Observable<T> httpObservable, boolean showLoading, boolean retry) {
+        if (mRxActionManager.contains(rxAction)) {
+            return;
+        }
+        mRxActionManager.add(rxAction, httpObservable
+                //指定IO线程
+                .subscribeOn(Schedulers.io())
+                // 调用开始
+                .doOnSubscribe(subscription -> {
+                    if (showLoading) {
+                        //发送RxLoading(显示)事件
+                        mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, true));
+                    }
+                })
+                // 调用结束
+                .doAfterTerminate(() -> {
+                    if (showLoading) {
+                        //发送RxLoading(消失)事件
+                        mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, false));
+                    }
+                })
+                // 操作结束,接收反馈
+                .subscribe(
+                        //操作进行中
+                        response -> {
+                            rxAction.setResponse(response);
+                            //发送RxAction事件
+                            mRxDispatcher.postRxAction(rxAction);
+                        },
+                        //操作异常
+                        throwable -> {
+                            if (retry) {
+                                //发送RxRetry事件
+                                mRxDispatcher.postRxRetry(RxRetry.newInstance(rxAction, throwable, httpObservable));
+                            } else {
+                                //发送RxRrror事件
+                                mRxDispatcher.postRxError(RxError.newInstance(rxAction, throwable));
+                            }
+                            mRxActionManager.remove(rxAction);
+                        },
+                        //操作结束
+                        () -> {
+                            mRxActionManager.remove(rxAction);
+                        }
+                ));
+    }
+
+    /**
      * 创建新的RxAction
      *
-     * @param tag  action tag对应具体是什么样的方法
+     * @param tag  rxAction tag对应具体是什么样的方法
      * @param data 键值对型的参数pair-value parameters(Key - Object))
      * @return
      */
@@ -57,155 +108,51 @@ public abstract class RxActionCreator {
     }
 
     /**
-     * 订阅管理器是否已经有了该action
-     *
-     * @param rxAction
-     * @return
-     */
-    private boolean hasRxAction(RxAction rxAction) {
-        return mRxActionManager.contains(rxAction);
-    }
-
-    /**
-     * 主要是为了和RxJava整合,用在调用网络接口api获取数据之后,被观察者得到数据,发生订阅关系,将返回的数据
-     * 或者error封装成action,postAction或者postError出去
-     * 订阅管理,将RxAction和Disposable添加到DisposableManager
-     *
-     * @param rxAction
-     * @param disposable
-     */
-    private void addRxAction(RxAction rxAction, Disposable disposable) {
-        mRxActionManager.add(rxAction, disposable);
-    }
-
-    /**
-     * 订阅管理器,移除该action，停止该action对应的操作
-     *
-     * @param rxAction
-     */
-    private void removeRxAction(RxAction rxAction) {
-        mRxActionManager.remove(rxAction);
-    }
-
-    /**
-     * 通过调度器dispatcher将action事件推出去
-     *
-     * @param rxAction
-     * @param response
-     * @param <T>
-     */
-    private <T> void postRxAction(@NonNull RxAction rxAction, T response) {
-        rxAction.setResponse(response);
-        mRxDispatcher.postRxAction(rxAction);
-        //发送通知，移除Action
-        removeRxAction(rxAction);
-    }
-
-    /**
-     * 通过调度器dispatcher将action对应的RxError事件推出去
-     *
-     * @param action
-     * @param throwable
-     */
-    private void postRxError(@NonNull RxAction action, Throwable throwable) {
-        mRxDispatcher.postRxError(RxError.newInstance(action, throwable));
-        //发送通知，移除Action
-        removeRxAction(action);
-    }
-
-    /**
-     * 通过调度器dispatcher将action对应的RxRetry事件推出去
-     *
-     * @param action
-     * @param throwable
-     * @param httpObservable
-     */
-    private <T> void postRxRetry(@NonNull RxAction action, Throwable throwable, Observable<T> httpObservable) {
-        mRxDispatcher.postRxRetry(RxRetry.newInstance(action, throwable, httpObservable));
-        //发送通知，移除Action
-        removeRxAction(action);
-    }
-
-
-    /**
-     * 通过调度器dispatcher将action对应的RxLoading事件推出去
-     *
-     * @param rxAction
-     * @param isLoading true:显示，false:消失
-     */
-    private void postRxLoading(RxAction rxAction, boolean isLoading) {
-        mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, isLoading));
-    }
-
-    /**
      * 发送网络action
      *
      * @param rxAction
      * @param httpObservable
      */
     protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) {
-            return;
-        }
-        addRxAction(rxAction, httpObservable
-                // 1:指定IO线程
-                .subscribeOn(Schedulers.io())
-                // 2:指定主线程
-                .observeOn(AndroidSchedulers.mainThread())
-                // 2:指定主线程
-                .subscribe(
-                        response -> postRxAction(rxAction, response),
-                        throwable -> postRxError(rxAction, throwable)
-                ));
+        postRxAction(rxAction, httpObservable, false, false);
     }
 
     /**
-     * 发送网络action，通知View操作进度更新
+     * 发送网络action
+     * <p>
+     * 1:通知View操作进度更新
      *
      * @param rxAction
      * @param httpObservable
      */
     protected <T> void postHttpLoadingAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) {
-            return;
-        }
-        addRxAction(rxAction, httpObservable
-                // 1:指定IO线程
-                .subscribeOn(Schedulers.io())
-                // 调用开始
-                .doOnSubscribe(subscription -> postRxLoading(rxAction, true))
-                // 调用结束
-                .doAfterTerminate(() -> postRxLoading(rxAction, false))
-                // 2:指定主线程
-                .observeOn(AndroidSchedulers.mainThread())
-                // 2:指定主线程
-                .subscribe(
-                        response -> postRxAction(rxAction, response),
-                        throwable -> postRxError(rxAction, throwable)
-                ));
+        postRxAction(rxAction, httpObservable, true, false);
     }
 
     /**
-     * 发送网络action，如果有异常，可以重试
+     * 发送网络action，
+     * <p>
+     * 1:如果有异常，可以重试
      *
      * @param rxAction
      * @param httpObservable
      */
     protected <T> void postHttpRetryAction(RxAction rxAction, Observable<T> httpObservable) {
-        if (hasRxAction(rxAction)) {
-            return;
-        }
-        addRxAction(rxAction, httpObservable
-                // 1:指定IO线程
-                .subscribeOn(Schedulers.io())
-                // 2:指定主线程
-                .observeOn(AndroidSchedulers.mainThread())
-                // 2:指定主线程
-                .subscribe(
-                        response -> postRxAction(rxAction, response),
-                        throwable -> postRxRetry(rxAction, throwable, httpObservable)
-                ));
+        postRxAction(rxAction, httpObservable, false, true);
+    }
 
+    /**
+     * 发送网络action，
+     * <p>
+     * 1:通知View操作进度更新
+     * <p>
+     * 2:如果有异常，可以重试
+     *
+     * @param rxAction
+     * @param httpObservable
+     */
+    protected <T> void postHttpRetryAndLoadingAction(RxAction rxAction, Observable<T> httpObservable) {
+        postRxAction(rxAction, httpObservable, true, true);
     }
 
     /**
@@ -215,10 +162,9 @@ public abstract class RxActionCreator {
      * @param data
      */
     public void postLocalAction(@NonNull String actionId, Object... data) {
-        RxAction action = newRxAction(actionId, data);
-        mRxDispatcher.postRxAction(action);
-        //发送通知，移除Action
-        removeRxAction(action);
+        RxAction rxAction = newRxAction(actionId, data);
+        mRxDispatcher.postRxAction(rxAction);
+        mRxActionManager.remove(rxAction);
     }
 
     /**
@@ -229,7 +175,7 @@ public abstract class RxActionCreator {
      */
     public void postRetryAction(@NonNull RxRetry rxRetry) {
         RxAction rxAction = newRxAction(rxRetry.getTag());
-        if (hasRxAction(rxAction)) {
+        if (mRxActionManager.contains(rxAction)) {
             return;
         }
         postHttpRetryAction(rxAction, rxRetry.getObservable());

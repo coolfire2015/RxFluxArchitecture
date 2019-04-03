@@ -25,7 +25,7 @@ public class FriendActionCreator extends RxActionCreator implements FriendAction
 
     @Override
     public void getFriendList() {
-        RxAction action = newRxAction(GET_FRIEND_LIST);
-        postHttpRetryAction(action, mWanApi.getFriendList());
+        RxAction rxAction = newRxAction(GET_FRIEND_LIST);
+        postHttpRetryAction(rxAction, mWanApi.getFriendList());
     }
 }

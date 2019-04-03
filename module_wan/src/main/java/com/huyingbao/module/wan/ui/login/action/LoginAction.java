@@ -25,4 +25,14 @@ public interface LoginAction {
      * @param password 密码
      */
     void login(String username, String password);
+
+    /**
+     * 发送验证码,60s之后可以重发
+     */
+    String GET_IDENTIFY = "getIdentify";
+
+    /**
+     * 发送验证码,60s之后可以重发
+     */
+    void getIdentify();
 }

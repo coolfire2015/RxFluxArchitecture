@@ -91,10 +91,10 @@ public class RxDispatcher {
     /**
      * 1:发送RxAction,通知所有订阅的RxStore
      *
-     * @param action
+     * @param rxAction
      */
-    public void postRxAction(final RxAction action) {
-        EventBus.getDefault().post(action);
+    public void postRxAction(final RxAction rxAction){
+        EventBus.getDefault().post(rxAction);
     }
 
     /**

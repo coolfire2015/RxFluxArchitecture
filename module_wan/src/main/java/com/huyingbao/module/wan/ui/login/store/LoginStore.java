@@ -36,6 +36,8 @@ public class LoginStore extends RxActivityStore {
                 break;
             case LoginAction.REGISTER:
                 break;
+            case LoginAction.GET_IDENTIFY:
+                break;
             default:
                 break;
         }
