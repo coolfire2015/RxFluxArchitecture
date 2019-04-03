@@ -9,6 +9,7 @@ import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.model.User;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,7 +31,7 @@ public class LoginStore extends RxActivityStore {
     }
 
     @Override
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case LoginAction.LOGIN:

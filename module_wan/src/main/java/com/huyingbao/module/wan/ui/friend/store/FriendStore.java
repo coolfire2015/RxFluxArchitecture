@@ -8,6 +8,7 @@ import com.huyingbao.module.wan.ui.friend.action.FriendAction;
 import com.huyingbao.module.wan.ui.friend.model.WebSite;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class FriendStore extends RxFragmentStore {
     }
 
     @Override
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case FriendAction.GET_FRIEND_LIST:

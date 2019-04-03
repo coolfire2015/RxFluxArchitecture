@@ -60,7 +60,7 @@ public class HttpInterceptor implements Interceptor {
         }
         String content = response.body().string();
         long t2 = System.nanoTime();
-        Logger.e(String.format("接收 for %s in %.1fms", response.request().url(), (t2 - t1) / 1e6d));
+        Logger.i(String.format("接收 for %s in %.1fms", response.request().url(), (t2 - t1) / 1e6d));
         Logger.json(content);
         return response.newBuilder().body(ResponseBody.create(response.body().contentType(), content)).build();
     }

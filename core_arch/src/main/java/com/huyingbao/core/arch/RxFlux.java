@@ -139,7 +139,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
-            Log.v("RxFlux", "10.1-subscribe RxActivity : " + activity.getClass().getSimpleName());
+            Log.w("RxFlux", "10.1-subscribe RxActivity : " + activity.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxFluxView) activity);
         }
     }
@@ -158,7 +158,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
-            Log.v("RxFlux", "11.1-subscribe RxFragment : " + f.getClass().getSimpleName());
+            Log.w("RxFlux", "11.1-subscribe RxFragment : " + f.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxFluxView) f);
         }
     }
@@ -174,7 +174,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         Log.v("RxFlux", "12-onActivityPaused");
         if (activity instanceof RxFluxView) {
             mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
-            Log.d("RxFlux", "12.1-unsubscribe RxActivity : " + activity.getClass().getSimpleName());
+            Log.w("RxFlux", "12.1-unsubscribe RxActivity : " + activity.getClass().getSimpleName());
         }
     }
 
@@ -190,7 +190,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
         Log.v("RxFlux", "13-onFragmentPaused");
         if (f instanceof RxFluxView) {
             mRxDispatcher.unsubscribeRxView((RxFluxView) f);
-            Log.d("RxFlux", "13.1-unsubscribe RxFragment : " + f.getClass().getSimpleName());
+            Log.w("RxFlux", "13.1-unsubscribe RxFragment : " + f.getClass().getSimpleName());
         }
     }
 

@@ -30,7 +30,7 @@ public class MainStore extends RxActivityStore {
      * @param rxAction
      */
     @Override
-    @Subscribe()
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case MainAction.TO_WAN_MODULE:

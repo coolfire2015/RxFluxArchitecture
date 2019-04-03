@@ -56,7 +56,7 @@ public abstract class RxActivityStore extends ViewModel implements RxActionDispa
         if (mRxDispatcher.isSubscribe(this)) {
             return;
         }
-        Log.v("RxFlux", "1.3-storeForActivity register");
+        Log.w("RxFlux", "1.3-register RxActivityStore : "+getClass().getSimpleName());
         mRxDispatcher.subscribeRxStore(this);
     }
 
@@ -66,7 +66,7 @@ public abstract class RxActivityStore extends ViewModel implements RxActionDispa
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {
-        Log.v("RxFlux", "18.1-storeForActivity unregister");
+        Log.w("RxFlux", "18.1-unregister RxActivityStore : "+getClass().getSimpleName());
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
@@ -76,7 +76,7 @@ public abstract class RxActivityStore extends ViewModel implements RxActionDispa
     @Override
     @CallSuper
     protected void onCleared() {
-        Log.v("RxFlux", "18.2-storeForActivity cleared");
+        Log.w("RxFlux", "18.2-cleared RxActivityStore : "+getClass().getSimpleName());
     }
 
     /**

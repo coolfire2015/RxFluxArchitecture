@@ -11,6 +11,7 @@ import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class ArticleStore extends RxActivityStore {
      * @param rxAction
      */
     @Override
-    @Subscribe()
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:
