@@ -36,8 +36,11 @@ public abstract class RxActionCreator {
      *
      * @param rxAction
      * @param httpObservable
+     * @param canShowLoading true:有进度显示,false:无进度显示
+     * @param canRetry       true:操作异常可重试,false:操作异常抛异常
+     * @param <T>
      */
-    private <T> void postRxAction(RxAction rxAction, Observable<T> httpObservable, boolean showLoading, boolean retry) {
+    private <T> void postRxAction(RxAction rxAction, Observable<T> httpObservable, boolean canShowLoading, boolean canRetry) {
         if (mRxActionManager.contains(rxAction)) {
             return;
         }
@@ -46,19 +49,19 @@ public abstract class RxActionCreator {
                 .subscribeOn(Schedulers.io())
                 // 调用开始
                 .doOnSubscribe(subscription -> {
-                    if (showLoading) {
+                    if (canShowLoading) {
                         //发送RxLoading(显示)事件
                         mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, true));
                     }
                 })
                 // 调用结束
                 .doAfterTerminate(() -> {
-                    if (showLoading) {
+                    if (canShowLoading) {
                         //发送RxLoading(消失)事件
                         mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, false));
                     }
                 })
-                // 操作结束,接收反馈
+                // 操作结束,在io线程中接收接收反馈,没有切换线程
                 .subscribe(
                         //操作进行中
                         response -> {
@@ -68,11 +71,11 @@ public abstract class RxActionCreator {
                         },
                         //操作异常
                         throwable -> {
-                            if (retry) {
+                            if (canRetry) {
                                 //发送RxRetry事件
                                 mRxDispatcher.postRxRetry(RxRetry.newInstance(rxAction, throwable, httpObservable));
                             } else {
-                                //发送RxRrror事件
+                                //发送RxError事件
                                 mRxDispatcher.postRxError(RxError.newInstance(rxAction, throwable));
                             }
                             mRxActionManager.remove(rxAction);
@@ -169,6 +172,7 @@ public abstract class RxActionCreator {
 
     /**
      * 接收到重试action之后,进行重试操作
+     * <p>
      * 发送重试action
      *
      * @param rxRetry
