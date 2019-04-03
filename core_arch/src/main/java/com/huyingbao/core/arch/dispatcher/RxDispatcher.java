@@ -93,7 +93,7 @@ public class RxDispatcher {
      *
      * @param rxAction
      */
-    public void postRxAction(final RxAction rxAction){
+    public void postRxAction(final RxAction rxAction) {
         EventBus.getDefault().post(rxAction);
     }
 
