@@ -29,7 +29,7 @@ internal constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher)
         webSiteListData.value = null
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     override fun onRxAction(rxAction: RxAction) {
         when (rxAction.tag) {
             FriendAction.GET_FRIEND_LIST -> {

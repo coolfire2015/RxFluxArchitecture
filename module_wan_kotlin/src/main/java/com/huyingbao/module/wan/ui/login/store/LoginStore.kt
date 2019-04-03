@@ -22,7 +22,7 @@ class LoginStore @Inject
 internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
     private var mUser: WanResponse<User>? = null
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     override fun onRxAction(rxAction: RxAction) {
         when (rxAction.tag) {
             LoginAction.LOGIN -> {

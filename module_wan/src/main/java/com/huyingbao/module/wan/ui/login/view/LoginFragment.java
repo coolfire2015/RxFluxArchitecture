@@ -6,21 +6,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.rxview.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
-import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -61,19 +55,10 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
                 mBtnIdentify.setText(R.string.wan_info_identify);
             } else {
                 mBtnIdentify.setEnabled(false);
-                mBtnLogin.setText(R.string.wan_info_timeout);
+                String infoTimeout = getResources().getString(R.string.wan_info_timeout);
+                mBtnLogin.setText(String.format(infoTimeout, interval));
             }
         });
-    }
-
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case LoginAction.GET_IDENTIFY:
-                break;
-        }
     }
 
     @OnClick(R2.id.btn_login)

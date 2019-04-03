@@ -43,7 +43,7 @@ internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher)
      *
      * @param rxAction
      */
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     override fun onRxAction(rxAction: RxAction) {
         when (rxAction.tag) {
             ArticleAction.GET_ARTICLE_LIST -> {
