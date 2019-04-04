@@ -15,7 +15,7 @@ import dagger.android.ContributesAndroidInjector;
  * @date 2019/1/1
  */
 @Module
-public abstract class WanFragmentModule {
+public abstract class WanInjectorFragmentModule {
     @FragmentScope
     @ContributesAndroidInjector
     abstract ArticleListFragment injectArticleListFragment();

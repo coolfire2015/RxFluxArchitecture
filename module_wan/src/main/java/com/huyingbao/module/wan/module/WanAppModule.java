@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author liujunfeng
  * @date 2019/1/1
  */
-@Module(includes = {WanActivityModule.class, WanStoreModule.class})
+@Module(includes = {WanInjectorActivityModule.class, WanStoreModule.class})
 public class WanAppModule {
     @Singleton
     @Provides

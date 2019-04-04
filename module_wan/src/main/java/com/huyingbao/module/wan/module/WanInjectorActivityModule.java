@@ -12,12 +12,12 @@ import dagger.android.ContributesAndroidInjector;
  * @date 2019/1/1
  */
 @Module
-public abstract class WanActivityModule {
+public abstract class WanInjectorActivityModule {
     @ActivityScope
-    @ContributesAndroidInjector(modules = WanFragmentModule.class)
+    @ContributesAndroidInjector(modules = WanInjectorFragmentModule.class)
     abstract ArticleActivity injectArticleActivity();
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = WanFragmentModule.class)
+    @ContributesAndroidInjector(modules = WanInjectorFragmentModule.class)
     abstract LoginActivity injectLoginActivity();
 }
