@@ -8,11 +8,6 @@ import it.cosenonjaviste.daggermock.DaggerMockRule;
 public class MockDaggerRule extends DaggerMockRule<MockComponent> {
     public MockDaggerRule() {
         super(MockComponent.class, new MockModule());
-        set(new DaggerMockRule.ComponentSetter<MockComponent>() {
-            @Override
-            public void setComponent(MockComponent component) {
-                MockUtils.setComponent(component);
-            }
-        });
+        set(component -> MockUtils.setComponent(component));
     }
 }

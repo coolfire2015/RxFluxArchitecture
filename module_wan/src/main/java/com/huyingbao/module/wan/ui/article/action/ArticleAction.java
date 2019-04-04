@@ -12,7 +12,7 @@ public interface ArticleAction {
     /**
      * 获取文章列表
      */
-    String GET_ARTICLE_LIST = "article/list";
+    String GET_ARTICLE_LIST = "get_article_list";
 
     /**
      * 获取文章列表

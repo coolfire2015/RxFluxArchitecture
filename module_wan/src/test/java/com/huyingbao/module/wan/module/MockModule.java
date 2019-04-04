@@ -2,7 +2,6 @@ package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,7 +53,7 @@ public class MockModule {
     private void initMockServer() {
         //开启RestMockServer
         RESTMockServerStarter.startSync(new JVMFileParser());
-        RESTMockServer.whenGET(RequestMatchers.pathContains(ArticleAction.GET_ARTICLE_LIST))
+        RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
                 .thenReturnFile(200, "json/articleList.json");
     }
 }
