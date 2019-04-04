@@ -14,9 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import io.appflate.restmock.RESTMockServer;
-import io.appflate.restmock.utils.RequestMatchers;
-
 import static org.mockito.Mockito.times;
 
 /**
@@ -44,8 +41,6 @@ public class ArticleActionCreatorTest {
 
     @Test
     public void getArticleList() {
-        RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
-                .thenReturnFile(200, "json/articleList.json");
         mArticleAction.getArticleList(1);
         //调用方法成功,发送一次RxAction
         Mockito.verify(mRxDispatcher).postRxAction(Mockito.any());

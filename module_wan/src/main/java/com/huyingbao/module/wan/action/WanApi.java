@@ -1,5 +1,6 @@
 package com.huyingbao.module.wan.action;
 
+import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.model.Article;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 import com.huyingbao.module.wan.ui.article.model.Page;
@@ -55,6 +56,6 @@ public interface WanApi {
      * @param page 页码
      * @return
      */
-    @GET("article/list/{page}/json")
+    @GET(ArticleAction.GET_ARTICLE_LIST + "/{page}/json")
     Observable<WanResponse<Page<Article>>> getArticleList(@Path("page") int page);
 }
