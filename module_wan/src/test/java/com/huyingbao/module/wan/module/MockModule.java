@@ -9,7 +9,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.appflate.restmock.JVMFileParser;
 import io.appflate.restmock.RESTMockServer;
+import io.appflate.restmock.RESTMockServerStarter;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -36,6 +38,8 @@ public class MockModule {
     @Singleton
     @Provides
     public WanApi provideWanApi(OkHttpClient okHttpClient) {
+        //开启RestMockServer
+        RESTMockServerStarter.startSync(new JVMFileParser());
         //实例化retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(RESTMockServer.getUrl())
