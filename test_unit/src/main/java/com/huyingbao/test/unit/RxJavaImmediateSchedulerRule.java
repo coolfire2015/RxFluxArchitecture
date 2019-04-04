@@ -19,13 +19,8 @@ import io.reactivex.plugins.RxJavaPlugins;
  * @author liujunfeng
  * @date 2019/1/1
  */
-public class RxJavaTestSchedulerRuleStatic implements TestRule {
-
-    /**
-     * 立即执行的调度器
-     */
+public class RxJavaImmediateSchedulerRule implements TestRule {
     private Scheduler mImmediate = new Scheduler() {
-
         @Override
         public Disposable scheduleDirect(@NonNull Runnable run, long delay, @NonNull TimeUnit unit) {
             return super.scheduleDirect(run, 0, unit);
@@ -36,6 +31,10 @@ public class RxJavaTestSchedulerRuleStatic implements TestRule {
             return new ExecutorScheduler.ExecutorWorker(command -> command.run(), true);
         }
     };
+
+    public Scheduler getImmediate() {
+        return mImmediate;
+    }
 
     @Override
     public Statement apply(final Statement base, Description description) {

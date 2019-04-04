@@ -7,7 +7,7 @@ import dagger.android.support.DaggerApplication;
  * @author liujunfeng
  * @date 2019/1/1
  */
-public class FakeWanApplication extends WanApplication{
+public class FakeWanApplication extends WanApplication {
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerFakeWanComponent.builder().application(this).build();

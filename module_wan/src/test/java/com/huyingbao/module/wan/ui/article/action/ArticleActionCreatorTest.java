@@ -1,30 +1,25 @@
 package com.huyingbao.module.wan.ui.article.action;
 
-import com.google.gson.GsonBuilder;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.test.unit.RxJavaTestSchedulerRuleStatic;
+import com.huyingbao.module.wan.module.MockComponent;
+import com.huyingbao.module.wan.module.MockModule;
+import com.huyingbao.test.unit.RxJavaImmediateSchedulerRule;
 
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import java.util.concurrent.TimeUnit;
 
 import io.appflate.restmock.JVMFileParser;
 import io.appflate.restmock.RESTMockServer;
 import io.appflate.restmock.RESTMockServerStarter;
 import io.appflate.restmock.utils.RequestMatchers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import it.cosenonjaviste.daggermock.DaggerMockRule;
 
 import static org.mockito.Mockito.times;
 
@@ -32,37 +27,31 @@ import static org.mockito.Mockito.times;
  * Created by liujunfeng on 2019/3/27.
  */
 public class ArticleActionCreatorTest {
-    @Rule
-    public MockitoRule mMockitoRule = MockitoJUnit.rule();
-    @ClassRule
-    public static RxJavaTestSchedulerRuleStatic sMRxJavaTestSchedulerRuleStatic = new RxJavaTestSchedulerRuleStatic();
-    @Spy
+    private WanApi mWanApi;
+    @Mock
     private RxDispatcher mRxDispatcher;
-    @Spy
+    @Mock
     private RxActionManager mRxActionManager;
 
-    private WanApi mWanApi;
+    @Rule
+    public MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public RxJavaImmediateSchedulerRule mRule = new RxJavaImmediateSchedulerRule();
+    @Rule
+    public DaggerMockRule<MockComponent> rule = new DaggerMockRule<>(MockComponent.class, new MockModule())
+            .set(new DaggerMockRule.ComponentSetter<MockComponent>() {
+                @Override
+                public void setComponent(MockComponent component) {
+                    //启动RESTMock服务
+                    RESTMockServerStarter.startSync(new JVMFileParser());
+                    mWanApi = component.getWanApi();
+                }
+            });
+
     private ArticleActionCreator mArticleAction;
 
     @Before
     public void setUp() {
-        //启动服务
-        RESTMockServerStarter.startSync(new JVMFileParser());
-        //定义HttpClient,并添加拦截器
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .build();
-        //设置HttpClient
-        Retrofit retrofit = new Retrofit.Builder()
-                //设置mock的Url地址
-                .baseUrl(RESTMockServer.getUrl())
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-        mWanApi = retrofit.create(WanApi.class);
         mArticleAction = new ArticleActionCreator(mRxDispatcher, mRxActionManager, mWanApi);
     }
 

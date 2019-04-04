@@ -29,6 +29,7 @@ public class RxJavaTestSchedulerRule implements TestRule {
                 RxJavaPlugins.setNewThreadSchedulerHandler(scheduler -> mTestScheduler);
                 RxJavaPlugins.setSingleSchedulerHandler(scheduler -> mTestScheduler);
                 RxAndroidPlugins.setMainThreadSchedulerHandler(scheduler -> mTestScheduler);
+
                 try {
                     base.evaluate();
                 } finally {
