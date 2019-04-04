@@ -8,5 +8,5 @@
     <string name="wan_username">用户名</string>
     <string name="wan_password">密码</string>
     <string name="wan_info_identify">发送验证码</string>
-    <string name="wan_info_timeout">倒计时%dS</string>
+    <string name="wan_info_timeout">倒计时%sS</string>
 </resources>

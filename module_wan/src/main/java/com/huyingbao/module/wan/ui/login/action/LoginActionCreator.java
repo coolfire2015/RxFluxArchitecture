@@ -43,8 +43,8 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
         RxAction rxAction = newRxAction(GET_IDENTIFY);
         Observable<Long> observable = Observable
                 .interval(1, TimeUnit.SECONDS)
-                .take(60)
-                .map(aLong -> 60 - aLong);
+                .take(10)
+                .map(aLong -> 9 - aLong);
         postHttpAction(rxAction, observable);
     }
 }

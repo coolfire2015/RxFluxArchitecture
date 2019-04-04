@@ -50,13 +50,13 @@ public class LoginFragment extends CommonRxFragment<LoginStore> {
     public void afterCreate(Bundle savedInstanceState) {
         setTitle(R.string.wan_label_login, true);
         getRxStore().getIntervalLiveData().observe(this, interval -> {
-            if (interval == 0) {
+            if (TextUtils.isEmpty(interval) || TextUtils.equals(interval, "0")) {
                 mBtnIdentify.setEnabled(true);
                 mBtnIdentify.setText(R.string.wan_info_identify);
             } else {
                 mBtnIdentify.setEnabled(false);
                 String infoTimeout = getResources().getString(R.string.wan_info_timeout);
-                mBtnLogin.setText(String.format(infoTimeout, interval));
+                mBtnIdentify.setText(String.format(infoTimeout, interval));
             }
         });
     }

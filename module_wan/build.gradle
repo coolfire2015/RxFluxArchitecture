@@ -136,9 +136,6 @@ dependencies {
     } else {
         api project(':core_common')
     }
-    //单元测试
-    implementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
-    testImplementation project(':core_unit')
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
@@ -146,4 +143,22 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+
+    //单元测试
+    testImplementation project(':test_unit')
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+
+    //仪器测试
+    androidTestImplementation project(':test_espresso')
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    androidTestAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    androidTestAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    androidTestAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    androidTestAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }

@@ -22,12 +22,21 @@ import androidx.lifecycle.MutableLiveData;
  */
 @Singleton
 public class LoginStore extends RxActivityStore {
-    private MutableLiveData<Integer> mIntervalLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> mIntervalLiveData = new MutableLiveData<>();
     private WanResponse<User> mUser;
 
     @Inject
     LoginStore(RxDispatcher rxDispatcher) {
         super(rxDispatcher);
+    }
+
+    /**
+     * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
+     */
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mIntervalLiveData.setValue(null);
     }
 
     @Override
@@ -41,14 +50,14 @@ public class LoginStore extends RxActivityStore {
             case LoginAction.REGISTER:
                 break;
             case LoginAction.GET_IDENTIFY:
-                mIntervalLiveData.setValue(rxAction.getResponse());
+                mIntervalLiveData.setValue(rxAction.getResponse() + "");
                 break;
             default:
                 break;
         }
     }
 
-    public MutableLiveData<Integer> getIntervalLiveData() {
+    public MutableLiveData<String> getIntervalLiveData() {
         return mIntervalLiveData;
     }
 }
