@@ -65,4 +65,7 @@ dependencies {
     api "org.assertj:assertj-core:${TEST_ASSERT_J}"
     //AssertJ-Android
     api "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+    //RxJava
+    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
+    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
 }
