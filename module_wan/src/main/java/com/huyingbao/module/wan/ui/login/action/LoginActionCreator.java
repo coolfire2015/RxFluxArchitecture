@@ -29,7 +29,8 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
 
     @Override
     public void register(String username, String password, String repassword) {
-
+        RxAction rxAction = newRxAction(REGISTER);
+        postHttpAction(rxAction, mWanApi.register(username, password, repassword).flatMap(verifyResponse()));
     }
 
     @Override

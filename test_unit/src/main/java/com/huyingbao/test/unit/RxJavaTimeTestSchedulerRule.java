@@ -9,9 +9,10 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.TestScheduler;
 
 /**
+ * RxJava异步切换同步调度器,提供时间控制调度器
  * Created by weilu on 2018/1/6..
  */
-public class RxJavaTestSchedulerRule implements TestRule {
+public class RxJavaTimeTestSchedulerRule implements TestRule {
 
     private final TestScheduler mTestScheduler = new TestScheduler();
 

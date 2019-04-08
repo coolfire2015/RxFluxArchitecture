@@ -14,7 +14,7 @@ import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
 
 /**
- * 切换RxJava异步为同步
+ * 切换RxJava异步为同步,立即执行
  *
  * @author liujunfeng
  * @date 2019/1/1

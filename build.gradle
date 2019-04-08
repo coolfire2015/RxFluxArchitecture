@@ -119,6 +119,13 @@ def getGitVersionInfo() {
 }
 
 /**
+ * 获取Git分支名
+ */
+def getGitBranch() {
+    return 'git symbolic-ref --short -q HEAD'.execute().text.trim()
+}
+
+/**
  * 输出日志
  */
 def buildLog() {

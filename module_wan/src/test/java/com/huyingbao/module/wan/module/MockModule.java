@@ -1,7 +1,9 @@
 package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
+import com.huyingbao.module.wan.BuildConfig;
 import com.huyingbao.module.wan.action.WanApi;
+import com.huyingbao.module.wan.action.WanContants;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,10 +41,9 @@ public class MockModule {
     @Singleton
     @Provides
     public WanApi provideWanApi(OkHttpClient okHttpClient) {
-        initMockServer();
         //实例化retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RESTMockServer.getUrl())
+                .baseUrl(initBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -50,10 +51,36 @@ public class MockModule {
         return retrofit.create(WanApi.class);
     }
 
-    private void initMockServer() {
+    /**
+     * 初始化根Url
+     *
+     * @return
+     */
+    private String initBaseUrl() {
+        return BuildConfig.MOCK_URL ? initMockServer() : WanContants.BASE_URL;
+    }
+
+    /**
+     * 使用RESTMockServer,为需要测试的接口提供mock数据
+     *
+     * @return mock的url
+     */
+    private String initMockServer() {
         //开启RestMockServer
         RESTMockServerStarter.startSync(new JVMFileParser());
+        //article/list
         RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
                 .thenReturnFile(200, "json/articleList.json");
+        //banner/json
+        RESTMockServer.whenGET(RequestMatchers.pathContains("banner/json"))
+                .thenReturnFile(200, "json/bannerList.json");
+        //login
+        RESTMockServer.whenGET(RequestMatchers.pathContains("user/login"))
+                .thenReturnFile(200, "json/login.json");
+        //register
+        RESTMockServer.whenGET(RequestMatchers.pathContains("user/register"))
+                .thenReturnFile(200, "json/register.json");
+        //返回Mock的Url
+        return RESTMockServer.getUrl();
     }
 }

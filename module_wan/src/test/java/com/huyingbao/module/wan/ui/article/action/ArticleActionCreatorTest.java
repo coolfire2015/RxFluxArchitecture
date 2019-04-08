@@ -10,11 +10,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by liujunfeng on 2019/3/27.
@@ -43,14 +44,15 @@ public class ArticleActionCreatorTest {
     public void getArticleList() {
         mArticleAction.getArticleList(1);
         //调用方法成功,发送一次RxAction
-        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any());
+        verify(mRxDispatcher).postRxAction(any());
         //调用方法成功,发送两次RxLoading
-        Mockito.verify(mRxDispatcher, times(2)).postRxLoading(Mockito.any());
+        verify(mRxDispatcher, times(2)).postRxLoading(any());
     }
 
     @Test
     public void getBannerList() {
         mArticleAction.getBannerList();
-        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any());
+        //调用方法成功,发送一次RxAction
+        verify(mRxDispatcher).postRxAction(any());
     }
 }

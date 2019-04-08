@@ -22,7 +22,7 @@ public class FakeWanAppModule {
     @Provides
     WanApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.wanandroid.com/")
+                .baseUrl("https://www.wanandroid.com/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

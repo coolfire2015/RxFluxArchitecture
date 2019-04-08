@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.module.wan.action.WanApi;
+import com.huyingbao.module.wan.action.WanContants;
 
 import javax.inject.Singleton;
 
@@ -22,7 +23,7 @@ public class WanAppModule {
     @Provides
     WanApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.wanandroid.com/")
+                .baseUrl(WanContants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

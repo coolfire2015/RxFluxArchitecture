@@ -20,7 +20,7 @@ class WanModule {
     @Provides
     internal fun provideMainApi(client: OkHttpClient): WanApi {
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://www.wanandroid.com/")
+                .baseUrl("https://www.wanandroid.com/")
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

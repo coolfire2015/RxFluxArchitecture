@@ -10,6 +10,7 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * 切换RxJava异步为同步
  * Created by weilu on 2017/12/23.
  */
 public class RxJavaTrampolineSchedulerRule implements TestRule {

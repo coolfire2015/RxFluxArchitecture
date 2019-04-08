@@ -32,6 +32,20 @@ public interface WanApi {
     Observable<WanResponse<User>> login(@Field("username") String username,
                                         @Field("password") String password);
 
+    /**
+     * 登录
+     *
+     * @param username   用户名
+     * @param password   密码
+     * @param repassword 确认密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<WanResponse<User>> register(@Field("username") String username,
+                                           @Field("password") String password,
+                                           @Field("repassword") String repassword);
+
 
     /**
      * 获取友站列表
