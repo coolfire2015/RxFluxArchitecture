@@ -19,7 +19,7 @@ import io.reactivex.plugins.RxJavaPlugins;
  * @author liujunfeng
  * @date 2019/1/1
  */
-public class RxJavaImmediateSchedulerRule implements TestRule {
+public class RxJavaRule implements TestRule {
     private Scheduler mImmediate = new Scheduler() {
         @Override
         public Disposable scheduleDirect(@NonNull Runnable run, long delay, @NonNull TimeUnit unit) {
@@ -34,6 +34,10 @@ public class RxJavaImmediateSchedulerRule implements TestRule {
 
     public Scheduler getImmediate() {
         return mImmediate;
+    }
+
+    public void setImmediate(Scheduler immediate) {
+        mImmediate = immediate;
     }
 
     @Override

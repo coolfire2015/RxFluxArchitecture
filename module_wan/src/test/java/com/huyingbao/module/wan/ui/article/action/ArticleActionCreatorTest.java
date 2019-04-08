@@ -4,7 +4,7 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
-import com.huyingbao.test.unit.RxJavaImmediateSchedulerRule;
+import com.huyingbao.test.unit.RxJavaRule;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,11 +27,11 @@ public class ArticleActionCreatorTest {
     private RxActionManager mRxActionManager;
 
     @Rule
+    public RxJavaRule mRxJavaRule = new RxJavaRule();
+    @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule
     public MockDaggerRule mMockDaggerRule = new MockDaggerRule();
-    @Rule
-    public RxJavaImmediateSchedulerRule mImmediateSchedulerRule = new RxJavaImmediateSchedulerRule();
 
     private ArticleActionCreator mArticleAction;
 
