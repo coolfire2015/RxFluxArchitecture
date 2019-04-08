@@ -46,6 +46,9 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
                 .interval(1, TimeUnit.SECONDS)
                 .take(10)
                 .map(aLong -> 9 - aLong);
-        postHttpAction(rxAction, observable);
+        Observable<Long> coolfire2 = mWanApi.login("coolfire", "123456")
+                .flatMap(verifyResponse())
+                .flatMap(userWanResponse -> observable);
+        postHttpAction(rxAction, coolfire2);
     }
 }

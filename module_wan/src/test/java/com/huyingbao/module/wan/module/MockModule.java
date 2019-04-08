@@ -75,10 +75,10 @@ public class MockModule {
         RESTMockServer.whenGET(RequestMatchers.pathContains("banner/json"))
                 .thenReturnFile(200, "json/bannerList.json");
         //login
-        RESTMockServer.whenGET(RequestMatchers.pathContains("user/login"))
+        RESTMockServer.whenPOST(RequestMatchers.pathContains("user/login"))
                 .thenReturnFile(200, "json/login.json");
         //register
-        RESTMockServer.whenGET(RequestMatchers.pathContains("user/register"))
+        RESTMockServer.whenPOST(RequestMatchers.pathContains("user/register"))
                 .thenReturnFile(200, "json/register.json");
         //返回Mock的Url
         return RESTMockServer.getUrl();

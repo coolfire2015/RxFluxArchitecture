@@ -76,8 +76,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名配置
             signingConfig signingConfigs.release
-            //声明主 DEX 文件中需要的类
-            //multiDexKeepProguard file('multidex-config.pro')
         }
     }
     //数据绑定
