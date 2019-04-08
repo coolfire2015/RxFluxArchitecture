@@ -1,11 +1,11 @@
 package com.huyingbao.module.wan.ui.login.view;
 
 import com.huyingbao.module.wan.R;
+import com.huyingbao.test.CustomFragmentScenario;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.fragment.app.testing.FragmentScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -19,10 +19,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 public class LoginFragmentTest {
+    //    @Rule
+//    public FragmentScenarioRule<?, LoginFragment> fragmentTestRule = new FragmentTestRule<>(FragmentActivity.class, LoginFragment.class);
+//    @Rule
+//    public FragmentScenarioRule<LoginFragment> mActivityRule = new FragmentScenarioRule(null, null, LoginFragment.class);
 
     @Test
     public void login() {
-        FragmentScenario<LoginFragment> launch = FragmentScenario.launchInContainer(LoginFragment.class,
+        CustomFragmentScenario<LoginFragment> launch = CustomFragmentScenario.launchInContainer(LoginFragment.class,
                 null,
                 R.style.AppTheme,
                 null);

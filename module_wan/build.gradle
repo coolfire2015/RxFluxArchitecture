@@ -52,7 +52,7 @@ android {
             //显示分支名字
             buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //单元测试mockUrl
-            buildConfigField "boolean", "MOCK_URL", ''+ isUseMockUrl.toBoolean() + ''
+            buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -163,10 +163,13 @@ dependencies {
 
     //仪器测试
     androidTestImplementation project(':test_espresso')
+    debugImplementation "com.21buttons:fragment-test-rule:${TEST_FRAGMENT_TEST_RULE}"
+
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     androidTestAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     androidTestAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     androidTestAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     androidTestAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+
 }

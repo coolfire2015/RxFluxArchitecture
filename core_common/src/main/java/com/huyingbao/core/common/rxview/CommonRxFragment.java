@@ -43,7 +43,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
             return mStore;
         }
         Type genericSuperclass = getClass().getGenericSuperclass();
-        if (!(genericSuperclass instanceof ParameterizedType) || mViewModelFactory == null) {
+        if (!(genericSuperclass instanceof ParameterizedType)) {
             return null;
         }
         Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];

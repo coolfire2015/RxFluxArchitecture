@@ -1,23 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.huyingbao.test.unit">
-
-    <uses-sdk tools:overrideLibrary="androidx.test.core" />
-
-    <uses-permission android:name="android.permission.REORDER_TASKS" />
-
-    <application>
-        <activity
-            android:name="androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity"
-            android:exported="true"
-            android:multiprocess="true"
-            android:taskAffinity=""
-            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-    </application>
-
-</manifest>
+<manifest package="com.huyingbao.test.unit" />
