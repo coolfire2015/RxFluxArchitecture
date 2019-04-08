@@ -57,6 +57,10 @@ public class LoginActionCreatorTest {
         verify(mRxDispatcher).postRxAction(Mockito.any());
     }
 
+    /**
+     * 全部测试运行时,忽略该测试
+     * 需要单独测试
+     */
     @Test
     @Ignore
     public void getIdentify() {
