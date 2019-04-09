@@ -26,7 +26,7 @@ abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxA
      * 1:没有数据,返回未知异常
      * 2:有数据,返回code不是成功码,返回自定义异常
      */
-    private fun <T> verifyResponse(): Function<T, Observable<T>> {
+    public fun <T> verifyResponse(): Function<T, Observable<T>> {
         return Function { response ->
             if (response !is WanResponse<*>)
                 return@Function Observable.error<T>(CommonHttpException(600, "未知异常！"))

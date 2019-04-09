@@ -4,6 +4,8 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.module.wan.action.WanActionCreator
 import com.huyingbao.module.wan.action.WanApi
+import com.huyingbao.module.wan.ui.article.action.ArticleAction.Companion.GET_ARTICLE_LIST
+import com.huyingbao.module.wan.ui.article.action.ArticleAction.Companion.GET_BANNER_LIST
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

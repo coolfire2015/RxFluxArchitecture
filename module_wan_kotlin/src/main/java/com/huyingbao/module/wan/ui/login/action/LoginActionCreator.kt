@@ -5,6 +5,11 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.module.wan.action.WanActionCreator
 import com.huyingbao.module.wan.action.WanApi
+import com.huyingbao.module.wan.ui.login.action.LoginAction.Companion.GET_IDENTIFY
+import com.huyingbao.module.wan.ui.login.action.LoginAction.Companion.LOGIN
+import com.huyingbao.module.wan.ui.login.action.LoginAction.Companion.REGISTER
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
