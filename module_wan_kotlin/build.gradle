@@ -47,6 +47,10 @@ android {
     buildTypes {
         //自定义buildType.name
         debug {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+            //单元测试mockUrl
+            buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -55,9 +59,13 @@ android {
             proguardFile 'proguard-rules.pro'
             //签名配置
             signingConfig signingConfigs.debug
+            //声明主 DEX 文件中需要的类
+            //multiDexKeepProguard file('multidex-config.pro')
         }
         //自定义buildType.name
         release {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -82,7 +90,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //单元测试
+    //单元测试,robolectric支持
     testOptions {
         unitTests {
             includeAndroidResources = true

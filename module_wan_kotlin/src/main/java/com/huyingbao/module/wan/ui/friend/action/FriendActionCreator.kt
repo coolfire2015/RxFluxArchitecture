@@ -8,8 +8,7 @@ import com.huyingbao.module.wan.action.WanApi
 import javax.inject.Inject
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 class FriendActionCreator @Inject

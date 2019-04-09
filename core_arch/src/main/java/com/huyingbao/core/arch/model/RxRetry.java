@@ -4,8 +4,7 @@ import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public class RxRetry<T> extends RxEvent {
     private final Throwable mThrowable;

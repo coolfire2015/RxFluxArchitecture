@@ -8,9 +8,8 @@ import dagger.android.support.DaggerApplication;
 
 /**
  * 主Application
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public class SimpleApplication extends CommonApp {
     @Override

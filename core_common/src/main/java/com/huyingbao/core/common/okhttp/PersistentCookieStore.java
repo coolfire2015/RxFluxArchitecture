@@ -23,9 +23,8 @@ import okhttp3.HttpUrl;
 
 /**
  * 缓存cookies
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class PersistentCookieStore {

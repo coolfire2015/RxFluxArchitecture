@@ -4,8 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public class CommonUtils {
 

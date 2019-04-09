@@ -15,9 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
  * 提供ViewModel缓存的实例
  * 通过Dagger2将Map直接注入，
  * 通过Key直接获取到对应的ViewModel
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 
 @Singleton

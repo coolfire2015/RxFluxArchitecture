@@ -12,8 +12,7 @@ import javax.inject.Singleton
 
 /**
  * rxAction创建发送管理类
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 class ArticleActionCreator @Inject

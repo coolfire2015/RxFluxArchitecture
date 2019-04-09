@@ -7,9 +7,8 @@ import androidx.annotation.Nullable;
 
 /**
  * 自定义HttpException
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public class CommonHttpException extends IOException {
     private final int mCode;

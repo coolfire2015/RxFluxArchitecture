@@ -21,9 +21,8 @@ import io.reactivex.Observable;
 
 /**
  * rxAction创建发送管理类
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class ArticleActionCreator extends WanActionCreator implements ArticleAction {

@@ -13,9 +13,8 @@ import io.reactivex.functions.Function;
 /**
  * 模块自定义的ActionCreator
  * 对所有的接口添加返回结果检查
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class WanActionCreator extends RxActionCreator {
 

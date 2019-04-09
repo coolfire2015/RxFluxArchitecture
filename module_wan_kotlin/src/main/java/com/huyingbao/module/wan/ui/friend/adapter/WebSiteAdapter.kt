@@ -6,8 +6,7 @@ import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.model.WebSite
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 class WebSiteAdapter(data: List<WebSite>?) : BaseQuickAdapter<WebSite, BaseViewHolder>(R.layout.wan_recycle_item, data) {
 

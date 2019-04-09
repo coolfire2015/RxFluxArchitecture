@@ -13,9 +13,8 @@ import javax.inject.Inject;
 
 /**
  * rxAction创建发送管理类
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class RandomActionCreator extends RxActionCreator implements RandomAction {

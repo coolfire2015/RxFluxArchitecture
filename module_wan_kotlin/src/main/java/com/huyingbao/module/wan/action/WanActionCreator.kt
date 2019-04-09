@@ -13,8 +13,7 @@ import java.util.concurrent.TimeUnit
 /**
  * 模块自定义的ActionCreator
  * 对所有的接口添加返回结果检查
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager) {
 

@@ -47,17 +47,16 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
  * works with arbitrary fragments and works consistently across different versions of the Android
  * framework.
  * <p>
- * FragmentScenario only supports {@link Fragment}. If you are using a
- * deprecated fragment class such as {@code android.support.v4.app.Fragment} or
- * {@link android.app.Fragment}, please update your code to {@link Fragment}.
+ * FragmentScenario only supports {@link Fragment}.
  *
+ * @param <A> The Activity class hold fragment
  * @param <F> The Fragment class being tested
  * @see ActivityScenario a scenario API for Activity
+ * Created by liujunfeng on 2019/4/3.
  */
 public final class FragmentScenario<A extends FragmentActivity, F extends Fragment> {
 
     private static final String FRAGMENT_TAG = "FragmentScenario_Fragment_Tag";
-    @SuppressWarnings("WeakerAccess") /* synthetic access */
     final Class<A> mActivityClass;
     final Class<F> mFragmentClass;
     private final ActivityScenario<A> mActivityScenario;

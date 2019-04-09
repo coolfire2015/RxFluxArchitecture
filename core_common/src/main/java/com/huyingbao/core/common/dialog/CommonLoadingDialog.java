@@ -26,9 +26,8 @@ import butterknife.OnClick;
 
 /**
  * 进度提示
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class CommonLoadingDialog extends CommonDialogFragment implements DialogInterface.OnShowListener {

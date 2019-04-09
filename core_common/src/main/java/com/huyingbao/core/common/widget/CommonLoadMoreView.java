@@ -4,8 +4,7 @@ import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.huyingbao.core.common.R;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public class CommonLoadMoreView extends LoadMoreView {
 

@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 
 /**
  * 为纯Java单元测试提供AndroidSdk中的工具方法
+ * Created by liujunfeng on 2019/4/3.
  */
 public class TextUtils {
     /**

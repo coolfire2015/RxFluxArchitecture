@@ -13,9 +13,8 @@ import androidx.lifecycle.ViewModel;
  * 所有该接口的实现类，
  * 交由 {@link com.huyingbao.core.arch.dispatcher.RxDispatcher}
  * 来注册订阅，取消订阅管理。
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface RxFluxView<T extends ViewModel> {
     /**

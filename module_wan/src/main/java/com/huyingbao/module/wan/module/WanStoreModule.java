@@ -1,8 +1,7 @@
 package com.huyingbao.module.wan.module;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 
 import com.huyingbao.core.arch.store.RxStoreKey;

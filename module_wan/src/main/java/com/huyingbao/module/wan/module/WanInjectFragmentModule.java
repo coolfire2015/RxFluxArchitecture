@@ -11,11 +11,10 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module
-public abstract class WanInjectorFragmentModule {
+public abstract class WanInjectFragmentModule {
     @FragmentScope
     @ContributesAndroidInjector
     abstract ArticleListFragment injectArticleListFragment();

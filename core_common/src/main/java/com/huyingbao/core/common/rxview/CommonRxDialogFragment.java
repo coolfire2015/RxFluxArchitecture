@@ -26,8 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonRxDialogFragment<T extends ViewModel> extends CommonDialogFragment implements RxFluxView {
     @Inject

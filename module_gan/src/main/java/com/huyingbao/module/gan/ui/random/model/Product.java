@@ -1,8 +1,7 @@
 package com.huyingbao.module.gan.ui.random.model;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public class Product {
     /**

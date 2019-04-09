@@ -11,8 +11,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module
 abstract class WanFragmentModule {

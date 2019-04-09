@@ -8,16 +8,15 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Module
-public abstract class WanInjectorActivityModule {
+public abstract class WanInjectActivityModule {
     @ActivityScope
-    @ContributesAndroidInjector(modules = WanInjectorFragmentModule.class)
+    @ContributesAndroidInjector(modules = WanInjectFragmentModule.class)
     abstract ArticleActivity injectArticleActivity();
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = WanInjectorFragmentModule.class)
+    @ContributesAndroidInjector(modules = WanInjectFragmentModule.class)
     abstract LoginActivity injectLoginActivity();
 }

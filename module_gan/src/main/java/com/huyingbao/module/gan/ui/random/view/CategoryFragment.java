@@ -27,9 +27,8 @@ import butterknife.BindView;
 
 /**
  * 内容类型列表展示页面
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class CategoryFragment extends CommonRxFragment<RandomStore> {

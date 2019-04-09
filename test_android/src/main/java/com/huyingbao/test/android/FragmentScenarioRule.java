@@ -14,6 +14,12 @@ import androidx.test.core.app.ActivityScenario;
 
 import static androidx.test.internal.util.Checks.checkNotNull;
 
+/**
+ * @param <A> 容纳Fragment的Activity
+ * @param <F> 需要测试的Fragment
+ * @see androidx.test.ext.junit.rules.ActivityScenarioRule
+ * Created by liujunfeng on 2019/4/3.
+ */
 public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fragment> extends ExternalResource {
     /**
      * Same as {@link java.util.function.Supplier} which requires API level 24.

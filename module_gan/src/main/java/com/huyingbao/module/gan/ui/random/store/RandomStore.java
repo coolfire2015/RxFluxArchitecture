@@ -10,6 +10,7 @@ import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.model.Product;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -28,9 +29,8 @@ import androidx.lifecycle.MutableLiveData;
  * ViewModel对象在获取ViewModel时被限定为传递给ViewModelProvider的生命周期。
  * ViewModel保留在内存中，直到Activity销毁或Fragment分离之前。
  * <p>
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class RandomStore extends RxActivityStore {

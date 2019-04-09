@@ -42,8 +42,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonRxActivity<T extends RxActivityStore> extends CommonActivity implements RxFluxView, HasSupportFragmentInjector {
     @Inject

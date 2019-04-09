@@ -23,8 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
 public class BannerFragment extends CommonRxFragment<ArticleStore> {

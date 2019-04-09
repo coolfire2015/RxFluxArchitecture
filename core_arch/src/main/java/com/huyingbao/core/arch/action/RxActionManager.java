@@ -14,9 +14,8 @@ import io.reactivex.disposables.Disposable;
  * 订阅管理类
  * 将rxAction与disposable连接起来，
  * action的tag作为key
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class RxActionManager {

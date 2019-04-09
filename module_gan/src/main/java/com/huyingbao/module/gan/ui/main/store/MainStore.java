@@ -7,13 +7,13 @@ import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class MainStore extends RxActivityStore {

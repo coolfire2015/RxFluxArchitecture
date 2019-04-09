@@ -1,8 +1,7 @@
-package com.huyingbao.module.wan.module;
+package com.huyingbao.module.gan.module;
 
 import com.google.gson.GsonBuilder;
-import com.huyingbao.module.wan.action.WanApi;
-import com.huyingbao.module.wan.action.WanContants;
+import com.huyingbao.module.gan.action.GanApi;
 
 import javax.inject.Singleton;
 
@@ -14,19 +13,21 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * Module其实是一个简单工厂模式，Module里面的方法基本都是创建类实例的方法。
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-@Module(includes = {WanInjectActivityModule.class, WanStoreModule.class})
-public class WanAppModule {
+@Module(includes = {GanInjectActivityModule.class, GanStoreModule.class})
+public class GanAppModule {
     @Singleton
     @Provides
-    WanApi provideMainApi(OkHttpClient client) {
+    GanApi provideMainApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(WanContants.BASE_URL)
+                .baseUrl("https://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(WanApi.class);
+        return retrofit.create(GanApi.class);
     }
 }

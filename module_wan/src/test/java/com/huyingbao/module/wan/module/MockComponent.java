@@ -8,9 +8,8 @@ import dagger.Component;
 
 /**
  * mock注入器,为测试代码提供,方便测试的全局对象
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 @Component(modules = {MockModule.class})

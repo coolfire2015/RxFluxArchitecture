@@ -20,9 +20,8 @@ import androidx.multidex.MultiDex;
  * HasSupportFragmentInjector、
  * HasServiceInjector、
  * HasBroadcastReceiverInjector
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonApp extends RxFluxApp {
     /**

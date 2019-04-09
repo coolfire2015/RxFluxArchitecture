@@ -19,8 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonFragment extends Fragment implements CommonView {
     private Unbinder mUnbinder;

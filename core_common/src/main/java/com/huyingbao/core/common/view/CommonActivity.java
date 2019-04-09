@@ -15,9 +15,8 @@ import butterknife.ButterKnife;
 
 /**
  * 带有toolbar的Activity父类
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public abstract class CommonActivity extends AppCompatActivity implements CommonView {
     static {//Vector使用

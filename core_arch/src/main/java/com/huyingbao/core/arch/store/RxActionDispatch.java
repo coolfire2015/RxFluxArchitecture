@@ -7,9 +7,8 @@ import androidx.lifecycle.LifecycleObserver;
 /**
  * This interface must be implemented by the store
  * 所有的store必须实现该接口
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface RxActionDispatch extends LifecycleObserver {
 

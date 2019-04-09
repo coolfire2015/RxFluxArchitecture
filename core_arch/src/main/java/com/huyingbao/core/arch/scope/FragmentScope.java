@@ -8,9 +8,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * FragmentScope创建出来的单例保留在FragmentComponent实例中
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Scope
 @Retention(RUNTIME)

@@ -15,9 +15,8 @@ import io.reactivex.plugins.RxJavaPlugins;
 
 /**
  * 切换RxJava异步为同步,立即执行
- *
- * @author liujunfeng
- * @date 2019/1/1
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 public class RxJavaRule implements TestRule {
     private Scheduler mImmediate = new Scheduler() {

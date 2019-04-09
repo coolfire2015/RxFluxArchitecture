@@ -12,8 +12,7 @@ import dagger.Binds;
 import dagger.Module;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 
 @Module

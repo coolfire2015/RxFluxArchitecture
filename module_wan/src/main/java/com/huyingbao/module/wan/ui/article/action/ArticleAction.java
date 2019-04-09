@@ -1,8 +1,7 @@
 package com.huyingbao.module.wan.ui.article.action;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public interface ArticleAction {
     String TO_BANNER = "to_banner";

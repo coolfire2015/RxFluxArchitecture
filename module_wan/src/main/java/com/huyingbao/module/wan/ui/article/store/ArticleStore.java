@@ -22,8 +22,7 @@ import javax.inject.Singleton;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class ArticleStore extends RxActivityStore {

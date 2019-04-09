@@ -20,8 +20,7 @@ import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 public class MainActivity extends CommonRxActivity<MainStore> {
     @Inject

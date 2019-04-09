@@ -16,8 +16,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * @author liujunfeng
- * @date 2019/1/1
+ * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 class ArticleStore @Inject
