@@ -20,7 +20,7 @@ public class LoginActivityTest {
     public ActivityScenarioRule<LoginActivity> mActivityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
     @Test
-    public void onRxChanged() {
+    public void testOnRxChanged() {
         mActivityRule.getScenario().moveToState(Lifecycle.State.CREATED);
         mActivityRule.getScenario().onActivity(activity -> Assert.assertNotNull(activity.mLoginFragmentLazy));
     }

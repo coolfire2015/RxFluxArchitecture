@@ -41,7 +41,7 @@ public class ArticleActionCreatorTest {
     }
 
     @Test
-    public void getArticleList() {
+    public void testGetArticleList() {
         mArticleAction.getArticleList(1);
         //调用方法成功,发送一次RxAction
         verify(mRxDispatcher).postRxAction(any());
@@ -50,7 +50,7 @@ public class ArticleActionCreatorTest {
     }
 
     @Test
-    public void getBannerList() {
+    public void testGetBannerList() {
         mArticleAction.getBannerList();
         //调用方法成功,发送一次RxAction
         verify(mRxDispatcher).postRxAction(any());

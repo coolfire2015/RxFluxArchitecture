@@ -271,6 +271,7 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
                 ActivityScenario.launch(startActivityIntent));
         scenario.mActivityScenario.onActivity(activity -> {
             FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
+            //设置FragmentFactory
             if (factory != null) {
                 ViewModelProvider viewModelProvider = new ViewModelProvider(
                         activity,
@@ -280,15 +281,24 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
                         .setFragmentFactory(factory);
                 supportFragmentManager.setFragmentFactory(factory);
             }
+            //根据Fragment类名实例化对应的Fragment
             ClassLoader classLoader = Preconditions.checkNotNull(fragmentClass.getClassLoader());
             Fragment fragment = supportFragmentManager.getFragmentFactory()
                     .instantiate(classLoader, fragmentClass.getName());
+            //给Fragment设置Arguments
             fragment.setArguments(fragmentArgs);
             Fragment fragmentByTag = supportFragmentManager.findFragmentByTag(fragmentClass.getSimpleName());
             if (fragmentByTag == null) {
+                //Fragment类名为tag,不存在需要测试的Fragment
                 supportFragmentManager
                         .beginTransaction()
                         .add(containerViewId, fragment, FRAGMENT_TAG)
+                        .commitNow();
+            } else {
+                //Fragment类名为tag,存在需要测试的Fragment,替换旧的Fragment
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(containerViewId, fragment, FRAGMENT_TAG)
                         .commitNow();
             }
         });

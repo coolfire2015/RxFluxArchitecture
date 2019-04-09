@@ -46,13 +46,13 @@ public class LoginActionCreatorTest {
     }
 
     @Test
-    public void register() {
+    public void testRegister() {
         mLoginActionCreator.register("coolfire", "123456", "123456");
         verify(mRxDispatcher).postRxError(Mockito.any());
     }
 
     @Test
-    public void login() {
+    public void testLogin() {
         mLoginActionCreator.login("coolfire", "123456");
         verify(mRxDispatcher).postRxAction(Mockito.any());
     }
@@ -63,7 +63,7 @@ public class LoginActionCreatorTest {
      */
     @Test
     @Ignore
-    public void getIdentify() {
+    public void testGetIdentify() {
         //设置新的调度器
         mRxJavaRule.setImmediate(new TestScheduler());
         //调用待测试方法
