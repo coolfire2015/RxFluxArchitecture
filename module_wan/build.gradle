@@ -141,8 +141,14 @@ dependencies {
     //通用依赖模块
     if (isUseMaven.toBoolean()) {
         api "com.github.coolfire2015.RxFluxArchitecture:core_common:${RX_FLUX_ARCHITECTURE}"
+        testImplementation "com.github.coolfire2015.RxFluxArchitecture:test_junit:${RX_FLUX_ARCHITECTURE}"
+        debugImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
+        androidTestImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
     } else {
         api project(':core_common')
+        testImplementation project(':test_junit')
+        debugImplementation project(':test_android')
+        androidTestImplementation project(':test_android')
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
@@ -152,11 +158,7 @@ dependencies {
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
-    //必须设置
-    debugImplementation project(':test_android')
-
-    //仪器测试
-    androidTestImplementation project(':test_android')
+    //编译时生成,仪器测试
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     androidTestAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
@@ -164,8 +166,7 @@ dependencies {
     androidTestAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     androidTestAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
-    //单元测试
-    testImplementation project(':test_junit')
+    //编译时生成,单元测试
     testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"

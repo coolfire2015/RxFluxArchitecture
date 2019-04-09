@@ -120,8 +120,8 @@ dependencies {
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_gan:${RX_FLUX_ARCHITECTURE}"
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_wan:${RX_FLUX_ARCHITECTURE}"
         } else {
-//            implementation project(':module_gan')
-//            implementation project(':module_wan')
+            implementation project(':module_gan')
+            implementation project(':module_wan')
 //            implementation project(':module_wan_kotlin')
         }
     }
