@@ -11,8 +11,8 @@
             <option value="$PROJECT_DIR$/core_arch" />
             <option value="$PROJECT_DIR$/core_common" />
             <option value="$PROJECT_DIR$/module_wan" />
-            <option value="$PROJECT_DIR$/test_espresso" />
-            <option value="$PROJECT_DIR$/test_unit" />
+            <option value="$PROJECT_DIR$/test_android" />
+            <option value="$PROJECT_DIR$/test_junit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -18,6 +18,9 @@ package android.text;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 为纯Java单元测试提供AndroidSdk中的工具方法
+ */
 public class TextUtils {
     /**
      * Returns true if a and b are equal, including if they are both null.

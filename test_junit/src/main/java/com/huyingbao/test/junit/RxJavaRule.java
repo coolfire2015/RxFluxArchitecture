@@ -1,4 +1,4 @@
-package com.huyingbao.test.unit;
+package com.huyingbao.test.junit;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -36,6 +36,11 @@ public class RxJavaRule implements TestRule {
         return mImmediate;
     }
 
+    /**
+     * 可以设置自定义或者其他调度器,eg:{@link io.reactivex.schedulers.TestScheduler}
+     *
+     * @param immediate
+     */
     public void setImmediate(Scheduler immediate) {
         mImmediate = immediate;
     }

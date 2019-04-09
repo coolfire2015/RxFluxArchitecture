@@ -50,5 +50,4 @@ dependencies {
     api "androidx.test.ext:junit:${TEST_X_JUNIT}"
     api "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
     api "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
-    api "com.21buttons:fragment-test-rule:${TEST_FRAGMENT_TEST_RULE}"
 }

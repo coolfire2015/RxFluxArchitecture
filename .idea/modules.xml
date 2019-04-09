@@ -6,8 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/core_arch/core_arch.iml" filepath="$PROJECT_DIR$/core_arch/core_arch.iml" />
       <module fileurl="file://$PROJECT_DIR$/core_common/core_common.iml" filepath="$PROJECT_DIR$/core_common/core_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_wan/module_wan.iml" filepath="$PROJECT_DIR$/module_wan/module_wan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test_espresso/test_espresso.iml" filepath="$PROJECT_DIR$/test_espresso/test_espresso.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test_unit/test_unit.iml" filepath="$PROJECT_DIR$/test_unit/test_unit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_android/test_android.iml" filepath="$PROJECT_DIR$/test_android/test_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_junit/test_junit.iml" filepath="$PROJECT_DIR$/test_junit/test_junit.iml" />
     </modules>
   </component>
 </project>

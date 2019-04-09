@@ -153,7 +153,7 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
     //单元测试
-    testImplementation project(':test_unit')
+    testImplementation project(':test_junit')
     testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
@@ -162,9 +162,7 @@ dependencies {
     testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
     //仪器测试
-    androidTestImplementation project(':test_espresso')
-    debugImplementation "com.21buttons:fragment-test-rule:${TEST_FRAGMENT_TEST_RULE}"
-
+    androidTestImplementation project(':test_android')
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     androidTestAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"

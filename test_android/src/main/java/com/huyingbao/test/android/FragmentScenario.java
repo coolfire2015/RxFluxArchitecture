@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.huyingbao.test;
+package com.huyingbao.test.android;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
@@ -30,6 +30,7 @@ import androidx.core.util.Preconditions;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentFactory;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.testing.R;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.ViewModel;
@@ -46,14 +47,14 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
  * works with arbitrary fragments and works consistently across different versions of the Android
  * framework.
  * <p>
- * FragmentScenario only supports {@link androidx.fragment.app.Fragment}. If you are using a
+ * FragmentScenario only supports {@link Fragment}. If you are using a
  * deprecated fragment class such as {@code android.support.v4.app.Fragment} or
- * {@link android.app.Fragment}, please update your code to {@link androidx.fragment.app.Fragment}.
+ * {@link android.app.Fragment}, please update your code to {@link Fragment}.
  *
  * @param <F> The Fragment class being tested
  * @see ActivityScenario a scenario API for Activity
  */
-public final class CustomFragmentScenario<A extends FragmentActivity, F extends Fragment> {
+public final class FragmentScenario<A extends FragmentActivity, F extends Fragment> {
 
     private static final String FRAGMENT_TAG = "FragmentScenario_Fragment_Tag";
     @SuppressWarnings("WeakerAccess") /* synthetic access */
@@ -62,43 +63,6 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
     private final ActivityScenario<A> mActivityScenario;
     @Nullable
     private final FragmentFactory mFragmentFactory;
-
-    /**
-     * An empty activity inheriting FragmentActivity. This Activity is used to host Fragment in
-     * FragmentScenario.
-     *
-     * @hide
-     */
-    @RestrictTo(LIBRARY)
-    public static class EmptyFragmentActivity extends FragmentActivity {
-
-        @NonNull
-        public static final String THEME_EXTRAS_BUNDLE_KEY =
-                "androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity"
-                        + ".THEME_EXTRAS_BUNDLE_KEY";
-
-        @Override
-        @SuppressLint("RestrictedApi")
-        protected void onCreate(@Nullable Bundle savedInstanceState) {
-            setTheme(getIntent().getIntExtra(THEME_EXTRAS_BUNDLE_KEY,
-                    R.style.FragmentScenarioEmptyFragmentActivityTheme));
-
-            // Checks if we have a custom FragmentFactory and set it.
-            ViewModelProvider viewModelProvider = new ViewModelProvider(
-                    this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()));
-            FragmentFactory factory = viewModelProvider
-                    .get(FragmentFactoryHolderViewModel.class)
-                    .getFragmentFactory();
-            if (factory != null) {
-                getSupportFragmentManager().setFragmentFactory(factory);
-            }
-
-            // FragmentFactory needs to be set before calling the super.onCreate, otherwise the
-            // Activity crashes when it is recreating and there is a fragment which has no
-            // default constructor.
-            super.onCreate(savedInstanceState);
-        }
-    }
 
     /**
      * A view-model to hold a fragment factory.
@@ -127,7 +91,7 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
         }
     }
 
-    private CustomFragmentScenario(
+    private FragmentScenario(
             @NonNull Class<A> activityClass,
             @NonNull Class<F> fragmentClass,
             @Nullable FragmentFactory fragmentFactory,
@@ -145,9 +109,11 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param fragmentClass a fragment class to instantiate
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launch(
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launch(
+            @NonNull Class<A> activityClass,
             @NonNull Class<F> fragmentClass) {
-        return launch(fragmentClass, /*fragmentArgs=*/ null);
+        return launch(activityClass, fragmentClass,
+                /*fragmentArgs=*/ null);
     }
 
     /**
@@ -160,9 +126,12 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param fragmentArgs  a bundle to passed into fragment
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launch(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs) {
-        return launch(fragmentClass, fragmentArgs, /*factory=*/null);
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launch(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs) {
+        return launch(activityClass, fragmentClass, fragmentArgs,
+                /*factory=*/null);
     }
 
     /**
@@ -176,10 +145,12 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param factory       a fragment factory to use or null to use default factory
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launch(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs,
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launch(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs,
             @Nullable FragmentFactory factory) {
-        return launch(fragmentClass, fragmentArgs,
+        return launch(activityClass, fragmentClass, fragmentArgs,
                 R.style.FragmentScenarioEmptyFragmentActivityTheme, factory);
     }
 
@@ -196,10 +167,13 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param factory       a fragment factory to use or null to use default factory
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launch(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs,
-            @StyleRes int themeResId, @Nullable FragmentFactory factory) {
-        return internalLaunch(fragmentClass, fragmentArgs, themeResId, factory,
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launch(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs,
+            @StyleRes int themeResId,
+            @Nullable FragmentFactory factory) {
+        return internalLaunch(activityClass, fragmentClass, fragmentArgs, themeResId, factory,
                 /*containerViewId=*/ 0);
     }
 
@@ -212,9 +186,11 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param fragmentClass a fragment class to instantiate
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launchInContainer(
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launchInContainer(
+            @NonNull Class<A> activityClass,
             @NonNull Class<F> fragmentClass) {
-        return launchInContainer(fragmentClass, /*fragmentArgs=*/ null);
+        return launchInContainer(activityClass, fragmentClass,
+                /*fragmentArgs=*/ null);
     }
 
     /**
@@ -228,9 +204,12 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param fragmentArgs  a bundle to passed into fragment
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launchInContainer(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs) {
-        return launchInContainer(fragmentClass, fragmentArgs, /*factory=*/null);
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launchInContainer(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs) {
+        return launchInContainer(activityClass, fragmentClass, fragmentArgs,
+                /*factory=*/null);
     }
 
     /**
@@ -245,10 +224,12 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param factory       a fragment factory to use or null to use default factory
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launchInContainer(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs,
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launchInContainer(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs,
             @Nullable FragmentFactory factory) {
-        return launchInContainer(fragmentClass, fragmentArgs,
+        return launchInContainer(activityClass, fragmentClass, fragmentArgs,
                 R.style.FragmentScenarioEmptyFragmentActivityTheme, factory);
     }
 
@@ -265,47 +246,48 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * @param factory       a fragment factory to use or null to use default factory
      */
     @NonNull
-    public static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> launchInContainer(
-            @NonNull Class<F> fragmentClass, @Nullable Bundle fragmentArgs,
-            @StyleRes int themeResId, @Nullable FragmentFactory factory) {
-        return internalLaunch(
-                fragmentClass, fragmentArgs, themeResId, factory, android.R.id.content);
+    public static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> launchInContainer(
+            @NonNull Class<A> activityClass,
+            @NonNull Class<F> fragmentClass,
+            @Nullable Bundle fragmentArgs,
+            @StyleRes int themeResId,
+            @Nullable FragmentFactory factory) {
+        return internalLaunch(activityClass, fragmentClass, fragmentArgs, themeResId, factory, android.R.id.content);
     }
 
     @NonNull
     @SuppressLint("RestrictedApi")
-    private static <A extends FragmentActivity, F extends Fragment> CustomFragmentScenario<A, F> internalLaunch(
+    private static <A extends FragmentActivity, F extends Fragment> FragmentScenario<A, F> internalLaunch(
             @NonNull final Class<A> activityClass,
-            @NonNull final Class<F> fragmentClass, final @Nullable Bundle fragmentArgs,
-            @StyleRes int themeResId, @Nullable final FragmentFactory factory,
+            @NonNull final Class<F> fragmentClass,
+            final @Nullable Bundle fragmentArgs,
+            @StyleRes int themeResId,
+            @Nullable final FragmentFactory factory,
             @IdRes final int containerViewId) {
-        Intent startActivityIntent =
-                Intent.makeMainActivity(
-                        new ComponentName(getApplicationContext(),
-                                EmptyFragmentActivity.class))
-                        .putExtra(EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY, themeResId);
-        CustomFragmentScenario<A, F> scenario = new CustomFragmentScenario<>(
-                activityClass, fragmentClass, factory,
-                ActivityScenario.<EmptyFragmentActivity>launch(startActivityIntent));
-        scenario.mActivityScenario.onActivity(new ActivityScenario.ActivityAction<A>() {
-            @Override
-            public void perform(A activity) {
-                if (factory != null) {
-                    ViewModelProvider viewModelProvider = new ViewModelProvider(
-                            activity,
-                            ViewModelProvider.AndroidViewModelFactory.getInstance(
-                                    activity.getApplication()));
-                    viewModelProvider
-                            .get(FragmentFactoryHolderViewModel.class)
-                            .setFragmentFactory(factory);
-                    activity.getSupportFragmentManager().setFragmentFactory(factory);
-                }
-                Fragment fragment = activity.getSupportFragmentManager()
-                        .getFragmentFactory().instantiate(
-                                Preconditions.checkNotNull(fragmentClass.getClassLoader()),
-                                fragmentClass.getName());
-                fragment.setArguments(fragmentArgs);
-                activity.getSupportFragmentManager()
+        Intent startActivityIntent = Intent.makeMainActivity(new ComponentName(getApplicationContext(), activityClass));
+        FragmentScenario<A, F> scenario = new FragmentScenario<>(
+                activityClass,
+                fragmentClass,
+                factory,
+                ActivityScenario.launch(startActivityIntent));
+        scenario.mActivityScenario.onActivity(activity -> {
+            FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
+            if (factory != null) {
+                ViewModelProvider viewModelProvider = new ViewModelProvider(
+                        activity,
+                        ViewModelProvider.AndroidViewModelFactory.getInstance(activity.getApplication()));
+                viewModelProvider
+                        .get(FragmentFactoryHolderViewModel.class)
+                        .setFragmentFactory(factory);
+                supportFragmentManager.setFragmentFactory(factory);
+            }
+            ClassLoader classLoader = Preconditions.checkNotNull(fragmentClass.getClassLoader());
+            Fragment fragment = supportFragmentManager.getFragmentFactory()
+                    .instantiate(classLoader, fragmentClass.getName());
+            fragment.setArguments(fragmentArgs);
+            Fragment fragmentByTag = supportFragmentManager.findFragmentByTag(fragmentClass.getSimpleName());
+            if (fragmentByTag == null) {
+                supportFragmentManager
                         .beginTransaction()
                         .add(containerViewId, fragment, FRAGMENT_TAG)
                         .commitNow();
@@ -327,36 +309,25 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * This method cannot be called from the main thread.
      */
     @NonNull
-    public CustomFragmentScenario<F> moveToState(@NonNull State newState) {
+    public FragmentScenario<A, F> moveToState(@NonNull State newState) {
         if (newState == State.DESTROYED) {
             mActivityScenario.onActivity(
-                    new ActivityScenario.ActivityAction<EmptyFragmentActivity>() {
-                        @Override
-                        public void perform(EmptyFragmentActivity activity) {
-                            Fragment fragment =
-                                    activity.getSupportFragmentManager().findFragmentByTag(
-                                            FRAGMENT_TAG);
-                            // Null means the fragment has been destroyed already.
-                            if (fragment != null) {
-                                activity
-                                        .getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .remove(fragment)
-                                        .commitNowAllowingStateLoss();
-                            }
+                    activity -> {
+                        Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+                        // Null means the fragment has been destroyed already.
+                        if (fragment != null) {
+                            activity
+                                    .getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .remove(fragment)
+                                    .commitNowAllowingStateLoss();
                         }
                     });
         } else {
             mActivityScenario.onActivity(
-                    new ActivityScenario.ActivityAction<EmptyFragmentActivity>() {
-                        @Override
-                        public void perform(EmptyFragmentActivity activity) {
-                            Fragment fragment =
-                                    activity.getSupportFragmentManager().findFragmentByTag(
-                                            FRAGMENT_TAG);
-                            checkNotNull(fragment,
-                                    "The fragment has been removed from FragmentManager already.");
-                        }
+                    activity -> {
+                        Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+                        checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
                     });
             mActivityScenario.moveToState(newState);
         }
@@ -372,7 +343,7 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * This method cannot be called from the main thread.
      */
     @NonNull
-    public CustomFragmentScenario<F> recreate() {
+    public FragmentScenario<A, F> recreate() {
         mActivityScenario.recreate();
         return this;
     }
@@ -406,18 +377,13 @@ public final class CustomFragmentScenario<A extends FragmentActivity, F extends 
      * This method cannot be called from the main thread.
      */
     @NonNull
-    public CustomFragmentScenario<F> onFragment(@NonNull final FragmentAction<F> action) {
+    public FragmentScenario<A, F> onFragment(@NonNull final FragmentAction<F> action) {
         mActivityScenario.onActivity(
-                new ActivityScenario.ActivityAction<EmptyFragmentActivity>() {
-                    @Override
-                    public void perform(EmptyFragmentActivity activity) {
-                        Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(
-                                FRAGMENT_TAG);
-                        checkNotNull(fragment,
-                                "The fragment has been removed from FragmentManager already.");
-                        checkState(mFragmentClass.isInstance(fragment));
-                        action.perform(Preconditions.checkNotNull(mFragmentClass.cast(fragment)));
-                    }
+                activity -> {
+                    Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+                    checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
+                    checkState(mFragmentClass.isInstance(fragment));
+                    action.perform(Preconditions.checkNotNull(mFragmentClass.cast(fragment)));
                 });
         return this;
     }

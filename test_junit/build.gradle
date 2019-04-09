@@ -45,7 +45,7 @@ artifacts {
 
 dependencies {
     //内核
-    implementation project(':test_espresso')
+    implementation project(':test_android')
     //Junit
     api "junit:junit:${TEST_JUNIT}"
     //Mockito
