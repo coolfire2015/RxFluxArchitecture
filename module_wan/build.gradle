@@ -152,17 +152,10 @@ dependencies {
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
-    //单元测试
-    testImplementation project(':test_junit')
-    testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-    testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //必须设置
+    debugImplementation project(':test_android')
 
     //仪器测试
-    debugImplementation project(':test_android')//必须设置
     androidTestImplementation project(':test_android')
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
@@ -171,4 +164,12 @@ dependencies {
     androidTestAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     androidTestAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
+    //单元测试
+    testImplementation project(':test_junit')
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }
