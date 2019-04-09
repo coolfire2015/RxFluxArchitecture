@@ -13,8 +13,8 @@ import javax.inject.Singleton
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Module(includes = [WanActivityModule::class])
-class WanModule {
+@Module(includes = [WanInjectActivityModule::class, WanStoreModule::class])
+class WanAppModule {
     @Singleton
     @Provides
     internal fun provideMainApi(client: OkHttpClient): WanApi {

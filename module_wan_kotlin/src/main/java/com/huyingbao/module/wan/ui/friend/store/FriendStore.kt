@@ -8,6 +8,7 @@ import com.huyingbao.module.wan.action.WanResponse
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import com.huyingbao.module.wan.ui.friend.model.WebSite
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -34,6 +35,8 @@ internal constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher)
             FriendAction.GET_FRIEND_LIST -> {
                 isCreated = true
                 webSiteListData.setValue(rxAction.getResponse())
+            }
+            else -> {
             }
         }
     }

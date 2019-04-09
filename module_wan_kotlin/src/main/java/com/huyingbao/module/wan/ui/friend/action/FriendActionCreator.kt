@@ -17,7 +17,7 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
     lateinit var mWanApi: WanApi
 
     override fun getFriendList() {
-        val action = newRxAction(FriendAction.GET_FRIEND_LIST)
-        postHttpRetryAction(action, mWanApi.friendList)
+        val rxAction = newRxAction(FriendAction.GET_FRIEND_LIST)
+        postHttpRetryAction(rxAction, mWanApi.friendList)
     }
 }

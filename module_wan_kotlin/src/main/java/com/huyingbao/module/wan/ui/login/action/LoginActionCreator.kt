@@ -17,11 +17,24 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
     lateinit var mWanApi: WanApi
 
     override fun register(username: String, password: String, repassword: String) {
-
+        val rxAction = newRxAction(REGISTER)
+        postHttpAction(rxAction, mWanApi.register(username, password, repassword).flatMap(verifyResponse()))
     }
 
     override fun login(username: String, password: String) {
-        val action = newRxAction(LoginAction.LOGIN)
-        postHttpAction(action, mWanApi.login(username, password))
+        val rxAction = newRxAction(LOGIN)
+        postHttpAction(rxAction, mWanApi.login(username, password).flatMap(verifyResponse()))
+    }
+
+    override fun getIdentify() {
+        val rxAction = newRxAction(GET_IDENTIFY)
+        val observable = Observable
+                .interval(1, TimeUnit.SECONDS)
+                .take(10)
+                .map({ aLong -> 9 - aLong })
+        val coolfire2 = mWanApi.login("coolfire", "123456")
+                .flatMap(verifyResponse())
+                .flatMap({ userWanResponse -> observable })
+        postHttpAction(rxAction, coolfire2)
     }
 }

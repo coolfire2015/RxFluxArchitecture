@@ -4,3 +4,4 @@
 *.iml
 /.idea/workspace.xml
 /local.properties
+/module_wan2/*

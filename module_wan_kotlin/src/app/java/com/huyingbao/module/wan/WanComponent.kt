@@ -2,7 +2,7 @@ package com.huyingbao.module.wan
 
 import android.app.Application
 import com.huyingbao.core.common.module.CommonModule
-import com.huyingbao.module.wan.module.WanModule
+import com.huyingbao.module.wan.module.WanAppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,7 +14,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = [
-    WanModule::class,
+    WanAppModule::class,
     CommonModule::class,
     AndroidSupportInjectionModule::class
 ])

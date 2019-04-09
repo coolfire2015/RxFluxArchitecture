@@ -40,6 +40,8 @@ class ArticleActivity : CommonRxActivity<ArticleStore>() {
             ArticleAction.TO_BANNER -> addFragmentHideExisting(mBannerFragmentLazy.get())
             ArticleAction.TO_FRIEND -> addFragmentHideExisting(mFriendFragmentLazy.get())
             ArticleAction.TO_LOGIN -> startActivity(Intent(this, LoginActivity::class.java))
+            else -> {
+            }
         }
     }
 }

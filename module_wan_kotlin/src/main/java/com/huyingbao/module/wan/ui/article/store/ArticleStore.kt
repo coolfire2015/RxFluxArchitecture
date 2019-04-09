@@ -11,6 +11,7 @@ import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,7 +24,10 @@ class ArticleStore @Inject
 internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
     val articleLiveData = MutableLiveData<ArrayList<Article>>()
     val bannerLiveData = MutableLiveData<ArrayList<Banner>>()
-    var nextRequestPage = 1//列表页数
+    /**
+     * 列表页数
+     */
+    var nextRequestPage = 1
 
     /**
      * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。

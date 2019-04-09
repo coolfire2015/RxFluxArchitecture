@@ -21,19 +21,19 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
     lateinit var mWanApi: WanApi
 
     override fun getArticleList(page: Int) {
-        val action = newRxAction(ArticleAction.GET_ARTICLE_LIST)
+        val rxAction = newRxAction(GET_ARTICLE_LIST)
         //延迟5s调用接口，测试取消操作
-        val article = Observable.just("Article")
-                .delay(5, TimeUnit.SECONDS)
+        val httpObservable = Observable
+                .timer(5, TimeUnit.SECONDS)
                 .flatMap { s -> mWanApi.getArticleList(page) }
-        postHttpLoadingAction(action, article)
+        postHttpLoadingAction(rxAction, httpObservable)
     }
 
     override fun getBannerList() {
-        val action = newRxAction(ArticleAction.GET_BANNER_LIST)
+        val rxAction = newRxAction(GET_BANNER_LIST)
         //接口调用失败，自动重复调用5次，每次间隔3s
         val httpObservable = mWanApi.bannerList
                 .retryWhen(retryAction(5, 3))
-        postHttpAction(action, httpObservable)
+        postHttpAction(rxAction, httpObservable)
     }
 }

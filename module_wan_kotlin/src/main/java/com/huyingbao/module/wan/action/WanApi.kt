@@ -15,21 +15,52 @@ import java.util.*
 interface WanApi {
 
 
+    /**
+     * 获取友站列表
+     *
+     * @return
+     */
     @get:GET("friend/json")
     val friendList: Observable<WanResponse<ArrayList<WebSite>>>
 
+    /**
+     * 获取Banner列表
+     *
+     * @return
+     */
     @get:GET("banner/json")
     val bannerList: Observable<WanResponse<ArrayList<Banner>>>
 
+    /**
+     * 登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/login")
     fun login(@Field("username") username: String,
               @Field("password") password: String): Observable<WanResponse<User>>
 
     /**
-     * 首页文章列表
+     * 登录
      *
-     * @param page
+     * @param username   用户名
+     * @param password   密码
+     * @param repassword 确认密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    fun register(@Field("username") username: String,
+                 @Field("password") password: String,
+                 @Field("repassword") repassword: String): Observable<WanResponse<User>>
+
+    /**
+     * 获取文章列表
+     *
+     * @param page 页码
      * @return
      */
     @GET("article/list/{page}/json")
