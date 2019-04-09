@@ -7,8 +7,7 @@ import androidx.annotation.Nullable;
 
 /**
  * 自定义Exception
- * <p>
- * Created by liujunfeng on 2019/1/1.
+ * Created by liujunfeng on 2017/12/7.
  */
 public class CommonException extends IOException {
     private final int mCode;
