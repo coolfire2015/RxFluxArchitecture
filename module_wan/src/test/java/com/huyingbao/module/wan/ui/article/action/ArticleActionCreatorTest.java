@@ -33,16 +33,16 @@ public class ArticleActionCreatorTest {
     @Rule
     public MockDaggerRule mMockDaggerRule = new MockDaggerRule();
 
-    private ArticleActionCreator mArticleAction;
+    private ArticleActionCreator mActionCreator;
 
     @Before
     public void setUp() {
-        mArticleAction = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
+        mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
     }
 
     @Test
     public void testGetArticleList() {
-        mArticleAction.getArticleList(1);
+        mActionCreator.getArticleList(1);
         //调用方法成功,发送一次RxAction
         verify(mRxDispatcher).postRxAction(any());
         //调用方法成功,发送两次RxLoading
@@ -51,7 +51,7 @@ public class ArticleActionCreatorTest {
 
     @Test
     public void testGetBannerList() {
-        mArticleAction.getBannerList();
+        mActionCreator.getBannerList();
         //调用方法成功,发送一次RxAction
         verify(mRxDispatcher).postRxAction(any());
     }
