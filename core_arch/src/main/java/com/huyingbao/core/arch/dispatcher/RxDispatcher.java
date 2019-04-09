@@ -21,7 +21,6 @@ import javax.inject.Singleton;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-
 @Singleton
 public class RxDispatcher {
     @Inject

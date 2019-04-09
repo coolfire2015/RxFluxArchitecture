@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.module
 
 import com.google.gson.GsonBuilder
 import com.huyingbao.module.wan.action.WanApi
+import com.huyingbao.module.wan.action.WanContants
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,7 +20,7 @@ class WanAppModule {
     @Provides
     internal fun provideMainApi(client: OkHttpClient): WanApi {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://www.wanandroid.com/")
+                .baseUrl(WanContants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

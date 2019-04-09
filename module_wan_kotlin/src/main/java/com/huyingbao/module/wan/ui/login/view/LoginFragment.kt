@@ -1,6 +1,7 @@
 package com.huyingbao.module.wan.ui.login.view
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -8,8 +9,8 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.rxview.CommonRxFragment
-import com.huyingbao.core.common.util.CommonUtils
 import com.huyingbao.module.wan.R
+import com.huyingbao.module.wan.R2
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator
 import com.huyingbao.module.wan.ui.login.store.LoginStore
 import javax.inject.Inject
@@ -42,7 +43,7 @@ constructor() : CommonRxFragment<LoginStore>() {
     fun onViewClicked() {
         val username = mEtUsername.text.toString()
         val password = mEtPassword.text.toString()
-        if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             Toast.makeText(activity, "请输入密码！", Toast.LENGTH_SHORT).show()
             return
         }
