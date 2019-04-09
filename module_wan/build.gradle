@@ -162,6 +162,7 @@ dependencies {
     testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 
     //仪器测试
+    debugImplementation project(':test_android')//必须设置
     androidTestImplementation project(':test_android')
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
