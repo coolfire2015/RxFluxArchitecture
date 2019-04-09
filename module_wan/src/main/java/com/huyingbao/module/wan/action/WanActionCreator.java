@@ -3,7 +3,7 @@ package com.huyingbao.module.wan.action;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.common.model.CommonHttpException;
+import com.huyingbao.core.common.model.CommonException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,12 +37,12 @@ public abstract class WanActionCreator extends RxActionCreator {
     public <T> Function<T, Observable<T>> verifyResponse() {
         return response -> {
             if (!(response instanceof WanResponse)) {
-                return Observable.error(new CommonHttpException(600, "未知异常！"));
+                return Observable.error(new CommonException(600, "未知异常！"));
             }
             int errorCode = ((WanResponse) response).getErrorCode();
             if (errorCode != 0) {
                 String errorMsg = ((WanResponse) response).getErrorMsg();
-                CommonHttpException exception = new CommonHttpException(errorCode, errorMsg);
+                CommonException exception = new CommonException(errorCode, errorMsg);
                 return Observable.error(exception);
             }
             return Observable.just(response);

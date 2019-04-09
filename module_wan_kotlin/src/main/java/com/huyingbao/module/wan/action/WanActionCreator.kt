@@ -4,7 +4,7 @@ import com.huyingbao.core.arch.action.RxActionCreator
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
-import com.huyingbao.core.common.model.CommonHttpException
+import com.huyingbao.core.common.model.CommonException
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function
@@ -29,11 +29,11 @@ abstract class WanActionCreator(rxDispatcher: RxDispatcher, rxActionManager: RxA
     public fun <T> verifyResponse(): Function<T, Observable<T>> {
         return Function { response ->
             if (response !is WanResponse<*>)
-                return@Function Observable.error<T>(CommonHttpException(600, "未知异常！"))
+                return@Function Observable.error<T>(CommonException(600, "未知异常！"))
             val errorCode = (response as WanResponse<*>).errorCode
             if (errorCode != 0) {
                 val errorMsg = (response as WanResponse<*>).errorMsg
-                val exception = CommonHttpException(errorCode, errorMsg)
+                val exception = CommonException(errorCode, errorMsg)
                 return@Function Observable.error<T>(exception)
             }
             Observable.just<T>(response)

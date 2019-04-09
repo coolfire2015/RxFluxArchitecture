@@ -13,7 +13,7 @@ import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
-import com.huyingbao.core.common.model.CommonHttpException;
+import com.huyingbao.core.common.model.CommonException;
 import com.huyingbao.core.common.view.CommonActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -111,8 +111,8 @@ public abstract class CommonRxActivity<T extends RxActivityStore> extends Common
         //收到后，移除粘性通知
         EventBus.getDefault().removeStickyEvent(rxError);
         Throwable throwable = rxError.getThrowable();
-        if (throwable instanceof CommonHttpException) {
-            Toast.makeText(this, ((CommonHttpException) throwable).message(), Toast.LENGTH_SHORT).show();
+        if (throwable instanceof CommonException) {
+            Toast.makeText(this, ((CommonException) throwable).message(), Toast.LENGTH_SHORT).show();
         } else if (throwable instanceof retrofit2.HttpException) {
             Toast.makeText(this, ((retrofit2.HttpException) throwable).code() + ":服务器问题", Toast.LENGTH_SHORT).show();
         } else if (throwable instanceof SocketException) {
