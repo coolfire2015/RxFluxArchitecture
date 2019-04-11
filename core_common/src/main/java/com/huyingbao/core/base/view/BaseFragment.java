@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     private boolean mBackAble;
     private CharSequence mTitle;
 
-    private TextView mTvTop;
+    protected TextView mTvTop;
     private Toolbar mToolbarTop;
     private ActionBar mActionBarTop;
 
