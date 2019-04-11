@@ -40,7 +40,7 @@ public abstract class RxActionCreator {
      * @param <T>
      */
     private <T> void postRxAction(RxAction rxAction, Observable<T> httpObservable, boolean canShowLoading, boolean canRetry) {
-        if (mRxActionManager.contains(rxAction)) {
+        if (hasRxAction(rxAction)) {
             return;
         }
         mRxActionManager.add(rxAction, httpObservable
@@ -84,6 +84,16 @@ public abstract class RxActionCreator {
                             mRxActionManager.remove(rxAction);
                         }
                 ));
+    }
+
+    /**
+     * 订阅管理器是否已经有了该action
+     *
+     * @param rxAction
+     * @return
+     */
+    protected boolean hasRxAction(RxAction rxAction) {
+        return mRxActionManager.contains(rxAction);
     }
 
     /**
@@ -178,7 +188,7 @@ public abstract class RxActionCreator {
      */
     public void postRetryAction(@NonNull RxRetry rxRetry) {
         RxAction rxAction = newRxAction(rxRetry.getTag());
-        if (mRxActionManager.contains(rxAction)) {
+        if (hasRxAction(rxAction)) {
             return;
         }
         postHttpRetryAction(rxAction, rxRetry.getObservable());
