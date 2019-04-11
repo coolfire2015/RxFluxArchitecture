@@ -3,7 +3,7 @@ package com.huyingbao.core.base.view;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.huyingbao.core.base.CommonView;
+import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.util.ActivityUtils;
 
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonActivity extends AppCompatActivity implements CommonView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     static {//Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -52,7 +52,7 @@ public abstract class CommonActivity extends AppCompatActivity implements Common
 
     @Override
     public int getLayoutId() {
-        return R.layout.common_activity_fragment_base;
+        return R.layout.base_activity;
     }
 
     @Override

@@ -6,8 +6,8 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.main.action.MainActionCreator;
@@ -31,7 +31,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
-public class CategoryFragment extends CommonRxFragment<RandomStore> {
+public class CategoryFragment extends BaseRxFragment<RandomStore> {
     @Inject
     MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
@@ -46,7 +46,7 @@ public class CategoryFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.common_fragment_base_list;
+        return R.layout.common_fragment_list;
     }
 
     @Override

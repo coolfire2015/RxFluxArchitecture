@@ -7,7 +7,7 @@ import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
-import com.huyingbao.core.base.view.CommonFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +29,7 @@ import dagger.android.support.AndroidSupportInjection;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragment implements RxFluxView {
+public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment implements RxFluxView {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
 

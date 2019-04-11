@@ -7,7 +7,7 @@ import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
-import com.huyingbao.core.base.view.CommonDialogFragment;
+import com.huyingbao.core.base.view.BaseDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +28,7 @@ import dagger.android.support.AndroidSupportInjection;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonRxDialogFragment<T extends ViewModel> extends CommonDialogFragment implements RxFluxView {
+public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDialogFragment implements RxFluxView {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
 

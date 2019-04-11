@@ -6,8 +6,8 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
@@ -27,7 +27,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
-public class ProductFragment extends CommonRxFragment<RandomStore> {
+public class ProductFragment extends BaseRxFragment<RandomStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
     RandomActionCreator mActionCreator;
@@ -42,7 +42,7 @@ public class ProductFragment extends CommonRxFragment<RandomStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.common_fragment_base_list;
+        return R.layout.common_fragment_list;
     }
 
     @Override

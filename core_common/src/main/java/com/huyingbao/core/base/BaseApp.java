@@ -24,7 +24,7 @@ import androidx.multidex.MultiDex;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonApp extends RxFluxApp {
+public abstract class BaseApp extends RxFluxApp {
     /**
      * 注解CallSuper强制子类复写该方法时调用父方法
      */

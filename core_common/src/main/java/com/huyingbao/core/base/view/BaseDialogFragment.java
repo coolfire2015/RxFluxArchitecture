@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.huyingbao.core.base.CommonView;
+import com.huyingbao.core.base.BaseView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +17,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonDialogFragment extends AppCompatDialogFragment implements CommonView {
+public abstract class BaseDialogFragment extends AppCompatDialogFragment implements BaseView {
     private Unbinder mUnbinder;
 
     @NonNull

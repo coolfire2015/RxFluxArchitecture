@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import com.huyingbao.core.arch.scope.ActivityScope
+import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.core.common.R2
-import com.huyingbao.core.base.rxview.CommonRxFragment
 import com.huyingbao.core.common.widget.CommonLoadMoreView
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
@@ -27,7 +27,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class ArticleListFragment @Inject
-constructor() : CommonRxFragment<ArticleStore>() {
+constructor() : BaseRxFragment<ArticleStore>() {
     @Inject
     lateinit var mActionCreator: ArticleActionCreator
     @BindView(R2.id.rv_content)
@@ -36,7 +36,7 @@ constructor() : CommonRxFragment<ArticleStore>() {
     private var mAdapter: ArticleAdapter? = null
 
     override fun getLayoutId(): Int {
-        return R.layout.common_fragment_base_list
+        return R.layout.common_fragment_list
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {

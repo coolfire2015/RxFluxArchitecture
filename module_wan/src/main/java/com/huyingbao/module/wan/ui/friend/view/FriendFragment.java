@@ -6,7 +6,7 @@ import android.view.View;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.base.rxview.CommonRxFragment;
+import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator;
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter;
@@ -30,7 +30,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
-public class FriendFragment extends CommonRxFragment<FriendStore> {
+public class FriendFragment extends BaseRxFragment<FriendStore> {
     @Inject
     FriendActionCreator mActionCreator;
 
@@ -46,7 +46,7 @@ public class FriendFragment extends CommonRxFragment<FriendStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.common_fragment_base_list;
+        return R.layout.common_fragment_list;
     }
 
     @Override

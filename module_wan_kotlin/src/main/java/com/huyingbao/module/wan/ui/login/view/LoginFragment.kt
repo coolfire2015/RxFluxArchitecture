@@ -8,7 +8,7 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.huyingbao.core.arch.scope.ActivityScope
-import com.huyingbao.core.base.rxview.CommonRxFragment
+import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.R2
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator
@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class LoginFragment @Inject
-constructor() : CommonRxFragment<LoginStore>() {
+constructor() : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var mActionCreator: LoginActionCreator
 

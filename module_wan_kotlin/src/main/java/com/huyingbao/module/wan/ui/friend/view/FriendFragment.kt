@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.scope.ActivityScope
+import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.core.common.R2
-import com.huyingbao.core.base.rxview.CommonRxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
@@ -24,7 +24,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class FriendFragment @Inject
-constructor() : CommonRxFragment<FriendStore>() {
+constructor() : BaseRxFragment<FriendStore>() {
     @Inject
     lateinit var mActionCreator: FriendActionCreator
 
@@ -35,7 +35,7 @@ constructor() : CommonRxFragment<FriendStore>() {
     private var mAdapter: WebSiteAdapter? = null
 
     override fun getLayoutId(): Int {
-        return R.layout.common_fragment_base_list
+        return R.layout.common_fragment_list
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {

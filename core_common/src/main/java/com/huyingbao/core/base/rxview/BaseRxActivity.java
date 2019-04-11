@@ -10,11 +10,11 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonException;
-import com.huyingbao.core.base.view.CommonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +44,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonRxActivity<T extends RxActivityStore> extends CommonActivity implements RxFluxView, HasSupportFragmentInjector {
+public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActivity implements RxFluxView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
     @Inject

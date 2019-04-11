@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.base.rxview.CommonRxActivity;
+import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
@@ -24,7 +24,7 @@ import dagger.Lazy;
  * Created by liujunfeng on 2019/1/1.
  */
 @Route(path = "/wan/ArticleActivity")
-public class ArticleActivity extends CommonRxActivity<ArticleStore> {
+public class ArticleActivity extends BaseRxActivity<ArticleStore> {
     @Inject
     Lazy<ArticleListFragment> mArticleListFragmentLazy;
     @Inject

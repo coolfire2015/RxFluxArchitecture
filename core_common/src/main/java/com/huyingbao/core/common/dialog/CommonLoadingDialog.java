@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.model.RxLoading;
+import com.huyingbao.core.base.view.BaseDialogFragment;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.util.CommonUtils;
-import com.huyingbao.core.base.view.CommonDialogFragment;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,7 +30,7 @@ import butterknife.OnClick;
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-public class CommonLoadingDialog extends CommonDialogFragment implements DialogInterface.OnShowListener {
+public class CommonLoadingDialog extends BaseDialogFragment implements DialogInterface.OnShowListener {
     @Inject
     RxActionManager mRxActionManager;
 

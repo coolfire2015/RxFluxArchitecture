@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.huyingbao.core.base.CommonView;
+import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
 
 import androidx.annotation.NonNull;
@@ -22,7 +22,7 @@ import butterknife.Unbinder;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonFragment extends Fragment implements CommonView {
+public abstract class BaseFragment extends Fragment implements BaseView {
     private Unbinder mUnbinder;
 
     private boolean mBackAble;

@@ -5,8 +5,8 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter;
@@ -26,7 +26,7 @@ import butterknife.BindView;
  * Created by liujunfeng on 2019/1/1.
  */
 @ActivityScope
-public class BannerFragment extends CommonRxFragment<ArticleStore> {
+public class BannerFragment extends BaseRxFragment<ArticleStore> {
     @Inject
     ArticleActionCreator mActionCreator;
 
@@ -42,7 +42,7 @@ public class BannerFragment extends CommonRxFragment<ArticleStore> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.common_fragment_base_list;
+        return R.layout.common_fragment_list;
     }
 
     @Override

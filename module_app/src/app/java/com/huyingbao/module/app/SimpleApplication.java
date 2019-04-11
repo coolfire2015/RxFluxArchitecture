@@ -1,7 +1,7 @@
 package com.huyingbao.module.app;
 
 
-import com.huyingbao.core.base.CommonApp;
+import com.huyingbao.core.base.BaseApp;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
@@ -11,7 +11,7 @@ import dagger.android.support.DaggerApplication;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class SimpleApplication extends CommonApp {
+public class SimpleApplication extends BaseApp {
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerSimpleComponent.builder().application(this).build();

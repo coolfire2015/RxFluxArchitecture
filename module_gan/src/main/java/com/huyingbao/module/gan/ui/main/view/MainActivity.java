@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.base.rxview.CommonRxActivity;
+import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
 import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;
@@ -22,7 +22,7 @@ import dagger.Lazy;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class MainActivity extends CommonRxActivity<MainStore> {
+public class MainActivity extends BaseRxActivity<MainStore> {
     @Inject
     Lazy<MainFragment> mMainFragmentLazy;
 
