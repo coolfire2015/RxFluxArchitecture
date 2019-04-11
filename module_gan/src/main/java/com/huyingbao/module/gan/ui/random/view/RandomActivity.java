@@ -3,7 +3,7 @@ package com.huyingbao.module.gan.ui.random.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.rxview.CommonRxActivity;
+import com.huyingbao.core.base.rxview.CommonRxActivity;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 

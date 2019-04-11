@@ -1,10 +1,11 @@
-package com.huyingbao.core.common.view;
+package com.huyingbao.core.base.view;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.huyingbao.core.base.CommonView;
 import com.huyingbao.core.common.R;
-import com.huyingbao.core.common.util.ActivityUtils;
+import com.huyingbao.core.util.ActivityUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;

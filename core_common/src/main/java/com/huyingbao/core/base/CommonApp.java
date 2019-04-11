@@ -1,10 +1,11 @@
-package com.huyingbao.core.common;
+package com.huyingbao.core.base;
 
 
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.RxFluxApp;
+import com.huyingbao.core.common.BuildConfig;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;

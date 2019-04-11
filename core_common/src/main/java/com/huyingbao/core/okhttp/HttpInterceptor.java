@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.okhttp;
+package com.huyingbao.core.okhttp;
 
 import android.text.TextUtils;
 

@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.okhttp;
+package com.huyingbao.core.okhttp;
 
 import android.app.Application;
 import android.content.SharedPreferences;

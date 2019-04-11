@@ -3,7 +3,7 @@ package com.huyingbao.module.gan.ui.main.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.common.rxview.CommonRxFragment;
+import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.R2;
 import com.huyingbao.module.gan.ui.main.action.MainAction;

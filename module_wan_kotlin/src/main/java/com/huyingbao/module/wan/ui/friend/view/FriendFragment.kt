@@ -8,7 +8,7 @@ import butterknife.BindView
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.R2
-import com.huyingbao.core.common.rxview.CommonRxFragment
+import com.huyingbao.core.base.rxview.CommonRxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter

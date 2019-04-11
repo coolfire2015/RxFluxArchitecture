@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.util;
+package com.huyingbao.core.util;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.rxview;
+package com.huyingbao.core.base.rxview;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -14,7 +14,7 @@ import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonException;
-import com.huyingbao.core.common.view.CommonActivity;
+import com.huyingbao.core.base.view.CommonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

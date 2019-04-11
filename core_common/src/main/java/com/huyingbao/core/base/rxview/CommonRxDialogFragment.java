@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.rxview;
+package com.huyingbao.core.base.rxview;
 
 import android.content.Context;
 
@@ -7,8 +7,7 @@ import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
-import com.huyingbao.core.common.view.CommonFragment;
-import com.orhanobut.logger.Logger;
+import com.huyingbao.core.base.view.CommonDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +28,7 @@ import dagger.android.support.AndroidSupportInjection;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragment implements RxFluxView {
+public abstract class CommonRxDialogFragment<T extends ViewModel> extends CommonDialogFragment implements RxFluxView {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
 
@@ -60,11 +59,7 @@ public abstract class CommonRxFragment<T extends ViewModel> extends CommonFragme
     @Override
     public void onAttach(Context context) {
         //依赖注入
-        try {
-            AndroidSupportInjection.inject(this);
-        } catch (IllegalArgumentException e) {
-            Logger.e("依赖注入失败");
-        }
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 

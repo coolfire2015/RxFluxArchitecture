@@ -1,8 +1,8 @@
 package com.huyingbao.core.common.module;
 
 import com.huyingbao.core.arch.module.RxFluxModule;
-import com.huyingbao.core.common.okhttp.HttpInterceptor;
-import com.huyingbao.core.common.okhttp.PersistentCookieStore;
+import com.huyingbao.core.okhttp.HttpInterceptor;
+import com.huyingbao.core.okhttp.PersistentCookieStore;
 
 import java.util.ArrayList;
 import java.util.List;

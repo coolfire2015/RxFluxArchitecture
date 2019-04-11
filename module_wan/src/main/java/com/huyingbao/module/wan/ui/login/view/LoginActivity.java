@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.common.rxview.CommonRxActivity;
+import com.huyingbao.core.base.rxview.CommonRxActivity;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;

@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.common.rxview.CommonRxFragment;
+import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator;

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.R2
-import com.huyingbao.core.common.rxview.CommonRxFragment
+import com.huyingbao.core.base.rxview.CommonRxFragment
 import com.huyingbao.core.common.widget.CommonLoadMoreView
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction

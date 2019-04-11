@@ -13,8 +13,8 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.util.CommonUtils;
-import com.huyingbao.core.common.view.CommonDialogFragment;
+import com.huyingbao.core.util.CommonUtils;
+import com.huyingbao.core.base.view.CommonDialogFragment;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

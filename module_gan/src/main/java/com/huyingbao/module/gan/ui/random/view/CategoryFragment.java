@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.rxview.CommonRxFragment;
+import com.huyingbao.core.base.rxview.CommonRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.main.action.MainActionCreator;
