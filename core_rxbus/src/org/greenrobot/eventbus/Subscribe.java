@@ -48,6 +48,6 @@ public @interface Subscribe {
      *
      * @return
      */
-    String tag() default "DEFAULT_TAG";
+    String tag() default "";
 }
 
