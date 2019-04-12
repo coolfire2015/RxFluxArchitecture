@@ -43,6 +43,11 @@ class SubscriberMethodFinder {
     private final boolean ignoreGeneratedIndex;
 
     private static final int POOL_SIZE = 4;
+    /**
+     * 是一个最近使用且长度为4的FindState数组,
+     * 目的是用来缓存FindState信息,
+     * 提升EventBus运行效率.
+     */
     private static final FindState[] FIND_STATE_POOL = new FindState[POOL_SIZE];
 
     SubscriberMethodFinder(List<SubscriberInfoIndex> subscriberInfoIndexes, boolean strictMethodVerification,
@@ -52,15 +57,29 @@ class SubscriberMethodFinder {
         this.ignoreGeneratedIndex = ignoreGeneratedIndex;
     }
 
+    /**
+     * 找到Subscriber对象中所有订阅方法信息的集合。
+     *
+     * @param subscriberClass
+     * @return
+     */
     List<SubscriberMethod> findSubscriberMethods(Class<?> subscriberClass) {
+        // EventBus对Subscriber订阅者的订阅方法做的一个缓存，
+        // 它是一个Map对象，key是Subscriber对象，
+        // 因为Subscriber对象可能有多个订阅方法，
+        // 所以value是Subscriber对应的订阅方法的集合。
         List<SubscriberMethod> subscriberMethods = METHOD_CACHE.get(subscriberClass);
+        //EventBus先会从缓存中拿Subscriber对应的SubscriberMethod的集合，
+        // 如果缓存不为空，直接从缓存中获取。
         if (subscriberMethods != null) {
             return subscriberMethods;
         }
 
         if (ignoreGeneratedIndex) {
+            //利用反射来获取订阅类中的订阅方法信息
             subscriberMethods = findUsingReflection(subscriberClass);
         } else {
+            //通过注解来获取订阅方法信息,3.0以后默认使用
             subscriberMethods = findUsingInfo(subscriberClass);
         }
         if (subscriberMethods.isEmpty()) {
@@ -72,6 +91,12 @@ class SubscriberMethodFinder {
         }
     }
 
+    /**
+     * 通过注解来获取订阅方法信息
+     *
+     * @param subscriberClass
+     * @return
+     */
     private List<SubscriberMethod> findUsingInfo(Class<?> subscriberClass) {
         FindState findState = prepareFindState();
         findState.initForSubscriber(subscriberClass);
@@ -119,6 +144,12 @@ class SubscriberMethodFinder {
         return new FindState();
     }
 
+    /**
+     * 获取Subscriber的订阅方法
+     *
+     * @param findState
+     * @return
+     */
     private SubscriberInfo getSubscriberInfo(FindState findState) {
         if (findState.subscriberInfo != null && findState.subscriberInfo.getSuperSubscriberInfo() != null) {
             SubscriberInfo superclassInfo = findState.subscriberInfo.getSuperSubscriberInfo();
@@ -188,12 +219,28 @@ class SubscriberMethodFinder {
         METHOD_CACHE.clear();
     }
 
+    /**
+     * 保存将要查找的订阅方法信息的类
+     */
     static class FindState {
+        /**
+         * Subscriber订阅者的所有订阅方法的集合
+         */
         final List<SubscriberMethod> subscriberMethods = new ArrayList<>();
+        /**
+         * key:eventType,value:对应的method
+         */
         final Map<Class, Object> anyMethodByEventType = new HashMap<>();
+        /**
+         * key:一个订阅方法名称和EventType参数构成的字符串
+         * value:订阅方法的class对象
+         */
         final Map<String, Class> subscriberClassByMethodKey = new HashMap<>();
         final StringBuilder methodKeyBuilder = new StringBuilder(128);
 
+        /**
+         * 订阅者类的class字节码对象
+         */
         Class<?> subscriberClass;
         Class<?> clazz;
         boolean skipSuperClasses;

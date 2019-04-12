@@ -17,12 +17,31 @@ package org.greenrobot.eventbus;
 
 import java.lang.reflect.Method;
 
-/** Used internally by EventBus and generated subscriber indexes. */
+/**
+ * Used internally by EventBus and generated subscriber indexes.
+ * 我们在订阅者中定义的订阅方法的一个描述类，里面保存了订阅方法的信息，
+ * 其实就是我们在订阅者中定义的用@Subscriber注解修饰的订阅方法。
+ */
 public class SubscriberMethod {
+    /**
+     * 方法名
+     */
     final Method method;
+    /**
+     * 线程
+     */
     final ThreadMode threadMode;
+    /**
+     * 消息类型的字节码对象
+     */
     final Class<?> eventType;
+    /**
+     * 注解中priority属性，表示方法执行的优先级
+     */
     final int priority;
+    /**
+     * 注解中的sticky, 粘性属性
+     */
     final boolean sticky;
     /** Used for efficient comparison */
     String methodString;

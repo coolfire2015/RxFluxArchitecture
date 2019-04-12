@@ -16,6 +16,10 @@
 package org.greenrobot.eventbus.meta;
 
 /**
+ * 3.0版本中,EventBus提供了一个EventBusAnnotationProcessor注解处理器
+ * 来在编译期通过读取@Subscribe()注解并解析,
+ * 处理其中所包含的信息,然后生成java类来保存所有订阅者关于订阅的信息,
+ * 这样就比在运行时使用反射来获得这些订阅者的信息速度要快.
  * Interface for generated indexes.
  */
 public interface SubscriberInfoIndex {
