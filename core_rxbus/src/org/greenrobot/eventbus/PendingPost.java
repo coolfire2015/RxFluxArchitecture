@@ -22,6 +22,7 @@ final class PendingPost {
     private final static List<PendingPost> pendingPostPool = new ArrayList<PendingPost>();
 
     Object event;
+    String tag;
     Subscription subscription;
     PendingPost next;
 
@@ -30,12 +31,13 @@ final class PendingPost {
         this.subscription = subscription;
     }
 
-    static PendingPost obtainPendingPost(Subscription subscription, Object event) {
+    static PendingPost obtainPendingPost(Subscription subscription, Object event, String tag) {
         synchronized (pendingPostPool) {
             int size = pendingPostPool.size();
             if (size > 0) {
                 PendingPost pendingPost = pendingPostPool.remove(size - 1);
                 pendingPost.event = event;
+                pendingPost.tag = tag;
                 pendingPost.subscription = subscription;
                 pendingPost.next = null;
                 return pendingPost;

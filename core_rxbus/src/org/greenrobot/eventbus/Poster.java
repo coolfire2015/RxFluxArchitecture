@@ -27,6 +27,7 @@ interface Poster {
      *
      * @param subscription Subscription which will receive the event.
      * @param event        Event that will be posted to subscribers.
+     * @param tag          tag with event
      */
-    void enqueue(Subscription subscription, Object event);
+    void enqueue(Subscription subscription, Object event, String tag);
 }

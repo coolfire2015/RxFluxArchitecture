@@ -25,7 +25,7 @@ import java.util.logging.Level;
 /**
  * Executes an {@link RunnableEx} using a thread pool. Thrown exceptions are propagated by posting failure events of any
  * given type (default is {@link ThrowableFailureEvent}).
- * 
+ *
  * @author Markus
  */
 public class AsyncExecutor {
@@ -71,7 +71,9 @@ public class AsyncExecutor {
         }
     }
 
-    /** Like {@link Runnable}, but the run method may throw an exception. */
+    /**
+     * Like {@link Runnable}, but the run method may throw an exception.
+     */
     public interface RunnableEx {
         void run() throws Exception;
     }
@@ -101,7 +103,9 @@ public class AsyncExecutor {
         }
     }
 
-    /** Posts an failure event if the given {@link RunnableEx} throws an Exception. */
+    /**
+     * Posts an failure event if the given {@link RunnableEx} throws an Exception.
+     */
     public void execute(final RunnableEx runnable) {
         threadPool.execute(new Runnable() {
             @Override
@@ -119,7 +123,7 @@ public class AsyncExecutor {
                     if (event instanceof HasExecutionScope) {
                         ((HasExecutionScope) event).setExecutionScope(scope);
                     }
-                    eventBus.post(event);
+                    eventBus.post(event, "error");
                 }
             }
         });

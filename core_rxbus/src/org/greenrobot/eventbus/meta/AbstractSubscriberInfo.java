@@ -21,7 +21,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Method;
 
-/** Base class for generated subscriber meta info classes created by annotation processing. */
+/**
+ * Base class for generated subscriber meta info classes created by annotation processing.
+ */
 public abstract class AbstractSubscriberInfo implements SubscriberInfo {
     private final Class subscriberClass;
     private final Class<? extends SubscriberInfo> superSubscriberInfoClass;
@@ -41,7 +43,7 @@ public abstract class AbstractSubscriberInfo implements SubscriberInfo {
 
     @Override
     public SubscriberInfo getSuperSubscriberInfo() {
-        if(superSubscriberInfoClass == null) {
+        if (superSubscriberInfoClass == null) {
             return null;
         }
         try {
@@ -58,19 +60,19 @@ public abstract class AbstractSubscriberInfo implements SubscriberInfo {
         return shouldCheckSuperclass;
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, Class<?> eventType) {
-        return createSubscriberMethod(methodName, eventType, ThreadMode.POSTING, 0, false);
+    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType) {
+        return createSubscriberMethod(methodName, tag, eventType, ThreadMode.POSTING, 0, false);
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, Class<?> eventType, ThreadMode threadMode) {
-        return createSubscriberMethod(methodName, eventType, threadMode, 0, false);
+    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType, ThreadMode threadMode) {
+        return createSubscriberMethod(methodName, tag, eventType, threadMode, 0, false);
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, Class<?> eventType, ThreadMode threadMode,
+    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType, ThreadMode threadMode,
                                                       int priority, boolean sticky) {
         try {
             Method method = subscriberClass.getDeclaredMethod(methodName, eventType);
-            return new SubscriberMethod(method, eventType, threadMode, priority, sticky);
+            return new SubscriberMethod(method, tag, eventType, threadMode, priority, sticky);
         } catch (NoSuchMethodException e) {
             throw new EventBusException("Could not find subscriber method in " + subscriberClass +
                     ". Maybe a missing ProGuard rule?", e);

@@ -28,6 +28,10 @@ public class SubscriberMethod {
      */
     final Method method;
     /**
+     * 方法名对应的tag
+     */
+    final String tag;
+    /**
      * 线程
      */
     final ThreadMode threadMode;
@@ -43,11 +47,14 @@ public class SubscriberMethod {
      * 注解中的sticky, 粘性属性
      */
     final boolean sticky;
-    /** Used for efficient comparison */
+    /**
+     * Used for efficient comparison
+     */
     String methodString;
 
-    public SubscriberMethod(Method method, Class<?> eventType, ThreadMode threadMode, int priority, boolean sticky) {
+    public SubscriberMethod(Method method, String tag, Class<?> eventType, ThreadMode threadMode, int priority, boolean sticky) {
         this.method = method;
+        this.tag = tag;
         this.threadMode = threadMode;
         this.eventType = eventType;
         this.priority = priority;
@@ -60,7 +67,7 @@ public class SubscriberMethod {
             return true;
         } else if (other instanceof SubscriberMethod) {
             checkMethodString();
-            SubscriberMethod otherSubscriberMethod = (SubscriberMethod)other;
+            SubscriberMethod otherSubscriberMethod = (SubscriberMethod) other;
             otherSubscriberMethod.checkMethodString();
             // Don't use method.equals because of http://code.google.com/p/android/issues/detail?id=7811#c6
             return methodString.equals(otherSubscriberMethod.methodString);
@@ -83,5 +90,9 @@ public class SubscriberMethod {
     @Override
     public int hashCode() {
         return method.hashCode();
+    }
+
+    public int getHashCode() {
+        return (tag + eventType.getName()).hashCode();
     }
 }
