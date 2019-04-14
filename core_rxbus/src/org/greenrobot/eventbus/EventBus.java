@@ -15,6 +15,9 @@
  */
 package org.greenrobot.eventbus;
 
+import android.text.TextUtils;
+import android.util.Pair;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +45,7 @@ public class EventBus {
      * Log tag, apps may override it.
      */
     public static String TAG = "EventBus";
+    public static final String DEFAULT_TAG="defaultTag";
 
     static volatile EventBus defaultInstance;
 
@@ -52,9 +56,9 @@ public class EventBus {
      * Map对象的值就是用来缓存订阅方法的信息的
      * key为EventType的class对象，value为Subscription对象的集合
      */
-    private final Map<String, CopyOnWriteArrayList<Subscription>> subscriptionsByEventType;
-    private final Map<Object, List<String>> typesBySubscriber;
-    private final Map<String, Object> stickyEvents;
+    private final Map<Class<?>, CopyOnWriteArrayList<Pair<String,Subscription>>> subscriptionsByEventType;
+    private final Map<Object, List<Class<?>>> typesBySubscriber;
+    private final Map<Class<?>, Object> stickyEvents;
 
     /**
      * 多个线程操作同一个结果,但是互相之间不影响
@@ -176,12 +180,13 @@ public class EventBus {
         Class<?> eventType = subscriberMethod.eventType;
         String tag = subscriberMethod.tag;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
-        CopyOnWriteArrayList<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
+        Pair<String,Subscription> newPair=new Pair<>(tag,newSubscription);
+        CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
-            subscriptionsByEventType.put(eventType.getName() + tag, subscriptions);
+            subscriptionsByEventType.put(eventType, subscriptions);
         } else {
-            if (subscriptions.contains(newSubscription)) {
+            if (subscriptions.contains(newPair)) {
                 throw new EventBusException("Subscriber " + subscriber.getClass() + " already registered to event "
                         + eventType);
             }
@@ -190,18 +195,18 @@ public class EventBus {
         int size = subscriptions.size();
         //对消息进行优先级排序
         for (int i = 0; i <= size; i++) {
-            if (i == size || subscriberMethod.priority > subscriptions.get(i).subscriberMethod.priority) {
-                subscriptions.add(i, newSubscription);
+            if (i == size || subscriberMethod.priority > subscriptions.get(i).second.subscriberMethod.priority) {
+                subscriptions.add(i, newPair);
                 break;
             }
         }
 
-        List<String> subscribedEvents = typesBySubscriber.get(subscriber);
+        List<Class<?>> subscribedEvents = typesBySubscriber.get(subscriber);
         if (subscribedEvents == null) {
             subscribedEvents = new ArrayList<>();
             typesBySubscriber.put(subscriber, subscribedEvents);
         }
-        subscribedEvents.add(eventType.getName() + tag);
+        subscribedEvents.add(eventType);
 
         if (subscriberMethod.sticky) {
             //如果有sticky消息，直接发送。也可以得知sticky消息在注册后是可以执行的。
@@ -210,21 +215,16 @@ public class EventBus {
                 // Note: Iterating over all events may be inefficient with lots of sticky events,
                 // thus data structure should be changed to allow a more efficient lookup
                 // (e.g. an additional map storing sub classes of super classes: Class -> List<Class>).
-                Set<Map.Entry<String, Object>> entries = stickyEvents.entrySet();
-                for (Map.Entry<String, Object> entry : entries) {
-//                    String candidateEventType = entry.getKey();
-//                    if (eventType.isAssignableFrom(candidateEventType)) {
-//                        Object stickyEvent = entry.getValue();
-//                        checkPostStickyEventToSubscription(newSubscription, stickyEvent);
-//                    }
-                    String candidateEventType = entry.getKey();
-                    if ((eventType.getName() + tag).equals(candidateEventType)) {
+                Set<Map.Entry<Class<?>, Object>> entries = stickyEvents.entrySet();
+                for (Map.Entry<Class<?>, Object> entry : entries) {
+                    Class<?> candidateEventType = entry.getKey();
+                    if (eventType.isAssignableFrom(candidateEventType)) {
                         Object stickyEvent = entry.getValue();
-                        checkPostStickyEventToSubscription(newSubscription, stickyEvent, tag);
+                        checkPostStickyEventToSubscription(newSubscription, stickyEvent,tag);
                     }
                 }
             } else {
-                Object stickyEvent = stickyEvents.get(eventType.getName() + tag);
+                Object stickyEvent = stickyEvents.get(eventType);
                 checkPostStickyEventToSubscription(newSubscription, stickyEvent, tag);
             }
         }
@@ -255,12 +255,12 @@ public class EventBus {
     /**
      * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
      */
-    private void unsubscribeByEventType(Object subscriber, String eventType) {
-        List<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
+    private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
+        List<Pair<String,Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions != null) {
             int size = subscriptions.size();
             for (int i = 0; i < size; i++) {
-                Subscription subscription = subscriptions.get(i);
+                Subscription subscription = subscriptions.get(i).second;
                 if (subscription.subscriber == subscriber) {
                     subscription.active = false;
                     subscriptions.remove(i);
@@ -275,9 +275,9 @@ public class EventBus {
      * Unregisters the given subscriber from all event classes.
      */
     public synchronized void unregister(Object subscriber) {
-        List<String> subscribedTypes = typesBySubscriber.get(subscriber);
+        List<Class<?>> subscribedTypes = typesBySubscriber.get(subscriber);
         if (subscribedTypes != null) {
-            for (String eventType : subscribedTypes) {
+            for (Class<?> eventType : subscribedTypes) {
                 unsubscribeByEventType(subscriber, eventType);
             }
             typesBySubscriber.remove(subscriber);
@@ -339,13 +339,17 @@ public class EventBus {
         postingState.canceled = true;
     }
 
+    public void postSticky(Object event) {
+        postSticky(event,DEFAULT_TAG);
+    }
+
     /**
      * Posts the given event to the event bus and holds on to the event (because it is sticky). The most recent sticky
      * event of an event's type is kept in memory for future access by subscribers using {@link Subscribe#sticky()}.
      */
     public void postSticky(Object event, String tag) {
         synchronized (stickyEvents) {
-            stickyEvents.put(event.getClass().getName() + tag, event);
+            stickyEvents.put(event.getClass(), event);
         }
         // Should be posted after it is putted, in case the subscriber wants to remove immediately
         post(event, tag);
@@ -406,7 +410,7 @@ public class EventBus {
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
-                CopyOnWriteArrayList<Subscription> subscriptions;
+                CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions;
                 synchronized (this) {
                     subscriptions = subscriptionsByEventType.get(clazz);
                 }
@@ -452,18 +456,20 @@ public class EventBus {
      * @return
      */
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
-        CopyOnWriteArrayList<Subscription> subscriptions;
+        CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions;
         synchronized (this) {
-            subscriptions = subscriptionsByEventType.get(eventClass.getName() + postingState.tag);
+            subscriptions = subscriptionsByEventType.get(eventClass);
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {
-            for (Subscription subscription : subscriptions) {
+            for (Pair<String,Subscription> pair : subscriptions) {
                 postingState.event = event;
-                postingState.subscription = subscription;
+                postingState.subscription = pair.second;
                 boolean aborted = false;
                 try {
-                    postToSubscription(subscription, event, postingState.tag, postingState.isMainThread);
-                    aborted = postingState.canceled;
+                    if(TextUtils.equals(pair.first,postingState.tag)){
+                        postToSubscription(pair.second, event, postingState.tag, postingState.isMainThread);
+                        aborted = postingState.canceled;
+                    }
                 } finally {
                     postingState.event = null;
                     postingState.subscription = null;
@@ -607,6 +613,7 @@ public class EventBus {
             }
         }
     }
+
 
     /**
      * 当前操作线程的状态

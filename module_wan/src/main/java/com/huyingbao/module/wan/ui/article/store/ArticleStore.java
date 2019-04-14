@@ -57,7 +57,7 @@ public class ArticleStore extends RxActivityStore {
      * @param rxAction
      */
     @Override
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(tag = ArticleAction.GET_ARTICLE_LIST)
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case ArticleAction.GET_ARTICLE_LIST:

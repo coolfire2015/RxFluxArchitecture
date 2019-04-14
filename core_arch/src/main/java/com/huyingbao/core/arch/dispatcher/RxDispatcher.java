@@ -92,7 +92,7 @@ public class RxDispatcher {
      * @param rxAction
      */
     public void postRxAction(final RxAction rxAction) {
-        EventBus.getDefault().post(rxAction,"");
+        EventBus.getDefault().post(rxAction,rxAction.getTag());
     }
 
     /**
@@ -102,7 +102,7 @@ public class RxDispatcher {
      * @param rxChange
      */
     public void postRxChange(final RxChange rxChange) {
-        EventBus.getDefault().postSticky(rxChange,"");
+        EventBus.getDefault().postSticky(rxChange,rxChange.getTag());
     }
 
     /**
@@ -112,7 +112,7 @@ public class RxDispatcher {
      * @param rxError
      */
     public void postRxError(final RxError rxError) {
-        EventBus.getDefault().postSticky(rxError,"");
+        EventBus.getDefault().postSticky(rxError);
     }
 
     /**
@@ -122,7 +122,7 @@ public class RxDispatcher {
      * @param rxRetry
      */
     public void postRxRetry(final RxRetry rxRetry) {
-        EventBus.getDefault().postSticky(rxRetry,"");
+        EventBus.getDefault().postSticky(rxRetry);
     }
 
     /**
@@ -132,6 +132,6 @@ public class RxDispatcher {
      * @param rxLoading
      */
     public void postRxLoading(final RxLoading rxLoading) {
-        EventBus.getDefault().postSticky(rxLoading, "");
+        EventBus.getDefault().postSticky(rxLoading);
     }
 }

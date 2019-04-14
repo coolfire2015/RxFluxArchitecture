@@ -27,13 +27,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface Subscribe {
-    ThreadMode threadMode() default ThreadMode.POSTING;
+    ThreadMode threadMode() default ThreadMode.MAIN;
 
     /**
      * If true, delivers the most recent sticky event (posted with
-     * {@link EventBus#postSticky(Object)}) to this subscriber (if event available).
+     * {@link EventBus#postSticky(Object,String)}) to this subscriber (if event available).
      */
-    boolean sticky() default false;
+    boolean sticky() default true;
 
     /**
      * Subscriber priority to influence the order of event delivery.
@@ -48,6 +48,6 @@ public @interface Subscribe {
      *
      * @return
      */
-    String tag() default "";
+    String tag() default EventBus.DEFAULT_TAG;
 }
 
