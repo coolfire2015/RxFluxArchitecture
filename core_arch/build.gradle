@@ -46,7 +46,7 @@ dependencies {
     //使用
     //api "org.greenrobot:eventbus:${EVENTBUS}"
     //内核
-    api project(':core_rxbus')
+    api project(':core_eventbus')
     //版本兼容包
     api "androidx.core:core:${X_CORE}"
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"

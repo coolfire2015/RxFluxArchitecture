@@ -1,4 +1,5 @@
-include ':core_arch', ':core_rxbus'
+include ':core_eventbus'
+include ':core_arch'
 include ':core_common'
 include ':test_junit'
 include ':test_android'

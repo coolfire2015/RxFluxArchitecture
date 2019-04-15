@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
@@ -39,17 +40,17 @@ public class ArticleActivity extends BaseRxActivity<ArticleStore> {
     }
 
     @Subscribe(tags = {ArticleAction.TO_LOGIN})
-    public void toLogin() {
+    public void toLogin(RxChange rxChange) {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Subscribe(tags = {ArticleAction.TO_FRIEND})
-    public void toFriend() {
+    public void toFriend(RxChange rxChange) {
         addFragmentHideExisting(mFriendFragmentLazy.get());
     }
 
     @Subscribe(tags = {ArticleAction.TO_BANNER})
-    public void toBanner() {
+    public void toBanner(RxChange rxChange) {
         addFragmentHideExisting(mBannerFragmentLazy.get());
     }
 }

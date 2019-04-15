@@ -10,7 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/core_arch" />
             <option value="$PROJECT_DIR$/core_common" />
-            <option value="$PROJECT_DIR$/core_rxbus" />
+            <option value="$PROJECT_DIR$/core_eventbus" />
             <option value="$PROJECT_DIR$/module_wan" />
             <option value="$PROJECT_DIR$/test_android" />
             <option value="$PROJECT_DIR$/test_junit" />

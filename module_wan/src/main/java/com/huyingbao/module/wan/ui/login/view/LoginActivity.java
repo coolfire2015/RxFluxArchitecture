@@ -3,6 +3,7 @@ package com.huyingbao.module.wan.ui.login.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.login.action.LoginAction;
@@ -32,7 +33,7 @@ public class LoginActivity extends BaseRxActivity<LoginStore> {
     }
 
     @Subscribe(tags = {LoginAction.LOGIN})
-    public void onLogin() {
+    public void onLogin(RxChange rxChange) {
         startActivity(new Intent(this, ArticleActivity.class));
         finish();
     }
