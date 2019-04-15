@@ -3,6 +3,8 @@ package com.huyingbao.module.wan;
 
 import com.huyingbao.core.base.BaseApp;
 
+import org.greenrobot.eventbus.EventBus;
+
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
@@ -13,5 +15,14 @@ public class WanApplication extends BaseApp {
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerWanComponent.builder().application(this).build();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        EventBus.builder()
+                .addIndex(new WanEventBusIndex())
+                .eventInheritance(false)
+                .installDefaultEventBus();
     }
 }
