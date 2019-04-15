@@ -14,6 +14,8 @@ import javax.inject.Singleton
 
 /**
  * rxAction创建发送管理类
+ *
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
@@ -34,8 +36,10 @@ internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManage
     override fun getBannerList() {
         val rxAction = newRxAction(GET_BANNER_LIST)
         //接口调用失败，自动重复调用5次，每次间隔3s
-        val httpObservable = mWanApi.bannerList
+        val httpObservable = mWanApi
+                .bannerList
                 .retryWhen(retryAction(5, 3))
+                .flatMap(verifyResponse())
         postHttpAction(rxAction, httpObservable)
     }
 }

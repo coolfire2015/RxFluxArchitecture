@@ -1,5 +1,6 @@
 package com.huyingbao.module.wan.ui.login.store
 
+import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.model.RxChange
@@ -7,10 +8,7 @@ import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.module.wan.action.WanResponse
 import com.huyingbao.module.wan.ui.login.action.LoginAction
 import com.huyingbao.module.wan.ui.login.model.User
-
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,17 +18,22 @@ import javax.inject.Singleton
 @Singleton
 class LoginStore @Inject
 internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
+    val intervalLiveData = MutableLiveData<String>()
     private var mUser: WanResponse<User>? = null
 
-    @Subscribe()
-    override fun onRxAction(rxAction: RxAction) {
-        when (rxAction.tag) {
-            LoginAction.LOGIN -> {
-                mUser = rxAction.getResponse<WanResponse<User>>()
-                postChange(RxChange.newInstance(rxAction))
-            }
-            LoginAction.REGISTER -> {
-            }
-        }
+    override fun onCleared() {
+        super.onCleared()
+        intervalLiveData.value = null
+    }
+
+    @Subscribe(tags = [LoginAction.LOGIN])
+    fun onLogin(rxAction: RxAction) {
+        mUser = rxAction.getResponse<WanResponse<User>>()
+        postChange(RxChange.newInstance(rxAction))
+    }
+
+    @Subscribe(tags = [LoginAction.GET_IDENTIFY])
+    fun setIntervalLiveData(rxAction: RxAction) {
+        intervalLiveData.value = rxAction.getResponse<Any>().toString() + ""
     }
 }

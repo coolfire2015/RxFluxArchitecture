@@ -6,30 +6,30 @@ package com.huyingbao.module.wan.ui.article.action
 interface ArticleAction {
 
     /**
-     * 获取文章列表
+     * 鑾峰彇鏂囩珷鍒楄〃
      *
-     * @param page 页码
+     * @param page 椤电爜
      */
     fun getArticleList(page: Int)
 
     /**
-     * 获取Banner列表
+     * 鑾峰彇Banner鍒楄〃
      */
     fun getBannerList()
 
     companion object {
-        val TO_BANNER = "to_banner"
-        val TO_FRIEND = "to_friend"
-        val TO_LOGIN = "to_login"
+        const val TO_BANNER = "to_banner"
+        const val TO_FRIEND = "to_friend"
+        const val TO_LOGIN = "to_login"
 
         /**
-         * 获取文章列表
+         * 鑾峰彇鏂囩珷鍒楄〃
          */
-        val GET_ARTICLE_LIST = "get_article_list"
+        const val GET_ARTICLE_LIST = "get_article_list"
 
         /**
-         * 获取Banner列表
+         * 鑾峰彇Banner鍒楄〃
          */
-        val GET_BANNER_LIST = "get_banner_list"
+        const val GET_BANNER_LIST = "get_banner_list"
     }
 }

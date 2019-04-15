@@ -5,7 +5,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.core.common.R2
@@ -14,8 +13,6 @@ import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
 import com.huyingbao.module.wan.ui.friend.model.WebSite
 import com.huyingbao.module.wan.ui.friend.store.FriendStore
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import javax.inject.Inject
 
@@ -44,13 +41,10 @@ constructor() : BaseRxFragment<FriendStore>() {
         initAdapter()
         showData()
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (rxStore!!.isCreated) return
+        if (rxStore!!.isCreated) {
+            return
+        }
         refresh()
-    }
-
-    @Subscribe()
-    override fun onRxChanged(rxChange: RxChange) {
-        super.onRxChanged(rxChange)
     }
 
     /**
@@ -59,7 +53,8 @@ constructor() : BaseRxFragment<FriendStore>() {
     private fun initRecyclerView() {
         mRvContent.layoutManager = LinearLayoutManager(activity)
         mRvContent.setHasFixedSize(true)
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     /**

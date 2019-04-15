@@ -12,7 +12,6 @@ import com.huyingbao.module.wan.ui.friend.view.FriendFragment
 import com.huyingbao.module.wan.ui.login.view.LoginActivity
 import dagger.Lazy
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 /**
@@ -33,15 +32,18 @@ class ArticleActivity : BaseRxActivity<ArticleStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
 
-    @Subscribe()
-    override fun onRxChanged(rxChange: RxChange) {
-        super.onRxChanged(rxChange)
-        when (rxChange.tag) {
-            ArticleAction.TO_BANNER -> addFragmentHideExisting(mBannerFragmentLazy.get())
-            ArticleAction.TO_FRIEND -> addFragmentHideExisting(mFriendFragmentLazy.get())
-            ArticleAction.TO_LOGIN -> startActivity(Intent(this, LoginActivity::class.java))
-            else -> {
-            }
-        }
+    @Subscribe(tags = [ArticleAction.TO_LOGIN])
+    fun toLogin(rxChange: RxChange) {
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    @Subscribe(tags = [ArticleAction.TO_FRIEND])
+    fun toFriend(rxChange: RxChange) {
+        addFragmentHideExisting(mFriendFragmentLazy!!.get())
+    }
+
+    @Subscribe(tags = [ArticleAction.TO_BANNER])
+    fun toBanner(rxChange: RxChange) {
+        addFragmentHideExisting(mBannerFragmentLazy!!.get())
     }
 }

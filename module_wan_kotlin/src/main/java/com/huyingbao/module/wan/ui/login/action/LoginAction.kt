@@ -6,35 +6,35 @@ package com.huyingbao.module.wan.ui.login.action
 interface LoginAction {
 
     /**
-     * ×¢²á
+     * æ³¨å†Œ
      *
-     * @param username   ÓÃ»§Ãû
-     * @param password   ÃÜÂë
-     * @param repassword ÃÜÂë
+     * @param username   ç”¨æˆ·å
+     * @param password   å¯†ç 
+     * @param repassword å¯†ç 
      */
     fun register(username: String, password: String, repassword: String)
 
     /**
-     * µÇÂ¼
+     * ç™»å½•
      *
-     * @param username ÓÃ»§Ãû
-     * @param password ÃÜÂë
+     * @param username ç”¨æˆ·å
+     * @param password å¯†ç 
      */
     fun login(username: String, password: String)
 
     /**
-     * ·¢ËÍÑéÖ¤Âë,60sÖ®ºó¿ÉÒÔÖØ·¢
+     * å‘é€éªŒè¯ç ,10sä¹‹åå¯ä»¥é‡å‘
      */
     fun getIdentify()
 
     companion object {
-        val REGISTER = "register"
+        const val REGISTER = "register"
 
-        val LOGIN = "login"
+        const val LOGIN = "login"
 
         /**
-         * ·¢ËÍÑéÖ¤Âë,60sÖ®ºó¿ÉÒÔÖØ·¢
+         * å‘é€éªŒè¯ç ,10sä¹‹åå¯ä»¥é‡å‘
          */
-        val GET_IDENTIFY = "getIdentify"
+        const val GET_IDENTIFY = "getIdentify"
     }
 }

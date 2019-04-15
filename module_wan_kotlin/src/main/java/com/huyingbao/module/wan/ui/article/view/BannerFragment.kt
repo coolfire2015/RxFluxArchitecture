@@ -42,7 +42,9 @@ constructor() : BaseRxFragment<ArticleStore>() {
         initAdapter()
         showData()
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (rxStore!!.bannerLiveData.value != null) return
+        if (rxStore!!.bannerLiveData.value != null) {
+            return
+        }
         refresh()
     }
 
@@ -52,7 +54,8 @@ constructor() : BaseRxFragment<ArticleStore>() {
     private fun initRecyclerView() {
         mRvContent.layoutManager = LinearLayoutManager(activity)
         mRvContent.setHasFixedSize(true)
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     /**

@@ -10,7 +10,6 @@ import com.huyingbao.module.wan.ui.login.action.LoginAction
 import com.huyingbao.module.wan.ui.login.store.LoginStore
 import dagger.Lazy
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 /**
@@ -26,14 +25,9 @@ class LoginActivity : BaseRxActivity<LoginStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
 
-    @Subscribe()
-    override fun onRxChanged(rxChange: RxChange) {
-        super.onRxChanged(rxChange)
-        when (rxChange.tag) {
-            LoginAction.LOGIN -> {
-                startActivity(Intent(this, ArticleActivity::class.java))
-                finish()
-            }
-        }
+    @Subscribe(tags = [LoginAction.LOGIN])
+    fun onLogin(rxChange: RxChange) {
+        startActivity(Intent(this, ArticleActivity::class.java))
+        finish()
     }
 }

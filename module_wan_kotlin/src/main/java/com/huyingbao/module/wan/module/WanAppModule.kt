@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class WanAppModule {
     @Singleton
     @Provides
-    internal fun provideMainApi(client: OkHttpClient): WanApi {
+    internal fun provideWanApi(client: OkHttpClient): WanApi {
         val retrofit = Retrofit.Builder()
                 .baseUrl(WanContants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))

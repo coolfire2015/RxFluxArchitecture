@@ -6,14 +6,14 @@ package com.huyingbao.module.wan.ui.friend.action
 interface FriendAction {
 
     /**
-     * 获取友站列表
+     * 鑾峰彇鍙嬬珯鍒楄〃
      */
     fun getFriendList()
 
     companion object {
         /**
-         * 获取友站列表
+         * 鑾峰彇鍙嬬珯鍒楄〃
          */
-        val GET_FRIEND_LIST = "get_friend_list"
+        const val GET_FRIEND_LIST = "get_friend_list"
     }
 }

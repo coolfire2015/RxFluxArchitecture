@@ -57,13 +57,13 @@ constructor() : BaseRxFragment<ArticleStore>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_to_banner) {
-            mActionCreator.postLocalAction(ArticleAction.TO_BANNER)
+            mActionCreator.postLocalChange(ArticleAction.TO_BANNER)
             return true
         } else if (item.itemId == R.id.menu_to_friend) {
-            mActionCreator.postLocalAction(ArticleAction.TO_FRIEND)
+            mActionCreator.postLocalChange(ArticleAction.TO_FRIEND)
             return true
         } else if (item.itemId == R.id.menu_to_login) {
-            mActionCreator.postLocalAction(ArticleAction.TO_LOGIN)
+            mActionCreator.postLocalChange(ArticleAction.TO_LOGIN)
             return true
         } else {
             return super.onOptionsItemSelected(item)
@@ -76,7 +76,8 @@ constructor() : BaseRxFragment<ArticleStore>() {
     private fun initRecyclerView() {
         mRvContent.layoutManager = LinearLayoutManager(activity)
         mRvContent.setHasFixedSize(true)
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//硬件加速
+        //硬件加速
+        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     /**
@@ -111,7 +112,8 @@ constructor() : BaseRxFragment<ArticleStore>() {
      */
     private fun refresh() {
         rxStore!!.nextRequestPage = 1
-        mAdapter!!.setEnableLoadMore(false)//这里的作用是防止下拉刷新的时候还可以上拉加载
+        //这里的作用是防止下拉刷新的时候还可以上拉加载
+        mAdapter!!.setEnableLoadMore(false)
         mActionCreator.getArticleList(rxStore!!.nextRequestPage)
     }
 

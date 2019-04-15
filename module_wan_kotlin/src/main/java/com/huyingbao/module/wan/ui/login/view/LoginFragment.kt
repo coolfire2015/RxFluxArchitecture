@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import butterknife.BindView
 import butterknife.OnClick
 import com.huyingbao.core.arch.scope.ActivityScope
@@ -30,6 +31,8 @@ constructor() : BaseRxFragment<LoginStore>() {
     lateinit var mEtPassword: EditText
     @BindView(R2.id.btn_login)
     lateinit var mBtnLogin: Button
+    @BindView(R2.id.btn_identify)
+    lateinit var mBtnIdentify: Button
 
     override fun getLayoutId(): Int {
         return R.layout.wan_fragment_login
@@ -37,16 +40,34 @@ constructor() : BaseRxFragment<LoginStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.wan_label_login, true)
+        rxStore!!.intervalLiveData.observe(this, Observer{ interval ->
+            if (TextUtils.isEmpty(interval) || TextUtils.equals(interval, "0")) {
+                mBtnIdentify!!.isEnabled = true
+                mBtnIdentify!!.setText(R.string.wan_info_identify)
+            } else {
+                mBtnIdentify!!.isEnabled = false
+                val infoTimeout = resources.getString(R.string.wan_info_timeout)
+                mBtnIdentify!!.text = String.format(infoTimeout, interval)
+            }
+        })
     }
 
     @OnClick(R2.id.btn_login)
-    fun onViewClicked() {
-        val username = mEtUsername.text.toString()
-        val password = mEtPassword.text.toString()
+    fun login() {
+        val username = mEtUsername!!.text.toString()
+        val password = mEtPassword!!.text.toString()
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             Toast.makeText(activity, "请输入密码！", Toast.LENGTH_SHORT).show()
             return
         }
-        mActionCreator.login(username, password)
+        mActionCreator!!.login(username, password)
+        mActionCreator!!.getIdentify()
+    }
+
+
+    @OnClick(R2.id.btn_identify)
+    fun identify() {
+        mBtnIdentify!!.isEnabled = false
+        mActionCreator!!.getIdentify()
     }
 }
