@@ -2,21 +2,14 @@ package com.huyingbao.core.base.rxview;
 
 import android.content.Context;
 
-import com.huyingbao.core.arch.model.RxError;
-import com.huyingbao.core.arch.model.RxLoading;
-import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseDialogFragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -59,41 +52,5 @@ public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDial
         //依赖注入
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
-    }
-
-    /**
-     * 接收RxError，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
-     */
-    @Override
-    @Subscribe()
-    public void onRxError(@NonNull RxError rxError) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxError);
-    }
-
-    /**
-     * 接收RxLoading，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
-     */
-    @Override
-    @Subscribe()
-    public void onRxRetry(@NonNull RxRetry rxRetry) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxRetry);
-    }
-
-    /**
-     * 接收RxLoading，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
-     */
-    @Override
-    @Subscribe()
-    public void onRxLoading(@NonNull RxLoading rxLoading) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxLoading);
     }
 }

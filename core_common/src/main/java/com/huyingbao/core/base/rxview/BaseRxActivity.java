@@ -15,7 +15,6 @@ import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonException;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.lang.reflect.ParameterizedType;
@@ -90,11 +89,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Override
     @Subscribe()
     public void onRxError(@NonNull RxError rxError) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxError);
         Throwable throwable = rxError.getThrowable();
         if (throwable instanceof CommonException) {
             Toast.makeText(this, ((CommonException) throwable).message(), Toast.LENGTH_SHORT).show();
@@ -116,11 +112,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Override
     @Subscribe()
     public void onRxRetry(@NonNull RxRetry rxRetry) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxRetry);
         CoordinatorLayout coordinatorLayout = findViewById(R.id.cdl_content);
         if (coordinatorLayout == null) {
             return;
@@ -134,11 +127,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Override
     @Subscribe()
     public void onRxLoading(@NonNull RxLoading rxLoading) {
-        //收到后，移除粘性通知
-        EventBus.getDefault().removeStickyEvent(rxLoading);
         //显示进度框
         if (rxLoading.isLoading()) {
             mCommonLoadingDialogLazy.get().setRxLoading(rxLoading);

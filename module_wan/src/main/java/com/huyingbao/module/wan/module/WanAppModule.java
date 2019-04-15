@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WanAppModule {
     @Singleton
     @Provides
-    WanApi provideMainApi(OkHttpClient client) {
+    WanApi provideWanApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(WanContants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))

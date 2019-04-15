@@ -587,7 +587,10 @@ public class EventBus {
 
     void invokeSubscriber(Subscription subscription, Object event, String tag) {
         try {
+            //通过反射调用订阅者subscriber的方法subscriberMethod,并传入参数event
             subscription.subscriberMethod.method.invoke(subscription.subscriber, event);
+            //移除粘性订阅
+            removeStickyEvent(event);
         } catch (InvocationTargetException e) {
             handleSubscriberException(subscription, event, tag, e.getCause());
         } catch (IllegalAccessException e) {
