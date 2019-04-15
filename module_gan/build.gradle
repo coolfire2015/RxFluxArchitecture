@@ -42,7 +42,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName(),
-                             eventBusIndex      : project.getName()+'.EventBusIndex']
+                             eventBusIndex      : 'com.huyingbao.module.gan.GanEventBusIndex']
             }
         }
     }
