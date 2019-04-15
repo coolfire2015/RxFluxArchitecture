@@ -3,25 +3,20 @@ package com.huyingbao.module.wan.ui.friend.view;
 import android.os.Bundle;
 import android.view.View;
 
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.common.R2;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator;
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter;
 import com.huyingbao.module.wan.ui.friend.model.WebSite;
 import com.huyingbao.module.wan.ui.friend.store.FriendStore;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -60,12 +55,6 @@ public class FriendFragment extends BaseRxFragment<FriendStore> {
             return;
         }
         refresh();
-    }
-
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
     }
 
     /**

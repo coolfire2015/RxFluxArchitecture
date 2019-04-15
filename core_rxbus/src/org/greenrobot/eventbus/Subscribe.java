@@ -27,11 +27,17 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface Subscribe {
+    /**
+     * 默认主线程
+     *
+     * @return
+     */
     ThreadMode threadMode() default ThreadMode.MAIN;
 
     /**
      * If true, delivers the most recent sticky event (posted with
-     * {@link EventBus#postSticky(Object,String)}) to this subscriber (if event available).
+     * {@link EventBus#postSticky(Object, String)}) to this subscriber (if event available).
+     * 默认粘性通知
      */
     boolean sticky() default true;
 
@@ -44,10 +50,10 @@ public @interface Subscribe {
     int priority() default 0;
 
     /**
-     * 事件的tag,类似于BroadcastReceiver中的Action,事件的标识符
+     * 事件的tag数组,类似于BroadcastReceiver中的Action,事件的标识符
      *
      * @return
      */
-    String tag() default EventBus.DEFAULT_TAG;
+    String[] tags() default {EventBus.DEFAULT_TAG};
 }
 

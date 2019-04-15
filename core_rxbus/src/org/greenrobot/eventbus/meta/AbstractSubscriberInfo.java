@@ -60,19 +60,19 @@ public abstract class AbstractSubscriberInfo implements SubscriberInfo {
         return shouldCheckSuperclass;
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType) {
-        return createSubscriberMethod(methodName, tag, eventType, ThreadMode.POSTING, 0, false);
+    protected SubscriberMethod createSubscriberMethod(String methodName, String[] tags, Class<?> eventType) {
+        return createSubscriberMethod(methodName, tags, eventType, ThreadMode.POSTING, 0, false);
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType, ThreadMode threadMode) {
-        return createSubscriberMethod(methodName, tag, eventType, threadMode, 0, false);
+    protected SubscriberMethod createSubscriberMethod(String methodName, String[] tags, Class<?> eventType, ThreadMode threadMode) {
+        return createSubscriberMethod(methodName, tags, eventType, threadMode, 0, false);
     }
 
-    protected SubscriberMethod createSubscriberMethod(String methodName, String tag, Class<?> eventType, ThreadMode threadMode,
+    protected SubscriberMethod createSubscriberMethod(String methodName, String[] tags, Class<?> eventType, ThreadMode threadMode,
                                                       int priority, boolean sticky) {
         try {
             Method method = subscriberClass.getDeclaredMethod(methodName, eventType);
-            return new SubscriberMethod(method, tag, eventType, threadMode, priority, sticky);
+            return new SubscriberMethod(method, tags, eventType, threadMode, priority, sticky);
         } catch (NoSuchMethodException e) {
             throw new EventBusException("Could not find subscriber method in " + subscriberClass +
                     ". Maybe a missing ProGuard rule?", e);

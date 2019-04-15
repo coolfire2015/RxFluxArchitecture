@@ -72,13 +72,13 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_to_banner) {
-            mActionCreator.postLocalAction(ArticleAction.TO_BANNER);
+            mActionCreator.postLocalChange(ArticleAction.TO_BANNER);
             return true;
         } else if (item.getItemId() == R.id.menu_to_friend) {
-            mActionCreator.postLocalAction(ArticleAction.TO_FRIEND);
+            mActionCreator.postLocalChange(ArticleAction.TO_FRIEND);
             return true;
         } else if (item.getItemId() == R.id.menu_to_login) {
-            mActionCreator.postLocalAction(ArticleAction.TO_LOGIN);
+            mActionCreator.postLocalChange(ArticleAction.TO_LOGIN);
             return true;
         } else {
             return super.onOptionsItemSelected(item);

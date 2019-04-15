@@ -65,7 +65,7 @@ public class RandomStore extends RxActivityStore {
      * @param rxAction
      */
     @Override
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe()
     public void onRxAction(RxAction rxAction) {
         switch (rxAction.getTag()) {
             case RandomAction.GET_DATA_LIST:

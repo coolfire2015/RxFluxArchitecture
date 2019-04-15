@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
@@ -12,11 +11,9 @@ import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
 import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
@@ -41,22 +38,18 @@ public class ArticleActivity extends BaseRxActivity<ArticleStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case ArticleAction.TO_BANNER:
-                addFragmentHideExisting(mBannerFragmentLazy.get());
-                break;
-            case ArticleAction.TO_FRIEND:
-                addFragmentHideExisting(mFriendFragmentLazy.get());
-                break;
-            case ArticleAction.TO_LOGIN:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags = {ArticleAction.TO_LOGIN})
+    public void toLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Subscribe(tags = {ArticleAction.TO_FRIEND})
+    public void toFriend() {
+        addFragmentHideExisting(mFriendFragmentLazy.get());
+    }
+
+    @Subscribe(tags = {ArticleAction.TO_BANNER})
+    public void toBanner() {
+        addFragmentHideExisting(mBannerFragmentLazy.get());
     }
 }

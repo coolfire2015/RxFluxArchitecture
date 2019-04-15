@@ -28,9 +28,9 @@ public class SubscriberMethod {
      */
     final Method method;
     /**
-     * 方法名对应的tag
+     * 方法名对应的tag数组
      */
-    final String tag;
+    final String[] tags;
     /**
      * 线程
      */
@@ -52,9 +52,9 @@ public class SubscriberMethod {
      */
     String methodString;
 
-    public SubscriberMethod(Method method, String tag, Class<?> eventType, ThreadMode threadMode, int priority, boolean sticky) {
+    public SubscriberMethod(Method method, String[] tags, Class<?> eventType, ThreadMode threadMode, int priority, boolean sticky) {
         this.method = method;
-        this.tag = tag;
+        this.tags = tags;
         this.threadMode = threadMode;
         this.eventType = eventType;
         this.priority = priority;
@@ -90,9 +90,5 @@ public class SubscriberMethod {
     @Override
     public int hashCode() {
         return method.hashCode();
-    }
-
-    public int getHashCode() {
-        return (tag + eventType.getName()).hashCode();
     }
 }

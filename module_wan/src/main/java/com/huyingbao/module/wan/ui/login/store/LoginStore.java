@@ -9,7 +9,6 @@ import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.model.User;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,22 +37,15 @@ public class LoginStore extends RxActivityStore {
         mIntervalLiveData.setValue(null);
     }
 
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRxAction(RxAction rxAction) {
-        switch (rxAction.getTag()) {
-            case LoginAction.LOGIN:
-                mUser = rxAction.getResponse();
-                postChange(RxChange.newInstance(rxAction));
-                break;
-            case LoginAction.REGISTER:
-                break;
-            case LoginAction.GET_IDENTIFY:
-                mIntervalLiveData.setValue(rxAction.getResponse() + "");
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags={LoginAction.LOGIN})
+    public void onLogin(RxAction rxAction) {
+        mUser = rxAction.getResponse();
+        postChange(RxChange.newInstance(rxAction));
+    }
+
+    @Subscribe(tags={LoginAction.GET_IDENTIFY})
+    public void setIntervalLiveData(RxAction rxAction) {
+        mIntervalLiveData.setValue(rxAction.getResponse() + "");
     }
 
     public MutableLiveData<String> getIntervalLiveData() {

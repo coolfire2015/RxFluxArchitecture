@@ -1,6 +1,5 @@
 package com.huyingbao.core.arch.view;
 
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
@@ -28,14 +27,6 @@ public interface RxFluxView<T extends ViewModel> {
      */
     @Nullable
     T getRxStore();
-
-    /**
-     * 注册订阅之后，接收RxStore发送的RxChange事件，
-     * 响应操作正常结果。
-     *
-     * @param rxChange
-     */
-    void onRxChanged(@NonNull RxChange rxChange);
 
     /**
      * 注册订阅之后，接收RxActionCreator发送的RxError事件，

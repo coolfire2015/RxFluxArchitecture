@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
  * Created by liujunfeng on 2019/1/1.
  */
 public class RxChange extends RxEvent {
-    private RxChange(@NonNull String tag) {
+    public RxChange(@NonNull String tag) {
         super(tag);
     }
 

@@ -2,6 +2,7 @@ package com.huyingbao.core.arch.action;
 
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
@@ -156,6 +157,15 @@ public abstract class RxActionCreator {
         mRxDispatcher.postRxError(RxError.newInstance(rxAction, throwable));
     }
 
+    /**
+     * 通过调度器dispatcher将rxChange事件推出去
+     *
+     * @param rxChange
+     */
+    protected void postRxChange(RxChange rxChange) {
+        mRxDispatcher.postRxChange(rxChange);
+    }
+
 
     /**
      * 创建新的RxAction
@@ -238,6 +248,16 @@ public abstract class RxActionCreator {
         RxAction rxAction = newRxAction(actionId, data);
         postRxAction(rxAction);
         removeRxAction(rxAction);
+    }
+
+    /**
+     * 发送本地change,由view直接处理
+     *
+     * @param actionId
+     */
+    public void postLocalChange(@NonNull String actionId) {
+        RxChange rxChange = new RxChange(actionId);
+        postRxChange(rxChange);
     }
 
     /**

@@ -6,6 +6,7 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxChange;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
@@ -38,7 +39,7 @@ import androidx.lifecycle.ViewModel;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class RxFragmentStore extends ViewModel implements RxActionDispatch {
+public abstract class RxFragmentStore extends ViewModel implements LifecycleObserver {
     private final RxDispatcher mRxDispatcher;
 
     public RxFragmentStore(RxDispatcher rxDispatcher) {

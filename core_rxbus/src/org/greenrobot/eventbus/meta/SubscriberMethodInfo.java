@@ -19,28 +19,28 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class SubscriberMethodInfo {
     final String methodName;
-    final String tag;
+    final String[] tags;
     final ThreadMode threadMode;
     final Class<?> eventType;
     final int priority;
     final boolean sticky;
 
-    public SubscriberMethodInfo(String methodName, String tag, Class<?> eventType, ThreadMode threadMode,
+    public SubscriberMethodInfo(String methodName, String[] tags, Class<?> eventType, ThreadMode threadMode,
                                 int priority, boolean sticky) {
         this.methodName = methodName;
-        this.tag = tag;
+        this.tags = tags;
         this.threadMode = threadMode;
         this.eventType = eventType;
         this.priority = priority;
         this.sticky = sticky;
     }
 
-    public SubscriberMethodInfo(String methodName, String tag, Class<?> eventType) {
-        this(methodName, tag, eventType, ThreadMode.POSTING, 0, false);
+    public SubscriberMethodInfo(String methodName, String[] tags, Class<?> eventType) {
+        this(methodName, tags, eventType, ThreadMode.POSTING, 0, false);
     }
 
-    public SubscriberMethodInfo(String methodName, String tag, Class<?> eventType, ThreadMode threadMode) {
-        this(methodName, tag, eventType, threadMode, 0, false);
+    public SubscriberMethodInfo(String methodName, String[] tags, Class<?> eventType, ThreadMode threadMode) {
+        this(methodName, tags, eventType, threadMode, 0, false);
     }
 
 }

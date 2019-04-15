@@ -39,7 +39,7 @@ public class MainActivity extends BaseRxActivity<MainStore> {
      * 接收RxChange，粘性
      */
     @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe()
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {

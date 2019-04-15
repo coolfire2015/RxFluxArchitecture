@@ -8,7 +8,6 @@ import com.huyingbao.module.wan.ui.friend.action.FriendAction;
 import com.huyingbao.module.wan.ui.friend.model.WebSite;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -37,17 +36,10 @@ public class FriendStore extends RxFragmentStore {
         mWebSiteListData.setValue(null);
     }
 
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRxAction(RxAction rxAction) {
-        switch (rxAction.getTag()) {
-            case FriendAction.GET_FRIEND_LIST:
-                mIsCreated = true;
-                mWebSiteListData.setValue(rxAction.getResponse());
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags = {FriendAction.GET_FRIEND_LIST})
+    public void setWebSiteListData(RxAction rxAction) {
+        mIsCreated = true;
+        mWebSiteListData.setValue(rxAction.getResponse());
     }
 
     public MutableLiveData<WanResponse<ArrayList<WebSite>>> getWebSiteListData() {

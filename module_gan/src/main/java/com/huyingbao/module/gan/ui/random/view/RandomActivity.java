@@ -35,7 +35,7 @@ public class RandomActivity extends BaseRxActivity<RandomStore> {
     }
 
     @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe()
     public void onRxChanged(@NonNull RxChange rxChange) {
         super.onRxChanged(rxChange);
         switch (rxChange.getTag()) {

@@ -33,7 +33,7 @@ class ArticleActivity : BaseRxActivity<ArticleStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe()
     override fun onRxChanged(rxChange: RxChange) {
         super.onRxChanged(rxChange)
         when (rxChange.tag) {

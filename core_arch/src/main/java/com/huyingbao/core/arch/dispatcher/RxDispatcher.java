@@ -5,13 +5,14 @@ import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
-import com.huyingbao.core.arch.store.RxActionDispatch;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.lifecycle.LifecycleObserver;
 
 /**
  * Dispatcher不会被直接使用，
@@ -33,7 +34,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>     实现RxActionDispatch的RxStore
      */
-    public <T extends RxActionDispatch> void subscribeRxStore(final T rxStore) {
+    public <T extends LifecycleObserver> void subscribeRxStore(final T rxStore) {
         EventBus.getDefault().register(rxStore);
     }
 
@@ -53,7 +54,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>
      */
-    public <T extends RxActionDispatch> void unsubscribeRxStore(final T rxStore) {
+    public <T extends LifecycleObserver> void unsubscribeRxStore(final T rxStore) {
         EventBus.getDefault().unregister(rxStore);
     }
 
@@ -92,7 +93,7 @@ public class RxDispatcher {
      * @param rxAction
      */
     public void postRxAction(final RxAction rxAction) {
-        EventBus.getDefault().post(rxAction,rxAction.getTag());
+        EventBus.getDefault().post(rxAction, rxAction.getTag());
     }
 
     /**
@@ -102,7 +103,7 @@ public class RxDispatcher {
      * @param rxChange
      */
     public void postRxChange(final RxChange rxChange) {
-        EventBus.getDefault().postSticky(rxChange,rxChange.getTag());
+        EventBus.getDefault().postSticky(rxChange, rxChange.getTag());
     }
 
     /**

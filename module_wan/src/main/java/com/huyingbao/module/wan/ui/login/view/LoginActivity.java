@@ -3,18 +3,15 @@ package com.huyingbao.module.wan.ui.login.view;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.rxview.BaseRxActivity;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
@@ -34,17 +31,9 @@ public class LoginActivity extends BaseRxActivity<LoginStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Override
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case LoginAction.LOGIN:
-                startActivity(new Intent(this, ArticleActivity.class));
-                finish();
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags = {LoginAction.LOGIN})
+    public void onLogin() {
+        startActivity(new Intent(this, ArticleActivity.class));
+        finish();
     }
 }

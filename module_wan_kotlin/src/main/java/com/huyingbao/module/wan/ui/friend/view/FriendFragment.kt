@@ -48,7 +48,7 @@ constructor() : BaseRxFragment<FriendStore>() {
         refresh()
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe()
     override fun onRxChanged(rxChange: RxChange) {
         super.onRxChanged(rxChange)
     }

@@ -45,7 +45,7 @@ public class EventBus {
      * Log tag, apps may override it.
      */
     public static String TAG = "EventBus";
-    public static final String DEFAULT_TAG="defaultTag";
+    public static final String DEFAULT_TAG = "defaultTag";
 
     static volatile EventBus defaultInstance;
 
@@ -56,7 +56,7 @@ public class EventBus {
      * Map对象的值就是用来缓存订阅方法的信息的
      * key为EventType的class对象，value为Subscription对象的集合
      */
-    private final Map<Class<?>, CopyOnWriteArrayList<Pair<String,Subscription>>> subscriptionsByEventType;
+    private final Map<Class<?>, CopyOnWriteArrayList<Pair<String[], Subscription>>> subscriptionsByEventType;
     private final Map<Object, List<Class<?>>> typesBySubscriber;
     private final Map<Class<?>, Object> stickyEvents;
 
@@ -178,10 +178,10 @@ public class EventBus {
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
         //缓存subscriber method的信息
         Class<?> eventType = subscriberMethod.eventType;
-        String tag = subscriberMethod.tag;
+        String[] tags = subscriberMethod.tags;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
-        Pair<String,Subscription> newPair=new Pair<>(tag,newSubscription);
-        CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        Pair<String[], Subscription> newPair = new Pair<>(tags, newSubscription);
+        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
             subscriptionsByEventType.put(eventType, subscriptions);
@@ -220,21 +220,24 @@ public class EventBus {
                     Class<?> candidateEventType = entry.getKey();
                     if (eventType.isAssignableFrom(candidateEventType)) {
                         Object stickyEvent = entry.getValue();
-                        checkPostStickyEventToSubscription(newSubscription, stickyEvent,tag);
+                        checkPostStickyEventToSubscription(newSubscription, stickyEvent, tags);
                     }
                 }
             } else {
                 Object stickyEvent = stickyEvents.get(eventType);
-                checkPostStickyEventToSubscription(newSubscription, stickyEvent, tag);
+                checkPostStickyEventToSubscription(newSubscription, stickyEvent, tags);
             }
         }
     }
 
-    private void checkPostStickyEventToSubscription(Subscription newSubscription, Object stickyEvent, String tag) {
+    private void checkPostStickyEventToSubscription(Subscription newSubscription, Object stickyEvent, String[] tags) {
         if (stickyEvent != null) {
             // If the subscriber is trying to abort the event, it will fail (event is not tracked in posting state)
             // --> Strange corner case, which we don't take care of here.
-            postToSubscription(newSubscription, stickyEvent, tag, isMainThread());
+            //执行每个tag对应的订阅者方法
+            for (String tag : tags) {
+                postToSubscription(newSubscription, stickyEvent, tag, isMainThread());
+            }
         }
     }
 
@@ -256,7 +259,7 @@ public class EventBus {
      * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
      */
     private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
-        List<Pair<String,Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        List<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions != null) {
             int size = subscriptions.size();
             for (int i = 0; i < size; i++) {
@@ -340,7 +343,7 @@ public class EventBus {
     }
 
     public void postSticky(Object event) {
-        postSticky(event,DEFAULT_TAG);
+        postSticky(event, DEFAULT_TAG);
     }
 
     /**
@@ -410,7 +413,7 @@ public class EventBus {
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
-                CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions;
+                CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
                 synchronized (this) {
                     subscriptions = subscriptionsByEventType.get(clazz);
                 }
@@ -447,7 +450,7 @@ public class EventBus {
     }
 
     /**
-     * 会拿出注册时缓存订阅方法的相关信息subscriptionsByEventType，\
+     * 会拿出注册时缓存订阅方法的相关信息subscriptionsByEventType，
      * 并迭代这个Map对象，取出订阅方法的信息，并最终执行postToSubscription方法
      *
      * @param event
@@ -456,19 +459,23 @@ public class EventBus {
      * @return
      */
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
-        CopyOnWriteArrayList<Pair<String,Subscription>> subscriptions;
+        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
         synchronized (this) {
             subscriptions = subscriptionsByEventType.get(eventClass);
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {
-            for (Pair<String,Subscription> pair : subscriptions) {
+            for (Pair<String[], Subscription> pair : subscriptions) {
                 postingState.event = event;
                 postingState.subscription = pair.second;
                 boolean aborted = false;
                 try {
-                    if(TextUtils.equals(pair.first,postingState.tag)){
-                        postToSubscription(pair.second, event, postingState.tag, postingState.isMainThread);
-                        aborted = postingState.canceled;
+                    for (String tag : pair.first) {
+                        //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
+                        if (TextUtils.equals(tag, postingState.tag)) {
+                            postToSubscription(pair.second, event, postingState.tag, postingState.isMainThread);
+                            aborted = postingState.canceled;
+                            break;
+                        }
                     }
                 } finally {
                     postingState.event = null;
