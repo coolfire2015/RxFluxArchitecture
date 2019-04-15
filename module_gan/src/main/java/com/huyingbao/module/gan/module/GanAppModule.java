@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GanAppModule {
     @Singleton
     @Provides
-    GanApi provideMainApi(OkHttpClient client) {
+    GanApi provideGanApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))

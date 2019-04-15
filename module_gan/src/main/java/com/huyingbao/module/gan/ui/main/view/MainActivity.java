@@ -11,11 +11,9 @@ import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import dagger.Lazy;
 
@@ -35,22 +33,13 @@ public class MainActivity extends BaseRxActivity<MainStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    /**
-     * 接收RxChange，粘性
-     */
-    @Override
-    @Subscribe()
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case MainAction.TO_GAN_MODULE:
-                startActivity(new Intent(this, RandomActivity.class));
-                break;
-            case MainAction.TO_WAN_MODULE:
-                ARouter.getInstance().build("/wan/ArticleActivity").navigation();
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags = {MainAction.TO_WAN_MODULE})
+    public void toWanModule(RxChange rxChange) {
+        ARouter.getInstance().build("/wan/ArticleActivity").navigation();
+    }
+
+    @Subscribe(tags = {MainAction.TO_GAN_MODULE})
+    public void toGanModule(RxChange rxChange) {
+        startActivity(new Intent(this, RandomActivity.class));
     }
 }

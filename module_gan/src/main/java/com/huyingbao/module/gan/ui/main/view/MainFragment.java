@@ -39,11 +39,11 @@ public class MainFragment extends BaseRxFragment<MainStore> {
 
     @OnClick(R2.id.btn_category_gan)
     public void toGanModule() {
-        mActionCreator.postLocalAction(MainAction.TO_GAN_MODULE);
+        mActionCreator.postLocalChange(MainAction.TO_GAN_MODULE);
     }
 
     @OnClick(R2.id.btn_category_wan)
     public void toWanModule() {
-        mActionCreator.postLocalAction(MainAction.TO_WAN_MODULE);
+        mActionCreator.postLocalChange(MainAction.TO_WAN_MODULE);
     }
 }

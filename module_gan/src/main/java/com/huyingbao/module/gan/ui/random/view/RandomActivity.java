@@ -8,7 +8,6 @@ import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -34,16 +33,8 @@ public class RandomActivity extends BaseRxActivity<RandomStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Override
-    @Subscribe()
-    public void onRxChanged(@NonNull RxChange rxChange) {
-        super.onRxChanged(rxChange);
-        switch (rxChange.getTag()) {
-            case RandomAction.TO_SHOW_DATA:
-                addFragmentHideExisting(mProductListFragmentLazy.get());
-                break;
-            default:
-                break;
-        }
+    @Subscribe(tags = {RandomAction.TO_SHOW_DATA})
+    public void toShowData(@NonNull RxChange rxChange) {
+        addFragmentHideExisting(mProductListFragmentLazy.get());
     }
 }

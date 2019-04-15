@@ -10,7 +10,6 @@ import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.model.Product;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -57,35 +56,23 @@ public class RandomStore extends RxActivityStore {
         mProductListLiveData.setValue(null);
     }
 
-    /**
-     * 接收RxAction
-     * 处理RxAction携带的数据
-     * 发送RxChange通知RxView
-     *
-     * @param rxAction
-     */
-    @Override
-    @Subscribe()
-    public void onRxAction(RxAction rxAction) {
-        switch (rxAction.getTag()) {
-            case RandomAction.GET_DATA_LIST:
-                GanResponse<Product> response = rxAction.getResponse();
-                if (mProductListLiveData.getValue() == null) {
-                    mProductListLiveData.setValue(response.getResults());
-                } else {
-                    mProductListLiveData.getValue().addAll(response.getResults());
-                    mProductListLiveData.setValue(mProductListLiveData.getValue());
-                }
-                mNextRequestPage++;
-                break;
-            case RandomAction.TO_SHOW_DATA:
-                onCleared();//跳转页面，先清除旧数据
-                mCategory = rxAction.get(GanConstants.Key.CATEGORY);
-                postChange(RxChange.newInstance(rxAction));
-                break;
-            default:
-                break;
+    @Subscribe(tags = {RandomAction.TO_SHOW_DATA})
+    public void toShowData(RxAction rxAction) {
+        onCleared();//跳转页面，先清除旧数据
+        mCategory = rxAction.get(GanConstants.Key.CATEGORY);
+        postChange(RxChange.newInstance(rxAction));
+    }
+
+    @Subscribe(tags = {RandomAction.GET_DATA_LIST})
+    public void setProductListLiveData(RxAction rxAction) {
+        GanResponse<Product> response = rxAction.getResponse();
+        if (mProductListLiveData.getValue() == null) {
+            mProductListLiveData.setValue(response.getResults());
+        } else {
+            mProductListLiveData.getValue().addAll(response.getResults());
+            mProductListLiveData.setValue(mProductListLiveData.getValue());
         }
+        mNextRequestPage++;
     }
 
     public MutableLiveData<List<Product>> getProductListLiveData() {
@@ -94,10 +81,6 @@ public class RandomStore extends RxActivityStore {
 
     public String getCategory() {
         return mCategory;
-    }
-
-    public void setCategory(String stringExtra) {
-        mCategory = stringExtra;
     }
 
     public int getNextRequestPage() {

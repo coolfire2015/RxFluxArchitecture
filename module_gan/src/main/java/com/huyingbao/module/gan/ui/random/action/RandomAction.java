@@ -4,7 +4,7 @@ package com.huyingbao.module.gan.ui.random.action;
  * Created by liujunfeng on 2019/1/1.
  */
 public interface RandomAction {
-    String TO_SHOW_DATA = "to_show_data";
+    String TO_SHOW_DATA = "toShowData";
 
     /**
      * 获取文章数据列表
