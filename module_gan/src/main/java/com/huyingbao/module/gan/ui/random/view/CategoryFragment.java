@@ -38,7 +38,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
     RecyclerView mRvContent;
 
     private List<String> mDataList;
-    private BaseQuickAdapter mAdapter;
+    private CategoryAdapter mAdapter;
 
     @Inject
     public CategoryFragment() {

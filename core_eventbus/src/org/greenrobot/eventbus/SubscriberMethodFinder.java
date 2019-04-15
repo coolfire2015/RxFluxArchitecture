@@ -83,8 +83,10 @@ class SubscriberMethodFinder {
             subscriberMethods = findUsingInfo(subscriberClass);
         }
         if (subscriberMethods.isEmpty()) {
-            throw new EventBusException("Subscriber " + subscriberClass
-                    + " and its super classes have no public methods with the @Subscribe annotation");
+            //TODO 如果订阅者中没有订阅方法,不报错
+            //throw new EventBusException("Subscriber " + subscriberClass
+            //       + " and its super classes have no public methods with the @Subscribe annotation");
+            return subscriberMethods;
         } else {
             METHOD_CACHE.put(subscriberClass, subscriberMethods);
             return subscriberMethods;

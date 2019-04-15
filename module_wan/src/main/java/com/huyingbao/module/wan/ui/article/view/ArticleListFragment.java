@@ -7,10 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
@@ -38,7 +37,7 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private BaseQuickAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     @Inject
     public ArticleListFragment() {

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
@@ -34,7 +33,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private BaseQuickAdapter mAdapter;
+    private ProductAdapter mAdapter;
 
     @Inject
     public ProductFragment() {
