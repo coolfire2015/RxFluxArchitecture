@@ -2,6 +2,10 @@ package com.huyingbao.module.app;
 
 
 import com.huyingbao.core.base.BaseApp;
+import com.huyingbao.module.gan.GanEventBusIndex;
+import com.huyingbao.module.wan.WanEventBusIndex;
+
+import org.greenrobot.eventbus.EventBus;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
@@ -15,5 +19,15 @@ public class SimpleApplication extends BaseApp {
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerSimpleComponent.builder().application(this).build();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        EventBus.builder()
+                .addIndex(new WanEventBusIndex())
+                .addIndex(new GanEventBusIndex())
+                .eventInheritance(false)
+                .installDefaultEventBus();
     }
 }
