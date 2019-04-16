@@ -3,6 +3,7 @@ package com.huyingbao.module.wan.ui.article.action;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.module.wan.action.WanActionCreator;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.action.WanResponse;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 
@@ -24,7 +24,7 @@ import io.reactivex.Observable;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
+@ActivityScope
 public class ArticleActionCreator extends WanActionCreator implements ArticleAction {
     private WanApi mWanApi;
 

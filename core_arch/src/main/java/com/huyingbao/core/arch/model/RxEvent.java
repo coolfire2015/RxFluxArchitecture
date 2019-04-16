@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class RxEvent {
+public abstract class RxEvent {
     protected final String mTag;
 
     protected RxEvent(@NonNull String tag) {

@@ -3,7 +3,6 @@ package com.huyingbao.module.wan.ui.article.view;
 import android.os.Bundle;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
@@ -34,7 +33,7 @@ public class BannerFragment extends BaseRxFragment<ArticleStore> {
     RecyclerView mRvContent;
 
     private List<Banner> mDataList;
-    private BaseQuickAdapter mAdapter;
+    private BannerAdapter mAdapter;
 
     @Inject
     public BannerFragment() {

@@ -48,7 +48,7 @@ public abstract class RxActivityStore extends ViewModel implements LifecycleObse
     }
 
     /**
-     * 所关联对象（Activity/Fragment）创建时调用该方法
+     * 所关联对象（Activity）创建时调用该方法
      * 需要将store注册到dispatcher中
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -61,7 +61,7 @@ public abstract class RxActivityStore extends ViewModel implements LifecycleObse
     }
 
     /**
-     * 所关联对象（Activity/Fragment）销毁时调用该方法
+     * 所关联对象（Activity）销毁时调用该方法
      * 从dispatcher中解除注册
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -72,6 +72,8 @@ public abstract class RxActivityStore extends ViewModel implements LifecycleObse
 
     /**
      * 注解CallSuper强制子类复写该方法时调用父方法
+     * 所关联对象（Activity）销毁时调用该方法
+     * 清理缓存数据
      */
     @Override
     @CallSuper

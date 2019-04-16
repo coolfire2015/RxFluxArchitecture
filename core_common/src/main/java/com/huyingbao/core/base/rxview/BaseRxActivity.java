@@ -84,6 +84,13 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //View在destroy时,不再持有该Store对象
+        mStore = null;
+    }
+
     /**
      * 接收RxError，粘性
      * 该方法不经过RxStore,

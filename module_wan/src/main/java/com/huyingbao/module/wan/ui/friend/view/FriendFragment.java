@@ -82,10 +82,9 @@ public class FriendFragment extends BaseRxFragment<FriendStore> {
      */
     private void showData() {
         getRxStore().getWebSiteListData().observe(this, products -> {
-            if (products == null) {
-                return;
+            if (products != null) {
+                setData(products.getData());
             }
-            setData(products.getData());
         });
     }
 

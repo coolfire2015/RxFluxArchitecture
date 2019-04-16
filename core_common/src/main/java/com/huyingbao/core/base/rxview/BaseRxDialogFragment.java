@@ -2,6 +2,8 @@ package com.huyingbao.core.base.rxview;
 
 import android.content.Context;
 
+import com.huyingbao.core.arch.store.RxActivityStore;
+import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseDialogFragment;
 
@@ -36,7 +38,11 @@ public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDial
             return null;
         }
         Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
+        if (tClass.getSuperclass() == RxActivityStore.class) {
+            mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
+        } else if (tClass.getSuperclass() == RxFragmentStore.class) {
+            mStore = ViewModelProviders.of(this, mViewModelFactory).get(tClass);
+        }
         return mStore;
     }
 
@@ -52,5 +58,12 @@ public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDial
         //依赖注入
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //View在destroy时,不再持有该Store对象
+        mStore = null;
     }
 }

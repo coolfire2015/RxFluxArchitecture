@@ -3,7 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" filepath="$PROJECT_DIR$/RxFluxDaggerArchitecture.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module_app/module_app.iml" filepath="$PROJECT_DIR$/module_app/module_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_arch/core_arch.iml" filepath="$PROJECT_DIR$/core_arch/core_arch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_common/core_common.iml" filepath="$PROJECT_DIR$/core_common/core_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_eventbus/core_eventbus.iml" filepath="$PROJECT_DIR$/core_eventbus/core_eventbus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_eventbus_processor/core_eventbus_processor.iml" filepath="$PROJECT_DIR$/core_eventbus_processor/core_eventbus_processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_wan/module_wan.iml" filepath="$PROJECT_DIR$/module_wan/module_wan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_android/test_android.iml" filepath="$PROJECT_DIR$/test_android/test_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_junit/test_junit.iml" filepath="$PROJECT_DIR$/test_junit/test_junit.iml" />
     </modules>
   </component>
 </project>

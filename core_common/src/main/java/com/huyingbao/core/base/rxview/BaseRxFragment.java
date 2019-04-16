@@ -2,6 +2,8 @@ package com.huyingbao.core.base.rxview;
 
 import android.content.Context;
 
+import com.huyingbao.core.arch.store.RxActivityStore;
+import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseFragment;
 import com.orhanobut.logger.Logger;
@@ -37,7 +39,11 @@ public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment i
             return null;
         }
         Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
-        mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
+        if (tClass.getSuperclass() == RxActivityStore.class) {
+            mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
+        } else if (tClass.getSuperclass() == RxFragmentStore.class) {
+            mStore = ViewModelProviders.of(this, mViewModelFactory).get(tClass);
+        }
         return mStore;
     }
 
@@ -57,5 +63,12 @@ public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment i
             Logger.e("依赖注入失败");
         }
         super.onAttach(context);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //View在destroy时,不再持有该Store对象
+        mStore = null;
     }
 }

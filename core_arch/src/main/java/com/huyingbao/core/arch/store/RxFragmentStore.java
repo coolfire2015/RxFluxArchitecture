@@ -5,6 +5,7 @@ import android.util.Log;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxChange;
 
+import androidx.annotation.CallSuper;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -47,7 +48,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
     }
 
     /**
-     * 所关联对象（Activity/Fragment）创建时调用该方法
+     * 所关联对象（Fragment）创建时调用该方法
      * 需要将store注册到dispatcher中
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -61,7 +62,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
 
 
     /**
-     * 所关联对象（Activity/Fragment）销毁时调用该方法
+     * 所关联对象（Fragment）销毁时调用该方法
      * 从dispatcher中解除注册
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -70,7 +71,13 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
+    /**
+     * 注解CallSuper强制子类复写该方法时调用父方法
+     * 所关联对象（Fragment）销毁时调用该方法
+     * 清理缓存数据
+     */
     @Override
+    @CallSuper
     protected void onCleared() {
         Log.w("RxFlux", "19.2-cleared RxFragmentStore : " + getClass().getSimpleName());
     }
