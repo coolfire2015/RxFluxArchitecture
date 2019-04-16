@@ -17,9 +17,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class LoginActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : WanActionCreator(rxDispatcher, rxActionManager), LoginAction {
-    @Inject
-    lateinit var mWanApi: WanApi
+internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager, private val mWanApi: WanApi) : WanActionCreator(rxDispatcher, rxActionManager), LoginAction {
 
     override fun register(username: String, password: String, repassword: String) {
         val rxAction = newRxAction(REGISTER)

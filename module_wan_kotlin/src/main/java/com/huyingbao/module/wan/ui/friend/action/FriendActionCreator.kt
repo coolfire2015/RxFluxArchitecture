@@ -12,9 +12,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class FriendActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager), FriendAction {
-    @Inject
-    lateinit var mWanApi: WanApi
+internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager, private val mWanApi: WanApi) : RxActionCreator(rxDispatcher, rxActionManager), FriendAction {
 
     override fun getFriendList() {
         val rxAction = newRxAction(FriendAction.GET_FRIEND_LIST)

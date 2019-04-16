@@ -14,12 +14,12 @@ import javax.inject.Inject;
  */
 @FragmentScope
 public class FriendActionCreator extends RxActionCreator implements FriendAction {
-    @Inject
-    WanApi mWanApi;
+    private WanApi mWanApi;
 
     @Inject
-    FriendActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    FriendActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager, WanApi wanApi) {
         super(rxDispatcher, rxActionManager);
+        mWanApi = wanApi;
     }
 
     @Override

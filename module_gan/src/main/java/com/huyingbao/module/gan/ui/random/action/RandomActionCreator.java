@@ -18,12 +18,12 @@ import javax.inject.Inject;
  */
 @ActivityScope
 public class RandomActionCreator extends RxActionCreator implements RandomAction {
-    @Inject
-    GanApi mGanApi;
+    private GanApi mGanApi;
 
     @Inject
-    RandomActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager) {
+    RandomActionCreator(RxDispatcher rxDispatcher, RxActionManager rxActionManager, GanApi ganApi) {
         super(rxDispatcher, rxActionManager);
+        mGanApi = ganApi;
     }
 
     @Override

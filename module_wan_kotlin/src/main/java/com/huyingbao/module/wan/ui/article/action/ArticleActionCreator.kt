@@ -20,9 +20,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class ArticleActionCreator @Inject
-internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : WanActionCreator(rxDispatcher, rxActionManager), ArticleAction {
-    @Inject
-    lateinit var mWanApi: WanApi
+internal constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager, private val mWanApi: WanApi) : WanActionCreator(rxDispatcher, rxActionManager), ArticleAction {
 
     override fun getArticleList(page: Int) {
         val rxAction = newRxAction(GET_ARTICLE_LIST)

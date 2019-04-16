@@ -40,7 +40,7 @@ constructor() : BaseRxFragment<LoginStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.wan_label_login, true)
-        rxStore!!.intervalLiveData.observe(this, Observer{ interval ->
+        rxStore!!.intervalLiveData.observe(this, Observer { interval ->
             if (TextUtils.isEmpty(interval) || TextUtils.equals(interval, "0")) {
                 mBtnIdentify!!.isEnabled = true
                 mBtnIdentify!!.setText(R.string.wan_info_identify)
