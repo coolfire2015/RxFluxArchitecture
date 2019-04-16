@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 订阅管理类
- * 将rxAction与disposable连接起来，
+ * 将rxAction与disposable(订阅与被订阅关联对象)连接起来，
  * action的tag作为key
  * <p>
  * Created by liujunfeng on 2019/1/1.
@@ -21,6 +21,7 @@ import io.reactivex.disposables.Disposable;
 public class RxActionManager {
     /**
      * 管理订阅的ArrayMap
+     * <p>
      * rxAction的tag作为key
      */
     private ArrayMap<String, Pair<Integer, Disposable>> mMap;

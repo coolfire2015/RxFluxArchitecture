@@ -15,11 +15,16 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 这个类必须被继承,提供一个可以创建RxAction的方法.
+ * <p>
  * 按钮被点击触发回调方法，在回调方法中调用ActionCreator提供的有语义的的方法，
  * ActionCreator会根据传入参数创建Action并通过Dispatcher发送给Store，
+ * <p>
  * 所有订阅了这个Action的Store会接收到订阅的Action并消化Action，
- * 然后Store会发送UI状态改变的事件给相关的Activity（或Fragment)，
- * Activity在收到状态发生改变的事件之后，开始更新UI（更新UI的过程中会从Store获取所有需要的数据）。
+ * 然后Store会发送UI状态改变的事件RxChange给相关的View(Activity或Fragment)
+ * <p>
+ * View在收到状态发生改变的事件之后，开始更新UI（更新UI的过程中会从Store获取所有需要的数据）。
+ * <p>
+ * 类似MVP模式中的Presenter,只是方法执行完成没有回调方法
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

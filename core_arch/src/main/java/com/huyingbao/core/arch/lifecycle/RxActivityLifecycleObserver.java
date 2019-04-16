@@ -1,7 +1,6 @@
 package com.huyingbao.core.arch.lifecycle;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
@@ -13,6 +12,10 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
 /**
+ * Activity生命周期订阅者对象,
+ * <p>
+ * 在Activity对象外,执行与该Activity生命周期相关联的方法.
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public class RxActivityLifecycleObserver implements LifecycleObserver {
@@ -24,16 +27,15 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
 
     /**
      * activity创建成功之后调用,
-     * 若activity是RxViewDispatch的子类,
-     * 获取需要关联的RxStoreList
-     * 将RxStoreList同activity生命周期关联
+     * <p>
+     * 若activity是{@link RxFluxView}的子类, 获取需要关联的rxStore
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
-        Log.v("RxFlux", "1.2-onCreateLifecycle ");
         if (mActivity instanceof RxFluxView) {
             ViewModel rxStore = ((RxFluxView) mActivity).getRxStore();
             if (rxStore instanceof RxActivityStore) {
+                //rxStore关联activity生命周期
                 ((FragmentActivity) mActivity).getLifecycle().addObserver((RxActivityStore) rxStore);
             }
         }

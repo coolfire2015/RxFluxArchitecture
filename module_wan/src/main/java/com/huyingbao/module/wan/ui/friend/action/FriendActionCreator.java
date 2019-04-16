@@ -4,7 +4,7 @@ import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
-import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.arch.scope.FragmentScope;
 import com.huyingbao.module.wan.action.WanApi;
 
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.inject.Inject;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
+@FragmentScope
 public class FriendActionCreator extends RxActionCreator implements FriendAction {
     @Inject
     WanApi mWanApi;

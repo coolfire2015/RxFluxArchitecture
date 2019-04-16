@@ -8,7 +8,7 @@ import androidx.collection.ArrayMap;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class RxAction extends RxEvent {
+public class RxAction extends BaseEvent {
     private static final String RESPONSE = "response";
     private final ArrayMap<String, Object> mData;
 
