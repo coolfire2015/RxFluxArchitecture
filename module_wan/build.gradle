@@ -145,7 +145,7 @@ dependencies {
         testImplementation "com.github.coolfire2015.RxFluxArchitecture:test_junit:${RX_FLUX_ARCHITECTURE}"
         debugImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
         androidTestImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
-        annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core_eventbus_processor:${RX_FLUX_ARCHITECTURE}"
+        annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
     } else {
         api project(':core_common')
         testImplementation project(':test_junit')

@@ -8,16 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/core_arch" />
-            <option value="$PROJECT_DIR$/core_common" />
-            <option value="$PROJECT_DIR$/core_eventbus" />
-            <option value="$PROJECT_DIR$/core_eventbus_processor" />
             <option value="$PROJECT_DIR$/module_app" />
-            <option value="$PROJECT_DIR$/module_gan" />
-            <option value="$PROJECT_DIR$/module_wan" />
-            <option value="$PROJECT_DIR$/module_wan_kotlin" />
-            <option value="$PROJECT_DIR$/test_android" />
-            <option value="$PROJECT_DIR$/test_junit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
