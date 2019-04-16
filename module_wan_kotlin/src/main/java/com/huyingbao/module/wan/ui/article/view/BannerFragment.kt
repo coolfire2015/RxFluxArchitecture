@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.core.common.R2
 import com.huyingbao.module.wan.R
@@ -20,9 +19,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
-class BannerFragment @Inject
-constructor() : BaseRxFragment<ArticleStore>() {
+class BannerFragment : BaseRxFragment<ArticleStore>() {
     @Inject
     lateinit var mActionCreator: ArticleActionCreator
 
@@ -93,5 +90,12 @@ constructor() : BaseRxFragment<ArticleStore>() {
      */
     private fun setData(data: List<Banner>?) {
         mAdapter!!.setNewData(data)
+    }
+
+    companion object {
+
+        fun newInstance(): BannerFragment {
+            return BannerFragment()
+        }
     }
 }

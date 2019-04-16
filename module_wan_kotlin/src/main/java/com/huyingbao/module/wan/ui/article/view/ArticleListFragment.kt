@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.core.common.R2
 import com.huyingbao.core.common.widget.CommonLoadMoreView
@@ -25,9 +24,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
-class ArticleListFragment @Inject
-constructor() : BaseRxFragment<ArticleStore>() {
+class ArticleListFragment : BaseRxFragment<ArticleStore>() {
     @Inject
     lateinit var mActionCreator: ArticleActionCreator
     @BindView(R2.id.rv_content)
@@ -144,5 +141,9 @@ constructor() : BaseRxFragment<ArticleStore>() {
 
     companion object {
         private val PAGE_SIZE = 20
+
+        fun newInstance(): ArticleListFragment {
+            return ArticleListFragment()
+        }
     }
 }

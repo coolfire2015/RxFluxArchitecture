@@ -12,21 +12,15 @@ import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import javax.inject.Inject;
-
 import androidx.fragment.app.Fragment;
-import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 public class MainActivity extends BaseRxActivity<MainStore> {
-    @Inject
-    Lazy<MainFragment> mMainFragmentLazy;
-
     @Override
     protected Fragment createFragment() {
-        return mMainFragmentLazy.get();
+        return MainFragment.newInstance();
     }
 
     @Override

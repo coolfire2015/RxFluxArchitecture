@@ -11,21 +11,15 @@ import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import javax.inject.Inject;
-
 import androidx.fragment.app.Fragment;
-import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 public class LoginActivity extends BaseRxActivity<LoginStore> {
-    @Inject
-    Lazy<LoginFragment> mLoginFragmentLazy;
-
     @Override
     protected Fragment createFragment() {
-        return mLoginFragmentLazy.get();
+        return LoginFragment.newInstance();
     }
 
     @Override

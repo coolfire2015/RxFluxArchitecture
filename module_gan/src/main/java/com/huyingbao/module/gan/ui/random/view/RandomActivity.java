@@ -9,24 +9,16 @@ import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 public class RandomActivity extends BaseRxActivity<RandomStore> {
-    @Inject
-    Lazy<CategoryFragment> mCategoryFragmentLazy;
-    @Inject
-    Lazy<ProductFragment> mProductListFragmentLazy;
-
     @Override
     protected Fragment createFragment() {
-        return mCategoryFragmentLazy.get();
+        return CategoryFragment.newInstance();
     }
 
     @Override
@@ -35,6 +27,6 @@ public class RandomActivity extends BaseRxActivity<RandomStore> {
 
     @Subscribe(tags = {RandomAction.TO_SHOW_DATA})
     public void toShowData(@NonNull RxChange rxChange) {
-        addFragmentHideExisting(mProductListFragmentLazy.get());
+        addFragmentHideExisting(ProductFragment.newInstance());
     }
 }

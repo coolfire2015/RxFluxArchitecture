@@ -13,27 +13,16 @@ import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import javax.inject.Inject;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentFactory;
-import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 @Route(path = "/wan/ArticleActivity")
 public class ArticleActivity extends BaseRxActivity<ArticleStore> {
-    @Inject
-    Lazy<ArticleListFragment> mArticleListFragmentLazy;
-    //    @Inject
-//    Lazy<FriendFragment> mFriendFragmentLazy;
-    @Inject
-    Lazy<BannerFragment> mBannerFragmentLazy;
-
     @Override
     protected Fragment createFragment() {
-        return mArticleListFragmentLazy.get();
+        return ArticleListFragment.newInstance();
     }
 
     @Override
@@ -47,11 +36,11 @@ public class ArticleActivity extends BaseRxActivity<ArticleStore> {
 
     @Subscribe(tags = {ArticleAction.TO_FRIEND})
     public void toFriend(RxChange rxChange) {
-        addFragmentHideExisting(getFragment(FriendFragment.class));
+        addFragmentHideExisting(FriendFragment.newInstance());
     }
 
     @Subscribe(tags = {ArticleAction.TO_BANNER})
     public void toBanner(RxChange rxChange) {
-        addFragmentHideExisting(mBannerFragmentLazy.get());
+        addFragmentHideExisting(BannerFragment.newInstance());
     }
 }

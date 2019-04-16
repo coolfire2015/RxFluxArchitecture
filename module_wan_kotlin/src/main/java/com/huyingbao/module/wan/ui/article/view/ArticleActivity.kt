@@ -10,24 +10,15 @@ import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment
 import com.huyingbao.module.wan.ui.login.view.LoginActivity
-import dagger.Lazy
 import org.greenrobot.eventbus.Subscribe
-import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 @Route(path = "/wan/ArticleActivity")
 class ArticleActivity : BaseRxActivity<ArticleStore>() {
-    @Inject
-    lateinit var mArticleListFragmentLazy: Lazy<ArticleListFragment>
-    @Inject
-    lateinit var mFriendFragmentLazy: Lazy<FriendFragment>
-    @Inject
-    lateinit var mBannerFragmentLazy: Lazy<BannerFragment>
-
     override fun createFragment(): Fragment {
-        return mArticleListFragmentLazy.get()
+        return ArticleListFragment.newInstance()
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
@@ -39,11 +30,11 @@ class ArticleActivity : BaseRxActivity<ArticleStore>() {
 
     @Subscribe(tags = [ArticleAction.TO_FRIEND])
     fun toFriend(rxChange: RxChange) {
-        addFragmentHideExisting(mFriendFragmentLazy!!.get())
+        addFragmentHideExisting(FriendFragment.newInstance())
     }
 
     @Subscribe(tags = [ArticleAction.TO_BANNER])
     fun toBanner(rxChange: RxChange) {
-        addFragmentHideExisting(mBannerFragmentLazy!!.get())
+        addFragmentHideExisting(BannerFragment.newInstance())
     }
 }

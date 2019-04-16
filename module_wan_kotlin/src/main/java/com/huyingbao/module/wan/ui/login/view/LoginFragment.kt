@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import butterknife.BindView
 import butterknife.OnClick
-import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.base.rxview.BaseRxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.R2
@@ -19,9 +18,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
-class LoginFragment @Inject
-constructor() : BaseRxFragment<LoginStore>() {
+class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var mActionCreator: LoginActionCreator
 
@@ -69,5 +66,11 @@ constructor() : BaseRxFragment<LoginStore>() {
     fun identify() {
         mBtnIdentify!!.isEnabled = false
         mActionCreator!!.getIdentify()
+    }
+
+    companion object {
+        fun newInstance(): LoginFragment {
+            return LoginFragment()
+        }
     }
 }
