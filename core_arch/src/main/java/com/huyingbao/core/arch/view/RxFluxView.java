@@ -4,9 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 /**
- * 所有该接口的实现类，
- * 交由 {@link com.huyingbao.core.arch.dispatcher.RxDispatcher}
- * 来注册订阅，取消订阅管理。
+ * 所有该接口的实现类，交由 {@link com.huyingbao.core.arch.dispatcher.RxDispatcher} 来注册订阅，取消订阅管理。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

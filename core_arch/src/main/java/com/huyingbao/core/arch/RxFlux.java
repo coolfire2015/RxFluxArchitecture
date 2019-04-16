@@ -34,7 +34,6 @@ import androidx.fragment.app.FragmentManager;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-
 @Singleton
 public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     /**
