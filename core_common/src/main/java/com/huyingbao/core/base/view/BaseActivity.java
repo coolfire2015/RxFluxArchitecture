@@ -40,14 +40,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         //添加显示的Fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         //从fragment队列中获取资源ID标识的fragment
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fl_content);
+        Fragment fragmentOld = fragmentManager.findFragmentById(R.id.fl_content);
         //如果已经存在fragment或者创建fragment方法为空,直接返回
-        if (fragment != null || createFragment() == null) {
+        if (fragmentOld != null) {
+            return;
+        }
+        //使用新的Fragment
+        Fragment fragmentNew= createFragment();
+        if(fragmentNew==null){
             return;
         }
         //使用fragment类名作为tag
-        String tag = createFragment().getClass().getSimpleName();
-        fragmentManager.beginTransaction().add(R.id.fl_content, createFragment(), tag).commit();
+        String tag = fragmentNew.getClass().getSimpleName();
+        fragmentManager.beginTransaction().add(R.id.fl_content, fragmentNew, tag).commit();
     }
 
     @Override

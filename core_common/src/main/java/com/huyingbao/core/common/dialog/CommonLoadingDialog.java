@@ -29,7 +29,6 @@ import butterknife.OnClick;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
 public class CommonLoadingDialog extends BaseDialogFragment implements DialogInterface.OnShowListener {
     @Inject
     RxActionManager mRxActionManager;
@@ -45,9 +44,8 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
     private int messageInt;
     private RxLoading mRxLoading;
 
-    @Inject
-    public CommonLoadingDialog() {
-
+    public static CommonLoadingDialog newInstance() {
+        return new CommonLoadingDialog();
     }
 
     @Override

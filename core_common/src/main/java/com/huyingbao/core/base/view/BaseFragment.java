@@ -39,8 +39,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
         //fragment中创建菜单
         setHasOptionsMenu(true);
-        //实例化宿主Activity中的ActionBar
-        initActionBar();
         super.onAttach(context);
     }
 
@@ -60,6 +58,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //实例化宿主Activity中的ActionBar
+        initActionBar();
         // view创建之后的操作
         afterCreate(savedInstanceState);
     }
