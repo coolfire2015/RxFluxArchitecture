@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.module.gan.R;
@@ -30,7 +29,6 @@ import butterknife.BindView;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
 public class CategoryFragment extends BaseRxFragment<RandomStore> {
     @Inject
     MainActionCreator mActionCreator;
@@ -40,8 +38,8 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
     private List<String> mDataList;
     private CategoryAdapter mAdapter;
 
-    @Inject
-    public CategoryFragment() {
+    public static CategoryFragment newInstance() {
+        return new CategoryFragment();
     }
 
     @Override

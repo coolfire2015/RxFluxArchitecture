@@ -2,7 +2,6 @@ package com.huyingbao.module.gan.ui.main.view;
 
 import android.os.Bundle;
 
-import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.R2;
@@ -17,15 +16,13 @@ import butterknife.OnClick;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
 public class MainFragment extends BaseRxFragment<MainStore> {
     @Inject
     MainActionCreator mActionCreator;
 
-    @Inject
-    public MainFragment() {
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
-
 
     @Override
     public int getLayoutId() {

@@ -6,7 +6,6 @@ import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseFragment;
-import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -14,19 +13,30 @@ import java.lang.reflect.Type;
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment implements RxFluxView {
+public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment implements RxFluxView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     private T mStore;
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return childFragmentInjector;
+    }
 
     @Nullable
     @Override
@@ -57,11 +67,7 @@ public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment i
     @Override
     public void onAttach(Context context) {
         //依赖注入
-        try {
-            AndroidSupportInjection.inject(this);
-        } catch (IllegalArgumentException e) {
-            Logger.e("依赖注入失败");
-        }
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 

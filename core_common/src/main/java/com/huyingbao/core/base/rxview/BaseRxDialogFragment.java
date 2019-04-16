@@ -13,19 +13,30 @@ import java.lang.reflect.Type;
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDialogFragment implements RxFluxView {
+public abstract class BaseRxDialogFragment<T extends ViewModel> extends BaseDialogFragment implements RxFluxView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     private T mStore;
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return childFragmentInjector;
+    }
 
     @Nullable
     @Override

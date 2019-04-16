@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.base.rxview.BaseRxFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
@@ -25,7 +24,6 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
 public class ProductFragment extends BaseRxFragment<RandomStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
@@ -35,8 +33,8 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
 
     private ProductAdapter mAdapter;
 
-    @Inject
-    public ProductFragment() {
+    public static ProductFragment newInstance() {
+        return new ProductFragment();
     }
 
     @Override

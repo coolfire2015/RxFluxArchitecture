@@ -16,6 +16,7 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentFactory;
 import dagger.Lazy;
 
 /**
@@ -25,8 +26,8 @@ import dagger.Lazy;
 public class ArticleActivity extends BaseRxActivity<ArticleStore> {
     @Inject
     Lazy<ArticleListFragment> mArticleListFragmentLazy;
-    @Inject
-    Lazy<FriendFragment> mFriendFragmentLazy;
+    //    @Inject
+//    Lazy<FriendFragment> mFriendFragmentLazy;
     @Inject
     Lazy<BannerFragment> mBannerFragmentLazy;
 
@@ -46,7 +47,7 @@ public class ArticleActivity extends BaseRxActivity<ArticleStore> {
 
     @Subscribe(tags = {ArticleAction.TO_FRIEND})
     public void toFriend(RxChange rxChange) {
-        addFragmentHideExisting(mFriendFragmentLazy.get());
+        addFragmentHideExisting(getFragment(FriendFragment.class));
     }
 
     @Subscribe(tags = {ArticleAction.TO_BANNER})
