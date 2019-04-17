@@ -4,6 +4,10 @@ package com.huyingbao.module.wan.action;
  * Created by liujunfeng on 2019/4/3.
  */
 public class WanContants {
+    public class Key {
+        public static final String URL = "url";
+    }
+
     /**
      * 时间间隔
      */

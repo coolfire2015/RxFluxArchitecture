@@ -4,13 +4,16 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.core.util.LocalStorageUtils;
 import com.huyingbao.module.wan.action.WanActionCreator;
 import com.huyingbao.module.wan.action.WanApi;
+import com.huyingbao.module.wan.action.WanContants;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 /**
@@ -18,6 +21,9 @@ import io.reactivex.Observable;
  */
 @ActivityScope
 public class LoginActionCreator extends WanActionCreator implements LoginAction {
+    @Inject
+    LocalStorageUtils mLocalStorageUtils;
+
     private WanApi mWanApi;
 
     @Inject
@@ -49,5 +55,19 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
                 .flatMap(verifyResponse())
                 .flatMap(userWanResponse -> observable);
         postHttpAction(rxAction, coolfire2);
+    }
+
+    @Override
+    public void changeBaseUrl(String baseUrl) {
+        RxAction rxAction = newRxAction(CHANGE_BASE_URL);
+        Completable completable = Completable.create(emitter -> {
+            try {
+                mLocalStorageUtils.setString(WanContants.Key.URL, baseUrl);
+                emitter.onComplete();
+            } catch (Exception e) {
+                emitter.onError(e);
+            }
+        });
+        postHttpAction(rxAction, completable.toObservable());
     }
 }

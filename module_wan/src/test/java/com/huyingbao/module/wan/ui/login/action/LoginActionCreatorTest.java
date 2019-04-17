@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.ui.login.action;
 
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.util.LocalStorageUtils;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
 import com.huyingbao.test.junit.RxJavaRule;
@@ -26,10 +27,17 @@ import static org.mockito.Mockito.verify;
  * Created by liujunfeng on 2019/4/3.
  */
 public class LoginActionCreatorTest {
+    /**
+     * 注解Spy只能修饰默认构造方法(无参数)
+     */
     @Spy
     private RxDispatcher mRxDispatcher;
     @Mock
     private RxActionManager mRxActionManager;
+    @Mock
+    private LocalStorageUtils mLocalStorageUtils;
+
+    private LoginActionCreator mLoginActionCreator;
 
     @Rule
     public RxJavaRule mRxJavaRule = new RxJavaRule();
@@ -38,11 +46,10 @@ public class LoginActionCreatorTest {
     @Rule
     public MockDaggerRule mMockDaggerRule = new MockDaggerRule();
 
-    private LoginActionCreator mLoginActionCreator;
-
     @Before
     public void setUp() throws Exception {
         mLoginActionCreator = new LoginActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
+        mLoginActionCreator.mLocalStorageUtils = mLocalStorageUtils;
     }
 
     @Test
@@ -55,6 +62,12 @@ public class LoginActionCreatorTest {
     public void testLogin() {
         mLoginActionCreator.login("coolfire", "123456");
         verify(mRxDispatcher).postRxAction(Mockito.any());
+    }
+
+    @Test
+    public void testChangeBaseUrl() {
+        mLoginActionCreator.changeBaseUrl("asdf");
+        verify(mLocalStorageUtils).setString(Mockito.any(), Mockito.any());
     }
 
     /**

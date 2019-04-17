@@ -34,4 +34,16 @@ public interface LoginAction {
      * 发送验证码,60s之后可以重发
      */
     void getIdentify();
+
+    /**
+     * 更改Api根路径
+     */
+    String CHANGE_BASE_URL = "changeBaseUrl";
+
+    /**
+     * 更改Api根路径
+     *
+     * @param baseUrl
+     */
+    void changeBaseUrl(String baseUrl);
 }
