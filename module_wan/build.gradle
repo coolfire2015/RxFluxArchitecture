@@ -145,11 +145,20 @@ dependencies {
         testImplementation "com.github.coolfire2015.RxFluxArchitecture:test_junit:${RX_FLUX_ARCHITECTURE}"
         debugImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
         androidTestImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
+        
+        annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
+        testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
+        androidTestAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
+
     } else {
         api project(':core_common')
         testImplementation project(':test_junit')
         debugImplementation project(':test_android')
         androidTestImplementation project(':test_android')
+
+        annotationProcessor project(':core_eventbus_processor')
+        testAnnotationProcessor project(':core_eventbus_processor')
+        androidTestAnnotationProcessor project(':core_eventbus_processor')
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
@@ -158,7 +167,6 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
-    annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
 
     //编译时生成,仪器测试
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
@@ -167,7 +175,6 @@ dependencies {
     androidTestAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     androidTestAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     androidTestAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
-    androidTestAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
 
     //编译时生成,单元测试
     testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
@@ -176,5 +183,4 @@ dependencies {
     testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
-    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
 }

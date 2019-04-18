@@ -289,6 +289,10 @@ public class EventBus {
         }
     }
 
+    public void post(Object event) {
+        post(event, DEFAULT_TAG);
+    }
+
     /**
      * Posts the given event to the event bus.
      */
@@ -405,6 +409,10 @@ public class EventBus {
         synchronized (stickyEvents) {
             stickyEvents.clear();
         }
+    }
+
+    public boolean hasSubscriberForEvent(Class<?> eventClass) {
+        return hasSubscriberForEvent(eventClass, EventBus.DEFAULT_TAG);
     }
 
     public boolean hasSubscriberForEvent(Class<?> eventClass, String tag) {

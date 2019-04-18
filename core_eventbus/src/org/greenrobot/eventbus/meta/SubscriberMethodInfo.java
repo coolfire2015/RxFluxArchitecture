@@ -15,6 +15,7 @@
  */
 package org.greenrobot.eventbus.meta;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class SubscriberMethodInfo {
@@ -43,4 +44,7 @@ public class SubscriberMethodInfo {
         this(methodName, tags, eventType, threadMode, 0, false);
     }
 
+    public SubscriberMethodInfo(String methodName, Class<?> eventType) {
+        this(methodName, new String[]{EventBus.DEFAULT_TAG}, eventType, ThreadMode.POSTING, 0, false);
+    }
 }
