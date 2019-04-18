@@ -4,6 +4,7 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
+import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.test.junit.RxJavaRule;
 
 import org.junit.Before;
@@ -25,6 +26,8 @@ public class ArticleActionCreatorTest {
     private RxDispatcher mRxDispatcher;
     @Mock
     private RxActionManager mRxActionManager;
+    @Mock
+    private ArticleStore mArticleStore;
 
     @Rule
     public RxJavaRule mRxJavaRule = new RxJavaRule();
@@ -38,6 +41,7 @@ public class ArticleActionCreatorTest {
     @Before
     public void setUp() {
         mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
+        mRxDispatcher.subscribeRxStore(mArticleStore);
     }
 
     @Test
@@ -47,6 +51,7 @@ public class ArticleActionCreatorTest {
         verify(mRxDispatcher).postRxAction(any());
         //调用方法成功,发送两次RxLoading
         verify(mRxDispatcher, times(2)).postRxLoading(any());
+        verify(mArticleStore).setArticleLiveData(any());
     }
 
     @Test
