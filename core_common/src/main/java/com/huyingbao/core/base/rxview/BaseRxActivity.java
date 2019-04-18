@@ -47,6 +47,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
     DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
     @Inject
     Lazy<CommonActionCreator> mCommonActionCreatorLazy;
+    @Inject
+    Lazy<CommonLoadingDialog> mCommonLoadingDialogLazy;
 
     private T mStore;
 
@@ -137,7 +139,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
         Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(rxLoading.getTag());
         if(fragmentByTag==null&&rxLoading.isLoading()){
             //显示进度框
-            CommonLoadingDialog.newInstance().show(getSupportFragmentManager(),rxLoading.getTag());
+            mCommonLoadingDialogLazy.get().show(getSupportFragmentManager(),rxLoading.getTag());
             return;
         }
         if(fragmentByTag instanceof CommonLoadingDialog&&!rxLoading.isLoading()){

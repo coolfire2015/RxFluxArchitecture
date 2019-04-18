@@ -23,15 +23,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.OnClick;
+import dagger.Lazy;
 
 /**
  * 进度提示
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
+@Singleton
 public class CommonLoadingDialog extends BaseDialogFragment implements DialogInterface.OnShowListener {
     @Inject
-    RxActionManager mRxActionManager;
+    Lazy<RxActionManager> mRxActionManagerLazy;
 
     @BindView(R2.id.progress_bar_loading)
     ProgressBar mProgressBarLoading;
@@ -46,6 +48,11 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
 
     public static CommonLoadingDialog newInstance() {
         return new CommonLoadingDialog();
+    }
+
+    @Inject
+    public CommonLoadingDialog(){
+
     }
 
     @Override
@@ -105,7 +112,7 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
      */
     @OnClick(R2.id.tv_loading_cancel)
     public void cancel() {
-        mRxActionManager.clear();
+        mRxActionManagerLazy.get().clear();
         CommonUtils.showShortToast(getContext(), "取消操作！");
         dismiss();
     }
