@@ -28,7 +28,7 @@ import androidx.lifecycle.LifecycleObserver;
 @Singleton
 public class RxDispatcher {
     @Inject
-    RxDispatcher() {
+    public RxDispatcher() {
     }
 
     /**

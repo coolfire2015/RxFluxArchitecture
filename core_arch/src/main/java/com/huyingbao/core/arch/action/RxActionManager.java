@@ -27,7 +27,7 @@ public class RxActionManager {
     private ArrayMap<String, Pair<Integer, Disposable>> mMap;
 
     @Inject
-    RxActionManager() {
+    public RxActionManager() {
         mMap = new ArrayMap<>();
     }
 
