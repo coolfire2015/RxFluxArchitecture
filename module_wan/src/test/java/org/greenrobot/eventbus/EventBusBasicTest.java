@@ -20,10 +20,7 @@ import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -37,7 +34,6 @@ import static org.mockito.Mockito.verify;
  * @author Markus Junginger, greenrobot
  */
 @SuppressWarnings({"WeakerAccess", "UnusedParameters", "unused"})
-@RunWith(AndroidJUnit4.class)
 public class EventBusBasicTest extends AbstractEventBusTest {
 
     public static class WithIndex extends EventBusBasicTest {
@@ -58,6 +54,22 @@ public class EventBusBasicTest extends AbstractEventBusTest {
     @Test
     public void testRegisterAndPost() {
         // Use an activity to test real life performance
+        StringEventSubscriber stringEventSubscriber = new StringEventSubscriber();
+        String event = "Hello";
+
+        long start = System.currentTimeMillis();
+        eventBus.register(stringEventSubscriber);
+        long time = System.currentTimeMillis() - start;
+        log("Registered in " + time + "ms");
+
+        eventBus.post(event);
+
+        assertEquals(event, stringEventSubscriber.lastStringEvent);
+    }
+
+    @Test
+    public void testRegisterAndPostOne() {
+        // Use an activity to test real life performance
         StringEventSubscriber stringEventSubscriber = Mockito.mock(StringEventSubscriber.class);
         String event = "Hello";
 
@@ -67,8 +79,40 @@ public class EventBusBasicTest extends AbstractEventBusTest {
         log("Registered in " + time + "ms");
 
         eventBus.post(event);
+
         verify(stringEventSubscriber).onEvent(any());
-//        assertEquals(event, stringEventSubscriber.lastStringEvent);
+    }
+
+    @Test
+    public void testRegisterAndPostTwo() {
+        // Use an activity to test real life performance
+        StringEventSubscriber2 stringEventSubscriber = Mockito.mock(StringEventSubscriber2.class);
+        String event = "Hello";
+
+        long start = System.currentTimeMillis();
+        eventBus.register(stringEventSubscriber);
+        long time = System.currentTimeMillis() - start;
+        log("Registered in " + time + "ms");
+
+        eventBus.post(event);
+
+        verify(stringEventSubscriber).onEvent(any());
+    }
+
+    @Test
+    public void testRegisterAndPostTag() {
+        // Use an activity to test real life performance
+        StringEventSubscriberTag stringEventSubscriber = Mockito.mock(StringEventSubscriberTag.class);
+        String event = "Hello";
+
+        long start = System.currentTimeMillis();
+        eventBus.register(stringEventSubscriber);
+        long time = System.currentTimeMillis() - start;
+        log("Registered in " + time + "ms");
+
+        eventBus.post(event, StringEventSubscriberTag.TAG1);
+
+        verify(stringEventSubscriber).onEvent(any());
     }
 
     @Test
@@ -79,8 +123,8 @@ public class EventBusBasicTest extends AbstractEventBusTest {
         eventBus.register(articleStore);
         long time = System.currentTimeMillis() - start;
         log("Registered in " + time + "ms");
-        RxAction.Builder actionBuilder = new RxAction.Builder(ArticleAction.GET_ARTICLE_LIST);
-        eventBus.post(actionBuilder.build());
+        RxAction actionBuilder = new RxAction.Builder(ArticleAction.GET_ARTICLE_LIST).build();
+        eventBus.post(actionBuilder, actionBuilder.getTag());
         verify(articleStore).setArticleLiveData(any());
     }
 
@@ -286,9 +330,35 @@ public class EventBusBasicTest extends AbstractEventBusTest {
         public void onEvent(String event) {
             lastStringEvent = event;
         }
+    }
+
+    public static class StringEventSubscriber2 {
+        public String lastStringEvent;
 
         @Subscribe
-        public void asdf(String event) {
+        public void onEvent(String event) {
+            lastStringEvent = event;
+        }
+
+        @Subscribe
+        public void onEvent2(String event) {
+            lastStringEvent = event;
+        }
+    }
+
+    public static class StringEventSubscriberTag {
+        public String lastStringEvent;
+        public static final String TAG1 = "tag1";
+        public static final String TAG2 = "tag2";
+
+        @Subscribe(tags = {TAG1})
+        public void onEvent(String event) {
+            lastStringEvent = event;
+        }
+
+        @Subscribe(tags = {TAG2})
+        public void onEvent2(String event) {
+            lastStringEvent = event;
         }
     }
 

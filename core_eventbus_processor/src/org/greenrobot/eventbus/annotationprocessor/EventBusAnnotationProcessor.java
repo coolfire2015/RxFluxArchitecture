@@ -281,6 +281,7 @@ public class EventBusAnnotationProcessor extends AbstractProcessor {
             String methodName = method.getSimpleName().toString();
             String eventClass = getClassString(paramElement, myPackage) + ".class";
 
+            //TODO 添加tags数组
             Subscribe subscribe = method.getAnnotation(Subscribe.class);
             List<String> parts = new ArrayList<>();
             parts.add(callPrefix + "(\"" + methodName + "\",");

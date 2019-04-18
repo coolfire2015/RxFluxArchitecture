@@ -169,6 +169,7 @@ public class EventBus {
 
     /**
      * Must be called in synchronized block
+     * 订阅者与订阅者方法关联
      *
      * @param subscriber
      * @param subscriberMethod
@@ -191,7 +192,7 @@ public class EventBus {
         }
 
         int size = subscriptions.size();
-        //对消息进行优先级排序
+        //对消息进行优先级排序并添加到关联map的list中
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).second.subscriberMethod.priority) {
                 subscriptions.add(i, newEventBusPair);

@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.meta.SubscriberInfoIndex;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -233,7 +234,7 @@ class SubscriberMethodFinder {
         /**
          * key:eventType,value:对应的method
          */
-        final Map<Class, Object> anyMethodByEventType = new HashMap<>();
+        final Map<String, Object> anyMethodByEventType = new HashMap<>();
         /**
          * key:一个订阅方法名称和EventType参数构成的字符串
          * value:订阅方法的class对象
@@ -266,22 +267,40 @@ class SubscriberMethodFinder {
             subscriberInfo = null;
         }
 
+        /**
+         * 判断订阅者的订阅方法是否已经添加
+         *
+         * @param method
+         * @param eventType
+         * @param tags
+         * @return
+         */
         boolean checkAdd(Method method, Class<?> eventType, String[] tags) {
             // 2 level check: 1st level with event type only (fast), 2nd level with complete signature when required.
             // Usually a subscriber doesn't have methods listening to the same event type.
-            Object existing = anyMethodByEventType.put(eventType, method);
+            //使用订阅者方法接收类和Tag作为Key
+            String key = eventType.hashCode() + Arrays.toString(tags).hashCode() + "";
+            Object existing = anyMethodByEventType.put(key, method);
             if (existing == null) {
+                //添加成功
                 return true;
             } else {
+                //如果相同的Key已经添加过
                 if (existing instanceof Method) {
+                    //相同的Key对应的Value是Method
                     if (!checkAddWithMethodSignature((Method) existing, eventType, tags)) {
                         // Paranoia check
                         throw new IllegalStateException();
                     }
                     // Put any non-Method object to "consume" the existing Method
-                    anyMethodByEventType.put(eventType, this);
+                    anyMethodByEventType.put(key, this);
                 }
-                return checkAddWithMethodSignature(method, eventType, tags);
+                boolean isAdd = checkAddWithMethodSignature(method, eventType, tags);
+                if (!isAdd) {
+                    // Put any non-Method object to "consume" the existing Method
+                    anyMethodByEventType.put(key, this);
+                }
+                return isAdd;
             }
         }
 
@@ -298,12 +317,14 @@ class SubscriberMethodFinder {
             methodKeyBuilder.setLength(0);
             methodKeyBuilder.append(method.getName());
             methodKeyBuilder.append('>').append(eventType.getName());
-            methodKeyBuilder.append('>').append(tags.hashCode());
+            methodKeyBuilder.append('>').append(Arrays.toString(tags).hashCode());
 
             String methodKey = methodKeyBuilder.toString();
             Class<?> methodClass = method.getDeclaringClass();
             Class<?> methodClassOld = subscriberClassByMethodKey.put(methodKey, methodClass);
             if (methodClassOld == null || methodClassOld.isAssignableFrom(methodClass)) {
+                //如果已经添加的Method所在的类是需要添加的扩展
+                //判定此 Class 对象所表示的类或接口与指定的 Class 参数所表示的类或接口是否相同，或是否是其超类或超接口
                 // Only add if not already found in a sub class
                 return true;
             } else {

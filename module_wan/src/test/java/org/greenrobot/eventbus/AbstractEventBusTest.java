@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -33,7 +32,9 @@ import static org.junit.Assert.fail;
  * @author Markus Junginger, greenrobot
  */
 public abstract class AbstractEventBusTest {
-    /** Activates long(er) running tests e.g. testing multi-threading more thoroughly.  */
+    /**
+     * Activates long(er) running tests e.g. testing multi-threading more thoroughly.
+     */
     protected static final boolean LONG_TESTS = false;
 
     protected EventBus eventBus;
@@ -94,7 +95,7 @@ public abstract class AbstractEventBusTest {
     protected void assertEventCount(int expectedEventCount) {
         assertEquals(expectedEventCount, eventCount.intValue());
     }
-    
+
     protected void countDownAndAwaitLatch(CountDownLatch latch, long seconds) {
         latch.countDown();
         awaitLatch(latch, seconds);
