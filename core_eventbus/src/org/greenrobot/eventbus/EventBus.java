@@ -15,7 +15,6 @@
  */
 package org.greenrobot.eventbus;
 
-import org.greenrobot.eventbus.util.TextUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -478,7 +477,7 @@ public class EventBus {
                 try {
                     for (String tag : eventBusPair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
-                        if (TextUtils.equals(tag, postingState.tag)) {
+                        if (tag != null && tag.equals(postingState.tag)) {
                             postToSubscription(eventBusPair.second, event, postingState.tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;
