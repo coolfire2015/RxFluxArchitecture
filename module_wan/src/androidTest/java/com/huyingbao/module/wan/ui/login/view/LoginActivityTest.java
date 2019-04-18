@@ -1,6 +1,5 @@
 package com.huyingbao.module.wan.ui.login.view;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +21,5 @@ public class LoginActivityTest {
     @Test
     public void onRxChanged() {
         mActivityRule.getScenario().moveToState(Lifecycle.State.CREATED);
-        mActivityRule.getScenario().onActivity(activity -> Assert.assertNotNull(activity.mLoginFragmentLazy));
     }
 }

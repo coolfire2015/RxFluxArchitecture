@@ -75,8 +75,10 @@ public class ErrorDialogConfig {
         this.eventBus = eventBus;
     }
 
-    /** eventBus!=null ? eventBus: EventBus.getDefault() */
+    /**
+     * eventBus!=null ? eventBus: EventBus.getDefault()
+     */
     EventBus getEventBus() {
-        return eventBus!=null ? eventBus: EventBus.getDefault();
+        return eventBus != null ? eventBus : EventBus.getDefault();
     }
 }

@@ -15,19 +15,29 @@
  */
 package org.greenrobot.eventbus;
 
-import org.junit.Test;
+import com.huyingbao.core.arch.model.RxAction;
+import com.huyingbao.module.wan.ui.article.action.ArticleAction;
+import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 
 /**
  * @author Markus Junginger, greenrobot
  */
 @SuppressWarnings({"WeakerAccess", "UnusedParameters", "unused"})
+@RunWith(AndroidJUnit4.class)
 public class EventBusBasicTest extends AbstractEventBusTest {
 
     public static class WithIndex extends EventBusBasicTest {
@@ -48,7 +58,7 @@ public class EventBusBasicTest extends AbstractEventBusTest {
     @Test
     public void testRegisterAndPost() {
         // Use an activity to test real life performance
-        StringEventSubscriber stringEventSubscriber = new StringEventSubscriber();
+        StringEventSubscriber stringEventSubscriber = Mockito.mock(StringEventSubscriber.class);
         String event = "Hello";
 
         long start = System.currentTimeMillis();
@@ -57,8 +67,21 @@ public class EventBusBasicTest extends AbstractEventBusTest {
         log("Registered in " + time + "ms");
 
         eventBus.post(event);
+        verify(stringEventSubscriber).onEvent(any());
+//        assertEquals(event, stringEventSubscriber.lastStringEvent);
+    }
 
-        assertEquals(event, stringEventSubscriber.lastStringEvent);
+    @Test
+    public void testRegisterStoreAndPostAction() {
+        // Use an activity to test real life performance
+        ArticleStore articleStore = Mockito.mock(ArticleStore.class);
+        long start = System.currentTimeMillis();
+        eventBus.register(articleStore);
+        long time = System.currentTimeMillis() - start;
+        log("Registered in " + time + "ms");
+        RxAction.Builder actionBuilder = new RxAction.Builder(ArticleAction.GET_ARTICLE_LIST);
+        eventBus.post(actionBuilder.build());
+        verify(articleStore).setArticleLiveData(any());
     }
 
     @Test
@@ -262,6 +285,10 @@ public class EventBusBasicTest extends AbstractEventBusTest {
         @Subscribe
         public void onEvent(String event) {
             lastStringEvent = event;
+        }
+
+        @Subscribe
+        public void asdf(String event) {
         }
     }
 

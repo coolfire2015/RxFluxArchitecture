@@ -26,7 +26,7 @@ import java.util.Set;
 
 /**
  * Maps throwables to texts for error dialogs. Use Config to configure the mapping.
- * 
+ *
  * @author Markus
  */
 public class ExceptionToResourceMapping {
@@ -37,7 +37,9 @@ public class ExceptionToResourceMapping {
         throwableToMsgIdMap = new HashMap<>();
     }
 
-    /** Looks at the exception and its causes trying to find an ID. */
+    /**
+     * Looks at the exception and its causes trying to find an ID.
+     */
     public Integer mapThrowable(final Throwable throwable) {
         Throwable throwableToCheck = throwable;
         int depthToGo = 20;
@@ -59,7 +61,9 @@ public class ExceptionToResourceMapping {
 
     }
 
-    /** Mapping without checking the cause (done in mapThrowable). */
+    /**
+     * Mapping without checking the cause (done in mapThrowable).
+     */
     protected Integer mapThrowableFlat(Throwable throwable) {
         Class<? extends Throwable> throwableClass = throwable.getClass();
         Integer resId = throwableToMsgIdMap.get(throwableClass);

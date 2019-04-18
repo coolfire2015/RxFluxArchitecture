@@ -38,9 +38,9 @@ import org.greenrobot.eventbus.EventBus;
  * <li>Use one of {@link #attachTo(Activity)}, {@link #attachTo(Activity, boolean)} or
  * {@link #attachTo(Activity, boolean, Bundle)} in your Activity, typically in onCreate.</li>
  * </ol>
- * 
+ * <p>
  * For more complex mappings, you can supply your own {@link ErrorDialogFragmentFactory}.
- * 
+ *
  * @author Markus
  */
 public class ErrorDialogManager {
@@ -101,7 +101,7 @@ public class ErrorDialogManager {
         }
 
         public static void attachTo(Activity activity, Object executionScope, boolean finishAfterDialog,
-                Bundle argumentsForErrorDialog) {
+                                    Bundle argumentsForErrorDialog) {
             FragmentManager fm = ((FragmentActivity) activity).getSupportFragmentManager();
             SupportManagerFragment fragment = (SupportManagerFragment) fm.findFragmentByTag(TAG_ERROR_DIALOG_MANAGER);
             if (fragment == null) {
@@ -174,7 +174,9 @@ public class ErrorDialogManager {
         }
     }
 
-    /** Must be set by the application. */
+    /**
+     * Must be set by the application.
+     */
     public static ErrorDialogFragmentFactory<?> factory;
 
     protected static final String TAG_ERROR_DIALOG = "de.greenrobot.eventbus.error_dialog";
@@ -186,22 +188,28 @@ public class ErrorDialogManager {
     public static final String KEY_ICON_ID = "de.greenrobot.eventbus.errordialog.icon_id";
     public static final String KEY_EVENT_TYPE_ON_CLOSE = "de.greenrobot.eventbus.errordialog.event_type_on_close";
 
-    /** Scope is limited to the activity's class. */
+    /**
+     * Scope is limited to the activity's class.
+     */
     public static void attachTo(Activity activity) {
         attachTo(activity, false, null);
     }
 
-    /** Scope is limited to the activity's class. */
+    /**
+     * Scope is limited to the activity's class.
+     */
     public static void attachTo(Activity activity, boolean finishAfterDialog) {
         attachTo(activity, finishAfterDialog, null);
     }
 
-    /** Scope is limited to the activity's class. */
+    /**
+     * Scope is limited to the activity's class.
+     */
     public static void attachTo(Activity activity, boolean finishAfterDialog, Bundle argumentsForErrorDialog) {
         Object executionScope = activity.getClass();
         attachTo(activity, executionScope, finishAfterDialog, argumentsForErrorDialog);
     }
-    
+
     public static void attachTo(Activity activity, Object executionScope, boolean finishAfterDialog, Bundle argumentsForErrorDialog) {
         if (factory == null) {
             throw new RuntimeException("You must set the static factory field to configure error dialogs for your app.");
@@ -215,7 +223,7 @@ public class ErrorDialogManager {
 
     private static boolean isSupportActivity(Activity activity) {
         boolean isSupport = false;
-        for (Class<?> c = activity.getClass().getSuperclass();; c = c.getSuperclass()) {
+        for (Class<?> c = activity.getClass().getSuperclass(); ; c = c.getSuperclass()) {
             if (c == null) {
                 throw new RuntimeException("Illegal activity type: " + activity.getClass());
             }
@@ -225,7 +233,7 @@ public class ErrorDialogManager {
                 break;
             } else if (name.startsWith("com.actionbarsherlock.app")
                     && (name.endsWith(".SherlockActivity") || name.endsWith(".SherlockListActivity") || name
-                            .endsWith(".SherlockPreferenceActivity"))) {
+                    .endsWith(".SherlockPreferenceActivity"))) {
                 throw new RuntimeException("Please use SherlockFragmentActivity. Illegal activity: " + name);
             } else if (name.equals("android.app.Activity")) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

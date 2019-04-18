@@ -107,7 +107,7 @@ class SubscriberMethodFinder {
             if (findState.subscriberInfo != null) {
                 SubscriberMethod[] array = findState.subscriberInfo.getSubscriberMethods();
                 for (SubscriberMethod subscriberMethod : array) {
-                    if (findState.checkAdd(subscriberMethod.method, subscriberMethod.eventType)) {
+                    if (findState.checkAdd(subscriberMethod.method, subscriberMethod.eventType, subscriberMethod.tags)) {
                         findState.subscriberMethods.add(subscriberMethod);
                     }
                 }
@@ -198,7 +198,7 @@ class SubscriberMethodFinder {
                     Subscribe subscribeAnnotation = method.getAnnotation(Subscribe.class);
                     if (subscribeAnnotation != null) {
                         Class<?> eventType = parameterTypes[0];
-                        if (findState.checkAdd(method, eventType)) {
+                        if (findState.checkAdd(method, eventType, subscribeAnnotation.tags())) {
                             ThreadMode threadMode = subscribeAnnotation.threadMode();
                             String[] tags = subscribeAnnotation.tags();
                             findState.subscriberMethods.add(new SubscriberMethod(method, tags, eventType, threadMode,
@@ -266,7 +266,7 @@ class SubscriberMethodFinder {
             subscriberInfo = null;
         }
 
-        boolean checkAdd(Method method, Class<?> eventType) {
+        boolean checkAdd(Method method, Class<?> eventType, String[] tags) {
             // 2 level check: 1st level with event type only (fast), 2nd level with complete signature when required.
             // Usually a subscriber doesn't have methods listening to the same event type.
             Object existing = anyMethodByEventType.put(eventType, method);
@@ -274,21 +274,31 @@ class SubscriberMethodFinder {
                 return true;
             } else {
                 if (existing instanceof Method) {
-                    if (!checkAddWithMethodSignature((Method) existing, eventType)) {
+                    if (!checkAddWithMethodSignature((Method) existing, eventType, tags)) {
                         // Paranoia check
                         throw new IllegalStateException();
                     }
                     // Put any non-Method object to "consume" the existing Method
                     anyMethodByEventType.put(eventType, this);
                 }
-                return checkAddWithMethodSignature(method, eventType);
+                return checkAddWithMethodSignature(method, eventType, tags);
             }
         }
 
-        private boolean checkAddWithMethodSignature(Method method, Class<?> eventType) {
+        /**
+         * 检查订阅者中的订阅方法是否已经添加,
+         * 三个参数关联起来生成key值,判断是否已经添加.
+         *
+         * @param method    订阅方法
+         * @param eventType 接收对象
+         * @param tags      订阅标志
+         * @return
+         */
+        private boolean checkAddWithMethodSignature(Method method, Class<?> eventType, String[] tags) {
             methodKeyBuilder.setLength(0);
             methodKeyBuilder.append(method.getName());
             methodKeyBuilder.append('>').append(eventType.getName());
+            methodKeyBuilder.append('>').append(tags.hashCode());
 
             String methodKey = methodKeyBuilder.toString();
             Class<?> methodClass = method.getDeclaringClass();
