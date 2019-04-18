@@ -15,8 +15,7 @@
  */
 package org.greenrobot.eventbus;
 
-import android.text.TextUtils;
-import android.util.Pair;
+import org.greenrobot.eventbus.util.TextUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class EventBus {
      * Map对象的值就是用来缓存订阅方法的信息的
      * key为EventType的class对象，value为Subscription对象的集合
      */
-    private final Map<Class<?>, CopyOnWriteArrayList<Pair<String[], Subscription>>> subscriptionsByEventType;
+    private final Map<Class<?>, CopyOnWriteArrayList<EventBusPair<String[], Subscription>>> subscriptionsByEventType;
     private final Map<Object, List<Class<?>>> typesBySubscriber;
     private final Map<Class<?>, Object> stickyEvents;
 
@@ -180,13 +179,13 @@ public class EventBus {
         Class<?> eventType = subscriberMethod.eventType;
         String[] tags = subscriberMethod.tags;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
-        Pair<String[], Subscription> newPair = new Pair<>(tags, newSubscription);
-        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        EventBusPair<String[], Subscription> newEventBusPair = new EventBusPair<>(tags, newSubscription);
+        CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
             subscriptionsByEventType.put(eventType, subscriptions);
         } else {
-            if (subscriptions.contains(newPair)) {
+            if (subscriptions.contains(newEventBusPair)) {
                 throw new EventBusException("Subscriber " + subscriber.getClass() + " already registered to event "
                         + eventType);
             }
@@ -196,7 +195,7 @@ public class EventBus {
         //对消息进行优先级排序
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).second.subscriberMethod.priority) {
-                subscriptions.add(i, newPair);
+                subscriptions.add(i, newEventBusPair);
                 break;
             }
         }
@@ -259,7 +258,7 @@ public class EventBus {
      * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
      */
     private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
-        List<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        List<EventBusPair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions != null) {
             int size = subscriptions.size();
             for (int i = 0; i < size; i++) {
@@ -421,7 +420,7 @@ public class EventBus {
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
-                CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
+                CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions;
                 synchronized (this) {
                     subscriptions = subscriptionsByEventType.get(clazz);
                 }
@@ -467,20 +466,20 @@ public class EventBus {
      * @return
      */
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
-        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
+        CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions;
         synchronized (this) {
             subscriptions = subscriptionsByEventType.get(eventClass);
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {
-            for (Pair<String[], Subscription> pair : subscriptions) {
+            for (EventBusPair<String[], Subscription> eventBusPair : subscriptions) {
                 postingState.event = event;
-                postingState.subscription = pair.second;
+                postingState.subscription = eventBusPair.second;
                 boolean aborted = false;
                 try {
-                    for (String tag : pair.first) {
+                    for (String tag : eventBusPair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
                         if (TextUtils.equals(tag, postingState.tag)) {
-                            postToSubscription(pair.second, event, postingState.tag, postingState.isMainThread);
+                            postToSubscription(eventBusPair.second, event, postingState.tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;
                         }

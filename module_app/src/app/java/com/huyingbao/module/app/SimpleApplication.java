@@ -7,6 +7,7 @@ import com.huyingbao.module.wan.WanEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 
+import androidx.core.util.Pair;
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
