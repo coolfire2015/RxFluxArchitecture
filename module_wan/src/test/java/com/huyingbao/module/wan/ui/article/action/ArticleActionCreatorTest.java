@@ -2,14 +2,11 @@ package com.huyingbao.module.wan.ui.article.action;
 
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.test.junit.RxJavaRule;
 
-import org.checkerframework.checker.units.qual.A;
-import org.greenrobot.eventbus.EventBus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -44,11 +41,13 @@ public class ArticleActionCreatorTest {
         mRxActionManager = new RxActionManager();
 
         mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
+        //订阅store
         mRxDispatcher.subscribeRxStore(mArticleStore);
     }
 
     @After
     public void tearDown() {
+        //解除订阅
         mRxDispatcher.unsubscribeRxStore(mArticleStore);
     }
 
