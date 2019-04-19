@@ -2,6 +2,7 @@ if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
+apply from: rootProject.file('test-library.gradle')
 
 group = "com.github.coolfire2015"
 
@@ -159,11 +160,11 @@ dependencies {
         api project(':core_common')
 
         //Junit测试
-        testImplementation project(':test_junit')
+        testImplementation project(':test_utils')
         //Junit测试,可以使用android原生测试框架
-        debugImplementation project(':test_android')
+        debugImplementation project(':test_fragment')
         //仪器测试
-        androidTestImplementation project(':test_android')
+        androidTestImplementation project(':test_fragment')
 
         //EventBus 索引生成
         annotationProcessor project(':core_eventbus_processor')

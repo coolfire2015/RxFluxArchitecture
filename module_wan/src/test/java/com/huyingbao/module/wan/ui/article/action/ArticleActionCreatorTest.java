@@ -5,7 +5,7 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
-import com.huyingbao.test.junit.RxJavaRule;
+import com.huyingbao.test.utils.RxJavaRule;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,13 +41,13 @@ public class ArticleActionCreatorTest {
         mRxActionManager = new RxActionManager();
 
         mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
-        //订阅store
+        //注册store订阅
         mRxDispatcher.subscribeRxStore(mArticleStore);
     }
 
     @After
     public void tearDown() {
-        //解除订阅
+        //解除store订阅
         mRxDispatcher.unsubscribeRxStore(mArticleStore);
     }
 

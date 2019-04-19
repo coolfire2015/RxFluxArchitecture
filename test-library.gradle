@@ -1,0 +1,31 @@
+dependencies {
+    androidTestImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    androidTestImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    androidTestImplementation "androidx.test:core:${TEST_X_CORE}"
+    androidTestImplementation "androidx.test:rules:${TEST_X_RULES}"
+    androidTestImplementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
+
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
+
+
+    //使用统一依赖版本
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
+}

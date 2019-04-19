@@ -5,7 +5,7 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.util.LocalStorageUtils;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
-import com.huyingbao.test.junit.RxJavaRule;
+import com.huyingbao.test.utils.RxJavaRule;
 
 import org.junit.Before;
 import org.junit.Ignore;

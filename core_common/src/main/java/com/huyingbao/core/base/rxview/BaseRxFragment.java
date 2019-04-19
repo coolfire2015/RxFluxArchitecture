@@ -6,9 +6,7 @@ import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseFragment;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import com.huyingbao.core.util.CommonUtils;
 
 import javax.inject.Inject;
 
@@ -44,15 +42,14 @@ public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment i
         if (mStore != null) {
             return mStore;
         }
-        Type genericSuperclass = getClass().getGenericSuperclass();
-        if (!(genericSuperclass instanceof ParameterizedType)) {
+        Class<T> storeClass = CommonUtils.getGenericClass(getClass());
+        if (storeClass == null) {
             return null;
         }
-        Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
-        if (tClass.getSuperclass() == RxActivityStore.class) {
-            mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(tClass);
-        } else if (tClass.getSuperclass() == RxFragmentStore.class) {
-            mStore = ViewModelProviders.of(this, mViewModelFactory).get(tClass);
+        if (storeClass.getSuperclass() == RxActivityStore.class) {
+            mStore = ViewModelProviders.of(getActivity(), mViewModelFactory).get(storeClass);
+        } else if (storeClass.getSuperclass() == RxFragmentStore.class) {
+            mStore = ViewModelProviders.of(this, mViewModelFactory).get(storeClass);
         }
         return mStore;
     }
