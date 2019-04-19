@@ -6,16 +6,6 @@ group = "com.github.coolfire2015"
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-//将源代码打包进aar
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main
-}
-
-artifacts {
-    archives sourcesJar
-}
-
 dependencies {
     //注解
     implementation project(':core_eventbus_annotations')
