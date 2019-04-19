@@ -6,14 +6,6 @@ group = "com.github.coolfire2015"
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDir 'src/main/java'
-//        }
-//    }
-//}
-
 //将源代码打包进aar
 task sourcesJar(type: Jar) {
     classifier = 'sources'
