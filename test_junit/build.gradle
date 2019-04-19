@@ -44,6 +44,10 @@ artifacts {
 }
 
 dependencies {
+    //使用统一依赖版本
+    implementation project(':core_common')
+    implementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    implementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
     //Junit
     api "junit:junit:${TEST_JUNIT}"
     //Mockito
@@ -63,7 +67,4 @@ dependencies {
     api "org.assertj:assertj-core:${TEST_ASSERT_J}"
     //AssertJ-Android
     api "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
-    //RxJava
-    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
-    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
 }

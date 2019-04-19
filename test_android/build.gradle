@@ -44,6 +44,9 @@ artifacts {
 }
 
 dependencies {
+    //使用统一依赖版本
+    implementation project(':core_common')
+    //android 原生单元测试框架
     api "androidx.test:core:${TEST_X_CORE}"
     api "androidx.test:rules:${TEST_X_RULES}"
     api "androidx.test:runner:${TEST_X_RUNNER}"
