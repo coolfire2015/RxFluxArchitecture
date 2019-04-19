@@ -2,7 +2,7 @@ if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
-apply from: rootProject.file('test-library.gradle')
+apply from: rootProject.file('TestLibrary.gradle')
 
 group = "com.github.coolfire2015"
 
