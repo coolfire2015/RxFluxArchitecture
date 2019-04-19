@@ -51,7 +51,7 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
     }
 
     @Inject
-    public CommonLoadingDialog(){
+    public CommonLoadingDialog() {
 
     }
 

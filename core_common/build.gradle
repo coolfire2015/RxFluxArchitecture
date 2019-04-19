@@ -44,13 +44,8 @@ artifacts {
 }
 
 dependencies {
-    if (isUseMaven.toBoolean()) {
-        //内核
-        api "com.github.coolfire2015.RxFluxArchitecture:core_arch:${RX_FLUX_ARCHITECTURE}"
-    } else {
-        //内核
-        api project(':core_arch')
-    }
+    //内核
+    api project(':core_arch')
     //分包
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //日志展示

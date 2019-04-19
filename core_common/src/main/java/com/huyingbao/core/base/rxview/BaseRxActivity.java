@@ -14,11 +14,10 @@ import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonException;
+import com.huyingbao.core.util.CommonUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -63,12 +62,11 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
         if (mStore != null) {
             return mStore;
         }
-        Type genericSuperclass = getClass().getGenericSuperclass();
-        if (!(genericSuperclass instanceof ParameterizedType)) {
+        Class<T> storeClass = CommonUtils.getGenericClass(getClass());
+        if (storeClass == null) {
             return null;
         }
-        Class<T> tClass = (Class<T>) ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
-        mStore = ViewModelProviders.of(this, mViewModelFactory).get(tClass);
+        mStore = ViewModelProviders.of(this, mViewModelFactory).get(storeClass);
         return mStore;
     }
 
@@ -137,14 +135,14 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
     @Subscribe()
     public void onRxLoading(@NonNull RxLoading rxLoading) {
         Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(rxLoading.getTag());
-        if(fragmentByTag==null&&rxLoading.isLoading()){
+        if (fragmentByTag == null && rxLoading.isLoading()) {
             //显示进度框
-            mCommonLoadingDialogLazy.get().show(getSupportFragmentManager(),rxLoading.getTag());
+            mCommonLoadingDialogLazy.get().show(getSupportFragmentManager(), rxLoading.getTag());
             return;
         }
-        if(fragmentByTag instanceof CommonLoadingDialog&&!rxLoading.isLoading()){
+        if (fragmentByTag instanceof CommonLoadingDialog && !rxLoading.isLoading()) {
             //隐藏进度框
-            ((CommonLoadingDialog)fragmentByTag).dismiss();
+            ((CommonLoadingDialog) fragmentByTag).dismiss();
         }
     }
 }

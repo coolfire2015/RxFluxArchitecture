@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
@@ -43,25 +44,13 @@ artifacts {
 }
 
 dependencies {
-    //EventBus
-    api project(':core_eventbus')
-    //版本兼容包
-    api "androidx.core:core:${X_CORE}"
-    api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
-    api "androidx.vectordrawable:vectordrawable:${X_VECTOR_DRAWABLE}"
-    api "androidx.coordinatorlayout:coordinatorlayout:${X_COORDINATOR_LAYOUT}"
-    //Arch
-    api "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
+    //Junit
+    implementation "junit:junit:${TEST_JUNIT}"
+    //Android
+    implementation "androidx.test:core:${TEST_X_CORE}"
+    implementation "androidx.test:rules:${TEST_X_RULES}"
+    implementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
     //RxJava
-    api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
-    api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
-    //Dagger
-    api "com.google.dagger:dagger:${DAGGER}"
-    //Dagger-Android
-    api "com.google.dagger:dagger-android:${DAGGER}"
-    api "com.google.dagger:dagger-android-support:${DAGGER}"
-    //编译时生成
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    implementation "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
+    implementation "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
 }

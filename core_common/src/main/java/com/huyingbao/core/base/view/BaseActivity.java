@@ -46,8 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             return;
         }
         //使用新的Fragment
-        Fragment fragmentNew= createFragment();
-        if(fragmentNew==null){
+        Fragment fragmentNew = createFragment();
+        if (fragmentNew == null) {
             return;
         }
         //使用fragment类名作为tag
