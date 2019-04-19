@@ -139,9 +139,10 @@ repositories {
 }
 
 dependencies {
-    //通用依赖模块
     if (isUseMaven.toBoolean()) {
+        //通用依赖模块
         api "com.github.coolfire2015.RxFluxArchitecture:core_common:${RX_FLUX_ARCHITECTURE}"
+
         //Junit测试
         testImplementation "com.github.coolfire2015.RxFluxArchitecture:test_junit:${RX_FLUX_ARCHITECTURE}"
         //Junit测试,可以使用android原生测试框架
@@ -149,13 +150,14 @@ dependencies {
         //仪器测试
         androidTestImplementation "com.github.coolfire2015.RxFluxArchitecture:test_android:${RX_FLUX_ARCHITECTURE}"
 
-        //eventbus 索引生成
+        //EventBus 索引生成
         annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
         testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
         androidTestAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
-
     } else {
+        //通用依赖模块
         api project(':core_common')
+
         //Junit测试
         testImplementation project(':test_junit')
         //Junit测试,可以使用android原生测试框架
@@ -163,7 +165,7 @@ dependencies {
         //仪器测试
         androidTestImplementation project(':test_android')
 
-        //eventbus 索引生成
+        //EventBus 索引生成
         annotationProcessor project(':core_eventbus_processor')
         testAnnotationProcessor project(':core_eventbus_processor')
         androidTestAnnotationProcessor project(':core_eventbus_processor')

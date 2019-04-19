@@ -115,16 +115,19 @@ repositories {
 }
 
 dependencies {
-    //功能模块
     if (!isModuleAsApp.toBoolean()) {
         if (isUseMaven.toBoolean()) {
+            //功能模块
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_gan:${RX_FLUX_ARCHITECTURE}"
             implementation "com.github.coolfire2015.RxFluxArchitecture:module_wan:${RX_FLUX_ARCHITECTURE}"
             annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
         } else {
-//            implementation project(':module_wan_kotlin')
+            //功能模块
             implementation project(':module_gan')
             implementation project(':module_wan')
+            //implementation project(':module_wan_kotlin')
+
+            //
             annotationProcessor project(':core_eventbus_processor')
         }
     }

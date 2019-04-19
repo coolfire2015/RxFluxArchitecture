@@ -44,8 +44,10 @@ artifacts {
 
 dependencies {
     if (isUseMaven.toBoolean()) {
+        //EventBus
         api "com.github.coolfire2015.RxFluxArchitecture:eventbus:${RX_FLUX_ARCHITECTURE}"
-    }else{
+    } else {
+        //EventBus
         api project(':core_eventbus')
     }
     //版本兼容包

@@ -139,12 +139,15 @@ repositories {
 }
 
 dependencies {
-    //通用依赖模块
     if (isUseMaven.toBoolean()) {
+        //通用依赖模块
         api "com.github.coolfire2015.RxFluxArchitecture:core_common:${RX_FLUX_ARCHITECTURE}"
+        //EventBus 索引生成
         annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:eventbus-annotation-processor:${RX_FLUX_ARCHITECTURE}"
     } else {
+        //通用依赖模块
         api project(':core_common')
+        //EventBus 索引生成
         annotationProcessor project(':core_eventbus_processor')
     }
     //编译时生成
