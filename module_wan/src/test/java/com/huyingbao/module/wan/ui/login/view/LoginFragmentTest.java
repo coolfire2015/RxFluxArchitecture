@@ -1,7 +1,7 @@
 package com.huyingbao.module.wan.ui.login.view;
 
 import com.huyingbao.module.wan.R;
-import com.huyingbao.test.fragment.FragmentScenarioRule;
+import com.huyingbao.test.utils.FragmentScenarioRule;
 
 import org.junit.Assert;
 import org.junit.Rule;

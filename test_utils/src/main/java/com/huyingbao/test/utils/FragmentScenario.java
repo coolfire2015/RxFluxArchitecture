@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.huyingbao.test.fragment;
+package com.huyingbao.test.utils;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
@@ -31,16 +31,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.testing.R;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.test.core.app.ActivityScenario;
-
-import static androidx.annotation.RestrictTo.Scope.LIBRARY;
-import static androidx.core.util.Preconditions.checkNotNull;
-import static androidx.core.util.Preconditions.checkState;
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+import androidx.test.core.app.ApplicationProvider;
 
 /**
  * FragmentScenario provides API to start and drive a Fragment's lifecycle state for testing. It
@@ -68,7 +63,7 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
      *
      * @hide
      */
-    @RestrictTo(LIBRARY)
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
     public static class FragmentFactoryHolderViewModel extends ViewModel {
 
         @Nullable
@@ -263,7 +258,7 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
             @StyleRes int themeResId,
             @Nullable final FragmentFactory factory,
             @IdRes final int containerViewId) {
-        Intent startActivityIntent = Intent.makeMainActivity(new ComponentName(getApplicationContext(), activityClass));
+        Intent startActivityIntent = Intent.makeMainActivity(new ComponentName(ApplicationProvider.getApplicationContext(), activityClass));
         FragmentScenario<A, F> scenario = new FragmentScenario<>(
                 activityClass,
                 fragmentClass,
@@ -336,7 +331,7 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
             mActivityScenario.onActivity(
                     activity -> {
                         Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-                        checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
+                        Preconditions.checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
                     });
             mActivityScenario.moveToState(newState);
         }
@@ -390,8 +385,8 @@ public final class FragmentScenario<A extends FragmentActivity, F extends Fragme
         mActivityScenario.onActivity(
                 activity -> {
                     Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-                    checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
-                    checkState(mFragmentClass.isInstance(fragment));
+                    Preconditions.checkNotNull(fragment, "The fragment has been removed from FragmentManager already.");
+                    Preconditions.checkState(mFragmentClass.isInstance(fragment));
                     action.perform(Preconditions.checkNotNull(mFragmentClass.cast(fragment)));
                 });
         return this;

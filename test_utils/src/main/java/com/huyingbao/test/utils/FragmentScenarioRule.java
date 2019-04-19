@@ -1,16 +1,15 @@
-package com.huyingbao.test.fragment;
+package com.huyingbao.test.utils;
 
 import android.os.Bundle;
-
-import org.junit.rules.ExternalResource;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentFactory;
 import androidx.test.core.app.ActivityScenario;
+import androidx.test.internal.util.Checks;
 
-import static androidx.test.internal.util.Checks.checkNotNull;
+import org.junit.rules.ExternalResource;
 
 /**
  * Created by liujunfeng on 2019/4/3.
@@ -39,8 +38,8 @@ public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fr
             Bundle args,
             FragmentFactory fragmentFactory) {
         scenarioSupplier = () -> FragmentScenario.launchInContainer(
-                checkNotNull(activityClass),
-                checkNotNull(fragmentClass),
+                Checks.checkNotNull(activityClass),
+                Checks.checkNotNull(fragmentClass),
                 args,
                 R.style.FragmentScenarioEmptyFragmentActivityTheme,
                 fragmentFactory);
@@ -64,6 +63,6 @@ public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fr
      * @throws NullPointerException if you call this method while test is not running
      */
     public FragmentScenario<A, F> getScenario() {
-        return checkNotNull(scenario);
+        return Checks.checkNotNull(scenario);
     }
 }
