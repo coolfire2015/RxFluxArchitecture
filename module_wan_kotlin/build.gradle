@@ -139,7 +139,7 @@ repositories {
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
-        arg('eventBusIndex', 'com.huyingbao.module.wan.WanEventBusIndex')
+        arg('eventBusIndex', 'com.huyingbao.module.wan.kotlin.WanEventBusIndex')
     }
     generateStubs = true
 }
