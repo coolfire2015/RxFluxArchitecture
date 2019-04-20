@@ -43,4 +43,9 @@ public class MainFragment extends BaseRxFragment<MainStore> {
     public void toWanModule() {
         mActionCreator.postLocalChange(MainAction.TO_WAN_MODULE);
     }
+
+    @OnClick(R2.id.btn_category_wan_kotlin)
+    public void toWanKotlinModule() {
+        mActionCreator.postLocalChange(MainAction.TO_WAN_KOTLIN_MODULE);
+    }
 }
