@@ -26,8 +26,9 @@ public class SimpleApplication extends BaseApp {
     public void onCreate() {
         super.onCreate();
         EventBus.builder()
-                .addIndex(new WanEventBusIndex())
                 .addIndex(new GanEventBusIndex())
+                .addIndex(new WanEventBusIndex())
+                .addIndex(new com.huyingbao.module.wan.kotlin.WanEventBusIndex())
                 .eventInheritance(false)
                 .installDefaultEventBus();
     }
