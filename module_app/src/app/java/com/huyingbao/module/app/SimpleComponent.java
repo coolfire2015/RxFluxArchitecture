@@ -37,6 +37,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         GanAppModule.class,//模块module
         WanAppModule.class,//模块module
+        com.huyingbao.module.wan.kotlin.module.WanAppModule.class,//模块module
         CommonModule.class,//通用module
         AndroidSupportInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {

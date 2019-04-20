@@ -8,4 +8,5 @@ package com.huyingbao.module.gan.ui.main.action;
 public interface MainAction {
     String TO_GAN_MODULE = "toGanModule";
     String TO_WAN_MODULE = "toWanModule";
+    String TO_WAN_KOTLIN_MODULE = "toWanKotlinModule";
 }

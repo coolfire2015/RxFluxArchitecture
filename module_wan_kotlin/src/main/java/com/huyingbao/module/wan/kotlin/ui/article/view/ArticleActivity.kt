@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.Subscribe
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Route(path = "/wan/ArticleActivity")
+@Route(path = "/wankotlin/ArticleActivity")
 class ArticleActivity : BaseRxActivity<ArticleStore>() {
     override fun createFragment(): Fragment {
         return ArticleListFragment.newInstance()

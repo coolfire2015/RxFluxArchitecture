@@ -6,6 +6,7 @@
 
     <string name="gan_category_wan">玩安卓</string>
     <string name="gan_category_gan">@string/gan_label_gan</string>
+    <string name="gan_category_wan_kotlin">玩安卓Kotlin</string>
 
     <string-array name="gan_array_category">
         <item>all</item>

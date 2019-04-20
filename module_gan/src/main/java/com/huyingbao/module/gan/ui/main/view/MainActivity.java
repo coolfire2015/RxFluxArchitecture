@@ -36,4 +36,9 @@ public class MainActivity extends BaseRxActivity<MainStore> {
     public void toGanModule(RxChange rxChange) {
         startActivity(new Intent(this, RandomActivity.class));
     }
+
+    @Subscribe(tags = {MainAction.TO_WAN_KOTLIN_MODULE})
+    public void toWanKotlinModule(RxChange rxChange){
+        ARouter.getInstance().build("/wankotlin/ArticleActivity").navigation();
+    }
 }
