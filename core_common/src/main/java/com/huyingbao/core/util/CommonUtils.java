@@ -32,7 +32,6 @@ public class CommonUtils {
         return genericClass;
     }
 
-
     /**
      * 显示短暂的Toast
      *
