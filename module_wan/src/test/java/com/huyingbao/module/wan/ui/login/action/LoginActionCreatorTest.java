@@ -5,8 +5,10 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.util.LocalStorageUtils;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
+import com.huyingbao.module.wan.ui.login.store.LoginStore;
 import com.huyingbao.test.utils.RxJavaRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -27,18 +29,6 @@ import static org.mockito.Mockito.verify;
  * Created by liujunfeng on 2019/4/3.
  */
 public class LoginActionCreatorTest {
-    /**
-     * 注解Spy只能修饰默认构造方法(无参数)
-     */
-    @Spy
-    private RxDispatcher mRxDispatcher;
-    @Mock
-    private RxActionManager mRxActionManager;
-    @Mock
-    private LocalStorageUtils mLocalStorageUtils;
-
-    private LoginActionCreator mLoginActionCreator;
-
     @Rule
     public RxJavaRule mRxJavaRule = new RxJavaRule();
     @Rule
@@ -46,28 +36,55 @@ public class LoginActionCreatorTest {
     @Rule
     public MockDaggerRule mMockDaggerRule = new MockDaggerRule();
 
+    @Spy
+    private RxDispatcher mRxDispatcher;
+    @Spy
+    private RxActionManager mRxActionManager;
+    @Mock
+    private LoginStore mLoginStore;
+    @Mock
+    private LocalStorageUtils mLocalStorageUtils;
+
+    private LoginActionCreator mLoginActionCreator;
+
     @Before
     public void setUp() throws Exception {
         mLoginActionCreator = new LoginActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
         mLoginActionCreator.mLocalStorageUtils = mLocalStorageUtils;
+        mRxDispatcher.subscribeRxStore(mLoginStore);
+    }
+
+    @After
+    public void tearDown() {
+        mRxDispatcher.unsubscribeRxStore(mLoginStore);
     }
 
     @Test
     public void testRegister() {
         mLoginActionCreator.register("coolfire", "123456", "123456");
-        verify(mRxDispatcher).postRxError(Mockito.any());
+        //验证方法正确执行,并发送RxAction
+        verify(mRxDispatcher).postRxAction(Mockito.any());
+        //验证RxStore的正确方法接受对应的RxAction
+        verify(mLoginStore).onRegister(Mockito.any());
     }
 
     @Test
     public void testLogin() {
         mLoginActionCreator.login("coolfire", "123456");
+        //验证方法正确执行,并发送RxAction
         verify(mRxDispatcher).postRxAction(Mockito.any());
+        //验证RxStore的正确方法接受对应的RxAction
+        verify(mLoginStore).onLogin(Mockito.any());
     }
 
     @Test
     public void testChangeBaseUrl() {
         mLoginActionCreator.changeBaseUrl("asdf");
         verify(mLocalStorageUtils).setString(Mockito.any(), Mockito.any());
+        //验证方法正确执行,并发送RxAction
+        verify(mRxDispatcher).postRxAction(Mockito.any());
+        //验证发送之后,正确移除RxAction
+        verify(mRxActionManager).remove(Mockito.any());
     }
 
     /**

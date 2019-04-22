@@ -1,6 +1,8 @@
 package com.huyingbao.module.wan.module;
 
 import com.google.gson.GsonBuilder;
+import com.huyingbao.core.arch.action.RxActionManager;
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.module.wan.BuildConfig;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.action.WanContants;
@@ -25,6 +27,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class MockModule {
+    @Singleton
+    @Provides
+    public RxActionManager provideRxActionManager() {
+        return new RxActionManager();
+    }
+
+    @Singleton
+    @Provides
+    public RxDispatcher provideRxDispatcher() {
+        return new RxDispatcher();
+    }
+
     @Singleton
     @Provides
     public OkHttpClient provideClient() {

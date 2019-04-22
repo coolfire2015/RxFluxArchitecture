@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -31,15 +32,14 @@ public class ArticleActionCreatorTest {
 
     @Mock
     private ArticleStore mArticleStore;
+    @Spy
     private RxDispatcher mRxDispatcher;
+    @Spy
     private RxActionManager mRxActionManager;
     private ArticleActionCreator mActionCreator;
 
     @Before
     public void setUp() {
-        mRxDispatcher = new RxDispatcher();
-        mRxActionManager = new RxActionManager();
-
         mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
         //注册store订阅
         mRxDispatcher.subscribeRxStore(mArticleStore);
