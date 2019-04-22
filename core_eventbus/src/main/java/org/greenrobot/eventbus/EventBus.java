@@ -493,9 +493,9 @@ public class EventBus {
                 postingState.subscription = eventBusPair.second;
                 boolean aborted = false;
                 try {
-                    for (String tag : eventBusPair.first) {
+                    for (String item : eventBusPair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
-                        if (tag != null && tag.equals(postingState.tag)) {
+                        if (item != null && item.equals(postingState.tag)) {
                             postToSubscription(eventBusPair.second, event, postingState.tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;
