@@ -1,15 +1,17 @@
 package com.huyingbao.core.base.view;
 
-import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import com.huyingbao.core.base.BaseView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,15 +24,16 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment impleme
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //设置布局
-        View rootView = LayoutInflater.from(getActivity()).inflate(getLayoutId(), null);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //注意此处android.R.id.content
+        return inflater.inflate(getLayoutId(), getDialog().getWindow().findViewById(android.R.id.content), false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         //ButterKnife绑定
-        mUnbinder = ButterKnife.bind(this, rootView);
-        //创建AlertDialog
-        AppCompatDialog dialog = new AppCompatDialog(getContext(), getTheme());
-        dialog.setContentView(rootView);
-        return dialog;
+        mUnbinder = ButterKnife.bind(this, view);
     }
 
     @Override
@@ -38,6 +41,15 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment impleme
         super.onActivityCreated(savedInstanceState);
         // view创建之后的操作
         afterCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        final Window window = getDialog().getWindow();
+        //设置Dialog对应的布局背景和尺寸生效
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     @Override

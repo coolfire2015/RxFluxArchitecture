@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -60,10 +60,10 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
     @Override
     public void changeBaseUrl(String baseUrl) {
         RxAction rxAction = newRxAction(CHANGE_BASE_URL);
-        Completable completable = Completable.create(emitter -> {
+        Single completable = Single.create(emitter -> {
             try {
                 mLocalStorageUtils.setString(WanContants.Key.URL, baseUrl);
-                emitter.onComplete();
+                emitter.onSuccess(baseUrl);
             } catch (Exception e) {
                 emitter.onError(e);
             }

@@ -55,7 +55,12 @@ public class EventBus {
      */
     private final Map<Class<?>, CopyOnWriteArrayList<EventBusPair<String[], Subscription>>> subscriptionsByEventType;
     private final Map<Object, List<Class<?>>> typesBySubscriber;
-    private final Map<Class<?>, Object> stickyEvents;
+    /**
+     * 粘性操作
+     * Key:发送接收的数据类型
+     * Value:发送接收操作的tag和实际数据
+     */
+    private final Map<Class<?>, EventBusPair<String, Object>> stickyEvents;
 
     /**
      * 多个线程操作同一个结果,但是互相之间不影响
@@ -170,12 +175,13 @@ public class EventBus {
      * Must be called in synchronized block
      * 订阅者与订阅者方法关联
      *
-     * @param subscriber
-     * @param subscriberMethod
+     * @param subscriber       订阅者
+     * @param subscriberMethod 订阅者中的订阅方法
      */
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
-        //缓存subscriber method的信息
+        //订阅者的订阅方法接收的数据类型
         Class<?> eventType = subscriberMethod.eventType;
+        //订阅者的订阅方法接收的操作tag数组
         String[] tags = subscriberMethod.tags;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
         EventBusPair<String[], Subscription> newEventBusPair = new EventBusPair<>(tags, newSubscription);
@@ -213,28 +219,39 @@ public class EventBus {
                 // Note: Iterating over all events may be inefficient with lots of sticky events,
                 // thus data structure should be changed to allow a more efficient lookup
                 // (e.g. an additional map storing sub classes of super classes: Class -> List<Class>).
-                Set<Map.Entry<Class<?>, Object>> entries = stickyEvents.entrySet();
-                for (Map.Entry<Class<?>, Object> entry : entries) {
+                Set<Map.Entry<Class<?>, EventBusPair<String, Object>>> entries = stickyEvents.entrySet();
+                for (Map.Entry<Class<?>, EventBusPair<String, Object>> entry : entries) {
                     Class<?> candidateEventType = entry.getKey();
                     if (eventType.isAssignableFrom(candidateEventType)) {
-                        Object stickyEvent = entry.getValue();
-                        checkPostStickyEventToSubscription(newSubscription, stickyEvent, tags);
+                        EventBusPair<String, Object> eventBusPair = entry.getValue();
+                        checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
                     }
                 }
             } else {
-                Object stickyEvent = stickyEvents.get(eventType);
-                checkPostStickyEventToSubscription(newSubscription, stickyEvent, tags);
+                EventBusPair<String, Object> eventBusPair = stickyEvents.get(eventType);
+                checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
             }
         }
     }
 
-    private void checkPostStickyEventToSubscription(Subscription newSubscription, Object stickyEvent, String[] tags) {
+    /**
+     * 检查发送粘性事件到订阅关系,执行订阅者中的订阅方法
+     *
+     * @param newSubscription 订阅封装
+     * @param tags            订阅封装中可执行的tag数组
+     * @param tag             缓存的粘性事件对应的操作tag
+     * @param stickyEvent     缓存的粘性事件数据类型
+     */
+    private void checkPostStickyEventToSubscription(Subscription newSubscription, String[] tags, String tag, Object stickyEvent) {
         if (stickyEvent != null) {
             // If the subscriber is trying to abort the event, it will fail (event is not tracked in posting state)
             // --> Strange corner case, which we don't take care of here.
             //执行每个tag对应的订阅者方法
-            for (String tag : tags) {
-                postToSubscription(newSubscription, stickyEvent, tag, isMainThread());
+            for (String item : tags) {
+                //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
+                if (item != null && item.equals(tag)) {
+                    postToSubscription(newSubscription, stickyEvent, tag, isMainThread());
+                }
             }
         }
     }
@@ -354,7 +371,8 @@ public class EventBus {
      */
     public void postSticky(Object event, String tag) {
         synchronized (stickyEvents) {
-            stickyEvents.put(event.getClass(), event);
+            //存储粘性操作
+            stickyEvents.put(event.getClass(), EventBusPair.create(tag, event));
         }
         // Should be posted after it is putted, in case the subscriber wants to remove immediately
         post(event, tag);
@@ -475,9 +493,9 @@ public class EventBus {
                 postingState.subscription = eventBusPair.second;
                 boolean aborted = false;
                 try {
-                    for (String tag : eventBusPair.first) {
+                    for (String item : eventBusPair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
-                        if (tag != null && tag.equals(postingState.tag)) {
+                        if (item != null && item.equals(postingState.tag)) {
                             postToSubscription(eventBusPair.second, event, postingState.tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;

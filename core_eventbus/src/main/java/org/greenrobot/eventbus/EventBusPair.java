@@ -79,7 +79,7 @@ public class EventBusPair<F, S> {
      * @param b the second object in the pair
      * @return a EventBusPair that is templatized with the types of a and b
      */
-    public static <A, B> android.util.Pair<A, B> create(A a, B b) {
-        return new android.util.Pair<A, B>(a, b);
+    public static <A, B> EventBusPair<A, B> create(A a, B b) {
+        return new EventBusPair<A, B>(a, b);
     }
 }

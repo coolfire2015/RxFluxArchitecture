@@ -43,6 +43,12 @@ public class LoginStore extends RxActivityStore {
         postChange(RxChange.newInstance(rxAction));
     }
 
+    @Subscribe(tags={LoginAction.REGISTER})
+    public void onRegister(RxAction rxAction) {
+        mUser = rxAction.getResponse();
+        postChange(RxChange.newInstance(rxAction));
+    }
+
     @Subscribe(tags={LoginAction.GET_IDENTIFY})
     public void setIntervalLiveData(RxAction rxAction) {
         mIntervalLiveData.setValue(rxAction.getResponse() + "");
