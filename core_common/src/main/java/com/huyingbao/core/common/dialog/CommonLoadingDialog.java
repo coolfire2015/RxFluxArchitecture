@@ -1,16 +1,12 @@
 package com.huyingbao.core.common.dialog;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.text.TextUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.huyingbao.core.arch.action.RxActionManager;
-import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.base.view.BaseDialogFragment;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
@@ -21,6 +17,7 @@ import javax.inject.Singleton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dagger.Lazy;
@@ -42,17 +39,12 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
     @BindView(R2.id.tv_loading_cancel)
     TextView mTvLoadingCancel;
 
-    private CharSequence message;
-    private int messageInt;
-    private RxLoading mRxLoading;
+    @StringRes
+    private int mMessageInt;
 
-    public static CommonLoadingDialog newInstance() {
-        return new CommonLoadingDialog();
-    }
 
     @Inject
     public CommonLoadingDialog() {
-
     }
 
     @Override
@@ -62,49 +54,27 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
 
     @Override
     public void afterCreate(@Nullable Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Dialog dialog = getDialog();
-        if (dialog == null) {
-            return;
-        }
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dp_120);
-        window.setAttributes(layoutParams);
+        getDialog().setCanceledOnTouchOutside(false);
     }
 
     @Override
     public void onShow(DialogInterface dialog) {
-        if (message != null && message.length() > 0) {
+        String message = getString(mMessageInt);
+        if (!TextUtils.isEmpty(message)) {
             mTvLoadingNotice.setText(message);
-            mTvLoadingNotice.setVisibility(View.VISIBLE);
-        } else if (messageInt > 0) {
-            mTvLoadingNotice.setText(messageInt);
-            mTvLoadingNotice.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
+        mMessageInt = 0;
     }
 
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
-    }
-
-    public void setMessage(CharSequence message) {
-        this.message = message;
-    }
-
-    public void setRxLoading(RxLoading rxLoading) {
-        mRxLoading = rxLoading;
+        mMessageInt = 0;
     }
 
     /**
@@ -115,5 +85,14 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
         mRxActionManagerLazy.get().clear();
         CommonUtils.showShortToast(getContext(), "取消操作！");
         dismiss();
+    }
+
+    /**
+     * 设置进度弹框显示文字
+     *
+     * @param messageInt
+     */
+    public void setMessageInt(@StringRes int messageInt) {
+        mMessageInt = messageInt;
     }
 }
