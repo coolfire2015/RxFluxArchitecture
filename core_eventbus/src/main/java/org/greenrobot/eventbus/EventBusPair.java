@@ -80,6 +80,6 @@ public class EventBusPair<F, S> {
      * @return a EventBusPair that is templatized with the types of a and b
      */
     public static <A, B> EventBusPair<A, B> create(A a, B b) {
-        return new EventBusPair<A, B>(a, b);
+        return new EventBusPair<>(a, b);
     }
 }

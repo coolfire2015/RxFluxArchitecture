@@ -224,12 +224,16 @@ public class EventBus {
                     Class<?> candidateEventType = entry.getKey();
                     if (eventType.isAssignableFrom(candidateEventType)) {
                         EventBusPair<String, Object> eventBusPair = entry.getValue();
-                        checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                        if (eventBusPair != null) {
+                            checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                        }
                     }
                 }
             } else {
                 EventBusPair<String, Object> eventBusPair = stickyEvents.get(eventType);
-                checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                if (eventBusPair != null) {
+                    checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                }
             }
         }
     }
