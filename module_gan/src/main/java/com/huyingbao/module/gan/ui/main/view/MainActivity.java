@@ -27,18 +27,18 @@ public class MainActivity extends BaseRxActivity<MainStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Subscribe(tags = {MainAction.TO_WAN_MODULE})
+    @Subscribe(tags = {MainAction.TO_WAN_MODULE}, sticky = true)
     public void toWanModule(RxChange rxChange) {
         ARouter.getInstance().build("/wan/ArticleActivity").navigation();
     }
 
-    @Subscribe(tags = {MainAction.TO_GAN_MODULE})
+    @Subscribe(tags = {MainAction.TO_GAN_MODULE}, sticky = true)
     public void toGanModule(RxChange rxChange) {
         startActivity(new Intent(this, RandomActivity.class));
     }
 
-    @Subscribe(tags = {MainAction.TO_WAN_KOTLIN_MODULE})
-    public void toWanKotlinModule(RxChange rxChange){
+    @Subscribe(tags = {MainAction.TO_WAN_KOTLIN_MODULE}, sticky = true)
+    public void toWanKotlinModule(RxChange rxChange) {
         ARouter.getInstance().build("/wankotlin/ArticleActivity").navigation();
     }
 }

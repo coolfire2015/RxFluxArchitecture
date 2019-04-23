@@ -2,7 +2,6 @@ package com.huyingbao.module.wan.kotlin
 
 
 import com.huyingbao.core.base.BaseApp
-import com.huyingbao.module.wan.WanEventBusIndex
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import org.greenrobot.eventbus.EventBus

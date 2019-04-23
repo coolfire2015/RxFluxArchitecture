@@ -20,7 +20,7 @@ class LoginActivity : BaseRxActivity<LoginStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
 
-    @Subscribe(tags = [LoginAction.LOGIN])
+    @Subscribe(tags = [LoginAction.LOGIN], sticky = true)
     fun onLogin(rxChange: RxChange) {
         startActivity(Intent(this, ArticleActivity::class.java))
         finish()

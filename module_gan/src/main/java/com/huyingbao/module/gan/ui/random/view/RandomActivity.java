@@ -25,7 +25,7 @@ public class RandomActivity extends BaseRxActivity<RandomStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Subscribe(tags = {RandomAction.TO_SHOW_DATA})
+    @Subscribe(tags = {RandomAction.TO_SHOW_DATA}, sticky = true)
     public void toShowData(@NonNull RxChange rxChange) {
         addFragmentHideExisting(ProductFragment.newInstance());
     }

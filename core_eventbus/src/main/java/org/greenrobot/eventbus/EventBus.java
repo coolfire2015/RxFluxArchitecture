@@ -215,6 +215,7 @@ public class EventBus {
         if (subscriberMethod.sticky) {
             //如果有sticky消息，直接发送。也可以得知sticky消息在注册后是可以执行的。
             if (eventInheritance) {
+                //如果支持继承
                 // Existing sticky events of all subclasses of eventType have to be considered.
                 // Note: Iterating over all events may be inefficient with lots of sticky events,
                 // thus data structure should be changed to allow a more efficient lookup
@@ -389,7 +390,11 @@ public class EventBus {
      */
     public <T> T getStickyEvent(Class<T> eventType) {
         synchronized (stickyEvents) {
-            return eventType.cast(stickyEvents.get(eventType));
+            EventBusPair<String, Object> eventBusPair = stickyEvents.get(eventType);
+            if (eventBusPair == null) {
+                return null;
+            }
+            return eventType.cast(eventBusPair.second);
         }
     }
 
@@ -400,7 +405,11 @@ public class EventBus {
      */
     public <T> T removeStickyEvent(Class<T> eventType) {
         synchronized (stickyEvents) {
-            return eventType.cast(stickyEvents.remove(eventType));
+            EventBusPair<String, Object> eventBusPair = stickyEvents.remove(eventType);
+            if (eventBusPair == null) {
+                return null;
+            }
+            return eventType.cast(eventBusPair.second);
         }
     }
 
@@ -412,8 +421,11 @@ public class EventBus {
     public boolean removeStickyEvent(Object event) {
         synchronized (stickyEvents) {
             Class<?> eventType = event.getClass();
-            Object existingEvent = stickyEvents.get(eventType);
-            if (event.equals(existingEvent)) {
+            EventBusPair<String, Object> eventBusPair = stickyEvents.remove(eventType);
+            if (eventBusPair == null) {
+                return false;
+            }
+            if (event.equals(eventBusPair.second)) {
                 stickyEvents.remove(eventType);
                 return true;
             } else {
@@ -488,8 +500,11 @@ public class EventBus {
      */
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
         CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions;
+        String tag;
+        //防止多次调用该方式时,方法内部变量被duo
         synchronized (this) {
             subscriptions = subscriptionsByEventType.get(eventClass);
+            tag = postingState.tag;
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {
             for (EventBusPair<String[], Subscription> eventBusPair : subscriptions) {
@@ -499,8 +514,8 @@ public class EventBus {
                 try {
                     for (String item : eventBusPair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
-                        if (item != null && item.equals(postingState.tag)) {
-                            postToSubscription(eventBusPair.second, event, postingState.tag, postingState.isMainThread);
+                        if (item != null && item.equals(tag)) {
+                            postToSubscription(eventBusPair.second, event, tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;
                         }
@@ -617,8 +632,10 @@ public class EventBus {
         try {
             //通过反射调用订阅者subscriber的方法subscriberMethod,并传入参数event
             subscription.subscriberMethod.method.invoke(subscription.subscriber, event);
-            //移除粘性订阅
-            removeStickyEvent(event);
+            if (subscription.subscriberMethod.sticky) {
+                //TODO 如果是粘性通知,完成调用订阅者方法之后,移除粘性订阅
+                removeStickyEvent(event);
+            }
         } catch (InvocationTargetException e) {
             handleSubscriberException(subscription, event, tag, e.getCause());
         } catch (IllegalAccessException e) {

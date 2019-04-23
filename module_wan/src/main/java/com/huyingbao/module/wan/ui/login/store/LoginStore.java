@@ -37,19 +37,19 @@ public class LoginStore extends RxActivityStore {
         mIntervalLiveData.setValue(null);
     }
 
-    @Subscribe(tags={LoginAction.LOGIN})
+    @Subscribe(tags = {LoginAction.LOGIN})
     public void onLogin(RxAction rxAction) {
         mUser = rxAction.getResponse();
         postChange(RxChange.newInstance(rxAction));
     }
 
-    @Subscribe(tags={LoginAction.REGISTER})
+    @Subscribe(tags = {LoginAction.REGISTER})
     public void onRegister(RxAction rxAction) {
         mUser = rxAction.getResponse();
         postChange(RxChange.newInstance(rxAction));
     }
 
-    @Subscribe(tags={LoginAction.GET_IDENTIFY})
+    @Subscribe(tags = {LoginAction.GET_IDENTIFY})
     public void setIntervalLiveData(RxAction rxAction) {
         mIntervalLiveData.setValue(rxAction.getResponse() + "");
     }
