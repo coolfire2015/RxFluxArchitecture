@@ -23,17 +23,17 @@ class ArticleActivity : BaseRxActivity<ArticleStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {}
 
-    @Subscribe(tags = [ArticleAction.TO_LOGIN])
+    @Subscribe(tags = [ArticleAction.TO_LOGIN], sticky = true)
     fun toLogin(rxChange: RxChange) {
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
-    @Subscribe(tags = [ArticleAction.TO_FRIEND])
+    @Subscribe(tags = [ArticleAction.TO_FRIEND], sticky = true)
     fun toFriend(rxChange: RxChange) {
         addFragmentHideExisting(FriendFragment.newInstance())
     }
 
-    @Subscribe(tags = [ArticleAction.TO_BANNER])
+    @Subscribe(tags = [ArticleAction.TO_BANNER], sticky = true)
     fun toBanner(rxChange: RxChange) {
         addFragmentHideExisting(BannerFragment.newInstance())
     }

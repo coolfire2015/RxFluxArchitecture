@@ -66,7 +66,6 @@ public class LoginFragment extends BaseRxFragment<LoginStore> {
             return;
         }
         mActionCreator.login(username, password);
-        mActionCreator.getIdentify();
     }
 
 

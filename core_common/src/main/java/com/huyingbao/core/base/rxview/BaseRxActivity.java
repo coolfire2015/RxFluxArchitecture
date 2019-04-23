@@ -94,7 +94,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Subscribe()
+    @Subscribe(sticky = true)
     public void onRxError(@NonNull RxError rxError) {
         Throwable throwable = rxError.getThrowable();
         if (throwable instanceof CommonException) {
@@ -117,7 +117,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Subscribe()
+    @Subscribe(sticky = true)
     public void onRxRetry(@NonNull RxRetry rxRetry) {
         CoordinatorLayout coordinatorLayout = findViewById(R.id.cdl_content);
         if (coordinatorLayout == null) {
@@ -132,7 +132,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
      */
-    @Subscribe()
+    @Subscribe(sticky = true)
     public void onRxLoading(@NonNull RxLoading rxLoading) {
         Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(rxLoading.getTag());
         if (fragmentByTag == null && rxLoading.isLoading()) {

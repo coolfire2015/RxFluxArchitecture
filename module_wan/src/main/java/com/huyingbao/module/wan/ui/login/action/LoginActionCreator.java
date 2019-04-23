@@ -35,13 +35,13 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
     @Override
     public void register(String username, String password, String repassword) {
         RxAction rxAction = newRxAction(REGISTER);
-        postHttpAction(rxAction, mWanApi.register(username, password, repassword).flatMap(verifyResponse()));
+        postHttpLoadingAction(rxAction, mWanApi.register(username, password, repassword).flatMap(verifyResponse()));
     }
 
     @Override
     public void login(String username, String password) {
         RxAction rxAction = newRxAction(LOGIN);
-        postHttpAction(rxAction, mWanApi.login(username, password).flatMap(verifyResponse()));
+        postHttpLoadingAction(rxAction, mWanApi.login(username, password).flatMap(verifyResponse()));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class LoginActionCreator extends WanActionCreator implements LoginAction 
         Observable<Long> coolfire2 = mWanApi.login("coolfire", "123456")
                 .flatMap(verifyResponse())
                 .flatMap(userWanResponse -> observable);
-        postHttpAction(rxAction, coolfire2);
+        postHttpLoadingAction(rxAction, coolfire2);
     }
 
     @Override

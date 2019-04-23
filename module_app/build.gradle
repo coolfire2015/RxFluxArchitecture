@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+    //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
-
     //lint设置
     lintOptions {
         //lint 不被终止
@@ -26,7 +26,6 @@ android {
     }
     //默认配置
     defaultConfig {
-        applicationId "com.huyingbao.app"
         multiDexEnabled true//支持Multidex分包
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
@@ -46,6 +45,12 @@ android {
     buildTypes {
         //自定义buildType.name
         debug {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+            //单元测试mockUrl
+            buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
+            //替换字符串资源
+            resValue "string", "app_name", "DemoDebug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -54,9 +59,15 @@ android {
             proguardFile 'proguard-rules.pro'
             //签名配置
             signingConfig signingConfigs.debug
+            //声明主 DEX 文件中需要的类
+            //multiDexKeepProguard file('multidex-config.pro')
         }
         //自定义buildType.name
         release {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+            //替换字符串资源
+            resValue "string", "app_name", "Demo"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -81,7 +92,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //单元测试
+    //单元测试,robolectric支持
     testOptions {
         unitTests {
             includeAndroidResources = true

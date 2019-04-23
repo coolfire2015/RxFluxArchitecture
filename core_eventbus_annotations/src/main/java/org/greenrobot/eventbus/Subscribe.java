@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface Subscribe {
     /**
-     * 默认主线程
+     * TODO 默认主线程
      *
      * @return
      */
@@ -36,9 +36,9 @@ public @interface Subscribe {
 
     /**
      * If true, delivers the most recent sticky event (posted with
-     * 默认粘性通知
+     * {@link EventBus#postSticky(Object)}) to this subscriber (if event available).
      */
-    boolean sticky() default true;
+    boolean sticky() default false;
 
     /**
      * Subscriber priority to influence the order of event delivery.
