@@ -43,10 +43,9 @@ artifacts {
 }
 
 dependencies {
-    //EventBus
+    //带有Tag的EventBus
     api project(':core-eventbus')
     //版本兼容包
-    api "androidx.core:core:${X_CORE}"
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
     api "androidx.vectordrawable:vectordrawable:${X_VECTOR_DRAWABLE}"
     api "androidx.coordinatorlayout:coordinatorlayout:${X_COORDINATOR_LAYOUT}"

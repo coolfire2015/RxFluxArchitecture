@@ -27,6 +27,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 
+import androidx.core.util.Pair;
+
 /**
  * EventBus is a central publish/subscribe event system for Android. Events are posted ({@link #post(Object, String)}) to the
  * bus, which delivers it to subscribers that have a matching handler method for the event type. To receive events,
@@ -53,14 +55,14 @@ public class EventBus {
      * Map对象的值就是用来缓存订阅方法的信息的
      * key为EventType的class对象，value为Subscription对象的集合
      */
-    private final Map<Class<?>, CopyOnWriteArrayList<EventBusPair<String[], Subscription>>> subscriptionsByEventType;
+    private final Map<Class<?>, CopyOnWriteArrayList<Pair<String[], Subscription>>> subscriptionsByEventType;
     private final Map<Object, List<Class<?>>> typesBySubscriber;
     /**
      * 粘性操作
      * Key:发送接收的数据类型
      * Value:发送接收操作的tag和实际数据
      */
-    private final Map<Class<?>, EventBusPair<String, Object>> stickyEvents;
+    private final Map<Class<?>, Pair<String, Object>> stickyEvents;
 
     /**
      * 多个线程操作同一个结果,但是互相之间不影响
@@ -182,13 +184,13 @@ public class EventBus {
         //订阅者的订阅方法接收的操作tag数组
         String[] tags = subscriberMethod.tags;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
-        EventBusPair<String[], Subscription> newEventBusPair = new EventBusPair<>(tags, newSubscription);
-        CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        Pair<String[], Subscription> newPair = new Pair<>(tags, newSubscription);
+        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
             subscriptionsByEventType.put(eventType, subscriptions);
         } else {
-            if (subscriptions.contains(newEventBusPair)) {
+            if (subscriptions.contains(newPair)) {
                 throw new EventBusException("Subscriber " + subscriber.getClass() + " already registered to event "
                         + eventType);
             }
@@ -198,7 +200,7 @@ public class EventBus {
         //对消息进行优先级排序并添加到关联map的list中
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).second.subscriberMethod.priority) {
-                subscriptions.add(i, newEventBusPair);
+                subscriptions.add(i, newPair);
                 break;
             }
         }
@@ -218,20 +220,20 @@ public class EventBus {
                 // Note: Iterating over all events may be inefficient with lots of sticky events,
                 // thus data structure should be changed to allow a more efficient lookup
                 // (e.g. an additional map storing sub classes of super classes: Class -> List<Class>).
-                Set<Map.Entry<Class<?>, EventBusPair<String, Object>>> entries = stickyEvents.entrySet();
-                for (Map.Entry<Class<?>, EventBusPair<String, Object>> entry : entries) {
+                Set<Map.Entry<Class<?>, Pair<String, Object>>> entries = stickyEvents.entrySet();
+                for (Map.Entry<Class<?>, Pair<String, Object>> entry : entries) {
                     Class<?> candidateEventType = entry.getKey();
                     if (eventType.isAssignableFrom(candidateEventType)) {
-                        EventBusPair<String, Object> eventBusPair = entry.getValue();
-                        if (eventBusPair != null) {
-                            checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                        Pair<String, Object> pair = entry.getValue();
+                        if (pair != null) {
+                            checkPostStickyEventToSubscription(newSubscription, tags, pair.first, pair.second);
                         }
                     }
                 }
             } else {
-                EventBusPair<String, Object> eventBusPair = stickyEvents.get(eventType);
-                if (eventBusPair != null) {
-                    checkPostStickyEventToSubscription(newSubscription, tags, eventBusPair.first, eventBusPair.second);
+                Pair<String, Object> pair = stickyEvents.get(eventType);
+                if (pair != null) {
+                    checkPostStickyEventToSubscription(newSubscription, tags, pair.first, pair.second);
                 }
             }
         }
@@ -277,7 +279,7 @@ public class EventBus {
      * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
      */
     private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
-        List<EventBusPair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
+        List<Pair<String[], Subscription>> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions != null) {
             int size = subscriptions.size();
             for (int i = 0; i < size; i++) {
@@ -375,7 +377,7 @@ public class EventBus {
     public void postSticky(Object event, String tag) {
         synchronized (stickyEvents) {
             //存储粘性操作
-            stickyEvents.put(event.getClass(), EventBusPair.create(tag, event));
+            stickyEvents.put(event.getClass(), Pair.create(tag, event));
         }
         // Should be posted after it is putted, in case the subscriber wants to remove immediately
         post(event, tag);
@@ -388,11 +390,11 @@ public class EventBus {
      */
     public <T> T getStickyEvent(Class<T> eventType) {
         synchronized (stickyEvents) {
-            EventBusPair<String, Object> eventBusPair = stickyEvents.get(eventType);
-            if (eventBusPair == null) {
+            Pair<String, Object> pair = stickyEvents.get(eventType);
+            if (pair == null) {
                 return null;
             }
-            return eventType.cast(eventBusPair.second);
+            return eventType.cast(pair.second);
         }
     }
 
@@ -403,11 +405,11 @@ public class EventBus {
      */
     public <T> T removeStickyEvent(Class<T> eventType) {
         synchronized (stickyEvents) {
-            EventBusPair<String, Object> eventBusPair = stickyEvents.remove(eventType);
-            if (eventBusPair == null) {
+            Pair<String, Object> pair = stickyEvents.remove(eventType);
+            if (pair == null) {
                 return null;
             }
-            return eventType.cast(eventBusPair.second);
+            return eventType.cast(pair.second);
         }
     }
 
@@ -419,11 +421,11 @@ public class EventBus {
     public boolean removeStickyEvent(Object event) {
         synchronized (stickyEvents) {
             Class<?> eventType = event.getClass();
-            EventBusPair<String, Object> eventBusPair = stickyEvents.remove(eventType);
-            if (eventBusPair == null) {
+            Pair<String, Object> pair = stickyEvents.remove(eventType);
+            if (pair == null) {
                 return false;
             }
-            if (event.equals(eventBusPair.second)) {
+            if (event.equals(pair.second)) {
                 stickyEvents.remove(eventType);
                 return true;
             } else {
@@ -451,7 +453,7 @@ public class EventBus {
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
-                CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions;
+                CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
                 synchronized (this) {
                     subscriptions = subscriptionsByEventType.get(clazz);
                 }
@@ -497,7 +499,7 @@ public class EventBus {
      * @return
      */
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
-        CopyOnWriteArrayList<EventBusPair<String[], Subscription>> subscriptions;
+        CopyOnWriteArrayList<Pair<String[], Subscription>> subscriptions;
         String tag;
         //防止多次调用该方式时,方法内部变量被duo
         synchronized (this) {
@@ -505,15 +507,15 @@ public class EventBus {
             tag = postingState.tag;
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {
-            for (EventBusPair<String[], Subscription> eventBusPair : subscriptions) {
+            for (Pair<String[], Subscription> pair : subscriptions) {
                 postingState.event = event;
-                postingState.subscription = eventBusPair.second;
+                postingState.subscription = pair.second;
                 boolean aborted = false;
                 try {
-                    for (String item : eventBusPair.first) {
+                    for (String item : pair.first) {
                         //循环tag数组,如果数组中有post过来的tag,执行对应的订阅者方法
                         if (item != null && item.equals(tag)) {
-                            postToSubscription(eventBusPair.second, event, tag, postingState.isMainThread);
+                            postToSubscription(pair.second, event, tag, postingState.isMainThread);
                             aborted = postingState.canceled;
                             break;
                         }
