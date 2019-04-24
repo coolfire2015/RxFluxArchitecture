@@ -56,7 +56,7 @@ android {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //替换字符串资源
-            resValue "string", "app_name", "玩安卓Debug"
+            resValue "string", "wan_name", "玩安卓Debug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -73,7 +73,7 @@ android {
             //显示分支名字
             buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //替换字符串资源
-            resValue "string", "app_name", "玩安卓"
+            resValue "string", "wan_name", "玩安卓"
             //混淆开关
             minifyEnabled false
             //Zipalign优化

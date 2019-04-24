@@ -52,7 +52,7 @@ android {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //替换字符串资源
-            resValue "string", "app_name", "玩安卓KotlinDebug"
+            resValue "string", "wan_kotlin_name", "玩安卓KotlinDebug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -69,7 +69,7 @@ android {
             //显示分支名字
             buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //替换字符串资源
-            resValue "string", "app_name", "玩安卓Kotlin"
+            resValue "string", "wan_kotlin_name", "玩安卓Kotlin"
             //混淆开关
             minifyEnabled false
             //Zipalign优化

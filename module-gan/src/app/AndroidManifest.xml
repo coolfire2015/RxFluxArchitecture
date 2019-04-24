@@ -9,7 +9,7 @@
         android:name="com.huyingbao.module.gan.GanApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
-        android:label="@string/app_name"
+        android:label="@string/gan_name"
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
