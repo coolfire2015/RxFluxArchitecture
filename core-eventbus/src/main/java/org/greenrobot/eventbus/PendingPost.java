@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class PendingPost {
-    private final static List<PendingPost> pendingPostPool = new ArrayList<PendingPost>();
+    private final static List<PendingPost> PENDING_POST_POOL = new ArrayList<PendingPost>();
 
     Object event;
     String tag;
@@ -32,10 +32,10 @@ final class PendingPost {
     }
 
     static PendingPost obtainPendingPost(Subscription subscription, Object event, String tag) {
-        synchronized (pendingPostPool) {
-            int size = pendingPostPool.size();
+        synchronized (PENDING_POST_POOL) {
+            int size = PENDING_POST_POOL.size();
             if (size > 0) {
-                PendingPost pendingPost = pendingPostPool.remove(size - 1);
+                PendingPost pendingPost = PENDING_POST_POOL.remove(size - 1);
                 pendingPost.event = event;
                 pendingPost.tag = tag;
                 pendingPost.subscription = subscription;
@@ -50,10 +50,10 @@ final class PendingPost {
         pendingPost.event = null;
         pendingPost.subscription = null;
         pendingPost.next = null;
-        synchronized (pendingPostPool) {
+        synchronized (PENDING_POST_POOL) {
             // Don't let the pool grow indefinitely
-            if (pendingPostPool.size() < 10000) {
-                pendingPostPool.add(pendingPost);
+            if (PENDING_POST_POOL.size() < 10000) {
+                PENDING_POST_POOL.add(pendingPost);
             }
         }
     }

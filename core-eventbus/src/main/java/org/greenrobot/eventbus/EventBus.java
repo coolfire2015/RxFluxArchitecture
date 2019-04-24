@@ -47,7 +47,7 @@ public class EventBus {
     static volatile EventBus defaultInstance;
 
     private static final EventBusBuilder DEFAULT_BUILDER = new EventBusBuilder();
-    private static final Map<Class<?>, List<Class<?>>> eventTypesCache = new HashMap<>();
+    private static final Map<Class<?>, List<Class<?>>> EVENT_TYPES_CACHE = new HashMap<>();
 
     /**
      * Map对象的值就是用来缓存订阅方法的信息的
@@ -72,9 +72,7 @@ public class EventBus {
         }
     };
 
-    // @Nullable
     private final MainThreadSupport mainThreadSupport;
-    // @Nullable
     private final Poster mainThreadPoster;
     private final BackgroundPoster backgroundPoster;
     private final AsyncPoster asyncPoster;
@@ -117,7 +115,7 @@ public class EventBus {
      */
     public static void clearCaches() {
         SubscriberMethodFinder.clearCaches();
-        eventTypesCache.clear();
+        EVENT_TYPES_CACHE.clear();
     }
 
     /**
@@ -584,8 +582,8 @@ public class EventBus {
      * Looks up all Class objects including super classes and interfaces. Should also work for interfaces.
      */
     private static List<Class<?>> lookupAllEventTypes(Class<?> eventClass) {
-        synchronized (eventTypesCache) {
-            List<Class<?>> eventTypes = eventTypesCache.get(eventClass);
+        synchronized (EVENT_TYPES_CACHE) {
+            List<Class<?>> eventTypes = EVENT_TYPES_CACHE.get(eventClass);
             if (eventTypes == null) {
                 eventTypes = new ArrayList<>();
                 Class<?> clazz = eventClass;
@@ -594,7 +592,7 @@ public class EventBus {
                     addInterfaces(eventTypes, clazz.getInterfaces());
                     clazz = clazz.getSuperclass();
                 }
-                eventTypesCache.put(eventClass, eventTypes);
+                EVENT_TYPES_CACHE.put(eventClass, eventTypes);
             }
             return eventTypes;
         }

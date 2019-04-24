@@ -46,12 +46,14 @@ public class AndroidLogger implements Logger {
         this.tag = tag;
     }
 
+    @Override
     public void log(Level level, String msg) {
         if (level != Level.OFF) {
             Log.println(mapLevel(level), tag, msg);
         }
     }
 
+    @Override
     public void log(Level level, String msg, Throwable th) {
         if (level != Level.OFF) {
             // That's how Log does it internally
@@ -61,15 +63,19 @@ public class AndroidLogger implements Logger {
 
     private int mapLevel(Level level) {
         int value = level.intValue();
-        if (value < 800) { // below INFO
-            if (value < 500) { // below FINE
+        if (value < 800) {
+            // below INFO
+            if (value < 500) {
+                // below FINE
                 return Log.VERBOSE;
             } else {
                 return Log.DEBUG;
             }
-        } else if (value < 900) { // below WARNING
+        } else if (value < 900) {
+            // below WARNING
             return Log.INFO;
-        } else if (value < 1000) { // below ERROR
+        } else if (value < 1000) {
+            // below ERROR
             return Log.WARN;
         } else {
             return Log.ERROR;
