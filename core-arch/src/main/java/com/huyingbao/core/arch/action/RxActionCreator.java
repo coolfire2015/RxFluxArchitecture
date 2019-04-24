@@ -57,14 +57,14 @@ public abstract class RxActionCreator {
                 .doOnSubscribe(subscription -> {
                     if (canShowLoading) {
                         //发送RxLoading(显示)事件
-                        postRxLoading(rxAction, true);
+                        postRxLoading(rxAction.getTag(), true);
                     }
                 })
                 // 调用结束
                 .doAfterTerminate(() -> {
                     if (canShowLoading) {
                         //发送RxLoading(消失)事件
-                        postRxLoading(rxAction, false);
+                        postRxLoading(rxAction.getTag(), false);
                     }
                 })
                 // 操作结束,在io线程中接收接收反馈,没有切换线程
@@ -77,9 +77,9 @@ public abstract class RxActionCreator {
                         //操作异常
                         throwable -> {
                             if (canRetry) {
-                                postRxRetry(rxAction, httpObservable, throwable);
+                                postRxRetry(rxAction.getTag(), httpObservable, throwable);
                             } else {
-                                postRxError(rxAction, throwable);
+                                postRxError(rxAction.getTag(), throwable);
                             }
                             removeRxAction(rxAction);
                         },
@@ -134,32 +134,33 @@ public abstract class RxActionCreator {
     /**
      * 通过调度器dispatcher将action对应的RxLoading事件推出去
      *
-     * @param rxAction
+     * @param tag
      * @param isLoading true:显示，false:消失
      */
-    protected void postRxLoading(RxAction rxAction, boolean isLoading) {
-        mRxDispatcher.postRxLoading(RxLoading.newInstance(rxAction, isLoading));
+    protected void postRxLoading(String tag, boolean isLoading) {
+        mRxDispatcher.postRxLoading(RxLoading.newInstance(tag, isLoading));
     }
 
     /**
      * 通过调度器dispatcher将action对应的RxRetry事件推出去
      *
-     * @param rxAction
-     * @param throwable
+     * @param tag
      * @param httpObservable
+     * @param throwable
+     * @param <T>
      */
-    protected <T> void postRxRetry(RxAction rxAction, Observable<T> httpObservable, Throwable throwable) {
-        mRxDispatcher.postRxRetry(RxRetry.newInstance(rxAction, throwable, httpObservable));
+    protected <T> void postRxRetry(String tag, Observable<T> httpObservable, Throwable throwable) {
+        mRxDispatcher.postRxRetry(RxRetry.newInstance(tag, throwable, httpObservable));
     }
 
     /**
      * 通过调度器dispatcher将action对应的RxError事件推出去
      *
-     * @param rxAction
+     * @param tag
      * @param throwable
      */
-    protected void postRxError(RxAction rxAction, Throwable throwable) {
-        mRxDispatcher.postRxError(RxError.newInstance(rxAction, throwable));
+    protected void postRxError(String tag, Throwable throwable) {
+        mRxDispatcher.postRxError(RxError.newInstance(tag, throwable));
     }
 
     /**
@@ -258,10 +259,10 @@ public abstract class RxActionCreator {
     /**
      * 发送本地change,由view直接处理
      *
-     * @param actionId
+     * @param tag
      */
-    public void postLocalChange(@NonNull String actionId) {
-        RxChange rxChange = new RxChange(actionId);
+    public void postLocalChange(@NonNull String tag) {
+        RxChange rxChange = RxChange.newInstance(tag);
         postRxChange(rxChange);
     }
 

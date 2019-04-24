@@ -15,8 +15,8 @@ public class RxError extends BaseEvent {
         mThrowable = throwable;
     }
 
-    public static RxError newInstance(@NonNull BaseEvent baseEvent, Throwable throwable) {
-        return new RxError(baseEvent.getTag(), throwable);
+    public static RxError newInstance(@NonNull String tag, Throwable throwable) {
+        return new RxError(tag, throwable);
     }
 
     public Throwable getThrowable() {

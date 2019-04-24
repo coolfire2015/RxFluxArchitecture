@@ -18,8 +18,8 @@ public class RxRetry<T> extends BaseEvent {
         mObservable = observable;
     }
 
-    public static <T> RxRetry newInstance(@NonNull BaseEvent baseEvent, Throwable throwable, Observable<T> httpObservable) {
-        return new RxRetry(baseEvent.getTag(), throwable, httpObservable);
+    public static <T> RxRetry newInstance(@NonNull String tag, Throwable throwable, Observable<T> httpObservable) {
+        return new RxRetry(tag, throwable, httpObservable);
     }
 
     public Throwable getThrowable() {

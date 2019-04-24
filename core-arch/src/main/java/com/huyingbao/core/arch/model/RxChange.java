@@ -17,11 +17,11 @@ import androidx.annotation.NonNull;
  * Created by liujunfeng on 2019/1/1.
  */
 public class RxChange extends BaseEvent {
-    public RxChange(@NonNull String tag) {
+    private RxChange(@NonNull String tag) {
         super(tag);
     }
 
-    public static RxChange newInstance(@NonNull BaseEvent baseEvent) {
-        return new RxChange(baseEvent.getTag());
+    public static RxChange newInstance(@NonNull String tag) {
+        return new RxChange(tag);
     }
 }

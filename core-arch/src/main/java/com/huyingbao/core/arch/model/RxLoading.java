@@ -19,8 +19,8 @@ public class RxLoading extends BaseEvent {
         mIsLoading = isLoading;
     }
 
-    public static RxLoading newInstance(@NonNull BaseEvent baseEvent, boolean isLoading) {
-        return new RxLoading(baseEvent.getTag(), isLoading);
+    public static RxLoading newInstance(@NonNull String tag, boolean isLoading) {
+        return new RxLoading(tag, isLoading);
     }
 
     public boolean isLoading() {
