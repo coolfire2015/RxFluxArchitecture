@@ -23,12 +23,12 @@ import butterknife.OnClick;
 import dagger.Lazy;
 
 /**
- * 进度提示
+ * 进度提示,通过依赖注入生成
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-public class CommonLoadingDialog extends BaseDialogFragment implements DialogInterface.OnShowListener {
+public class CommonLoadingDialog extends BaseDialogFragment {
     @Inject
     Lazy<RxActionManager> mRxActionManagerLazy;
 
@@ -55,10 +55,9 @@ public class CommonLoadingDialog extends BaseDialogFragment implements DialogInt
     @Override
     public void afterCreate(@Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(false);
-    }
-
-    @Override
-    public void onShow(DialogInterface dialog) {
+        if (mMessageInt == 0) {
+            return;
+        }
         String message = getString(mMessageInt);
         if (!TextUtils.isEmpty(message)) {
             mTvLoadingNotice.setText(message);

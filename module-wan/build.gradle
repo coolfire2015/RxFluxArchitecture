@@ -1,4 +1,10 @@
-apply plugin: 'com.android.application'
+if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
+else apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.github.dcendents.android-maven'
+apply from: rootProject.file('TestLibrary.gradle')
+
+group = "com.github.coolfire2015"
 
 android {
     //编译版本
@@ -37,7 +43,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName(),
-                             eventBusIndex      : 'com.huyingbao.module.app.AppEventBusIndex']
+                             eventBusIndex      : 'com.huyingbao.module.wan.WanEventBusIndex']
             }
         }
     }
@@ -50,7 +56,7 @@ android {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //替换字符串资源
-            resValue "string", "app_name", "DemoDebug"
+            resValue "string", "app_name", "玩安卓Debug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -67,7 +73,7 @@ android {
             //显示分支名字
             buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //替换字符串资源
-            resValue "string", "app_name", "Demo"
+            resValue "string", "app_name", "玩安卓"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -102,21 +108,33 @@ android {
     sourceSets {
         main {
             if (isModuleAsApp.toBoolean()) {
-                manifest.srcFile 'src/module/AndroidManifest.xml'
-            } else {
                 manifest.srcFile 'src/app/AndroidManifest.xml'
                 java.srcDirs 'src/app/java'
                 res.srcDirs 'src/app/res'
+            } else {
+                manifest.srcFile 'src/library/AndroidManifest.xml'
             }
         }
     }
     //修改生成的apk名字
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            if ("release".equals(variant.buildType.name))
-                outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+    if (isModuleAsApp.toBoolean()) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                if ("release".equals(variant.buildType.name))
+                    outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            }
         }
     }
+}
+
+//将源代码打包进aar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.javaDirectories
+}
+
+artifacts {
+    archives sourcesJar
 }
 
 //仓库
@@ -126,22 +144,14 @@ repositories {
 }
 
 dependencies {
-    if (!isModuleAsApp.toBoolean()) {
-        if (isUseMaven.toBoolean()) {
-            //功能模块
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module_gan:${RX_FLUX_ARCHITECTURE}"
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module_wan:${RX_FLUX_ARCHITECTURE}"
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module_wan_kotlin:${RX_FLUX_ARCHITECTURE}"
-            annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core_eventbus_processor:${RX_FLUX_ARCHITECTURE}"
-        } else {
-            //功能模块
-            implementation project(':module_gan')
-            implementation project(':module_wan')
-            implementation project(':module_wan_kotlin')
-            annotationProcessor project(':core_eventbus_processor')
-        }
-    }
+    //通用依赖模块
+    api project(':core-common')
     //编译时生成
+    annotationProcessor project(':core-eventbus-processor')
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }

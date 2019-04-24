@@ -45,7 +45,7 @@ artifacts {
 
 dependencies {
     //内核
-    api project(':core_arch')
+    api project(':core-arch')
     //分包
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //日志展示

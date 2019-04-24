@@ -1,5 +1,8 @@
 if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'//Kotlin支持
+apply plugin: 'kotlin-android'//Kotlin支持
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
 
@@ -39,12 +42,6 @@ android {
         signingConfig signingConfigs.debug
         vectorDrawables.useSupportLibrary = true//使用vector图片
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(),
-                             eventBusIndex      : 'com.huyingbao.module.gan.GanEventBusIndex']
-            }
-        }
     }
     //构建过程
     buildTypes {
@@ -55,7 +52,7 @@ android {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //替换字符串资源
-            resValue "string", "app_name", "干货Debug"
+            resValue "string", "app_name", "玩安卓KotlinDebug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -72,7 +69,7 @@ android {
             //显示分支名字
             buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //替换字符串资源
-            resValue "string", "app_name", "干货"
+            resValue "string", "app_name", "玩安卓Kotlin"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -142,15 +139,25 @@ repositories {
     flatDir { dirs 'libs' }
 }
 
+//Kapt编译支持
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        arg('eventBusIndex', 'com.huyingbao.module.wan.kotlin.WanEventBusIndex')
+    }
+    generateStubs = true
+}
+
 dependencies {
     //通用依赖模块
-    api project(':core_common')
+    api project(':core-common')
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
-    annotationProcessor project(':core_eventbus_processor')
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    kapt project(':core-eventbus-processor')
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }

@@ -44,7 +44,7 @@ artifacts {
 
 dependencies {
     //EventBus
-    api project(':core_eventbus')
+    api project(':core-eventbus')
     //版本兼容包
     api "androidx.core:core:${X_CORE}"
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"

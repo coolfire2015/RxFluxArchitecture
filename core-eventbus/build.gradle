@@ -44,5 +44,5 @@ artifacts {
 
 dependencies {
     //注解
-    api project(':core_eventbus_annotations')
+    api project(':core-eventbus-annotations')
 }

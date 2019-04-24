@@ -23,9 +23,9 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
     testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
     //测试工具
-    testImplementation "com.github.coolfire2015.RxFluxArchitecture:test_utils:${RX_FLUX_ARCHITECTURE}"
+    testImplementation "com.github.coolfire2015.RxFluxArchitecture:test-utils:${RX_FLUX_ARCHITECTURE}"
     //编译时生成
-    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core_eventbus_processor:${RX_FLUX_ARCHITECTURE}"
+    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
     testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
