@@ -5,7 +5,7 @@ import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
-import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.arch.view.RxSubscriberView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,7 +47,7 @@ public class RxDispatcher {
      * @param rxView
      * @param <T>
      */
-    public <T extends RxFluxView> void subscribeRxView(final T rxView) {
+    public <T extends RxSubscriberView> void subscribeRxView(final T rxView) {
         EventBus.getDefault().register(rxView);
     }
 
@@ -67,7 +67,7 @@ public class RxDispatcher {
      * @param rxView
      * @param <T>
      */
-    public <T extends RxFluxView> void unsubscribeRxView(final T rxView) {
+    public <T extends RxSubscriberView> void unsubscribeRxView(final T rxView) {
         EventBus.getDefault().unregister(rxView);
     }
 

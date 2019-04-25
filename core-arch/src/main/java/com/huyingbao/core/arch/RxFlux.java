@@ -11,7 +11,7 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver;
 import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver;
-import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.arch.view.RxSubscriberView;
 
 import java.util.Stack;
 
@@ -123,12 +123,12 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
      */
     @Override
     public void onActivityResumed(Activity activity) {
-        if (activity instanceof RxFluxView) {
+        if (activity instanceof RxSubscriberView) {
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
             Log.w("RxFlux", "10.1-subscribe RxActivity : " + activity.getClass().getSimpleName());
-            mRxDispatcher.subscribeRxView((RxFluxView) activity);
+            mRxDispatcher.subscribeRxView((RxSubscriberView) activity);
         }
     }
 
@@ -141,12 +141,12 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentResumed(fm, f);
-        if (f instanceof RxFluxView) {
+        if (f instanceof RxSubscriberView) {
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
             Log.w("RxFlux", "11.1-subscribe RxFragment : " + f.getClass().getSimpleName());
-            mRxDispatcher.subscribeRxView((RxFluxView) f);
+            mRxDispatcher.subscribeRxView((RxSubscriberView) f);
         }
     }
 
@@ -158,8 +158,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
      */
     @Override
     public void onActivityPaused(Activity activity) {
-        if (activity instanceof RxFluxView) {
-            mRxDispatcher.unsubscribeRxView((RxFluxView) activity);
+        if (activity instanceof RxSubscriberView) {
+            mRxDispatcher.unsubscribeRxView((RxSubscriberView) activity);
             Log.w("RxFlux", "12.1-unsubscribe RxActivity : " + activity.getClass().getSimpleName());
         }
     }
@@ -173,8 +173,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentPaused(fm, f);
-        if (f instanceof RxFluxView) {
-            mRxDispatcher.unsubscribeRxView((RxFluxView) f);
+        if (f instanceof RxSubscriberView) {
+            mRxDispatcher.unsubscribeRxView((RxSubscriberView) f);
             Log.w("RxFlux", "13.1-unsubscribe RxFragment : " + f.getClass().getSimpleName());
         }
     }

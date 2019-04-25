@@ -9,6 +9,7 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.arch.view.RxSubscriberView;
 import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
@@ -37,9 +38,20 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 
 /**
+ * 实现三个接口
+ * <p>
+ * 1:RxFluxView:获取RxStore,并关联自身生命周期
+ * <p>
+ * 2:RxSubscriberView:交由 {@link com.huyingbao.core.arch.RxFlux} 根据其生命周期注册订阅或者取消订阅
+ * <p>
+ * 3:HasSupportFragmentInjector:依赖注入
+ * <p>
  * Created by liujunfeng on 2019/1/1.
+ *
+ * @param <T>
  */
-public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActivity implements RxFluxView, HasSupportFragmentInjector {
+public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActivity
+        implements RxFluxView, RxSubscriberView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
     @Inject

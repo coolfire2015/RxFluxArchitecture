@@ -5,6 +5,7 @@ import android.content.Context;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
+import com.huyingbao.core.arch.view.RxSubscriberView;
 import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.core.utils.ClassUtils;
 
@@ -22,8 +23,10 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
+ * @param <T>
  */
-public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment implements RxFluxView, HasSupportFragmentInjector {
+public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment
+        implements RxFluxView, RxSubscriberView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
     @Inject
