@@ -1,5 +1,7 @@
 package com.huyingbao.module.gan.ui.random.model;
 
+import java.util.List;
+
 /**
  * Created by liujunfeng on 2019/1/1.
  */
@@ -22,6 +24,7 @@ public class Product {
     private String url;
     private boolean used;
     private String who;
+    private List<String> images;
 
     public String getCreatedAt() {
         return createdAt;
@@ -85,5 +88,14 @@ public class Product {
 
     public void setWho(String who) {
         this.who = who;
+    }
+
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

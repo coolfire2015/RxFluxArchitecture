@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
  */
 public class CategoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     public CategoryAdapter(@Nullable List<String> data) {
-        super(R.layout.gan_recycle_item_product, data);
+        super(R.layout.gan_recycle_item_category, data);
     }
 
     @Override

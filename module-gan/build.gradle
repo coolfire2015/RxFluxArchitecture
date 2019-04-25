@@ -153,4 +153,5 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

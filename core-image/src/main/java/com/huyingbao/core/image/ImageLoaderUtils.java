@@ -26,18 +26,18 @@ public class ImageLoaderUtils {
         mStrategy = strategy;
     }
 
-    public static void loadImage(Fragment fragment, ImageLoader img) {
+    public static void loadImage(Fragment fragment, ImageLoader imageLoader) {
         if (mStrategy == null) {
             mStrategy = new GlideImageLoaderStrategy();
         }
-        mStrategy.loadImage(fragment, img);
+        mStrategy.loadImage(fragment, imageLoader);
     }
 
-    public static void loadImage(Context context, ImageLoader img) {
+    public static void loadImage(Context context, ImageLoader imageLoader) {
         if (mStrategy == null) {
             mStrategy = new GlideImageLoaderStrategy();
         }
-        mStrategy.loadImage(context, img);
+        mStrategy.loadImage(context, imageLoader);
     }
 
     /**

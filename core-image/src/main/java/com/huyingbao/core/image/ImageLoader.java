@@ -121,20 +121,63 @@ public class ImageLoader<ResourceType> {
     }
 
     public static class Builder<ResourceType> {
+        /**
+         * 旋转角度
+         */
+        public float rotate;
+
+        /**
+         * 数据源
+         */
         public ResourceType resource;
+
+        /**
+         * 需要显示的控件
+         */
         public ImageView imgView;
+
+        /**
+         * 加载图片过程中显示的图片
+         */
         @DrawableRes
         public int placeHolder;
+
+        /**
+         * 加载失败显示的图片
+         */
         @DrawableRes
         public int errorHolder;
+
+        /**
+         * 图片缩放比例
+         */
         public float sizeMultiplier;
+
+        /**
+         * 加载宽度
+         */
+        public int width;
+
+        /**
+         * 加载高度
+         */
+        public int height;
+
+        /**
+         * true:fitCenter图片压缩居中显示,false:centerInside图片比例正常,超出部分被裁剪
+         */
         public boolean fitCenter;
+
+        /**
+         * true:网络图片需要本地缓存(默认),false:不需要本地缓存
+         */
         public boolean netImage;
+
+        /**
+         * true:加载圆形,false:不加载圆形(默认)
+         */
         public boolean isCircle;
         public RequestListener requestListener;
-        public int width;
-        public int height;
-        public float rotate;
 
         public Builder() {
             this.fitCenter = true;
