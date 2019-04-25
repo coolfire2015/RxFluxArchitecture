@@ -1,4 +1,4 @@
-package com.huyingbao.core.okhttp;
+package com.huyingbao.core.common.interceptor;
 
 import android.text.TextUtils;
 
@@ -20,11 +20,11 @@ import okhttp3.ResponseBody;
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-public class HttpInterceptor implements Interceptor {
+public class CommonHttpInterceptor implements Interceptor {
     private volatile String mBaseUrl;
 
     @Inject
-    public HttpInterceptor() {
+    public CommonHttpInterceptor() {
     }
 
     public void setBaseUrl(String baseUrl) {
