@@ -98,7 +98,7 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
         }
 
         private void handleEvent(String event, int prio) {
-            if(this.prio == prio) {
+            if (this.prio == prio) {
                 trackEvent(event);
                 if (cancel) {
                     eventBus.cancelEventDelivery(event);

@@ -10,7 +10,7 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.base.view.BaseDialogFragment;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
-import com.huyingbao.core.util.CommonUtils;
+import com.huyingbao.core.common.utils.CommonUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

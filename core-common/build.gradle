@@ -46,6 +46,10 @@ artifacts {
 dependencies {
     //内核
     api project(':core-arch')
+    api project(':core-image')
+    api project(':core-progress')
+    api project(':core-utils')
+    api project(':core-cookie')
     //分包
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //CardView
@@ -63,7 +67,6 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
     api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     //Json
-    api "com.alibaba:fastjson:${FAST_JSON}"
     api "com.google.code.gson:gson:${GSON}"
     //ButterKnife
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"

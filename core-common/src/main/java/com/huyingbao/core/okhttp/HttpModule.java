@@ -1,5 +1,7 @@
 package com.huyingbao.core.okhttp;
 
+import com.huyingbao.core.cookie.PersistentCookieStore;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

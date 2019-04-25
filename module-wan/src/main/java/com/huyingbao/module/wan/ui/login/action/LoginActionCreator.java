@@ -4,7 +4,7 @@ import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.core.util.LocalStorageUtils;
+import com.huyingbao.core.utils.LocalStorageUtils;
 import com.huyingbao.module.wan.action.WanActionCreator;
 import com.huyingbao.module.wan.action.WanApi;
 import com.huyingbao.module.wan.action.WanContants;

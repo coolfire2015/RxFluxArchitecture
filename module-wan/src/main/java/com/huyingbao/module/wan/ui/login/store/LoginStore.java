@@ -40,13 +40,13 @@ public class LoginStore extends RxActivityStore {
     @Subscribe(tags = {LoginAction.LOGIN})
     public void onLogin(RxAction rxAction) {
         mUser = rxAction.getResponse();
-        postChange(RxChange.newInstance(rxAction));
+        postChange(RxChange.newInstance(rxAction.getTag()));
     }
 
     @Subscribe(tags = {LoginAction.REGISTER})
     public void onRegister(RxAction rxAction) {
         mUser = rxAction.getResponse();
-        postChange(RxChange.newInstance(rxAction));
+        postChange(RxChange.newInstance(rxAction.getTag()));
     }
 
     @Subscribe(tags = {LoginAction.GET_IDENTIFY})

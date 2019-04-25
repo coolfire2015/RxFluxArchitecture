@@ -15,7 +15,7 @@
  */
 
 /**
- * Simple event storing an int value. More efficient than Integer because of the its flat hierarchy. 
+ * Simple event storing an int value. More efficient than Integer because of the its flat hierarchy.
  */
 package org.greenrobot.eventbus;
 

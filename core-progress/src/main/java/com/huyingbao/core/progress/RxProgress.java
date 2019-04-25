@@ -1,6 +1,6 @@
 package com.huyingbao.core.progress;
 
-public class ProgressInfo {
+public class RxProgress {
     public static final String TAG = "tag";
     /**
      * 当前已上传或下载的总长度
@@ -28,7 +28,7 @@ public class ProgressInfo {
     private boolean finish;
 
 
-    public ProgressInfo(String tag) {
+    public RxProgress(String tag) {
         this.tag = tag;
     }
 
@@ -106,7 +106,7 @@ public class ProgressInfo {
 
     @Override
     public String toString() {
-        return "ProgressInfo{" +
+        return "RxProgress{" +
                 "tag=" + tag +
                 ", currentLength=" + currentLength +
                 ", contentLength=" + contentLength +

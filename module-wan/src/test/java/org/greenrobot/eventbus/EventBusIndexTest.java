@@ -26,7 +26,9 @@ import org.junit.Test;
 public class EventBusIndexTest {
     private String value;
 
-    /** Ensures the index is actually used and no reflection fall-back kicks in. */
+    /**
+     * Ensures the index is actually used and no reflection fall-back kicks in.
+     */
     @Test
     public void testManualIndexWithoutAnnotation() {
         SubscriberInfoIndex index = new SubscriberInfoIndex() {

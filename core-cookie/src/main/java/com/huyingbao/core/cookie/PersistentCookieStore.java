@@ -1,4 +1,4 @@
-package com.huyingbao.core.okhttp;
+package com.huyingbao.core.cookie;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -34,7 +34,7 @@ public class PersistentCookieStore {
     private final SharedPreferences cookiePrefs;
 
     @Inject
-    PersistentCookieStore(Application application) {
+    public PersistentCookieStore(Application application) {
         cookiePrefs = application.getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new ArrayMap<>();
 

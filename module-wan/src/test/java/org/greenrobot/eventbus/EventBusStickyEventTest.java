@@ -17,7 +17,9 @@ package org.greenrobot.eventbus;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Markus Junginger, greenrobot

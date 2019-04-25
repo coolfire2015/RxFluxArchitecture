@@ -39,7 +39,7 @@ public class EventBusRegistrationRacingTest extends AbstractEventBusTest {
     volatile CountDownLatch registeredLatch;
     volatile CountDownLatch canUnregisterLatch;
     volatile CountDownLatch unregisteredLatch;
-    
+
     final Executor threadPool = Executors.newCachedThreadPool();
 
     @Test
@@ -49,7 +49,7 @@ public class EventBusRegistrationRacingTest extends AbstractEventBusTest {
             registeredLatch = new CountDownLatch(THREAD_COUNT);
             canUnregisterLatch = new CountDownLatch(1);
             unregisteredLatch = new CountDownLatch(THREAD_COUNT);
-            
+
             List<SubscriberThread> threads = startThreads();
             registeredLatch.await();
             eventBus.post("42");

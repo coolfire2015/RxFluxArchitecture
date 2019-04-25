@@ -29,17 +29,17 @@ public class ArticleActivity extends BaseRxActivity<ArticleStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Subscribe(tags = {ArticleAction.TO_LOGIN},sticky = true)
+    @Subscribe(tags = {ArticleAction.TO_LOGIN}, sticky = true)
     public void toLogin(RxChange rxChange) {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    @Subscribe(tags = {ArticleAction.TO_FRIEND},sticky = true)
+    @Subscribe(tags = {ArticleAction.TO_FRIEND}, sticky = true)
     public void toFriend(RxChange rxChange) {
         addFragmentHideExisting(FriendFragment.newInstance());
     }
 
-    @Subscribe(tags = {ArticleAction.TO_BANNER},sticky = true)
+    @Subscribe(tags = {ArticleAction.TO_BANNER}, sticky = true)
     public void toBanner(RxChange rxChange) {
         addFragmentHideExisting(BannerFragment.newInstance());
     }

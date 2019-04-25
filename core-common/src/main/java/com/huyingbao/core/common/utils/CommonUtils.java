@@ -1,4 +1,4 @@
-package com.huyingbao.core.util;
+package com.huyingbao.core.common.utils;
 
 import android.content.Context;
 import android.widget.Toast;

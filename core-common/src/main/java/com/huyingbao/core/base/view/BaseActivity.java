@@ -5,7 +5,7 @@ import android.view.MenuItem;
 
 import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
-import com.huyingbao.core.util.ActivityUtils;
+import com.huyingbao.core.utils.ActivityUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;

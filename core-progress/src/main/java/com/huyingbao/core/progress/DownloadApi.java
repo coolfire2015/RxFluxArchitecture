@@ -21,6 +21,6 @@ public interface DownloadApi {
     @GET
     @Streaming
     Observable<ResponseBody> download(
-            @Header(ProgressInfo.TAG) String tag,
+            @Header(RxProgress.TAG) String tag,
             @Url String url);
 }

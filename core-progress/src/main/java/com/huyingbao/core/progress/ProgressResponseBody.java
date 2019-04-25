@@ -16,10 +16,13 @@ import okio.ForwardingSource;
 import okio.Okio;
 import okio.Source;
 
+/**
+ * 使用EventBus发送进度变化通知
+ */
 public class ProgressResponseBody extends ResponseBody {
     private int mRefreshTime = 120;
     private ResponseBody mResponseBody;
-    private ProgressInfo mProgressInfo;
+    private RxProgress mRxProgress;
     /**
      * BufferedSource 是okio库中的输入流，这里就当作inputStream来使用。
      */
@@ -27,7 +30,7 @@ public class ProgressResponseBody extends ResponseBody {
 
     public ProgressResponseBody(ResponseBody responseBody, String tag) {
         mResponseBody = responseBody;
-        mProgressInfo = new ProgressInfo(tag);
+        mRxProgress = new RxProgress(tag);
     }
 
     @Override
@@ -66,25 +69,25 @@ public class ProgressResponseBody extends ResponseBody {
                     bytesRead = super.read(sink, byteCount);
                 } catch (IOException e) {
                     //发送异常,带有tag(需要有tag的方法来接)
-                    RxError rxError = RxError.newInstance(mProgressInfo.getTag(), e);
-                    EventBus.getDefault().postSticky(rxError, mProgressInfo.getTag());
+                    RxError rxError = RxError.newInstance(mRxProgress.getTag(), e);
+                    EventBus.getDefault().postSticky(rxError, mRxProgress.getTag());
                     throw e;
                 }
-                if (mProgressInfo.getContentLength() == 0) {
+                if (mRxProgress.getContentLength() == 0) {
                     //避免重复调用 contentLength()
-                    mProgressInfo.setContentLength(contentLength());
+                    mRxProgress.setContentLength(contentLength());
                 }
                 // read() returns the number of bytes read, or -1 if this source is exhausted.
                 totalLengthRead += bytesRead != -1 ? bytesRead : 0;
                 long curTime = SystemClock.elapsedRealtime();
-                if (curTime - lastTime >= mRefreshTime || bytesRead == -1 || totalLengthRead == mProgressInfo.getContentLength()) {
-                    mProgressInfo.setEachLength(bytesRead);
-                    mProgressInfo.setCurrentLength(totalLengthRead);
-                    mProgressInfo.setIntervalTime(curTime - lastTime);
-                    mProgressInfo.setFinish(bytesRead == -1 && totalLengthRead == mProgressInfo.getContentLength());
+                if (curTime - lastTime >= mRefreshTime || bytesRead == -1 || totalLengthRead == mRxProgress.getContentLength()) {
+                    mRxProgress.setEachLength(bytesRead);
+                    mRxProgress.setCurrentLength(totalLengthRead);
+                    mRxProgress.setIntervalTime(curTime - lastTime);
+                    mRxProgress.setFinish(bytesRead == -1 && totalLengthRead == mRxProgress.getContentLength());
                     lastTime = curTime;
                     //发送进度信息,带有tag(需要有tag的方法来接)
-                    EventBus.getDefault().postSticky(mProgressInfo, mProgressInfo.getTag());
+                    EventBus.getDefault().postSticky(mRxProgress, mRxProgress.getTag());
                 }
                 return bytesRead;
             }

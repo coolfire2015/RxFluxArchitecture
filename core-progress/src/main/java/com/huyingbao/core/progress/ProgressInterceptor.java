@@ -28,8 +28,8 @@ public class ProgressInterceptor implements Interceptor {
         }
         //获取Header传递过来的参数,并传递到ProgressResponseBody对象中
         String tag = null;
-        if (!TextUtils.isEmpty(response.request().header(ProgressInfo.TAG))) {
-            tag = response.request().header(ProgressInfo.TAG);
+        if (!TextUtils.isEmpty(response.request().header(RxProgress.TAG))) {
+            tag = response.request().header(RxProgress.TAG);
         }
         ProgressResponseBody body = new ProgressResponseBody(response.body(), tag);
         return response.newBuilder().body(body).build();

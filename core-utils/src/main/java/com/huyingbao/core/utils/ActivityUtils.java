@@ -1,4 +1,4 @@
-package com.huyingbao.core.util;
+package com.huyingbao.core.utils;
 
 import android.text.TextUtils;
 

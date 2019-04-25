@@ -6,7 +6,7 @@ import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 import com.huyingbao.core.base.view.BaseFragment;
-import com.huyingbao.core.util.CommonUtils;
+import com.huyingbao.core.utils.ClassUtils;
 
 import javax.inject.Inject;
 
@@ -42,7 +42,7 @@ public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment i
         if (mStore != null) {
             return mStore;
         }
-        Class<T> storeClass = CommonUtils.getGenericClass(getClass());
+        Class<T> storeClass = ClassUtils.getGenericClass(getClass());
         if (storeClass == null) {
             return null;
         }

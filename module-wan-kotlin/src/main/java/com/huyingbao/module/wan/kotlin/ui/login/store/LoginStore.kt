@@ -29,7 +29,7 @@ internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher)
     @Subscribe(tags = [LoginAction.LOGIN])
     fun onLogin(rxAction: RxAction) {
         mUser = rxAction.getResponse<WanResponse<User>>()
-        postChange(RxChange.newInstance(rxAction))
+        postChange(RxChange.newInstance(rxAction.tag))
     }
 
     @Subscribe(tags = [LoginAction.GET_IDENTIFY])

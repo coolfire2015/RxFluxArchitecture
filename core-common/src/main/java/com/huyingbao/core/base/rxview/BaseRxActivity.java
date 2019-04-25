@@ -14,7 +14,7 @@ import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;
 import com.huyingbao.core.common.model.CommonException;
-import com.huyingbao.core.util.CommonUtils;
+import com.huyingbao.core.utils.ClassUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -62,7 +62,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends BaseActi
         if (mStore != null) {
             return mStore;
         }
-        Class<T> storeClass = CommonUtils.getGenericClass(getClass());
+        Class<T> storeClass = ClassUtils.getGenericClass(getClass());
         if (storeClass == null) {
             return null;
         }

@@ -1,6 +1,7 @@
-package com.huyingbao.core.progress;
+package com.huyingbao.core.okhttp;
 
-import com.huyingbao.core.common.constant.CommonConstants;
+import com.huyingbao.core.progress.DownloadApi;
+import com.huyingbao.core.progress.ProgressInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class DownloadModule {
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(CommonConstants.Url.BASE_URL)
+                .baseUrl("https://www.debug.com/")
                 .client(httpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

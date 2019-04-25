@@ -26,7 +26,7 @@ public class LoginActivity extends BaseRxActivity<LoginStore> {
     public void afterCreate(Bundle savedInstanceState) {
     }
 
-    @Subscribe(tags = {LoginAction.LOGIN},sticky = true)
+    @Subscribe(tags = {LoginAction.LOGIN}, sticky = true)
     public void onLogin(RxChange rxChange) {
         startActivity(new Intent(this, ArticleActivity.class));
         finish();

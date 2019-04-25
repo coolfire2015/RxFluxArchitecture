@@ -60,7 +60,7 @@ public class RandomStore extends RxActivityStore {
     public void toShowData(RxAction rxAction) {
         onCleared();//跳转页面，先清除旧数据
         mCategory = rxAction.get(GanConstants.Key.CATEGORY);
-        postChange(RxChange.newInstance(rxAction));
+        postChange(RxChange.newInstance(rxAction.getTag()));
     }
 
     @Subscribe(tags = {RandomAction.GET_DATA_LIST})
