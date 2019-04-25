@@ -46,10 +46,10 @@ artifacts {
 dependencies {
     //内核
     api project(':core-arch')
-    api project(':core-image')
     api project(':core-progress')
     api project(':core-utils')
     api project(':core-cookie')
+    api project(':core-image')
     //分包
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //CardView

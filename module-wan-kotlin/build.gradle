@@ -1,10 +1,10 @@
 if (isModuleAsApp.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
-apply plugin: 'kotlin-kapt'//Kotlin支持
-apply plugin: 'kotlin-android'//Kotlin支持
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 group = "com.github.coolfire2015"
 
