@@ -2,6 +2,7 @@
 .gradle
 /.idea/caches
 /.idea/libraries
+/.idea/misc.xml
 /.idea/gradle.xml
 /.idea/modules.xml
 /.idea/workspace.xml
