@@ -1,8 +1,8 @@
 package com.huyingbao.core.common.module;
 
 import com.huyingbao.core.arch.module.RxFluxModule;
-import com.huyingbao.core.cookie.PersistentCookieStore;
 import com.huyingbao.core.common.interceptor.CommonHttpInterceptor;
+import com.huyingbao.core.cookie.PersistentCookieStore;
 import com.huyingbao.core.progress.DownloadApi;
 import com.huyingbao.core.progress.ProgressInterceptor;
 
