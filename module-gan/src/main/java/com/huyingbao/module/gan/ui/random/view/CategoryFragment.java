@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
@@ -29,7 +29,7 @@ import butterknife.BindView;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class CategoryFragment extends BaseRxFragment<RandomStore> {
+public class CategoryFragment extends BaseFragment<RandomStore> {
     @Inject
     MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)

@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.base.rxview.BaseRxFragment
+import com.huyingbao.core.base.view.BaseFragment
 import com.huyingbao.core.common.R2
 import com.huyingbao.module.wan.kotlin.R
 import com.huyingbao.module.wan.kotlin.ui.article.action.ArticleActionCreator
@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class BannerFragment : BaseRxFragment<ArticleStore>() {
+class BannerFragment : BaseFragment<ArticleStore>() {
     @Inject
     lateinit var mActionCreator: ArticleActionCreator
 

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.base.rxview.BaseRxActivity;
+import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class LoginActivity extends BaseRxActivity<LoginStore> {
+public class LoginActivity extends BaseActivity<LoginStore> {
     @Override
     protected Fragment createFragment() {
         return LoginFragment.newInstance();

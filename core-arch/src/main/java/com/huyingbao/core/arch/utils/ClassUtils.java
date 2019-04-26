@@ -1,4 +1,4 @@
-package com.huyingbao.core.utils;
+package com.huyingbao.core.arch.utils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

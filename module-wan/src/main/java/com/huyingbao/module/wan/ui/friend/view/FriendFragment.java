@@ -3,7 +3,7 @@ package com.huyingbao.module.wan.ui.friend.view;
 import android.os.Bundle;
 import android.view.View;
 
-import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator;
@@ -23,7 +23,7 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class FriendFragment extends BaseRxFragment<FriendStore> {
+public class FriendFragment extends BaseFragment<FriendStore> {
     @Inject
     FriendActionCreator mActionCreator;
 

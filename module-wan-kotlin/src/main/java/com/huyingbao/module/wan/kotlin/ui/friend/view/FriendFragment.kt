@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.base.rxview.BaseRxFragment
+import com.huyingbao.core.base.view.BaseFragment
 import com.huyingbao.core.common.R2
 import com.huyingbao.module.wan.kotlin.R
 import com.huyingbao.module.wan.kotlin.ui.friend.action.FriendActionCreator
@@ -18,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class FriendFragment : BaseRxFragment<FriendStore>() {
+class FriendFragment : BaseFragment<FriendStore>() {
     @Inject
     lateinit var mActionCreator: FriendActionCreator
 

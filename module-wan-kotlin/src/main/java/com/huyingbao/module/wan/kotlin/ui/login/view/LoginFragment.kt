@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import butterknife.BindView
 import butterknife.OnClick
-import com.huyingbao.core.base.rxview.BaseRxFragment
+import com.huyingbao.core.base.view.BaseFragment
 import com.huyingbao.module.wan.kotlin.R
 import com.huyingbao.module.wan.kotlin.R2
 import com.huyingbao.module.wan.kotlin.ui.login.action.LoginActionCreator
@@ -18,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class LoginFragment : BaseRxFragment<LoginStore>() {
+class LoginFragment : BaseFragment<LoginStore>() {
     @Inject
     lateinit var mActionCreator: LoginActionCreator
 

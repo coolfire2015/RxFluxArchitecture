@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.huyingbao.core.base.rxview.BaseRxFragment
+import com.huyingbao.core.base.view.BaseFragment
 import com.huyingbao.core.common.R2
 import com.huyingbao.core.common.widget.CommonLoadMoreView
 import com.huyingbao.module.wan.kotlin.R
@@ -24,7 +24,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class ArticleListFragment : BaseRxFragment<ArticleStore>() {
+class ArticleListFragment : BaseFragment<ArticleStore>() {
     @Inject
     lateinit var mActionCreator: ArticleActionCreator
     @BindView(R2.id.rv_content)

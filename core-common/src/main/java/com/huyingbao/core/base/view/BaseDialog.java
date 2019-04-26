@@ -8,18 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import com.huyingbao.core.arch.view.RxFluxDialog;
 import com.huyingbao.core.base.BaseView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.lifecycle.ViewModel;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class BaseDialogFragment extends AppCompatDialogFragment implements BaseView {
+public abstract class BaseDialog<T extends ViewModel> extends RxFluxDialog<T> implements BaseView {
     private Unbinder mUnbinder;
 
     @NonNull

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
@@ -24,7 +24,7 @@ import butterknife.BindView;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class ProductFragment extends BaseRxFragment<RandomStore> {
+public class ProductFragment extends BaseFragment<RandomStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
     RandomActionCreator mActionCreator;

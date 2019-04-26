@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.huyingbao.core.arch.view.RxFluxFragment;
 import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
 
@@ -15,14 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class BaseFragment<T extends ViewModel> extends RxFluxFragment<T> implements BaseView {
     private Unbinder mUnbinder;
 
     private boolean mBackAble;

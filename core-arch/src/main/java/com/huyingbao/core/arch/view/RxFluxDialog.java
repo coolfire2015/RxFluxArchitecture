@@ -1,17 +1,15 @@
-package com.huyingbao.core.base.rxview;
+package com.huyingbao.core.arch.view;
 
 import android.content.Context;
 
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
-import com.huyingbao.core.arch.view.RxFluxView;
-import com.huyingbao.core.arch.view.RxSubscriberView;
-import com.huyingbao.core.base.view.BaseFragment;
-import com.huyingbao.core.utils.ClassUtils;
+import com.huyingbao.core.arch.utils.ClassUtils;
 
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,10 +21,11 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
+ *
  * @param <T>
  */
-public abstract class BaseRxFragment<T extends ViewModel> extends BaseFragment
-        implements RxFluxView, RxSubscriberView, HasSupportFragmentInjector {
+public abstract class RxFluxDialog<T extends ViewModel> extends DialogFragment
+        implements RxFluxView<T>, RxSubscriberView, HasSupportFragmentInjector {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
     @Inject

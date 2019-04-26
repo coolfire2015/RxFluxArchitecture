@@ -2,7 +2,7 @@ package com.huyingbao.module.gan.ui.main.view;
 
 import android.os.Bundle;
 
-import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.R2;
 import com.huyingbao.module.gan.ui.main.action.MainAction;
@@ -16,7 +16,7 @@ import butterknife.OnClick;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class MainFragment extends BaseRxFragment<MainStore> {
+public class MainFragment extends BaseFragment<MainStore> {
     @Inject
     MainActionCreator mActionCreator;
 

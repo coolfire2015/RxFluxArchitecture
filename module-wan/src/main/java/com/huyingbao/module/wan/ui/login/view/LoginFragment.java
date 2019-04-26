@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.huyingbao.core.base.rxview.BaseRxFragment;
+import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.R2;
 import com.huyingbao.module.wan.ui.login.action.LoginActionCreator;
@@ -20,7 +20,7 @@ import butterknife.OnClick;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class LoginFragment extends BaseRxFragment<LoginStore> {
+public class LoginFragment extends BaseFragment<LoginStore> {
     @Inject
     LoginActionCreator mActionCreator;
 

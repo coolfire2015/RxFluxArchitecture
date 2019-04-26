@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.base.rxview.BaseRxActivity
+import com.huyingbao.core.base.view.BaseActivity
 import com.huyingbao.module.wan.kotlin.ui.article.view.ArticleActivity
 import com.huyingbao.module.wan.kotlin.ui.login.action.LoginAction
 import com.huyingbao.module.wan.kotlin.ui.login.store.LoginStore
@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.Subscribe
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class LoginActivity : BaseRxActivity<LoginStore>() {
+class LoginActivity : BaseActivity<LoginStore>() {
     override fun createFragment(): Fragment {
         return LoginFragment.newInstance()
     }

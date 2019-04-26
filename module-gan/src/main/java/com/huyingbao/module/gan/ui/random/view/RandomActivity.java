@@ -3,7 +3,7 @@ package com.huyingbao.module.gan.ui.random.view;
 import android.os.Bundle;
 
 import com.huyingbao.core.arch.model.RxChange;
-import com.huyingbao.core.base.rxview.BaseRxActivity;
+import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class RandomActivity extends BaseRxActivity<RandomStore> {
+public class RandomActivity extends BaseActivity<RandomStore> {
     @Override
     protected Fragment createFragment() {
         return CategoryFragment.newInstance();
