@@ -3,11 +3,11 @@ package com.huyingbao.core.image;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.huyingbao.core.image.strategy.BaseImageLoaderStrategy;
-import com.huyingbao.core.image.strategy.GlideImageLoaderStrategy;
-
 import androidx.annotation.DrawableRes;
 import androidx.fragment.app.Fragment;
+
+import com.huyingbao.core.image.strategy.BaseImageLoaderStrategy;
+import com.huyingbao.core.image.strategy.GlideImageLoaderStrategy;
 
 
 /**

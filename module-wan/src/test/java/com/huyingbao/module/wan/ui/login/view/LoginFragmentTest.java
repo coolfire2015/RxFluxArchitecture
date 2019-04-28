@@ -1,5 +1,8 @@
 package com.huyingbao.module.wan.ui.login.view;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.huyingbao.module.wan.R;
 import com.huyingbao.test.utils.FragmentScenarioRule;
 
@@ -7,9 +10,6 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import androidx.lifecycle.Lifecycle;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

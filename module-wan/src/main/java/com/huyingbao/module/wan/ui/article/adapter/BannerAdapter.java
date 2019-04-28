@@ -1,13 +1,13 @@
 package com.huyingbao.module.wan.ui.article.adapter;
 
+import androidx.annotation.Nullable;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.model.Banner;
 
 import java.util.List;
-
-import androidx.annotation.Nullable;
 
 /**
  * Created by liujunfeng on 2019/1/1.

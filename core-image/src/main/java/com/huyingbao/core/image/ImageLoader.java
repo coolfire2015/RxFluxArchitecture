@@ -2,9 +2,9 @@ package com.huyingbao.core.image;
 
 import android.widget.ImageView;
 
-import com.bumptech.glide.request.RequestListener;
-
 import androidx.annotation.DrawableRes;
+
+import com.bumptech.glide.request.RequestListener;
 
 /**
  * 图片加载参数设置

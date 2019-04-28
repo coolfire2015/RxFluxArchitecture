@@ -3,6 +3,8 @@ package com.huyingbao.module.wan.ui.login.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
@@ -10,8 +12,6 @@ import com.huyingbao.module.wan.ui.login.action.LoginAction;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * Created by liujunfeng on 2019/1/1.

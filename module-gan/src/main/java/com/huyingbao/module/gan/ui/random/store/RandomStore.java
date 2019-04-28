@@ -1,5 +1,7 @@
 package com.huyingbao.module.gan.ui.random.store;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
@@ -15,8 +17,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import androidx.lifecycle.MutableLiveData;
 
 /**
  * 如果OS销毁app释放资源，用户数据不会丢失；

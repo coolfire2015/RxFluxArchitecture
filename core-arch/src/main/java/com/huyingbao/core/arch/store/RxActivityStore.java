@@ -2,14 +2,14 @@ package com.huyingbao.core.arch.store;
 
 import android.util.Log;
 
-import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.arch.model.RxChange;
-
 import androidx.annotation.CallSuper;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
+
+import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxChange;
 
 
 /**

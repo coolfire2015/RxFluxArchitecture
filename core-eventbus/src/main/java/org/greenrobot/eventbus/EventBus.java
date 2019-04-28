@@ -16,6 +16,8 @@
 package org.greenrobot.eventbus;
 
 
+import androidx.core.util.Pair;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,8 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
-
-import androidx.core.util.Pair;
 
 /**
  * EventBus is a central publish/subscribe event system for Android. Events are posted ({@link #post(Object, String)}) to the

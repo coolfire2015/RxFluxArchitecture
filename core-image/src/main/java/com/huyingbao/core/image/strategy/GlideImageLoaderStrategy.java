@@ -3,6 +3,9 @@ package com.huyingbao.core.image.strategy;
 import android.app.Activity;
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -11,9 +14,6 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.huyingbao.core.image.ImageLoader;
 import com.huyingbao.core.image.transform.CircleTransformation;
 import com.huyingbao.core.image.transform.RotateTransformation;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
     private Context mContext;

@@ -1,12 +1,13 @@
 package com.huyingbao.core.arch.action;
 
+import androidx.collection.ArrayMap;
+import androidx.core.util.Pair;
+
 import com.huyingbao.core.arch.model.RxAction;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.collection.ArrayMap;
-import androidx.core.util.Pair;
 import io.reactivex.disposables.Disposable;
 
 

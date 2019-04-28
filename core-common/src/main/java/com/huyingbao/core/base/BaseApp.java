@@ -3,6 +3,9 @@ package com.huyingbao.core.base;
 
 import android.content.Context;
 
+import androidx.annotation.CallSuper;
+import androidx.multidex.MultiDex;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.RxFluxApp;
 import com.huyingbao.core.common.BuildConfig;
@@ -10,9 +13,6 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-
-import androidx.annotation.CallSuper;
-import androidx.multidex.MultiDex;
 
 /**
  * Application实现相应的接口

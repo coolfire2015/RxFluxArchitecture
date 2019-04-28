@@ -6,6 +6,10 @@ import android.text.TextUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.base.view.CommonDialog;
 import com.huyingbao.core.common.R;
@@ -15,9 +19,6 @@ import com.huyingbao.core.common.utils.CommonUtils;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dagger.Lazy;

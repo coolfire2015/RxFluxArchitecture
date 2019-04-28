@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import androidx.collection.ArrayMap;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,7 +19,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.collection.ArrayMap;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 

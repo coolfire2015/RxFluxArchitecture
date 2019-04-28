@@ -2,15 +2,15 @@ package com.huyingbao.module.gan.ui.random.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.view.BaseActivity;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 /**
  * Created by liujunfeng on 2019/1/1.

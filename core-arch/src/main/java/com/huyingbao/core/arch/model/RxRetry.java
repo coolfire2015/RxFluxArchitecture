@@ -1,6 +1,7 @@
 package com.huyingbao.core.arch.model;
 
 import androidx.annotation.NonNull;
+
 import io.reactivex.Observable;
 
 /**

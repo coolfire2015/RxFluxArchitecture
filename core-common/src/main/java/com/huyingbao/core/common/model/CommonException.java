@@ -1,9 +1,9 @@
 package com.huyingbao.core.common.model;
 
 
-import java.io.IOException;
-
 import androidx.annotation.Nullable;
+
+import java.io.IOException;
 
 /**
  * 自定义Exception

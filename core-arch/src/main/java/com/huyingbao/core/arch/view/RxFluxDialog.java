@@ -2,18 +2,19 @@ package com.huyingbao.core.arch.view;
 
 import android.content.Context;
 
-import com.huyingbao.core.arch.store.RxActivityStore;
-import com.huyingbao.core.arch.store.RxFragmentStore;
-import com.huyingbao.core.arch.utils.ClassUtils;
-
-import javax.inject.Inject;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.huyingbao.core.arch.store.RxActivityStore;
+import com.huyingbao.core.arch.store.RxFragmentStore;
+import com.huyingbao.core.arch.utils.ClassUtils;
+
+import javax.inject.Inject;
+
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;

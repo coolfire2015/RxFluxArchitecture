@@ -3,10 +3,10 @@ package com.huyingbao.core.image.strategy;
 import android.app.Activity;
 import android.content.Context;
 
-import com.huyingbao.core.image.ImageLoader;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import com.huyingbao.core.image.ImageLoader;
 
 
 /**

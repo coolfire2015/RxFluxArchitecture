@@ -2,14 +2,14 @@ package com.huyingbao.test.utils;
 
 import android.os.Bundle;
 
-import org.junit.rules.ExternalResource;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentFactory;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.internal.util.Checks;
+
+import org.junit.rules.ExternalResource;
 
 /**
  * Created by liujunfeng on 2019/4/3.

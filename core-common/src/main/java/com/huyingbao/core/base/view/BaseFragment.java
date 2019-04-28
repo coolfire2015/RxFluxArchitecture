@@ -7,16 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.huyingbao.core.arch.view.RxFluxFragment;
-import com.huyingbao.core.base.BaseView;
-import com.huyingbao.core.common.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModel;
+
+import com.huyingbao.core.arch.view.RxFluxFragment;
+import com.huyingbao.core.base.BaseView;
+import com.huyingbao.core.common.R;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

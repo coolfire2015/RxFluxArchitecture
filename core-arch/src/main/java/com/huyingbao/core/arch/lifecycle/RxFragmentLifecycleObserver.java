@@ -1,13 +1,13 @@
 package com.huyingbao.core.arch.lifecycle;
 
-import com.huyingbao.core.arch.store.RxFragmentStore;
-import com.huyingbao.core.arch.view.RxFluxView;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
+
+import com.huyingbao.core.arch.store.RxFragmentStore;
+import com.huyingbao.core.arch.view.RxFluxView;
 
 /**
  * Fragment生命周期订阅者对象,

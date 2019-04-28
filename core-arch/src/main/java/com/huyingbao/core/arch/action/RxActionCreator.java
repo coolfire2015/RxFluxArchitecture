@@ -1,5 +1,7 @@
 package com.huyingbao.core.arch.action;
 
+import androidx.annotation.NonNull;
+
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
@@ -7,7 +9,6 @@ import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 
-import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;

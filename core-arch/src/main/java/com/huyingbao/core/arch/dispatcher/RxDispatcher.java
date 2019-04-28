@@ -1,5 +1,7 @@
 package com.huyingbao.core.arch.dispatcher;
 
+import androidx.lifecycle.LifecycleObserver;
+
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
@@ -11,8 +13,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import androidx.lifecycle.LifecycleObserver;
 
 /**
  * Dispatcher不会被直接使用，

@@ -1,12 +1,13 @@
 package com.huyingbao.module.gan.module;
 
+import androidx.lifecycle.ViewModel;
+
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import javax.inject.Singleton;
 
-import androidx.lifecycle.ViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;

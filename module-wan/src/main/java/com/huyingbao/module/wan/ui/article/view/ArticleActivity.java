@@ -3,6 +3,8 @@ package com.huyingbao.module.wan.ui.article.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.view.BaseActivity;
@@ -12,8 +14,6 @@ import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
 import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * Created by liujunfeng on 2019/1/1.

@@ -3,11 +3,12 @@ package com.huyingbao.core.arch.module;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.huyingbao.core.arch.store.RxStoreFactory;
 
 import javax.inject.Singleton;
 
-import androidx.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 

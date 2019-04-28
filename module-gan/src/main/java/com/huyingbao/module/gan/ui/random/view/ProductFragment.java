@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.huyingbao.core.base.view.BaseFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.widget.CommonLoadMoreView;
@@ -17,8 +20,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**

@@ -4,6 +4,8 @@ package com.huyingbao.module.wan.module;
  * Created by liujunfeng on 2019/1/1.
  */
 
+import androidx.lifecycle.ViewModel;
+
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.friend.store.FriendStore;
@@ -11,7 +13,6 @@ import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import javax.inject.Singleton;
 
-import androidx.lifecycle.ViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;

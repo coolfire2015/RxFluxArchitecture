@@ -1,12 +1,12 @@
 package com.huyingbao.module.gan.ui.random.adapter;
 
+import androidx.annotation.Nullable;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.huyingbao.module.gan.R;
 
 import java.util.List;
-
-import androidx.annotation.Nullable;
 
 /**
  * Created by liujunfeng on 2019/1/1.

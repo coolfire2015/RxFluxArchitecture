@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import com.huyingbao.core.base.BaseView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.huyingbao.core.base.BaseView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

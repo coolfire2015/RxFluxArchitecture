@@ -3,6 +3,8 @@ package com.huyingbao.module.gan.ui.main.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.view.BaseActivity;
@@ -11,8 +13,6 @@ import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * Created by liujunfeng on 2019/1/1.
