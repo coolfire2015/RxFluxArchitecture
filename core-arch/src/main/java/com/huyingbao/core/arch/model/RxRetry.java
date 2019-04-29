@@ -2,6 +2,8 @@ package com.huyingbao.core.arch.model;
 
 import androidx.annotation.NonNull;
 
+import org.greenrobot.eventbus.EventBusEvent;
+
 import io.reactivex.Observable;
 
 /**
@@ -9,7 +11,7 @@ import io.reactivex.Observable;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class RxRetry<T> extends BaseEvent {
+public class RxRetry<T> extends EventBusEvent {
     private final Throwable mThrowable;
     private final Observable<T> mObservable;
 

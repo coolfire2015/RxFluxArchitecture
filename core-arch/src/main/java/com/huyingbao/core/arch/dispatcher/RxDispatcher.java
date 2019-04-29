@@ -9,6 +9,7 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxSubscriberView;
 
+import org.greenrobot.eventbus.EventBusEvent;
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ import javax.inject.Singleton;
  * <p>
  * 并提供便捷的方法来分发View中产生的事件，
  * <p>
- * 消息的传递通过{@link com.huyingbao.core.arch.model.BaseEvent}来封装。
+ * 消息的传递通过{@link EventBusEvent}来封装。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

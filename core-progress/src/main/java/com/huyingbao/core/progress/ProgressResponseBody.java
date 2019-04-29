@@ -24,13 +24,13 @@ public class ProgressResponseBody extends ResponseBody {
     private ResponseBody mResponseBody;
     private RxProgress mRxProgress;
     /**
-     * BufferedSource 是okio库中的输入流，这里就当作inputStream来使用。
+     * BufferedSource 是OkIo库中的输入流，这里就当作inputStream来使用。
      */
     private BufferedSource mBufferedSource;
 
     public ProgressResponseBody(ResponseBody responseBody, String tag) {
         mResponseBody = responseBody;
-        mRxProgress = new RxProgress(tag);
+        mRxProgress = RxProgress.newInstance(tag);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ProgressResponseBody extends ResponseBody {
             /**
              * 已经下载的数据长度
              */
-            private long totalLengthRead = 0L;
+            private long currentLength = 0L;
             /**
              * 最后一次刷新的时间
              */
@@ -70,7 +70,7 @@ public class ProgressResponseBody extends ResponseBody {
                 } catch (IOException e) {
                     //发送异常,带有tag(需要有tag的方法来接)
                     RxError rxError = RxError.newInstance(mRxProgress.getTag(), e);
-                    EventBus.getDefault().postSticky(rxError, mRxProgress.getTag());
+                    EventBus.getDefault().postSticky(rxError, rxError.getTag());
                     throw e;
                 }
                 if (mRxProgress.getContentLength() == 0) {
@@ -78,13 +78,12 @@ public class ProgressResponseBody extends ResponseBody {
                     mRxProgress.setContentLength(contentLength());
                 }
                 // read() returns the number of bytes read, or -1 if this source is exhausted.
-                totalLengthRead += bytesRead != -1 ? bytesRead : 0;
+                currentLength += bytesRead != -1 ? bytesRead : 0;
                 long curTime = SystemClock.elapsedRealtime();
-                if (curTime - lastTime >= mRefreshTime || bytesRead == -1 || totalLengthRead == mRxProgress.getContentLength()) {
+                if (curTime - lastTime >= mRefreshTime || bytesRead == -1 || currentLength == mRxProgress.getContentLength()) {
                     mRxProgress.setEachLength(bytesRead);
-                    mRxProgress.setCurrentLength(totalLengthRead);
+                    mRxProgress.setCurrentLength(currentLength);
                     mRxProgress.setIntervalTime(curTime - lastTime);
-                    mRxProgress.setFinish(bytesRead == -1 && totalLengthRead == mRxProgress.getContentLength());
                     lastTime = curTime;
                     //发送进度信息,带有tag(需要有tag的方法来接)
                     EventBus.getDefault().postSticky(mRxProgress, mRxProgress.getTag());

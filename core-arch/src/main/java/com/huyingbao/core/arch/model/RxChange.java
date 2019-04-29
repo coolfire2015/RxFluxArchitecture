@@ -2,6 +2,8 @@ package com.huyingbao.core.arch.model;
 
 import androidx.annotation.NonNull;
 
+import org.greenrobot.eventbus.EventBusEvent;
+
 /**
  * 通知View响应事件变化
  * <p>
@@ -16,7 +18,7 @@ import androidx.annotation.NonNull;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class RxChange extends BaseEvent {
+public class RxChange extends EventBusEvent {
     private RxChange(@NonNull String tag) {
         super(tag);
     }

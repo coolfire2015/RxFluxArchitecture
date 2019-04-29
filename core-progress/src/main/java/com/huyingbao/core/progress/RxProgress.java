@@ -1,87 +1,73 @@
 package com.huyingbao.core.progress;
 
-public class RxProgress {
+import androidx.annotation.NonNull;
+
+import org.greenrobot.eventbus.EventBusEvent;
+
+/**
+ * Created by liujunfeng on 2019/1/1.
+ */
+public class RxProgress extends EventBusEvent {
     public static final String TAG = "tag";
     /**
      * 当前已上传或下载的总长度
      */
-    private long currentLength;
+    private long mCurrentLength;
     /**
      * 数据总长度
      */
-    private long contentLength;
+    private long mContentLength;
     /**
      * 本次调用距离上一次被调用所间隔的时间(毫秒)
      */
-    private long intervalTime;
+    private long mIntervalTime;
     /**
      * 本次调用距离上一次被调用的间隔时间内上传或下载的byte长度
      */
-    private long eachLength;
-    /**
-     * 当前进度信息所属对象的标志
-     */
-    private String tag;
-    /**
-     * 进度是否完成
-     */
-    private boolean finish;
+    private long mEachLength;
 
+    private RxProgress(@NonNull String tag) {
+        super(tag);
+    }
 
-    public RxProgress(String tag) {
-        this.tag = tag;
+    public static RxProgress newInstance(String tag) {
+        return new RxProgress(tag);
     }
 
     public long getCurrentLength() {
-        return currentLength;
+        return mCurrentLength;
     }
 
     public void setCurrentLength(long currentLength) {
-        this.currentLength = currentLength;
+        this.mCurrentLength = currentLength;
     }
 
     public long getContentLength() {
-        return contentLength;
+        return mContentLength;
     }
 
     public void setContentLength(long contentLength) {
-        this.contentLength = contentLength;
+        this.mContentLength = contentLength;
     }
 
     public long getIntervalTime() {
-        return intervalTime;
+        return mIntervalTime;
     }
 
     public void setIntervalTime(long intervalTime) {
-        this.intervalTime = intervalTime;
+        this.mIntervalTime = intervalTime;
     }
 
     public long getEachLength() {
-        return eachLength;
+        return mEachLength;
     }
 
     public void setEachLength(long eachLength) {
-        this.eachLength = eachLength;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public void setFinish(boolean finish) {
-        this.finish = finish;
+        this.mEachLength = eachLength;
     }
 
     /**
-     * 获取百分比,该计算舍去了小数点,如果你想得到更精确的值,请自行计算
+     * 获取百分比
      *
      * @return
      */
@@ -93,7 +79,7 @@ public class RxProgress {
     }
 
     /**
-     * 获取上传或下载网络速度,单位为byte/s,如果你想得到更精确的值,请自行计算
+     * 获取上传或下载网络速度,单位为byte/s
      *
      * @return
      */
@@ -102,19 +88,5 @@ public class RxProgress {
             return 0;
         }
         return getEachLength() * 1000 / getIntervalTime();
-    }
-
-    @Override
-    public String toString() {
-        return "RxProgress{" +
-                "tag=" + tag +
-                ", currentLength=" + currentLength +
-                ", contentLength=" + contentLength +
-                ", eachLength=" + eachLength +
-                ", intervalTime=" + intervalTime +
-                ", percent=" + getPercent() + "%" +
-                ", speed=" + getSpeed() +
-                ", finish=" + finish +
-                '}';
     }
 }

@@ -3,12 +3,14 @@ package com.huyingbao.core.arch.model;
 import androidx.annotation.NonNull;
 import androidx.collection.ArrayMap;
 
+import org.greenrobot.eventbus.EventBusEvent;
+
 /**
  * action封装类，用于传递数据，使用Builder创建
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class RxAction extends BaseEvent {
+public class RxAction extends EventBusEvent {
     private static final String RESPONSE = "response";
     private final ArrayMap<String, Object> mData;
 

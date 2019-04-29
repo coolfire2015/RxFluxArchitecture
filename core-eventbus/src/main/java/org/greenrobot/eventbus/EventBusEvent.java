@@ -1,16 +1,16 @@
-package com.huyingbao.core.arch.model;
+package org.greenrobot.eventbus;
 
 import androidx.annotation.NonNull;
 
 /**
- * 抽象方法,用于EventBus传递事件,提供事件标志tag
+ * 用于EventBus传递事件,提供事件标志tag
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class BaseEvent {
+public abstract class EventBusEvent {
     protected final String mTag;
 
-    protected BaseEvent(@NonNull String tag) {
+    protected EventBusEvent(@NonNull String tag) {
         this.mTag = tag;
     }
 
