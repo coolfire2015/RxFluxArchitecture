@@ -1,7 +1,2 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.huyingbao.core.image">
-    <!-- Glide使用okhttp3加载 -->
-    <meta-data
-        android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-        android:value="GlideModule" />
-</manifest>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.huyingbao.core.image" />
