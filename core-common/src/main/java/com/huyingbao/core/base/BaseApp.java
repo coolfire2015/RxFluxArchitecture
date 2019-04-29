@@ -25,6 +25,13 @@ import com.orhanobut.logger.PrettyFormatStrategy;
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseApp extends RxFluxApp {
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //Multidex分包
+        MultiDex.install(this);
+    }
+
     /**
      * 注解CallSuper强制子类复写该方法时调用父方法
      */
@@ -34,17 +41,6 @@ public abstract class BaseApp extends RxFluxApp {
         super.onCreate();
         initArouter();
         initDebug();
-    }
-
-    /**
-     * multidex分包
-     *
-     * @param base
-     */
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
     /**
