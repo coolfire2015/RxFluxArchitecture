@@ -36,6 +36,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
+    public static final String TAG = "RxFlux";
     /**
      * Inject 用来标记需要注入的依赖
      * 被标注的属性不能使用private修饰，否则无法注入
@@ -127,7 +128,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
-            Log.w("RxFlux", "10.1-subscribe RxFluxActivity : " + activity.getClass().getSimpleName());
+            Log.i(TAG, "Subscribe RxFluxActivity : " + activity.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxSubscriberView) activity);
         }
     }
@@ -145,7 +146,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
             if (mRxDispatcher.isSubscribe(this)) {
                 return;
             }
-            Log.w("RxFlux", "11.1-subscribe RxFluxFragment : " + f.getClass().getSimpleName());
+            Log.i(TAG, "Subscribe RxFluxFragment : " + f.getClass().getSimpleName());
             mRxDispatcher.subscribeRxView((RxSubscriberView) f);
         }
     }
@@ -159,8 +160,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     @Override
     public void onActivityPaused(Activity activity) {
         if (activity instanceof RxSubscriberView) {
+            Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.getClass().getSimpleName());
             mRxDispatcher.unsubscribeRxView((RxSubscriberView) activity);
-            Log.w("RxFlux", "12.1-unsubscribe RxFluxActivity : " + activity.getClass().getSimpleName());
         }
     }
 
@@ -174,8 +175,8 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentPaused(fm, f);
         if (f instanceof RxSubscriberView) {
+            Log.i(TAG, "Unsubscribe RxFluxFragment : " + f.getClass().getSimpleName());
             mRxDispatcher.unsubscribeRxView((RxSubscriberView) f);
-            Log.w("RxFlux", "13.1-unsubscribe RxFluxFragment : " + f.getClass().getSimpleName());
         }
     }
 

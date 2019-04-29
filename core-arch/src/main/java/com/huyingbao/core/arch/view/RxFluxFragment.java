@@ -1,6 +1,7 @@
 package com.huyingbao.core.arch.view;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,16 +9,14 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.huyingbao.core.arch.RxFlux;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.store.RxFragmentStore;
 import com.huyingbao.core.arch.utils.ClassUtils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -25,18 +24,11 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @param <T>
  */
 public abstract class RxFluxFragment<T extends ViewModel> extends Fragment
-        implements RxFluxView<T>, RxSubscriberView, HasSupportFragmentInjector {
+        implements RxFluxView<T>, RxSubscriberView {
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
-    @Inject
-    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     private T mStore;
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return childFragmentInjector;
-    }
 
     @Nullable
     @Override
@@ -65,15 +57,20 @@ public abstract class RxFluxFragment<T extends ViewModel> extends Fragment
      */
     @Override
     public void onAttach(Context context) {
-        //依赖注入
-        AndroidSupportInjection.inject(this);
+        if (ClassUtils.getGenericClass(getClass()) != null) {
+            //如果持有Store,需要子类在Module中使用dagger.android实现依赖注入操作
+            AndroidSupportInjection.inject(this);
+        } else {
+            //未使用dagger.android
+            Log.w(RxFlux.TAG, "Not use dagger.android in " + getClass().getSimpleName());
+        }
         super.onAttach(context);
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         //View在destroy时,不再持有该Store对象
         mStore = null;
+        super.onDestroy();
     }
 }

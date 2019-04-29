@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
+import com.huyingbao.core.arch.RxFlux;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxChange;
 
@@ -56,7 +57,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
         if (mRxDispatcher.isSubscribe(this)) {
             return;
         }
-        Log.w("RxFlux", "1.3-register RxFragmentStore : " + getClass().getSimpleName());
+        Log.i(RxFlux.TAG, "Subscribe RxFragmentStore : " + getClass().getSimpleName());
         mRxDispatcher.subscribeRxStore(this);
     }
 
@@ -67,7 +68,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {
-        Log.w("RxFlux", "19.1-unregister RxFragmentStore : " + getClass().getSimpleName());
+        Log.i(RxFlux.TAG, "Unsubscribe RxFragmentStore : " + getClass().getSimpleName());
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
@@ -79,7 +80,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
     @Override
     @CallSuper
     protected void onCleared() {
-        Log.w("RxFlux", "19.2-cleared RxFragmentStore : " + getClass().getSimpleName());
+        Log.i(RxFlux.TAG, "Cleared RxFragmentStore : " + getClass().getSimpleName());
     }
 
     /**

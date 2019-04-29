@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.huyingbao.core.arch.action.RxActionManager;
-import com.huyingbao.core.base.view.CommonDialog;
+import com.huyingbao.core.base.view.BaseDialog;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.core.common.utils.CommonUtils;
@@ -29,7 +29,7 @@ import dagger.Lazy;
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-public class CommonLoadingDialog extends CommonDialog {
+public class CommonLoadingDialog extends BaseDialog {
     @Inject
     Lazy<RxActionManager> mRxActionManagerLazy;
 

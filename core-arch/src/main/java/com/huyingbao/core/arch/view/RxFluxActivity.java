@@ -1,6 +1,7 @@
 package com.huyingbao.core.arch.view;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.huyingbao.core.arch.RxFlux;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.utils.ClassUtils;
 
@@ -66,15 +68,20 @@ public abstract class RxFluxActivity<T extends RxActivityStore> extends AppCompa
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //依赖注入
-        AndroidInjection.inject(this);
+        if (ClassUtils.getGenericClass(getClass()) != null) {
+            //如果持有Store,需要子类在Module中使用dagger.android实现依赖注入操作
+            AndroidInjection.inject(this);
+        } else {
+            //未使用dagger.android
+            Log.w(RxFlux.TAG, "Not use dagger.android in " + getClass().getSimpleName());
+        }
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         //View在destroy时,不再持有该Store对象
         mStore = null;
+        super.onDestroy();
     }
 }

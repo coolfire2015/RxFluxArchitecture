@@ -9,8 +9,8 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.view.RxSubscriberView;
 
-import org.greenrobot.eventbus.EventBusEvent;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBusEvent;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
