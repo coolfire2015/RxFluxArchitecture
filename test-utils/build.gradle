@@ -49,7 +49,7 @@ dependencies {
     //Android
     implementation "androidx.test:core:${TEST_X_CORE}"
     implementation "androidx.test:rules:${TEST_X_RULES}"
-    implementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
+    implementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
     implementation "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"

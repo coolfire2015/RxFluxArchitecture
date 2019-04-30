@@ -43,8 +43,10 @@ artifacts {
 }
 
 dependencies {
-    //内核
-    implementation project(':core-arch')
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
+    //兼容包,使用ArrayMap
+    implementation "androidx.collection:collection:${X_COLLECTION}"
+    //依赖注入注解
+    implementation "javax.inject:javax.inject:${JAVAX_INJECT}"
 }

@@ -5,7 +5,7 @@ dependencies {
     testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
     testImplementation "androidx.test:core:${TEST_X_CORE}"
     testImplementation "androidx.test:rules:${TEST_X_RULES}"
-    testImplementation "androidx.fragment:fragment-testing:${TEST_X_FRAGMENT}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
     //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"

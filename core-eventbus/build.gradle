@@ -43,7 +43,7 @@ artifacts {
 }
 
 dependencies {
-    //注解
+    //EventBus注解
     api project(':core-eventbus-annotations')
     //版本兼容包,使用兼容包中的Pair,方便单元测试
     api "androidx.core:core:${X_CORE}"

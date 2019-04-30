@@ -59,8 +59,9 @@ dependencies {
     //Dagger-Android
     api "com.google.dagger:dagger-android:${DAGGER}"
     api "com.google.dagger:dagger-android-support:${DAGGER}"
-    //编译时生成
+    //Dagger编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    //AndroidX迁移
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }

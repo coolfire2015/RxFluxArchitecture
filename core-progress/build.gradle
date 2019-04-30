@@ -43,7 +43,7 @@ artifacts {
 }
 
 dependencies {
-    //内核
+    //内核,使用RxError和EventBus
     implementation project(':core-arch')
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"

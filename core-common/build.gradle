@@ -58,6 +58,8 @@ dependencies {
     api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
     //Material
     api "com.google.android.material:material:${X_MATERIAL}"
+    //Constraint
+    api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //OkHttp
@@ -74,9 +76,11 @@ dependencies {
     api "com.alibaba:arouter-api:${AROUTER_API}"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
-    //编译时生成
+    //Dagger编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    //AndroidX迁移
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    //ButterKnife编译时生成
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }

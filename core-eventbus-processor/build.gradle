@@ -7,7 +7,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    //注解
+    //EventBus注解
     implementation project(':core-eventbus-annotations')
     //Java工具
     implementation "de.greenrobot:java-common:${JAVA_COMMON}"

@@ -43,8 +43,10 @@ artifacts {
 }
 
 dependencies {
-    //内核
-    implementation project(':core-arch')
-    //Json
+    //Json解析
     implementation "com.alibaba:fastjson:${FAST_JSON}"
+    //依赖注入注解
+    implementation "javax.inject:javax.inject:${JAVAX_INJECT}"
+    //版本兼容包,使用兼容包中Fragment
+    implementation "androidx.fragment:fragment:${X_FRAGMENT}"
 }
