@@ -1,16 +1,24 @@
+include ':annotation'
+include ':compiler'
+
+include ':core-annotations'
+include ':core-processor'
+
 include ':core-eventbus'
 include ':core-eventbus-annotations'
 include ':core-eventbus-processor'
+
 include ':core-arch'
-include ':core-annotations'
-include ':core-processor'
-include ':core-arch'
+
 include ':core-utils'
 include ':core-progress'
 include ':core-image'
 include ':core-cookie'
+
 include ':core-common'
+
 include ':test-utils'
+
 include ':module-app'
 include ':module-wan'
 include ':module-gan'

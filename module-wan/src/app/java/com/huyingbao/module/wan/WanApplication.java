@@ -16,13 +16,4 @@ public class WanApplication extends BaseApp {
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerWanComponent.builder().application(this).build();
     }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        EventBus.builder()
-                .addIndex(new WanEventBusIndex())
-                .eventInheritance(false)
-                .installDefaultEventBus();
-    }
 }
