@@ -1,5 +1,5 @@
 include ':annotation'
-include ':compiler'
+include ':core-compiler'
 
 include ':core-annotations'
 include ':core-processor'
