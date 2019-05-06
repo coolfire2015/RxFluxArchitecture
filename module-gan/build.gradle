@@ -153,4 +153,8 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //Glide编译时生成
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
+    //解决Glide找不到Android声明库问题
+    annotationProcessor "androidx.annotation:annotation:${X_ANNOTATION}"
 }

@@ -144,4 +144,8 @@ dependencies {
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    //Glide编译时生成
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
+    //解决Glide找不到Android声明库问题
+    annotationProcessor "androidx.annotation:annotation:${X_ANNOTATION}"
 }
