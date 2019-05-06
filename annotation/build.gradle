@@ -1,3 +1,7 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'com.github.dcendents.android-maven'
 
-apply from: "${rootProject.projectDir}/scripts/upload.gradle"
+group = "com.github.coolfire2015"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

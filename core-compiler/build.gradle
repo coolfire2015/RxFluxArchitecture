@@ -90,5 +90,3 @@ jar {
         }
     }
 }
-
-apply from: "${rootProject.projectDir}/scripts/upload.gradle"
