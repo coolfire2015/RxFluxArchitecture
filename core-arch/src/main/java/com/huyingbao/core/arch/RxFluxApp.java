@@ -34,9 +34,6 @@ public abstract class RxFluxApp extends DaggerApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         mGlobalRxAppLifecycle = getAnnotationGeneratedGlideModules();
-        if (mGlobalRxAppLifecycle != null) {
-            mGlobalRxAppLifecycle.attachBaseContext(base);
-        }
     }
 
 
@@ -51,21 +48,13 @@ public abstract class RxFluxApp extends DaggerApplication {
         }
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        if (mGlobalRxAppLifecycle != null) {
-            mGlobalRxAppLifecycle.onTerminate(this);
-        }
-    }
-
     @Nullable
     @SuppressWarnings({"unchecked", "deprecation", "TryWithIdenticalCatches"})
     private RxAppLifecycle getAnnotationGeneratedGlideModules() {
         RxAppLifecycle result = null;
         try {
             Class<RxAppLifecycle> clazz = (Class<RxAppLifecycle>)
-                    Class.forName("com.huyingbao.core.arch.GeneratedRxAppLifecycleImpl");
+                    Class.forName("com.huyingbao.core.arch.RxAppLifecycleImpl");
             result = clazz.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             if (Log.isLoggable(TAG, Log.WARN)) {

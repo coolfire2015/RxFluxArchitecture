@@ -14,20 +14,10 @@ import org.greenrobot.eventbus.EventBus;
 @AppDelegate
 public class WanAppLifecyle implements RxAppLifecycle {
     @Override
-    public void attachBaseContext(@NonNull Context base) {
-
-    }
-
-    @Override
     public void onCreate(@NonNull Application application) {
         EventBus.builder()
                 .addIndex(new WanEventBusIndex())
                 .eventInheritance(false)
                 .installDefaultEventBus();
-    }
-
-    @Override
-    public void onTerminate(@NonNull Application application) {
-
     }
 }

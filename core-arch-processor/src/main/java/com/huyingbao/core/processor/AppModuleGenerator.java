@@ -35,12 +35,7 @@ final class AppModuleGenerator {
                 new ArrayList<>(libraryGlideModuleClassNames);
         Collections.sort(orderedLibraryGlideModuleClassNames);
 
-//        MethodSpec constructor =
-//                generateConstructor(
-//                        appGlideModuleClassName,
-//                        orderedLibraryGlideModuleClassNames);
-
-        MethodSpec registerComponents = generateRegisterComponents(orderedLibraryGlideModuleClassNames);
+        MethodSpec onCreate = generateOnCreate(orderedLibraryGlideModuleClassNames);
 
         Builder builder = TypeSpec.classBuilder(GENERATED_APP_MODULE_IMPL_SIMPLE_NAME)
                 .addModifiers(Modifier.FINAL)
@@ -49,74 +44,27 @@ final class AppModuleGenerator {
                                 .addMember("value", "$S", "deprecation")
                                 .build()
                 )
-                .superclass(ClassName.get(GENERATED_ROOT_MODULE_PACKAGE_NAME, GENERATED_ROOT_MODULE_SIMPLE_NAME))
-//                .addMethod(constructor)
-                .addMethod(registerComponents);
-//        for (String glideModule : libraryGlideModuleClassNames) {
-//            builder.addField(appGlideModuleClassName, "appGlideModule", Modifier.PRIVATE, Modifier.FINAL)
-//        }
+                .addSuperinterface(ClassName.get(GENERATED_ROOT_MODULE_PACKAGE_NAME, GENERATED_ROOT_MODULE_SIMPLE_NAME))
+                .addMethod(onCreate);
         return builder.build();
     }
 
-    private MethodSpec generateRegisterComponents(Collection<String> libraryGlideModuleClassNames) {
-        MethodSpec.Builder registerComponents =
-                MethodSpec.methodBuilder("registerComponents")
+    private MethodSpec generateOnCreate(Collection<String> libraryGlideModuleClassNames) {
+        MethodSpec.Builder builder =
+                MethodSpec.methodBuilder("onCreate")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
                         .addParameter(ParameterSpec.builder(
-                                ClassName.get("android.content", "Context"), "context")
-                                .addAnnotation(nonNull())
-                                .build()
-                        )
-                        .addParameter(ParameterSpec.builder(
-                                ClassName.get("com.bumptech.glide", "Glide"), "glide")
-                                .addAnnotation(nonNull())
-                                .build()
-                        )
-                        .addParameter(ParameterSpec.builder(
-                                ClassName.get("com.bumptech.glide", "Registry"), "registry")
+                                ClassName.get("android.app", "Application"), "application")
                                 .addAnnotation(nonNull())
                                 .build()
                         );
 
         for (String glideModule : libraryGlideModuleClassNames) {
             ClassName moduleClassName = ClassName.bestGuess(glideModule);
-            registerComponents.addStatement(
-                    "new $T().registerComponents(context, glide, registry)", moduleClassName);
+            builder.addStatement(
+                    "new $T().onCreate(application)", moduleClassName);
         }
-        // Order matters here. The AppGlideModule must be called last.
-        registerComponents.addStatement("appGlideModule.registerComponents(context, glide, registry)");
-        return registerComponents.build();
+        return builder.build();
     }
-
-//    /**
-//     * 创建构造方法
-//     *
-//     * @param libraryGlideModuleClassNames
-//     * @return
-//     */
-//    private MethodSpec generateConstructor(Collection<String> libraryGlideModuleClassNames) {
-//        MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder();
-//        constructorBuilder.addStatement("appGlideModule = new $T()", appGlideModule);
-//
-//        ClassName androidLogName = ClassName.get("android.util", "Log");
-//
-//        // Add some log lines to indicate to developers which modules where discovered.
-//        constructorBuilder.beginControlFlow("if ($T.isLoggable($S, $T.DEBUG))",
-//                androidLogName, GLIDE_LOG_TAG, androidLogName);
-//        constructorBuilder.addStatement("$T.d($S, $S)", androidLogName, GLIDE_LOG_TAG,
-//                "Discovered AppGlideModule from annotation: " + appGlideModule);
-//        // Excluded GlideModule classes from the manifest are logged in Glide's singleton.
-//        for (String glideModule : libraryGlideModuleClassNames) {
-//            if (excludedGlideModuleClassNames.contains(glideModule)) {
-//                constructorBuilder.addStatement("$T.d($S, $S)", androidLogName, GLIDE_LOG_TAG,
-//                        "AppGlideModule excludes LibraryGlideModule from annotation: " + glideModule);
-//            } else {
-//                constructorBuilder.addStatement("$T.d($S, $S)", androidLogName, GLIDE_LOG_TAG,
-//                        "Discovered LibraryGlideModule from annotation: " + glideModule);
-//            }
-//        }
-//        constructorBuilder.endControlFlow();
-//        return constructorBuilder.build();
-//    }
 }
