@@ -1,8 +1,5 @@
-include ':annotation'
-include ':core-compiler'
-
-include ':core-annotations'
-include ':core-processor'
+include ':core-arch-annotations'
+include ':core-arch-processor'
 
 include ':core-eventbus'
 include ':core-eventbus-annotations'

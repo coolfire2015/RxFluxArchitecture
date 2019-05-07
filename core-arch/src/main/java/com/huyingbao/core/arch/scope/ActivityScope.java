@@ -53,6 +53,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Created by liujunfeng on 2019/1/1.
  */
 @Scope
-@Retention(RUNTIME)//编译检测，防止不规范使用，SubComponent必须使用和父Component不同的Scope标示
+@Retention(RUNTIME)
 public @interface ActivityScope {
 }

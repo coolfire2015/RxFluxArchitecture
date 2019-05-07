@@ -157,4 +157,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
     //解决Glide找不到Android声明库问题
     annotationProcessor "androidx.annotation:annotation:${X_ANNOTATION}"
+
+    implementation project(':core-arch-annotations')
+    annotationProcessor project(':core-arch-processor')
 }

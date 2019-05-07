@@ -23,12 +23,12 @@ public abstract class RxFluxApp extends DaggerApplication {
     @Inject
     RxFlux mRxFlux;
 
-    private List<AppLifecycles> mAppLifecycles;
+    private List<RxAppLifecycle> mRxAppLifecycles;
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-//        for (AppLifecycles appLifecycles : mAppLifecycles) {
+//        for (RxAppLifecycle appLifecycles : mRxAppLifecycles) {
 //            appLifecycles.attachBaseContext(base);
 //        }
     }
@@ -40,7 +40,7 @@ public abstract class RxFluxApp extends DaggerApplication {
         //application创建的时候调用该方法，
         //使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
-//        for (AppLifecycles appLifecycles : mAppLifecycles) {
+//        for (RxAppLifecycle appLifecycles : mRxAppLifecycles) {
 //            appLifecycles.onCreate(this);
 //        }
     }
@@ -48,7 +48,7 @@ public abstract class RxFluxApp extends DaggerApplication {
     @Override
     public void onTerminate() {
         super.onTerminate();
-//        for (AppLifecycles appLifecycles : mAppLifecycles) {
+//        for (RxAppLifecycle appLifecycles : mRxAppLifecycles) {
 //            appLifecycles.onTerminate(this);
 //        }
     }

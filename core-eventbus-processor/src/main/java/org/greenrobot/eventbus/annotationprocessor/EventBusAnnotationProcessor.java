@@ -69,6 +69,7 @@ public class EventBusAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
+        //日志相关的辅助类Messager
         Messager messager = processingEnv.getMessager();
         try {
             String index = processingEnv.getOptions().get(OPTION_EVENT_BUS_INDEX);
