@@ -45,6 +45,7 @@ artifacts {
 dependencies {
     //带有Tag的EventBus
     api project(':core-eventbus')
+    //Application代理注解
     api project(':core-arch-annotations')
     //版本兼容包
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
