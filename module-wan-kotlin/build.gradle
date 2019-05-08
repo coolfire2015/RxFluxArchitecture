@@ -153,6 +153,7 @@ dependencies {
     api project(':core-common')
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //编译时生成
+    kapt project(':core-arch-processor')
     kapt project(':core-eventbus-processor')
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
