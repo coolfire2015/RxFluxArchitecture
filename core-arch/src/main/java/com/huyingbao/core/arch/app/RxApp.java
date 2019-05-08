@@ -1,10 +1,12 @@
-package com.huyingbao.core.arch;
+package com.huyingbao.core.arch.app;
 
 
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.huyingbao.core.arch.RxFlux;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,7 +26,7 @@ import static com.huyingbao.core.arch.RxFlux.TAG;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class RxFluxApp extends DaggerApplication {
+public abstract class RxApp extends DaggerApplication {
     @Inject
     RxFlux mRxFlux;
 

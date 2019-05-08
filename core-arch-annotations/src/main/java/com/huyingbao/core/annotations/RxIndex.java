@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
-public @interface Index {
+public @interface RxIndex {
     String[] modules() default {};
 }

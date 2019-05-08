@@ -18,15 +18,14 @@ import javax.lang.model.element.Modifier;
 import static com.huyingbao.core.processor.ProcessorUtil.nonNull;
 
 
-final class AppModuleGenerator {
+final class RxAppLifecycleGenerator {
     static final String GENERATED_ROOT_MODULE_PACKAGE_NAME = "com.huyingbao.core.arch";
-    private static final String GLIDE_LOG_TAG = "RxFlux";
     private static final String GENERATED_APP_MODULE_IMPL_SIMPLE_NAME = "RxAppLifecycleImpl";
     private static final String GENERATED_ROOT_MODULE_SIMPLE_NAME = "RxAppLifecycle";
 
     private final ProcessorUtil processorUtil;
 
-    AppModuleGenerator(ProcessorUtil processorUtil) {
+    RxAppLifecycleGenerator(ProcessorUtil processorUtil) {
         this.processorUtil = processorUtil;
     }
 

@@ -16,7 +16,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
-import static com.huyingbao.core.processor.AppDelegateProcessor.DEBUG;
+import static com.huyingbao.core.processor.RxArchProcessor.DEBUG;
 
 
 /**
@@ -26,20 +26,30 @@ final class ProcessorUtil {
     /**
      * 框架包名
      */
-    private static final String PACKAGE_NAME = "com.huyingbao.core.arch";
+    private static final String PACKAGE_NAME = "com.huyingbao.core.arch.app";
+    /**
+     * RxApp类名
+     */
+    private static final String RX_APP_SIMPLE_NAME = "RxApp";
+    /**
+     * RxApp规范类名
+     */
+    private static final String RX_APP_QUALIFIED_NAME =
+            PACKAGE_NAME + "." + RX_APP_SIMPLE_NAME;
     /**
      * App生命周期接口RxAppLifecycle类名
      */
-    private static final String SIMPLE_NAME = "RxAppLifecycle";
+    private static final String RX_APP_LIFECYCLE_SIMPLE_NAME = "RxAppLifecycle";
     /**
      * App生命周期接口类名RxAppLifecycle,规范类名
      */
-    private static final String QUALIFIED_NAME = PACKAGE_NAME + "." + SIMPLE_NAME;
+    private static final String RX_APP_LIFECYCLE_QUALIFIED_NAME =
+            PACKAGE_NAME + "." + RX_APP_LIFECYCLE_SIMPLE_NAME;
     /**
      * 编译文件所在包名
      */
     private static final String COMPILER_PACKAGE_NAME =
-            AppDelegateProcessor.class.getPackage().getName();
+            RxArchProcessor.class.getPackage().getName();
     /**
      * 非空注解
      */
@@ -65,16 +75,32 @@ final class ProcessorUtil {
      * RxAppLifecycle类型元素
      */
     private final TypeElement mRxAppLifecycleType;
+    /**
+     * RxApp类型元素
+     */
+    private final TypeElement mRxAppType;
     private int mRound;
 
     ProcessorUtil(ProcessingEnvironment processingEnv) {
         this.mProcessingEnv = processingEnv;
         //返回给定其规范名称的类型元素。
-        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_NAME);
+        mRxAppType = processingEnv.getElementUtils().getTypeElement(RX_APP_QUALIFIED_NAME);
+        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(RX_APP_LIFECYCLE_QUALIFIED_NAME);
     }
 
     void process() {
         mRound++;
+    }
+
+    /**
+     * 判断该类是否是RxApp的子类
+     *
+     * @param element
+     * @return
+     */
+    boolean isRxApp(TypeElement element) {
+        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
+                mRxAppType.asType());
     }
 
     /**
