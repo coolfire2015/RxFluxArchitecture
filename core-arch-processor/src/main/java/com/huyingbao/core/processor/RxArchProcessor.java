@@ -20,12 +20,11 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 
 public class RxArchProcessor extends AbstractProcessor {
-    private static final String COMPILER_PACKAGE_NAME =
-            RxArchProcessor.class.getPackage().getName();
+    private static final String COMPILER_PACKAGE_NAME = RxArchProcessor.class.getPackage().getName();
     static final boolean DEBUG = false;
+    private boolean mIsGeneratedWritten;
     private ProcessorUtil mProcessorUtil;
     private RxIndexerGenerator mRxIndexerGenerator;
-    private boolean isGeneratedAppGlideModuleWritten;
     private RxAppLifecycleGenerator mRxAppLifecycleGenerator;
     private final List<TypeElement> mRxAppList = new ArrayList<>();
 
@@ -74,15 +73,16 @@ public class RxArchProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         mProcessorUtil.process();
-        //生成索引文件
+        //编译RxAppDelegate注解生成索引RxIndexer_文件
         boolean newIndexWritten = processIndex(roundEnvironment);
-        //判断是否有
+        //编译RxAppBody注解
         processRxAppBody(set, roundEnvironment);
         if (newIndexWritten) {
             return true;
         }
-        if (!isGeneratedAppGlideModuleWritten) {
-            isGeneratedAppGlideModuleWritten = processRxLifecycleImpl();
+        if (!mIsGeneratedWritten) {
+            //生成全局RxAppLifecycleImpl文件
+            mIsGeneratedWritten = processRxLifecycleImpl();
         }
         return true;
     }
@@ -123,50 +123,46 @@ public class RxArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 生成全局代理
+     * 生成全局AppLifecycle实现类
      *
      * @return
      */
     private boolean processRxLifecycleImpl() {
-        // mRxAppList is added to in order to catch errors where multiple AppGlideModules may be
-        // present for a single application or library. Because we only add to mRxAppList, we use
-        // isGeneratedAppGlideModuleWritten to make sure the GeneratedAppGlideModule is written at
-        // most once.
         if (mRxAppList.isEmpty()) {
             return false;
         }
-        // If this package is null, it means there are no classes with this package name. One way this
-        // could happen is if we process an annotation and reach this point without writing something
-        // to the package. We do not error check here because that shouldn't happen with the
-        // current implementation.
-        PackageElement glideGenPackage = processingEnv.getElementUtils().getPackageElement(COMPILER_PACKAGE_NAME);
-        Set<String> indexedClassNames = getIndexedClassNames(glideGenPackage);
-        TypeSpec generatedAppGlideModule = mRxAppLifecycleGenerator.generate(indexedClassNames);
+        PackageElement packageElement = processingEnv.getElementUtils().getPackageElement(COMPILER_PACKAGE_NAME);
+        //所有module中的编译生成的索引文件
+        Set<String> indexedClassNames = getIndexedClassNames(packageElement);
+        //生成全局RxLifecycleImpl文件
+        TypeSpec generatedRxLifecycleImpl = mRxAppLifecycleGenerator.generate(indexedClassNames);
         mProcessorUtil.writeClass(
-                RxAppLifecycleGenerator.GENERATED_ROOT_MODULE_PACKAGE_NAME,
-                generatedAppGlideModule);
+                RxAppLifecycleGenerator.GENERATED_ROOT_PACKAGE_NAME,
+                generatedRxLifecycleImpl);
         return true;
     }
 
     /**
      * 从当前包附加的类中获取到所有编译生成的Index类
+     * 再从Index类的RxIndex注解中取出modules中存储的自定义RxAppLifecycle
      *
-     * @param glideGenPackage
+     * @param packageElement
      * @return
      */
     @SuppressWarnings("unchecked")
-    private Set<String> getIndexedClassNames(PackageElement glideGenPackage) {
-        Set<String> glideModules = new HashSet<>();
-        List<? extends Element> glideGeneratedElements = glideGenPackage.getEnclosedElements();
-        for (Element indexer : glideGeneratedElements) {
+    private Set<String> getIndexedClassNames(PackageElement packageElement) {
+        Set<String> rxAppLifecycles = new HashSet<>();
+        //获取当前包元素附加的所有元素
+        List<? extends Element> rxAppLifecycleGeneratedElements = packageElement.getEnclosedElements();
+        for (Element indexer : rxAppLifecycleGeneratedElements) {
             RxIndex annotation = indexer.getAnnotation(RxIndex.class);
             // If the annotation is null, it means we've come across another class in the same package
             // that we can safely ignore.
             if (annotation != null) {
-                Collections.addAll(glideModules, annotation.modules());
+                Collections.addAll(rxAppLifecycles, annotation.modules());
             }
         }
-        mProcessorUtil.debugLog("Found GlideModules: " + glideModules);
-        return glideModules;
+        mProcessorUtil.debugLog("Found RxAppLifecycle: " + rxAppLifecycles);
+        return rxAppLifecycles;
     }
 }

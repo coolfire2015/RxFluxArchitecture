@@ -16,51 +16,57 @@ import java.util.Set;
 import javax.lang.model.element.Modifier;
 
 
+/**
+ * 生成com.huyingbao.core.arch.RxAppLifecycleImpl类
+ */
 final class RxAppLifecycleGenerator {
-    static final String GENERATED_ROOT_MODULE_PACKAGE_NAME = "com.huyingbao.core.arch";
-    private static final String GENERATED_APP_MODULE_IMPL_SIMPLE_NAME = "RxAppLifecycleImpl";
-    private static final String GENERATED_ROOT_MODULE_SIMPLE_NAME = "RxAppLifecycle";
+    static final String GENERATED_ROOT_PACKAGE_NAME = "com.huyingbao.core.arch";
+    private static final String GENERATED_ROOT_SIMPLE_NAME = "RxAppLifecycle";
+    private static final String GENERATED_RX_APP_LIFECYCLE_IMPL_SIMPLE_NAME = "RxAppLifecycleImpl";
 
-    private final ProcessorUtil processorUtil;
+    private final ProcessorUtil mProcessorUtil;
 
     RxAppLifecycleGenerator(ProcessorUtil processorUtil) {
-        this.processorUtil = processorUtil;
+        this.mProcessorUtil = processorUtil;
     }
 
-    TypeSpec generate(Set<String> libraryGlideModuleClassNames) {
-        List<String> orderedLibraryGlideModuleClassNames =
-                new ArrayList<>(libraryGlideModuleClassNames);
-        Collections.sort(orderedLibraryGlideModuleClassNames);
-
-        MethodSpec onCreate = generateOnCreate(orderedLibraryGlideModuleClassNames);
-
-        Builder builder = TypeSpec.classBuilder(GENERATED_APP_MODULE_IMPL_SIMPLE_NAME)
+    TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
+        List<String> orderedRxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
+        Collections.sort(orderedRxAppLifecycleClassNames);
+        //生成方法
+        MethodSpec onCreate = generateOnCreate(orderedRxAppLifecycleClassNames);
+        //添加注解
+        AnnotationSpec annotationSpec = AnnotationSpec.builder(SuppressWarnings.class)
+                .addMember("value", "$S", "deprecation")
+                .build();
+        Builder builder = TypeSpec.classBuilder(GENERATED_RX_APP_LIFECYCLE_IMPL_SIMPLE_NAME)
                 .addModifiers(Modifier.FINAL)
-                .addAnnotation(
-                        AnnotationSpec.builder(SuppressWarnings.class)
-                                .addMember("value", "$S", "deprecation")
-                                .build()
-                )
-                .addSuperinterface(ClassName.get(GENERATED_ROOT_MODULE_PACKAGE_NAME, GENERATED_ROOT_MODULE_SIMPLE_NAME))
+                //添加注解
+                .addAnnotation(annotationSpec)
+                //添加需要实现的接口
+                .addSuperinterface(ClassName.get(GENERATED_ROOT_PACKAGE_NAME, GENERATED_ROOT_SIMPLE_NAME))
+                //添加方法
                 .addMethod(onCreate);
         return builder.build();
     }
 
-    private MethodSpec generateOnCreate(Collection<String> libraryGlideModuleClassNames) {
+    /**
+     * 生成onCreate(Application application)方法
+     *
+     * @param rxAppLifecycleClassNames
+     * @return
+     */
+    private MethodSpec generateOnCreate(Collection<String> rxAppLifecycleClassNames) {
         //方法入参
-        ParameterSpec parameterSpec = ParameterSpec.builder(
-                ClassName.get("android.app", "Application"),
-                "application")
-                .build();
-        MethodSpec.Builder builder =
-                MethodSpec.methodBuilder("onCreate")
-                        .addModifiers(Modifier.PUBLIC)
-                        .addAnnotation(Override.class)
-                        .addParameter(parameterSpec);
-        for (String glideModule : libraryGlideModuleClassNames) {
-            ClassName moduleClassName = ClassName.bestGuess(glideModule);
-            builder.addStatement(
-                    "new $T().onCreate(application)", moduleClassName);
+        ClassName application = ClassName.get("android.app", "Application");
+        ParameterSpec parameterSpec = ParameterSpec.builder(application, "application").build();
+        MethodSpec.Builder builder = MethodSpec.methodBuilder("onCreate")
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class)
+                .addParameter(parameterSpec);
+        for (String rxAppLifecycle : rxAppLifecycleClassNames) {
+            ClassName moduleClassName = ClassName.bestGuess(rxAppLifecycle);
+            builder.addStatement("new $T().onCreate(application)", moduleClassName);
         }
         return builder.build();
     }

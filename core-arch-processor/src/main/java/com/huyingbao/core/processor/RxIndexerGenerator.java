@@ -13,18 +13,21 @@ import java.util.List;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
+/**
+ * 生成索引文件
+ */
 final class RxIndexerGenerator {
     private static final String INDEXER_NAME_PREFIX = "RxIndexer_";
-    private final ProcessorUtil processorUtil;
+    private final ProcessorUtil mProcessorUtil;
 
     RxIndexerGenerator(ProcessorUtil processorUtil) {
-        this.processorUtil = processorUtil;
+        this.mProcessorUtil = processorUtil;
     }
 
     TypeSpec generate(List<TypeElement> types) {
         List<TypeElement> modules = new ArrayList<>();
         for (TypeElement element : types) {
-            if (processorUtil.isRxAppLifecycle(element)) {
+            if (mProcessorUtil.isRxAppLifecycle(element)) {
                 modules.add(element);
             } else {
                 throw new IllegalArgumentException("Unrecognized type: " + element);
