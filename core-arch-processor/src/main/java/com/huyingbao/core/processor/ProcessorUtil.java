@@ -26,7 +26,7 @@ final class ProcessorUtil {
     /**
      * 框架包名
      */
-    private static final String PACKAGE_NAME = "com.huyingbao.core.arch.app";
+    private static final String PACKAGE_NAME = "com.huyingbao.core.arch";
     /**
      * RxApp类名
      */

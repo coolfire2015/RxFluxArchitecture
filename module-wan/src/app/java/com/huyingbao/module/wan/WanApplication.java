@@ -3,8 +3,6 @@ package com.huyingbao.module.wan;
 
 import com.huyingbao.core.base.BaseApp;
 
-import org.greenrobot.eventbus.EventBus;
-
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 

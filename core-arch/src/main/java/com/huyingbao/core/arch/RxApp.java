@@ -1,12 +1,10 @@
-package com.huyingbao.core.arch.app;
+package com.huyingbao.core.arch;
 
 
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-
-import com.huyingbao.core.arch.RxFlux;
 
 import java.lang.reflect.InvocationTargetException;
 

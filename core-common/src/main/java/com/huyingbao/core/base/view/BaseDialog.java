@@ -14,21 +14,14 @@ import androidx.lifecycle.ViewModel;
 
 import com.huyingbao.core.arch.view.RxFluxDialog;
 import com.huyingbao.core.base.BaseView;
-import com.huyingbao.core.common.action.CommonActionCreator;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseDialog<T extends ViewModel> extends RxFluxDialog<T> implements BaseView {
-    @Inject
-    Lazy<CommonActionCreator> mCommonActionCreatorLazy;
-
     private Unbinder mUnbinder;
 
     @NonNull

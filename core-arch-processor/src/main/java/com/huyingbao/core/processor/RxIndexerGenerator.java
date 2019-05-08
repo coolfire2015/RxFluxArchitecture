@@ -14,7 +14,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
 final class RxIndexerGenerator {
-    private static final String INDEXER_NAME_PREFIX = "AppDelegateIndexer_";
+    private static final String INDEXER_NAME_PREFIX = "RxIndexer_";
     private final ProcessorUtil processorUtil;
 
     RxIndexerGenerator(ProcessorUtil processorUtil) {

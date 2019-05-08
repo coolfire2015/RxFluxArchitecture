@@ -1,5 +1,6 @@
 package com.huyingbao.core.processor;
 
+import com.huyingbao.core.annotations.RxAppBody;
 import com.huyingbao.core.annotations.RxAppDelegate;
 import com.huyingbao.core.annotations.RxIndex;
 import com.squareup.javapoet.TypeSpec;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
@@ -23,15 +23,11 @@ public class RxArchProcessor extends AbstractProcessor {
     private static final String COMPILER_PACKAGE_NAME =
             RxArchProcessor.class.getPackage().getName();
     static final boolean DEBUG = false;
-    /**
-     * 日志相关的辅助类
-     */
-    private Messager mMessage;
     private ProcessorUtil mProcessorUtil;
     private RxIndexerGenerator mRxIndexerGenerator;
     private boolean isGeneratedAppGlideModuleWritten;
     private RxAppLifecycleGenerator mRxAppLifecycleGenerator;
-    private final List<TypeElement> appGlideModules = new ArrayList<>();
+    private final List<TypeElement> mRxAppList = new ArrayList<>();
 
     /**
      * 可以初始化拿到一些使用的工具
@@ -44,7 +40,6 @@ public class RxArchProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
-        mMessage = processingEnvironment.getMessager();
         mProcessorUtil = new ProcessorUtil(processingEnvironment);
         mRxIndexerGenerator = new RxIndexerGenerator(mProcessorUtil);
         mRxAppLifecycleGenerator = new RxAppLifecycleGenerator(mProcessorUtil);
@@ -56,6 +51,7 @@ public class RxArchProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> result = new HashSet<>();
+        result.add(RxAppBody.class.getCanonicalName());
         result.add(RxAppDelegate.class.getCanonicalName());
         return result;
     }
@@ -81,12 +77,12 @@ public class RxArchProcessor extends AbstractProcessor {
         //生成索引文件
         boolean newIndexWritten = processIndex(roundEnvironment);
         //判断是否有
-        processRxApp(set, roundEnvironment);
+        processRxAppBody(set, roundEnvironment);
         if (newIndexWritten) {
             return true;
         }
         if (!isGeneratedAppGlideModuleWritten) {
-            isGeneratedAppGlideModuleWritten = maybeWriteAppModule();
+            isGeneratedAppGlideModuleWritten = processRxLifecycleImpl();
         }
         return true;
     }
@@ -109,16 +105,34 @@ public class RxArchProcessor extends AbstractProcessor {
     }
 
     /**
+     * 检查使用RxAppBody注解的类中是否有RxApp子类,如果有则取出
+     *
+     * @param set
+     * @param env
+     */
+    private void processRxAppBody(Set<? extends TypeElement> set, RoundEnvironment env) {
+        for (TypeElement element : mProcessorUtil.getElementsFor(RxAppBody.class, env)) {
+            if (mProcessorUtil.isRxApp(element)) {
+                mRxAppList.add(element);
+            }
+        }
+        mProcessorUtil.debugLog("got app modules: " + mRxAppList);
+        if (mRxAppList.size() > 1) {
+            throw new IllegalStateException("You cannot have more than one RxApp, found: " + mRxAppList);
+        }
+    }
+
+    /**
      * 生成全局代理
      *
      * @return
      */
-    private boolean maybeWriteAppModule() {
-        // appGlideModules is added to in order to catch errors where multiple AppGlideModules may be
-        // present for a single application or library. Because we only add to appGlideModules, we use
+    private boolean processRxLifecycleImpl() {
+        // mRxAppList is added to in order to catch errors where multiple AppGlideModules may be
+        // present for a single application or library. Because we only add to mRxAppList, we use
         // isGeneratedAppGlideModuleWritten to make sure the GeneratedAppGlideModule is written at
         // most once.
-        if (appGlideModules.isEmpty()) {
+        if (mRxAppList.isEmpty()) {
             return false;
         }
         // If this package is null, it means there are no classes with this package name. One way this
@@ -131,7 +145,7 @@ public class RxArchProcessor extends AbstractProcessor {
         mProcessorUtil.writeClass(
                 RxAppLifecycleGenerator.GENERATED_ROOT_MODULE_PACKAGE_NAME,
                 generatedAppGlideModule);
-        return false;
+        return true;
     }
 
     /**
@@ -154,24 +168,5 @@ public class RxArchProcessor extends AbstractProcessor {
         }
         mProcessorUtil.debugLog("Found GlideModules: " + glideModules);
         return glideModules;
-    }
-
-    /**
-     * 检查使用RxAppDelegate注解的类中是否有RxApp子类,如果有则取出
-     *
-     * @param set
-     * @param env
-     */
-    private void processRxApp(Set<? extends TypeElement> set, RoundEnvironment env) {
-        for (TypeElement element : mProcessorUtil.getElementsFor(RxAppDelegate.class, env)) {
-            if (mProcessorUtil.isRxApp(element)) {
-                appGlideModules.add(element);
-            }
-        }
-        mProcessorUtil.debugLog("got app modules: " + appGlideModules);
-        if (appGlideModules.size() > 1) {
-            throw new IllegalStateException("You cannot have more than one AppGlideModule, found: "
-                    + appGlideModules);
-        }
     }
 }

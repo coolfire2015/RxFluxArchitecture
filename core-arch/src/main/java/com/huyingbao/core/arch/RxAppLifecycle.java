@@ -1,8 +1,6 @@
-package com.huyingbao.core.arch.app;
+package com.huyingbao.core.arch;
 
 import android.app.Application;
-
-import androidx.annotation.NonNull;
 
 /**
  * 跟随App生命周期
@@ -13,5 +11,5 @@ public interface RxAppLifecycle {
      *
      * @param application
      */
-    void onCreate(@NonNull Application application);
+    void onCreate(Application application);
 }

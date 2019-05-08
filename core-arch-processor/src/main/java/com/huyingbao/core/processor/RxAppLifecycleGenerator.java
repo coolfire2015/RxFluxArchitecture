@@ -15,8 +15,6 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
-import static com.huyingbao.core.processor.ProcessorUtil.nonNull;
-
 
 final class RxAppLifecycleGenerator {
     static final String GENERATED_ROOT_MODULE_PACKAGE_NAME = "com.huyingbao.core.arch";
@@ -49,16 +47,16 @@ final class RxAppLifecycleGenerator {
     }
 
     private MethodSpec generateOnCreate(Collection<String> libraryGlideModuleClassNames) {
+        //方法入参
+        ParameterSpec parameterSpec = ParameterSpec.builder(
+                ClassName.get("android.app", "Application"),
+                "application")
+                .build();
         MethodSpec.Builder builder =
                 MethodSpec.methodBuilder("onCreate")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
-                        .addParameter(ParameterSpec.builder(
-                                ClassName.get("android.app", "Application"), "application")
-                                .addAnnotation(nonNull())
-                                .build()
-                        );
-
+                        .addParameter(parameterSpec);
         for (String glideModule : libraryGlideModuleClassNames) {
             ClassName moduleClassName = ClassName.bestGuess(glideModule);
             builder.addStatement(
