@@ -6,10 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Used to retrieve LibraryGlideModule and GlideExtension classes in our annotation processor from
- * libraries and applications.
- *
- * <p>Part of the internals of Glide's annotation processor and not for public use.
+ * 用于检索@RxAppDelegate注解类
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)

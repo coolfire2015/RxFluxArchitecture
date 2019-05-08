@@ -33,7 +33,7 @@ public abstract class RxApp extends DaggerApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        mGlobalRxAppLifecycle = getAnnotationGeneratedGlideModules();
+        mGlobalRxAppLifecycle = getAnnotationGeneratedRxAppLifecycleImpl();
     }
 
 
@@ -50,7 +50,7 @@ public abstract class RxApp extends DaggerApplication {
 
     @Nullable
     @SuppressWarnings({"unchecked", "deprecation", "TryWithIdenticalCatches"})
-    private RxAppLifecycle getAnnotationGeneratedGlideModules() {
+    private RxAppLifecycle getAnnotationGeneratedRxAppLifecycleImpl() {
         RxAppLifecycle result = null;
         try {
             Class<RxAppLifecycle> clazz = (Class<RxAppLifecycle>)
@@ -58,26 +58,26 @@ public abstract class RxApp extends DaggerApplication {
             result = clazz.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             if (Log.isLoggable(TAG, Log.WARN)) {
-                Log.w(TAG, "Failed to find GeneratedAppGlideModule. You should include an"
-                        + " annotationProcessor compile dependency on com.github.bumptech.glide:compiler"
-                        + " in your application and a @GlideModule annotated AppGlideModule implementation or"
-                        + " LibraryGlideModules will be silently ignored");
+                Log.w(TAG, "Failed to find RxAppLifecycleImpl. You should include an"
+                        + " annotationProcessor compile dependency on com.github.coolfire2015.RxFluxArchitecture:core-arch-processor"
+                        + " in your application and a @RxAppDelegate annotated RxAppLifecycle implementation"
+                        + " and a @RxAppBody annotated RxApp implementation");
             }
             // These exceptions can't be squashed across all versions of Android.
         } catch (InstantiationException e) {
-            throwIncorrectGlideModule(e);
+            throwIncorrectRxAppLifecycle(e);
         } catch (IllegalAccessException e) {
-            throwIncorrectGlideModule(e);
+            throwIncorrectRxAppLifecycle(e);
         } catch (NoSuchMethodException e) {
-            throwIncorrectGlideModule(e);
+            throwIncorrectRxAppLifecycle(e);
         } catch (InvocationTargetException e) {
-            throwIncorrectGlideModule(e);
+            throwIncorrectRxAppLifecycle(e);
         }
         return result;
     }
 
-    private void throwIncorrectGlideModule(Exception e) {
-        throw new IllegalStateException("GeneratedAppGlideModuleImpl is implemented incorrectly."
+    private void throwIncorrectRxAppLifecycle(Exception e) {
+        throw new IllegalStateException("RxAppLifecycleImpl is implemented incorrectly."
                 + " If you've manually implemented this class, remove your implementation. The Annotation"
                 + " processor will generate a correct implementation.", e);
     }
