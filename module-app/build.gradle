@@ -132,20 +132,18 @@ dependencies {
             implementation "com.github.coolfire2015.RxFluxArchitecture:module-gan:${RX_FLUX_ARCHITECTURE}"
             implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan:${RX_FLUX_ARCHITECTURE}"
             implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan-kotlin:${RX_FLUX_ARCHITECTURE}"
+            annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
             annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
         } else {
             //功能模块
             implementation project(':module-gan')
             implementation project(':module-wan')
             implementation project(':module-wan-kotlin')
+            annotationProcessor project(':core-arch-processor')
             annotationProcessor project(':core-eventbus-processor')
         }
     }
     //编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    //Glide编译时生成
-    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
-    //解决Glide找不到Android声明库问题
-    annotationProcessor "androidx.annotation:annotation:${X_ANNOTATION}"
 }

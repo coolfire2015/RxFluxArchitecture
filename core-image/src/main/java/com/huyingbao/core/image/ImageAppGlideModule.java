@@ -1,4 +1,4 @@
-package com.huyingbao.module.app;
+package com.huyingbao.core.image;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

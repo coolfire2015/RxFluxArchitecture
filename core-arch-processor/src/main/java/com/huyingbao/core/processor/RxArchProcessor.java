@@ -92,7 +92,7 @@ public class RxArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 生成代理索引
+     * 生成代理索引文件
      *
      * @param roundEnvironment
      * @return
