@@ -23,16 +23,36 @@ import static com.huyingbao.core.processor.AppDelegateProcessor.DEBUG;
  * Utilities for writing classes and logging.
  */
 final class ProcessorUtil {
-    private static final String MODULE_PACKAGE_NAME = "com.huyingbao.core.arch";
-    private static final String LIBRARY_MODULE_SIMPLE_NAME = "RxAppLifecycle";
-    private static final String LIBRARY_MODULE_QUALIFIED_NAME =
-            MODULE_PACKAGE_NAME + "." + LIBRARY_MODULE_SIMPLE_NAME;
+    /**
+     * 框架包名
+     */
+    private static final String PACKAGE_NAME = "com.huyingbao.core.arch";
+    /**
+     * App生命周期接口RxAppLifecycle类名
+     */
+    private static final String SIMPLE_NAME = "RxAppLifecycle";
+    /**
+     * App生命周期接口类名RxAppLifecycle,规范类名
+     */
+    private static final String QUALIFIED_NAME = PACKAGE_NAME + "." + SIMPLE_NAME;
+    /**
+     * 编译文件所在包名
+     */
     private static final String COMPILER_PACKAGE_NAME =
             AppDelegateProcessor.class.getPackage().getName();
+    /**
+     * 非空注解
+     */
     private static final ClassName NONNULL_ANNOTATION =
             ClassName.get("android.support.annotation", "NonNull");
+    /**
+     * 非空注解
+     */
     private static final ClassName JETBRAINS_NOTNULL_ANNOTATION =
             ClassName.get("org.jetbrains.annotations", "NotNull");
+    /**
+     * 非空注解
+     */
     private static final ClassName ANDROIDX_NONNULL_ANNOTATION =
             ClassName.get("androidx.annotation", "NonNull");
     private static final ClassName CHECK_RESULT_ANNOTATION =
@@ -40,23 +60,32 @@ final class ProcessorUtil {
     private static final ClassName ANDROIDX_CHECK_RESULT_ANNOTATION =
             ClassName.get("androidx.annotation", "CheckResult");
 
-    private final ProcessingEnvironment processingEnv;
-    private final TypeElement mRxAppLifecycleModuleType;
-    private int round;
+    private final ProcessingEnvironment mProcessingEnv;
+    /**
+     * RxAppLifecycle类型元素
+     */
+    private final TypeElement mRxAppLifecycleType;
+    private int mRound;
 
     ProcessorUtil(ProcessingEnvironment processingEnv) {
-        this.processingEnv = processingEnv;
+        this.mProcessingEnv = processingEnv;
         //返回给定其规范名称的类型元素。
-        mRxAppLifecycleModuleType = processingEnv.getElementUtils().getTypeElement(LIBRARY_MODULE_QUALIFIED_NAME);
+        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_NAME);
     }
 
     void process() {
-        round++;
+        mRound++;
     }
 
+    /**
+     * 判断该类是否是RxAppLifecycle的实现类
+     *
+     * @param element
+     * @return
+     */
     boolean isRxAppLifecycle(TypeElement element) {
-        return processingEnv.getTypeUtils().isAssignable(element.asType(),
-                mRxAppLifecycleModuleType.asType());
+        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
+                mRxAppLifecycleType.asType());
     }
 
     void writeIndexer(TypeSpec indexer) {
@@ -66,7 +95,7 @@ final class ProcessorUtil {
     void writeClass(String packageName, TypeSpec clazz) {
         try {
             debugLog("Writing class:\n" + clazz);
-            JavaFile.builder(packageName, clazz).build().writeTo(processingEnv.getFiler());
+            JavaFile.builder(packageName, clazz).build().writeTo(mProcessingEnv.getFiler());
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
@@ -85,7 +114,7 @@ final class ProcessorUtil {
     }
 
     void infoLog(String toLog) {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + round + "] " + toLog);
+        mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + mRound + "] " + toLog);
     }
 
     static ClassName nonNull() {

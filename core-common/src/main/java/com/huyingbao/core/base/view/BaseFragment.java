@@ -17,14 +17,21 @@ import androidx.lifecycle.ViewModel;
 import com.huyingbao.core.arch.view.RxFluxFragment;
 import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
+import com.huyingbao.core.common.action.CommonActionCreator;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.Lazy;
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseFragment<T extends ViewModel> extends RxFluxFragment<T> implements BaseView {
+    @Inject
+    Lazy<CommonActionCreator> mCommonActionCreatorLazy;
+
     private Unbinder mUnbinder;
 
     private boolean mBackAble;

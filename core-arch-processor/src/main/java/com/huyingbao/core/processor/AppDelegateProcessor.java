@@ -81,7 +81,7 @@ public class AppDelegateProcessor extends AbstractProcessor {
             return true;
         }
         if (!isGeneratedAppGlideModuleWritten) {
-            isGeneratedAppGlideModuleWritten = maybeWriteAppModule();
+//            isGeneratedAppGlideModuleWritten = maybeWriteAppModule();
         }
         return true;
     }
@@ -141,5 +141,20 @@ public class AppDelegateProcessor extends AbstractProcessor {
         }
         mProcessorUtil.debugLog("Found GlideModules: " + glideModules);
         return glideModules;
+    }
+
+    void processModules(Set<? extends TypeElement> set, RoundEnvironment env) {
+        for (TypeElement element : processorUtil.getElementsFor(GlideModule.class, env)) {
+            if (processorUtil.isAppGlideModule(element)) {
+                appGlideModules.add(element);
+            }
+        }
+
+        processorUtil.debugLog("got app modules: " + appGlideModules);
+
+        if (appGlideModules.size() > 1) {
+            throw new IllegalStateException(
+                    "You cannot have more than one AppGlideModule, found: " + appGlideModules);
+        }
     }
 }
