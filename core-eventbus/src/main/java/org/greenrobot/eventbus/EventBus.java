@@ -47,8 +47,10 @@ public class EventBus {
     public static String TAG = "EventBus";
 
     static volatile EventBus defaultInstance;
-
-    private static final EventBusBuilder DEFAULT_BUILDER = new EventBusBuilder();
+    /**
+     * TODO 单例
+     */
+    private static final EventBusBuilder DEFAULT_BUILDER = EventBusBuilder.getDefault();
     private static final Map<Class<?>, List<Class<?>>> EVENT_TYPES_CACHE = new HashMap<>();
 
     /**
@@ -108,8 +110,13 @@ public class EventBus {
         return instance;
     }
 
+    /**
+     * TODO 单例
+     *
+     * @return
+     */
     public static EventBusBuilder builder() {
-        return new EventBusBuilder();
+        return EventBusBuilder.getDefault();
     }
 
     /**

@@ -14,7 +14,6 @@ public class WanAppLifecyle implements RxAppLifecycle {
     public void onCreate(Application application) {
         EventBus.builder()
                 .addIndex(new WanEventBusIndex())
-                .eventInheritance(false)
-                .installDefaultEventBus();
+                .eventInheritance(false);
     }
 }

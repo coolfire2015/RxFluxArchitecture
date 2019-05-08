@@ -14,7 +14,6 @@ public class GanAppLifecyle implements RxAppLifecycle {
     public void onCreate(Application application) {
         EventBus.builder()
                 .addIndex(new GanEventBusIndex())
-                .eventInheritance(false)
-                .installDefaultEventBus();
+                .eventInheritance(false);
     }
 }

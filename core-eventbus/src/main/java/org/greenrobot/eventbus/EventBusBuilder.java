@@ -31,6 +31,10 @@ import java.util.concurrent.Executors;
  */
 public class EventBusBuilder {
     private final static ExecutorService DEFAULT_EXECUTOR_SERVICE = Executors.newCachedThreadPool();
+    /**
+     * TODO 单例Builder
+     */
+    static volatile EventBusBuilder defaultInstance;
 
     boolean logSubscriberExceptions = true;
     boolean logNoSubscriberMessages = true;
@@ -46,7 +50,25 @@ public class EventBusBuilder {
     Logger logger;
     MainThreadSupport mainThreadSupport;
 
-    EventBusBuilder() {
+    private EventBusBuilder() {
+    }
+
+    /**
+     * TODO 单例Builder
+     * Convenience singleton for apps using a process-wide EventBusBuilder instance.
+     */
+    public static EventBusBuilder getDefault() {
+        //使用双重否定的单例模式
+        EventBusBuilder instance = defaultInstance;
+        if (instance == null) {
+            synchronized (EventBusBuilder.class) {
+                instance = EventBusBuilder.defaultInstance;
+                if (instance == null) {
+                    instance = EventBusBuilder.defaultInstance = new EventBusBuilder();
+                }
+            }
+        }
+        return instance;
     }
 
     /**
