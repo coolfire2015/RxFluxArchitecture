@@ -1,11 +1,18 @@
 [![](https://jitpack.io/v/coolfire2015/RxFluxArchitecture.svg)](https://jitpack.io/#coolfire2015/RxFluxArchitecture)
-
+## 功能
+- 使用Dagger.Android实现View(Activity/Fragment)的依赖注入
+- Store中使用实现Tag功能的EventBus接收ActionCreator发送的数据
+- View中使用实现Tag功能的EventBus接收Store发送的数据
+- View,Store自动注册订阅、取消订阅
+- Store（ViewModel）自动跟随View生命周期，维持设备横竖屏切换时数据
 ## 架构图
-![架构图](image/组件化架构图.jpg)
+![架构图](image/架构图.jpg)
+
+![组件框架图](image/组件框架图.jpg)
 
 ## 依赖框架
 ### 核心
-- 依赖注入 [**Dagger2+Dagger2.Android**](https://github.com/google/dagger)
+- 依赖注入 [**Dagger+Dagger.Android**](https://github.com/google/dagger)
 - 函数编程 [**RxJava**](https://github.com/ReactiveX/RxJava)
 +[**RxAndroid**](https://github.com/ReactiveX/RxAndroid)
 - AndroidX [**X-Core**](https://mvnrepository.com/artifact/androidx.core/core)
