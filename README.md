@@ -1,6 +1,8 @@
 [![](https://jitpack.io/v/coolfire2015/RxFluxArchitecture.svg)](https://jitpack.io/#coolfire2015/RxFluxArchitecture)
+
 ## 架构图
 ![架构图](image/组件化架构图.jpg)
+
 ## 依赖框架
 ### 核心
 - 依赖注入 [**Dagger2+Dagger2.Android**](https://github.com/google/dagger)
