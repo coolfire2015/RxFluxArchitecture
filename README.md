@@ -3,12 +3,12 @@
 ![架构图](image/组件化架构图.jpg)
 ## 依赖框架
 ### 核心
-- 依赖注入[**Dagger2+Dagger2.Android**](https://github.com/google/dagger)
+- 依赖注入 [**Dagger2+Dagger2.Android**](https://github.com/google/dagger)
 - 函数编程 [**RxJava**](https://github.com/ReactiveX/RxJava)
 +[**RxAndroid**](https://github.com/ReactiveX/RxAndroid)
 - AndroidX [**X-Core**](https://mvnrepository.com/artifact/androidx.core/core)
 +[**X-AppCompat**](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
-+[**X-Lifecycle**]([**Core**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions))
++[**X-Lifecycle**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions)
 - AndroidX迁移 [**Jetifier**](https://mvnrepository.com/artifact/com.android.tools.build.jetifier/jetifier-core)
 ### 通用
 - 模块路由 [**Arouter**](https://github.com/alibaba/ARouter)
@@ -19,6 +19,7 @@
 - 图片加载 [**Glide**](https://github.com/bumptech/glide)
 - 日志展示 [**Logger**](https://github.com/orhanobut/logger)
 - 数据解析 [**Fastjson**](https://github.com/alibaba/fastjson)
++[**Gson**](https://github.com/google/gson)
 - 内存泄漏 [**LeakCanary**](https://github.com/square/leakcanary)
 - 通用适配 [**BaseRecyclerViewAdapterHelper**](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 - AndroidX [**X-Multidex**](https://mvnrepository.com/artifact/androidx.multidex/multidex)
@@ -26,8 +27,8 @@
 +[**X-CardView**](https://mvnrepository.com/artifact/androidx.cardview/cardview)
 +[**X-RecyclerView**](https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview)
 +[**X-Material**](https://mvnrepository.com/artifact/com.google.android.material/material)
++[**X-Collection**](https://mvnrepository.com/artifact/androidx.collection/collection)
 +[**X-ConstraintLayout**](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout)
-+[**Gson**](https://github.com/google/gson)
 ### 测试 
 - [**Junit**](https://github.com/junit-team/junit4)
 - [**Mockito**](https://github.com/mockito/mockito)
@@ -36,6 +37,7 @@
 - [**Robolectric**](https://github.com/robolectric/robolectric)
 - [**Daggermock**](https://github.com/fabioCollini/DaggerMock)
 - [**X-Test-Core**](https://mvnrepository.com/artifact/androidx.test/core)
+- [**X-Test-Junit**](https://mvnrepository.com/artifact/androidx.test.ext/junit)
 - [**X-Test-Rules**](https://mvnrepository.com/artifact/androidx.test/rules)
 - [**X-Test-Runner**](https://mvnrepository.com/artifact/androidx.test/runner)
 - [**X-Test-Espresso**](https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core)
