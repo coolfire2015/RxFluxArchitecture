@@ -16,29 +16,24 @@ import com.huyingbao.core.image.transform.CircleTransformation;
 import com.huyingbao.core.image.transform.RotateTransformation;
 
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
-    private Context mContext;
 
     @Override
     public void loadImage(Context context, ImageLoader img) {
-        this.mContext = context;
         load(img, Glide.with(context).load(img.getResource()));
     }
 
     @Override
     public void loadImage(Activity activity, ImageLoader img) {
-        this.mContext = activity;
         load(img, Glide.with(activity).load(img.getResource()));
     }
 
     @Override
     public void loadImage(FragmentActivity fragmentActivity, ImageLoader img) {
-        this.mContext = fragmentActivity;
         load(img, Glide.with(fragmentActivity).load(img.getResource()));
     }
 
     @Override
     public void loadImage(Fragment fragment, ImageLoader img) {
-        this.mContext = fragment.getContext();
         load(img, Glide.with(fragment).load(img.getResource()));
     }
 

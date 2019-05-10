@@ -20,6 +20,8 @@ import org.junit.rules.ExternalResource;
 public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fragment> extends ExternalResource {
 
     private final FragmentScenarioRule.Supplier<FragmentScenario<A, F>> scenarioSupplier;
+    @Nullable
+    private FragmentScenario<A, F> scenario;
 
     /**
      * Same as {@link java.util.function.Supplier} which requires API level 24.
@@ -29,9 +31,6 @@ public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fr
     interface Supplier<T> {
         T get();
     }
-
-    @Nullable
-    private FragmentScenario<A, F> scenario;
 
     public FragmentScenarioRule(
             Class<A> activityClass,
