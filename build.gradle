@@ -144,3 +144,11 @@ def buildLog() {
     fw.flush()
     fw.close()
 }
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//def keyStoreFile = file(keystoreProperties['storeFileLocal'])
+//// 判断是位于本地还是CI服务器
+//if (!keyStoreFile.exists()){
+//    keyStoreFile = file(keystoreProperties['storeFileCI'])
+//}

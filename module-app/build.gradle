@@ -19,9 +19,9 @@ android {
         }
         release {
             storeFile file(STORE_RELEASE_FILE)
-            storePassword STORE_PASSWORD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
+            storePassword project.hasProperty("STORE_PASSWORD") ? STORE_PASSWORD : System.getenv("STORE_PASSWORD")
+            keyAlias project.hasProperty("KEY_ALIAS") ? KEY_ALIAS : System.getenv("KEY_ALIAS")
+            keyPassword project.hasProperty("KEY_PASSWORD") ? KEY_PASSWORD : System.getenv("KEY_PASSWORD")
         }
     }
     //默认配置
@@ -110,11 +110,15 @@ android {
             }
         }
     }
-    //修改生成的apk名字
+    //修改生成的apk文件名及路径
     applicationVariants.all { variant ->
         variant.outputs.all {
-            if ("release".equals(variant.buildType.name))
-                outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            if ("release".equals(variant.buildType.name)) {
+                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs")
+                variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
+                    apkData.outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+                }
+            }
         }
     }
 }

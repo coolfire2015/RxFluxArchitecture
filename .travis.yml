@@ -1,35 +1,87 @@
+#声明构建语言环境
 language: android
+#开启基于容器的Travis CI任务，让编译效率更高。
+sudo: false
+#Git配置
+git:
+  #将git depth设置相对小的值,加快构建速度
+  depth: 3
+#下载jdk8
 jdk: oraclejdk8
-before_install:
-  - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-28"
-
+#全局变量
 env:
   global:
     - ANDROID_API_LEVEL=28
     - ANDROID_BUILD_TOOLS_VERSION=28.0.3
     - TRAVIS_SECURE_ENV_VARS=true
-
+#Android配置
 android:
+  #配置信息
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - tools
-    # - platform-tools
-
-    # The BuildTools version used by your project
+    #Uncomment the lines below if you want to
+    #use the latest revision of Android SDK Tools
+    #- tools
+    #- platform-tools
+    #The BuildTools version used by your project
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-
-    # The SDK version used to compile your project
+    #The SDK version used to compile your project
     - android-$ANDROID_API_LEVEL
-
-    # Additional components
+    #Additional components
+    - extra-google-google_play_services
     - extra-google-m2repository
-    - extra-android-m2repository
-    - extra-google-android-support
+    - addon-google_apis-google-21
+    - extra-android-m2repository      #Android Support Repository
+    - extra-android-support           #Support Library
   licenses:
     - '.+'
-
+#脚本
 script:
   - ./gradlew clean
   - ./gradlew assembleRelease
+#运行之前
+before_install:
+  #改变gradlew的访问权限
+  - chmod +x gradlew
+  - yes | sdkmanager "platforms;android-28"
+  #安装fir命令行客户端
+  - gem install fir-cli
+#为构建添加缓存
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+#缓存
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+#在部署前
+before_deploy:
+  - ls release/build/outputs/apk/
+#部署
+deploy:
+  #部署到GitHub Release
+  provider: releases
+  #填写GitHub的token
+  api_key:
+    secure: ${GH_TOKEN}
+  #部署文件路径
+  file: release/build/outputs/apk/*.apk
+  #设置为true以跳过清理,不然apk文件就会被清理
+  skip_cleanup: true
+  #发布时机
+  on:
+    tags: true
+    all_branches: true
+  repo: coolfire2015/RxFluxArchitecture
+#部署之后
+after_deploy:
+  - fir login $FIR_TOKEN #fir账号的Token
+  - fir me #打印身份信息,验证是否登录成功
+  - fir p release/build/outputs/apk/*.apk #自动发布应用至fir内测平台
+#通知
+notifications:
+  email:
+    recipients:
+      - 1049380320@qq.com
+    on_success: change
+    on_failure: always

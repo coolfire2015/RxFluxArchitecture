@@ -1,5 +1,6 @@
 *.iml
 .gradle
+/release
 /.idea/caches
 /.idea/libraries
 /.idea/misc.xml
@@ -7,3 +8,4 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 /local.properties
+/keystore.properties
