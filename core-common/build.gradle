@@ -76,8 +76,6 @@ dependencies {
     api "com.alibaba:arouter-api:${AROUTER_API}"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
-    //内存泄露
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
     //Dagger编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"

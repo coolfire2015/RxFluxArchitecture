@@ -68,7 +68,7 @@ deploy:
   file: release/build/outputs/apk/*.apk
   #设置为true以跳过清理,不然apk文件就会被清理
   skip_cleanup: true
-  #发布时机
+  #部署时机
   on:
     tags: true
     all_branches: true
