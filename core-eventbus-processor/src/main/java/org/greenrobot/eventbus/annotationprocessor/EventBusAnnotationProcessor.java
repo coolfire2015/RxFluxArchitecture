@@ -84,15 +84,14 @@ public class EventBusAnnotationProcessor extends AbstractProcessor {
 
             round++;
             if (verbose) {
-                messager.printMessage(Diagnostic.Kind.NOTE, "Processing round " + round + ", new annotations: " +
-                        !annotations.isEmpty() + ", processingOver: " + env.processingOver());
+                messager.printMessage(Diagnostic.Kind.NOTE,
+                        "Processing round " + round + ", new annotations: " +
+                                !annotations.isEmpty() + ", processingOver: " + env.processingOver());
             }
-            if (env.processingOver()) {
-                if (!annotations.isEmpty()) {
-                    messager.printMessage(Diagnostic.Kind.ERROR,
-                            "Unexpected processing state: annotations still available after processing over");
-                    return false;
-                }
+            if (env.processingOver() && !annotations.isEmpty()) {
+                messager.printMessage(Diagnostic.Kind.ERROR,
+                        "Unexpected processing state: annotations still available after processing over");
+                return false;
             }
             if (annotations.isEmpty()) {
                 return false;
@@ -245,10 +244,10 @@ public class EventBusAnnotationProcessor extends AbstractProcessor {
         PackageElement packageElement = getPackageElement(typeElement);
         String packageString = packageElement.getQualifiedName().toString();
         String className = typeElement.getQualifiedName().toString();
-        if (packageString != null && !packageString.isEmpty()) {
+        if (!packageString.isEmpty()) {
             if (packageString.equals(myPackage)) {
                 className = cutPackage(myPackage, className);
-            } else if (packageString.equals("java.lang")) {
+            } else if ("java.lang".equals(packageString)) {
                 className = typeElement.getSimpleName().toString();
             }
         }

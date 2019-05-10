@@ -31,7 +31,6 @@ public class BannerFragment extends BaseFragment<ArticleStore> {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private List<Banner> mDataList;
     private BannerAdapter mAdapter;
 
     public static BannerFragment newInstance() {
@@ -70,8 +69,7 @@ public class BannerFragment extends BaseFragment<ArticleStore> {
      * 实例化adapter
      */
     private void initAdapter() {
-        mDataList = new ArrayList();
-        mAdapter = new BannerAdapter(mDataList);
+        mAdapter = new BannerAdapter(new ArrayList<>());
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }

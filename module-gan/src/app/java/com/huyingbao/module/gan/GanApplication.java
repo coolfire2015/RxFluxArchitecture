@@ -4,8 +4,6 @@ package com.huyingbao.module.gan;
 import com.huyingbao.core.annotations.RxAppBody;
 import com.huyingbao.core.base.BaseApp;
 
-import org.greenrobot.eventbus.EventBus;
-
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 

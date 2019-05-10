@@ -1,6 +1,5 @@
 package com.huyingbao.core.image.transform;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
@@ -17,7 +16,7 @@ public class RotateTransformation extends BitmapTransformation {
 
     private float rotateRotationAngle = 0f;
 
-    public RotateTransformation(Context context, float rotateRotationAngle) {
+    public RotateTransformation(float rotateRotationAngle) {
         this.rotateRotationAngle = rotateRotationAngle;
     }
 

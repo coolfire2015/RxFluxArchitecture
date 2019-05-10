@@ -31,7 +31,6 @@ public class FriendFragment extends BaseFragment<FriendStore> {
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
-    private List<WebSite> mDataList;
     private WebSiteAdapter mAdapter;
 
     public static FriendFragment newInstance() {
@@ -70,8 +69,7 @@ public class FriendFragment extends BaseFragment<FriendStore> {
      * 实例化adapter
      */
     private void initAdapter() {
-        mDataList = new ArrayList();
-        mAdapter = new WebSiteAdapter(mDataList);
+        mAdapter = new WebSiteAdapter(new ArrayList<>());
         //view设置适配器
         mRvContent.setAdapter(mAdapter);
     }

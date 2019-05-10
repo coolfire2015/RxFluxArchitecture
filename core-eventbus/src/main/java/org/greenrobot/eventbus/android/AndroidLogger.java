@@ -23,6 +23,7 @@ import java.util.logging.Level;
 
 public class AndroidLogger implements Logger {
 
+    private final String tag;
     private static final boolean ANDROID_LOG_AVAILABLE;
 
     static {
@@ -39,8 +40,6 @@ public class AndroidLogger implements Logger {
         return ANDROID_LOG_AVAILABLE;
     }
 
-
-    private final String tag;
 
     public AndroidLogger(String tag) {
         this.tag = tag;

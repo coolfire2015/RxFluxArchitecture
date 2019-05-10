@@ -29,6 +29,10 @@ import java.util.logging.Level;
  * @author Markus
  */
 public class AsyncExecutor {
+    private final Executor threadPool;
+    private final Constructor<?> failureEventConstructor;
+    private final EventBus eventBus;
+    private final Object scope;
 
     public static class Builder {
         private Executor threadPool;
@@ -86,11 +90,6 @@ public class AsyncExecutor {
         return new Builder().build();
     }
 
-    private final Executor threadPool;
-    private final Constructor<?> failureEventConstructor;
-    private final EventBus eventBus;
-    private final Object scope;
-
     private AsyncExecutor(Executor threadPool, EventBus eventBus, Class<?> failureEventType, Object scope) {
         this.threadPool = threadPool;
         this.eventBus = eventBus;
@@ -128,5 +127,4 @@ public class AsyncExecutor {
             }
         });
     }
-
 }

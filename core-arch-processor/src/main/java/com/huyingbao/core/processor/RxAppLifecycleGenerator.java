@@ -24,10 +24,8 @@ final class RxAppLifecycleGenerator {
     private static final String GENERATED_ROOT_SIMPLE_NAME = "RxAppLifecycle";
     private static final String GENERATED_RX_APP_LIFECYCLE_IMPL_SIMPLE_NAME = "RxAppLifecycleImpl";
 
-    private final ProcessorUtil mProcessorUtil;
+    RxAppLifecycleGenerator() {
 
-    RxAppLifecycleGenerator(ProcessorUtil processorUtil) {
-        this.mProcessorUtil = processorUtil;
     }
 
     TypeSpec generate(Set<String> rxAppLifecycleClassNames) {

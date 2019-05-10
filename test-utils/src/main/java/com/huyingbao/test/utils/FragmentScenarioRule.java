@@ -18,6 +18,9 @@ import org.junit.rules.ExternalResource;
  * @param <F> 需要测试的Fragment
  */
 public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fragment> extends ExternalResource {
+
+    private final FragmentScenarioRule.Supplier<FragmentScenario<A, F>> scenarioSupplier;
+
     /**
      * Same as {@link java.util.function.Supplier} which requires API level 24.
      *
@@ -26,8 +29,6 @@ public final class FragmentScenarioRule<A extends FragmentActivity, F extends Fr
     interface Supplier<T> {
         T get();
     }
-
-    private final FragmentScenarioRule.Supplier<FragmentScenario<A, F>> scenarioSupplier;
 
     @Nullable
     private FragmentScenario<A, F> scenario;

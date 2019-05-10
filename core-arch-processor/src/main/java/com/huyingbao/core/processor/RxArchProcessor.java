@@ -41,7 +41,7 @@ public class RxArchProcessor extends AbstractProcessor {
         super.init(processingEnvironment);
         mProcessorUtil = new ProcessorUtil(processingEnvironment);
         mRxIndexerGenerator = new RxIndexerGenerator(mProcessorUtil);
-        mRxAppLifecycleGenerator = new RxAppLifecycleGenerator(mProcessorUtil);
+        mRxAppLifecycleGenerator = new RxAppLifecycleGenerator();
     }
 
     /**
@@ -76,7 +76,7 @@ public class RxArchProcessor extends AbstractProcessor {
         //编译RxAppDelegate注解生成索引RxIndexer_文件
         boolean newIndexWritten = processIndex(roundEnvironment);
         //编译RxAppBody注解
-        processRxAppBody(set, roundEnvironment);
+        processRxAppBody(roundEnvironment);
         if (newIndexWritten) {
             return true;
         }
@@ -110,7 +110,7 @@ public class RxArchProcessor extends AbstractProcessor {
      * @param set
      * @param env
      */
-    private void processRxAppBody(Set<? extends TypeElement> set, RoundEnvironment env) {
+    private void processRxAppBody(RoundEnvironment env) {
         for (TypeElement element : mProcessorUtil.getElementsFor(RxAppBody.class, env)) {
             if (mProcessorUtil.isRxApp(element)) {
                 mRxAppList.add(element);

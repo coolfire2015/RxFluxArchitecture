@@ -57,4 +57,8 @@ public class LoginStore extends RxActivityStore {
     public MutableLiveData<String> getIntervalLiveData() {
         return mIntervalLiveData;
     }
+
+    public WanResponse<User> getUser() {
+        return mUser;
+    }
 }

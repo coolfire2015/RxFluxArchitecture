@@ -80,7 +80,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
 
         if (imageLoader.getRotate() != 0f) {
             //旋转
-            requestOptions.transform(new RotateTransformation(mContext, imageLoader.getRotate()));
+            requestOptions.transform(new RotateTransformation(imageLoader.getRotate()));
         }
 
         requestBuilder.apply(requestOptions);

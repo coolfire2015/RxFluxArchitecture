@@ -10,15 +10,18 @@ import com.bumptech.glide.request.RequestListener;
  * 图片加载参数设置
  * Created by liujunfeng on 2017/1/1.
  *
- * @param <ResourceType>
+ * @param <R>
  */
-public class ImageLoader<ResourceType> {
+public class ImageLoader<R> {
     /**
      * 旋转角度
      */
     private float rotate;
 
-    private ResourceType resource;
+    /**
+     * 数据源
+     */
+    private R resource;
 
     private ImageView imgView;
 
@@ -57,7 +60,7 @@ public class ImageLoader<ResourceType> {
 
     private RequestListener requestListener;
 
-    private ImageLoader(Builder<ResourceType> builder) {
+    private ImageLoader(Builder<R> builder) {
         this.resource = builder.resource;
         this.imgView = builder.imgView;
         this.placeHolder = builder.placeHolder;
@@ -72,7 +75,7 @@ public class ImageLoader<ResourceType> {
         this.rotate = builder.rotate;
     }
 
-    public ResourceType getResource() {
+    public R getResource() {
         return resource;
     }
 
