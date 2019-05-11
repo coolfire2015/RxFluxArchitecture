@@ -9,7 +9,7 @@ import com.huyingbao.module.gan.GanEventBusIndex;
 import org.greenrobot.eventbus.EventBus;
 
 @RxAppDelegate
-public class GanAppLifecyle implements RxAppLifecycle {
+public class GanAppLifecycle implements RxAppLifecycle {
     @Override
     public void onCreate(Application application) {
         EventBus.builder()
