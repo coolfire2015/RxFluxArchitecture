@@ -4,6 +4,19 @@
 [![Build Status](https://travis-ci.org/coolfire2015/RxFluxArchitecture.svg?branch=master)](https://travis-ci.org/coolfire2015/RxFluxArchitecture)
 ## Demo下载地址
 ![下载](image/下载.png)
+## 效果图
+
+![效果图](image/效果图/Fragment切换.gif)
+
+![效果图](image/效果图/屏幕旋转.gif)
+
+![效果图](image/效果图/操作重试.gif)
+
+![效果图](image/效果图/状态加载-操作成功.gif)
+
+![效果图](image/效果图/状态加载-取消操作.gif)
+
+
 ## 功能
 - 使用Dagger.Android实现View(Activity/Fragment)的依赖注入
 - Store中使用实现Tag功能的EventBus接收ActionCreator发送的数据
