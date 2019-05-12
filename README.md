@@ -6,15 +6,15 @@
 ![下载](image/下载.png)
 ## 效果图
 
-![效果图](image/效果图/Fragment切换.gif)
 
+![效果图](image/效果图/Fragment切换.gif)
 ![效果图](image/效果图/屏幕旋转.gif)
 
-![效果图](image/效果图/操作重试.gif)
 
 ![效果图](image/效果图/状态加载-操作成功.gif)
-
 ![效果图](image/效果图/状态加载-取消操作.gif)
+
+![效果图](image/效果图/操作重试.gif)
 
 
 ## 功能
