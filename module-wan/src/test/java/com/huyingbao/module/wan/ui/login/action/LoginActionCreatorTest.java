@@ -2,7 +2,7 @@ package com.huyingbao.module.wan.ui.login.action;
 
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
-import com.huyingbao.core.util.LocalStorageUtils;
+import com.huyingbao.core.utils.LocalStorageUtils;
 import com.huyingbao.module.wan.module.MockDaggerRule;
 import com.huyingbao.module.wan.module.MockUtils;
 import com.huyingbao.module.wan.ui.login.store.LoginStore;
