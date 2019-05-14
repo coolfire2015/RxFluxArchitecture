@@ -2,8 +2,10 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e3864a8c7c9b4f768702376e665b1d44)](https://app.codacy.com/app/coolfire2015/RxFluxArchitecture?utm_source=github.com&utm_medium=referral&utm_content=coolfire2015/RxFluxArchitecture&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/coolfire2015/RxFluxArchitecture.svg?branch=master)](https://travis-ci.org/coolfire2015/RxFluxArchitecture)
+
 ## Demo下载地址
 ![下载](image/下载.png)
+
 ## 效果图
 ![效果图](image/效果图/Fragment切换.gif)
 ![效果图](image/效果图/屏幕旋转.gif)
@@ -29,6 +31,8 @@
 * View，Store 自动注册订阅、解除订阅。
 * 使用 Dagger.Android 实现 View (Activity/Fragment)的依赖注入。
 * 使用实现 Tag 功能的 EventBus 实现数据总线功能。
+* core-arch 是核心框架，尽量不要变动。
+* core-common 是自定义框架，其中的所有代码都可以自定义随意变动，可改为自己熟悉的代码编写方式。
 
 ## 功能实现1：操作响应`RxAction`和`RxChange`，以登录功能为例
 1. **View**
