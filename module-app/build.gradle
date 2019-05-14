@@ -114,7 +114,7 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.all {
             if ("release".equals(variant.buildType.name)) {
-                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs")
+                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
                 variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
                     apkData.outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
                 }
