@@ -27,6 +27,9 @@ public class RxFragmentLifecycleObserver implements LifecycleObserver {
      * fragment创建成功之后调用,
      * <p>
      * 若fragment是{@link RxFluxView}的子类, 获取需要关联的rxStore
+     * <p>
+     * 使用LifecycleObserver,接收ON_CREATE,确保在RxFluxFragment onAttach()方法之后执行,
+     * 在RxFluxFragment onAttach()方法实现依赖注入
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {

@@ -45,10 +45,10 @@ public abstract class BaseFragment<T extends ViewModel> extends RxFluxFragment<T
 
     @Override
     public void onAttach(Context context) {
+        super.onAttach(context);
         //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
         //fragment中创建菜单
         setHasOptionsMenu(true);
-        super.onAttach(context);
     }
 
     @NonNull

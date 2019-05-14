@@ -50,7 +50,6 @@ public class RandomStore extends RxActivityStore {
      */
     @Override
     protected void onCleared() {
-        super.onCleared();
         mNextRequestPage = 1;
         mCategory = null;
         mProductListLiveData.setValue(null);

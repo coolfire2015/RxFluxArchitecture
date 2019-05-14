@@ -41,7 +41,6 @@ public class ArticleStore extends RxActivityStore {
      */
     @Override
     protected void onCleared() {
-        super.onCleared();
         mNextRequestPage = 1;
         mArticleLiveData.setValue(null);
         mBannerLiveData.setValue(null);

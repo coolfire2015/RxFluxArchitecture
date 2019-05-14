@@ -23,7 +23,6 @@ internal constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher)
         private set
 
     override fun onCleared() {
-        super.onCleared()
         isCreated = false
         webSiteListData.value = null
     }

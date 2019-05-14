@@ -33,7 +33,6 @@ public class LoginStore extends RxActivityStore {
      */
     @Override
     protected void onCleared() {
-        super.onCleared();
         mIntervalLiveData.setValue(null);
     }
 

@@ -2,7 +2,6 @@ package com.huyingbao.core.arch.store;
 
 import android.util.Log;
 
-import androidx.annotation.CallSuper;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -53,7 +52,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
      * 需要将store注册到dispatcher中
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    public void register() {
+    public void subscribe() {
         if (mRxDispatcher.isSubscribe(this)) {
             return;
         }
@@ -67,20 +66,9 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
      * 从dispatcher中取消订阅
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void unregister() {
+    public void unsubscribe() {
         Log.i(RxFlux.TAG, "Unsubscribe RxFragmentStore : " + getClass().getSimpleName());
         mRxDispatcher.unsubscribeRxStore(this);
-    }
-
-    /**
-     * 注解CallSuper强制子类复写该方法时调用父方法
-     * 所关联对象（Fragment）销毁时调用该方法
-     * 清理缓存数据
-     */
-    @Override
-    @CallSuper
-    protected void onCleared() {
-        Log.i(RxFlux.TAG, "Cleared RxFragmentStore : " + getClass().getSimpleName());
     }
 
     /**

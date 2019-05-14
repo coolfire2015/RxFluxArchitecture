@@ -31,7 +31,6 @@ internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher)
      * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
      */
     override fun onCleared() {
-        super.onCleared()
         nextRequestPage = 1
         articleLiveData.value = null
         bannerLiveData.value = null

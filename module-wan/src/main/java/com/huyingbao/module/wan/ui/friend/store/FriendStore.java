@@ -31,7 +31,6 @@ public class FriendStore extends RxFragmentStore {
 
     @Override
     protected void onCleared() {
-        super.onCleared();
         mIsCreated = false;
         mWebSiteListData.setValue(null);
     }

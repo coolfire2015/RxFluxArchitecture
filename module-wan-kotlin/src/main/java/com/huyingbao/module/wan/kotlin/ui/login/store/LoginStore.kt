@@ -22,7 +22,6 @@ internal constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher)
     private var mUser: WanResponse<User>? = null
 
     override fun onCleared() {
-        super.onCleared()
         intervalLiveData.value = null
     }
 
