@@ -41,13 +41,13 @@ public class ArticleActionCreatorTest {
     @Before
     public void setUp() {
         mActionCreator = new ArticleActionCreator(mRxDispatcher, mRxActionManager, MockUtils.getComponent().getWanApi());
-        //注册store订阅
+        //注册订阅
         mRxDispatcher.subscribeRxStore(mArticleStore);
     }
 
     @After
     public void tearDown() {
-        //解除store订阅
+        //取消订阅
         mRxDispatcher.unsubscribeRxStore(mArticleStore);
     }
 

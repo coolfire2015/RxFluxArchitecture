@@ -63,7 +63,7 @@ public abstract class RxActivityStore extends ViewModel implements LifecycleObse
 
     /**
      * 所关联对象（Activity）销毁时调用该方法
-     * 从dispatcher中解除注册
+     * 从dispatcher中取消订阅
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {

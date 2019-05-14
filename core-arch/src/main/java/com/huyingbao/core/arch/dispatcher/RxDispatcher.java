@@ -33,7 +33,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 将store注册到EventBus中
+     * RxStore 注册订阅
      *
      * @param rxStore
      * @param <T>     实现RxActionDispatch的RxStore
@@ -43,7 +43,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 将view注册到EventBus中
+     * View 注册订阅
      *
      * @param rxView
      * @param <T>
@@ -53,7 +53,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 解除rxStore的注册
+     * RxStore 取消订阅
      *
      * @param rxStore
      * @param <T>
@@ -63,7 +63,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 将view解除注册
+     * View 取消订阅
      *
      * @param rxView
      * @param <T>
@@ -73,7 +73,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 判断是否注册
+     * 判断是否注册订阅
      *
      * @param object
      * @param <T>
@@ -84,7 +84,7 @@ public class RxDispatcher {
     }
 
     /**
-     * 解除所有的注册
+     * 取消所有订阅
      */
     public synchronized void unsubscribeAll() {
         EventBus.clearCaches();

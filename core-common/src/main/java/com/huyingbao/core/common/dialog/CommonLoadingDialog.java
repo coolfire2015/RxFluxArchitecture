@@ -78,7 +78,7 @@ public class CommonLoadingDialog extends BaseDialog {
     }
 
     /**
-     * 取消所有注册的订阅Action
+     * 取消订阅的Action
      */
     @OnClick(R2.id.tv_loading_cancel)
     public void cancel() {

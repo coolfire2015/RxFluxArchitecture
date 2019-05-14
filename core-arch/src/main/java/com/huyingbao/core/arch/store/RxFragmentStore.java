@@ -64,7 +64,7 @@ public abstract class RxFragmentStore extends ViewModel implements LifecycleObse
 
     /**
      * 所关联对象（Fragment）销毁时调用该方法
-     * 从dispatcher中解除注册
+     * 从dispatcher中取消订阅
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unregister() {

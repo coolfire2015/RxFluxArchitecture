@@ -28,7 +28,7 @@
 * ActionCreator 类似 MVP 架构中的 Presenter，只是其中不持有 View 对象，无需操作结束回调 View 的响应方法。
 * Store 继承自`androidx.lifecycle.ViewModel`，可以通过`androidx.lifecycle.LiveData<T>`实现 MVVM 架构。
 * Store 自动关联 View 生命周期，维持设备横竖屏切换时数据。
-* View，Store 自动注册订阅、解除订阅。
+* View，Store 自动注册订阅、取消订阅。
 * 使用 Dagger.Android 实现 View (Activity/Fragment)的依赖注入。
 * 使用实现 Tag 功能的 EventBus 实现数据总线功能。
 * core-arch 是核心框架，尽量不要变动。
