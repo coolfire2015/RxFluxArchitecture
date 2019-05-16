@@ -15,13 +15,6 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
 /**
- * Application实现相应的接口
- * HasActivityInjector、
- * HasFragmentInjector、
- * HasSupportFragmentInjector、
- * HasServiceInjector、
- * HasBroadcastReceiverInjector
- * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseApp extends RxApp {
