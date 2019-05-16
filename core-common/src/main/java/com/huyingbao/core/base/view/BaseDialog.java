@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 import com.huyingbao.core.arch.view.RxFluxDialog;
-import com.huyingbao.core.base.BaseView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

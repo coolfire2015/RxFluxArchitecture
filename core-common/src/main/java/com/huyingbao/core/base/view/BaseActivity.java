@@ -16,7 +16,6 @@ import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
 import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxActivity;
-import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 import com.huyingbao.core.common.dialog.CommonLoadingDialog;

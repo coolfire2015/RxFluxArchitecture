@@ -1,4 +1,4 @@
-package com.huyingbao.core.base;
+package com.huyingbao.core.base.view;
 
 import android.os.Bundle;
 

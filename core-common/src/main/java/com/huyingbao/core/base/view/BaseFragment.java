@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModel;
 
 import com.huyingbao.core.arch.view.RxFluxFragment;
-import com.huyingbao.core.base.BaseView;
 import com.huyingbao.core.common.R;
 import com.huyingbao.core.common.action.CommonActionCreator;
 
