@@ -7,5 +7,7 @@
 /.idea/gradle.xml
 /.idea/modules.xml
 /.idea/workspace.xml
+/.idea/markdown-exported-files.xml
+/.idea/markdown-navigator.xml
 /local.properties
 /keystore.properties
