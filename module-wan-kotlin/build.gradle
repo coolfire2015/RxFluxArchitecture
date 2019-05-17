@@ -5,21 +5,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: rootProject.file('common.gradle')
+//apply from: rootProject.file('depend_kotlin.gradle')
 
 group = "com.github.coolfire2015"
 
 android {
-    //编译版本
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    //lint设置
-    lintOptions {
-        //lint 不被终止
-        abortOnError false
-        //打Release版本时,不进行检测
-        checkReleaseBuilds false
-        //关闭检索的功能
-        disable 'GoogleAppIndexingWarning'
-    }
     //签名配置,自定义,用在defaultConfig中
     signingConfigs {
         debug {
@@ -80,26 +71,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    //数据绑定
-    dataBinding {
-        enabled = true
-    }
-    //Dex分包
-    dexOptions {
-        jumboMode = true
-        javaMaxHeapSize "4g"//增加java堆内存大小
-    }
-    //Lambda表达式需要
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    //单元测试,robolectric支持
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
     //代码目录设置
     sourceSets {
         main {
@@ -115,28 +86,16 @@ android {
     //修改生成的apk名字
     if (isModuleAsApp.toBoolean()) {
         applicationVariants.all { variant ->
-            variant.outputs.all {
-                if ("release".equals(variant.buildType.name))
-                    outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
+            if (variant.buildType.name != "debug") {
+                variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+            }
+            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+                apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+                        variant.versionName + "-" +
+                        variant.buildType.name + ".apk"
             }
         }
     }
-}
-
-//将源代码打包进aar
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.javaDirectories
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-//仓库
-repositories {
-    //本地仓库,添加aar支持
-    flatDir { dirs 'libs' }
 }
 
 //Kapt编译支持

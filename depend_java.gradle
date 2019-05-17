@@ -1,0 +1,55 @@
+dependencies {
+    //通用库
+    if (isUseMaven.toBoolean()) {
+        implementation "com.github.coolfire2015.RxFluxArchitecture:core-common:${RX_FLUX_ARCHITECTURE}"
+        testImplementation "com.github.coolfire2015.RxFluxArchitecture:test-utils:${RX_FLUX_ARCHITECTURE}"
+        annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+        annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
+        testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+        testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
+    } else {
+        implementation project(':core-common')
+        testImplementation project(':test-utils')
+        annotationProcessor project(':core-arch-processor')
+        annotationProcessor project(':core-eventbus-processor')
+        testAnnotationProcessor project(':core-arch-processor')
+        testAnnotationProcessor project(':core-eventbus-processor')
+    }
+    //编译时生成
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //单元测试编译时生成
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
+    testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    testAnnotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //测试Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    //测试Api
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+    //测试工具
+    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
+    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
+}

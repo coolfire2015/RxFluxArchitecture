@@ -1,17 +1,8 @@
 apply plugin: 'com.android.application'
+apply from: rootProject.file('common.gradle')
+apply from: rootProject.file('depend_java.gradle')
 
 android {
-    //编译版本
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    //lint设置
-    lintOptions {
-        //lint 不被终止
-        abortOnError false
-        //打Release版本时,不进行检测
-        checkReleaseBuilds false
-        //关闭检索的功能
-        disable 'GoogleAppIndexingWarning'
-    }
     //签名配置,自定义,用在defaultConfig中
     signingConfigs {
         debug {
@@ -78,26 +69,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    //数据绑定
-    dataBinding {
-        enabled = true
-    }
-    //Dex分包
-    dexOptions {
-        jumboMode = true
-        javaMaxHeapSize "4g"//增加java堆内存大小
-    }
-    //Lambda表达式需要
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    //单元测试,robolectric支持
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
     //代码目录设置
     sourceSets {
         main {
@@ -112,42 +83,24 @@ android {
     }
     //修改生成的apk文件名及路径
     applicationVariants.all { variant ->
-        variant.outputs.all {
-            if ("release".equals(variant.buildType.name)) {
-                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
-                variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
-                    apkData.outputFileName = "demo_v_" + variant.buildType.name + "_" + rootProject.getGitVersionName() + '.apk'
-                }
-            }
+        if (variant.buildType.name != "debug") {
+            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+        }
+        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+                    variant.versionName + "-" +
+                    variant.buildType.name + ".apk"
         }
     }
 }
-
-//仓库
-repositories {
-    //本地仓库,添加aar支持
-    flatDir { dirs 'libs' }
-}
-
 dependencies {
-    if (!isModuleAsApp.toBoolean()) {
-        if (isUseMaven.toBoolean()) {
-            //功能模块
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module-gan:${RX_FLUX_ARCHITECTURE}"
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan:${RX_FLUX_ARCHITECTURE}"
-            implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan-kotlin:${RX_FLUX_ARCHITECTURE}"
-            annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
-            annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
-        } else {
-            //功能模块
-            implementation project(':module-gan')
-            implementation project(':module-wan')
-            implementation project(':module-wan-kotlin')
-            annotationProcessor project(':core-arch-processor')
-            annotationProcessor project(':core-eventbus-processor')
-        }
+    if (isModuleAsApp.toBoolean() || isUseMaven.toBoolean()) {
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-gan:${RX_FLUX_ARCHITECTURE}"
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan:${RX_FLUX_ARCHITECTURE}"
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan-kotlin:${RX_FLUX_ARCHITECTURE}"
+    } else {
+        implementation project(':module-gan')
+        implementation project(':module-wan')
+        implementation project(':module-wan-kotlin')
     }
-    //编译时生成
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }

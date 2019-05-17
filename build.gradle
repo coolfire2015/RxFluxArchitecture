@@ -8,9 +8,13 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${BUILD_GRADLE}"
+        //ButterKnife支持
         classpath "com.jakewharton:butterknife-gradle-plugin:${BUTTER_KNIFE}"
+        //Kotlin支持
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
+        //AndroidX支持
         classpath "com.android.tools.build.jetifier:jetifier-processor:${JETIFIER}"
+        //Maven支持
         classpath "com.github.dcendents:android-maven-gradle-plugin:${ANDROID_MAVEN_GRADLE_PLUGIN}"
     }
 }
