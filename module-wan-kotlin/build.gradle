@@ -52,8 +52,6 @@ android {
             proguardFile 'proguard-rules.pro'
             //签名配置
             signingConfig signingConfigs.debug
-            //声明主 DEX 文件中需要的类
-            //multiDexKeepProguard file('multidex-config.pro')
         }
         //自定义buildType.name
         release {
