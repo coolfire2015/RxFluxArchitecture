@@ -16,7 +16,7 @@ include ':core-common'
 
 include ':test-utils'
 
-//include ':module-app'
-//include ':module-wan'
-//include ':module-gan'
+include ':module-app'
+include ':module-wan'
+include ':module-gan'
 include ':module-wan-kotlin'

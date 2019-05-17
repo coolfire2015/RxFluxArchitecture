@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: rootProject.file('common.gradle')
-//apply from: rootProject.file('depend_kotlin.gradle')
+apply from: rootProject.file('depend_kotlin.gradle')
 
 group = "com.github.coolfire2015"
 
@@ -105,19 +105,4 @@ kapt {
         arg('eventBusIndex', 'com.huyingbao.module.wan.kotlin.WanEventBusIndex')
     }
     generateStubs = true
-}
-
-dependencies {
-    //通用依赖模块
-    api project(':core-common')
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
-    //编译时生成
-    kapt project(':core-arch-processor')
-    kapt project(':core-eventbus-processor')
-    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
-    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
-    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
 }

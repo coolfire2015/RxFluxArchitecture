@@ -1,14 +1,56 @@
 dependencies {
-    //通用依赖模块
-    api project(':core-common')
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    //通用库
+    if (isUseMaven.toBoolean()) {
+        implementation "com.github.coolfire2015.RxFluxArchitecture:core-common:${RX_FLUX_ARCHITECTURE}"
+        testImplementation "com.github.coolfire2015.RxFluxArchitecture:test-utils:${RX_FLUX_ARCHITECTURE}"
+        kapt "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+        kapt "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
+        kaptTest "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+        kaptTest "com.github.coolfire2015.RxFluxArchitecture:core-eventbus-processor:${RX_FLUX_ARCHITECTURE}"
+    } else {
+        implementation project(':core-common')
+        testImplementation project(':test-utils')
+        kapt project(':core-arch-processor')
+        kapt project(':core-eventbus-processor')
+        kaptTest project(':core-arch-processor')
+        kaptTest project(':core-eventbus-processor')
+    }
     //编译时生成
-    kapt project(':core-arch-processor')
-    kapt project(':core-eventbus-processor')
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //单元测试编译时生成
+    kaptTest "com.google.dagger:dagger-compiler:${DAGGER}"
+    kaptTest "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kaptTest "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kaptTest "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kaptTest "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    //测试Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    //测试Api
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+    //测试工具
+    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
+    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
 }
