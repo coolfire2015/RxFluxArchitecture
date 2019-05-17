@@ -1,5 +1,4 @@
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //通用库
     if (isUseMaven.toBoolean()) {
         implementation "com.github.coolfire2015.RxFluxArchitecture:core-common:${RX_FLUX_ARCHITECTURE}"

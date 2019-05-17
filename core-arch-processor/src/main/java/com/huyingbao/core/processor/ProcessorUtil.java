@@ -1,11 +1,9 @@
 package com.huyingbao.core.processor;
 
-import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,25 +48,6 @@ final class ProcessorUtil {
      */
     private static final String COMPILER_PACKAGE_NAME =
             RxArchProcessor.class.getPackage().getName();
-    /**
-     * 非空注解
-     */
-    private static final ClassName NONNULL_ANNOTATION =
-            ClassName.get("android.support.annotation", "NonNull");
-    /**
-     * 非空注解
-     */
-    private static final ClassName JETBRAINS_NOTNULL_ANNOTATION =
-            ClassName.get("org.jetbrains.annotations", "NotNull");
-    /**
-     * 非空注解
-     */
-    private static final ClassName ANDROIDX_NONNULL_ANNOTATION =
-            ClassName.get("androidx.annotation", "NonNull");
-    private static final ClassName CHECK_RESULT_ANNOTATION =
-            ClassName.get("android.support.annotation", "CheckResult");
-    private static final ClassName ANDROIDX_CHECK_RESULT_ANNOTATION =
-            ClassName.get("androidx.annotation", "CheckResult");
 
     private final ProcessingEnvironment mProcessingEnv;
     /**
@@ -141,28 +120,5 @@ final class ProcessorUtil {
 
     void infoLog(String toLog) {
         mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + mRound + "] " + toLog);
-    }
-
-    static ClassName nonNull() {
-        try {
-            Class.forName(ANDROIDX_NONNULL_ANNOTATION.reflectionName());
-            return ANDROIDX_NONNULL_ANNOTATION;
-        } catch (ClassNotFoundException e) {
-            return NONNULL_ANNOTATION;
-        }
-    }
-
-    static ClassName checkResult() {
-        try {
-            Class.forName(ANDROIDX_CHECK_RESULT_ANNOTATION.reflectionName());
-            return ANDROIDX_CHECK_RESULT_ANNOTATION;
-        } catch (ClassNotFoundException e) {
-            return CHECK_RESULT_ANNOTATION;
-        }
-    }
-
-    static List<ClassName> nonNulls() {
-        return Arrays.asList(NONNULL_ANNOTATION, JETBRAINS_NOTNULL_ANNOTATION,
-                ANDROIDX_NONNULL_ANNOTATION);
     }
 }

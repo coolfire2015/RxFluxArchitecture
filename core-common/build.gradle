@@ -74,6 +74,8 @@ dependencies {
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
     //Arouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
+    //Kotlin支持
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //Dagger编译时生成
