@@ -64,7 +64,7 @@ deploy:
   api_key:
     secure: ${GH_TOKEN}
   #部署文件路径
-  file: release/outputs/apk/module-app-$TRAVIS_TAG.apk
+  file: release/outputs/apk/module-app-$TRAVIS_TAG-release.apk
   #默认情况下Travis CI在完成编译后会清除所有生成的文件，设置为true以跳过清理
   skip_cleanup: true
   #部署时机
@@ -80,9 +80,9 @@ after_deploy:
   #打印身份信息,验证是否登录成功
   - fir me
   #自动发布应用至fir内测平台
-  - fir p release/outputs/apk/*.apk -c "`git cat-file tag $TRAVIS_TAG`"
+  - fir p release/outputs/apk/module-app-$TRAVIS_TAG-release.apk -c "`git cat-file tag $TRAVIS_TAG`"
   #删除部署之后的apk
-  - rm release/outputs/apk/module-app-$TRAVIS_TAG.apk
+  - rm release/outputs/apk/module-app-$TRAVIS_TAG-release.apk
 #通知
 notifications:
   email:
