@@ -45,15 +45,6 @@ public abstract class BaseDialog<T extends ViewModel> extends RxFluxDialog<T> im
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        final Window window = getDialog().getWindow();
-        //设置Dialog对应的布局背景和尺寸生效
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();

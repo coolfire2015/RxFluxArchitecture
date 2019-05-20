@@ -3,6 +3,18 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e3864a8c7c9b4f768702376e665b1d44)](https://app.codacy.com/app/coolfire2015/RxFluxArchitecture?utm_source=github.com&utm_medium=referral&utm_content=coolfire2015/RxFluxArchitecture&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/coolfire2015/RxFluxArchitecture.svg?branch=master)](https://travis-ci.org/coolfire2015/RxFluxArchitecture)
 
+**相关系列文章**
+
+[模块化解耦框架RxFluxArchitecture1-框架简介](https://juejin.im/post/5cdc1038f265da037b613589)
+
+[模块化解耦框架RxFluxArchitecture2-基本功能实现](https://juejin.im/post/5cd92ce1f265da03a436efd5)
+
+[模块化解耦框架RxFluxArchitecture3-订阅管理绑定生命周期](https://juejin.im/post/5cda6f4e518825796d63ec58)
+
+[模块化解耦框架RxFluxArchitecture4-依赖库与依赖注入](https://juejin.im/post/5cdcfb996fb9a0321855760e)
+
+[模块化解耦框架RxFluxArchitecture5-Application多模块共存](https://juejin.im/post/5cd6cada6fb9a03218556de2)
+
 ## Demo下载地址
 ![下载](image/下载.png)
 
@@ -16,17 +28,6 @@
 
 ![效果图](image/效果图/操作重试.gif)
 
-**相关系列文章**
-
-[模块化解耦框架RxFluxArchitecture1-框架简介](https://juejin.im/post/5cdc1038f265da037b613589)
-
-[模块化解耦框架RxFluxArchitecture2-基本功能实现](https://juejin.im/post/5cd92ce1f265da03a436efd5)
-
-[模块化解耦框架RxFluxArchitecture3-订阅管理绑定生命周期](https://juejin.im/post/5cda6f4e518825796d63ec58)
-
-[模块化解耦框架RxFluxArchitecture4-依赖库与依赖注入](https://juejin.im/post/5cdcfb996fb9a0321855760e)
-
-[模块化解耦框架RxFluxArchitecture5-Application多模块共存](https://juejin.im/post/5cd6cada6fb9a03218556de2)
 ## 依赖框架
 ### 核心
 - 依赖注入 [**Dagger+Dagger.Android**](https://github.com/google/dagger)
@@ -36,6 +37,7 @@
 +[**X-AppCompat**](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
 +[**X-Lifecycle**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions)
 - AndroidX迁移 [**Jetifier**](https://mvnrepository.com/artifact/com.android.tools.build.jetifier/jetifier-core)
+
 ### 通用
 - 模块路由 [**Arouter**](https://github.com/alibaba/ARouter)
 - View注入 [**ButterKnife**](https://github.com/JakeWharton/butterknife)
@@ -55,6 +57,7 @@
 +[**X-Material**](https://mvnrepository.com/artifact/com.google.android.material/material)
 +[**X-Collection**](https://mvnrepository.com/artifact/androidx.collection/collection)
 +[**X-ConstraintLayout**](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout)
+
 ### 测试 
 - [**Junit**](https://github.com/junit-team/junit4)
 - [**Mockito**](https://github.com/mockito/mockito)
@@ -68,7 +71,8 @@
 - [**X-Test-Runner**](https://mvnrepository.com/artifact/androidx.test/runner)
 - [**X-Test-Espresso**](https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core)
 - [**X-Test-Fragment**](https://mvnrepository.com/artifact/androidx.fragment/fragment-testing)
-# License
+
+## License
 Copyright 2019 liujunfeng
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at

@@ -67,9 +67,11 @@ public abstract class RxFluxFragment<T extends ViewModel> extends Fragment
         super.onAttach(context);
     }
 
+    /**
+     * View在destroy时,不再持有该Store对象
+     */
     @Override
     public void onDestroy() {
-        //View在destroy时,不再持有该Store对象
         mStore = null;
         super.onDestroy();
     }

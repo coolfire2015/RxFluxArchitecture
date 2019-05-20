@@ -78,9 +78,11 @@ public abstract class RxFluxActivity<T extends RxActivityStore> extends AppCompa
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * View在destroy时,不再持有该Store对象
+     */
     @Override
     public void onDestroy() {
-        //View在destroy时,不再持有该Store对象
         mStore = null;
         super.onDestroy();
     }
