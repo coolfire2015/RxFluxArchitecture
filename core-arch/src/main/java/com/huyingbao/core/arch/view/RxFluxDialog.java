@@ -14,6 +14,9 @@ import com.huyingbao.core.arch.utils.ClassUtils;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -22,11 +25,17 @@ import dagger.android.support.AndroidSupportInjection;
  * @param <T>
  */
 public abstract class RxFluxDialog<T extends ViewModel> extends AppCompatDialogFragment
-        implements RxFluxView<T>, RxSubscriberView {
+        implements RxFluxView<T>, RxSubscriberView, HasAndroidInjector {
+    private T mStore;
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
+    @Inject
+    DispatchingAndroidInjector<Object> mChildAndroidInjector;
 
-    private T mStore;
+    @Override
+    public AndroidInjector<Object> androidInjector() {
+        return mChildAndroidInjector;
+    }
 
     @Nullable
     @Override

@@ -94,6 +94,6 @@ dependencies {
     } else {
         implementation project(':module-gan')
         implementation project(':module-wan')
-        implementation project(':module-github')
+//        implementation project(':module-github')
     }
 }

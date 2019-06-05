@@ -10,11 +10,14 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
+import com.huyingbao.core.arch.RxFlux;
+
 import java.lang.reflect.InvocationTargetException;
 
 import javax.inject.Inject;
 
-import dagger.android.support.DaggerApplication;
+
+import dagger.android.DaggerApplication;
 
 import static com.huyingbao.core.arch.RxFlux.TAG;
 
@@ -42,7 +45,6 @@ public abstract class RxApp extends DaggerApplication {
             mLifecycleRegistry = (LifecycleRegistry) lifecycleOwner.getLifecycle();
         }
     }
-
 
     @Override
     public void onCreate() {

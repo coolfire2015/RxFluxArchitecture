@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.huyingbao.core.annotations.RxAppObserver
-import com.huyingbao.core.arch.RxAppLifecycle
+import com.huyingbao.core.arch.app.RxAppLifecycle
 import com.huyingbao.module.github.GithubEventBusIndex
+import dagger.android.AndroidInjector
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -13,6 +14,9 @@ import org.greenrobot.eventbus.EventBus
  */
 @RxAppObserver
 class GithubAppLifecyle(application: Application?) : RxAppLifecycle(application) {
+    override fun rxAppLifecycleInjector(): AndroidInjector<out RxAppLifecycle> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {

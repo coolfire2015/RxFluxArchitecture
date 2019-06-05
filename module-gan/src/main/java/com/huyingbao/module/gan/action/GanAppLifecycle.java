@@ -11,11 +11,18 @@ import com.huyingbao.module.gan.GanEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dagger.android.AndroidInjector;
+
 @RxAppObserver
 public class GanAppLifecycle extends RxAppLifecycle {
     public GanAppLifecycle(Application application) {
         super(application);
     }
+
+//    @Override
+//    protected AndroidInjector<? extends RxAppLifecycle> rxAppLifecycleInjector() {
+//        return null;
+//    }
 
     @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

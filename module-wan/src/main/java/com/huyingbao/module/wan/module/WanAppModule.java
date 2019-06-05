@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.GsonBuilder;
 import com.huyingbao.module.wan.api.WanApi;
+import com.huyingbao.module.wan.app.WanAppStore;
 import com.huyingbao.module.wan.app.WanContants;
-import com.huyingbao.module.wan.app.WanStore;
 
 import javax.inject.Singleton;
 
@@ -33,13 +33,5 @@ public class WanAppModule {
                 .client(client)
                 .build();
         return retrofit.create(WanApi.class);
-    }
-
-    @Singleton
-    @Provides
-    WanStore provideWanStore(Application application) {
-        return ViewModelProvider.AndroidViewModelFactory
-                .getInstance(application)
-                .create(WanStore.class);
     }
 }

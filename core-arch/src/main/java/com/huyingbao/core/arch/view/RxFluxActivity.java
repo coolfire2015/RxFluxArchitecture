@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,8 +13,9 @@ import com.huyingbao.core.arch.utils.ClassUtils;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+import dagger.android.HasAndroidInjector;
 
 
 /**
@@ -32,17 +32,16 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @param <T>
  */
 public abstract class RxFluxActivity<T extends RxActivityStore> extends AppCompatActivity
-        implements RxFluxView<T>, RxSubscriberView, HasSupportFragmentInjector {
+        implements RxFluxView<T>, RxSubscriberView, HasAndroidInjector {
+    private T mStore;
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
     @Inject
-    DispatchingAndroidInjector<Fragment> mChildFragmentInjector;
-
-    private T mStore;
+    DispatchingAndroidInjector<Object> mChildAndroidInjector;
 
     @Override
-    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
-        return mChildFragmentInjector;
+    public AndroidInjector<Object> androidInjector() {
+        return mChildAndroidInjector;
     }
 
     @Nullable

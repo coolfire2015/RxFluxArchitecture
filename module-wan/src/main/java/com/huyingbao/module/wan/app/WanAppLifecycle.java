@@ -11,12 +11,20 @@ import com.huyingbao.module.wan.WanEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dagger.android.AndroidInjector;
+
 @RxAppObserver
 public class WanAppLifecycle extends RxAppLifecycle {
 
     public WanAppLifecycle(Application application) {
         super(application);
+
     }
+
+//    @Override
+//    protected AndroidInjector<? extends RxAppLifecycle> rxAppLifecycleInjector() {
+//        return DaggerWanComponet.create();
+//    }
 
     @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -24,7 +32,6 @@ public class WanAppLifecycle extends RxAppLifecycle {
         EventBus.builder()
                 .addIndex(new WanEventBusIndex())
                 .eventInheritance(false);
-
     }
 
     @Override

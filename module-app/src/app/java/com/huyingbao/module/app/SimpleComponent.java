@@ -4,13 +4,13 @@ import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
 import com.huyingbao.module.gan.module.GanAppModule;
-import com.huyingbao.module.github.module.GithubAppModule;
 import com.huyingbao.module.wan.module.WanAppModule;
 
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
@@ -38,7 +38,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         GanAppModule.class,//模块module
         WanAppModule.class,//模块module
-        GithubAppModule.class,//模块module
         CommonModule.class,//通用module
         AndroidSupportInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {

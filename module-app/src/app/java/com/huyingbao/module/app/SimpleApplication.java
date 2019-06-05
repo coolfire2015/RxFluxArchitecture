@@ -4,7 +4,7 @@ package com.huyingbao.module.app;
 import com.huyingbao.core.base.BaseApp;
 
 import dagger.android.AndroidInjector;
-import dagger.android.support.DaggerApplication;
+import dagger.android.DaggerApplication;
 
 /**
  * 主Application

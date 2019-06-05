@@ -9,9 +9,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class WanStore extends RxAppStore {
+public class WanAppStore extends RxAppStore {
     @Inject
-    public WanStore(Application application, RxDispatcher rxDispatcher) {
+    public WanAppStore(Application application, RxDispatcher rxDispatcher) {
         super(application, rxDispatcher);
     }
 }
