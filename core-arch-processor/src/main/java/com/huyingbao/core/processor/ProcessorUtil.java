@@ -1,0 +1,99 @@
+package com.huyingbao.core.processor;
+
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.TypeSpec;
+
+import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.ElementFilter;
+import javax.tools.Diagnostic;
+
+import static com.huyingbao.core.processor.RxArchProcessor.DEBUG;
+
+
+/**
+ * Utilities for writing classes and logging.
+ */
+final class ProcessorUtil {
+    /**
+     * 框架包名
+     */
+    private static final String PACKAGE_NAME = "com.huyingbao.core.arch";
+    /**
+     * App生命周期接口RxAppLifecycle类名
+     */
+    private static final String RX_APP_LIFECYCLE_SIMPLE_NAME = "RxAppLifecycle";
+    /**
+     * App生命周期接口类名RxAppLifecycle,规范类名
+     */
+    private static final String RX_APP_LIFECYCLE_QUALIFIED_NAME =
+            PACKAGE_NAME + "." + RX_APP_LIFECYCLE_SIMPLE_NAME;
+    /**
+     * 编译文件所在包名
+     */
+    private static final String COMPILER_PACKAGE_NAME =
+            RxArchProcessor.class.getPackage().getName();
+
+    private final ProcessingEnvironment mProcessingEnv;
+    /**
+     * RxAppLifecycle类型元素
+     */
+    private final TypeElement mRxAppLifecycleType;
+    private int mRound;
+
+    ProcessorUtil(ProcessingEnvironment processingEnv) {
+        this.mProcessingEnv = processingEnv;
+        //返回给定其规范名称的类型元素。
+        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(RX_APP_LIFECYCLE_QUALIFIED_NAME);
+    }
+
+    void process() {
+        mRound++;
+    }
+
+    /**
+     * 判断该类是否是RxAppLifecycle的实现类
+     *
+     * @param element
+     * @return
+     */
+    boolean isRxAppLifecycle(TypeElement element) {
+        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
+                mRxAppLifecycleType.asType());
+    }
+
+    void writeIndexer(TypeSpec indexer) {
+        writeClass(COMPILER_PACKAGE_NAME, indexer);
+    }
+
+    void writeClass(String packageName, TypeSpec clazz) {
+        try {
+            debugLog("Writing class:\n" + clazz);
+            JavaFile.builder(packageName, clazz).build().writeTo(mProcessingEnv.getFiler());
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    List<TypeElement> getElementsFor(
+            Class<? extends Annotation> clazz, RoundEnvironment env) {
+        Collection<? extends Element> annotatedElements = env.getElementsAnnotatedWith(clazz);
+        return ElementFilter.typesIn(annotatedElements);
+    }
+
+    void debugLog(String toLog) {
+        if (DEBUG) {
+            infoLog(toLog);
+        }
+    }
+
+    void infoLog(String toLog) {
+        mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + mRound + "] " + toLog);
+    }
+}

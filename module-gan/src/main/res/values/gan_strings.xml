@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gan_label_main">主页</string>
+    <string name="gan_label_gan">干货集中营</string>
+    <string name="gan_label_category">目录</string>
+
+    <string name="gan_category_wan">玩安卓</string>
+    <string name="gan_category_gan">@string/gan_label_gan</string>
+    <string name="gan_category_wan_kotlin">玩安卓Kotlin</string>
+
+    <string-array name="gan_array_category">
+        <item>all</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>休息视频</item>
+        <item>福利</item>
+        <item>拓展资源</item>
+        <item>前端</item>
+        <item>瞎推荐</item>
+        <item>App</item>
+    </string-array>
+</resources>

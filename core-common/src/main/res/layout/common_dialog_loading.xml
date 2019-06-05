@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_120"
+    android:layout_height="wrap_content"
+    android:background="@color/common_accent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_loading"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_10"
+        android:indeterminateTint="@color/common_icons" />
+
+    <TextView
+        android:id="@+id/tv_loading_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textColor="@color/common_icons"
+        android:textSize="@dimen/sp_12"
+        tools:text="@string/brvah_loading" />
+
+    <TextView
+        android:id="@+id/tv_loading_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_6"
+        android:text="@string/common_cancel"
+        android:textColor="@color/common_icons"
+        android:textSize="@dimen/sp_16" />
+</LinearLayout>

@@ -8,7 +8,15 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${BUILD_GRADLE}"
+        //ButterKnife支持
         classpath "com.jakewharton:butterknife-gradle-plugin:${BUTTER_KNIFE}"
+        //Kotlin支持
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
+        //Kotlin全开放编译器插件
+        classpath "org.jetbrains.kotlin:kotlin-allopen:${KOTLIN_VERSION}"
+        //AndroidX支持
+        classpath "com.android.tools.build.jetifier:jetifier-processor:${JETIFIER}"
+        //Maven支持
         classpath "com.github.dcendents:android-maven-gradle-plugin:${ANDROID_MAVEN_GRADLE_PLUGIN}"
     }
 }
@@ -114,6 +122,13 @@ def getGitVersionName() {
  */
 def getGitVersionInfo() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+/**
+ * 获取Git分支名
+ */
+def getGitBranch() {
+    return 'git symbolic-ref --short -q HEAD'.execute().text.trim()
 }
 
 /**

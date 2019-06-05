@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wan_label_article">文章</string>
+    <string name="wan_label_login">登录</string>
+    <string name="wan_label_friend">常用网站</string>
+    <string name="wan_label_banner">横幅</string>
+
+    <string name="wan_username">用户名</string>
+    <string name="wan_password">密码</string>
+    <string name="wan_info_identify">发送验证码</string>
+    <string name="wan_info_timeout">倒计时%sS</string>
+</resources>

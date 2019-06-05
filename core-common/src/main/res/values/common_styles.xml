@@ -1,0 +1,15 @@
+<resources>
+    <!-- Base application theme. -->
+    <!--Theme.AppCompat:黑色主题-->
+    <!--Theme.AppCompat.Light:浅色主题-->
+    <!--Theme.AppCompat.Light.DarkActionBar:带黑色工具栏的浅色主题-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/common_primary</item><!--工具栏颜色 -->
+        <item name="colorPrimaryDark">@color/common_primary</item><!--状态栏颜色 -->
+        <item name="colorAccent">@color/common_accent</item><!--给EditText着色,形成反差色.按钮组件不支持着色-->
+    </style>
+    <!--默认的AppBarLayout样式-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--默认的弹出框样式-->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

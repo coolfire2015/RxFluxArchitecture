@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply from: rootProject.file('depend_common.gradle')
+apply from: rootProject.file('depend_java.gradle')
+
+android {
+    //签名配置,自定义,用在defaultConfig中
+    signingConfigs {
+        debug {
+            storeFile file(STORE_DEBUG_FILE)
+        }
+        release {
+            storeFile file(STORE_RELEASE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
+    //默认配置
+    defaultConfig {
+        multiDexEnabled true//支持Multidex分包
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+        signingConfig signingConfigs.debug
+        vectorDrawables.useSupportLibrary = true//使用vector图片
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        debug {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+            //单元测试mockUrl
+            buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
+            //替换字符串资源
+            resValue "string", "app_name", "RxFluxArchDebug"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFile 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.debug
+        }
+        //自定义buildType.name
+        release {
+            //显示分支名字
+            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+            //替换字符串资源
+            resValue "string", "app_name", "RxFluxArch"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+        }
+    }
+    //代码目录设置
+    sourceSets {
+        main {
+            manifest.srcFile 'src/app/AndroidManifest.xml'
+            java.srcDirs 'src/app/java'
+            res.srcDirs 'src/app/res'
+        }
+    }
+    //修改生成的apk文件名及路径
+    applicationVariants.all { variant ->
+        if (variant.buildType.name != "debug") {
+            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+        }
+        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+                    variant.versionName + "-" +
+                    variant.buildType.name + ".apk"
+        }
+    }
+}
+dependencies {
+    if (isModuleAsApp.toBoolean() || isUseMaven.toBoolean()) {
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-gan:${RX_FLUX_ARCHITECTURE}"
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan:${RX_FLUX_ARCHITECTURE}"
+        implementation "com.github.coolfire2015.RxFluxArchitecture:module-github:${RX_FLUX_ARCHITECTURE}"
+    } else {
+        implementation project(':module-gan')
+        implementation project(':module-wan')
+        implementation project(':module-github')
+    }
+}

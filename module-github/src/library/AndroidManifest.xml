@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huyingbao.module.github">
+
+    <application
+        android:allowBackup="false"
+        android:supportsRtl="true">
+        <activity android:name=".ui.login.view.LoginActivity" />
+    </application>
+</manifest>
