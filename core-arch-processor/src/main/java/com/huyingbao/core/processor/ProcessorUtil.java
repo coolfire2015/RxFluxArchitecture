@@ -24,37 +24,59 @@ final class ProcessorUtil {
     /**
      * 框架包名
      */
-    private static final String PACKAGE_NAME = "com.huyingbao.core.arch";
+    public static final String PACKAGE_ROOT = "com.huyingbao.core.arch";
+    /**
+     * RxApp类名
+     */
+    private static final String TYPE_RX_APP = "RxApp";
+    /**
+     * RxApp规范类名
+     */
+    private static final String QUALIFIED_RX_APP = PACKAGE_ROOT + "." + TYPE_RX_APP;
     /**
      * App生命周期接口RxAppLifecycle类名
      */
-    private static final String RX_APP_LIFECYCLE_SIMPLE_NAME = "RxAppLifecycle";
+    private static final String TYPE_RX_APP_LIFECYCLE = "RxAppLifecycle";
     /**
      * App生命周期接口类名RxAppLifecycle,规范类名
      */
-    private static final String RX_APP_LIFECYCLE_QUALIFIED_NAME =
-            PACKAGE_NAME + "." + RX_APP_LIFECYCLE_SIMPLE_NAME;
+    private static final String QUALIFIED_RX_APP_LIFECYCLE = PACKAGE_ROOT + "." + TYPE_RX_APP_LIFECYCLE;
     /**
      * 编译文件所在包名
      */
-    private static final String COMPILER_PACKAGE_NAME =
-            RxArchProcessor.class.getPackage().getName();
+    private static final String PACKAGE_COMPILER = RxArchProcessor.class.getPackage().getName();
 
     private final ProcessingEnvironment mProcessingEnv;
     /**
      * RxAppLifecycle类型元素
      */
     private final TypeElement mRxAppLifecycleType;
+    /**
+     * RxApp类型元素
+     */
+    private final TypeElement mRxAppType;
     private int mRound;
 
     ProcessorUtil(ProcessingEnvironment processingEnv) {
         this.mProcessingEnv = processingEnv;
         //返回给定其规范名称的类型元素。
-        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(RX_APP_LIFECYCLE_QUALIFIED_NAME);
+        mRxAppType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_RX_APP);
+        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_RX_APP_LIFECYCLE);
     }
 
     void process() {
         mRound++;
+    }
+
+    /**
+     * 判断该类是否是RxApp的子类
+     *
+     * @param element
+     * @return
+     */
+    boolean isRxApp(TypeElement element) {
+        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
+                mRxAppType.asType());
     }
 
     /**
@@ -69,7 +91,7 @@ final class ProcessorUtil {
     }
 
     void writeIndexer(TypeSpec indexer) {
-        writeClass(COMPILER_PACKAGE_NAME, indexer);
+        writeClass(PACKAGE_COMPILER, indexer);
     }
 
     void writeClass(String packageName, TypeSpec clazz) {

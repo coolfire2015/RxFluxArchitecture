@@ -10,12 +10,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
-import com.huyingbao.core.arch.RxFlux;
-
 import java.lang.reflect.InvocationTargetException;
 
 import javax.inject.Inject;
-
 
 import dagger.android.DaggerApplication;
 
