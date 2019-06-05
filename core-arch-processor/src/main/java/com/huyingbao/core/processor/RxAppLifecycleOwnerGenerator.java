@@ -59,7 +59,6 @@ final class RxAppLifecycleOwnerGenerator {
     /**
      * 生成getLifecycle()方法
      *
-     * @param rxAppLifecycleClassNames
      * @return
      */
     private MethodSpec generateGetLifecycle() {

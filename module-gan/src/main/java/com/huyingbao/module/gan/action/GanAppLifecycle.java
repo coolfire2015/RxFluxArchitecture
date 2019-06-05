@@ -17,6 +17,7 @@ public class GanAppLifecycle extends RxAppLifecycle {
         super(application);
     }
 
+    @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
         EventBus.builder()
@@ -24,8 +25,15 @@ public class GanAppLifecycle extends RxAppLifecycle {
                 .eventInheritance(false);
     }
 
+    @Override
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onLowMemory() {
+
+    }
+
+    @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy() {
+    public void onTerminate() {
 
     }
 }

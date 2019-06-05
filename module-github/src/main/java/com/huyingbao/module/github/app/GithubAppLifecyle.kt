@@ -15,14 +15,18 @@ import org.greenrobot.eventbus.EventBus
 class GithubAppLifecyle(application: Application?) : RxAppLifecycle(application) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
+    override fun onCreate() {
         EventBus.builder()
                 .addIndex(GithubEventBusIndex())
                 .eventInheritance(false)
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    override fun onLowMemory() {
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
+    override fun onTerminate() {
 
     }
 }
