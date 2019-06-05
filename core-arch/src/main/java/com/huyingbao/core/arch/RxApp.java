@@ -50,7 +50,7 @@ public abstract class RxApp extends DaggerApplication {
         //使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
         if (mLifecycleRegistry != null) {
-//            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class RxApp extends DaggerApplication {
     public void onLowMemory() {
         super.onLowMemory();
         if (mLifecycleRegistry != null) {
-//            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
+            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class RxApp extends DaggerApplication {
     public void onTerminate() {
         super.onTerminate();
         if (mLifecycleRegistry != null) {
-//            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
+            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
         }
     }
 

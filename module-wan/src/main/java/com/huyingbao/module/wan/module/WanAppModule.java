@@ -1,13 +1,9 @@
 package com.huyingbao.module.wan.module;
 
-import android.app.Application;
-
-import androidx.lifecycle.ViewModelProvider;
-
 import com.google.gson.GsonBuilder;
 import com.huyingbao.module.wan.api.WanApi;
-import com.huyingbao.module.wan.app.WanAppStore;
 import com.huyingbao.module.wan.app.WanContants;
+import com.huyingbao.module.wan.ui.friend.model.WebSite;
 
 import javax.inject.Singleton;
 
@@ -33,5 +29,11 @@ public class WanAppModule {
                 .client(client)
                 .build();
         return retrofit.create(WanApi.class);
+    }
+
+    @Singleton
+    @Provides
+    WebSite provideWebSite() {
+        return new WebSite();
     }
 }

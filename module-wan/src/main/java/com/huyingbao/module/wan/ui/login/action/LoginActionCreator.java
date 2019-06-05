@@ -5,8 +5,8 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher;
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.scope.ActivityScope;
 import com.huyingbao.core.utils.LocalStorageUtils;
-import com.huyingbao.module.wan.app.WanActionCreator;
 import com.huyingbao.module.wan.api.WanApi;
+import com.huyingbao.module.wan.app.WanActionCreator;
 import com.huyingbao.module.wan.app.WanContants;
 
 import java.util.concurrent.TimeUnit;
