@@ -6,10 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标注{@link RxAppObserver}索引类
+ * 标注Application本身，生命周期持有者，被观察者
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
-public @interface RxIndex {
-    String[] modules() default {};
+public @interface RxAppOwner {
 }

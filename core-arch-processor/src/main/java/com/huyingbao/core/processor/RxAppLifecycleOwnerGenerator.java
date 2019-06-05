@@ -17,10 +17,9 @@ import javax.lang.model.element.Modifier;
 
 
 /**
- * 生成com.huyingbao.core.arch.RxAppLifecycleImpl类
+ * 生成com.huyingbao.core.arch.RxAppLifecycleOwner类
  */
 final class RxAppLifecycleOwnerGenerator {
-    public static final String PACKAGE_GENERATED_ROOT = "com.huyingbao.core.arch";
     private static final String PACKAGE_LIFECYCLE = "androidx.lifecycle";
     private static final String PACKAGE_ANNOTATION = "androidx.annotation";
     private static final String PACKAGE_APPLICATION = "android.app";
@@ -59,7 +58,6 @@ final class RxAppLifecycleOwnerGenerator {
     /**
      * 生成getLifecycle()方法
      *
-     * @param rxAppLifecycleClassNames
      * @return
      */
     private MethodSpec generateGetLifecycle() {

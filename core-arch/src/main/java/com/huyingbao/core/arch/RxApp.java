@@ -10,12 +10,11 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.inject.Inject;
 
-import dagger.android.support.DaggerApplication;
+import dagger.android.DaggerApplication;
 
 import static com.huyingbao.core.arch.RxFlux.TAG;
 
@@ -78,8 +77,7 @@ public abstract class RxApp extends DaggerApplication {
         LifecycleOwner result = null;
         try {
             Class<LifecycleOwner> clazz = (Class<LifecycleOwner>) Class.forName("com.huyingbao.core.arch.RxAppLifecycleOwner");
-            Constructor<LifecycleOwner> constructor = clazz.getConstructor(Application.class);
-            result = constructor.newInstance(this);
+            result = clazz.getConstructor(Application.class).newInstance(this);
         } catch (ClassNotFoundException e) {
             if (Log.isLoggable(TAG, Log.WARN)) {
                 Log.w(TAG, "Failed to find RxAppLifecycleOwner. You should include an"
