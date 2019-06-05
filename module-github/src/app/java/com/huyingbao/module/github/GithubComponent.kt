@@ -6,7 +6,7 @@ import com.huyingbao.module.github.module.GithubAppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 /**
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @Component(modules = [
     GithubAppModule::class,
     CommonModule::class,
-    AndroidSupportInjectionModule::class
+    AndroidInjectionModule::class
 ])
 interface GithubComponent : AndroidInjector<GithubApplication> {
     @Component.Builder

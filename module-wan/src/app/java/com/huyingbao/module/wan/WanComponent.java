@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
-import dagger.android.support.AndroidSupportInjectionModule;
+import dagger.android.AndroidInjectionModule;
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -19,7 +19,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         WanAppModule.class,
         CommonModule.class,
-        AndroidSupportInjectionModule.class})
+        AndroidInjectionModule.class})
 public interface WanComponent extends AndroidInjector<WanApplication> {
     @Component.Builder
     interface Builder {

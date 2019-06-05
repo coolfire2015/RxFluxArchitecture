@@ -12,12 +12,11 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
-import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  * 主Module
  * <p>
- * 在AppComponent中将dagger2库里的AndroidSupportInjectionModule注入到Application中，
+ * 在AppComponent中将dagger2库里的{@link AndroidInjectionModule}注入到Application中，
  * 并将Application实现相应的接口（例如：HasActivityInjector、HasFragmentInjector、
  * HasServiceInjector、HasBroadcastReceiverInjector等等很多），
  * 并返回相应的方法，返回值参照以上App中的方式；
@@ -39,7 +38,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         GanAppModule.class,//模块module
         WanAppModule.class,//模块module
         CommonModule.class,//通用module
-        AndroidSupportInjectionModule.class})
+        AndroidInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {
     @Component.Builder
     interface Builder {
