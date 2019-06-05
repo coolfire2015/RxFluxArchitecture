@@ -4,11 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "kotlin-allopen"
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_kotlin.gradle')
-//JitPack
-group = "com.github.coolfire2015"
 
 //获取local.Properties
 Properties localProperties = new Properties()

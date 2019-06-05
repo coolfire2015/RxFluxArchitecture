@@ -1,10 +1,7 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_java.gradle')
-//JitPack
-group = "com.github.coolfire2015"
 
 android {
     //签名配置,自定义,用在defaultConfig中
