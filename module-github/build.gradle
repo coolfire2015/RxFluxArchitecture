@@ -8,8 +8,11 @@ apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_kotlin.gradle')
 
 //获取local.Properties
-Properties localProperties = new Properties()
-localProperties.load(project.rootProject.file('local.Properties').newDataInputStream())
+File localPropFile = project.rootProject.file("local.properties")
+if (localPropFile.exists()) {
+    Properties localProperties = new Properties()
+    localProperties.load(localPropFile.newDataInputStream())
+}
 
 //指定会打开类的注解的列表
 allOpen {
