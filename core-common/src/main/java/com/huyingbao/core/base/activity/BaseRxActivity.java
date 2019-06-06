@@ -73,9 +73,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
     }
 
     /**
-     * 接收RxError，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
+     * 接收RxError，粘性，该方法不经过RxStore, 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
     public void onRxError(@NonNull RxError rxError) {

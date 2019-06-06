@@ -21,6 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
+ * 不使用Dagger.Android，不接收订阅回调
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseCommonDialog extends AppCompatDialogFragment implements BaseView {

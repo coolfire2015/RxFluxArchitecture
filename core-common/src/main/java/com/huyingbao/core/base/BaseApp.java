@@ -21,7 +21,7 @@ public abstract class BaseApp extends RxApp {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        //Multidex分包
+        //MultiDex分包
         MultiDex.install(this);
     }
 

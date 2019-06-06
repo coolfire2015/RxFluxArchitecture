@@ -13,7 +13,7 @@ import com.huyingbao.core.common.R;
 
 
 /**
- * 带有toolbar的Activity父类
+ * 使用{@link androidx.navigation.Navigation}管理Fragment
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
