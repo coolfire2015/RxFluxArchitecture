@@ -9,8 +9,8 @@ dependencies {
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
     annotationProcessor "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-//    annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
-    annotationProcessor project(':core-arch-processor')
+    annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+//    annotationProcessor project(':core-arch-processor')
     //单元测试编译时生成
     testAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
@@ -19,8 +19,8 @@ dependencies {
     testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     testAnnotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
     testAnnotationProcessor "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-//    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
-    testAnnotationProcessor project(':core-arch-processor')
+    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+//    testAnnotationProcessor project(':core-arch-processor')
     //测试Android
     testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
     testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"

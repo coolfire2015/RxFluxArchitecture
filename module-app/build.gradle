@@ -87,13 +87,7 @@ android {
     }
 }
 dependencies {
-    if (isModuleAsApp.toBoolean() || isUseMaven.toBoolean()) {
-        implementation "com.github.coolfire2015.RxFluxArchitecture:module-gan:${RX_FLUX_ARCHITECTURE}"
-        implementation "com.github.coolfire2015.RxFluxArchitecture:module-wan:${RX_FLUX_ARCHITECTURE}"
-        implementation "com.github.coolfire2015.RxFluxArchitecture:module-github:${RX_FLUX_ARCHITECTURE}"
-    } else {
-        implementation project(':module-gan')
-        implementation project(':module-wan')
-//        implementation project(':module-github')
-    }
+    implementation project(':module-gan')
+    implementation project(':module-wan')
+    implementation project(':module-github')
 }

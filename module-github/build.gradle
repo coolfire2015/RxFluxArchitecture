@@ -9,10 +9,8 @@ apply from: rootProject.file('depend_kotlin.gradle')
 
 //获取local.Properties
 File localPropFile = project.rootProject.file("local.properties")
-if (localPropFile.exists()) {
-    Properties localProperties = new Properties()
-    localProperties.load(localPropFile.newDataInputStream())
-}
+Properties localProperties = new Properties()
+localProperties.load(localPropFile.newDataInputStream())
 
 //指定会打开类的注解的列表
 allOpen {
@@ -34,7 +32,7 @@ android {
     }
     //默认配置
     defaultConfig {
-        //支持Multidex分包
+        //支持MultiDex分包
         multiDexEnabled true
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int

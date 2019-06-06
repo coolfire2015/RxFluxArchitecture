@@ -1,8 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
-//JitPack
-group = "com.github.coolfire2015"
 
 android {
     //编译版本
@@ -45,8 +42,8 @@ artifacts {
 
 dependencies {
     //内核
-    api project(":core-arch")
-//    api "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
+//    api project(":core-arch")
+    api "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
     api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
     api "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
