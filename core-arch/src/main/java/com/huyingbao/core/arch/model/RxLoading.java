@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import org.greenrobot.eventbus.EventBusEvent;
 
 /**
- * ActionCreator直接发送过程进度事件,通知View响应,不经过RxStore
+ * 操作进度通知，发送到{@link com.huyingbao.core.arch.view.RxFluxView}
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

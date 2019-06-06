@@ -89,8 +89,6 @@ public class CommonLoadingDialog extends BaseCommonDialog {
 
     /**
      * 设置进度弹框显示文字
-     *
-     * @param messageInt
      */
     public void setMessageInt(@StringRes int messageInt) {
         mMessageInt = messageInt;

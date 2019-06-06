@@ -12,18 +12,14 @@ import io.reactivex.disposables.Disposable;
 
 
 /**
- * 订阅管理类
- * 将rxAction与disposable(订阅与被订阅关联对象)连接起来，
- * action的tag作为key
+ * 订阅管理类：关联并管理{@link RxAction}与{@link Disposable}
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
 public class RxActionManager {
     /**
-     * 管理订阅的ArrayMap
-     * <p>
-     * rxAction的tag作为key
+     * 管理订阅的ArrayMap，{@link RxAction}的tag作为key
      */
     private ArrayMap<String, Pair<Integer, Disposable>> mMap;
 
@@ -33,14 +29,9 @@ public class RxActionManager {
     }
 
     /**
-     * 添加订阅管理,将RxAction和Disposable添加到RxActionManager
-     * <p>
-     * 成对添加
-     * <p>
-     * 如果已经有了一个对应RxAction的订阅,则取消订阅
-     *
-     * @param rxAction
-     * @param disposable
+     * 成对添加{@link RxAction}和{@link Disposable}到管理订阅的ArrayMap中。
+     * 如果已存在，则取消{@link Disposable}中观察者与被观察者订阅关系，
+     * 停止被观察者{@link io.reactivex.Observable}方法。
      */
     public void add(RxAction rxAction, Disposable disposable) {
         Pair<Integer, Disposable> old = mMap.put(rxAction.getTag(), getPair(rxAction, disposable));
@@ -50,9 +41,8 @@ public class RxActionManager {
     }
 
     /**
-     * 从管理器中取消订阅,移除该rxAction，停止该rxAction对应的操作
-     *
-     * @param rxAction
+     * 移除{@link RxAction}，取消{@link Disposable}中观察者与被观察者订阅关系，
+     * 停止被观察者{@link io.reactivex.Observable}方法。
      */
     public void remove(RxAction rxAction) {
         Pair<Integer, Disposable> old = mMap.remove(rxAction.getTag());
@@ -62,14 +52,7 @@ public class RxActionManager {
     }
 
     /**
-     * 检查
-     * <p>
-     * 1:订阅管理器是否已经有了该rxAction
-     * <p>
-     * 2:rxAction是否已经运行一个disposable
-     *
-     * @param rxAction 获取rxAction的tag，tag的hashcode对应一个disposable
-     * @return
+     * 检查否已存在{@link RxAction}
      */
     public boolean contains(RxAction rxAction) {
         Pair<Integer, Disposable> old = mMap.get(rxAction.getTag());
@@ -81,7 +64,7 @@ public class RxActionManager {
     }
 
     /**
-     * 清除所有的disposables
+     * 清除所有的{@link Disposable}
      */
     public synchronized void clear() {
         if (mMap.isEmpty()) {
@@ -95,11 +78,9 @@ public class RxActionManager {
     }
 
     /**
-     * 创建一个新的pair
+     * 创建一个新的{@link Pair}
      *
-     * @param rxAction   转变成hashcode
-     * @param disposable
-     * @return
+     * @param rxAction hashcode作为Key
      */
     private Pair<Integer, Disposable> getPair(RxAction rxAction, Disposable disposable) {
         return new Pair<>(rxAction.hashCode(), disposable);

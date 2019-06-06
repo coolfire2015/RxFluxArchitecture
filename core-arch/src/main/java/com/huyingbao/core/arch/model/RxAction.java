@@ -5,8 +5,11 @@ import androidx.collection.ArrayMap;
 
 import org.greenrobot.eventbus.EventBusEvent;
 
+import java.util.Objects;
+
 /**
- * action封装类，用于传递数据，使用Builder创建
+ * 操作结果通知，封装操作返回数据，
+ * 由{@link com.huyingbao.core.arch.action.RxActionCreator}发送到{@link com.huyingbao.core.arch.store.RxStore}，
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
@@ -50,7 +53,7 @@ public class RxAction extends EventBusEvent {
         if (!mTag.equals(rxAction.mTag)) {
             return false;
         }
-        return !(mData != null ? !mData.equals(rxAction.mData) : rxAction.mData != null);
+        return Objects.equals(mData, rxAction.mData);
     }
 
     @Override

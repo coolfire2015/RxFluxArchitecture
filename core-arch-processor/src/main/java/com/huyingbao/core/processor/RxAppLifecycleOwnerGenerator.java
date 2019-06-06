@@ -18,6 +18,8 @@ import javax.lang.model.element.Modifier;
 
 /**
  * 生成com.huyingbao.core.arch.RxAppLifecycleOwner类
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 final class RxAppLifecycleOwnerGenerator {
     private static final String PACKAGE_LIFECYCLE = "androidx.lifecycle";
@@ -40,9 +42,6 @@ final class RxAppLifecycleOwnerGenerator {
 
     /**
      * 生成类
-     *
-     * @param rxAppLifecycleClassNames
-     * @return
      */
     TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
         List<String> orderedRxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
@@ -65,8 +64,6 @@ final class RxAppLifecycleOwnerGenerator {
 
     /**
      * 生成类注解
-     *
-     * @return
      */
     private AnnotationSpec generateAnnotation() {
         return AnnotationSpec.builder(SuppressWarnings.class)
@@ -76,9 +73,6 @@ final class RxAppLifecycleOwnerGenerator {
 
     /**
      * 生成构造方法
-     *
-     * @param rxAppLifecycleClassNames
-     * @return
      */
     private MethodSpec generateConstructor(Collection<String> rxAppLifecycleClassNames) {
         //方法入参
@@ -101,8 +95,6 @@ final class RxAppLifecycleOwnerGenerator {
 
     /**
      * 生成成员变量
-     *
-     * @return
      */
     private FieldSpec generateField() {
         //获取类名
@@ -115,8 +107,6 @@ final class RxAppLifecycleOwnerGenerator {
 
     /**
      * 生成getLifecycle()方法
-     *
-     * @return
      */
     private MethodSpec generateGetLifecycle() {
         MethodSpec.Builder builder = MethodSpec.methodBuilder("getLifecycle")

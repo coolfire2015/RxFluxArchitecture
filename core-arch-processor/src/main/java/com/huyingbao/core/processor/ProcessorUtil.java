@@ -19,6 +19,8 @@ import static com.huyingbao.core.processor.RxArchProcessor.DEBUG;
 
 /**
  * Utilities for writing classes and logging.
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 final class ProcessorUtil {
     /**
@@ -70,9 +72,6 @@ final class ProcessorUtil {
 
     /**
      * 判断该类是否是RxApp的子类
-     *
-     * @param element
-     * @return
      */
     boolean isRxApp(TypeElement element) {
         return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
@@ -81,9 +80,6 @@ final class ProcessorUtil {
 
     /**
      * 判断该类是否是RxAppLifecycle的实现类
-     *
-     * @param element
-     * @return
      */
     boolean isRxAppLifecycle(TypeElement element) {
         return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),

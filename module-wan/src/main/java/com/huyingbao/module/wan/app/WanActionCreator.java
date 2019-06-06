@@ -30,9 +30,9 @@ public abstract class WanActionCreator extends RxActionCreator {
     /**
      * 验证接口返回数据是正常
      * <p>
-     * 1:没有数据,返回未知异常
+     * 1.没有数据,返回未知异常
      * <p>
-     * 2:有数据,返回code不是成功码,返回自定义异常
+     * 2.有数据,返回code不是成功码,返回自定义异常
      */
     public <T> Function<T, Observable<T>> verifyResponse() {
         return response -> {

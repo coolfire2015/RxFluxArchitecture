@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * 标注Application本身，生命周期持有者，被观察者
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)

@@ -10,9 +10,15 @@ import dagger.android.HasAndroidInjector;
 import static dagger.internal.Preconditions.checkNotNull;
 
 /**
- * 公用Dagger.Android依赖注入方法
+ * Created by liujunfeng on 2019/1/1.
  */
 public final class RxAndroidInjection {
+    /**
+     * 公用Dagger.Android依赖注入方法
+     *
+     * @param object      需要完成依赖注入的类
+     * @param application 实现{@link HasAndroidInjector}的Application
+     */
     public static void inject(@NonNull Object object, @NonNull Application application) {
         AndroidInjector<Object> injector;
         if (application instanceof HasAndroidInjector) {

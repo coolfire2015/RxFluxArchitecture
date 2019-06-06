@@ -19,6 +19,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 
+/**
+ * Created by liujunfeng on 2019/1/1.
+ */
 public class RxArchProcessor extends AbstractProcessor {
     private static final String COMPILER_PACKAGE_NAME = RxArchProcessor.class.getPackage().getName();
     static final boolean DEBUG = false;
@@ -33,8 +36,6 @@ public class RxArchProcessor extends AbstractProcessor {
      * 比如文件相关的辅助类 Filer;
      * 元素相关的辅助类Elements;
      * 日志相关的辅助类Messager;
-     *
-     * @param processingEnvironment
      */
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -65,10 +66,6 @@ public class RxArchProcessor extends AbstractProcessor {
 
     /**
      * 生成Java文件
-     *
-     * @param set
-     * @param roundEnvironment
-     * @return
      */
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
@@ -89,9 +86,6 @@ public class RxArchProcessor extends AbstractProcessor {
 
     /**
      * 检索{@link RxAppObserver}，生成Application生命周期观察者索引文件
-     *
-     * @param roundEnvironment
-     * @return
      */
     private boolean processIndex(RoundEnvironment roundEnvironment) {
         List<TypeElement> elements = mProcessorUtil.getElementsFor(RxAppObserver.class, roundEnvironment);
@@ -106,8 +100,6 @@ public class RxArchProcessor extends AbstractProcessor {
 
     /**
      * 检查使用{@link RxAppOwner}注解的类中是否有RxApp子类，如果有则取出，且RxApp子类只能有一个。
-     *
-     * @param env
      */
     private void processRxAppOwner(RoundEnvironment env) {
         for (TypeElement element : mProcessorUtil.getElementsFor(RxAppOwner.class, env)) {
@@ -123,8 +115,6 @@ public class RxArchProcessor extends AbstractProcessor {
 
     /**
      * 生成RxAppLifecycleOwner类
-     *
-     * @return
      */
     private boolean processRxAppLifecycleOwner() {
         if (mRxAppList.isEmpty()) {
@@ -142,11 +132,7 @@ public class RxArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 从当前包附加的类中获取到所有编译生成的Index类
-     * 再从Index类的{@link RxIndex}注解中取出modules中存储的自定义RxAppLifecycle类名
-     *
-     * @param packageElement
-     * @return
+     * 从当前包附加的类中获取到所有编译生成的Index类，再从Index类的{@link RxIndex}注解中取出modules中存储的自定义RxAppLifecycle类名
      */
     @SuppressWarnings("unchecked")
     private Set<String> getIndexedClassNames(PackageElement packageElement) {

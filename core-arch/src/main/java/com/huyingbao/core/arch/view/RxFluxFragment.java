@@ -21,8 +21,6 @@ import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by liujunfeng on 2019/1/1.
- *
- * @param <T>
  */
 public abstract class RxFluxFragment<T extends ViewModel> extends Fragment
         implements RxFluxView<T>, RxSubscriberView, HasAndroidInjector {

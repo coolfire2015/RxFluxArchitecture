@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 import dagger.MapKey;
 
 /**
- * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法
+ * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法，
  * <p>
- * 区分不同的RxStore子类 对ClassKey注解的扩展
+ * 区分不同的{@link RxStore}子类 对{@link dagger.multibindings.ClassKey}扩展。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

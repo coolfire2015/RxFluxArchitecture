@@ -19,17 +19,7 @@ import dagger.android.HasAndroidInjector;
 
 
 /**
- * 实现三个接口
- * <p>
- * 1:RxFluxView:获取RxStore,并关联自身生命周期
- * <p>
- * 2:RxSubscriberView:交由 {@link com.huyingbao.core.arch.RxFlux} 根据其生命周期注册订阅或者取消订阅
- * <p>
- * 3:HasSupportFragmentInjector:依赖注入
- * <p>
  * Created by liujunfeng on 2019/1/1.
- *
- * @param <T>
  */
 public abstract class RxFluxActivity<T extends RxActivityStore> extends AppCompatActivity
         implements RxFluxView<T>, RxSubscriberView, HasAndroidInjector {

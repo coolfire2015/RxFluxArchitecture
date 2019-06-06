@@ -26,20 +26,20 @@ public abstract class BaseApp extends RxApp {
     }
 
     /**
-     * 注解CallSuper强制子类复写该方法时调用父方法
+     * 注解{@link CallSuper}强制子类复写该方法时调用父方法
      */
     @Override
     @CallSuper
     public void onCreate() {
         super.onCreate();
-        initArouter();
+        initARouter();
         initDebug();
     }
 
     /**
-     * 初始化Arouter
+     * 初始化ARouter
      */
-    private void initArouter() {
+    private void initARouter() {
         if (BuildConfig.DEBUG) {
             ARouter.openLog();
             ARouter.openDebug();

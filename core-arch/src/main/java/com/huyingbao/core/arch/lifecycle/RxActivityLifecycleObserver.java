@@ -12,9 +12,7 @@ import com.huyingbao.core.arch.store.RxActivityStore;
 import com.huyingbao.core.arch.view.RxFluxView;
 
 /**
- * Activity生命周期订阅者对象,
- * <p>
- * 在Activity对象外,执行与该Activity生命周期相关联的方法.
+ * Activity生命周期观察者，将Activity持有的{@link com.huyingbao.core.arch.store.RxStore}关联其生命周期。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
@@ -26,12 +24,7 @@ public class RxActivityLifecycleObserver implements LifecycleObserver {
     }
 
     /**
-     * activity创建成功之后调用,
-     * <p>
-     * 若activity是{@link RxFluxView}的子类, 获取需要关联的rxStore
-     * <p>
-     * 使用LifecycleObserver,接收ON_CREATE,确保在RxFluxActivity onCreate()方法之后执行,
-     * 在RxFluxActivity onCreate()方法实现依赖注入
+     * 在onCreate(Bundle)完成依赖注入之后调用
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {

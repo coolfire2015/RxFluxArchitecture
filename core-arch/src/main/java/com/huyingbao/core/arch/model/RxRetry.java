@@ -7,7 +7,7 @@ import org.greenrobot.eventbus.EventBusEvent;
 import io.reactivex.Observable;
 
 /**
- * ActionCreator直接发送异常重试事件,通知View响应,不经过RxStore
+ * 操作异常重试通知，发送到{@link com.huyingbao.core.arch.view.RxFluxView｝
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

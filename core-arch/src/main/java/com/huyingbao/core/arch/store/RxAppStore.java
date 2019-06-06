@@ -11,6 +11,8 @@ import com.huyingbao.core.arch.model.RxChange;
 
 
 /**
+ * 存储和管理Application生命周期内的数据
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class RxAppStore extends AndroidViewModel implements RxStore {
@@ -22,8 +24,7 @@ public abstract class RxAppStore extends AndroidViewModel implements RxStore {
     }
 
     /**
-     * 所关联对象Application创建时调用该方法
-     * 需要将store注册到dispatcher中
+     * 在所关联对象（Application）创建时调用该方法，注册到{@link RxDispatcher}
      */
     public void subscribe() {
         if (mRxDispatcher.isSubscribe(this)) {
@@ -34,22 +35,15 @@ public abstract class RxAppStore extends AndroidViewModel implements RxStore {
     }
 
     /**
-     * 所关联对象Application销毁时调用该方法
-     * 从dispatcher中取消订阅
+     * 在所关联对象Application销毁时，取消{@link RxDispatcher}中订阅
      */
     public void unsubscribe() {
         Log.i(RxFlux.TAG, "Unsubscribe RxApStore : " + getClass().getSimpleName());
         mRxDispatcher.unsubscribeRxStore(this);
     }
 
-    /**
-     * 传递更改,传递一个RxStoreChange,
-     * 每一个RxStoreChange由storeId和action组成
-     *
-     * @param change
-     */
     @Override
-    public void postChange(RxChange change) {
-        mRxDispatcher.postRxChange(change);
+    public void postChange(RxChange rxChange) {
+        mRxDispatcher.postRxChange(rxChange);
     }
 }

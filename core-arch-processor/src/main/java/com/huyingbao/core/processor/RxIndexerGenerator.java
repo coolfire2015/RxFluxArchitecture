@@ -15,6 +15,8 @@ import javax.lang.model.element.TypeElement;
 
 /**
  * 生成索引文件
+ * <p>
+ * Created by liujunfeng on 2019/1/1.
  */
 final class RxIndexerGenerator {
     private static final String INDEXER_NAME_PREFIX = "RxIndexer_";

@@ -25,12 +25,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * 主类
- * 必须在application创建的时候调用该类的实例方法, 并仅调用一次.
- * 这个类会自动跟踪应用程序的生命周期,
- * 并且注销每个activity剩余的订阅subscriptions
- * <p>
- * 抽象的类并不能实例化
+ * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅，必须在Application创建的时候调用该类的实例方法, 并仅调用一次。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
@@ -118,9 +113,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
 
     /**
-     * RxFluxView能响应时，注册订阅
-     *
-     * @param activity
+     * {@link RxSubscriberView}注册订阅
      */
     @Override
     public void onActivityResumed(Activity activity) {
@@ -134,10 +127,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     /**
-     * RxFluxView能响应时，注册订阅
-     *
-     * @param fm
-     * @param f
+     * {@link RxSubscriberView}注册订阅
      */
     @Override
     public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
@@ -153,9 +143,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
 
 
     /**
-     * RxFluxView不能响应时，取消订阅
-     *
-     * @param activity
+     * {@link RxSubscriberView}取消订阅
      */
     @Override
     public void onActivityPaused(Activity activity) {
@@ -166,10 +154,7 @@ public class RxFlux extends FragmentManager.FragmentLifecycleCallbacks implement
     }
 
     /**
-     * RxFluxView不能响应时，取消订阅
-     *
-     * @param fm
-     * @param f
+     * {@link RxSubscriberView}取消订阅
      */
     @Override
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {

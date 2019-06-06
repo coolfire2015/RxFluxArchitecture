@@ -19,12 +19,9 @@ import dagger.android.DaggerApplication;
 import static com.huyingbao.core.arch.RxFlux.TAG;
 
 /**
- * Application实现相应的接口
- * HasActivityInjector、
- * HasFragmentInjector、
- * HasSupportFragmentInjector、
- * HasServiceInjector、
- * HasBroadcastReceiverInjector
+ * Application实现Dagger.Android依赖注入。
+ * <p>
+ * 通过反射获取RxAppLifecycleOwner，并实现生命周期状态分发到{@link RxAppLifecycle}。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
@@ -46,8 +43,7 @@ public abstract class RxApp extends DaggerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //application创建的时候调用该方法，
-        //使RxFlux可以接受Activity生命周期回调
+        //application创建的时候调用该方法，使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
         if (mLifecycleRegistry != null) {
             mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);

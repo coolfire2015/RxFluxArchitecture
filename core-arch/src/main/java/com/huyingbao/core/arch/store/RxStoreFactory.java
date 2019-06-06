@@ -11,42 +11,39 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 
 /**
- * 实现ViewModelProvider.Factory
- * 提供ViewModel缓存的实例
- * 通过Dagger2将Map直接注入，
- * 通过Key直接获取到对应的ViewModel
+ * 实现{@link ViewModelProvider.Factory}，提供过依赖注入获取{@link RxStore} Map集合， 缓存并对外提供{@link RxStore}实例
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 
 @Singleton
 public class RxStoreFactory implements ViewModelProvider.Factory {
-    private final Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;
+    private final Map<Class<? extends ViewModel>, Provider<ViewModel>> mClassProviderMap;
 
     @Inject
-    RxStoreFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
-        this.creators = creators;
+    RxStoreFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> mClassProviderMap) {
+        this.mClassProviderMap = mClassProviderMap;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        Provider<? extends ViewModel> creator = creators.get(modelClass);
+        Provider<? extends ViewModel> viewModelProvider = mClassProviderMap.get(modelClass);
         //通过class找到相应ViewModel的Provider
-        if (creator == null) {
-            for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : creators.entrySet()) {
+        if (viewModelProvider == null) {
+            for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : mClassProviderMap.entrySet()) {
                 if (modelClass.isAssignableFrom(entry.getKey())) {
-                    creator = entry.getValue();
+                    viewModelProvider = entry.getValue();
                     break;
                 }
             }
         }
-        if (creator == null) {
+        if (viewModelProvider == null) {
             throw new IllegalArgumentException("unknown model class " + modelClass);
         }
         try {
             //通过get()方法获取到ViewModel
-            return (T) creator.get();
+            return (T) viewModelProvider.get();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

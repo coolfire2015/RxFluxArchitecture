@@ -19,8 +19,8 @@ import dagger.multibindings.IntoMap;
 public abstract class GanStoreModule {
     /**
      * 创建类实例有2个维度可以创建：
-     * 1:通过Module中的Provide注解或者Binds等注解来创建（以下简称Module维度）优先
-     * 2:通过用Inject注解标注的构造函数来创建（以下简称Inject维度）
+     * 1.通过Module中的Provide注解或者Binds等注解来创建（以下简称Module维度）优先
+     * 2.通过用Inject注解标注的构造函数来创建（以下简称Inject维度）
      * <p>
      * Qualifier注解用来区分同一纬度下两种不同的创建实例的方法，类似MapKey
      * <p>

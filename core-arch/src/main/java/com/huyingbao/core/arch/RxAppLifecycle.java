@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 /**
- * 跟随App生命周期
+ * 跟随Application生命周期
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

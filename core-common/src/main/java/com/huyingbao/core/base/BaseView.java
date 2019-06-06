@@ -10,15 +10,11 @@ import androidx.annotation.Nullable;
 public interface BaseView {
     /**
      * 获取对应布局文件ID
-     *
-     * @return
      */
     int getLayoutId();
 
     /**
      * View层创建之后调用方法
-     *
-     * @param savedInstanceState
      */
     void afterCreate(@Nullable Bundle savedInstanceState);
 }
