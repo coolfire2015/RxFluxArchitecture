@@ -32,7 +32,7 @@ import com.huyingbao.core.arch.model.RxChange;
  * RxStore继承ViewModel，可以在屏幕旋转或配置更改引起的Activity重建时存活下来。
  * 重建后数据可以继续使用。
  * <p>
- * 实现LifecycleObserver，可以关联Fragment生命周期
+ * 实现{@link LifecycleObserver}，可以关联Fragment生命周期
  * <p>
  * ViewModel类旨在存储和管理与UI相关的数据，
  * 以便数据在诸如屏幕旋转之类的配置更改中生存下来。

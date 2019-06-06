@@ -4,9 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 
 import com.huyingbao.core.arch.RxFlux;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
@@ -16,7 +13,7 @@ import com.huyingbao.core.arch.model.RxChange;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public abstract class RxAppStore extends AndroidViewModel implements LifecycleObserver, RxStore {
+public abstract class RxAppStore extends AndroidViewModel implements RxStore {
     private final RxDispatcher mRxDispatcher;
 
     public RxAppStore(Application application, RxDispatcher rxDispatcher) {
@@ -28,7 +25,6 @@ public abstract class RxAppStore extends AndroidViewModel implements LifecycleOb
      * 所关联对象Application创建时调用该方法
      * 需要将store注册到dispatcher中
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void subscribe() {
         if (mRxDispatcher.isSubscribe(this)) {
             return;
@@ -41,7 +37,6 @@ public abstract class RxAppStore extends AndroidViewModel implements LifecycleOb
      * 所关联对象Application销毁时调用该方法
      * 从dispatcher中取消订阅
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void unsubscribe() {
         Log.i(RxFlux.TAG, "Unsubscribe RxApStore : " + getClass().getSimpleName());
         mRxDispatcher.unsubscribeRxStore(this);

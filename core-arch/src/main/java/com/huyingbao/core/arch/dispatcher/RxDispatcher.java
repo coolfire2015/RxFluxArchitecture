@@ -1,12 +1,11 @@
 package com.huyingbao.core.arch.dispatcher;
 
-import androidx.lifecycle.LifecycleObserver;
-
 import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.arch.model.RxError;
 import com.huyingbao.core.arch.model.RxLoading;
 import com.huyingbao.core.arch.model.RxRetry;
+import com.huyingbao.core.arch.store.RxStore;
 import com.huyingbao.core.arch.view.RxSubscriberView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +37,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>     实现RxActionDispatch的RxStore
      */
-    public <T extends LifecycleObserver> void subscribeRxStore(final T rxStore) {
+    public <T extends RxStore> void subscribeRxStore(final T rxStore) {
         EventBus.getDefault().register(rxStore);
     }
 
@@ -58,7 +57,7 @@ public class RxDispatcher {
      * @param rxStore
      * @param <T>
      */
-    public <T extends LifecycleObserver> void unsubscribeRxStore(final T rxStore) {
+    public <T extends RxStore> void unsubscribeRxStore(final T rxStore) {
         EventBus.getDefault().unregister(rxStore);
     }
 

@@ -1,7 +1,6 @@
 package com.huyingbao.module.github.module
 
 import com.google.gson.GsonBuilder
-import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.api.ReposApi
 import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubContants

@@ -6,10 +6,10 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.module.CommonContants
-import com.huyingbao.module.github.utils.FlatMapResponse2Result
 import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.ui.login.action.LoginAction.Companion.LOGIN
 import com.huyingbao.module.github.ui.login.model.LoginRequest
+import com.huyingbao.module.github.utils.FlatMapResponse2Result
 import retrofit2.Retrofit
 import javax.inject.Inject
 

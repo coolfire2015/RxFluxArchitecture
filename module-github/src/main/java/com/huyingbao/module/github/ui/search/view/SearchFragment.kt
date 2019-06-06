@@ -5,7 +5,7 @@ import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.ui.search.store.SearchStore
 
-class  SearchFragment : BaseRxFragment<SearchStore>() {
+class SearchFragment : BaseRxFragment<SearchStore>() {
     companion object {
         fun newInstance(): SearchFragment {
             return SearchFragment()

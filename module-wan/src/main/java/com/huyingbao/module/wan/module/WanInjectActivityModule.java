@@ -1,6 +1,7 @@
 package com.huyingbao.module.wan.module;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
+import com.huyingbao.module.wan.app.WanAppLifecycle;
 import com.huyingbao.module.wan.ui.article.view.ArticleActivity;
 import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
@@ -19,4 +20,8 @@ public abstract class WanInjectActivityModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = WanInjectFragmentModule.class)
     abstract LoginActivity injectLoginActivity();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract WanAppLifecycle injectWanAppLifecycle();
 }

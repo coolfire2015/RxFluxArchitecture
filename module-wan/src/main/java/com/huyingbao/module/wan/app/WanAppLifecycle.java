@@ -7,8 +7,8 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import com.huyingbao.core.annotations.RxAppObserver;
 import com.huyingbao.core.arch.RxAppLifecycle;
+import com.huyingbao.core.arch.utils.RxAndroidInjection;
 import com.huyingbao.module.wan.WanEventBusIndex;
-import com.huyingbao.module.wan.ui.friend.model.WebSite;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,11 +17,11 @@ import javax.inject.Inject;
 @RxAppObserver
 public class WanAppLifecycle extends RxAppLifecycle {
     @Inject
-    WebSite mWebSite;
+    WanAppStore mWanAppStore;
 
     public WanAppLifecycle(Application application) {
         super(application);
-        DaggerWanComponet.create().inject(this);
+        RxAndroidInjection.inject(this, application);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class WanAppLifecycle extends RxAppLifecycle {
         EventBus.builder()
                 .addIndex(new WanEventBusIndex())
                 .eventInheritance(false);
+        mWanAppStore.subscribe();
     }
 
     @Override
@@ -41,6 +42,6 @@ public class WanAppLifecycle extends RxAppLifecycle {
     @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onTerminate() {
-
+        mWanAppStore.unsubscribe();
     }
 }
