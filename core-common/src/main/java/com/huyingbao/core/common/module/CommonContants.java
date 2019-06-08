@@ -12,4 +12,8 @@ public final class CommonContants {
         public static final String USER_NAME = "userName";
         public static final String PASSWORD = "password";
     }
+
+    public static final class Header{
+        public static final String AUTHORIZATION ="Authorization";
+    }
 }

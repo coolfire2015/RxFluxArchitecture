@@ -1,26 +1,25 @@
-package com.huyingbao.module.github.ui.login.action
+package com.huyingbao.module.github.ui.main.action
 
+import com.google.common.base.Verify
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.module.github.module.MockUtils
 import com.huyingbao.module.github.module.mockDaggerRule
+import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.test.utils.RxJavaRule
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
+
+import org.junit.Assert.*
+import org.junit.Rule
 import org.mockito.Mockito
-import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 
-/**
- * Created by liujunfeng on 2019/4/3.
- */
-class LoginActionCreatorTest {
+class MainActionCreatorTest {
     @get:Rule
-    var rxJavaRule = RxJavaRule()
+var rxJavaRule = RxJavaRule()
     @get:Rule
     var mockitoRule = MockitoJUnit.rule()
     @get:Rule
@@ -31,12 +30,11 @@ class LoginActionCreatorTest {
     @Spy
     lateinit var mRxActionManager: RxActionManager
 
-    private var mLoginActionCreator: LoginActionCreator? = null
+    private var mMainActionCreator: MainActionCreator? = null
 
     @Before
-    @Throws(Exception::class)
     fun setUp() {
-        mLoginActionCreator = LoginActionCreator(mRxDispatcher, mRxActionManager, MockUtils.component!!.retrofit)
+        mMainActionCreator = MainActionCreator(mRxDispatcher,mRxActionManager, MockUtils.component!!.retrofit)
     }
 
     @After
@@ -44,9 +42,8 @@ class LoginActionCreatorTest {
     }
 
     @Test
-    fun testLogin() {
-        mLoginActionCreator!!.login("asdf", "asdf")
-        //验证方法正确执行,并发送RxAction
-        verify(mRxDispatcher).postRxAction(Mockito.any<RxAction>())
+    fun testGetLoginUserInfo() {
+        mMainActionCreator!!.getLoginUserInfo()
+        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
     }
 }

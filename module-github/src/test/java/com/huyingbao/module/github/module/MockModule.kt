@@ -1,20 +1,26 @@
 package com.huyingbao.module.github.module
 
+import android.text.TextUtils
 import com.google.gson.GsonBuilder
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.common.annotation.OpenForTesting
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.GithubComponent
 import com.huyingbao.module.github.app.GithubContants
+import com.huyingbao.module.github.utils.PageInfoInterceptor
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.utils.RequestMatchers
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.mockito.Mockito
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -41,29 +47,39 @@ class MockModule {
 
     @Singleton
     @Provides
-    fun provideClient(): OkHttpClient {
+    fun provideRetrofit(): Retrofit {
+        //Head拦截器
+        val headInterceptor = Interceptor { chain ->
+            var request = chain.request()
+            val token = request.header(CommonContants.Header.AUTHORIZATION)
+            if (TextUtils.isEmpty(token)) {
+                //Header中添加Authorization token数据
+                val url = request.url().toString()
+                val requestBuilder = request.newBuilder()
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 7cb70f7e66b66f9d08fb45febe3b3ad25ecf7722")
+                        .url(url)
+                request = requestBuilder.build()
+            }
+            chain.proceed(request)
+        }
         //日志拦截器
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        //实例化okhttp
-        val okHttpClient = OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
+        //初始化OkHttp
+        val clientBuilder = OkHttpClient.Builder()
+                .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .addInterceptor(headInterceptor)
                 .addInterceptor(loggingInterceptor)
-                .build()
-        return okHttpClient
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(initBaseUrl())
+                .addInterceptor(PageInfoInterceptor())
+        //初始化Retrofit
+        val retrofitBuilder = Retrofit.Builder()
+                .baseUrl(GithubContants.Url.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(client)
-                .build()
+                .client(clientBuilder.build())
+        return retrofitBuilder.build()
     }
 
     /**
