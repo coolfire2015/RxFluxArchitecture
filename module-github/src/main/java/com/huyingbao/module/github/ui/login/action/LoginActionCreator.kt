@@ -7,6 +7,7 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.api.UserApi
+import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.login.action.LoginAction.Companion.LOGIN
 import com.huyingbao.module.github.ui.login.model.LoginRequest
 import com.huyingbao.module.github.utils.FlatMapResponse2Result
@@ -21,7 +22,7 @@ class LoginActionCreator @Inject constructor(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager,
         private val retrofit: Retrofit
-) : RxActionCreator(rxDispatcher, rxActionManager), LoginAction {
+) : GithubActionCreator(rxDispatcher, rxActionManager), LoginAction {
 
     override fun login(username: String, password: String) {
         // 生成RxAction实例
@@ -32,11 +33,9 @@ class LoginActionCreator @Inject constructor(
         val basicCode = Base64
                 .encodeToString("$username:$password".toByteArray(), Base64.NO_WRAP)
                 .replace("\\+", "%2B")
-        // 链式调用接口
-        val login = retrofit.create(UserApi::class.java)
+        //调用接口
+        postHttpAction(rxAction, retrofit.create(UserApi::class.java)
                 // 调用接口1：Auth认证，获取登录token
-                .authorizations("Basic $basicCode", LoginRequest.generate())
-                .flatMap { FlatMapResponse2Result(it) }
-        postHttpAction(rxAction, login)
+                .authorizations("Basic $basicCode", LoginRequest.generate()))
     }
 }

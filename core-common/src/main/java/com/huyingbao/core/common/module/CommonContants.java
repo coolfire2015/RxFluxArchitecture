@@ -3,6 +3,7 @@ package com.huyingbao.core.common.module;
 public final class CommonContants {
     public static final class Config {
         public static final int PAGE_SIZE = 20;
+        public static final long HTTP_TIME_OUT=20L;
 
     }
 

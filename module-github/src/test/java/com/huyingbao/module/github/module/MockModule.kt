@@ -5,6 +5,8 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.annotation.OpenForTesting
 import com.huyingbao.module.github.BuildConfig
+import com.huyingbao.module.github.GithubComponent
+import com.huyingbao.module.github.app.GithubContants
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
@@ -70,7 +72,7 @@ class MockModule {
      * @return
      */
     private fun initBaseUrl(): String {
-        return if (BuildConfig.MOCK_URL) initMockServer() else CommonContants.Url.BASE_API
+        return if (BuildConfig.MOCK_URL) initMockServer() else GithubContants.Url.BASE_API
     }
 
     /**

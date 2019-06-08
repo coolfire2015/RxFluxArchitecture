@@ -24,10 +24,9 @@ interface UserApi {
             : Observable<Response<AccessToken>>
 
     /**
-     * 获取用户信息
+     * 获取当前登录用户信息
      */
     @GET("user")
-    fun getPersonInfo(@Header("Authorization") basicCode: String)
-            : Observable<Response<User>>
+    fun getLoginUserInfo(): Observable<Response<User>>
 
 }

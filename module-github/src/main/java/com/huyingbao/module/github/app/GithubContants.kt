@@ -15,20 +15,4 @@ class GithubContants {
         const val BASE_HOST = "https://ghchart.rshah.org/"
 
     }
-
-    object Key {
-        const val ACCESS_TOKEN = "accessToken"
-
-        const val USER_NAME = "user_name"
-
-        const val PASSWORD = "password"
-
-        const val USER_INFO = "userInfo"
-    }
-
-    object Config {
-        const val PAGE_SIZE = 30
-
-        const val HTTP_TIME_OUT = 20L
-    }
 }

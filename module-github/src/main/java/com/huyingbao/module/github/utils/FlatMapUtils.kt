@@ -1,5 +1,7 @@
 package com.huyingbao.module.github.utils
 
+import com.huyingbao.core.common.model.CommonException
+import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import retrofit2.Response
@@ -7,14 +9,20 @@ import retrofit2.Response
 /**
  * 将Response转化为实体数据
  */
-class FlatMapResponse2Result<T>(private val response: Response<T>) : ObservableSource<T> {
+class FlatMapResponse2Result<T>(private val response: T) : ObservableSource<T> {
     override fun subscribe(observer: Observer<in T?>) {
-        if (response.isSuccessful) {
+        if (response !is Response<*>) {
+            observer.onError(CommonException(600, "未知异常！"))
+        }else{
             //接口调用成功，向下传递body
-            observer.onNext(response.body())
-        } else {
-            //接口调用失败，抛出异常
-            observer.onError(Throwable(response.code().toString(), Throwable(response.errorBody().toString())))
+            if (response.isSuccessful) {
+                observer.onNext(response.body() as T?)
+            } else {
+                //接口调用失败，抛出异常
+                observer.onError(Throwable(
+                        response.code().toString(),
+                        Throwable(response.errorBody().toString())))
+            }
         }
     }
 }

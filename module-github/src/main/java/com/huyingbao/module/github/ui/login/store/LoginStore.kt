@@ -23,6 +23,8 @@ class LoginStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivitySto
     var mAccessToken: String? = null
 
     override fun onCleared() {
+        super.onCleared()
+        mAccessToken=null
     }
 
     @Subscribe(tags = [LoginAction.LOGIN])
