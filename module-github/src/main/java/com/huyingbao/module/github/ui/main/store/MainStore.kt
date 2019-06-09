@@ -13,15 +13,4 @@ import javax.inject.Singleton
 @Singleton
 class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivityStore(rxDispatcher) {
 
-    val mUser= MutableLiveData<User>()
-
-    override fun onCleared() {
-        super.onCleared()
-        mUser.value=null
-    }
-
-    @Subscribe(tags = [MainAction.GET_LOGIN_USER_INFO])
-    fun onGetLoginUserInfo(rxAction: RxAction){
-        mUser.value=rxAction.getResponse()
-    }
 }

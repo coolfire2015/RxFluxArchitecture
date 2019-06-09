@@ -1,6 +1,7 @@
 package com.huyingbao.module.github.module
 
 import com.huyingbao.core.arch.scope.ActivityScope
+import com.huyingbao.module.github.app.GithubAppLifecycle
 import com.huyingbao.module.github.ui.login.view.LoginActivity
 import com.huyingbao.module.github.ui.main.view.MainActivity
 import com.huyingbao.module.github.ui.user.view.UserActivity
@@ -12,6 +13,10 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class GithubInjectActivityModule {
+    @ActivityScope
+    @ContributesAndroidInjector()
+    abstract fun injectGithubAppLifecycle(): GithubAppLifecycle
+
     @ActivityScope
     @ContributesAndroidInjector(modules = [GithubInjectFragmentModule::class])
     abstract fun injectLoginActivity(): LoginActivity

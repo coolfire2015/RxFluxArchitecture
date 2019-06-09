@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.github_activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseRxActivity<MainStore>(), NavigationView.OnNavigationItemSelectedListener {
+    @
 
     override fun getLayoutId(): Int {
         return R.layout.github_activity_main
