@@ -9,6 +9,5 @@
         android:id="@+id/userFragment"
         android:name="com.huyingbao.module.github.ui.user.view.UserFragment"
         android:label="@string/github_label_user"
-        tools:layout="@layout/github_fragment_user">
-    </fragment>
+        tools:layout="@layout/github_fragment_user"></fragment>
 </navigation>

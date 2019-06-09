@@ -17,6 +17,7 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivitySto
 
     override fun onCleared() {
         super.onCleared()
+        mUser.value=null
     }
 
     @Subscribe(tags = [MainAction.GET_LOGIN_USER_INFO])
