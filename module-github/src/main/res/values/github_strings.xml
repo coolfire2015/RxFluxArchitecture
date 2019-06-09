@@ -9,6 +9,11 @@
     <string name="github_username">用户名</string>
     <string name="github_password">密码</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="github_menu_feedback">用户反馈</string>
+    <string name="github_menu_user_info">个人信息</string>
+    <string name="github_menu_version">版本更新</string>
+    <string name="github_menu_about">应用关于</string>
+    <string name="github_menu_logout">退出登录</string>
 </resources>
