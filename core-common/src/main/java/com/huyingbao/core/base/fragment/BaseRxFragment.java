@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModel;
 
 import com.huyingbao.core.arch.view.RxFluxFragment;
@@ -35,12 +33,6 @@ public abstract class BaseRxFragment<T extends ViewModel> extends RxFluxFragment
 
     private boolean mBackAble;
     private CharSequence mTitle;
-
-    protected TextView mTvTop;
-    private Toolbar mToolbarTop;
-    private ActionBar mActionBarTop;
-
-    protected boolean mIsVisibleToUser;
 
     @Override
     public void onAttach(Context context) {
@@ -66,8 +58,6 @@ public abstract class BaseRxFragment<T extends ViewModel> extends RxFluxFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //实例化宿主Activity中的ActionBar
-        initActionBar();
         // view创建之后的操作
         afterCreate(savedInstanceState);
     }
@@ -76,17 +66,6 @@ public abstract class BaseRxFragment<T extends ViewModel> extends RxFluxFragment
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
-    }
-
-    /**
-     * 可见状态转变
-     *
-     * @param isVisibleToUser
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        this.mIsVisibleToUser = isVisibleToUser;
     }
 
     /**
@@ -105,57 +84,43 @@ public abstract class BaseRxFragment<T extends ViewModel> extends RxFluxFragment
     }
 
     /**
-     * 实例化宿主Activity中的ActionBar
-     */
-    private void initActionBar() {
-        View view = getActivity().getWindow().getDecorView();
-        mToolbarTop = view.findViewById(R.id.tlb_top);
-        mTvTop = view.findViewById(R.id.tv_top_title);
-        if (mToolbarTop == null || !(getActivity() instanceof AppCompatActivity)) {
-            return;
-        }
-        //取代原本的actionbar
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbarTop);
-        //设置actionbar
-        mActionBarTop = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (mActionBarTop == null) {
-            return;
-        }
-        //不显示home图标
-        mActionBarTop.setDisplayShowHomeEnabled(false);
-        //不显示标题
-        mActionBarTop.setDisplayShowTitleEnabled(false);
-    }
-
-    /**
-     * 设置Toolbar
+     * 设置标题，设置返回图标
      *
      * @param title    Toolbar标题
-     * @param backAble true：显示返回箭头，false：不显示
+     * @param backAble true：Home按钮作为返回箭头，false：默认设置
      */
     protected void setTitle(CharSequence title, boolean backAble) {
+        if (getActivity() == null) {
+            return;
+        }
         mBackAble = backAble;
         mTitle = title;
-        if (mTvTop == null) {
+        ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (!(getActivity() instanceof AppCompatActivity) || supportActionBar == null) {
+            //设置标题
+            getActivity().setTitle(mTitle);
             return;
         }
+        //显示标题
+        supportActionBar.setDisplayShowTitleEnabled(true);
         //设置标题
-        mTvTop.setText(mTitle);
-        if (mActionBarTop == null) {
-            return;
-        }
+        supportActionBar.setTitle(mTitle);
         //显示右侧返回图标
-        mActionBarTop.setDisplayHomeAsUpEnabled(backAble);
         if (backAble) {
-            mActionBarTop.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
+            //显示Home按钮
+            supportActionBar.setDisplayShowHomeEnabled(true);
+            //设置Home按钮作为返回按钮
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            //设置Home按钮图标
+            supportActionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material);
         }
     }
 
     /**
-     * 设置Toolbar
+     * 设置标题，设置返回图标
      *
-     * @param titleId  Toolbar标题
-     * @param backAble true：显示返回箭头，false：不显示
+     * @param titleId    Toolbar标题
+     * @param backAble true：Home按钮作为返回箭头，false：默认设置
      */
     protected void setTitle(int titleId, boolean backAble) {
         setTitle(getText(titleId), backAble);

@@ -16,7 +16,7 @@ class GithubAppStore @Inject constructor(
         application: Application,
         rxDispatcher: RxDispatcher
 ) : RxAppStore(application,rxDispatcher) {
-    private val mUser= MutableLiveData<User>()
+    val mUser= MutableLiveData<User>()
 
     override fun onCleared() {
         super.onCleared()

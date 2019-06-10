@@ -2,10 +2,12 @@ package com.huyingbao.core.base.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
@@ -52,8 +54,21 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        initActionBar();
         afterCreate(savedInstanceState);
         ButterKnife.bind(this);
+    }
+
+    /**
+     * 初始化ActionBar，默认使用R.id.tlb_top Toolbar取代ActionBar，
+     */
+    protected void initActionBar() {
+        View view = getWindow().getDecorView();
+        Toolbar toolbar = view.findViewById(R.id.tlb_top);
+        if (toolbar != null) {
+            //使用Toolbar取代原本的actionbar
+            setSupportActionBar(toolbar);
+        }
     }
 
     @Override

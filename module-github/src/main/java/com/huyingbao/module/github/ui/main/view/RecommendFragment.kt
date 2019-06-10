@@ -5,15 +5,15 @@ import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.ui.main.store.MainStore
 
-class MainFragment : BaseRxFragment<MainStore>() {
+class RecommendFragment : BaseRxFragment<MainStore>() {
     companion object {
-        fun newInstance(): MainFragment {
-            return MainFragment()
+        fun newInstance(): RecommendFragment {
+            return RecommendFragment()
         }
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.github_fragment_main
+        return R.layout.github_fragment_recommend
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {

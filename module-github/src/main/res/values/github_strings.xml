@@ -3,8 +3,11 @@
     <string name="github_label_start">引导页</string>
     <string name="github_label_login">登录</string>
     <string name="github_label_main">主页</string>
-    <string name="github_label_user">用户</string>
+    <string name="github_label_user">个人信息</string>
     <string name="github_label_star">点赞</string>
+    <string name="github_label_dynamic">动态</string>
+    <string name="github_label_recommend">推荐</string>
+    <string name="github_label_mine">我的</string>
 
     <string name="github_username">用户名</string>
     <string name="github_password">密码</string>
