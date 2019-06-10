@@ -3,7 +3,7 @@ package com.huyingbao.core.common.module;
 public final class CommonContants {
     public static final class Config {
         public static final int PAGE_SIZE = 20;
-        public static final long HTTP_TIME_OUT=20L;
+        public static final long HTTP_TIME_OUT = 20L;
 
     }
 
@@ -13,7 +13,7 @@ public final class CommonContants {
         public static final String PASSWORD = "password";
     }
 
-    public static final class Header{
-        public static final String AUTHORIZATION ="Authorization";
+    public static final class Header {
+        public static final String AUTHORIZATION = "Authorization";
     }
 }

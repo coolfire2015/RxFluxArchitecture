@@ -15,16 +15,16 @@ import javax.inject.Singleton
 class GithubAppStore @Inject constructor(
         application: Application,
         rxDispatcher: RxDispatcher
-) : RxAppStore(application,rxDispatcher) {
-    val mUser= MutableLiveData<User>()
+) : RxAppStore(application, rxDispatcher) {
+    val mUser = MutableLiveData<User>()
 
     override fun onCleared() {
         super.onCleared()
-        mUser.value=null
+        mUser.value = null
     }
 
     @Subscribe(tags = [MainAction.GET_LOGIN_USER_INFO])
-    fun onGetLoginUserInfo(rxAction: RxAction){
-        mUser.value=rxAction.getResponse()
+    fun onGetLoginUserInfo(rxAction: RxAction) {
+        mUser.value = rxAction.getResponse()
     }
 }

@@ -7,7 +7,6 @@ import com.huyingbao.core.annotations.RxAppObserver
 import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
 import com.huyingbao.module.github.GithubEventBusIndex
-import dagger.android.AndroidInjector
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
@@ -19,6 +18,7 @@ class GithubAppLifecycle(application: Application?) : RxAppLifecycle(application
     init {
         RxAndroidInjection.inject(this, mApplication)
     }
+
     @Inject
     lateinit var githubAppStore: GithubAppStore
 

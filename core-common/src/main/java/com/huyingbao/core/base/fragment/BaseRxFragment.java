@@ -119,7 +119,7 @@ public abstract class BaseRxFragment<T extends ViewModel> extends RxFluxFragment
     /**
      * 设置标题，设置返回图标
      *
-     * @param titleId    Toolbar标题
+     * @param titleId  Toolbar标题
      * @param backAble true：Home按钮作为返回箭头，false：默认设置
      */
     protected void setTitle(int titleId, boolean backAble) {

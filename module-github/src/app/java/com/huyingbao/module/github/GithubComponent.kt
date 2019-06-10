@@ -5,8 +5,8 @@ import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.github.module.GithubAppModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
 import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 /**

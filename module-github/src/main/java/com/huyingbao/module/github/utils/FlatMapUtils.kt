@@ -1,7 +1,6 @@
 package com.huyingbao.module.github.utils
 
 import com.huyingbao.core.common.model.CommonException
-import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import retrofit2.Response
@@ -13,7 +12,7 @@ class FlatMapResponse2Result<T>(private val response: T) : ObservableSource<T> {
     override fun subscribe(observer: Observer<in T?>) {
         if (response !is Response<*>) {
             observer.onError(CommonException(600, "未知异常！"))
-        }else{
+        } else {
             //接口调用成功，向下传递body
             if (response.isSuccessful) {
                 observer.onNext(response.body() as T?)

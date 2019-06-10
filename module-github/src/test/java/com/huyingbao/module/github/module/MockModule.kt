@@ -4,11 +4,9 @@ import android.text.TextUtils
 import com.google.gson.GsonBuilder
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.common.annotation.OpenForTesting
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
-import com.huyingbao.module.github.GithubComponent
 import com.huyingbao.module.github.app.GithubContants
 import com.huyingbao.module.github.utils.PageInfoInterceptor
 import dagger.Module
@@ -20,7 +18,6 @@ import io.appflate.restmock.utils.RequestMatchers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.mockito.Mockito
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

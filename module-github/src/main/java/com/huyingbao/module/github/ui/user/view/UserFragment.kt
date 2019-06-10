@@ -11,6 +11,6 @@ class UserFragment : BaseRxFragment<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.github_label_user,true)
+        setTitle(R.string.github_label_user, true)
     }
 }
