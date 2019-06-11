@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:navigationIcon="@drawable/abc_ic_ab_back_material">
 
-    <include layout="@layout/common_layout_toolbar" />
+    <include layout="@layout/common_appbar_top" />
 
     <FrameLayout
         android:id="@+id/fl_container"

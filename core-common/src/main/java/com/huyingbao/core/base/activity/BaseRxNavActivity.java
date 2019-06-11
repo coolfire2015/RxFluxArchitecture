@@ -20,7 +20,7 @@ import com.huyingbao.core.common.R;
 public abstract class BaseRxNavActivity<T extends RxActivityStore> extends BaseRxActivity<T> implements BaseView {
     @Override
     public int getLayoutId() {
-        return R.layout.base_nav_activity;
+        return R.layout.base_activity_nav;
     }
 
     @Override

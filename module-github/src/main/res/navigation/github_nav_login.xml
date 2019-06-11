@@ -30,5 +30,5 @@
         android:id="@+id/mainActivity"
         android:name="com.huyingbao.module.github.ui.main.view.MainActivity"
         android:label="@string/github_label_main"
-        tools:layout="@layout/base_frag_activity" />
+        tools:layout="@layout/base_activity_frag" />
 </navigation>

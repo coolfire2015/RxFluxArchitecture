@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
-    tools:showIn="@layout/base_frag_activity">
+    tools:showIn="@layout/base_activity_frag">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tlb_top"

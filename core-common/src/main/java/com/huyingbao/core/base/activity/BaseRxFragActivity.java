@@ -19,7 +19,7 @@ import com.huyingbao.core.utils.ActivityUtils;
 public abstract class BaseRxFragActivity<T extends RxActivityStore> extends BaseRxActivity<T> implements BaseView {
     @Override
     public int getLayoutId() {
-        return R.layout.base_frag_activity;
+        return R.layout.base_activity_frag;
     }
 
     @Override

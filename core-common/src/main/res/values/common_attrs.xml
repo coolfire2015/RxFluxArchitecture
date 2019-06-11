@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CommonInfoCardView">
+        <attr name="infoIcon" format="reference" />
+        <attr name="infoTitle" format="string|reference" />
+        <attr name="infoContent" format="string|reference" />
+    </declare-styleable>
+</resources>
