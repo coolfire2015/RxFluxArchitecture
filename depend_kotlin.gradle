@@ -2,7 +2,6 @@ dependencies {
     //通用库
     implementation project(':core-common')
     //编译时生成
-    kapt "com.android.databinding:compiler:3.0.1"
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"

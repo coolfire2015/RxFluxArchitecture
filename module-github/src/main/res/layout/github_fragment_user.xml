@@ -21,7 +21,37 @@
             <com.huyingbao.core.common.widget.CommonInfoCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@{userInfo.login}" />
+                app:infoTitle="@{@string/github_name}"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoContent="@{userInfo.name}" />
+
+            <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoTitle="@{@string/github_email}"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoContent="@{userInfo.email}" />
+
+            <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoTitle="@string/github_blog"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoContent="@{userInfo.blog}" />
+
+            <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoTitle="@string/github_company"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoContent="@{userInfo.company}" />
+
+            <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoTitle="@{@string/github_bio}"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoContent="@{userInfo.bio}" />
         </LinearLayout>
     </ScrollView>
 </layout>

@@ -13,13 +13,14 @@ import androidx.cardview.widget.CardView;
 import com.huyingbao.core.common.R;
 
 /**
- * 自定义封装Info信息的Layout
+ * 自定义封装Info信息的CardView
+ * Created by liujunfeng on 2019/6/12.
  */
 public class CommonInfoCardView extends CardView {
     @DrawableRes
-    private int infoIcon;
-    private String infoTitle;
-    private String infoContent;
+    private int mInfoIcon;
+    private String mInfoTitle;
+    private String mInfoContent;
 
     public CommonInfoCardView(Context context) {
         this(context, null);
@@ -32,6 +33,13 @@ public class CommonInfoCardView extends CardView {
     public CommonInfoCardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.common_cardview_info, this);
+        setTypedArray(context, attrs);
+    }
+
+    /**
+     * 1：布局文件中使用属性值直接设置
+     */
+    private void setTypedArray(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CommonInfoCardView);
         if (typedArray.hasValue(R.styleable.CommonInfoCardView_infoIcon)) {
             this.<ImageView>findViewById(R.id.infoIcon).setImageResource(typedArray.getResourceId(R.styleable.CommonInfoCardView_infoIcon, 0));
@@ -44,30 +52,35 @@ public class CommonInfoCardView extends CardView {
         }
     }
 
+    @DrawableRes
     public int getInfoIcon() {
-        return infoIcon;
+        return mInfoIcon;
     }
 
+    /**
+     * 2：在代码中直接设置值
+     * 3：在布局文件中使用DataBinding自动设置值
+     */
     public void setInfoIcon(@DrawableRes int infoIcon) {
-        this.infoIcon = infoIcon;
-        this.<ImageView>findViewById(R.id.infoIcon).setImageResource(infoIcon);
+        mInfoIcon = infoIcon;
+        this.<ImageView>findViewById(R.id.infoIcon).setImageResource(mInfoIcon);
     }
 
     public String getInfoTitle() {
-        return infoTitle;
+        return mInfoTitle;
     }
 
     public void setInfoTitle(String infoTitle) {
-        this.infoTitle = infoTitle;
-        this.<TextView>findViewById(R.id.infoTitle).setText(infoTitle);
+        mInfoTitle = infoTitle;
+        this.<TextView>findViewById(R.id.infoTitle).setText(mInfoTitle);
     }
 
     public String getInfoContent() {
-        return infoContent;
+        return mInfoContent;
     }
 
     public void setInfoContent(String infoContent) {
-        this.infoContent = infoContent;
-        this.<TextView>findViewById(R.id.infoContent).setText(infoContent);
+        mInfoContent = infoContent;
+        this.<TextView>findViewById(R.id.infoContent).setText(mInfoContent);
     }
 }
