@@ -7,6 +7,9 @@ interface MainAction {
     fun getLoginUserInfo()
 
     companion object {
+        /**
+         * 获取用户信息
+         */
         const val GET_LOGIN_USER_INFO = "getLoginUserInfo"
     }
 }

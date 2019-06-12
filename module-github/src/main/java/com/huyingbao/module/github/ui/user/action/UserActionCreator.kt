@@ -3,6 +3,8 @@ package com.huyingbao.module.github.ui.user.action
 import com.huyingbao.core.arch.action.RxActionCreator
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.module.github.api.UserApi
+import com.huyingbao.module.github.ui.user.model.UserInfoRequest
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -11,4 +13,8 @@ class UserActionCreator @Inject constructor(
         rxActionManager: RxActionManager,
         private val retrofit: Retrofit
 ) : RxActionCreator(rxDispatcher, rxActionManager), UserAction {
+    override fun updateUserInfo(userInfoRequest: UserInfoRequest) {
+        val rxAction = newRxAction(UserAction.UPDATE_USER_INFO)
+        postHttpAction(rxAction, retrofit.create(UserApi::class.java).updateUserInfo(userInfoRequest))
+    }
 }

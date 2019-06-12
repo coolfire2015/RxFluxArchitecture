@@ -14,6 +14,8 @@
     <dimen name="dp_120">120dp</dimen>
     <dimen name="dp_160">160dp</dimen>
     <dimen name="dp_200">200dp</dimen>
+    <dimen name="dp_320">320dp</dimen>
+    <dimen name="dp_400">400dp</dimen>
 
     <dimen name="sp_12">12sp</dimen>
     <dimen name="sp_14">14sp</dimen>

@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.utils
+package com.huyingbao.module.github.app
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
 import com.huyingbao.core.base.fragment.BaseRxFragment
+import com.huyingbao.module.github.utils.autoCleared
 
 /**
  * Created by liujunfeng on 2019/1/1.

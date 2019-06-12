@@ -11,6 +11,8 @@ public final class CommonContants {
         public static final String ACCESS_TOKEN = "accessToken";
         public static final String USER_NAME = "userName";
         public static final String PASSWORD = "password";
+        public static final String TITLE = "title";
+        public static final String CONTENT = "content";
     }
 
     public static final class Header {

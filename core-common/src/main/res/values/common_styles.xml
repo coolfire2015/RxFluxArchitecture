@@ -20,4 +20,16 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="ViewDividerHorizontalStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_04</item>
+        <item name="android:background">@color/common_divider</item>
+    </style>
+
+    <style name="ViewDividerVerticalStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/dp_04</item>
+        <item name="android:background">@color/common_divider</item>
+    </style>
 </resources>

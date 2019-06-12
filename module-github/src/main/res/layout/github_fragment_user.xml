@@ -19,39 +19,52 @@
             android:orientation="vertical">
 
             <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@{@string/github_name}"
+                app:infoContent="@{userInfo.name}"
                 app:infoIcon="@android:drawable/ic_dialog_email"
-                app:infoContent="@{userInfo.name}" />
+                app:infoTitle="@{@string/github_info_name}" />
 
             <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@{@string/github_email}"
+                app:infoContent="@{userInfo.email}"
                 app:infoIcon="@android:drawable/ic_dialog_email"
-                app:infoContent="@{userInfo.email}" />
+                app:infoTitle="@{@string/github_info_email}" />
 
             <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_blog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@string/github_blog"
+                app:infoContent="@{userInfo.blog}"
                 app:infoIcon="@android:drawable/ic_dialog_email"
-                app:infoContent="@{userInfo.blog}" />
+                app:infoTitle="@string/github_info_blog" />
 
             <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@string/github_company"
+                app:infoContent="@{userInfo.company}"
                 app:infoIcon="@android:drawable/ic_dialog_email"
-                app:infoContent="@{userInfo.company}" />
+                app:infoTitle="@string/github_info_company" />
 
             <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:infoTitle="@{@string/github_bio}"
+                app:infoContent="@{userInfo.location}"
                 app:infoIcon="@android:drawable/ic_dialog_email"
-                app:infoContent="@{userInfo.bio}" />
+                app:infoTitle="@string/github_info_location" />
+
+            <com.huyingbao.core.common.widget.CommonInfoCardView
+                android:id="@+id/cv_info_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoContent="@{userInfo.bio}"
+                app:infoIcon="@android:drawable/ic_dialog_email"
+                app:infoTitle="@string/github_info_bio" />
         </LinearLayout>
     </ScrollView>
 </layout>

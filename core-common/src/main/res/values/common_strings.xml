@@ -2,4 +2,7 @@
 <resources>
     <string name="common_cancel">取消</string>
     <string name="common_retry">重试</string>
+    <string name="common_ok">确定</string>
+    <string name="common_hint_title">请输入标题</string>
+    <string name="common_hint_content">请输入内容</string>
 </resources>
