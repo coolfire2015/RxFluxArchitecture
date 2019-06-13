@@ -8,10 +8,32 @@ git:
   depth: 3
 #下载jdk8
 jdk: oraclejdk8
+#Android配置
+android:
+  #配置信息
+  components:
+    #The BuildTools version used by your project
+    - build-tools-29.0.0
+    #The SDK version used to compile your project
+    - android-29
+    #Additional components
+    - extra-android-m2repository      #Android Support Repository
+    - extra-android-support           #Support Library
+  licenses:
+    - '.+'
+#缓存之前
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+#为构建添加缓存
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 #脚本运行之前
-before_install:
-  - yes | sdkmanager "build-tools;28.0.3"
-  - yes | sdkmanager "platforms;android-28"
+before_script:
+  - yes | sdkmanager "build-tools;29.0.0"
+  - yes | sdkmanager "platforms;android-29"
   #改变gradlew的访问权限
   - chmod +x gradlew
   #安装fir命令行客户端
@@ -25,45 +47,10 @@ before_install:
   - echo "STORE_PASSWORD=$STORE_PASSWORD" > local.properties
   - echo "KEY_ALIAS=$KEY_ALIAS" > local.properties
   - echo "KEY_PASSWORD=$KEY_PASSWORD" > local.properties
-#全局变量
-env:
-  global:
-    - COMPILE_SDK_VERSION=28
-    - BUILD_TOOLS_VERSION=28.0.3
-#Android配置
-android:
-  #配置信息
-  components:
-    #Uncomment the lines below if you want to
-    #use the latest revision of Android SDK Tools
-    - tools
-    - platform-tools
-    #The BuildTools version used by your project
-    - build-tools-$BUILD_TOOLS_VERSION
-    #The SDK version used to compile your project
-    - android-$COMPILE_SDK_VERSION
-    #Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - addon-google_apis-google-21
-    - extra-android-m2repository      #Android Support Repository
-    - extra-android-support           #Support Library
-  licenses:
-    - '.+'
-
 #脚本
 script:
   - ./gradlew clean
   - ./gradlew assembleRelease
-#缓存之前
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-#为构建添加缓存
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
 #部署之前前
 before_deploy:
   - ls release/outputs/apk/
