@@ -52,15 +52,15 @@ before_install:
 script:
   - ./gradlew clean
   - ./gradlew assembleRelease
-#缓存之前
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-#为构建添加缓存
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+##缓存之前
+#before_cache:
+#  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+#  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+##为构建添加缓存
+#cache:
+#  directories:
+#    - $HOME/.gradle/caches/
+#    - $HOME/.gradle/wrapper/
 #部署之前前
 before_deploy:
   - ls release/outputs/apk/
