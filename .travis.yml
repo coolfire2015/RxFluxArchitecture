@@ -11,8 +11,8 @@ jdk: oraclejdk8
 #全局变量
 env:
   global:
-    - COMPILE_SDK_VERSION=29
-    - BUILD_TOOLS_VERSION=29.0.0
+    - COMPILE_SDK_VERSION=28
+    - BUILD_TOOLS_VERSION=28.0.3
 #Android配置
 android:
   #配置信息
@@ -37,7 +37,7 @@ android:
 before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-29"
+  - yes | sdkmanager "platforms;android-28"
   #安装fir命令行客户端
   - gem install fir-cli
   #密钥
