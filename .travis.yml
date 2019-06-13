@@ -8,23 +8,23 @@ git:
   depth: 3
 #下载jdk8
 jdk: oraclejdk8
-##全局变量
-#env:
-#  global:
-#    - COMPILE_SDK_VERSION=28
-#    - BUILD_TOOLS_VERSION=28.0.3
+#全局变量
+env:
+  global:
+    - COMPILE_SDK_VERSION=28
+    - BUILD_TOOLS_VERSION=28.0.3
 #Android配置
 android:
   #配置信息
   components:
     #Uncomment the lines below if you want to
     #use the latest revision of Android SDK Tools
-    - tools
-    - platform-tools
+    #- tools
+    #- platform-tools
     #The BuildTools version used by your project
-    - build-tools-28.0.3
+    - build-tools-$BUILD_TOOLS_VERSION
     #The SDK version used to compile your project
-    - android-28
+    - android-$COMPILE_SDK_VERSION
     #Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
@@ -32,19 +32,12 @@ android:
     - extra-android-m2repository      #Android Support Repository
     - extra-android-support           #Support Library
   licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
+    - '.+'
 #脚本运行之前
 before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
-#  - yes | sdkmanager "platforms;android-28"
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-  - yes | sdkmanager --update
-  - yes | sdkmanager --licenses
+  - yes | sdkmanager "platforms;android-28"
   #安装fir命令行客户端
   - gem install fir-cli
   #密钥
@@ -56,7 +49,7 @@ before_install:
   - echo "STORE_PASSWORD=$STORE_PASSWORD" > local.properties
   - echo "KEY_ALIAS=$KEY_ALIAS" > local.properties
   - echo "KEY_PASSWORD=$KEY_PASSWORD" > local.properties
-  #脚本
+#脚本
 script:
   - ./gradlew clean
   - ./gradlew assembleRelease
