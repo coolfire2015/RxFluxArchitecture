@@ -40,14 +40,14 @@ before_install:
   - yes | sdkmanager "platforms;android-28"
   #安装fir命令行客户端
   - gem install fir-cli
-  #密钥
-  - echo "CLIENT_ID=$CLIENT_ID" > local.properties
-  - echo "CLIENT_SECRET=$CLIENT_SECRET" > local.properties
-  - echo "STORE_RELEASE_FILE=$STORE_RELEASE_FILE" > local.properties
-  - echo "STORE_DEBUG_FILE=$STORE_DEBUG_FILE" > local.properties
-  - echo "STORE_PASSWORD=$STORE_PASSWORD" > local.properties
-  - echo "KEY_ALIAS=$KEY_ALIAS" > local.properties
-  - echo "KEY_PASSWORD=$KEY_PASSWORD" > local.properties
+#  #密钥
+#  - echo "CLIENT_ID=$CLIENT_ID" > local.properties
+#  - echo "CLIENT_SECRET=$CLIENT_SECRET" > local.properties
+#  - echo "STORE_RELEASE_FILE=$STORE_RELEASE_FILE" > local.properties
+#  - echo "STORE_DEBUG_FILE=$STORE_DEBUG_FILE" > local.properties
+#  - echo "STORE_PASSWORD=$STORE_PASSWORD" > local.properties
+#  - echo "KEY_ALIAS=$KEY_ALIAS" > local.properties
+#  - echo "KEY_PASSWORD=$KEY_PASSWORD" > local.properties
   #脚本
 script:
   - ./gradlew clean
