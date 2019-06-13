@@ -1,21 +1,31 @@
-#下载jdk8
-jdk: oraclejdk8
 #声明构建语言环境
 language: android
 dist: trusty
+#下载jdk8
+jdk: oraclejdk8
 #Android配置
 android:
   #配置信息
   components:
-    - tools
-    - platform-tools
-    - build-tools
-    - android
-    - extra-android-support
-    - extra-android-m2repository
+    # Uncomment the lines below if you want to
+    # use the latest revision of Android SDK Tools
+    # - tools
+    # - platform-tools
+
+    # The BuildTools version used by your project
+    - build-tools-26.0.2
+
+    # The SDK version used to compile your project
+    - android-26
+
+    # Additional components
+    - extra-google-google_play_services
     - extra-google-m2repository
+    - extra-android-m2repository
   licenses:
-    - '.+'
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 #缓存之前
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -30,7 +40,7 @@ cache:
 before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
-#  - yes | sdkmanager "platforms;android-29"
+  - yes | sdkmanager "platforms;android-29"
   #安装fir命令行客户端
   - gem install fir-cli
 #脚本运行之前
