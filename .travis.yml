@@ -34,7 +34,7 @@ cache:
 before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
-  - yes | $PATH/sdkmanager "platforms;android-28"
+  - yes | $PATH/sdkmanager "platforms;android-29"
   #安装fir命令行客户端
   - gem install fir-cli
 #脚本运行之前
