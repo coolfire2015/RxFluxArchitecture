@@ -6,10 +6,10 @@ language: android
 android:
   #配置信息
   components:
-    - tools-26.1.1
-    - platform-tools-29.0.1
-    - build-tools-29.0.0
-    - android-29
+    - tools
+    - platform-tools
+    - build-tools
+    - android
     - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
@@ -29,7 +29,7 @@ cache:
 before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-29"
+#  - yes | sdkmanager "platforms;android-29"
   #安装fir命令行客户端
   - gem install fir-cli
 #脚本运行之前
