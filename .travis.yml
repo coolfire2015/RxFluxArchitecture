@@ -24,6 +24,7 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
 #极早的流程步骤
 before_install:
   #改变gradlew的访问权限
