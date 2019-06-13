@@ -19,7 +19,11 @@ import com.huyingbao.module.github.ui.user.view.UserActivity
 import kotlinx.android.synthetic.main.github_activity_main.*
 import javax.inject.Inject
 
-
+/**
+ * 主页，包含左侧抽屉
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 class MainActivity : BaseRxActivity<MainStore>() {
     @Inject
     lateinit var githubAppStore: GithubAppStore

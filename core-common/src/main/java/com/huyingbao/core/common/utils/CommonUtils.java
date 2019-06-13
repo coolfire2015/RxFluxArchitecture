@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
+ * 通用工具类
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public class CommonUtils {

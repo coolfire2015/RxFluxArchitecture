@@ -12,7 +12,9 @@ import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.utils.autoCleared
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * 使用DataBinding的Fragment
+ *
+ * Created by liujunfeng on 2019/6/10.
  */
 abstract class BaseRxBindFragment<T : ViewModel, Y : ViewDataBinding> : BaseRxFragment<T>() {
     /**

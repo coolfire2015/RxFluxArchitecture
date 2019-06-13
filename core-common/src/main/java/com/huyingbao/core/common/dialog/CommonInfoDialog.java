@@ -24,6 +24,8 @@ import butterknife.OnClick;
 
 /**
  * 内容提交编辑框
+ * <p>
+ * Created by liujunfeng on 2019/6/13.
  */
 @Singleton
 public class CommonInfoDialog extends BaseCommonDialog {

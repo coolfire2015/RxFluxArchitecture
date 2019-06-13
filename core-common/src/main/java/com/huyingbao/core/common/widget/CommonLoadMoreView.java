@@ -4,6 +4,8 @@ import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.huyingbao.core.common.R;
 
 /**
+ * BaseRecyclerAdapter加载View
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public class CommonLoadMoreView extends LoadMoreView {

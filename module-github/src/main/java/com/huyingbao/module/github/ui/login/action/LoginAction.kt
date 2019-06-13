@@ -1,6 +1,8 @@
 package com.huyingbao.module.github.ui.login.action
 
 /**
+ * 登录模块
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 interface LoginAction {

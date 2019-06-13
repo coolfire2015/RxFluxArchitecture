@@ -12,6 +12,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
+ * 通用依赖注入仓库
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 @Module(includes = {RxFluxModule.class})

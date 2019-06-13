@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
+ * 公用的ActionCreator，主要使用其{@link RxActionCreator#postLocalChange(String)}等方法。
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton

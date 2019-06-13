@@ -3,11 +3,18 @@ package com.huyingbao.module.github.ui.user.action
 import com.huyingbao.core.arch.action.RxActionCreator
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.ui.user.model.UserInfoRequest
 import retrofit2.Retrofit
 import javax.inject.Inject
 
+/**
+ * 当前登录用户模块
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
+@ActivityScope
 class UserActionCreator @Inject constructor(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager,

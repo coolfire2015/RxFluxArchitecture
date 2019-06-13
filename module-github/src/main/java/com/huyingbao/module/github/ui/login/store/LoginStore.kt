@@ -13,6 +13,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
+ * 登录模块数据处理Store
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton

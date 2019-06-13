@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
+ * 全局仓库
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 @Module(includes = [GithubInjectActivityModule::class, GithubStoreModule::class])

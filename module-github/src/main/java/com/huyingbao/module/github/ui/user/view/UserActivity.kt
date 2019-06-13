@@ -7,6 +7,8 @@ import com.huyingbao.module.github.ui.user.store.UserStore
 
 /**
  * 登录用户个人信息模块
+ *
+ * Created by liujunfeng on 2019/6/10.
  */
 class UserActivity : BaseRxFragActivity<UserStore>() {
     override fun createFragment(): Fragment {

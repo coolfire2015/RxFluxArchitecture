@@ -11,6 +11,8 @@ import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 /**
+ * Store仓库
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 @Module

@@ -21,6 +21,8 @@ import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
 /**
+ * 登录页面
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 class LoginFragment : BaseRxFragment<LoginStore>() {

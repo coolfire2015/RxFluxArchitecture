@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**
+ * 用户信息封装
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 class User {

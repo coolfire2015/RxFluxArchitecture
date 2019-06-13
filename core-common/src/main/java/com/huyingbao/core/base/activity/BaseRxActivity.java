@@ -41,7 +41,8 @@ import dagger.Lazy;
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxActivity<T> implements BaseView {
-    static {//Vector使用
+    static {
+        //Vector使用
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
@@ -60,7 +61,7 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
     }
 
     /**
-     * 初始化ActionBar，默认使用R.id.tlb_top Toolbar取代ActionBar，
+     * 初始化ActionBar，默认使用Toolbar取代ActionBar，
      */
     protected void initActionBar() {
         View view = getWindow().getDecorView();
@@ -71,24 +72,31 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
         }
     }
 
+    /**
+     * 拦截ActionBar中Home按钮点击事件
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // 点击返回图标事件
-            case android.R.id.home:
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportFragmentManager().popBackStack();
-                    return true;
-                }
-                finish();
+        if (item.getItemId() == android.R.id.home) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                //先弹出Fragment回退栈中的Fragment
+                getSupportFragmentManager().popBackStack();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            }
+            //结束当前Activity
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
      * 接收RxError，粘性，该方法不经过RxStore, 由RxFluxView直接处理
+     *
+     * @param rxError
      */
     @Subscribe(sticky = true)
     public void onRxError(@NonNull RxError rxError) {
@@ -112,6 +120,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
      * 接收RxLoading，粘性
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
+     *
+     * @param rxRetry
      */
     @Subscribe(sticky = true)
     public void onRxRetry(@NonNull RxRetry rxRetry) {
@@ -128,6 +138,8 @@ public abstract class BaseRxActivity<T extends RxActivityStore> extends RxFluxAc
      * 接收RxLoading，粘性
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
+     *
+     * @param rxLoading
      */
     @Subscribe(sticky = true)
     public void onRxLoading(@NonNull RxLoading rxLoading) {

@@ -14,6 +14,7 @@ import com.huyingbao.core.common.R;
 
 /**
  * 自定义封装Info信息的CardView
+ * <p>
  * Created by liujunfeng on 2019/6/12.
  */
 public class CommonInfoCardView extends CardView {

@@ -7,12 +7,15 @@ import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.module.github.utils.FlatMapResponse2Result
 import io.reactivex.Observable
 
+/**
+ * 使用[FlatMapResponse2Result]处理返回结果的父类ActionCreator
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 abstract class GithubActionCreator(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager
 ) : RxActionCreator(rxDispatcher, rxActionManager) {
-
-
     override fun <T> postHttpAction(rxAction: RxAction, httpObservable: Observable<T>) {
         super.postHttpAction(rxAction, httpObservable.flatMap<T> { FlatMapResponse2Result(it) })
     }

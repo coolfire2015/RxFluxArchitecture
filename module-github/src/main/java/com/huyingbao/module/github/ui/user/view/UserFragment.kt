@@ -17,7 +17,11 @@ import kotlinx.android.synthetic.main.github_fragment_user.*
 import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
-
+/**
+ * 当前登录用户信息展示修改页面
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() {
     @Inject
     lateinit var userActionCreator: UserActionCreator

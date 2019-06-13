@@ -12,6 +12,11 @@ import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * 全局数据维持AppStore
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 @Singleton
 class GithubAppStore @Inject constructor(
         application: Application,

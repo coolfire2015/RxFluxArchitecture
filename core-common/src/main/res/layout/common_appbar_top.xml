@@ -14,6 +14,5 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-    </androidx.appcompat.widget.Toolbar>
+        app:popupTheme="@style/AppTheme.PopupOverlay"></androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>

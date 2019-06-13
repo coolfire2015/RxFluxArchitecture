@@ -13,6 +13,8 @@ import retrofit2.http.*
 import java.util.*
 
 /**
+ * 项目仓库
+ *
  * Created by liujunfeng on 2019/5/30.
  */
 interface ReposApi {

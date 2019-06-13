@@ -1,5 +1,10 @@
 package com.huyingbao.module.github.ui.main.action
 
+/**
+ * 主页模块
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 interface MainAction {
     /**
      * 获取用户信息

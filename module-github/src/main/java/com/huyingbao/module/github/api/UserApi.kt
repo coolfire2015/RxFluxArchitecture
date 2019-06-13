@@ -9,6 +9,8 @@ import retrofit2.Response
 import retrofit2.http.*
 
 /**
+ * 用户信息
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 interface UserApi {

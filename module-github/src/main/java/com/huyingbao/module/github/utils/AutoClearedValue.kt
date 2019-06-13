@@ -8,6 +8,8 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
+ * 绑定Fragment生命周期，销毁时自动清理数据
+ *
  * A lazy property that gets cleaned up when the fragment is destroyed.
  *
  * Accessing this variable in a destroyed fragment will throw NPE.

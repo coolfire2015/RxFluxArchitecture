@@ -24,7 +24,7 @@ import butterknife.OnClick;
 import dagger.Lazy;
 
 /**
- * 进度提示,通过依赖注入生成
+ * 进度提示
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

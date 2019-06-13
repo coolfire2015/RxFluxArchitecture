@@ -15,6 +15,8 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
 /**
+ * 全局通用App
+ * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public abstract class BaseApp extends RxApp {

@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import com.huyingbao.core.base.activity.BaseRxFragActivity
 import com.huyingbao.module.github.ui.code.store.CodeStore
 
+/**
+ * 代码模块
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
 class CodeActivity : BaseRxFragActivity<CodeStore>() {
     override fun createFragment(): Fragment? {
         return CodeFragment.newInstance()

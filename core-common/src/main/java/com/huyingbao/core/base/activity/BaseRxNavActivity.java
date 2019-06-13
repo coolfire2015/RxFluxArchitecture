@@ -45,7 +45,9 @@ public abstract class BaseRxNavActivity<T extends RxActivityStore> extends BaseR
     }
 
     /**
-     * {@link androidx.navigation.Navigation}资源文件
+     * 导航资源文件
+     *
+     * @return {@link androidx.navigation.Navigation}资源文件
      */
     @NavigationRes
     public abstract int getGraphId();
