@@ -2,6 +2,7 @@
 jdk: oraclejdk8
 #声明构建语言环境
 language: android
+dist: trusty
 #Android配置
 android:
   #配置信息
