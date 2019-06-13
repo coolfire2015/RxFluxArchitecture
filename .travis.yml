@@ -25,19 +25,19 @@ android:
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-#为构建添加缓存
+#缓存
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-#脚本运行之前
-before_script:
-  - yes | ~/android/sdk/tools/bin/sdkmanager "build-tools;29.0.0"
-  - yes | ~/android/sdk/tools/bin/sdkmanager "platforms;android-29"
+#极早的流程步骤
+before_install:
   #改变gradlew的访问权限
   - chmod +x gradlew
   #安装fir命令行客户端
   - gem install fir-cli
+#脚本运行之前
+before_script:
   #密钥
   - touch local.properties
   - echo "CLIENT_ID=$CLIENT_ID" > local.properties
@@ -51,7 +51,7 @@ before_script:
 script:
   - ./gradlew clean
   - ./gradlew assembleRelease
-#部署之前前
+#部署之前
 before_deploy:
   - ls release/outputs/apk/
 #部署
