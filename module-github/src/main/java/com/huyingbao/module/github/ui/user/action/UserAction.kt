@@ -14,6 +14,9 @@ interface UserAction {
          */
         const val UPDATE_USER_INFO = "updateUserInfo"
 
+        /**
+         * 弹框更新当前用户信息
+         */
         const val UPDATE_CONTENT = "updateContent"
     }
 

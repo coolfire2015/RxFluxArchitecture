@@ -52,7 +52,6 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
 
     @Subscribe(tags = [UserAction.UPDATE_CONTENT], sticky = true)
     fun onUpdateContent(rxAction: RxAction) {
-
         val userInfoRequest = UserInfoRequest()
         userInfoRequest.name = rxAction.data[CommonContants.Key.CONTENT].toString()
         userActionCreator.updateUserInfo(userInfoRequest)
