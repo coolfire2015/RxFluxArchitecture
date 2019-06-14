@@ -85,14 +85,17 @@ public class CommonInfoDialog extends BaseCommonDialog {
     }
 
     /**
-     * 设置需要显示的信息
+     * 设置需要显示的信息，
+     *
+     * @param info     如果info=""，依然显示
+     * @param textView 需要展示的View
      */
-    private void setTextView(String title, TextView tvInfoTitle) {
-        if (TextUtils.isEmpty(title)) {
-            tvInfoTitle.setVisibility(View.GONE);
+    private void setTextView(CharSequence info, TextView textView) {
+        if (info == null) {
+            textView.setVisibility(View.GONE);
         } else {
-            tvInfoTitle.setText(title);
-            tvInfoTitle.setVisibility(View.VISIBLE);
+            textView.setText(info);
+            textView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -108,7 +111,7 @@ public class CommonInfoDialog extends BaseCommonDialog {
     }
 
     /**
-     * 确定
+     * 确定，输入框中的内容可以为空
      */
     @OnClick(R2.id.tv_info_ok)
     public void onOkClicked() {
@@ -131,10 +134,10 @@ public class CommonInfoDialog extends BaseCommonDialog {
     }
 
     public static class Info {
-        private String mTitle;
-        private String mContent;
-        private String mEditTitle;
-        private String mEditContent;
+        private CharSequence mTitle;
+        private CharSequence mContent;
+        private CharSequence mEditTitle;
+        private CharSequence mEditContent;
         private String mActionFirst;
         private String mActionSecond;
 
@@ -142,35 +145,35 @@ public class CommonInfoDialog extends BaseCommonDialog {
 
         }
 
-        public String getTitle() {
+        public CharSequence getTitle() {
             return mTitle;
         }
 
-        public void setTitle(String title) {
+        public void setTitle(CharSequence title) {
             this.mTitle = title;
         }
 
-        public String getContent() {
+        public CharSequence getContent() {
             return mContent;
         }
 
-        public void setContent(String content) {
+        public void setContent(CharSequence content) {
             this.mContent = content;
         }
 
-        public String getEditTitle() {
+        public CharSequence getEditTitle() {
             return mEditTitle;
         }
 
-        public void setEditTitle(String editTitle) {
+        public void setEditTitle(CharSequence editTitle) {
             this.mEditTitle = editTitle;
         }
 
-        public String getEditContent() {
+        public CharSequence getEditContent() {
             return mEditContent;
         }
 
-        public void setEditContent(String editContent) {
+        public void setEditContent(CharSequence editContent) {
             this.mEditContent = editContent;
         }
 

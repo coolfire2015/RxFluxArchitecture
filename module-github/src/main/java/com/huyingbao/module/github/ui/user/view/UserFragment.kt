@@ -3,9 +3,8 @@ package com.huyingbao.module.github.ui.user.view
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import butterknife.OnClick
-import com.huyingbao.core.arch.model.RxAction
+import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.common.dialog.CommonInfoDialog
-import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.widget.CommonInfoCardView
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.R2
@@ -14,8 +13,8 @@ import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.databinding.GithubFragmentUserBinding
 import com.huyingbao.module.github.ui.user.action.UserAction
 import com.huyingbao.module.github.ui.user.action.UserActionCreator
-import com.huyingbao.module.github.ui.user.model.UserInfoRequest
 import com.huyingbao.module.github.ui.user.store.UserStore
+import kotlinx.android.synthetic.main.github_fragment_user.*
 import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
@@ -74,9 +73,9 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
      */
     private fun showUpdateDialog(view: CommonInfoCardView, tag: String) {
         commonInfoDialog.info = CommonInfoDialog.Info()
-        commonInfoDialog.info.title = "编辑"
+        commonInfoDialog.info.title = "编辑${view.infoTitle}"
         commonInfoDialog.info.actionFirst = tag
-        commonInfoDialog.info.editContent = view.infoContent
+        commonInfoDialog.info.editContent = view.infoContent ?: ""
         activity?.supportFragmentManager?.let { fragmentManager -> commonInfoDialog.show(fragmentManager, commonInfoDialog.javaClass.simpleName) }
     }
 
@@ -90,16 +89,17 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
         UserAction.UPDATE_USER_BLOG,
         UserAction.UPDATE_USER_COMPANY,
         UserAction.UPDATE_USER_BIO])
-    fun onUpdateContent(rxAction: RxAction) {
-        val userInfoRequest = UserInfoRequest()
-        when (rxAction.tag) {
-            UserAction.UPDATE_USER_NAME -> userInfoRequest.name = rxAction.data[CommonContants.Key.CONTENT].toString()
-            UserAction.UPDATE_USER_EMAIL -> userInfoRequest.email = rxAction.data[CommonContants.Key.CONTENT].toString()
-            UserAction.UPDATE_USER_LOCATION -> userInfoRequest.location = rxAction.data[CommonContants.Key.CONTENT].toString()
-            UserAction.UPDATE_USER_BLOG -> userInfoRequest.blog = rxAction.data[CommonContants.Key.CONTENT].toString()
-            UserAction.UPDATE_USER_COMPANY -> userInfoRequest.company = rxAction.data[CommonContants.Key.CONTENT].toString()
-            UserAction.UPDATE_USER_BIO -> userInfoRequest.bio = rxAction.data[CommonContants.Key.CONTENT].toString()
+    fun onUpdateContent(rxChange: RxChange) {
+        rxStore?.mUserInfoRequest?.let {
+            when (rxChange.tag) {
+                UserAction.UPDATE_USER_NAME -> cv_info_name.infoContent = it.name
+                UserAction.UPDATE_USER_EMAIL -> cv_info_email.infoContent = it.email
+                UserAction.UPDATE_USER_LOCATION -> cv_info_location.infoContent = it.location
+                UserAction.UPDATE_USER_BLOG -> cv_info_blog.infoContent = it.blog
+                UserAction.UPDATE_USER_COMPANY -> cv_info_company.infoContent = it.company
+                UserAction.UPDATE_USER_BIO -> cv_info_bio.infoContent = it.bio
+            }
+            userActionCreator.updateUserInfo(it)
         }
-        userActionCreator.updateUserInfo(userInfoRequest)
     }
 }

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import com.huyingbao.core.common.R;
@@ -18,11 +19,6 @@ import com.huyingbao.core.common.R;
  * Created by liujunfeng on 2019/6/12.
  */
 public class CommonInfoCardView extends CardView {
-    @DrawableRes
-    private int mInfoIcon;
-    private String mInfoTitle;
-    private String mInfoContent;
-
     public CommonInfoCardView(Context context) {
         this(context, null);
     }
@@ -53,35 +49,27 @@ public class CommonInfoCardView extends CardView {
         }
     }
 
-    @DrawableRes
-    public int getInfoIcon() {
-        return mInfoIcon;
-    }
-
     /**
      * 2：在代码中直接设置值
      * 3：在布局文件中使用DataBinding自动设置值
      */
     public void setInfoIcon(@DrawableRes int infoIcon) {
-        mInfoIcon = infoIcon;
-        this.<ImageView>findViewById(R.id.infoIcon).setImageResource(mInfoIcon);
+        this.<ImageView>findViewById(R.id.infoIcon).setImageResource(infoIcon);
     }
 
-    public String getInfoTitle() {
-        return mInfoTitle;
+    public CharSequence getInfoTitle() {
+        return this.<TextView>findViewById(R.id.infoTitle).getText();
     }
 
-    public void setInfoTitle(String infoTitle) {
-        mInfoTitle = infoTitle;
-        this.<TextView>findViewById(R.id.infoTitle).setText(mInfoTitle);
+    public void setInfoTitle(@NonNull CharSequence infoTitle) {
+        this.<TextView>findViewById(R.id.infoTitle).setText(infoTitle);
     }
 
-    public String getInfoContent() {
-        return mInfoContent;
+    public CharSequence getInfoContent() {
+        return this.<TextView>findViewById(R.id.infoContent).getText();
     }
 
-    public void setInfoContent(String infoContent) {
-        mInfoContent = infoContent;
-        this.<TextView>findViewById(R.id.infoContent).setText(mInfoContent);
+    public void setInfoContent(@NonNull CharSequence infoContent) {
+        this.<TextView>findViewById(R.id.infoContent).setText(infoContent);
     }
 }
