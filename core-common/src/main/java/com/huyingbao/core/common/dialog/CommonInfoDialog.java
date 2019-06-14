@@ -62,7 +62,7 @@ public class CommonInfoDialog extends BaseCommonDialog {
     public void onResume() {
         super.onResume();
         if (mInfo == null) {
-            CommonUtils.showShortToast(getContext(), "请设置初始参数");
+            CommonUtils.showShortToast(getContext(), "请设置初始参数！");
             dismiss();
         } else {
             setTextView(mInfo.getTitle(), mTvInfoTitle);
@@ -100,12 +100,11 @@ public class CommonInfoDialog extends BaseCommonDialog {
      * 取消
      */
     @OnClick(R2.id.tv_info_cancel)
-    public void onCancleClicked() {
+    public void onCancelClicked() {
         if (mInfo != null && !TextUtils.isEmpty(mInfo.getActionSecond())) {
             mCommonActionCreator.postLocalAction(mInfo.getActionSecond());
-        } else {
-            dismiss();
         }
+        dismiss();
     }
 
     /**
@@ -119,9 +118,8 @@ public class CommonInfoDialog extends BaseCommonDialog {
             mCommonActionCreator.postLocalAction(mInfo.getActionFirst(),
                     CommonContants.Key.TITLE, title,
                     CommonContants.Key.CONTENT, content);
-        } else {
-            dismiss();
         }
+        dismiss();
     }
 
     public Info getInfo() {
@@ -133,63 +131,63 @@ public class CommonInfoDialog extends BaseCommonDialog {
     }
 
     public static class Info {
-        private String title;
-        private String content;
-        private String editTitle;
-        private String editContent;
-        private String actionFirst;
-        private String actionSecond;
+        private String mTitle;
+        private String mContent;
+        private String mEditTitle;
+        private String mEditContent;
+        private String mActionFirst;
+        private String mActionSecond;
 
         public Info() {
 
         }
 
         public String getTitle() {
-            return title;
+            return mTitle;
         }
 
         public void setTitle(String title) {
-            this.title = title;
+            this.mTitle = title;
         }
 
         public String getContent() {
-            return content;
+            return mContent;
         }
 
         public void setContent(String content) {
-            this.content = content;
+            this.mContent = content;
         }
 
         public String getEditTitle() {
-            return editTitle;
+            return mEditTitle;
         }
 
         public void setEditTitle(String editTitle) {
-            this.editTitle = editTitle;
+            this.mEditTitle = editTitle;
         }
 
         public String getEditContent() {
-            return editContent;
+            return mEditContent;
         }
 
         public void setEditContent(String editContent) {
-            this.editContent = editContent;
+            this.mEditContent = editContent;
         }
 
         public String getActionFirst() {
-            return actionFirst;
+            return mActionFirst;
         }
 
         public void setActionFirst(String actionFirst) {
-            this.actionFirst = actionFirst;
+            this.mActionFirst = actionFirst;
         }
 
         public String getActionSecond() {
-            return actionSecond;
+            return mActionSecond;
         }
 
         public void setActionSecond(String actionSecond) {
-            this.actionSecond = actionSecond;
+            this.mActionSecond = actionSecond;
         }
     }
 }

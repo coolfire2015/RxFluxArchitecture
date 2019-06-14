@@ -19,10 +19,12 @@ interface UserAction {
          */
         const val UPDATE_USER_INFO = "updateUserInfo"
 
-        /**
-         * 弹框更新当前用户信息
-         */
-        const val UPDATE_CONTENT = "updateContent"
+        const val UPDATE_USER_NAME = "updateUserName"
+        const val UPDATE_USER_EMAIL = "updateUserEmail"
+        const val UPDATE_USER_COMPANY = "updateUserCompany"
+        const val UPDATE_USER_BLOG = "updateUserBlog"
+        const val UPDATE_USER_LOCATION = "updateUserLocation"
+        const val UPDATE_USER_BIO = "updateUserBio"
     }
 
 }

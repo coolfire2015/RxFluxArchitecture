@@ -32,7 +32,9 @@ class GithubAppStore @Inject constructor(
     /**
      * 接收并维持当前登录用户信息
      */
-    @Subscribe(tags = [MainAction.GET_LOGIN_USER_INFO, UserAction.UPDATE_USER_INFO])
+    @Subscribe(tags = [
+        MainAction.GET_LOGIN_USER_INFO,
+        UserAction.UPDATE_USER_INFO])
     fun onReceiveUserInfo(rxAction: RxAction) {
         mUser.value = rxAction.getResponse()
     }

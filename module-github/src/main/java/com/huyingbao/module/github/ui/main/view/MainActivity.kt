@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -82,8 +81,8 @@ class MainActivity : BaseRxActivity<MainStore>() {
             true
         }
         githubAppStore.mUser.observe(this, Observer {
-            if (it != null && this.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                //当数据变化，不为空，且当前界面正在显示时，更新UI
+            if (it != null) {
+                //当数据变化更新UI
                 nav_view_main?.findViewById<TextView>(R.id.tv_user_name)?.text = it.name
                 nav_view_main?.findViewById<TextView>(R.id.tv_user_email)?.text = it.email
             }

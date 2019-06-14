@@ -3,6 +3,7 @@ package com.huyingbao.module.wan.app;
 import com.huyingbao.core.arch.action.RxActionCreator;
 import com.huyingbao.core.arch.action.RxActionManager;
 import com.huyingbao.core.arch.dispatcher.RxDispatcher;
+import com.huyingbao.core.arch.model.RxAction;
 import com.huyingbao.core.common.model.CommonException;
 
 import java.util.concurrent.TimeUnit;
@@ -22,10 +23,15 @@ public abstract class WanActionCreator extends RxActionCreator {
         super(rxDispatcher, rxActionManager);
     }
 
-//    @Override
-//    protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
-//        super.postHttpAction(rxAction, httpObservable.flatMap(verifyResponse()));
-//    }
+    @Override
+    protected <T> void postHttpAction(RxAction rxAction, Observable<T> httpObservable) {
+        super.postHttpAction(rxAction, httpObservable.flatMap(verifyResponse()));
+    }
+
+    @Override
+    protected <T> void postHttpLoadingAction(RxAction rxAction, Observable<T> httpObservable) {
+        super.postHttpLoadingAction(rxAction, httpObservable.flatMap(verifyResponse()));
+    }
 
     /**
      * 验证接口返回数据是正常

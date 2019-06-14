@@ -22,6 +22,6 @@ class MainActionCreator @Inject constructor(
 
     override fun getLoginUserInfo() {
         val rxAction = newRxAction(MainAction.GET_LOGIN_USER_INFO)
-        postHttpAction(rxAction, retrofit.create(UserApi::class.java).getLoginUserInfo())
+        postHttpLoadingAction(rxAction, retrofit.create(UserApi::class.java).getLoginUserInfo())
     }
 }

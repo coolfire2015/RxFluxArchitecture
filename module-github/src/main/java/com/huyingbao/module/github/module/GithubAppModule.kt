@@ -1,7 +1,6 @@
 package com.huyingbao.module.github.module
 
 import android.text.TextUtils
-import com.google.gson.GsonBuilder
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.api.ReposApi
@@ -57,7 +56,9 @@ class GithubAppModule {
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+                //入参Body中如果有参数为空，依然序列化
+                //.addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
         return retrofitBuilder.build()
