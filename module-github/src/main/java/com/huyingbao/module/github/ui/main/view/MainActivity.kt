@@ -10,12 +10,18 @@ import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.huyingbao.core.base.activity.BaseRxActivity
+import com.huyingbao.core.common.dialog.CommonInfoDialog
+import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.app.GithubAppStore
+import com.huyingbao.module.github.ui.login.view.LoginActivity
 import com.huyingbao.module.github.ui.main.action.MainActionCreator
 import com.huyingbao.module.github.ui.main.store.MainStore
 import com.huyingbao.module.github.ui.user.view.UserActivity
 import kotlinx.android.synthetic.main.github_activity_main.*
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.clearTop
 import javax.inject.Inject
 
 /**
@@ -26,13 +32,16 @@ import javax.inject.Inject
 class MainActivity : BaseRxActivity<MainStore>() {
     @Inject
     lateinit var githubAppStore: GithubAppStore
+    @Inject
+    lateinit var commonInfoDialog: CommonInfoDialog
+    @Inject
+    lateinit var mainActionCreator: MainActionCreator
+    @Inject
+    lateinit var localStorageUtils: LocalStorageUtils
 
     override fun getLayoutId(): Int {
         return R.layout.github_activity_main
     }
-
-    @Inject
-    lateinit var mainActionCreator: MainActionCreator
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         mainActionCreator.getLoginUserInfo()
@@ -40,6 +49,17 @@ class MainActivity : BaseRxActivity<MainStore>() {
         initNavigationView()
         initBottomNavigationView()
         initViewPager()
+    }
+
+    /**
+     * 拦截回退按钮，先关闭抽屉
+     */
+    override fun onBackPressed() {
+        if (drawer_layout_main.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout_main?.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     /**
@@ -61,21 +81,11 @@ class MainActivity : BaseRxActivity<MainStore>() {
     private fun initNavigationView() {
         nav_view_main?.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_main_feedback -> {
-                    startActivity(Intent(this, UserActivity::class.java))
-                }
-                R.id.nav_main_user_info -> {
-
-                }
-                R.id.nav_main_about -> {
-
-                }
-                R.id.nav_main_version -> {
-
-                }
-                R.id.nav_main_logout -> {
-
-                }
+                R.id.nav_main_feedback -> showFeedBackDialog()
+                R.id.nav_main_user_info -> startActivity(Intent(this, UserActivity::class.java))
+                R.id.nav_main_about -> showAbout()
+                R.id.nav_main_version -> checkUpdate()
+                R.id.nav_main_logout -> logout()
             }
             drawer_layout_main?.closeDrawer(GravityCompat.START)
             true
@@ -88,7 +98,6 @@ class MainActivity : BaseRxActivity<MainStore>() {
             }
         })
     }
-
 
     /**
      * 初始化底部导航View，
@@ -147,13 +156,45 @@ class MainActivity : BaseRxActivity<MainStore>() {
         })
     }
 
-
-    override fun onBackPressed() {
-        if (drawer_layout_main.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout_main?.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+    /**
+     * 显示更新内容弹框
+     */
+    private fun showFeedBackDialog() {
+        commonInfoDialog.info = CommonInfoDialog.Info()
+        commonInfoDialog.info.title = getString(R.string.github_menu_feedback)
+        commonInfoDialog.info.editContent = ""
+        commonInfoDialog.info.infoDialogClickListener = CommonInfoDialog.InfoDialogClickListener { editTitle, editContent ->
+            mainActionCreator.feedback(editContent)
         }
+        commonInfoDialog.show(supportFragmentManager, commonInfoDialog.javaClass.simpleName)
     }
 
+    /**
+     * 检查更新
+     */
+    private fun checkUpdate() {
+
+
+    }
+
+    /**
+     * 显示关于
+     */
+    private fun showAbout() {
+
+
+    }
+
+    /**
+     * 退出登录
+     */
+    private fun logout() {
+        localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
+        val intent =Intent(this,LoginActivity::class.java)
+        //Anto
+        intent.clearTask()
+        intent.clearTop()
+        startActivity(intent)
+        finish()
+    }
 }

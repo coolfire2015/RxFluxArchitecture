@@ -71,6 +71,6 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
 
     @Subscribe(tags = [LoginAction.LOGIN], sticky = true)
     fun onLogin(rxAction: RxAction) {
-        NavigationUtils.navigate(view!!, R.id.start_to_main, args = null, popUp = true, finishStack = true)
+        NavigationUtils.navigate(view!!, R.id.login_to_main, args = null, popUp = true, finishStack = true)
     }
 }

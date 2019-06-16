@@ -82,6 +82,8 @@ dependencies {
     api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
     //Kotlin支持
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    // Anko Commons
+    api "org.jetbrains.anko:anko-commons:$ANKO"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //Dagger编译时生成

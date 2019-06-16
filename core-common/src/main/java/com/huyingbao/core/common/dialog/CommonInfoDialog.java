@@ -115,9 +115,17 @@ public class CommonInfoDialog extends BaseCommonDialog {
      */
     @OnClick(R2.id.tv_info_ok)
     public void onOkClicked() {
-        if (mInfo != null && !TextUtils.isEmpty(mInfo.getActionFirst())) {
-            String title = mEtInfoTitle.getText().toString();
-            String content = mEtInfoContent.getText().toString();
+        if (mInfo == null) {
+            dismiss();
+        }
+        String title = mEtInfoTitle.getText().toString();
+        String content = mEtInfoContent.getText().toString();
+        if (mInfo.getInfoDialogClickListener() != null) {
+            //如果有点击监听，则回调方法
+            mInfo.getInfoDialogClickListener().onConfirm(title, content);
+        }
+        if (!TextUtils.isEmpty(mInfo.getActionFirst())) {
+            //如果设置Action，则发送Action
             mCommonActionCreator.postLocalAction(mInfo.getActionFirst(),
                     CommonContants.Key.TITLE, title,
                     CommonContants.Key.CONTENT, content);
@@ -133,6 +141,19 @@ public class CommonInfoDialog extends BaseCommonDialog {
         mInfo = info;
     }
 
+    /**
+     * 点击回调接口
+     */
+    public interface InfoDialogClickListener {
+        /**
+         * 点击确认
+         *
+         * @param editTitle
+         * @param editContent
+         */
+        public void onConfirm(String editTitle, String editContent);
+    }
+
     public static class Info {
         private CharSequence mTitle;
         private CharSequence mContent;
@@ -140,6 +161,7 @@ public class CommonInfoDialog extends BaseCommonDialog {
         private CharSequence mEditContent;
         private String mActionFirst;
         private String mActionSecond;
+        private InfoDialogClickListener mInfoDialogClickListener;
 
         public Info() {
 
@@ -191,6 +213,14 @@ public class CommonInfoDialog extends BaseCommonDialog {
 
         public void setActionSecond(String actionSecond) {
             this.mActionSecond = actionSecond;
+        }
+
+        public InfoDialogClickListener getInfoDialogClickListener() {
+            return mInfoDialogClickListener;
+        }
+
+        public void setInfoDialogClickListener(InfoDialogClickListener infoDialogClickListener) {
+            mInfoDialogClickListener = infoDialogClickListener;
         }
     }
 }

@@ -23,6 +23,7 @@ class LoginStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivitySto
     lateinit var localStorageUtils: LocalStorageUtils
 
     var mAccessToken: String? = null
+        private set
 
     override fun onCleared() {
         super.onCleared()

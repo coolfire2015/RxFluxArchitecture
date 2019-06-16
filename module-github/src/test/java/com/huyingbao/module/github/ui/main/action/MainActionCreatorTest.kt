@@ -42,4 +42,16 @@ class MainActionCreatorTest {
         mMainActionCreator!!.getLoginUserInfo()
         Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
     }
+
+    @Test
+    fun testFeedback() {
+        mMainActionCreator!!.feedback("test")
+        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
+    }
+
+    @Test
+    fun getNewsEvent() {
+        mMainActionCreator!!.getNewsEvent("coolfire2015", 1)
+        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
+    }
 }
