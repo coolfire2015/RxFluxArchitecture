@@ -7,7 +7,6 @@ import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubActionCreator
-import com.huyingbao.module.github.ui.login.action.LoginAction.Companion.LOGIN
 import com.huyingbao.module.github.ui.login.model.LoginRequest
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -26,7 +25,7 @@ class LoginActionCreator @Inject constructor(
 
     override fun login(username: String, password: String) {
         // 生成RxAction实例
-        val rxAction = newRxAction(LOGIN,
+        val rxAction = newRxAction(LoginAction.LOGIN,
                 CommonContants.Key.USER_NAME, username,
                 CommonContants.Key.PASSWORD, password)
         // 用户名密码转换,可以链式转换
@@ -37,5 +36,10 @@ class LoginActionCreator @Inject constructor(
         postHttpAction(rxAction, retrofit.create(UserApi::class.java)
                 // 调用接口1：Auth认证，获取登录token
                 .authorizations("Basic $basicCode", LoginRequest.generate()))
+    }
+
+    override fun getLoginUserInfo() {
+        val rxAction = newRxAction(LoginAction.GET_LOGIN_USER_INFO)
+        postHttpAction(rxAction, retrofit.create(UserApi::class.java).getLoginUserInfo())
     }
 }

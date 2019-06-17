@@ -6,10 +6,7 @@ package com.huyingbao.module.github.ui.main.action
  * Created by liujunfeng on 2019/6/10.
  */
 interface MainAction {
-    /**
-     * 获取用户信息
-     */
-    fun getLoginUserInfo()
+
 
     /**
      * 发送用户反馈
@@ -22,11 +19,6 @@ interface MainAction {
     fun getNewsEvent(user: String, page: Int)
 
     companion object {
-        /**
-         * 获取用户信息
-         */
-        const val GET_LOGIN_USER_INFO = "getLoginUserInfo"
-
         /**
          * 发送用户反馈
          */

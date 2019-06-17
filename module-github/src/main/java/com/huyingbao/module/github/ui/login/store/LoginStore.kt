@@ -22,26 +22,34 @@ class LoginStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivitySto
     @Inject
     lateinit var localStorageUtils: LocalStorageUtils
 
-    var mAccessToken: String? = null
-        private set
-
-    override fun onCleared() {
-        super.onCleared()
-        mAccessToken = null
-    }
-
     @Subscribe(tags = [LoginAction.LOGIN])
     fun onLogin(rxAction: RxAction) {
-        mAccessToken = rxAction.getResponse<AccessToken?>()?.token
         val userName: String? = rxAction.data[CommonContants.Key.USER_NAME] as String?
         val password: String? = rxAction.data[CommonContants.Key.PASSWORD] as String?
-        localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, mAccessToken)
+        localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, rxAction.getResponse<AccessToken?>()?.token)
         localStorageUtils.setValue(CommonContants.Key.USER_NAME, userName)
         localStorageUtils.setValue(CommonContants.Key.PASSWORD, password)
         postChange(RxChange.newInstance(rxAction.tag))
     }
 
+    /**
+     * 获取保存的Token
+     */
     fun getAccessToken(): String? {
-        return mAccessToken ?: localStorageUtils.getValue(CommonContants.Key.ACCESS_TOKEN, "")
+        return localStorageUtils.getValue(CommonContants.Key.ACCESS_TOKEN, "")
+    }
+
+    /**
+     * 获取保存的用户名
+     */
+    fun getUserName(): String? {
+        return localStorageUtils.getValue(CommonContants.Key.USER_NAME, "")
+    }
+
+    /**
+     * 获取保存的密码
+     */
+    fun getPassword(): String? {
+        return localStorageUtils.getValue(CommonContants.Key.PASSWORD, "")
     }
 }

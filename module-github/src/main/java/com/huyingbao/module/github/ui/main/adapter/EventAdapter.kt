@@ -12,7 +12,7 @@ class EventAdapter(data: List<Event>?) : BaseQuickAdapter<Event, BaseViewHolder>
 
     override fun convert(helper: BaseViewHolder, item: Event) {
         helper.setText(R.id.tv_event_action, item.payload?.action)
-                .setText(R.id.tv_event_user_name, item.actor?.name?:item.org?.name)
+                .setText(R.id.tv_event_user_name, item.actor?.name ?: item.org?.name)
                 .setText(R.id.tv_event_time, item.createdAt.toString())
     }
 }

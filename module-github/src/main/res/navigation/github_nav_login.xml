@@ -13,22 +13,10 @@
         <action
             android:id="@+id/start_to_login"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/start_to_main"
-            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.huyingbao.module.github.ui.login.view.LoginFragment"
         android:label="@string/github_label_login"
-        tools:layout="@layout/github_fragment_login">
-        <action
-            android:id="@+id/login_to_main"
-            app:destination="@id/mainActivity" />
-    </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.huyingbao.module.github.ui.main.view.MainActivity"
-        android:label="@string/github_label_main"
-        tools:layout="@layout/base_activity_frag"/>
+        tools:layout="@layout/github_fragment_login" />
 </navigation>

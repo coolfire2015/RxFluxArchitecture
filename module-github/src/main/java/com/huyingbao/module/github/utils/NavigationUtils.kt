@@ -45,7 +45,7 @@ object NavigationUtils {
      */
     fun navigate(view: View, actionId: Int, args: Bundle?, popUp: Boolean, finishStack: Boolean) {
         val navController = Navigation.findNavController(view)
-        if(navController==null){
+        if (navController == null) {
 
         }
         if (popUp) {

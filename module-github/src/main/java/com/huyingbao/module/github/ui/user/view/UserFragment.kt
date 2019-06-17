@@ -43,7 +43,7 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.github_label_user, true)
-        githubAppStore.mUser.observe(this, Observer {
+        githubAppStore.userLiveData.observe(this, Observer {
             binding?.userInfo = it
         })
     }

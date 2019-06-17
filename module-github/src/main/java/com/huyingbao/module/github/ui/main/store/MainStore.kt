@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivityStore(rxDispatcher) {
     val eventListLiveData = MutableLiveData<ArrayList<Event>>()
-
+    var nextRequestPage = 1
 
     @Subscribe(tags = [MainAction.GET_NEWS_EVENT])
     fun onGetNewsEvent(rxAction: RxAction) {

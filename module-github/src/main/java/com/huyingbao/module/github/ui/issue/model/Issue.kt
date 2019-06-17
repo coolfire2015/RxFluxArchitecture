@@ -3,8 +3,7 @@ package com.huyingbao.module.github.ui.issue.model
 
 import com.google.gson.annotations.SerializedName
 import com.huyingbao.module.github.ui.login.model.User
-
-import java.util.Date
+import java.util.*
 
 
 class Issue {

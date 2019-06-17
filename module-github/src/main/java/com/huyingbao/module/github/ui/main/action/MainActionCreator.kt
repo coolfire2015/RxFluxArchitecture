@@ -1,6 +1,5 @@
 package com.huyingbao.module.github.ui.main.action
 
-import android.net.Uri
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
@@ -22,11 +21,6 @@ class MainActionCreator @Inject constructor(
         rxActionManager: RxActionManager,
         private val retrofit: Retrofit
 ) : GithubActionCreator(rxDispatcher, rxActionManager), MainAction {
-    override fun getLoginUserInfo() {
-        val rxAction = newRxAction(MainAction.GET_LOGIN_USER_INFO)
-        postHttpLoadingAction(rxAction, retrofit.create(UserApi::class.java).getLoginUserInfo())
-    }
-
     override fun feedback(editContent: String) {
         val rxAction = newRxAction(MainAction.FEED_BACK)
         val issue = Issue()

@@ -2,13 +2,14 @@ package com.huyingbao.module.github.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager.widget.ViewPager
 import com.huyingbao.core.base.activity.BaseRxActivity
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.module.CommonContants
@@ -44,7 +45,6 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        mainActionCreator.getLoginUserInfo()
         initDrawerLayout()
         initNavigationView()
         initBottomNavigationView()
@@ -90,11 +90,14 @@ class MainActivity : BaseRxActivity<MainStore>() {
             drawer_layout_main?.closeDrawer(GravityCompat.START)
             true
         }
-        githubAppStore.mUser.observe(this, Observer {
+        githubAppStore.userLiveData.observe(this, Observer {
             if (it != null) {
                 //当数据变化更新UI
-                nav_view_main?.findViewById<TextView>(R.id.tv_user_name)?.text = it.name
-                nav_view_main?.findViewById<TextView>(R.id.tv_user_email)?.text = it.email
+                val headerView = nav_view_main.getHeaderView(0)
+                if (headerView is LinearLayout) {
+                    (headerView.getChildAt(1) as TextView).text = it.login
+                    (headerView.getChildAt(2) as TextView).text = it.email
+                }
             }
         })
     }
@@ -124,12 +127,13 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     /**
-     * 初始化ViewPage2
+     * 初始化ViewPage
      */
     private fun initViewPager() {
+        view_pager_main.offscreenPageLimit = 3
         //设置适配器，生成对应的Fragment
-        view_pager_main.adapter = object : FragmentStateAdapter(this) {
-            override fun createFragment(position: Int): Fragment {
+        view_pager_main.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            override fun getItem(position: Int): Fragment {
                 return when (position) {
                     0 -> DynamicFragment()
                     1 -> RecommendFragment()
@@ -138,20 +142,26 @@ class MainActivity : BaseRxActivity<MainStore>() {
                 }
             }
 
-            override fun getItemCount(): Int {
+            override fun getCount(): Int {
                 return 3
             }
         }
         //设置滑动回调
-        view_pager_main.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        view_pager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
             override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                return when (position) {
+                when (position) {
                     0 -> bottom_nav_main.selectedItemId = R.id.bottom_nav_dynamic
                     1 -> bottom_nav_main.selectedItemId = R.id.bottom_nav_recommend
                     2 -> bottom_nav_main.selectedItemId = R.id.bottom_nav_mine
                     else -> bottom_nav_main.selectedItemId = R.id.bottom_nav_dynamic
                 }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
             }
         })
     }
@@ -190,8 +200,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
      */
     private fun logout() {
         localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
-        val intent =Intent(this,LoginActivity::class.java)
-        //Anto
+        val intent = Intent(this, LoginActivity::class.java)
         intent.clearTask()
         intent.clearTop()
         startActivity(intent)

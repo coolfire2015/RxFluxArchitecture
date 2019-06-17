@@ -61,8 +61,8 @@ dependencies {
     //X_ConstraintLayout
     api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
     //X-Navigation
-    api "android.arch.navigation:navigation-ui-ktx:${X_NAVIGATION}"
-    api "android.arch.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
+    api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
+    api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //OkHttp
@@ -78,14 +78,16 @@ dependencies {
     api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
     //ARouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
-    //RxJava AutoDispose 自动取消
+    //AutoDispose
     api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
     //Kotlin支持
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
-    // Anko Commons
+    //Anko Commons
     api "org.jetbrains.anko:anko-commons:$ANKO"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
+    //SmartRefreshLayout
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
     //Dagger编译时生成
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
