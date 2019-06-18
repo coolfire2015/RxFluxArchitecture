@@ -12,7 +12,6 @@ import com.huyingbao.module.wan.app.WanAppStore;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment;
-import com.huyingbao.module.wan.ui.login.view.LoginActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -33,11 +32,6 @@ public class ArticleActivity extends BaseRxFragActivity<ArticleStore> {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-    }
-
-    @Subscribe(tags = {ArticleAction.TO_LOGIN}, sticky = true)
-    public void toLogin(RxChange rxChange) {
-        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Subscribe(tags = {ArticleAction.TO_FRIEND}, sticky = true)

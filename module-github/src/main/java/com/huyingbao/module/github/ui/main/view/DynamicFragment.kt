@@ -10,6 +10,8 @@ import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.main.action.MainActionCreator
 import com.huyingbao.module.github.ui.main.adapter.EventAdapter
 import com.huyingbao.module.github.ui.main.store.MainStore
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.github_fragment_dynamic.*
 import javax.inject.Inject
 
@@ -37,14 +39,30 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        githubAppStore.userLiveData.value?.login?.let { mainActionCreator.getNewsEvent(it, 1) }
+        initRefreshView()
         initRecyclerView()
         initAdapter()
         showData()
     }
 
     /**
-     * 实例化RecyclerView
+     * 初始化上下拉刷新View
+     */
+    private fun initRefreshView() {
+        rfl_content.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+            }
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+            }
+        })
+        rfl_content.autoRefresh()
+    }
+
+    /**
+     * 初始化RecyclerView
      */
     private fun initRecyclerView() {
         rv_content.layoutManager = LinearLayoutManager(activity)
@@ -57,7 +75,7 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
     }
 
     /**
-     * 实例化adapter
+     * 初始化adapter
      */
     private fun initAdapter() {
         mAdapter = EventAdapter(null)
@@ -69,7 +87,12 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
      */
     private fun showData() {
         rxStore!!.eventListLiveData.observe(this, Observer { articleArrayList ->
-            mAdapter!!.setNewData(articleArrayList)
+            if (articleArrayList != null) {
+                mAdapter!!.setNewData(articleArrayList)
+                //关闭下拉
+                rfl_content.finishRefresh()
+                rfl_content.finishLoadMore()
+            }
         })
     }
 }

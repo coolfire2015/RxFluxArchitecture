@@ -6,7 +6,6 @@ package com.huyingbao.module.wan.ui.article.action;
 public interface ArticleAction {
     String TO_BANNER = "to_banner";
     String TO_FRIEND = "to_friend";
-    String TO_LOGIN = "to_login";
 
     /**
      * 获取文章列表

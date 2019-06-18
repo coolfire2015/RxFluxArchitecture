@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 import com.huyingbao.core.arch.store.RxStoreKey;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
 import com.huyingbao.module.wan.ui.friend.store.FriendStore;
-import com.huyingbao.module.wan.ui.login.store.LoginStore;
 
 import javax.inject.Singleton;
 
@@ -24,12 +23,6 @@ public abstract class WanStoreModule {
     @IntoMap
     @RxStoreKey(ArticleStore.class)
     abstract ViewModel bindArticleStore(ArticleStore articleStore);
-
-    @Singleton
-    @Binds
-    @IntoMap
-    @RxStoreKey(LoginStore.class)
-    abstract ViewModel bindLoginStore(LoginStore loginStore);
 
     @Singleton
     @Binds

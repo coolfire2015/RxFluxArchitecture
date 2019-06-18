@@ -13,10 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.person.view.PersonActivity" />
-        <activity android:name=".ui.issue.view.IssueActivity" />
-        <activity android:name=".ui.code.view.CodeActivity" />
-        <activity android:name=".ui.repos.view.ReposActivity" />
         <activity android:name=".ui.login.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.person.view.PersonActivity" />
+        <activity android:name=".ui.issue.view.IssueActivity" />
+        <activity android:name=".ui.code.view.CodeActivity" />
+        <activity android:name=".ui.repos.view.ReposActivity" />
         <activity android:name=".ui.main.view.MainActivity" />
         <activity android:name=".ui.user.view.UserActivity" />
         <activity android:name=".ui.star.view.StarActivity" />

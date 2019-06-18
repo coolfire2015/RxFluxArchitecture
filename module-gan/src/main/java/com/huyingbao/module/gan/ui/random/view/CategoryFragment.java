@@ -12,7 +12,6 @@ import com.huyingbao.core.base.fragment.BaseRxFragment;
 import com.huyingbao.core.common.R2;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
-import com.huyingbao.module.gan.ui.main.action.MainActionCreator;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
 import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
@@ -20,8 +19,6 @@ import com.huyingbao.module.gan.ui.random.store.RandomStore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -31,8 +28,6 @@ import butterknife.BindView;
  * Created by liujunfeng on 2019/1/1.
  */
 public class CategoryFragment extends BaseRxFragment<RandomStore> {
-    @Inject
-    MainActionCreator mActionCreator;
     @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
@@ -67,7 +62,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mActionCreator.postLocalAction(RandomAction.TO_SHOW_DATA,
+                mCommonActionCreator.postLocalAction(RandomAction.TO_SHOW_DATA,
                         GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });

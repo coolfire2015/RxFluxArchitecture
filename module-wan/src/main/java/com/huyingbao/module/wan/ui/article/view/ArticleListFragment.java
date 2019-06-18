@@ -75,9 +75,6 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
         } else if (item.getItemId() == R.id.menu_to_friend) {
             mActionCreator.postLocalChange(ArticleAction.TO_FRIEND);
             return true;
-        } else if (item.getItemId() == R.id.menu_to_login) {
-            mActionCreator.postLocalChange(ArticleAction.TO_LOGIN);
-            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }

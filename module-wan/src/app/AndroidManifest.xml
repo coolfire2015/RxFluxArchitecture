@@ -20,6 +20,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huyingbao.module.wan.ui.login.view.LoginActivity" />
     </application>
 </manifest>

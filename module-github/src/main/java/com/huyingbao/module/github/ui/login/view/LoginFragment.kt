@@ -2,9 +2,6 @@ package com.huyingbao.module.github.ui.login.view
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.EditText
-import android.widget.Toast
-import butterknife.BindView
 import butterknife.OnClick
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.base.fragment.BaseRxFragment
@@ -13,6 +10,7 @@ import com.huyingbao.module.github.R2
 import com.huyingbao.module.github.ui.login.action.LoginAction
 import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.module.github.ui.login.store.LoginStore
+import kotlinx.android.synthetic.main.github_fragment_login.*
 import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
@@ -24,11 +22,6 @@ import javax.inject.Inject
 class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var mActionCreator: LoginActionCreator
-
-    @BindView(R2.id.et_username)
-    lateinit var mEtUsername: EditText
-    @BindView(R2.id.et_password)
-    lateinit var mEtPassword: EditText
 
     override fun getLayoutId(): Int {
         return R.layout.github_fragment_login
@@ -43,8 +36,8 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
      * 初始化View
      */
     private fun initView() {
-        mEtUsername.setText(rxStore?.getUserName())
-        mEtPassword.setText(rxStore?.getPassword())
+        et_username.setText(rxStore?.getUserName())
+        et_password.setText(rxStore?.getPassword())
     }
 
     /**
@@ -52,10 +45,9 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
      */
     @OnClick(R2.id.btn_login)
     fun login() {
-        val username = mEtUsername.text.toString()
-        val password = mEtPassword.text.toString()
+        val username = et_username.text.toString()
+        val password = et_password.text.toString()
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Toast.makeText(activity, "请输入密码！", Toast.LENGTH_SHORT).show()
             return
         }
         mActionCreator.login(username, password)

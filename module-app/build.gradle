@@ -2,29 +2,40 @@ apply plugin: 'com.android.application'
 apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_java.gradle')
 
+//获取local.Properties
+File localPropFile = project.rootProject.file("local.properties")
+Properties localProperties = new Properties()
+localProperties.load(localPropFile.newDataInputStream())
+
 android {
     //签名配置,自定义,用在defaultConfig中
     signingConfigs {
         debug {
-            storeFile file(STORE_DEBUG_FILE)
+            storeFile file(localProperties.getProperty("STORE_DEBUG_FILE"))
         }
         release {
-            storeFile file(STORE_RELEASE_FILE)
-            storePassword STORE_PASSWORD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
+            storeFile file(localProperties.getProperty("STORE_RELEASE_FILE"))
+            storePassword localProperties.getProperty("STORE_PASSWORD")
+            keyAlias localProperties.getProperty("KEY_ALIAS")
+            keyPassword localProperties.getProperty("KEY_PASSWORD")
         }
     }
     //默认配置
     defaultConfig {
-        multiDexEnabled true//支持Multidex分包
+        //支持MultiDex分包
+        multiDexEnabled true
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode rootProject.gitGitVersionCode()
         versionName rootProject.getGitVersionName()
         signingConfig signingConfigs.debug
-        vectorDrawables.useSupportLibrary = true//使用vector图片
+        //使用vector图片
+        vectorDrawables.useSupportLibrary = true
+        //单元测试配置
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //显示分支名字
+        buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+        //注解编译参数设置
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -35,8 +46,6 @@ android {
     buildTypes {
         //自定义buildType.name
         debug {
-            //显示分支名字
-            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
             //替换字符串资源
@@ -52,8 +61,6 @@ android {
         }
         //自定义buildType.name
         release {
-            //显示分支名字
-            buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
             //替换字符串资源
             resValue "string", "app_name", "RxFluxArch"
             //混淆开关

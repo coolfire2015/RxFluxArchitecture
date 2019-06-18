@@ -20,6 +20,11 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivitySto
     val eventListLiveData = MutableLiveData<ArrayList<Event>>()
     var nextRequestPage = 1
 
+    override fun onCleared() {
+        super.onCleared()
+        eventListLiveData.value = null
+    }
+
     @Subscribe(tags = [MainAction.GET_NEWS_EVENT])
     fun onGetNewsEvent(rxAction: RxAction) {
         eventListLiveData.value = rxAction.getResponse()

@@ -1,7 +1,6 @@
 package com.huyingbao.module.gan.module;
 
 import com.huyingbao.core.arch.scope.ActivityScope;
-import com.huyingbao.module.gan.ui.main.view.MainActivity;
 import com.huyingbao.module.gan.ui.random.view.RandomActivity;
 
 import dagger.Module;
@@ -34,10 +33,6 @@ public abstract class GanInjectActivityModule {
      *
      * @return
      */
-    @ActivityScope
-    @ContributesAndroidInjector(modules = GanInjectFragmentModule.class)
-    abstract MainActivity injectMainActivity();
-
     @ActivityScope
     @ContributesAndroidInjector(modules = GanInjectFragmentModule.class)
     abstract RandomActivity injectRandomActivity();

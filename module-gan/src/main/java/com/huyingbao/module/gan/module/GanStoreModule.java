@@ -3,7 +3,6 @@ package com.huyingbao.module.gan.module;
 import androidx.lifecycle.ViewModel;
 
 import com.huyingbao.core.arch.store.RxStoreKey;
-import com.huyingbao.module.gan.ui.main.store.MainStore;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
 import javax.inject.Singleton;
@@ -42,10 +41,4 @@ public abstract class GanStoreModule {
     @IntoMap
     @RxStoreKey(RandomStore.class)
     abstract ViewModel bindRandomStore(RandomStore randomStore);
-
-    @Singleton
-    @Binds
-    @IntoMap
-    @RxStoreKey(MainStore.class)
-    abstract ViewModel bindMainStore(MainStore mainStore);
 }

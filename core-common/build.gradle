@@ -63,6 +63,12 @@ dependencies {
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
+    //X-Room
+    api "androidx.room:room-runtime:${X_ROOM}"
+    //X-Room kotlin扩展和协程支持
+    api "androidx.room:room-ktx:${X_ROOM}"
+    //X-Room RxJava 支持库
+    api "androidx.room:room-rxjava2:${X_ROOM}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //OkHttp

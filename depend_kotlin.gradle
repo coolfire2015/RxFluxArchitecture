@@ -2,22 +2,24 @@ dependencies {
     //通用库
     implementation project(':core-common')
     //编译时生成
+    kapt "androidx.room:room-compiler:${X_ROOM}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
-    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
     kapt "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
     kapt "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
 //    kapt project(':core-arch-processor')
     //单元测试编译时生成
+    kaptTest "androidx.room:room-compiler:${X_ROOM}"
+    kaptTest "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
+    kaptTest "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kaptTest "com.google.dagger:dagger-compiler:${DAGGER}"
     kaptTest "com.google.dagger:dagger-android-processor:${DAGGER}"
-    kaptTest "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kaptTest "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
     kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
-    kaptTest "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
     kaptTest "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
     kaptTest "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
 //    kaptTest project(':core-arch-processor')

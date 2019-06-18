@@ -12,9 +12,4 @@
         android:icon="@android:drawable/ic_menu_report_image"
         android:title="@string/wan_label_banner"
         app:showAsAction="ifRoom|withText" />
-    <item
-        android:id="@+id/menu_to_login"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/wan_label_login"
-        app:showAsAction="ifRoom|withText" />
 </menu>
