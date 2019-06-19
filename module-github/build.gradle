@@ -1,9 +1,9 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "kotlin-allopen"
-apply plugin: 'com.jakewharton.butterknife'
 apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_kotlin.gradle')
 

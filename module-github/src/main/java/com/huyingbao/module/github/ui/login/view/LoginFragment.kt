@@ -2,16 +2,15 @@ package com.huyingbao.module.github.ui.login.view
 
 import android.os.Bundle
 import android.text.TextUtils
-import butterknife.OnClick
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
-import com.huyingbao.module.github.R2
 import com.huyingbao.module.github.ui.login.action.LoginAction
 import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import kotlinx.android.synthetic.main.github_fragment_login.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -38,19 +37,20 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     private fun initView() {
         et_username.setText(rxStore?.getUserName())
         et_password.setText(rxStore?.getPassword())
+        btn_login.setOnClickListener { clickLogin() }
     }
 
     /**
      * 点击登录
      */
-    @OnClick(R2.id.btn_login)
-    fun login() {
+    private fun clickLogin() {
         val username = et_username.text.toString()
         val password = et_password.text.toString()
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            return
+            context?.toast("请输入内容！")
+        } else {
+            mActionCreator.login(username, password)
         }
-        mActionCreator.login(username, password)
     }
 
     /**
