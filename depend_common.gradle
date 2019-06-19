@@ -1,3 +1,13 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-allopen"
+apply plugin: 'kotlin-kapt'
+
+//指定会打开类的注解的列表
+allOpen {
+    annotation("com.huyingbao.core.common.annotation.AllOpen")
+}
+
 android {
     //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -24,6 +34,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     //单元测试,Robolectric支持
     testOptions {
         unitTests {
@@ -46,4 +60,84 @@ artifacts {
 repositories {
     //本地仓库,添加aar支持
     flatDir { dirs 'libs' }
+}
+
+//通用的依赖库
+dependencies {
+    //内核
+    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
+    implementation "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
+    implementation "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
+    //X-Core
+    implementation "androidx.core:core-ktx:${X_CORE}"
+    //X-MultiDex
+    implementation "androidx.multidex:multidex:${X_MULTIDEX}"
+    //X-CardView
+    implementation "androidx.cardview:cardview:${X_CARD_VIEW}"
+    //X-Viewpager
+    implementation "androidx.viewpager2:viewpager2:${X_VIEWPAGER}"
+    //X-RecyclerView
+    implementation "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
+    //X-Material
+    implementation "com.google.android.material:material:${X_MATERIAL}"
+    //X_ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
+    //X-Navigation
+    implementation "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
+    //X-Room
+    implementation "androidx.room:room-runtime:${X_ROOM}"
+    //X-Room kotlin扩展和协程支持
+    implementation "androidx.room:room-ktx:${X_ROOM}"
+    //X-Room RxJava 支持库
+    implementation "androidx.room:room-rxjava2:${X_ROOM}"
+    //日志展示
+    implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //OkHttp
+    implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    //Json
+    implementation "com.google.code.gson:gson:${GSON}"
+    //ARouter
+    implementation "com.alibaba:arouter-api:${AROUTER_API}"
+    //AutoDispose
+    implementation "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
+    //Kotlin支持
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    //Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:$ANKO"
+    //RecyclerView适配器
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
+    //SmartRefreshLayout
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
+
+    //测试Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock-kotlin:${TEST_DEAAGE_MOCK}"
+    //测试Api
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+    //测试工具
+    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
+    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
+    testImplementation "com.github.coolfire2015:RxFluxTestUtils:${RX_FLUX_TEST_UTILS}"
 }

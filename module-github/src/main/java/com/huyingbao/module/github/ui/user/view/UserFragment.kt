@@ -1,13 +1,12 @@
 package com.huyingbao.module.github.ui.user.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
-import butterknife.OnClick
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.widget.CommonInfoCardView
 import com.huyingbao.module.github.R
-import com.huyingbao.module.github.R2
 import com.huyingbao.module.github.app.BaseRxBindFragment
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.databinding.GithubFragmentUserBinding
@@ -43,40 +42,35 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.github_label_user, true)
-        githubAppStore.userLiveData.observe(this, Observer {
-            binding?.userInfo = it
-        })
+        initView()
     }
 
     /**
-     * 点击事件
+     * 初始化
      */
-    @OnClick(R2.id.cv_info_bio,
-            R2.id.cv_info_blog,
-            R2.id.cv_info_email,
-            R2.id.cv_info_company,
-            R2.id.cv_info_name,
-            R2.id.cv_info_location)
-    fun onClick(view: CommonInfoCardView) {
-        when (view.id) {
-            R.id.cv_info_bio -> showUpdateDialog(view, UserAction.UPDATE_USER_BIO)
-            R.id.cv_info_blog -> showUpdateDialog(view, UserAction.UPDATE_USER_BLOG)
-            R.id.cv_info_company -> showUpdateDialog(view, UserAction.UPDATE_USER_COMPANY)
-            R.id.cv_info_email -> showUpdateDialog(view, UserAction.UPDATE_USER_EMAIL)
-            R.id.cv_info_name -> showUpdateDialog(view, UserAction.UPDATE_USER_NAME)
-            R.id.cv_info_location -> showUpdateDialog(view, UserAction.UPDATE_USER_LOCATION)
-        }
+    private fun initView() {
+        githubAppStore.userLiveData.observe(this, Observer {
+            binding?.userInfo = it
+        })
+        cv_info_bio.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_BIO) }
+        cv_info_blog.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_BLOG) }
+        cv_info_company.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_COMPANY) }
+        cv_info_email.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_EMAIL) }
+        cv_info_name.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_NAME) }
+        cv_info_location.setOnClickListener { showUpdateDialog(it, UserAction.UPDATE_USER_LOCATION) }
     }
 
     /**
      * 显示更新内容弹框
      */
-    private fun showUpdateDialog(view: CommonInfoCardView, tag: String) {
-        commonInfoDialog.info = CommonInfoDialog.Info()
-        commonInfoDialog.info.title = "编辑${view.infoTitle}"
-        commonInfoDialog.info.actionFirst = tag
-        commonInfoDialog.info.editContent = view.infoContent ?: ""
-        activity?.supportFragmentManager?.let { fragmentManager -> commonInfoDialog.show(fragmentManager, commonInfoDialog.javaClass.simpleName) }
+    private fun showUpdateDialog(infoView: View, tag: String) {
+        if (infoView is CommonInfoCardView) {
+            commonInfoDialog.info = CommonInfoDialog.Info()
+            commonInfoDialog.info!!.title = "编辑${infoView.infoTitle}"
+            commonInfoDialog.info!!.actionFirst = tag
+            commonInfoDialog.info!!.editContent = infoView.infoContent ?: ""
+            activity?.supportFragmentManager?.let { fragmentManager -> commonInfoDialog.show(fragmentManager, commonInfoDialog.javaClass.simpleName) }
+        }
     }
 
     /**

@@ -171,10 +171,12 @@ class MainActivity : BaseRxActivity<MainStore>() {
      */
     private fun showFeedBackDialog() {
         commonInfoDialog.info = CommonInfoDialog.Info()
-        commonInfoDialog.info.title = getString(R.string.github_menu_feedback)
-        commonInfoDialog.info.editContent = ""
-        commonInfoDialog.info.infoDialogClickListener = CommonInfoDialog.InfoDialogClickListener { editTitle, editContent ->
-            mainActionCreator.feedback(editContent)
+        commonInfoDialog.info!!.title = getString(R.string.github_menu_feedback)
+        commonInfoDialog.info!!.editContent = ""
+        commonInfoDialog.info!!.infoDialogClickListener = object : CommonInfoDialog.InfoDialogClickListener {
+            override fun onConfirm(editTitle: String, editContent: String) {
+                mainActionCreator.feedback(editContent)
+            }
         }
         commonInfoDialog.show(supportFragmentManager, commonInfoDialog.javaClass.simpleName)
     }
@@ -184,14 +186,12 @@ class MainActivity : BaseRxActivity<MainStore>() {
      */
     private fun checkUpdate() {
 
-
     }
 
     /**
      * 显示关于
      */
     private fun showAbout() {
-
 
     }
 

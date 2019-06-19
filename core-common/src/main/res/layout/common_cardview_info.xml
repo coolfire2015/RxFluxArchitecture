@@ -14,14 +14,14 @@
         android:padding="@dimen/dp_10">
 
         <ImageView
-            android:id="@+id/infoIcon"
+            android:id="@+id/iv_info_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"
             tools:src="@android:drawable/ic_menu_call" />
 
         <TextView
-            android:id="@+id/infoTitle"
+            android:id="@+id/tv_info_title"
             android:layout_width="@dimen/dp_40"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -29,7 +29,7 @@
             tools:text="@string/common_cancel" />
 
         <TextView
-            android:id="@+id/infoContent"
+            android:id="@+id/tv_info_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -1,9 +1,4 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "kotlin-allopen"
 apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_kotlin.gradle')
 
@@ -11,11 +6,6 @@ apply from: rootProject.file('depend_kotlin.gradle')
 File localPropFile = project.rootProject.file("local.properties")
 Properties localProperties = new Properties()
 localProperties.load(localPropFile.newDataInputStream())
-
-//指定会打开类的注解的列表
-allOpen {
-    annotation("com.huyingbao.core.common.annotation.AllOpen")
-}
 
 android {
     //签名配置,自定义,用在defaultConfig中
@@ -80,10 +70,6 @@ android {
             //签名配置
             signingConfig signingConfigs.release
         }
-    }
-    //Kotlin Java1.8支持
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
     //注解编译参数设置
     kapt {

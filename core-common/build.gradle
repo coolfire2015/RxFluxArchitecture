@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
+apply from: rootProject.file('depend_common.gradle')
 
 android {
-    //编译版本
-    compileSdkVersion COMPILE_SDK_VERSION as int
     //默认配置
     defaultConfig {
         //Sdk版本
@@ -23,82 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //Lambda表达式需要
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
-
-//将源代码打包进aar
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.javaDirectories
-}
-
-artifacts {
-    archives sourcesJar
-}
-
 dependencies {
-    //内核
-//    api project(":core-arch")
-    api "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
-    api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
-    api "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
-    //X-Core
-    api "androidx.core:core-ktx:${X_CORE}"
-    //X-MultiDex
-    api "androidx.multidex:multidex:${X_MULTIDEX}"
-    //X-CardView
-    api "androidx.cardview:cardview:${X_CARD_VIEW}"
-    //X-Viewpager
-    api "androidx.viewpager2:viewpager2:${X_VIEWPAGER}"
-    //X-RecyclerView
-    api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
-    //X-Material
-    api "com.google.android.material:material:${X_MATERIAL}"
-    //X_ConstraintLayout
-    api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
-    //X-Navigation
-    api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
-    api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X-Room
-    api "androidx.room:room-runtime:${X_ROOM}"
-    //X-Room kotlin扩展和协程支持
-    api "androidx.room:room-ktx:${X_ROOM}"
-    //X-Room RxJava 支持库
-    api "androidx.room:room-rxjava2:${X_ROOM}"
-    //日志展示
-    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
-    //OkHttp
-    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
-    api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
-    //Retrofit
-    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
-    api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
-    //Json
-    api "com.google.code.gson:gson:${GSON}"
-    //ButterKnife
-    api "com.jakewharton:butterknife:${BUTTER_KNIFE}"
-    //ARouter
-    api "com.alibaba:arouter-api:${AROUTER_API}"
-    //AutoDispose
-    api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
-    //Kotlin支持
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
-    //Anko Commons
-    api "org.jetbrains.anko:anko-commons:$ANKO"
-    //RecyclerView适配器
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
-    //SmartRefreshLayout
-    api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
     //Dagger编译时生成
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     //AndroidX迁移
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    //ButterKnife编译时生成
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }
