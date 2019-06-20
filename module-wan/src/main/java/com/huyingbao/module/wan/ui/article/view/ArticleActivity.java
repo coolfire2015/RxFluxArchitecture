@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.huyingbao.core.arch.model.RxChange;
 import com.huyingbao.core.base.activity.BaseRxFragActivity;
+import com.huyingbao.core.common.module.CommonContants;
 import com.huyingbao.module.wan.app.WanAppStore;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.store.ArticleStore;
@@ -19,7 +20,7 @@ import javax.inject.Inject;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Route(path = "/wan/ArticleActivity")
+@Route(path = CommonContants.Address.ArticleActivity)
 public class ArticleActivity extends BaseRxFragActivity<ArticleStore> {
     @Inject
     WanAppStore mWanAppStore;

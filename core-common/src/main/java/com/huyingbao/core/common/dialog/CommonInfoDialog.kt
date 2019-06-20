@@ -95,7 +95,7 @@ class CommonInfoDialog : BaseCommonDialog() {
         if (commonInfo != null && !TextUtils.isEmpty(commonInfo!!.actionSecond)) {
             commonInfo!!.actionSecond.let {
                 //TODO 如果设置Action，则发送Action
-                //mCommonActionCreator.postLocalAction(it)
+                //commonActionCreator.postLocalAction(it)
             }
         }
         dismiss()
@@ -114,7 +114,7 @@ class CommonInfoDialog : BaseCommonDialog() {
         if (!TextUtils.isEmpty(commonInfo!!.actionFirst)) {
             //TODO 如果设置Action，则发送Action
             commonInfo!!.actionFirst.let {
-                //mCommonActionCreator.postLocalAction(it, CommonContants.Key.TITLE, title, CommonContants.Key.CONTENT, content)
+                //commonActionCreator.postLocalAction(it, CommonContants.Key.TITLE, title, CommonContants.Key.CONTENT, content)
             }
         }
         dismiss()

@@ -12,6 +12,7 @@ import com.huyingbao.core.base.fragment.BaseRxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
+import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.CategoryAdapter;
 import com.huyingbao.module.gan.ui.random.store.RandomStore;
 
@@ -19,14 +20,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * 内容类型列表展示页面
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public class CategoryFragment extends BaseRxFragment<RandomStore> {
-    RecyclerView mRvContent;
+    @Inject
+    RandomActionCreator mRandomActionCreator;
 
+    private RecyclerView mRvContent;
     private List<String> mDataList;
     private CategoryAdapter mAdapter;
 
@@ -59,7 +64,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mCommonActionCreator.postLocalAction(RandomAction.TO_SHOW_DATA,
+                mRandomActionCreator.postLocalAction(RandomAction.TO_SHOW_DATA,
                         GanConstants.Key.CATEGORY, mDataList.get(position));
             }
         });
@@ -69,7 +74,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
      * 实例化adapter
      */
     private void initAdapter() {
-        mDataList = new ArrayList();
+        mDataList = new ArrayList<>();
         mAdapter = new CategoryAdapter(mDataList);
         //view设置适配器
         mRvContent.setAdapter(mAdapter);

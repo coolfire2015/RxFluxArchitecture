@@ -2,9 +2,17 @@ package com.huyingbao.module.github.ui.repos.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.base.activity.BaseRxFragActivity
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.ui.repos.store.ReposStore
 
+/**
+ * 仓库模块
+ *
+ * Created by liujunfeng on 2019/6/10.
+ */
+@Route(path = CommonContants.Address.ReposActivity)
 class ReposActivity : BaseRxFragActivity<ReposStore>() {
     override fun createFragment(): Fragment? {
         return ReposFragment.newInstance()

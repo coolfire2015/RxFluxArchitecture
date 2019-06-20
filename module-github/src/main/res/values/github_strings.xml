@@ -26,5 +26,7 @@
     <string name="github_menu_user_info">个人信息</string>
     <string name="github_menu_version">版本更新</string>
     <string name="github_menu_about">应用关于</string>
+    <string name="github_menu_wan">玩安卓</string>
+    <string name="github_menu_gan">干货集中营</string>
     <string name="github_menu_logout">退出登录</string>
 </resources>

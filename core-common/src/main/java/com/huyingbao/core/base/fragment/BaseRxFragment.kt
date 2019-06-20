@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 abstract class BaseRxFragment<T : ViewModel> : RxFluxFragment<T>(), BaseView {
     @Inject
-    lateinit var mCommonActionCreator: CommonActionCreator
+    lateinit var commonActionCreator: CommonActionCreator
 
     private var mBackAble: Boolean = false
     private var mTitle: CharSequence? = null

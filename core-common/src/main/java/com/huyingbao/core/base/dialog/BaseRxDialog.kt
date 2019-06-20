@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 abstract class BaseRxDialog<T : ViewModel> : RxFluxDialog<T>(), BaseView {
     @Inject
-    lateinit var mCommonActionCreator: CommonActionCreator
+    lateinit var commonActionCreator: CommonActionCreator
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //注意此处android.R.id.content

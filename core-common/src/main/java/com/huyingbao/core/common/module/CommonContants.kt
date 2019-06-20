@@ -24,4 +24,20 @@ class CommonContants {
     object Header {
         const val AUTHORIZATION = "Authorization"
     }
+
+    object Address {
+        const val RandomActivity = "/gan/random/RandomActivity"
+
+        const val ArticleActivity = "/wan/article/ArticleActivity"
+
+        const val LoginActivity = "/github/login/LoginActivity"
+        const val PersonActivity = "/github/person/PersonActivity"
+        const val IssueActivity = "/github/issue/IssueActivity"
+        const val CodeActivity = "/github/code/CodeActivity"
+        const val ReposActivity = "/github/repos/ReposActivity"
+        const val MainActivity = "/github/main/MainActivity"
+        const val UserActivity = "/github/user/UserActivity"
+        const val StarActivity = "/github/star/StarActivity"
+        const val SearchActivity = "/github/search/SearchActivity"
+    }
 }

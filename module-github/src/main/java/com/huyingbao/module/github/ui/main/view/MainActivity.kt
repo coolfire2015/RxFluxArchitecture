@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.activity.BaseRxActivity
 import com.huyingbao.core.common.dialog.CommonInfo
 import com.huyingbao.core.common.dialog.CommonInfoDialog
@@ -32,6 +34,7 @@ import javax.inject.Inject
  *
  * Created by liujunfeng on 2019/6/10.
  */
+@Route(path = CommonContants.Address.MainActivity)
 class MainActivity : BaseRxActivity<MainStore>() {
     @Inject
     lateinit var githubAppStore: GithubAppStore
@@ -85,6 +88,8 @@ class MainActivity : BaseRxActivity<MainStore>() {
                 R.id.nav_main_user_info -> startActivity(Intent(this, UserActivity::class.java))
                 R.id.nav_main_about -> showAbout()
                 R.id.nav_main_version -> checkUpdate()
+                R.id.nav_main_wan -> ARouter.getInstance().build(CommonContants.Address.ArticleActivity).navigation()
+                R.id.nav_main_gan -> ARouter.getInstance().build(CommonContants.Address.RandomActivity).navigation()
                 R.id.nav_main_logout -> logout()
             }
             drawer_layout_main?.closeDrawer(GravityCompat.START)

@@ -2,7 +2,9 @@ package com.huyingbao.module.github.ui.person.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.base.activity.BaseRxFragActivity
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.ui.person.store.PersonStore
 
 /**
@@ -10,6 +12,7 @@ import com.huyingbao.module.github.ui.person.store.PersonStore
  *
  * Created by liujunfeng on 2019/6/10.
  */
+@Route(path = CommonContants.Address.PersonActivity)
 class PersonActivity : BaseRxFragActivity<PersonStore>() {
     override fun createFragment(): Fragment? {
         return PersonFragment.newInstance()

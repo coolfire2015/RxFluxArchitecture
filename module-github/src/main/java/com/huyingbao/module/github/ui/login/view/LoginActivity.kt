@@ -2,8 +2,10 @@ package com.huyingbao.module.github.ui.login.view
 
 import android.content.Intent
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.base.activity.BaseRxNavActivity
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.login.action.LoginAction
@@ -17,6 +19,7 @@ import javax.inject.Inject
  *
  * Created by liujunfeng on 2019/1/1.
  */
+@Route(path = CommonContants.Address.LoginActivity)
 class LoginActivity : BaseRxNavActivity<LoginStore>() {
     @Inject
     lateinit var githubAppStore: GithubAppStore

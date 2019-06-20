@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.huyingbao.core.base.BaseView
-import com.huyingbao.core.common.action.CommonActionCreator
-import javax.inject.Inject
 
 /**
  * 不使用Dagger.Android，不接收订阅回调
