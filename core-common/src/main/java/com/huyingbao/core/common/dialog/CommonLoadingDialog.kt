@@ -7,7 +7,6 @@ import androidx.annotation.StringRes
 import com.huyingbao.core.base.dialog.BaseCommonDialog
 import com.huyingbao.core.common.R
 import kotlinx.android.synthetic.main.common_dialog_loading.*
-import org.jetbrains.anko.toast
 
 /**
  * 进度提示
@@ -15,8 +14,10 @@ import org.jetbrains.anko.toast
  * Created by liujunfeng on 2019/1/1.
  */
 class CommonLoadingDialog : BaseCommonDialog() {
+    var clickListener: CommonLoadingDialogClickListener? = null
+
     @StringRes
-    private var mMessageInt: Int = 0
+    private var messageInt: Int = 0
 
     companion object {
         fun newInstance(): CommonLoadingDialog {
@@ -30,40 +31,44 @@ class CommonLoadingDialog : BaseCommonDialog() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         dialog!!.setCanceledOnTouchOutside(false)
-        if (mMessageInt == 0) {
-            return
+        if (messageInt != 0) {
+            val message = getString(messageInt)
+            if (!TextUtils.isEmpty(message)) {
+                tv_loading_notice!!.text = message
+            }
         }
-        val message = getString(mMessageInt)
-        if (!TextUtils.isEmpty(message)) {
-            tv_loading_notice!!.text = message
+        tv_loading_cancel.setOnClickListener {
+            clickListener?.onCancel()
+            dismiss()
         }
-        tv_loading_cancel.setOnClickListener { cancel() }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        mMessageInt = 0
+        messageInt = 0
+        clickListener = null
     }
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
-        mMessageInt = 0
-    }
-
-    /**
-     * 取消订阅的Action
-     */
-    private fun cancel() {
-        //TODO 需要取消Action
-        //mRxActionManagerLazy.clear()
-        context?.toast("消失，未取消操作！")
-        dismiss()
+        messageInt = 0
+        clickListener = null
     }
 
     /**
      * 设置进度弹框显示文字
      */
     fun setMessageInt(@StringRes messageInt: Int) {
-        mMessageInt = messageInt
+        this.messageInt = messageInt
     }
+}
+
+/**
+ * 点击回调接口
+ */
+interface CommonLoadingDialogClickListener {
+    /**
+     * 点击取消
+     */
+    fun onCancel()
 }

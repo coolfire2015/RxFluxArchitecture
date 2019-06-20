@@ -16,8 +16,10 @@ import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.common.R
 import com.huyingbao.core.common.action.CommonActionCreator
 import com.huyingbao.core.common.dialog.CommonLoadingDialog
+import com.huyingbao.core.common.dialog.CommonLoadingDialogClickListener
 import com.huyingbao.core.common.model.CommonException
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.toast
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -117,7 +119,14 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
         val fragmentByTag = supportFragmentManager.findFragmentByTag(rxLoading.tag)
         if (fragmentByTag == null && rxLoading.isLoading) {
             //显示进度框
-            CommonLoadingDialog.newInstance().show(supportFragmentManager, rxLoading.tag)
+            val commonLoadingDialog = CommonLoadingDialog.newInstance()
+            commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
+                override fun onCancel() {
+                    commonActionCreator.removeRxAction(tag = rxLoading.tag)
+                    toast("取消操作${rxLoading.tag}")
+                }
+            }
+            commonLoadingDialog.show(supportFragmentManager, rxLoading.tag)
             return
         }
         if (fragmentByTag is CommonLoadingDialog && !rxLoading.isLoading) {
