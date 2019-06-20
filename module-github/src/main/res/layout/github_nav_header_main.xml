@@ -15,9 +15,10 @@
 
     <ImageView
         android:id="@+id/iv_user_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
         android:paddingTop="@dimen/dp_10"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_main" />
 
     <TextView
