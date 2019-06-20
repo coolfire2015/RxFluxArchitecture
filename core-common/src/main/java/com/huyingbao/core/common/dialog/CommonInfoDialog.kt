@@ -4,7 +4,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
-import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import com.huyingbao.core.base.dialog.BaseCommonDialog
@@ -55,7 +54,7 @@ class CommonInfoDialog : BaseCommonDialog() {
             setTextView(commonInfo!!.content, tv_info_content)
             setTextView(commonInfo!!.editTitle, et_info_title)
             setTextView(commonInfo!!.editContent, et_info_content)
-            tv_info_cancel.setOnClickListener { onCancelClicked() }
+            tv_info_cancel.setOnClickListener { dismiss() }
             tv_info_ok.setOnClickListener { onOkClicked() }
         }
     }
@@ -89,34 +88,12 @@ class CommonInfoDialog : BaseCommonDialog() {
     }
 
     /**
-     * 取消
-     */
-    private fun onCancelClicked() {
-        if (commonInfo != null && !TextUtils.isEmpty(commonInfo!!.actionSecond)) {
-            commonInfo!!.actionSecond.let {
-                //TODO 如果设置Action，则发送Action
-                //commonActionCreator.postLocalAction(it)
-            }
-        }
-        dismiss()
-    }
-
-    /**
      * 确定，输入框中的内容可以为空
      */
     private fun onOkClicked() {
-        if (commonInfo == null) {
-            dismiss()
-        }
         val title = et_info_title!!.text.toString()
         val content = et_info_content!!.text.toString()
         clickListener?.onConfirm(title, content)
-        if (!TextUtils.isEmpty(commonInfo!!.actionFirst)) {
-            //TODO 如果设置Action，则发送Action
-            commonInfo!!.actionFirst.let {
-                //commonActionCreator.postLocalAction(it, CommonContants.Key.TITLE, title, CommonContants.Key.CONTENT, content)
-            }
-        }
         dismiss()
     }
 }
@@ -139,8 +116,6 @@ class CommonInfo : Parcelable {
     var content: String? = null
     var editTitle: String? = null
     var editContent: String? = null
-    var actionFirst: String? = null
-    var actionSecond: String? = null
 
     override fun describeContents(): Int {
         return 0
@@ -151,8 +126,6 @@ class CommonInfo : Parcelable {
         dest.writeString(this.content)
         dest.writeString(this.editTitle)
         dest.writeString(this.editContent)
-        dest.writeString(this.actionFirst)
-        dest.writeString(this.actionSecond)
     }
 
     constructor() {}
@@ -162,8 +135,6 @@ class CommonInfo : Parcelable {
         this.content = `in`.readString()
         this.editTitle = `in`.readString()
         this.editContent = `in`.readString()
-        this.actionFirst = `in`.readString()
-        this.actionSecond = `in`.readString()
     }
 
     companion object {

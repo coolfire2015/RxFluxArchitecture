@@ -178,13 +178,13 @@ class MainActivity : BaseRxActivity<MainStore>() {
         val info = CommonInfo()
         info.title = getString(R.string.github_menu_feedback)
         info.editContent = ""
-        val newInstance = CommonInfoDialog.newInstance(info)
-        newInstance.clickListener = object : CommonInfoDialogClickListener {
+        val commonInfoDialog = CommonInfoDialog.newInstance(info)
+        commonInfoDialog.clickListener = object : CommonInfoDialogClickListener {
             override fun onConfirm(editTitle: String, editContent: String) {
                 mainActionCreator.feedback(editContent)
             }
         }
-        newInstance.show(supportFragmentManager, CommonInfoDialog::class.java.simpleName)
+        commonInfoDialog.show(supportFragmentManager, CommonInfoDialog::class.java.simpleName)
     }
 
     /**
