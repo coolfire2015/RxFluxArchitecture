@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.app
+package com.huyingbao.core.base.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
+import com.huyingbao.core.common.utils.autoCleared
 
-import com.huyingbao.core.base.fragment.BaseRxFragment
-import com.huyingbao.module.github.utils.autoCleared
 
 /**
  * 使用DataBinding的Fragment

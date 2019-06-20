@@ -2,11 +2,11 @@ package com.huyingbao.module.github.module
 
 import android.text.TextUtils
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.api.ReposApi
 import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubContants
-import com.huyingbao.module.github.utils.PageInfoInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -34,7 +34,7 @@ class GithubAppModule {
             val token = localStorageUtils.getValue(CommonContants.Key.ACCESS_TOKEN, "")
             if (!TextUtils.isEmpty(token)) {
                 //Header中添加Authorization token数据
-                val url = request.url().toString()
+                val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
                         .addHeader("Authorization", "token $token")
                         .url(url)

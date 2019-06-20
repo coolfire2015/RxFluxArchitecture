@@ -7,7 +7,7 @@ import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.widget.CommonInfoCardView
 import com.huyingbao.module.github.R
-import com.huyingbao.module.github.app.BaseRxBindFragment
+import com.huyingbao.core.base.fragment.BaseRxBindFragment
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.databinding.GithubFragmentUserBinding
 import com.huyingbao.module.github.ui.user.action.UserAction

@@ -1,3 +1,23 @@
+//Kotlin业务模块通用依赖
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-allopen"
+apply plugin: 'kotlin-kapt'
+apply from: rootProject.file('depend_common.gradle')
+
+//指定会打开类的注解的列表
+allOpen {
+    annotation("com.huyingbao.core.common.annotation.AllOpen")
+}
+
+android {
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
     //通用库
     implementation project(':core-common')

@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huyingbao.core.base.fragment.BaseRxFragment;
-import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleAction;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
@@ -24,8 +22,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 /**
  * Created by liujunfeng on 2019/1/1.
  */
@@ -33,7 +29,7 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
     ArticleActionCreator mActionCreator;
-    @BindView(R2.id.rv_content)
+
     RecyclerView mRvContent;
 
     private ArticleAdapter mAdapter;
@@ -84,6 +80,7 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
      * 实例化RecyclerView
      */
     private void initRecyclerView() {
+        mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         //硬件加速
@@ -96,7 +93,7 @@ public class ArticleListFragment extends BaseRxFragment<ArticleStore> {
     private void initAdapter() {
         mAdapter = new ArticleAdapter(null);
         //设置更多view
-        mAdapter.setLoadMoreView(new CommonLoadMoreView());
+//        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //view设置适配器

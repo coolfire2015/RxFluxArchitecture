@@ -1,5 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-allopen"
+apply plugin: 'kotlin-kapt'
 apply from: rootProject.file('depend_common.gradle')
+
+//指定会打开类的注解的列表
+allOpen {
+    annotation("com.huyingbao.core.common.annotation.AllOpen")
+}
 
 android {
     //默认配置

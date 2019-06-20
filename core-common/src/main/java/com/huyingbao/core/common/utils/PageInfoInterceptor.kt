@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.utils
+package com.huyingbao.core.common.utils
 
 import android.net.Uri
 import okhttp3.Interceptor
@@ -15,7 +15,7 @@ class PageInfoInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        val linkString: String? = response.headers()["Link"]
+        val linkString: String? = response.headers["Link"]
 
         val pageInfo = PageInfo()
 

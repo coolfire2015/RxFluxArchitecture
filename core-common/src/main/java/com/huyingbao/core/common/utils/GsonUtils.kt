@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.utils
+package com.huyingbao.core.common.utils
 
 import android.text.TextUtils
 import com.google.gson.Gson

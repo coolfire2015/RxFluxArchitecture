@@ -1,5 +1,4 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
-apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_kotlin.gradle')
 
 //获取local.Properties

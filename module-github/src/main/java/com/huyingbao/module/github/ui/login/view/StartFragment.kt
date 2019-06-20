@@ -9,7 +9,7 @@ import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.module.github.ui.login.store.LoginStore
-import com.huyingbao.module.github.utils.NavigationUtils
+import com.huyingbao.core.common.utils.NavigationUtils
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable

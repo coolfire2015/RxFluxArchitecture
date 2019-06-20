@@ -17,13 +17,15 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
 class CommonLoadingDialog @Inject constructor() : BaseCommonDialog() {
-    @Inject
-    lateinit var mRxActionManagerLazy: RxActionManager
-
     @StringRes
     private var mMessageInt: Int = 0
+
+    companion object {
+        fun newInstance(): CommonLoadingDialog {
+            return CommonLoadingDialog()
+        }
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.common_dialog_loading
@@ -52,10 +54,10 @@ class CommonLoadingDialog @Inject constructor() : BaseCommonDialog() {
     }
 
     /**
-     * TODO 取消订阅的Action
+     * 取消订阅的Action
      */
     private fun cancel() {
-        mRxActionManagerLazy.clear()
+        //TODO mRxActionManagerLazy.clear()
         context?.toast("取消操作！")
         dismiss()
     }

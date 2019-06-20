@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huyingbao.core.base.fragment.BaseRxFragment;
-import com.huyingbao.core.common.R2;
-import com.huyingbao.core.common.widget.CommonLoadMoreView;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
@@ -20,8 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 /**
  * Created by liujunfeng on 2019/1/1.
  */
@@ -29,7 +25,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
     RandomActionCreator mActionCreator;
-    @BindView(R2.id.rv_content)
+
     RecyclerView mRvContent;
 
     private ProductAdapter mAdapter;
@@ -60,6 +56,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
      * 实例化RecyclerView
      */
     private void initRecyclerView() {
+        mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         //硬件加速
@@ -72,7 +69,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
     private void initAdapter() {
         mAdapter = new ProductAdapter(null);
         //设置更多view
-        mAdapter.setLoadMoreView(new CommonLoadMoreView());
+//        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //view设置适配器

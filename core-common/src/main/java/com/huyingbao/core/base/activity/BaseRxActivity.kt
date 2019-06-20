@@ -36,9 +36,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     }
 
     @Inject
-    lateinit var mCommonActionCreator: CommonActionCreator
-    @Inject
-    lateinit var mLoadingDialogLazy: CommonLoadingDialog
+    lateinit var commonActionCreator: CommonActionCreator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +102,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     fun onRxRetry(rxRetry: RxRetry<*>) {
         val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.cdl_content) ?: return
         Snackbar.make(coordinatorLayout, rxRetry.tag, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Retry") { mCommonActionCreator.postRetryAction(rxRetry) }
+                .setAction("Retry") { commonActionCreator.postRetryAction(rxRetry) }
                 .show()
     }
 
@@ -119,7 +117,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
         val fragmentByTag = supportFragmentManager.findFragmentByTag(rxLoading.tag)
         if (fragmentByTag == null && rxLoading.isLoading) {
             //显示进度框
-            mLoadingDialogLazy.show(supportFragmentManager, rxLoading.tag)
+            CommonLoadingDialog.newInstance().show(supportFragmentManager, rxLoading.tag)
             return
         }
         if (fragmentByTag is CommonLoadingDialog && !rxLoading.isLoading) {

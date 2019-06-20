@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huyingbao.core.base.fragment.BaseRxFragment;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.module.wan.R;
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator;
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter;
@@ -19,8 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 /**
  * Created by liujunfeng on 2019/1/1.
  */
@@ -28,7 +25,6 @@ public class BannerFragment extends BaseRxFragment<ArticleStore> {
     @Inject
     ArticleActionCreator mActionCreator;
 
-    @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
     private BannerAdapter mAdapter;
@@ -59,6 +55,7 @@ public class BannerFragment extends BaseRxFragment<ArticleStore> {
      * 实例化RecyclerView
      */
     private void initRecyclerView() {
+        mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         //硬件加速

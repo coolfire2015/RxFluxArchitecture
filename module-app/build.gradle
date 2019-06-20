@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_java.gradle')
 
 //获取local.Properties

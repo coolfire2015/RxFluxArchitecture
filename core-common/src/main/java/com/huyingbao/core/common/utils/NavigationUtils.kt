@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.utils
+package com.huyingbao.core.common.utils
 
 import android.app.Activity
 import android.os.Bundle
@@ -45,9 +45,6 @@ object NavigationUtils {
      */
     fun navigate(view: View, actionId: Int, args: Bundle?, popUp: Boolean, finishStack: Boolean) {
         val navController = Navigation.findNavController(view)
-        if (navController == null) {
-
-        }
         if (popUp) {
             //弹出然后跳转
             val navOptions = NavOptions.Builder().setPopUpTo(navController.graph.id, true).build()

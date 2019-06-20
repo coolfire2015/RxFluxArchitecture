@@ -18,9 +18,14 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/6/13.
  */
-@Singleton
 class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
     var info: Info? = null
+
+    companion object {
+        fun newInstance(): CommonInfoDialog {
+            return CommonInfoDialog()
+        }
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.common_dialog_info
@@ -75,7 +80,8 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
      */
     private fun onCancelClicked() {
         if (info != null && !TextUtils.isEmpty(info!!.actionSecond)) {
-            info!!.actionSecond?.let { mCommonActionCreator!!.postLocalAction(it) }
+//            TODO
+//             info!!.actionSecond?.let { mCommonActionCreator.postLocalAction(it) }
         }
         dismiss()
     }
@@ -94,12 +100,12 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
             info!!.infoDialogClickListener!!.onConfirm(title, content)
         }
         if (!TextUtils.isEmpty(info!!.actionFirst)) {
-            //如果设置Action，则发送Action
-            info!!.actionFirst?.let {
-                mCommonActionCreator!!.postLocalAction(it,
-                        CommonContants.Key.TITLE, title,
-                        CommonContants.Key.CONTENT, content)
-            }
+            //TODO 如果设置Action，则发送Action
+//            info!!.actionFirst?.let {
+//                mCommonActionCreator.postLocalAction(it,
+//                        CommonContants.Key.TITLE, title,
+//                        CommonContants.Key.CONTENT, content)
+//            }
         }
         dismiss()
     }

@@ -17,9 +17,6 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseCommonDialog : AppCompatDialogFragment(), BaseView {
-    @Inject
-    lateinit var mCommonActionCreator: CommonActionCreator
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //注意此处android.R.id.content
         return inflater.inflate(getLayoutId(), dialog!!.window!!.findViewById(android.R.id.content), false)

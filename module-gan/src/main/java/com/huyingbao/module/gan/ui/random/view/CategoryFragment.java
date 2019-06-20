@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.huyingbao.core.base.fragment.BaseRxFragment;
-import com.huyingbao.core.common.R2;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
@@ -20,15 +19,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
  * 内容类型列表展示页面
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
 public class CategoryFragment extends BaseRxFragment<RandomStore> {
-    @BindView(R2.id.rv_content)
     RecyclerView mRvContent;
 
     private List<String> mDataList;
@@ -55,6 +51,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
      * 实例化RecyclerView,并设置adapter
      */
     private void initRecyclerView() {
+        mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
         //硬件加速

@@ -1,6 +1,4 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-apply from: rootProject.file('depend_common.gradle')
 apply from: rootProject.file('depend_java.gradle')
 
 //获取local.Properties

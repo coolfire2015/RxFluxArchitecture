@@ -1,8 +1,9 @@
-package com.huyingbao.module.github.utils
+package com.huyingbao.core.common.utils
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -10,15 +11,15 @@ import kotlin.reflect.KProperty
 /**
  * 绑定Fragment生命周期，销毁时自动清理数据
  *
- * A lazy property that gets cleaned up when the fragment is destroyed.
+ * A lazy property that gets cleaned up when the lifecycleOwner is destroyed.
  *
- * Accessing this variable in a destroyed fragment will throw NPE.
+ * Accessing this variable in a destroyed lifecycleOwner will throw NPE.
  */
-class AutoClearedValue<T : Any?>(val fragment: Fragment) : ReadWriteProperty<Fragment, T?> {
+class AutoClearedValue<T : Any?>(private val lifecycleOwner: LifecycleOwner) : ReadWriteProperty<Fragment, T?> {
     private var _value: T? = null
 
     init {
-        fragment.lifecycle.addObserver(object : LifecycleObserver {
+        lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
             @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
             fun onDestroy() {
                 _value = null
@@ -36,6 +37,6 @@ class AutoClearedValue<T : Any?>(val fragment: Fragment) : ReadWriteProperty<Fra
 }
 
 /**
- * Creates an [AutoClearedValue] associated with this fragment.
+ * Creates an [AutoClearedValue] associated with this lifecycleOwner.
  */
-fun <T : Any?> Fragment.autoCleared() = AutoClearedValue<T?>(this)
+fun <T : Any?> LifecycleOwner.autoCleared() = AutoClearedValue<T?>(this)

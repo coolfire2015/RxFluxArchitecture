@@ -8,7 +8,7 @@ import com.huyingbao.core.common.annotation.OpenForTesting
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.app.GithubContants
-import com.huyingbao.module.github.utils.PageInfoInterceptor
+import com.huyingbao.core.common.utils.PageInfoInterceptor
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
@@ -51,7 +51,7 @@ class MockModule {
             val token = request.header(CommonContants.Header.AUTHORIZATION)
             if (TextUtils.isEmpty(token)) {
                 //Header中添加Authorization token数据
-                val url = request.url().toString()
+                val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
                         .addHeader(CommonContants.Header.AUTHORIZATION, "token 84f129b0068d5a2eaecc6664404b3790743618dd")
                         .url(url)

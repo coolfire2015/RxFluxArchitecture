@@ -1,3 +1,7 @@
+//Java业务模块通用依赖
+
+apply from: rootProject.file('depend_common.gradle')
+
 dependencies {
     //通用库
     implementation project(':core-common')
@@ -19,7 +23,4 @@ dependencies {
     testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     testAnnotationProcessor "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
     testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
-    //ButterKnife
-    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
-    testAnnotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE}"
 }
