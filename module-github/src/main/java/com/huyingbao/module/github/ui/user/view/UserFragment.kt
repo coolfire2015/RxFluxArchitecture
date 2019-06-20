@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.base.fragment.BaseRxBindFragment
+import com.huyingbao.core.common.dialog.CommonInfo
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.widget.CommonInfoCardView
 import com.huyingbao.module.github.R
-import com.huyingbao.core.base.fragment.BaseRxBindFragment
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.databinding.GithubFragmentUserBinding
 import com.huyingbao.module.github.ui.user.action.UserAction
@@ -27,8 +28,6 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
     lateinit var userActionCreator: UserActionCreator
     @Inject
     lateinit var githubAppStore: GithubAppStore
-    @Inject
-    lateinit var commonInfoDialog: CommonInfoDialog
 
     companion object {
         fun newInstance(): UserFragment {
@@ -65,11 +64,13 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
      */
     private fun showUpdateDialog(infoView: View, tag: String) {
         if (infoView is CommonInfoCardView) {
-            commonInfoDialog.info = CommonInfoDialog.Info()
-            commonInfoDialog.info!!.title = "编辑${infoView.infoTitle}"
-            commonInfoDialog.info!!.actionFirst = tag
-            commonInfoDialog.info!!.editContent = infoView.infoContent ?: ""
-            activity?.supportFragmentManager?.let { fragmentManager -> commonInfoDialog.show(fragmentManager, commonInfoDialog.javaClass.simpleName) }
+            activity?.supportFragmentManager?.let {
+                val info = CommonInfo()
+                info.title = "编辑${infoView.infoTitle}"
+                info.actionFirst = tag
+                info.editContent = (infoView.infoContent ?: "") as String?
+                CommonInfoDialog.newInstance(info).show(it, CommonInfoDialog::class.java.simpleName)
+            }
         }
     }
 

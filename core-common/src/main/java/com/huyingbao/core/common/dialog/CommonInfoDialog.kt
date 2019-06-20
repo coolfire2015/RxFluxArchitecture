@@ -2,6 +2,8 @@ package com.huyingbao.core.common.dialog
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
@@ -10,20 +12,24 @@ import com.huyingbao.core.common.R
 import com.huyingbao.core.common.module.CommonContants
 import kotlinx.android.synthetic.main.common_dialog_info.*
 import org.jetbrains.anko.toast
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * 内容提交编辑框
  *
  * Created by liujunfeng on 2019/6/13.
  */
-class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
-    var info: Info? = null
+class CommonInfoDialog : BaseCommonDialog() {
+    var clickListener: CommonInfoDialogClickListener? = null
+
+    private var commonInfo: CommonInfo? = null
 
     companion object {
-        fun newInstance(): CommonInfoDialog {
-            return CommonInfoDialog()
+        fun newInstance(info: CommonInfo): CommonInfoDialog {
+            return CommonInfoDialog().apply {
+                arguments = Bundle().apply {
+                    putParcelable(CommonContants.Key.INFO, info)
+                }
+            }
         }
     }
 
@@ -32,19 +38,23 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-
+        arguments?.let {
+            if (it.containsKey(CommonContants.Key.INFO)) {
+                commonInfo = it.getParcelable(CommonContants.Key.INFO)
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        if (info == null) {
+        if (commonInfo == null) {
             context?.toast("请设置初始参数！")
             dismiss()
         } else {
-            setTextView(info!!.title, tv_info_title)
-            setTextView(info!!.content, tv_info_content)
-            setTextView(info!!.editTitle, et_info_title)
-            setTextView(info!!.editContent, et_info_content)
+            setTextView(commonInfo!!.title, tv_info_title)
+            setTextView(commonInfo!!.content, tv_info_content)
+            setTextView(commonInfo!!.editTitle, et_info_title)
+            setTextView(commonInfo!!.editContent, et_info_content)
             tv_info_cancel.setOnClickListener { onCancelClicked() }
             tv_info_ok.setOnClickListener { onOkClicked() }
         }
@@ -52,12 +62,15 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        info = null
+        commonInfo = null
+        clickListener = null
+
     }
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
-        info = null
+        commonInfo = null
+        clickListener = null
     }
 
     /**
@@ -79,9 +92,11 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
      * 取消
      */
     private fun onCancelClicked() {
-        if (info != null && !TextUtils.isEmpty(info!!.actionSecond)) {
-//            TODO
-//             info!!.actionSecond?.let { mCommonActionCreator.postLocalAction(it) }
+        if (commonInfo != null && !TextUtils.isEmpty(commonInfo!!.actionSecond)) {
+            commonInfo!!.actionSecond.let {
+                //TODO 如果设置Action，则发送Action
+                //mCommonActionCreator.postLocalAction(it)
+            }
         }
         dismiss()
     }
@@ -90,43 +105,79 @@ class CommonInfoDialog @Inject constructor() : BaseCommonDialog() {
      * 确定，输入框中的内容可以为空
      */
     private fun onOkClicked() {
-        if (info == null) {
+        if (commonInfo == null) {
             dismiss()
         }
         val title = et_info_title!!.text.toString()
         val content = et_info_content!!.text.toString()
-        if (info!!.infoDialogClickListener != null) {
-            //如果有点击监听，则回调方法
-            info!!.infoDialogClickListener!!.onConfirm(title, content)
-        }
-        if (!TextUtils.isEmpty(info!!.actionFirst)) {
+        clickListener?.onConfirm(title, content)
+        if (!TextUtils.isEmpty(commonInfo!!.actionFirst)) {
             //TODO 如果设置Action，则发送Action
-//            info!!.actionFirst?.let {
-//                mCommonActionCreator.postLocalAction(it,
-//                        CommonContants.Key.TITLE, title,
-//                        CommonContants.Key.CONTENT, content)
-//            }
+            commonInfo!!.actionFirst.let {
+                //mCommonActionCreator.postLocalAction(it, CommonContants.Key.TITLE, title, CommonContants.Key.CONTENT, content)
+            }
         }
         dismiss()
     }
+}
 
+/**
+ * 点击回调接口
+ */
+interface CommonInfoDialogClickListener {
     /**
-     * 点击回调接口
+     * 点击确认
      */
-    interface InfoDialogClickListener {
-        /**
-         * 点击确认
-         */
-        fun onConfirm(editTitle: String, editContent: String)
+    fun onConfirm(editTitle: String, editContent: String)
+}
+
+/**
+ * Dialog初始化信息封装
+ */
+class CommonInfo : Parcelable {
+    var title: String? = null
+    var content: String? = null
+    var editTitle: String? = null
+    var editContent: String? = null
+    var actionFirst: String? = null
+    var actionSecond: String? = null
+
+    override fun describeContents(): Int {
+        return 0
     }
 
-    class Info {
-        var title: CharSequence? = null
-        var content: CharSequence? = null
-        var editTitle: CharSequence? = null
-        var editContent: CharSequence? = null
-        var actionFirst: String? = null
-        var actionSecond: String? = null
-        var infoDialogClickListener: InfoDialogClickListener? = null
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(this.title)
+        dest.writeString(this.content)
+        dest.writeString(this.editTitle)
+        dest.writeString(this.editContent)
+        dest.writeString(this.actionFirst)
+        dest.writeString(this.actionSecond)
+    }
+
+    constructor() {}
+
+    protected constructor(`in`: Parcel) {
+        this.title = `in`.readString()
+        this.content = `in`.readString()
+        this.editTitle = `in`.readString()
+        this.editContent = `in`.readString()
+        this.actionFirst = `in`.readString()
+        this.actionSecond = `in`.readString()
+    }
+
+    companion object {
+
+        @JvmField
+        val CREATOR: Parcelable.Creator<CommonInfo> = object : Parcelable.Creator<CommonInfo> {
+            override fun createFromParcel(source: Parcel): CommonInfo {
+                return CommonInfo(source)
+            }
+
+            override fun newArray(size: Int): Array<CommonInfo?> {
+                return arrayOfNulls(size)
+            }
+        }
     }
 }
+

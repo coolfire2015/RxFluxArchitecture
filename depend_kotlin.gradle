@@ -16,6 +16,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    //Kotlin 实验功能
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {

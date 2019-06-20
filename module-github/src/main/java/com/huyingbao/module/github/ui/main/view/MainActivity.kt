@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.huyingbao.core.base.activity.BaseRxActivity
+import com.huyingbao.core.common.dialog.CommonInfo
 import com.huyingbao.core.common.dialog.CommonInfoDialog
+import com.huyingbao.core.common.dialog.CommonInfoDialogClickListener
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.R
@@ -33,8 +35,6 @@ import javax.inject.Inject
 class MainActivity : BaseRxActivity<MainStore>() {
     @Inject
     lateinit var githubAppStore: GithubAppStore
-    @Inject
-    lateinit var commonInfoDialog: CommonInfoDialog
     @Inject
     lateinit var mainActionCreator: MainActionCreator
     @Inject
@@ -170,15 +170,16 @@ class MainActivity : BaseRxActivity<MainStore>() {
      * 显示更新内容弹框
      */
     private fun showFeedBackDialog() {
-        commonInfoDialog.info = CommonInfoDialog.Info()
-        commonInfoDialog.info!!.title = getString(R.string.github_menu_feedback)
-        commonInfoDialog.info!!.editContent = ""
-        commonInfoDialog.info!!.infoDialogClickListener = object : CommonInfoDialog.InfoDialogClickListener {
+        val info = CommonInfo()
+        info.title = getString(R.string.github_menu_feedback)
+        info.editContent = ""
+        val newInstance = CommonInfoDialog.newInstance(info)
+        newInstance.clickListener = object : CommonInfoDialogClickListener {
             override fun onConfirm(editTitle: String, editContent: String) {
                 mainActionCreator.feedback(editContent)
             }
         }
-        commonInfoDialog.show(supportFragmentManager, commonInfoDialog.javaClass.simpleName)
+        newInstance.show(supportFragmentManager, CommonInfoDialog::class.java.simpleName)
     }
 
     /**

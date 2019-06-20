@@ -30,6 +30,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    //Kotlin 实验功能
+    androidExtensions {
+        experimental = true
+    }
 }
 dependencies {
     //Dagger编译时生成

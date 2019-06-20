@@ -4,20 +4,17 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.annotation.StringRes
-import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.base.dialog.BaseCommonDialog
 import com.huyingbao.core.common.R
 import kotlinx.android.synthetic.main.common_dialog_loading.*
 import org.jetbrains.anko.toast
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * 进度提示
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class CommonLoadingDialog @Inject constructor() : BaseCommonDialog() {
+class CommonLoadingDialog : BaseCommonDialog() {
     @StringRes
     private var mMessageInt: Int = 0
 
@@ -57,8 +54,9 @@ class CommonLoadingDialog @Inject constructor() : BaseCommonDialog() {
      * 取消订阅的Action
      */
     private fun cancel() {
-        //TODO mRxActionManagerLazy.clear()
-        context?.toast("取消操作！")
+        //TODO 需要取消Action
+        //mRxActionManagerLazy.clear()
+        context?.toast("消失，未取消操作！")
         dismiss()
     }
 
