@@ -10,7 +10,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
@@ -44,9 +44,15 @@ class LoginActionCreatorTest {
     }
 
     @Test
-    fun testLogin() {
+    fun login() {
         mLoginActionCreator!!.login("asdf", "asdf")
         //验证方法正确执行,并发送RxAction
-        verify(mRxDispatcher).postRxAction(Mockito.any<RxAction>())
+        verify(mRxDispatcher).postRxAction(any<RxAction>())
+    }
+
+    @Test
+    fun getLoginUserInfo() {
+        mLoginActionCreator!!.getLoginUserInfo()
+        verify(mRxDispatcher).postRxAction(any<RxAction>())
     }
 }

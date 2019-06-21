@@ -5,7 +5,6 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.module.CommonContants
-import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.login.model.LoginRequest
 import retrofit2.Retrofit
@@ -33,13 +32,13 @@ class LoginActionCreator @Inject constructor(
                 .encodeToString("$username:$password".toByteArray(), Base64.NO_WRAP)
                 .replace("\\+", "%2B")
         //调用接口
-        postHttpLoadingAction(rxAction, retrofit.create(UserApi::class.java)
+        postHttpLoadingAction(rxAction, retrofit.create(LoginApi::class.java)
                 // 调用接口1：Auth认证，获取登录token
                 .authorizations("Basic $basicCode", LoginRequest.generate()))
     }
 
     override fun getLoginUserInfo() {
         val rxAction = newRxAction(LoginAction.GET_LOGIN_USER_INFO)
-        postHttpLoadingAction(rxAction, retrofit.create(UserApi::class.java).getLoginUserInfo())
+        postHttpLoadingAction(rxAction, retrofit.create(LoginApi::class.java).getLoginUserInfo())
     }
 }

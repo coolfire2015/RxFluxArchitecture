@@ -15,7 +15,7 @@ import com.huyingbao.module.github.ui.main.model.Event
 class EventAdapter(data: List<Event>?) : BaseQuickAdapter<Event, BaseViewHolder>(R.layout.github_layout_item_event, data) {
 
     override fun convert(helper: BaseViewHolder, item: Event) {
-        helper.setText(R.id.tv_event_action, item.type+"    "+item.repo?.name)
+        helper.setText(R.id.tv_event_action, item.type + "    " + item.repo?.name)
         helper.setText(R.id.tv_event_user_name, item.actor?.login ?: item.org?.name)
         helper.setText(R.id.tv_event_time, TimeUtils.getNewsTimeStr(item.createdAt))
         val imageLoader = ImageLoader.Builder<String>()

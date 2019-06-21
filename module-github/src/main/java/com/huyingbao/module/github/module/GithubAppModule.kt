@@ -4,8 +4,6 @@ import android.text.TextUtils
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
-import com.huyingbao.module.github.api.ReposApi
-import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubContants
 import dagger.Module
 import dagger.Provides
@@ -62,17 +60,5 @@ class GithubAppModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
         return retrofitBuilder.build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideUserApi(retrofit: Retrofit): UserApi {
-        return retrofit.create(UserApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideReposApi(retrofit: Retrofit): ReposApi {
-        return retrofit.create(ReposApi::class.java)
     }
 }

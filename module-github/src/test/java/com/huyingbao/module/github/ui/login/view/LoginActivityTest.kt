@@ -19,7 +19,7 @@ class LoginActivityTest {
     var mActivityRule: ActivityScenarioRule<LoginActivity> = ActivityScenarioRule(LoginActivity::class.java)
 
     @Test
-    fun testOnRxChanged() {
-        mActivityRule.getScenario().moveToState(Lifecycle.State.CREATED)
+    fun onRxChanged() {
+        mActivityRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 }

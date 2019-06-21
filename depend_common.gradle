@@ -58,6 +58,23 @@ dependencies {
     implementation "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
     implementation "androidx.core:core-ktx:${X_CORE}"
+    //X-Fragment
+    implementation "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
+    //X-Lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
+    //X-Navigation
+    implementation "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
+    //X-Room
+    implementation "androidx.room:room-runtime:${X_ROOM}"
+    implementation "androidx.room:room-ktx:${X_ROOM}"
+    implementation "androidx.room:room-rxjava2:${X_ROOM}"
+    //X_Paging
+    implementation "androidx.paging:paging-runtime-ktx:${X_PAGING}"
+    implementation "androidx.paging:paging-rxjava2-ktx:${X_PAGING}"
+    //X-WorkManager
+    implementation "androidx.work:work-runtime-ktx:${X_WORK}"
     //X-MultiDex
     implementation "androidx.multidex:multidex:${X_MULTIDEX}"
     //X-CardView
@@ -68,17 +85,13 @@ dependencies {
     implementation "com.google.android.material:material:${X_MATERIAL}"
     //X_ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
-    //X-Navigation
-    implementation "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
-    implementation "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X-Room
-    implementation "androidx.room:room-runtime:${X_ROOM}"
-    //X-Room kotlin扩展和协程支持
-    implementation "androidx.room:room-ktx:${X_ROOM}"
-    //X-Room RxJava 支持库
-    implementation "androidx.room:room-rxjava2:${X_ROOM}"
+
     //Kotlin支持
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    //Kotlin Coroutines 支持
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
+
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
     implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"

@@ -77,6 +77,8 @@
 - Kotlin拓展 [**Anko**](https://github.com/Kotlin/anko)
 - RxJava自动注销 [**AutoDispose**](https://github.com/uber/AutoDispose)
 - AndroidX [**X-Room**](https://mvnrepository.com/artifact/androidx.room/room-runtime)
++[**X-Paging**](https://mvnrepository.com/artifact/androidx.paging/paging-runtime-ktx)
++[**X-Work**](https://mvnrepository.com/artifact/androidx.work/work-runtime-ktx)
 +[**X-Navigation**](https://mvnrepository.com/artifact/androidx.navigation/navigation-runtime)
 +[**X-Multidex**](https://mvnrepository.com/artifact/androidx.multidex/multidex)
 +[**X-Fragment**](https://mvnrepository.com/artifact/androidx.fragment/fragment)

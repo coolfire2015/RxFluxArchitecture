@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Singleton
 class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivityStore(rxDispatcher) {
     val eventListLiveData = MutableLiveData<ArrayList<Event>>()
-    var nextRequestPage = 1
 
     override fun onCleared() {
         super.onCleared()
@@ -28,6 +27,11 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher?) : RxActivitySto
     @Subscribe(tags = [MainAction.GET_NEWS_EVENT])
     fun onGetNewsEvent(rxAction: RxAction) {
         eventListLiveData.value = rxAction.getResponse()
+    }
+
+    @Subscribe(tags = [MainAction.GET_TREND_DATA])
+    fun onGetTrend(rxAction: RxAction) {
+
     }
 
 }

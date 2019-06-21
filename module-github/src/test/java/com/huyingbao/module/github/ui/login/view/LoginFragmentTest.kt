@@ -20,7 +20,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LoginFragmentTest {
     @Rule
-    var mScenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(LoginActivity::class.java!!, LoginFragment::class.java!!, null, null)
+    var mScenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(
+            LoginActivity::class.java,
+            LoginFragment::class.java,
+            null,
+            null)
 
     @Test
     fun testLogin() {

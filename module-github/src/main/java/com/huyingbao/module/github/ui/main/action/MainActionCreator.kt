@@ -3,8 +3,6 @@ package com.huyingbao.module.github.ui.main.action
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
-import com.huyingbao.module.github.api.IssueApi
-import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.issue.model.Issue
 import retrofit2.Retrofit
@@ -26,7 +24,7 @@ class MainActionCreator @Inject constructor(
         val issue = Issue()
         issue.title = "用户反馈"
         issue.body = editContent
-        postHttpLoadingAction(rxAction, retrofit.create(IssueApi::class.java).createIssue(
+        postHttpLoadingAction(rxAction, retrofit.create(MainApi::class.java).createIssue(
                 "coolfire2015",
                 "RxFluxArchitecture",
                 issue
@@ -35,6 +33,11 @@ class MainActionCreator @Inject constructor(
 
     override fun getNewsEvent(user: String, page: Int) {
         val rxAction = newRxAction(MainAction.GET_NEWS_EVENT)
-        postHttpAction(rxAction, retrofit.create(UserApi::class.java).getNewsEvent(user, page))
+        postHttpAction(rxAction, retrofit.create(MainApi::class.java).getNewsEvent(user, page))
+    }
+
+    override fun getTrendData(languageType: String, since: String) {
+        val rxAction = newRxAction(MainAction.GET_TREND_DATA)
+        postHttpAction(rxAction, retrofit.create(MainApi::class.java).getTrendData(languageType, since))
     }
 }

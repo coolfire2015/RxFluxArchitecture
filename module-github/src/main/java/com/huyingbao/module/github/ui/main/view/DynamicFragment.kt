@@ -29,8 +29,8 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
     lateinit var githubAppStore: GithubAppStore
 
     private var mAdapter: EventAdapter? = null
-    private var rfl_content: SmartRefreshLayout?=null
-    private var rv_content: RecyclerView?=null
+    private var rfl_content: SmartRefreshLayout? = null
+    private var rv_content: RecyclerView? = null
 
     companion object {
         fun newInstance(): DynamicFragment {
@@ -53,8 +53,8 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
      * 初始化上下拉刷新View
      */
     private fun initRefreshView() {
-        rfl_content=view?.find(R.id.rfl_content)
-        rv_content=view?.find(R.id.rv_content)
+        rfl_content = view?.find(R.id.rfl_content)
+        rv_content = view?.find(R.id.rv_content)
         rfl_content?.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)

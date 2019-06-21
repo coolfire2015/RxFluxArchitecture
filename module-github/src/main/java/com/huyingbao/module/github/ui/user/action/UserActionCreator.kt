@@ -3,7 +3,6 @@ package com.huyingbao.module.github.ui.user.action
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
-import com.huyingbao.module.github.api.UserApi
 import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.user.model.UserInfoRequest
 import retrofit2.Retrofit
