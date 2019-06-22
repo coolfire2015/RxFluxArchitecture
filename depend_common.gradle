@@ -53,7 +53,8 @@ repositories {
 //通用的依赖库
 dependencies {
     //内核
-    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
+    implementation project(':core-arch')
+//    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
     implementation "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
     implementation "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core

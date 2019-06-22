@@ -19,6 +19,9 @@ android {
             keyPassword localProperties.getProperty("KEY_PASSWORD")
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = false
+    }
     //默认配置
     defaultConfig {
         //支持MultiDex分包

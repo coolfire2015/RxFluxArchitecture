@@ -29,15 +29,12 @@ public abstract class RxApp extends DaggerApplication {
     @Inject
     RxFlux mRxFlux;
 
-    private LifecycleRegistry mLifecycleRegistry;
+    private LifecycleOwner mLifecycleOwner;
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        LifecycleOwner lifecycleOwner = getAnnotationGeneratedRxAppLifecycleOwner();
-        if (lifecycleOwner != null) {
-            mLifecycleRegistry = (LifecycleRegistry) lifecycleOwner.getLifecycle();
-        }
+        mLifecycleOwner = getAnnotationGeneratedRxAppLifecycleOwner();
     }
 
     @Override
@@ -45,25 +42,19 @@ public abstract class RxApp extends DaggerApplication {
         super.onCreate();
         //application创建的时候调用该方法，使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mRxFlux);
-        if (mLifecycleRegistry != null) {
-            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
-        }
+        ((LifecycleRegistry) mLifecycleOwner.getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if (mLifecycleRegistry != null) {
-            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
-        }
+        ((LifecycleRegistry) mLifecycleOwner.getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_STOP);
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        if (mLifecycleRegistry != null) {
-            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
-        }
+        ((LifecycleRegistry) mLifecycleOwner.getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
     }
 
     @Nullable

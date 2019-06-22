@@ -27,16 +27,16 @@ class LoginActionCreatorTest {
     var mockDaggerRule = mockDaggerRule()
 
     @Spy
-    lateinit var mRxDispatcher: RxDispatcher
+    lateinit var rxDispatcher: RxDispatcher
     @Spy
-    lateinit var mRxActionManager: RxActionManager
+    lateinit var rxActionManager: RxActionManager
 
-    private var mLoginActionCreator: LoginActionCreator? = null
+    private var loginActionCreator: LoginActionCreator? = null
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        mLoginActionCreator = LoginActionCreator(mRxDispatcher, mRxActionManager, MockUtils.component!!.retrofit)
+        loginActionCreator = LoginActionCreator(rxDispatcher, rxActionManager, MockUtils.component!!.retrofit)
     }
 
     @After
@@ -45,14 +45,14 @@ class LoginActionCreatorTest {
 
     @Test
     fun login() {
-        mLoginActionCreator!!.login("asdf", "asdf")
+        loginActionCreator?.login("asdf", "asdf")
         //验证方法正确执行,并发送RxAction
-        verify(mRxDispatcher).postRxAction(any<RxAction>())
+        verify(rxDispatcher).postRxAction(any<RxAction>())
     }
 
     @Test
     fun getLoginUserInfo() {
-        mLoginActionCreator!!.getLoginUserInfo()
-        verify(mRxDispatcher).postRxAction(any<RxAction>())
+        loginActionCreator?.getLoginUserInfo()
+        verify(rxDispatcher).postRxAction(any<RxAction>())
     }
 }

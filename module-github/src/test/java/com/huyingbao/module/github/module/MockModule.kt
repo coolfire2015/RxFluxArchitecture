@@ -8,7 +8,6 @@ import com.huyingbao.core.common.annotation.OpenForTesting
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.app.GithubContants
-import com.huyingbao.core.common.utils.PageInfoInterceptor
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
@@ -53,7 +52,7 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 84f129b0068d5a2eaecc6664404b3790743618dd")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 8a273eb1c906b612a32733d0d1f164a22868e80b")
                         .url(url)
                 request = requestBuilder.build()
             }
@@ -69,7 +68,8 @@ class MockModule {
                 .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(headInterceptor)
                 .addInterceptor(loggingInterceptor)
-                .addInterceptor(PageInfoInterceptor())
+                //单元测试中不添加该拦截器
+                //.addInterceptor(PageInfoInterceptor())
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)

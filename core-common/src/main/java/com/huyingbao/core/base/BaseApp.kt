@@ -23,10 +23,6 @@ abstract class BaseApp : RxApp() {
         MultiDex.install(this)
     }
 
-    /**
-     * 注解[CallSuper]强制子类复写该方法时调用父方法
-     */
-    @CallSuper
     override fun onCreate() {
         super.onCreate()
         initARouter()

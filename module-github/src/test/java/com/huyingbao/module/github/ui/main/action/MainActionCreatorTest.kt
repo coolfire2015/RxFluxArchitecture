@@ -9,7 +9,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 
@@ -22,15 +24,15 @@ class MainActionCreatorTest {
     var mockDaggerRule = mockDaggerRule()
 
     @Spy
-    lateinit var mRxDispatcher: RxDispatcher
+    lateinit var rxDispatcher: RxDispatcher
     @Spy
-    lateinit var mRxActionManager: RxActionManager
+    lateinit var rxActionManager: RxActionManager
 
-    private var mMainActionCreator: MainActionCreator? = null
+    private var mainActionCreator: MainActionCreator? = null
 
     @Before
     fun setUp() {
-        mMainActionCreator = MainActionCreator(mRxDispatcher, mRxActionManager, MockUtils.component!!.retrofit)
+        mainActionCreator = MainActionCreator(rxDispatcher, rxActionManager, MockUtils.component!!.retrofit)
     }
 
     @After
@@ -39,17 +41,19 @@ class MainActionCreatorTest {
 
     @Test
     fun feedback() {
-        mMainActionCreator!!.feedback("test")
-        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
+        mainActionCreator?.feedback("test")
+        Mockito.verify(rxDispatcher).postRxAction(Mockito.any())
     }
 
     @Test
     fun getNewsEvent() {
-        mMainActionCreator!!.getNewsEvent("coolfire2015", 1)
-        Mockito.verify(mRxDispatcher).postRxAction(Mockito.any())
+        mainActionCreator?.getNewsEvent("coolfire2015", 1)
+        verify(rxDispatcher).postRxAction(any())
     }
 
     @Test
     fun getTrendData() {
+        mainActionCreator?.getTrendData("Kotlin","monthly")
+        verify(rxDispatcher).postRxAction(any())
     }
 }

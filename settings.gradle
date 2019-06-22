@@ -1,6 +1,6 @@
-//include ':core-arch-annotations'
-//include ':core-arch-processor'
-//include ':core-arch'
+include ':core-arch-annotations'
+include ':core-arch-processor'
+include ':core-arch'
 
 include ':core-common'
 
