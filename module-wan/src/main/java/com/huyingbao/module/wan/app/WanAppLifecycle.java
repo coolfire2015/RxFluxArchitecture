@@ -21,7 +21,7 @@ public class WanAppLifecycle extends RxAppLifecycle {
 
     public WanAppLifecycle(Application application) {
         super(application);
-        RxAndroidInjection.inject(this, application);
+        RxAndroidInjection.INSTANCE.inject(this, application);
     }
 
     @Override

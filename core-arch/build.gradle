@@ -1,7 +1,16 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-allopen"
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
+
+//指定会打开类的注解的列表
+allOpen {
+    annotation("com.huyingbao.core.common.annotation.AllOpen")
+}
 
 android {
     //编译版本
@@ -29,6 +38,14 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    //Kotlin 实验功能
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -60,8 +77,8 @@ dependencies {
     //带有Tag的EventBus
     api "com.github.coolfire2015.RxFluxEventBus:core-eventbus:${RX_FLUX_EVENTBUS}"
     //Dagger编译时生成
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     //AndroidX迁移
-    annotationProcessor "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
 }
