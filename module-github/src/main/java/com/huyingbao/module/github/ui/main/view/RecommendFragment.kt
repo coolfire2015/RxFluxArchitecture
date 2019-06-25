@@ -15,6 +15,7 @@ import javax.inject.Inject
 class RecommendFragment : BaseRxFragment<MainStore>() {
     @Inject
     lateinit var mainActionCreator: MainActionCreator
+
     companion object {
         fun newInstance(): RecommendFragment {
             return RecommendFragment()
@@ -26,6 +27,6 @@ class RecommendFragment : BaseRxFragment<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        mainActionCreator.getTrendData("Kotlin","monthly")
+        mainActionCreator.getTrendData("Kotlin", "monthly")
     }
 }

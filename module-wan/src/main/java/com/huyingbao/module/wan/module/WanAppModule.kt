@@ -3,7 +3,6 @@ package com.huyingbao.module.wan.module
 import com.google.gson.GsonBuilder
 import com.huyingbao.module.wan.api.WanApi
 import com.huyingbao.module.wan.app.WanContants
-import com.huyingbao.module.wan.ui.friend.model.WebSite
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

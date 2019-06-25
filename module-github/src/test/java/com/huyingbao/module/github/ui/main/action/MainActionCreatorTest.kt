@@ -53,7 +53,7 @@ class MainActionCreatorTest {
 
     @Test
     fun getTrendData() {
-        mainActionCreator?.getTrendData("Kotlin","monthly")
+        mainActionCreator?.getTrendData("Kotlin", "monthly")
         verify(rxDispatcher).postRxAction(any())
     }
 }

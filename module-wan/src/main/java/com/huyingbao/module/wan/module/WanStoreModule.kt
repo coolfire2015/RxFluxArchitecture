@@ -5,16 +5,13 @@ package com.huyingbao.module.wan.module
  */
 
 import androidx.lifecycle.ViewModel
-
 import com.huyingbao.core.arch.store.RxStoreKey
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.huyingbao.module.wan.ui.friend.store.FriendStore
-
-import javax.inject.Singleton
-
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 
 @Module
 abstract class WanStoreModule {

@@ -5,12 +5,10 @@ import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
 import com.huyingbao.module.wan.ui.friend.model.WebSite
-
-import java.util.ArrayList
-
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import java.util.*
 
 /**
  * Created by liujunfeng on 2019/1/1.

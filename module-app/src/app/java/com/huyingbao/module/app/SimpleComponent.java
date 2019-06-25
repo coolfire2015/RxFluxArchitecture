@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
 import com.huyingbao.module.gan.module.GanAppModule;
-import com.huyingbao.module.github.app.GithubAppLifecycle;
 import com.huyingbao.module.github.module.GithubAppModule;
 import com.huyingbao.module.wan.module.WanAppModule;
 
