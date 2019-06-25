@@ -28,7 +28,7 @@ abstract class RxActivityStore(
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun subscribe() {
-        if (!rxDispatcher.isSubscribe(this)) {
+        if (rxDispatcher.isSubscribe(this)) {
             return
         }
         Log.i(RxFlux.TAG, "Subscribe RxActivityStore : " + javaClass.simpleName)
