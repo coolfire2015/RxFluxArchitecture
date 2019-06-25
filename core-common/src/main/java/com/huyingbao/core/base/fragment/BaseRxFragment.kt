@@ -20,8 +20,8 @@ abstract class BaseRxFragment<T : ViewModel> : RxFluxFragment<T>(), BaseView {
     @Inject
     lateinit var commonActionCreator: CommonActionCreator
 
-    private var mBackAble: Boolean = false
-    private var mTitle: CharSequence? = null
+    private var backAble: Boolean = false
+    private var title: CharSequence? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,7 +48,7 @@ abstract class BaseRxFragment<T : ViewModel> : RxFluxFragment<T>(), BaseView {
         //从隐藏转为非隐藏的时候调用
         //当前页面显示时，显示对应的标题
         if (!hidden) {
-            setTitle(mTitle, mBackAble)
+            setTitle(title, backAble)
         }
     }
 
@@ -62,18 +62,18 @@ abstract class BaseRxFragment<T : ViewModel> : RxFluxFragment<T>(), BaseView {
         if (activity == null) {
             return
         }
-        mBackAble = backAble
-        mTitle = title
+        this.backAble = backAble
+        this.title = title
         val supportActionBar = (activity as AppCompatActivity).supportActionBar
         if (activity !is AppCompatActivity || supportActionBar == null) {
             //设置标题
-            activity!!.title = mTitle
+            activity?.title = this.title
             return
         }
         //显示标题
         supportActionBar.setDisplayShowTitleEnabled(true)
         //设置标题
-        supportActionBar.title = mTitle
+        supportActionBar.title = this.title
         //显示右侧返回图标
         if (backAble) {
             //显示Home按钮

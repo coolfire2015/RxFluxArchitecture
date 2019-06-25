@@ -9,7 +9,6 @@ class CommonContants {
     object Config {
         const val PAGE_SIZE = 20
         const val HTTP_TIME_OUT = 20L
-
     }
 
     object Key {

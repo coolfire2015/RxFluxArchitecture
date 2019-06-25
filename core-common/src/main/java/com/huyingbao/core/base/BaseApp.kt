@@ -2,7 +2,6 @@ package com.huyingbao.core.base
 
 
 import android.content.Context
-import androidx.annotation.CallSuper
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.RxApp

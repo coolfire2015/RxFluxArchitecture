@@ -53,7 +53,8 @@ repositories {
 //通用的依赖库
 dependencies {
     //内核
-    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
+    implementation project(':core-arch')
+//    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
     implementation "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
     implementation "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
@@ -85,13 +86,11 @@ dependencies {
     implementation "com.google.android.material:material:${X_MATERIAL}"
     //X_ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
-
     //Kotlin支持
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //Kotlin Coroutines 支持
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
-
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
     implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"

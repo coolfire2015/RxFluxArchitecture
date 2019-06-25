@@ -3,6 +3,7 @@ package com.huyingbao.module.gan.ui.random.view;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -25,7 +26,7 @@ public class RandomActivity extends BaseRxFragActivity<RandomStore> {
     }
 
     @Override
-    public void afterCreate(Bundle savedInstanceState) {
+    public void afterCreate(@Nullable Bundle savedInstanceState) {
     }
 
     @Subscribe(tags = {RandomAction.TO_SHOW_DATA}, sticky = true)

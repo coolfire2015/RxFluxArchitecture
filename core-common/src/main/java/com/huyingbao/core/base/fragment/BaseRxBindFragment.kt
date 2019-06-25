@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import com.huyingbao.core.common.utils.autoCleared
+import com.huyingbao.core.arch.utils.autoCleared
 
 
 /**

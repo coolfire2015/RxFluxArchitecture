@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +41,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
     }
 
     @Override
-    public void afterCreate(Bundle savedInstanceState) {
+    public void afterCreate(@Nullable Bundle savedInstanceState) {
         setTitle(getRxStore().getCategory(), true);
         initRecyclerView();
         initAdapter();
