@@ -4,6 +4,6 @@ include ':core-arch'
 
 include ':core-common'
 
-//include ':module-app'
+include ':module-app'
 include ':module-wan'
 include ':module-gan'
