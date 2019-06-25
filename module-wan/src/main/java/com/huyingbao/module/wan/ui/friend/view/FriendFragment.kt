@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-
+import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
 import com.huyingbao.module.wan.ui.friend.model.WebSite
 import com.huyingbao.module.wan.ui.friend.store.FriendStore
-import kotlinx.android.synthetic.main.common_fragment_list.*
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -25,6 +22,7 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
     lateinit var actionCreator: FriendActionCreator
 
     private var adapter: WebSiteAdapter? = null
+    private var rvContent: RecyclerView? = null
 
     override fun getLayoutId(): Int {
         return R.layout.common_fragment_list
@@ -32,24 +30,14 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.wan_label_friend, true)
-        initRecyclerView()
         initAdapter()
+        initRecyclerView()
         showData()
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (rxStore!!.isCreated) {
+        if (rxStore?.isCreated != null && rxStore?.isCreated!!) {
             return
         }
         refresh()
-    }
-
-    /**
-     * 实例化RecyclerView
-     */
-    private fun initRecyclerView() {
-        rv_content.layoutManager = LinearLayoutManager(activity)
-        rv_content.setHasFixedSize(true)
-        //硬件加速
-        rv_content.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     /**
@@ -57,15 +45,26 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
      */
     private fun initAdapter() {
         adapter = WebSiteAdapter(ArrayList())
+    }
+
+    /**
+     * 实例化RecyclerView
+     */
+    private fun initRecyclerView() {
+        rvContent = view?.findViewById(R.id.rv_content)
+        rvContent?.layoutManager = LinearLayoutManager(activity)
+        rvContent?.setHasFixedSize(true)
+        //硬件加速
+        rvContent?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         //view设置适配器
-        rv_content.adapter = adapter
+        rvContent?.adapter = adapter
     }
 
     /**
      * 显示数据
      */
     private fun showData() {
-        rxStore!!.webSiteListData.observe(this, Observer{ products ->
+        rxStore?.webSiteListData?.observe(this, Observer { products ->
             if (products != null) {
                 setData(products.data)
             }
@@ -76,7 +75,7 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
      * 刷新
      */
     private fun refresh() {
-        actionCreator!!.getFriendList()
+        actionCreator.getFriendList()
     }
 
     /**
@@ -85,7 +84,7 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
      * @param data
      */
     private fun setData(data: List<WebSite>?) {
-        adapter!!.setNewData(data)
+        adapter?.setNewData(data)
     }
 
     companion object {
