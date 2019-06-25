@@ -1,16 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "kotlin-allopen"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
-
-//指定会打开类的注解的列表
-allOpen {
-    annotation("com.huyingbao.core.common.annotation.AllOpen")
-}
 
 android {
     //编译版本
@@ -34,7 +28,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //Lambda表达式需要
+    //Java1.8支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,10 +36,6 @@ android {
     //Kotlin Java1.8支持
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-    //Kotlin 实验功能
-    androidExtensions {
-        experimental = true
     }
 }
 
@@ -69,6 +59,9 @@ dependencies {
     //RxJava
     api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"
     api "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_2}"
+    api "io.reactivex.rxjava2:rxkotlin:${RX_KOTLIN_2}"
+    //Kotlin支持
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
     //Dagger
     api "com.google.dagger:dagger:${DAGGER}"
     //Dagger-Android

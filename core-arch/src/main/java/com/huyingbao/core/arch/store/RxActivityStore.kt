@@ -19,7 +19,9 @@ import com.huyingbao.core.arch.model.RxChange
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxActivityStore(private val rxDispatcher: RxDispatcher) : ViewModel(), LifecycleObserver, RxStore {
+abstract class RxActivityStore(
+        private val rxDispatcher: RxDispatcher
+) : ViewModel(), LifecycleObserver, RxStore {
 
     /**
      * 在所关联对象（Activity）[Lifecycle.Event.ON_CREATE]时，注册到[RxDispatcher]

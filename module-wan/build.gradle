@@ -1,5 +1,5 @@
 apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
-apply from: rootProject.file('depend_java.gradle')
+apply from: rootProject.file('depend_kotlin.gradle')
 
 android {
     //签名配置,自定义,用在defaultConfig中

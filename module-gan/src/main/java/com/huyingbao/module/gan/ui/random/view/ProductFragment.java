@@ -40,7 +40,7 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
     }
 
     @Override
-    public void afterCreate(Bundle savedInstanceState) {
+    public void afterCreate(@Nullable Bundle savedInstanceState) {
         setTitle(getRxStore().getCategory(), true);
         initRecyclerView();
         initAdapter();

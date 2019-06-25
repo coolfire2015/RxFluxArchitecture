@@ -3,6 +3,7 @@ package com.huyingbao.core.arch.action
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.*
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -32,7 +33,7 @@ abstract class RxActionCreator(
         if (hasRxAction(rxAction)) {
             return
         }
-        val subscribe = httpObservable
+        httpObservable
                 //指定IO线程
                 .subscribeOn(Schedulers.io())
                 // 调用开始
@@ -43,32 +44,40 @@ abstract class RxActionCreator(
                     }
                 }
                 // 调用结束
-                .doAfterTerminate {
+                .doFinally {
                     if (canShowLoading) {
                         //发送RxLoading(消失)事件
                         postRxLoading(rxAction.tag, false)
                     }
                 }
                 // 操作结束,在io线程中接收接收反馈,没有切换线程
-                .subscribe(
-                        //操作进行中
-                        { response ->
-                            rxAction.setResponse(response)
-                            postRxAction(rxAction)
-                        },
-                        //操作异常
-                        { throwable ->
-                            if (canRetry) {
-                                postRxRetry(rxAction.tag, httpObservable, throwable)
-                            } else {
-                                postRxError(rxAction.tag, throwable)
-                            }
-                            removeRxAction(rxAction)
-                        },
+                .subscribe(object : Observer<T> {
+                    override fun onComplete() {
                         //操作结束
-                        { removeRxAction(rxAction) }
-                )
-        addRxAction(rxAction, subscribe)
+                        removeRxAction(rxAction)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                        //关联操作
+                        addRxAction(rxAction, d)
+                    }
+
+                    override fun onNext(t: T) {
+                        //操作进行中
+                        rxAction.setResponse(t)
+                        postRxAction(rxAction)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        //操作异常
+                        if (canRetry) {
+                            postRxRetry(rxAction.tag, httpObservable, e)
+                        } else {
+                            postRxError(rxAction.tag, e)
+                        }
+                        removeRxAction(rxAction)
+                    }
+                })
     }
 
     /**

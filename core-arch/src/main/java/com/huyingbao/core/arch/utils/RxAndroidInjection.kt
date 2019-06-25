@@ -14,10 +14,10 @@ object RxAndroidInjection {
     /**
      * 公用Dagger.Android依赖注入方法
      *
-     * @param object      需要完成依赖注入的类
+     * @param any      需要完成依赖注入的类
      * @param application 实现[HasAndroidInjector]的Application
      */
-    fun inject(`object`: Any, application: Application) {
+    fun inject(any: Any, application: Application) {
         val injector: AndroidInjector<Any>
         if (application is HasAndroidInjector) {
             injector = (application as HasAndroidInjector).androidInjector()
@@ -26,9 +26,9 @@ object RxAndroidInjection {
             throw RuntimeException(
                     String.format(
                             "%s does not implement %s",
-                            application.javaClass.getCanonicalName(),
-                            HasAndroidInjector::class.java!!.getCanonicalName()))
+                            application.javaClass.canonicalName,
+                            HasAndroidInjector::class.java.canonicalName))
         }
-        injector.inject(`object`)
+        injector.inject(any)
     }
 }

@@ -13,18 +13,18 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxActivityLifecycleObserver(private val mActivity: Activity) : LifecycleObserver {
+class RxActivityLifecycleObserver(private val activity: Activity) : LifecycleObserver {
 
     /**
      * 在onCreate(Bundle)完成依赖注入之后调用
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    internal fun onCreate() {
-        if (mActivity is RxFluxView<*>) {
-            val rxStore = (mActivity as RxFluxView<*>).rxStore
+    fun onCreate() {
+        if (activity is RxFluxView<*> && activity is FragmentActivity) {
+            val rxStore = activity.rxStore
             if (rxStore is RxActivityStore) {
                 //rxStore关联activity生命周期
-                (mActivity as FragmentActivity).lifecycle.addObserver((rxStore as RxActivityStore?)!!)
+                activity.lifecycle.addObserver(rxStore)
             }
         }
     }

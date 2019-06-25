@@ -45,7 +45,7 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
     }
 
     @Override
-    public void afterCreate(Bundle savedInstanceState) {
+    public void afterCreate(@Nullable Bundle savedInstanceState) {
         setTitle(R.string.gan_label_category, true);
         initRecyclerView();
         initAdapter();

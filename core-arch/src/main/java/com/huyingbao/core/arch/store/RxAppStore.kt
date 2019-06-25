@@ -15,7 +15,10 @@ import com.huyingbao.core.arch.model.RxChange
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxAppStore(application: Application, private val rxDispatcher: RxDispatcher) : AndroidViewModel(application), RxStore {
+abstract class RxAppStore(
+        application: Application,
+        private val rxDispatcher: RxDispatcher
+) : AndroidViewModel(application), RxStore {
 
     /**
      * 在所关联对象（Application）创建时调用该方法，注册到[RxDispatcher]

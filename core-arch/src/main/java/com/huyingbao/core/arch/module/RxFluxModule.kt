@@ -17,10 +17,10 @@ import javax.inject.Singleton
 abstract class RxFluxModule {
     @Singleton
     @Binds
-    internal abstract fun bindApplication(application: Application): Context
+    abstract fun bindApplication(application: Application): Context
 
     @Singleton
     @Binds
-    internal abstract fun bindViewModelFactory(rxStoreFactory: RxStoreFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(rxStoreFactory: RxStoreFactory): ViewModelProvider.Factory
 }
 

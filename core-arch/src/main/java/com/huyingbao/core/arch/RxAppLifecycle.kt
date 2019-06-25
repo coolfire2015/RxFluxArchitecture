@@ -12,7 +12,7 @@ import androidx.lifecycle.OnLifecycleEvent
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxAppLifecycle(protected var mApplication: Application) : LifecycleObserver {
+abstract class RxAppLifecycle(protected var application: Application) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     abstract fun onCreate()

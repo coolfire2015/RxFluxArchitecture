@@ -25,7 +25,7 @@ public class RandomActivity extends BaseRxFragActivity<RandomStore> {
     }
 
     @Override
-    public void afterCreate(Bundle savedInstanceState) {
+    public void afterCreate(@Nullable Bundle savedInstanceState) {
     }
 
     @Subscribe(tags = {RandomAction.TO_SHOW_DATA}, sticky = true)

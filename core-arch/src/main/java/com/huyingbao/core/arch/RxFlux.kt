@@ -5,75 +5,53 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver
 import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver
 import com.huyingbao.core.arch.view.RxSubscriberView
-
-import java.util.Stack
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅，必须在Application创建的时候调用该类的实例方法, 并仅调用一次。
  *
- *
- * Created by liujunfeng on 2019/1/1.
- */
-@Singleton
-class RxFlux
-/**
  * Inject 标记用于提供依赖的方法
- *
  *
  * 构造器注入的局限：如果有多个构造器，我们只能标注其中一个，无法标注多个
  *
- *
  * 标注在public方法上，Dagger2会在构造器执行之后立即调用这个方法，可以提供this对象
+ * Created by liujunfeng on 2019/1/1.
  */
-@Inject
-constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
+@Singleton
+class RxFlux @Inject constructor() :
+        FragmentManager.FragmentLifecycleCallbacks(),
+        Application.ActivityLifecycleCallbacks {
     /**
-     * Inject 用来标记需要注入的依赖
-     * 被标注的属性不能使用private修饰，否则无法注入
-     *
-     * @param rxBus
+     * [Inject] 用来标记需要注入的依赖, 被标注的属性不能使用private修饰，否则无法注入
      */
     @Inject
-    internal var mRxDispatcher: RxDispatcher? = null
+    lateinit var rxDispatcher: RxDispatcher
     @Inject
-    internal var mRxActionManager: RxActionManager? = null
+    lateinit var rxActionManager: RxActionManager
 
-    private var mActivityCounter: Int = 0
-    private val mActivityStack: Stack<Activity>
+    private var activityCounter: Int = 0
+    private val activityStack: Stack<Activity> = Stack()
 
-    init {
-        mActivityCounter = 0
-        mActivityStack = Stack()
-    }
-
-    override fun onActivityCreated(activity: Activity, bundle: Bundle) {
-        mActivityCounter++
-        mActivityStack.add(activity)
+    override fun onActivityCreated(activity: Activity?, bundle: Bundle?) {
+        activityCounter++
+        activityStack.add(activity)
         if (activity is FragmentActivity) {
-            activity.lifecycle
-                    .addObserver(RxActivityLifecycleObserver(activity))
-            activity.supportFragmentManager
-                    .registerFragmentLifecycleCallbacks(this, true)
+            activity.lifecycle.addObserver(RxActivityLifecycleObserver(activity))
+            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
         }
     }
 
-    override fun onActivityStarted(activity: Activity) {}
-
-    override fun onFragmentPreAttached(fm: FragmentManager, f: Fragment, context: Context) {
-        super.onFragmentPreAttached(fm, f, context)
+    override fun onActivityStarted(activity: Activity?) {
     }
 
     override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
@@ -81,37 +59,16 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
         f.lifecycle.addObserver(RxFragmentLifecycleObserver(f))
     }
 
-    override fun onFragmentPreCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        super.onFragmentPreCreated(fm, f, savedInstanceState)
-    }
-
-    override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        super.onFragmentCreated(fm, f, savedInstanceState)
-    }
-
-    override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-        super.onFragmentViewCreated(fm, f, v, savedInstanceState)
-    }
-
-    override fun onFragmentActivityCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        super.onFragmentActivityCreated(fm, f, savedInstanceState)
-    }
-
-    override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
-        super.onFragmentStarted(fm, f)
-    }
-
-
     /**
      * [RxSubscriberView]注册订阅
      */
-    override fun onActivityResumed(activity: Activity) {
+    override fun onActivityResumed(activity: Activity?) {
         if (activity is RxSubscriberView) {
-            if (mRxDispatcher!!.isSubscribe(this)) {
+            if (rxDispatcher.isSubscribe(this)) {
                 return
             }
-            Log.i(TAG, "Subscribe RxFluxActivity : " + activity.javaClass.getSimpleName())
-            mRxDispatcher!!.subscribeRxView(activity as RxSubscriberView)
+            Log.i(TAG, "Subscribe RxFluxActivity : " + activity.javaClass.simpleName)
+            rxDispatcher.subscribeRxView(activity as RxSubscriberView)
         }
     }
 
@@ -121,22 +78,21 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
     override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
         super.onFragmentResumed(fm, f)
         if (f is RxSubscriberView) {
-            if (mRxDispatcher!!.isSubscribe(this)) {
+            if (rxDispatcher.isSubscribe(this)) {
                 return
             }
-            Log.i(TAG, "Subscribe RxFluxFragment : " + f.javaClass.getSimpleName())
-            mRxDispatcher!!.subscribeRxView(f as RxSubscriberView)
+            Log.i(TAG, "Subscribe RxFluxFragment : " + f.javaClass.simpleName)
+            rxDispatcher.subscribeRxView(f as RxSubscriberView)
         }
     }
-
 
     /**
      * [RxSubscriberView]取消订阅
      */
-    override fun onActivityPaused(activity: Activity) {
+    override fun onActivityPaused(activity: Activity?) {
         if (activity is RxSubscriberView) {
-            Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.javaClass.getSimpleName())
-            mRxDispatcher!!.unsubscribeRxView(activity as RxSubscriberView)
+            Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.javaClass.simpleName)
+            rxDispatcher.unsubscribeRxView(activity as RxSubscriberView)
         }
     }
 
@@ -146,47 +102,26 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
     override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
         super.onFragmentPaused(fm, f)
         if (f is RxSubscriberView) {
-            Log.i(TAG, "Unsubscribe RxFluxFragment : " + f.javaClass.getSimpleName())
-            mRxDispatcher!!.unsubscribeRxView(f as RxSubscriberView)
+            Log.i(TAG, "Unsubscribe RxFluxFragment : " + f.javaClass.simpleName)
+            rxDispatcher.unsubscribeRxView(f as RxSubscriberView)
         }
     }
 
-    override fun onActivityStopped(activity: Activity) {}
+    override fun onActivityStopped(activity: Activity?) {}
 
-    override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
-        super.onFragmentStopped(fm, f)
-    }
+    override fun onActivitySaveInstanceState(activity: Activity?, bundle: Bundle?) {}
 
-    override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
-
-    override fun onFragmentSaveInstanceState(fm: FragmentManager, f: Fragment, outState: Bundle) {
-        super.onFragmentSaveInstanceState(fm, f, outState)
-    }
-
-    override fun onActivityDestroyed(activity: Activity) {
-        mActivityCounter--
-        mActivityStack.remove(activity)
-        if (mActivityCounter == 0 || mActivityStack.size == 0) {
+    override fun onActivityDestroyed(activity: Activity?) {
+        activityCounter--
+        activityStack.remove(activity)
+        if (activityCounter == 0 || activityStack.size == 0) {
             shutdown()
         }
     }
 
-    override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
-        super.onFragmentViewDestroyed(fm, f)
-    }
-
-    override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
-        super.onFragmentDestroyed(fm, f)
-    }
-
-    override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
-        super.onFragmentDetached(fm, f)
-    }
-
-
     fun finishAllActivity() {
-        while (!mActivityStack.empty()) {
-            mActivityStack.pop().finish()
+        while (!activityStack.empty()) {
+            activityStack.pop().finish()
         }
     }
 
@@ -195,19 +130,19 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
     }
 
     private fun shutdown() {
-        mRxActionManager!!.clear()
-        mRxDispatcher!!.unsubscribeAll()
+        rxActionManager.clear()
+        rxDispatcher.unsubscribeAll()
     }
 
     private fun finishActivity(activity: Activity?) {
         if (activity != null) {
-            mActivityStack.remove(activity)
+            activityStack.remove(activity)
             activity.finish()
         }
     }
 
     private fun getActivity(cls: Class<*>): Activity? {
-        for (activity in mActivityStack) {
+        for (activity in activityStack) {
             if (activity.javaClass == cls) {
                 return activity
             }
@@ -216,6 +151,6 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.Activi
     }
 
     companion object {
-        val TAG = "RxFlux"
+        const val TAG = "RxFlux"
     }
 }

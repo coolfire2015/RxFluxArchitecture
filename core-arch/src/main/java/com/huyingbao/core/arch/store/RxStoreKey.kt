@@ -1,11 +1,6 @@
 package com.huyingbao.core.arch.store
 
 import androidx.lifecycle.ViewModel
-
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
-
 import dagger.MapKey
 import kotlin.reflect.KClass
 
@@ -18,8 +13,7 @@ import kotlin.reflect.KClass
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Documented
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 @MapKey
 annotation class RxStoreKey(val value: KClass<out ViewModel>)

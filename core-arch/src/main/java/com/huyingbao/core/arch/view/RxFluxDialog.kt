@@ -5,64 +5,57 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.store.RxFragmentStore
 import com.huyingbao.core.arch.utils.ClassUtils
-
-import javax.inject.Inject
-
+import com.huyingbao.core.arch.utils.autoCleared
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxFluxDialog<T : ViewModel> : AppCompatDialogFragment(), RxFluxView<T>, RxSubscriberView, HasAndroidInjector {
-    private var mStore: T? = null
+abstract class RxFluxDialog<T : ViewModel> :
+        AppCompatDialogFragment(),
+        RxFluxView<T>,
+        RxSubscriberView,
+        HasAndroidInjector {
     @Inject
-    internal var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    internal var mChildAndroidInjector: DispatchingAndroidInjector<Any>? = null
+    lateinit var childAndroidInjector: DispatchingAndroidInjector<Any>
+
+    private var store by autoCleared<T?>()
 
     override val rxStore: T?
         get() {
-            if (mStore != null) {
-                return mStore
+            if (store != null) {
+                return store
             }
             val storeClass = ClassUtils.getGenericClass<T>(javaClass)
-                    ?: throw IllegalArgumentException("No generic class for Class<" + javaClass.getCanonicalName() + ">")
+                    ?: throw IllegalArgumentException("No generic class for Class<" + javaClass.canonicalName + ">")
             if (storeClass.superclass == RxActivityStore::class.java) {
-                mStore = ViewModelProviders.of(activity!!, mViewModelFactory).get(storeClass)
+                store = ViewModelProviders.of(activity!!, viewModelFactory).get(storeClass)
             } else if (storeClass.superclass == RxFragmentStore::class.java) {
-                mStore = ViewModelProviders.of(this, mViewModelFactory).get(storeClass)
+                store = ViewModelProviders.of(this, viewModelFactory).get(storeClass)
             }
-            return mStore
+            return store
         }
 
     override fun androidInjector(): AndroidInjector<Any>? {
-        return mChildAndroidInjector
+        return childAndroidInjector
     }
 
     /**
      * 子类都需要在Module中使用dagger.android中的
      * [dagger.android.ContributesAndroidInjector]注解
      * 生成对应的注入器，在方法中进行依赖注入操作。
-     *
-     * @param context
      */
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    /**
-     * View在destroy时,不再持有该Store对象
-     */
-    override fun onDestroy() {
-        mStore = null
-        super.onDestroy()
     }
 }

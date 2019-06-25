@@ -17,7 +17,7 @@ import javax.inject.Singleton
 class CommonModule {
     @Singleton
     @Provides
-    internal fun provideClient(): OkHttpClient {
+    fun provideClient(): OkHttpClient {
         //设置日志拦截器
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY

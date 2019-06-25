@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ViewModel
-
 import com.huyingbao.core.arch.store.RxFragmentStore
 import com.huyingbao.core.arch.view.RxFluxView
 
@@ -14,18 +12,18 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxFragmentLifecycleObserver(private val mFragment: Fragment) : LifecycleObserver {
+class RxFragmentLifecycleObserver(private val fragment: Fragment) : LifecycleObserver {
 
     /**
      * 在onAttach()完成依赖注入之后调用
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    internal fun onCreate() {
-        if (mFragment is RxFluxView<*>) {
-            val rxStore = (mFragment as RxFluxView<*>).rxStore
+    fun onCreate() {
+        if (fragment is RxFluxView<*>) {
+            val rxStore = fragment.rxStore
             if (rxStore is RxFragmentStore) {
                 //rxStore关联Fragment生命周期
-                mFragment.lifecycle.addObserver((rxStore as RxFragmentStore?)!!)
+                fragment.lifecycle.addObserver(rxStore)
             }
         }
     }
