@@ -19,8 +19,7 @@ import javax.inject.Singleton
 class CommonActionCreator @Inject
 constructor(rxDispatcher: RxDispatcher, rxActionManager: RxActionManager) : RxActionCreator(rxDispatcher, rxActionManager) {
     /**
-     * [RxActionManager]移除[RxAction]，停止对应的[Disposable]，
-     * 被观察者[Observable]正在运行的方法会被停止。
+     * [RxActionManager]移除[RxAction]，停止对应的[Disposable]，被观察者[Observable]正在运行的方法会被停止。
      */
     fun removeRxAction(tag: String) {
         removeRxAction(newRxAction(tag))

@@ -30,11 +30,11 @@ class CommonLoadingDialog : BaseCommonDialog() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        dialog!!.setCanceledOnTouchOutside(false)
+        dialog?.setCanceledOnTouchOutside(false)
         if (messageInt != 0) {
             val message = getString(messageInt)
             if (!TextUtils.isEmpty(message)) {
-                tv_loading_notice!!.text = message
+                tv_loading_notice?.text = message
             }
         }
         tv_loading_cancel.setOnClickListener {
