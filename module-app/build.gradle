@@ -91,4 +91,5 @@ dependencies {
     implementation project(':core-common')
     implementation project(':module-gan')
     implementation project(':module-wan')
+    implementation project(':module-github')
 }

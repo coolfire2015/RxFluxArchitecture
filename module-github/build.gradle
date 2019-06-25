@@ -1,0 +1,109 @@
+apply plugin: isModuleAsApp.toBoolean() ? 'com.android.application' : 'com.android.library'
+apply from: rootProject.file('depend_kotlin.gradle')
+
+//获取local.Properties
+File localPropFile = project.rootProject.file("local.properties")
+Properties localProperties = new Properties()
+localProperties.load(localPropFile.newDataInputStream())
+
+android {
+    //签名配置,自定义,用在defaultConfig中
+    signingConfigs {
+        debug {
+            storeFile file(localProperties.getProperty("STORE_DEBUG_FILE"))
+        }
+        release {
+            storeFile file(localProperties.getProperty("STORE_RELEASE_FILE"))
+            storePassword localProperties.getProperty("STORE_PASSWORD")
+            keyAlias localProperties.getProperty("KEY_ALIAS")
+            keyPassword localProperties.getProperty("KEY_PASSWORD")
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = false
+    }
+    //默认配置
+    defaultConfig {
+        //支持MultiDex分包
+        multiDexEnabled true
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+        signingConfig signingConfigs.debug
+        //使用vector图片
+        vectorDrawables.useSupportLibrary = true
+        //单元测试配置
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //GitHub Id
+        buildConfigField "String", "CLIENT_ID", localProperties.getProperty("CLIENT_ID")
+        //GitHub secret
+        buildConfigField "String", "CLIENT_SECRET", localProperties.getProperty("CLIENT_SECRET")
+        //显示分支名字
+        buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        debug {
+            //单元测试mockUrl
+            buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
+            //替换字符串资源
+            resValue "string", "app_github_name", "GitHub-Debug"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.debug
+        }
+        //自定义buildType.name
+        release {
+            //替换字符串资源
+            resValue "string", "app_github_name", "GitHub"
+            //混淆开关
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+        }
+    }
+    //注解编译参数设置
+    kapt {
+        generateStubs = true
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+            arg('eventBusIndex', 'com.huyingbao.module.github.GithubEventBusIndex')
+        }
+    }
+    //代码目录设置
+    sourceSets {
+        main {
+            if (isModuleAsApp.toBoolean()) {
+                manifest.srcFile 'src/app/AndroidManifest.xml'
+                java.srcDirs 'src/app/java'
+                res.srcDirs 'src/app/res'
+            } else {
+                manifest.srcFile 'src/library/AndroidManifest.xml'
+            }
+        }
+    }
+    //修改生成的apk名字
+    if (isModuleAsApp.toBoolean()) {
+        applicationVariants.all { variant ->
+            if (variant.buildType.name != "debug") {
+                variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+            }
+            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+                apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+                        variant.versionName + "-" +
+                        variant.buildType.name + ".apk"
+            }
+        }
+    }
+}

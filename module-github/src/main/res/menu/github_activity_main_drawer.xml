@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item>
+        <menu>
+            <item
+                android:id="@+id/nav_main_feedback"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_feedback" />
+            <item
+                android:id="@+id/nav_main_user_info"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_user_info" />
+            <item
+                android:id="@+id/nav_main_version"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_version" />
+            <item
+                android:id="@+id/nav_main_about"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_about" />
+            <item
+                android:id="@+id/nav_main_wan"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_wan" />
+            <item
+                android:id="@+id/nav_main_gan"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_gan" />
+            <item
+                android:id="@+id/nav_main_logout"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/github_menu_logout" />
+        </menu>
+    </item>
+
+</menu>
