@@ -4,6 +4,7 @@ import android.text.TextUtils
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
+import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.app.GithubContants
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -25,6 +27,7 @@ import javax.inject.Singleton
 class GithubAppModule {
     @Singleton
     @Provides
+    @Named(value = BuildConfig.MODULE_NAME)
     fun provideRetrofit(localStorageUtils: LocalStorageUtils): Retrofit {
         //Head拦截器
         val headInterceptor = Interceptor { chain ->

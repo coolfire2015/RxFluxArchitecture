@@ -16,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class GithubInjectActivityModule {
     @ActivityScope
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector
     abstract fun injectGithubAppLifecycle(): GithubAppLifecycle
 
     @ActivityScope

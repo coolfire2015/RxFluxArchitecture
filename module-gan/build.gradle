@@ -30,6 +30,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //显示分支名字
         buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+        //当前模块名字
+        buildConfigField 'String', 'MODULE_NAME', '"' + project.getName() + '"'
         //注解编译参数设置
         javaCompileOptions {
             annotationProcessorOptions {

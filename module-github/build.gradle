@@ -19,9 +19,6 @@ android {
             keyPassword localProperties.getProperty("KEY_PASSWORD")
         }
     }
-    testOptions {
-        unitTests.returnDefaultValues = false
-    }
     //默认配置
     defaultConfig {
         //支持MultiDex分包
@@ -35,12 +32,14 @@ android {
         vectorDrawables.useSupportLibrary = true
         //单元测试配置
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //显示分支名字
+        buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
+        //当前模块名字
+        buildConfigField 'String', 'MODULE_NAME', '"' + project.getName() + '"'
         //GitHub Id
         buildConfigField "String", "CLIENT_ID", localProperties.getProperty("CLIENT_ID")
         //GitHub secret
         buildConfigField "String", "CLIENT_SECRET", localProperties.getProperty("CLIENT_SECRET")
-        //显示分支名字
-        buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
     }
     //构建过程
     buildTypes {
