@@ -6,8 +6,8 @@ import android.util.Log
 import androidx.lifecycle.Lifecycle
 import com.huyingbao.core.arch.RxFlux.Companion.TAG
 import com.huyingbao.core.base.fragment.BaseRxFragment
-import com.huyingbao.core.common.utils.NavigationUtils
 import com.huyingbao.module.github.R
+import com.huyingbao.module.github.ui.login.action.LoginAction
 import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -25,6 +25,12 @@ class StartFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var loginActionCreator: LoginActionCreator
 
+    companion object {
+        fun newInstance(): StartFragment {
+            return StartFragment()
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.github_fragment_start
     }
@@ -36,7 +42,7 @@ class StartFragment : BaseRxFragment<LoginStore>() {
                     .timer(500, TimeUnit.MILLISECONDS)
                     .doOnDispose { Log.i(TAG, "Disposing subscription ON_DESTROY") }
                     .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
-                    .subscribe { NavigationUtils.navigate(view!!, R.id.start_to_login, popUp = true) }
+                    .subscribe { loginActionCreator.postLocalChange(LoginAction.TO_LOGIN_FRAGMENT) }
         } else {
             //有token，获取当前登录用户信息
             loginActionCreator.getLoginUserInfo()

@@ -22,6 +22,12 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var mActionCreator: LoginActionCreator
 
+    companion object{
+        fun newInstance():LoginFragment{
+            return LoginFragment()
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.github_fragment_login
     }

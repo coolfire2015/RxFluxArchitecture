@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.snackbar.Snackbar
 import com.huyingbao.core.arch.model.RxError
 import com.huyingbao.core.arch.model.RxLoading
@@ -18,6 +19,7 @@ import com.huyingbao.core.common.action.CommonActionCreator
 import com.huyingbao.core.common.dialog.CommonLoadingDialog
 import com.huyingbao.core.common.dialog.CommonLoadingDialogClickListener
 import com.huyingbao.core.common.model.CommonException
+import com.huyingbao.core.common.module.CommonContants
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
 import java.net.SocketException
@@ -86,13 +88,30 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     @Subscribe(sticky = true)
     fun onRxError(rxError: RxError) {
         when (val throwable = rxError.throwable) {
-            is CommonException -> Toast.makeText(this, throwable.message(), Toast.LENGTH_SHORT).show()
+            is CommonException -> handleCommonException(throwable)
             is retrofit2.HttpException -> Toast.makeText(this, throwable.code().toString() + ":服务器问题", Toast.LENGTH_SHORT).show()
             is SocketException -> Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show()
             is UnknownHostException -> Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show()
             is SocketTimeoutException -> Toast.makeText(this, "连接超时!", Toast.LENGTH_SHORT).show()
             else -> Toast.makeText(this, throwable.toString(), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    /**
+     * 处理自定义异常
+     */
+    private fun handleCommonException(throwable: CommonException) {
+        when(throwable.code()){
+            CommonContants.Error.UNAUTHORIZED->{
+                //结束当前页面，跳转登录页面
+                finish()
+                ARouter.getInstance().build(CommonContants.Address.LoginActivity)
+                        .withBoolean(CommonContants.Key.TO_LOGIN,true)
+                        .navigation()
+            }
+            else->Toast.makeText(this, throwable.message(), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     /**

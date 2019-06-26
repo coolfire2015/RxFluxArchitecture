@@ -15,6 +15,10 @@ import retrofit2.http.*
 interface LoginAction {
     companion object {
         /**
+         * 跳转登录页面
+         */
+        const val TO_LOGIN_FRAGMENT="toLoginFragment"
+        /**
          * 登录
          */
         const val LOGIN = "login"
