@@ -21,7 +21,7 @@ import javax.inject.Named
 class ArticleActionCreator @Inject constructor(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager,
-        @Named(value = BuildConfig.MODULE_NAME) private val retrofit: Retrofit
+        @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
 ) : WanActionCreator(rxDispatcher, rxActionManager), ArticleAction {
 
     override fun getArticleList(page: Int) {

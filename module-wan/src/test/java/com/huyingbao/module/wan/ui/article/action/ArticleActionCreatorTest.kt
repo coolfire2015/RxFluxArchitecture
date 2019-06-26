@@ -2,7 +2,6 @@ package com.huyingbao.module.wan.ui.article.action
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.module.wan.module.MockUtils
 import com.huyingbao.module.wan.module.mockDaggerRule
 import com.huyingbao.test.utils.RxJavaRule
@@ -12,9 +11,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
 import org.mockito.Spy
-import org.mockito.internal.util.Primitives
 import org.mockito.junit.MockitoJUnit
 
 class ArticleActionCreatorTest {

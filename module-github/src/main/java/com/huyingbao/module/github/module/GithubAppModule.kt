@@ -4,18 +4,14 @@ import android.text.TextUtils
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
-import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.app.GithubContants
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -27,11 +23,10 @@ import javax.inject.Singleton
 class GithubAppModule {
     @Singleton
     @Provides
-    @Named(value = BuildConfig.MODULE_NAME)
-    fun provideRetrofit(localStorageUtils: LocalStorageUtils): Retrofit {
+    fun provideRetrofit(localStorageUtils: LocalStorageUtils, builder: OkHttpClient.Builder): Retrofit {
         //Head拦截器
-        val headInterceptor = Interceptor { chain ->
-            var request = chain.request()
+        val headInterceptor = Interceptor {
+            var request = it.request()
             val token = localStorageUtils.getValue(CommonContants.Key.ACCESS_TOKEN, "")
             if (!TextUtils.isEmpty(token)) {
                 //Header中添加Authorization token数据
@@ -41,19 +36,13 @@ class GithubAppModule {
                         .url(url)
                 request = requestBuilder.build()
             }
-            chain.proceed(request)
+            it.proceed(request)
         }
-        //日志拦截器
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         //初始化OkHttp
-        val clientBuilder = OkHttpClient.Builder()
-                .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+        val client = builder
                 .addInterceptor(headInterceptor)
-                .addInterceptor(loggingInterceptor)
                 .addInterceptor(PageInfoInterceptor())
+                .build()
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)
@@ -61,7 +50,7 @@ class GithubAppModule {
                 //.addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(clientBuilder.build())
+                .client(client)
         return retrofitBuilder.build()
     }
 }

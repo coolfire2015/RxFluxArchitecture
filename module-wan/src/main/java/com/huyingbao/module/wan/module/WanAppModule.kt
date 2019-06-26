@@ -19,7 +19,7 @@ import javax.inject.Singleton
 class WanAppModule {
     @Singleton
     @Provides
-    @Named(value = BuildConfig.MODULE_NAME)
+    @Named(BuildConfig.MODULE_NAME)
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(WanContants.Base.BASE_URL)
