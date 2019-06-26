@@ -54,7 +54,6 @@ repositories {
 dependencies {
     //内核
     implementation project(':core-arch')
-//    implementation "com.github.coolfire2015.RxFluxArchitecture:core-arch:${RX_FLUX_ARCHITECTURE}"
     implementation "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
     implementation "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
@@ -126,7 +125,9 @@ dependencies {
     testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
     //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
-    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
+    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito any()等返回null的问题
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
     testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock-kotlin:${TEST_DEAAGE_MOCK}"

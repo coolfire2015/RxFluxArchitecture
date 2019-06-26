@@ -13,7 +13,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     annotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     annotationProcessor "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-//    annotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
     annotationProcessor project(':core-arch-processor')
     //单元测试编译时生成
     testAnnotationProcessor "androidx.room:room-compiler:${X_ROOM}"
@@ -23,6 +22,5 @@ dependencies {
     testAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER}"
     testAnnotationProcessor "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     testAnnotationProcessor "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-//    testAnnotationProcessor "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
     testAnnotationProcessor project(':core-arch-processor')
 }

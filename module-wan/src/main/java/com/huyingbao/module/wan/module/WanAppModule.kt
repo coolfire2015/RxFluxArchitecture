@@ -1,9 +1,7 @@
 package com.huyingbao.module.wan.module
 
 import com.google.gson.GsonBuilder
-import com.huyingbao.module.wan.api.WanApi
 import com.huyingbao.module.wan.app.WanContants
-import com.huyingbao.module.wan.ui.friend.model.WebSite
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,13 +17,12 @@ import javax.inject.Singleton
 class WanAppModule {
     @Singleton
     @Provides
-    fun provideWanApi(client: OkHttpClient): WanApi {
-        val retrofit = Retrofit.Builder()
+    fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
+        return Retrofit.Builder()
                 .baseUrl(WanContants.Base.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(client)
+                .client(builder.build())
                 .build()
-        return retrofit.create(WanApi::class.java)
     }
 }

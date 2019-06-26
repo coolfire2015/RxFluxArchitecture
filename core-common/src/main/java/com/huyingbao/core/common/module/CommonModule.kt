@@ -17,16 +17,15 @@ import javax.inject.Singleton
 class CommonModule {
     @Singleton
     @Provides
-    fun provideClient(): OkHttpClient {
+    fun provideClientBuilder(): OkHttpClient.Builder {
         //设置日志拦截器
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
-                .build()
     }
 }
 
