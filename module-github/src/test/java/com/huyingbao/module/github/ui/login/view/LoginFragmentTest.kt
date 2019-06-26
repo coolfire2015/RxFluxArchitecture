@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LoginFragmentTest {
     @Rule
-    var mScenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(
+    var scenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(
             LoginActivity::class.java,
             LoginFragment::class.java,
             null,
@@ -33,7 +33,7 @@ class LoginFragmentTest {
 
     @Test
     fun testCreated() {
-        mScenarioRule.getScenario().moveToState(Lifecycle.State.RESUMED)
-        mScenarioRule.getScenario().onFragment { fragment -> Assert.assertNotNull(fragment.mActionCreator) }
+        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        scenarioRule.scenario.onFragment { fragment -> Assert.assertNotNull(fragment.mActionCreator) }
     }
 }

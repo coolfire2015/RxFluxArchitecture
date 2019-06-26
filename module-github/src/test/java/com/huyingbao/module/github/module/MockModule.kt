@@ -68,8 +68,8 @@ class MockModule {
                 .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(headInterceptor)
                 .addInterceptor(loggingInterceptor)
-                //单元测试中不添加该拦截器
-                //.addInterceptor(PageInfoInterceptor())
+        //单元测试中不添加该拦截器
+        //.addInterceptor(PageInfoInterceptor())
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)
@@ -81,8 +81,6 @@ class MockModule {
 
     /**
      * 初始化根Url
-     *
-     * @return
      */
     private fun initBaseUrl(): String {
         return if (BuildConfig.MOCK_URL) initMockServer() else GithubContants.Url.BASE_API

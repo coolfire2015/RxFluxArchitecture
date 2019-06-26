@@ -2,7 +2,6 @@ package com.huyingbao.module.github.ui.login.action
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.module.github.module.MockUtils
 import com.huyingbao.module.github.module.mockDaggerRule
 import com.huyingbao.test.utils.RxJavaRule
@@ -47,12 +46,12 @@ class LoginActionCreatorTest {
     fun login() {
         loginActionCreator?.login("asdf", "asdf")
         //验证方法正确执行,并发送RxAction
-        verify(rxDispatcher).postRxAction(any<RxAction>())
+        verify(rxDispatcher).postRxAction(any())
     }
 
     @Test
     fun getLoginUserInfo() {
         loginActionCreator?.getLoginUserInfo()
-        verify(rxDispatcher).postRxAction(any<RxAction>())
+        verify(rxDispatcher).postRxAction(any())
     }
 }

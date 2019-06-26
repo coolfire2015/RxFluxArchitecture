@@ -5,3 +5,6 @@
 /build
 /release
 /local.properties
+core-arch/build
+core-arch-annotations/build
+core-arch-processor/build

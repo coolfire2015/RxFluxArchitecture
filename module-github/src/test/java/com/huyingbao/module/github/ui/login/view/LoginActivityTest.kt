@@ -16,10 +16,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
     @Rule
-    var mActivityRule: ActivityScenarioRule<LoginActivity> = ActivityScenarioRule(LoginActivity::class.java)
+    var activityRule: ActivityScenarioRule<LoginActivity> = ActivityScenarioRule(LoginActivity::class.java)
 
     @Test
     fun onRxChanged() {
-        mActivityRule.scenario.moveToState(Lifecycle.State.CREATED)
+        activityRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 }
