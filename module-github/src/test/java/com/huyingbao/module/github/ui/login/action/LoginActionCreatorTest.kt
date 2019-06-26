@@ -5,12 +5,12 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.module.github.module.MockUtils
 import com.huyingbao.module.github.module.mockDaggerRule
 import com.huyingbao.test.utils.RxJavaRule
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 

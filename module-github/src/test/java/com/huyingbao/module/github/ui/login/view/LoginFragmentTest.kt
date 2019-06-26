@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class LoginFragmentTest {
-    @Rule
+    @get:Rule
     var scenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(
             LoginActivity::class.java,
             LoginFragment::class.java,
