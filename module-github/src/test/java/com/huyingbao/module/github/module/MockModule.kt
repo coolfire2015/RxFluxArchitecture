@@ -2,9 +2,9 @@ package com.huyingbao.module.github.module
 
 import android.text.TextUtils
 import com.google.gson.GsonBuilder
+import com.huyingbao.core.annotations.OpenForTesting
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.common.annotation.OpenForTesting
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
 import com.huyingbao.module.github.app.GithubContants
