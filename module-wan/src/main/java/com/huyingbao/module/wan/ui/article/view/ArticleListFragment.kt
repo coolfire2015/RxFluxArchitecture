@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.fragment.BaseRxFragment
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.module.CommonContants.Config.PAGE_SIZE
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
@@ -65,6 +67,11 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
             }
             item.itemId == R.id.menu_to_friend -> {
                 articleActionCreator.postLocalChange(ArticleAction.TO_FRIEND)
+                true
+            }
+            item.itemId == R.id.menu_to_gan -> {
+                //跳转module-gan
+                ARouter.getInstance().build(CommonContants.Address.RandomActivity).navigation()
                 true
             }
             else -> super.onOptionsItemSelected(item)
