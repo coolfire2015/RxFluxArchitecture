@@ -1,7 +1,6 @@
 package com.huyingbao.module.wan.ui.article.store
 
 import androidx.lifecycle.MutableLiveData
-
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
@@ -10,11 +9,8 @@ import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
-
 import org.greenrobot.eventbus.Subscribe
-
-import java.util.ArrayList
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 

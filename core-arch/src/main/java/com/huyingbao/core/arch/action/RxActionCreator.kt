@@ -178,7 +178,7 @@ abstract class RxActionCreator(
     /**
      * 异步执行，成功发送[RxAction]，异常发送[RxRetry]。
      */
-    protected fun <T> postHttpRetryAction(rxAction: RxAction, httpObservable: Observable<T>) {
+    protected open fun <T> postHttpRetryAction(rxAction: RxAction, httpObservable: Observable<T>) {
         postRxAction(rxAction, httpObservable, canShowLoading = false, canRetry = true)
     }
 
@@ -186,7 +186,7 @@ abstract class RxActionCreator(
      * 异步执行，成功发送[RxAction]，异常发送[RxRetry]。
      * 开始结束发送[RxLoading]。
      */
-    protected fun <T> postHttpRetryAndLoadingAction(rxAction: RxAction, httpObservable: Observable<T>) {
+    protected open fun <T> postHttpRetryAndLoadingAction(rxAction: RxAction, httpObservable: Observable<T>) {
         postRxAction(rxAction, httpObservable, canShowLoading = true, canRetry = true)
     }
 
