@@ -17,7 +17,6 @@ import com.huyingbao.core.common.dialog.CommonInfo
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.dialog.CommonInfoDialogClickListener
 import com.huyingbao.core.common.module.CommonContants
-import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.login.view.LoginActivity
@@ -40,8 +39,6 @@ class MainActivity : BaseRxActivity<MainStore>() {
     lateinit var githubAppStore: GithubAppStore
     @Inject
     lateinit var mainActionCreator: MainActionCreator
-    @Inject
-    lateinit var localStorageUtils: LocalStorageUtils
 
     override fun getLayoutId(): Int {
         return R.layout.github_activity_main
@@ -202,7 +199,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     /**
-     * 退出登录
+     * 清除旧Token，跳转登录页面，结束当前页面
      */
     private fun logout() {
         localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")

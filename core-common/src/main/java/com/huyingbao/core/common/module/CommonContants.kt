@@ -18,7 +18,7 @@ class CommonContants {
         const val TITLE = "title"
         const val CONTENT = "content"
         const val INFO = "info"
-        const val TO_LOGIN = "toLogin"
+        const val IS_TO_LOGIN = "isToLogin"
     }
 
     object Header {
@@ -41,8 +41,8 @@ class CommonContants {
         const val SearchActivity = "/github/search/SearchActivity"
     }
 
-    object Error{
-        const val COMMON=600
-        const val UNAUTHORIZED=401
+    object Error {
+        const val COMMON = 600
+        const val UNAUTHORIZED = 401
     }
 }

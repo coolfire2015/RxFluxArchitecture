@@ -20,6 +20,7 @@ import com.huyingbao.core.common.dialog.CommonLoadingDialog
 import com.huyingbao.core.common.dialog.CommonLoadingDialogClickListener
 import com.huyingbao.core.common.model.CommonException
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.utils.LocalStorageUtils
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
 import java.net.SocketException
@@ -41,6 +42,8 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
 
     @Inject
     lateinit var commonActionCreator: CommonActionCreator
+    @Inject
+    lateinit var localStorageUtils: LocalStorageUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,23 +101,6 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     }
 
     /**
-     * 处理自定义异常
-     */
-    private fun handleCommonException(throwable: CommonException) {
-        when(throwable.code()){
-            CommonContants.Error.UNAUTHORIZED->{
-                //结束当前页面，跳转登录页面
-                finish()
-                ARouter.getInstance().build(CommonContants.Address.LoginActivity)
-                        .withBoolean(CommonContants.Key.TO_LOGIN,true)
-                        .navigation()
-            }
-            else->Toast.makeText(this, throwable.message(), Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
-    /**
      * 接收[RxRetry]，粘性
      * 该方法不经过RxStore,
      * 由RxFluxView直接处理
@@ -151,6 +137,21 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
         if (fragmentByTag is CommonLoadingDialog && !rxLoading.isLoading) {
             //隐藏进度框
             fragmentByTag.dismiss()
+        }
+    }
+
+    /**
+     * 处理自定义异常
+     */
+    private fun handleCommonException(commonException: CommonException) {
+        when (commonException.code()) {
+            CommonContants.Error.UNAUTHORIZED -> {
+                //登录认证失败，清除旧Token，结束当前页面，跳转登录页面
+                localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
+                finish()
+                ARouter.getInstance().build(CommonContants.Address.LoginActivity).withBoolean(CommonContants.Key.IS_TO_LOGIN, true).navigation()
+            }
+            else -> Toast.makeText(this, commonException.message(), Toast.LENGTH_SHORT).show()
         }
     }
 }
