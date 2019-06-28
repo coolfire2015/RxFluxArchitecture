@@ -29,13 +29,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //显示分支名字
         buildConfigField 'String', 'BRANCH', '"' + rootProject.getGitBranch() + '"'
-        //注解编译参数设置
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(),
-                             eventBusIndex      : 'com.huyingbao.module.wan.WanEventBusIndex']
-            }
-        }
+        //当前模块名字
+        buildConfigField 'String', 'MODULE_NAME', '"' + project.getName() + '"'
     }
     //构建过程
     buildTypes {
@@ -66,6 +61,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名配置
             signingConfig signingConfigs.release
+        }
+    }
+    //注解编译参数设置
+    kapt {
+        generateStubs = true
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+            arg('eventBusIndex', 'com.huyingbao.module.wan.WanEventBusIndex')
         }
     }
     //代码目录设置
