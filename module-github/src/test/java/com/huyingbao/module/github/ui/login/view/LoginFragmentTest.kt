@@ -3,12 +3,12 @@ package com.huyingbao.module.github.ui.login.view
 import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.huyingbao.module.github.GithubApplication
 import com.huyingbao.module.github.R
 import com.huyingbao.test.utils.FragmentScenarioRule
+import org.hamcrest.core.AllOf.allOf
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -27,16 +27,18 @@ class LoginFragmentTest {
             LoginActivity::class.java,
             LoginFragment::class.java,
             null,
-            null)
+            null,
+            R.id.fl_container)
 
     @Test
     fun testLogin() {
-        onView(withId(R.id.btn_login)).check(matches(withText(R.string.github_label_login)))
+        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        scenarioRule.scenario.onFragment { onView(allOf(isDisplayed(), withId(R.id.btn_login))).check(matches(withText(R.string.github_label_login))) }
     }
 
     @Test
     fun testCreated() {
         scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        scenarioRule.scenario.onFragment { fragment -> Assert.assertNotNull(fragment.mActionCreator) }
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.mActionCreator) }
     }
 }
