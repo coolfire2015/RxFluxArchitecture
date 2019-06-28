@@ -4,7 +4,8 @@
 
     <application
         android:allowBackup="false"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
     </application>
 </manifest>
