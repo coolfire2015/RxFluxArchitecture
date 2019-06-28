@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
-    lateinit var mActionCreator: LoginActionCreator
+    lateinit var loginActionCreator: LoginActionCreator
 
     companion object{
         fun newInstance():LoginFragment{
@@ -55,7 +55,7 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             context?.toast("请输入内容！")
         } else {
-            mActionCreator.login(username, password)
+            loginActionCreator.login(username, password)
         }
     }
 
@@ -64,6 +64,6 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
      */
     @Subscribe(tags = [LoginAction.LOGIN], sticky = true)
     fun onLogin(rxAction: RxAction) {
-        mActionCreator.getLoginUserInfo()
+        loginActionCreator.getLoginUserInfo()
     }
 }

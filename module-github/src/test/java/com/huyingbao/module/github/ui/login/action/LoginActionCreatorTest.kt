@@ -27,13 +27,14 @@ class LoginActionCreatorTest : MockActionCreator() {
 
     @After
     fun tearDown() {
+        loginActivity?.let { rxDispatcher.unsubscribeRxView(it) }
     }
 
     @Test
     fun login() {
         loginActionCreator?.login("asdf", "asdf")
         //验证方法正确执行,并发送RxAction
-        verify(rxDispatcher).postRxAction(any())
+        verify(rxDispatcher).postRxError(any())
     }
 
     @Test

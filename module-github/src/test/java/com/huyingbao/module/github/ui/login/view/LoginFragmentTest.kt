@@ -9,9 +9,7 @@ import com.huyingbao.module.github.GithubApplication
 import com.huyingbao.module.github.R
 import com.huyingbao.test.utils.FragmentScenarioRule
 import org.hamcrest.core.AllOf.allOf
-import org.junit.Assert
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -30,15 +28,33 @@ class LoginFragmentTest {
             null,
             R.id.fl_container)
 
+    @Before
+    fun setUp() {
+        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+    }
+
+    @After
+    fun tearDown() {
+        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+    }
+
     @Test
-    fun testLogin() {
+    fun getLoginActionCreator() {
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.loginActionCreator) }
+    }
+
+    @Test
+    fun getLayoutId() {
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
+    }
+
+    @Test
+    fun afterCreate() {
         scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
         scenarioRule.scenario.onFragment { onView(allOf(isDisplayed(), withId(R.id.btn_login))).check(matches(withText(R.string.github_label_login))) }
     }
 
     @Test
-    fun testCreated() {
-        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.mActionCreator) }
+    fun onLogin() {
     }
 }

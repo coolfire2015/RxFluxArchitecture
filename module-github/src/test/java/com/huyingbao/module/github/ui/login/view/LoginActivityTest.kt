@@ -23,6 +23,6 @@ class LoginActivityTest {
 
     @Test
     fun onRxChanged() {
-        activityRule.scenario.moveToState(Lifecycle.State.CREATED)
+        activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
     }
 }
