@@ -4,7 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.huyingbao.module.wan.module.WanApplication
+import com.huyingbao.module.wan.WanApplication
 
 import org.junit.Rule
 import org.junit.Test

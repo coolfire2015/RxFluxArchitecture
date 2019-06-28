@@ -8,3 +8,4 @@
 core-arch/build
 core-arch-annotations/build
 core-arch-processor/build
+module-github/build
