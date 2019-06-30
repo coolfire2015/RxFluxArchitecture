@@ -1,14 +1,16 @@
 package com.huyingbao.module.github.ui.login.view
 
 import androidx.lifecycle.Lifecycle
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.huyingbao.module.github.GithubApplication
 import com.huyingbao.module.github.R
 import com.huyingbao.test.utils.FragmentScenarioRule
-import org.hamcrest.core.AllOf.allOf
+import org.hamcrest.core.AllOf
 import org.junit.*
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -51,10 +53,24 @@ class LoginFragmentTest {
     @Test
     fun afterCreate() {
         scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        scenarioRule.scenario.onFragment { onView(allOf(isDisplayed(), withId(R.id.btn_login))).check(matches(withText(R.string.github_label_login))) }
+        scenarioRule.scenario.onFragment {
+            Espresso.onView(AllOf.allOf(ViewMatchers.isDisplayed(), ViewMatchers.withId(R.id.btn_login)))
+                    .check(ViewAssertions.matches(withText(R.string.github_label_login)))
+        }
     }
 
     @Test
     fun onLogin() {
+        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        scenarioRule.scenario.onFragment {
+            Espresso.onView(ViewMatchers.withId(R.id.et_username))
+                    .perform(ViewActions.clearText(), ViewActions.typeText("asdf"))
+
+            Espresso.onView(ViewMatchers.withId(R.id.et_password))
+                    .perform(ViewActions.clearText(), ViewActions.typeText("asf"))
+
+            Espresso.onView(AllOf.allOf(ViewMatchers.isDisplayed(), ViewMatchers.withId(R.id.btn_login)))
+                    .perform(ViewActions.click())
+        }
     }
 }

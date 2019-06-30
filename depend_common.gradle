@@ -119,10 +119,13 @@ dependencies {
     //测试Android
     testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
     testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
-    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
     testImplementation "androidx.test:core:${TEST_X_CORE}"
     testImplementation "androidx.test:rules:${TEST_X_RULES}"
     testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    //Espresso
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
+    testImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
     //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
