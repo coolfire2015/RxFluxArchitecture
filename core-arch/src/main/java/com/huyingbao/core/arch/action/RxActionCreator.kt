@@ -6,6 +6,8 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
+import java.util.logging.Level
 
 
 /**
@@ -69,7 +71,8 @@ abstract class RxActionCreator(
                     }
 
                     override fun onError(e: Throwable) {
-                        //操作异常
+                        //操作异常，打印错误日志
+                        EventBus.getDefault().logger.log(Level.SEVERE, "RxActionCreator onError:", e)
                         if (canRetry) {
                             postRxRetry(rxAction.tag, httpObservable, e)
                         } else {
