@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -48,6 +49,9 @@ class GithubAppModule {
                 .baseUrl(GithubContants.Url.BASE_API)
                 //入参Body中如果有参数为空，依然序列化
                 //.addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+                //使用ScalarsConverterFactory，当接口返回类型为常规类型时，规范接口返回数据
+                //可用来处理接口返回XML数据转为String，然后再转为Json
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

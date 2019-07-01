@@ -1,7 +1,6 @@
 package com.huyingbao.module.github.module
 
 import android.text.TextUtils
-import com.google.gson.GsonBuilder
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.module.CommonContants
@@ -19,6 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -50,7 +50,7 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 8a273eb1c906b612a32733d0d1f164a22868e80b")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token ccdc62e68a9c21654f1811e9f72d93265988ce29")
                         .url(url)
                 request = requestBuilder.build()
             }
@@ -71,7 +71,8 @@ class MockModule {
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
         return retrofitBuilder.build()

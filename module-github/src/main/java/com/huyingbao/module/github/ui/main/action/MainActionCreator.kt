@@ -38,6 +38,9 @@ class MainActionCreator @Inject constructor(
 
     override fun getTrendData(languageType: String, since: String) {
         val rxAction = newRxAction(MainAction.GET_TREND_DATA)
-        postHttpAction(rxAction, retrofit.create(MainApi::class.java).getTrendData(languageType, since))
+        postHttpAction(rxAction, retrofit.create(MainApi::class.java).getTrendData(
+                true,
+                languageType,
+                since))
     }
 }
