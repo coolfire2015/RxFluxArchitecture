@@ -5,6 +5,11 @@ import com.huyingbao.module.github.ui.login.model.User
 import com.shuyu.github.kotlin.model.bean.Repository
 import java.util.*
 
+/**
+ * 事件类
+ * Created by guoshuyu
+ * Date: 2018-10-29
+ */
 class Event {
     var id: String? = null
     var type: String? = null

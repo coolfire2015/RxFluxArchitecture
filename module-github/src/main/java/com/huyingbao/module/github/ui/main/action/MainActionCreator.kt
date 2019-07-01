@@ -3,8 +3,10 @@ package com.huyingbao.module.github.ui.main.action
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
+import com.huyingbao.core.common.utils.FlatMapResponse2Result
 import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.issue.model.Issue
+import com.huyingbao.module.github.ui.main.model.TrendConversion
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -38,9 +40,10 @@ class MainActionCreator @Inject constructor(
 
     override fun getTrendData(languageType: String, since: String) {
         val rxAction = newRxAction(MainAction.GET_TREND_DATA)
-        postHttpAction(rxAction, retrofit.create(MainApi::class.java).getTrendData(
-                true,
-                languageType,
-                since))
+        val httpObservable = retrofit.create(MainApi::class.java)
+                .getTrendData(true, languageType, since)
+                .flatMap { FlatMapResponse2Result(it) }
+                .map { TrendConversion.htmlToRepo(it) }
+        postHttpAction(rxAction, httpObservable)
     }
 }

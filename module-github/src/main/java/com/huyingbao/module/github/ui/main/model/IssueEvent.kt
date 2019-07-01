@@ -4,9 +4,12 @@ import com.google.gson.annotations.SerializedName
 import com.huyingbao.module.github.ui.login.model.User
 import java.util.*
 
-
+/**
+ * 问题类
+ * Created by guoshuyu
+ * Date: 2018-10-29
+ */
 class IssueEvent {
-
     var id: String? = null
     var user: User? = null
     @SerializedName("created_at")

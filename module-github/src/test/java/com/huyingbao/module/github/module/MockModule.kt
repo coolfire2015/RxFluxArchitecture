@@ -50,7 +50,7 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token ccdc62e68a9c21654f1811e9f72d93265988ce29")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token fbaf21e4996ba2443a4a6f7906c0ab281e9978f3")
                         .url(url)
                 request = requestBuilder.build()
             }
@@ -58,7 +58,10 @@ class MockModule {
         }
         //日志拦截器
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = if (BuildConfig.DEBUG)
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
         //初始化OkHttp
         val clientBuilder = OkHttpClient.Builder()
                 .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)

@@ -42,7 +42,10 @@ class MockModule {
     fun provideRetrofit(): Retrofit {
         //日志拦截器
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = if (BuildConfig.DEBUG)
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
         //初始化OkHttp
         val clientBuilder = OkHttpClient.Builder()
                 .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)

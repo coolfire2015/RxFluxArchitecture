@@ -5,7 +5,11 @@ import com.google.gson.annotations.SerializedName
 import com.huyingbao.module.github.ui.issue.model.Issue
 import java.util.*
 
-
+/**
+ * 事件类内容
+ * Created by guoshuyu
+ * Date: 2018-10-29
+ */
 class EventPayload {
 
     //PushEvent
