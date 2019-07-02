@@ -24,8 +24,7 @@ abstract class BaseActionCreatorTest {
     @get:Rule
     var mockitoRule = MockitoJUnit.rule()
     /**
-     * [com.huyingbao.core.arch.store.RxStore]
-     * [com.huyingbao.core.arch.view.RxSubscriberView]
+     * [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]
      * 自动注册订阅和取消订阅
      */
     @get:Rule
@@ -47,8 +46,8 @@ abstract class BaseActionCreatorTest {
     lateinit var rxActionManager: RxActionManager
 
     /**
-     * 获取所有需要管理订阅的 [com.huyingbao.core.arch.store.RxStore]和
-     * [com.huyingbao.core.arch.view.RxSubscriberView]实现类对象列表
+     * 获取所有需要管理订阅的 [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]
+     * 实现类对象列表
      */
     abstract fun getSubscriberList(): List<Any>
 }

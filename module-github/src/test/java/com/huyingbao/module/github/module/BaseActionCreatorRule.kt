@@ -7,8 +7,7 @@ import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
 
 /**
- * [com.huyingbao.core.arch.store.RxStore]
- * [com.huyingbao.core.arch.view.RxSubscriberView]
+ * [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]
  * 自动注册订阅和取消订阅
  */
 class BaseActionCreatorRule : MethodRule {
