@@ -16,7 +16,7 @@ import javax.inject.Named
 class FriendActionCreator @Inject constructor(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager,
-        @param:Named(BuildConfig.MODULE_NAME)  private val retrofit: Retrofit
+        @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
 ) : RxActionCreator(rxDispatcher, rxActionManager), FriendAction {
     override fun getFriendList() {
         val rxAction = newRxAction(FriendAction.GET_FRIEND_LIST)

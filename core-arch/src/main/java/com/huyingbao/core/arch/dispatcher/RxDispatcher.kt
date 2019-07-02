@@ -4,8 +4,6 @@ import com.huyingbao.core.arch.model.*
 import com.huyingbao.core.arch.store.RxStore
 import com.huyingbao.core.arch.view.RxSubscriberView
 import org.greenrobot.eventbus.EventBus
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * 调度核心类：
@@ -16,8 +14,7 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
-class RxDispatcher @Inject constructor() {
+class RxDispatcher {
 
     /**
      * [RxStore]注册订阅。

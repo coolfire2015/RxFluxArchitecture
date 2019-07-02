@@ -1,6 +1,7 @@
 package com.huyingbao.core.common.module
 
 import com.huyingbao.core.arch.module.RxFluxModule
+import com.huyingbao.core.common.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -20,7 +21,10 @@ class CommonModule {
     fun provideClientBuilder(): OkHttpClient.Builder {
         //设置日志拦截器
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = if (BuildConfig.DEBUG)
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
         return OkHttpClient.Builder()
                 .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)

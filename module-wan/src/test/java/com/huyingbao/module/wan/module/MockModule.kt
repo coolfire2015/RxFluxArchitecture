@@ -1,11 +1,12 @@
 package com.huyingbao.module.wan.module
 
+import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
-import com.huyingbao.core.arch.action.RxActionManager
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
+import com.huyingbao.module.wan.ui.article.store.ArticleStore
+import dagger.Component
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
@@ -13,50 +14,44 @@ import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.utils.RequestMatchers
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * 依赖注入器,为测试代码提供方便测试的全局对象
  */
-@Module
+@Singleton
+@Component(modules = [MockModule::class])
+interface MockComponent {
+    val retrofit: Retrofit
+}
+
+/**
+ * 依赖注入仓库
+ *
+ * 1.提供[org.mockito.Spy]和[org.mockito.Mock]对象
+ *
+ * 2.提供测试代码需要的全局对象
+ */
+@Module(includes = [CommonModule::class])
 class MockModule {
     @Singleton
     @Provides
-    fun provideRxActionManager(): RxActionManager {
-        return RxActionManager()
+    fun provideArticleStore(rxStoreFactory: ViewModelProvider.Factory): ArticleStore {
+        return rxStoreFactory.create(ArticleStore::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideRxDispatcher(): RxDispatcher {
-        return RxDispatcher()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(): Retrofit {
-        //日志拦截器
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        //初始化OkHttp
-        val clientBuilder = OkHttpClient.Builder()
-                .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(loggingInterceptor)
-        //单元测试中不添加该拦截器
-        //.addInterceptor(PageInfoInterceptor())
+    fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(WanContants.Base.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(clientBuilder.build())
+                .client(builder.build())
         return retrofitBuilder.build()
     }
 

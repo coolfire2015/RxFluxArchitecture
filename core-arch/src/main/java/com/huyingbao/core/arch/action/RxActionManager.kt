@@ -4,8 +4,6 @@ import androidx.collection.ArrayMap
 import androidx.core.util.Pair
 import com.huyingbao.core.arch.model.RxAction
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
-import javax.inject.Singleton
 
 
 /**
@@ -13,8 +11,7 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
-class RxActionManager @Inject constructor() {
+class RxActionManager {
     /**
      * 管理订阅的ArrayMap，[RxAction]的tag作为key
      */
