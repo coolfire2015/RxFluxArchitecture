@@ -123,16 +123,14 @@ dependencies {
     testImplementation "androidx.test:core:${TEST_X_CORE}"
     testImplementation "androidx.test:rules:${TEST_X_RULES}"
     testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
-    //Espresso
     testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
-    testImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
-    testImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
     //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
-    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
-    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito any()等返回null的问题
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"//解决Mockito any()等返回null的问题
     testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.coolfire2015:RxFluxTestUtils:${RX_FLUX_TEST_UTILS}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock-kotlin:${TEST_DEAAGE_MOCK}"
     //测试Api
@@ -140,11 +138,12 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
     testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
     //测试工具
-    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
-    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
-    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
-    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
-    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
-    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
-    testImplementation "com.github.coolfire2015:RxFluxTestUtils:${RX_FLUX_TEST_UTILS}"
+//    testImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
+//    testImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
+//    testImplementation "org.assertj:assertj-core:${TEST_ASSERT_J}"
+//    testImplementation "com.squareup.assertj:assertj-android:${TEST_ASSERT_J_ANDROID}"
+//    testImplementation "org.powermock:powermock-api-mockito2:${TEST_POWER_MOCK}"
+//    testImplementation "org.powermock:powermock-module-junit4:${TEST_POWER_MOCK}"
+//    testImplementation "org.powermock:powermock-module-junit4-rule:${TEST_POWER_MOCK}"
+//    testImplementation "org.powermock:powermock-classloading-xstream:${TEST_POWER_MOCK}"
 }

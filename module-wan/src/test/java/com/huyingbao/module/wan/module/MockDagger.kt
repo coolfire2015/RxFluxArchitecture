@@ -1,5 +1,7 @@
 package com.huyingbao.module.github.module
 
+import com.huyingbao.module.wan.module.MockComponent
+import com.huyingbao.module.wan.module.MockModule
 import it.cosenonjaviste.daggermock.DaggerMock
 
 /**

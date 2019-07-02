@@ -1,13 +1,18 @@
 package com.huyingbao.module.wan.module
 
+import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
+import com.huyingbao.module.wan.ui.article.store.ArticleStore
+import dagger.Component
 import dagger.Module
 import dagger.Provides
+import dagger.android.AndroidInjectionModule
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -21,9 +26,22 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * 依赖注入器,为测试代码提供方便测试的全局对象
  */
-@Module
+@Singleton
+@Component(modules = [MockModule::class])
+interface MockComponent {
+    val retrofit: Retrofit
+}
+
+/**
+ * 依赖注入仓库
+ *
+ * 1.提供[org.mockito.Spy]和[org.mockito.Mock]对象
+ *
+ * 2.提供测试代码需要的全局对象
+ */
+@Module(includes = [WanAppModule::class, CommonModule::class, AndroidInjectionModule::class])
 class MockModule {
     @Singleton
     @Provides
@@ -31,10 +49,16 @@ class MockModule {
         return RxActionManager()
     }
 
+//    @Singleton
+//    @Provides
+//    fun provideRxDispatcher(): RxDispatcher {
+//        return RxDispatcher()
+//    }
+
     @Singleton
     @Provides
-    fun provideRxDispatcher(): RxDispatcher {
-        return RxDispatcher()
+    fun provideArticleStore(rxStoreFactory: ViewModelProvider.Factory): ArticleStore {
+        return rxStoreFactory.create(ArticleStore::class.java)
     }
 
     @Singleton
