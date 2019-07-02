@@ -22,8 +22,8 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var loginActionCreator: LoginActionCreator
 
-    companion object{
-        fun newInstance():LoginFragment{
+    companion object {
+        fun newInstance(): LoginFragment {
             return LoginFragment()
         }
     }

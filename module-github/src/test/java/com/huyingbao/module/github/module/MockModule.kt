@@ -5,7 +5,9 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.BuildConfig
+import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.app.GithubContants
+import dagger.Component
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.JVMFileParser
@@ -15,6 +17,7 @@ import io.appflate.restmock.utils.RequestMatchers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.mockito.Mockito
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,7 +26,20 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * 依赖注入器,为测试代码提供方便测试的全局对象
+ */
+@Singleton
+@Component(modules = [MockModule::class])
+interface MockComponent {
+    val retrofit: Retrofit
+}
+
+/**
+ * 依赖注入仓库
+ *
+ * 1.提供[org.mockito.Spy]和[org.mockito.Mock]对象
+ *
+ * 2.提供测试代码需要的全局对象
  */
 @Module
 class MockModule {
@@ -41,6 +57,12 @@ class MockModule {
 
     @Singleton
     @Provides
+    fun provideGithubAppStore(): GithubAppStore {
+        return Mockito.mock(GithubAppStore::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofit(): Retrofit {
         //Head拦截器
         val headInterceptor = Interceptor { chain ->
@@ -50,7 +72,7 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token fbaf21e4996ba2443a4a6f7906c0ab281e9978f3")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 8bc430e0553b4564ebb1a359ca5d3d878a416a05")
                         .url(url)
                 request = requestBuilder.build()
             }

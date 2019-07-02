@@ -47,6 +47,10 @@ android {
         debug {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
+            //单元测试用户名
+            buildConfigField "String", "GIT_NAME", localProperties.getProperty("GIT_NAME")
+            //单元测试密码
+            buildConfigField "String", "GIT_PWD", localProperties.getProperty("GIT_PWD")
             //替换字符串资源
             resValue "string", "app_github_name", "GitHub-Debug"
             //混淆开关

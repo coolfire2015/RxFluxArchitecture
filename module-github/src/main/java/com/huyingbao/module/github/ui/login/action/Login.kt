@@ -17,7 +17,7 @@ interface LoginAction {
         /**
          * 跳转登录页面
          */
-        const val TO_LOGIN_FRAGMENT="toLoginFragment"
+        const val TO_LOGIN_FRAGMENT = "toLoginFragment"
         /**
          * 登录
          */
