@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.module
+package com.huyingbao.module.wan.module
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher

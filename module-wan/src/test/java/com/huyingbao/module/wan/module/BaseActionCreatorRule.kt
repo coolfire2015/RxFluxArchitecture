@@ -1,4 +1,4 @@
-package com.huyingbao.module.github.module
+package com.huyingbao.module.wan.module
 
 import com.huyingbao.core.arch.store.RxStore
 import com.huyingbao.core.arch.view.RxSubscriberView
