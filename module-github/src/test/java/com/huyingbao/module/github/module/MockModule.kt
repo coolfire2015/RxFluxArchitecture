@@ -4,8 +4,8 @@ import android.text.TextUtils
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.github.BuildConfig
-import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.app.GithubContants
 import dagger.Component
 import dagger.Module
@@ -16,13 +16,10 @@ import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.utils.RequestMatchers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.mockito.Mockito
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -41,7 +38,7 @@ interface MockComponent {
  *
  * 2.提供测试代码需要的全局对象
  */
-@Module
+@Module(includes = [CommonModule::class])
 class MockModule {
     @Singleton
     @Provides
@@ -57,13 +54,7 @@ class MockModule {
 
     @Singleton
     @Provides
-    fun provideGithubAppStore(): GithubAppStore {
-        return Mockito.mock(GithubAppStore::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         //Head拦截器
         val headInterceptor = Interceptor { chain ->
             var request = chain.request()
@@ -78,19 +69,8 @@ class MockModule {
             }
             chain.proceed(request)
         }
-        //日志拦截器
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = if (BuildConfig.DEBUG)
-            HttpLoggingInterceptor.Level.BODY
-        else
-            HttpLoggingInterceptor.Level.NONE
         //初始化OkHttp
-        val clientBuilder = OkHttpClient.Builder()
-                .connectTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(CommonContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(headInterceptor)
-                .addInterceptor(loggingInterceptor)
+        builder.addInterceptor(headInterceptor)
         //单元测试中不添加该拦截器
         //.addInterceptor(PageInfoInterceptor())
         //初始化Retrofit
@@ -99,7 +79,7 @@ class MockModule {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(clientBuilder.build())
+                .client(builder.build())
         return retrofitBuilder.build()
     }
 

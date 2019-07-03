@@ -10,11 +10,12 @@ object MockUtils {
 }
 
 /**
- * DaggerMock Rule
+ * 动态创建 Module 子类的 JUnit 规则
  *
- * 1.初始化测试类里面的所有用[org.mockito.Mock]和[org.mockito.Spy]标注的对象
+ * 1.动态创建了一个[MockModule]的子类，返回在测试中定义并使用[org.mockito.Mock]和[org.mockito.Spy]标注的虚拟对象 ，而不是真实的对象。
  *
- * 2.通过反射的方式得到[MockModule]的所有provider方法，如果有某个方法的返回值是[org.mockito.Mock]和[org.mockito.Spy]标注的对象，那么就使用Mockito返回mock的对象。
+ * 2.Mock [MockModule]，通过反射的方式得到[MockModule]的所有[dagger.Provides]方法，如果有某个方法的返回值是[org.mockito.Mock]和[org.mockito.Spy]标注的虚拟对象，
+ * 那么就使用Mockito，让这个[dagger.Provides]方法被调用时，返回虚拟对象。
  *
  * 3.使用[MockModule]来构建一个[MockComponent]，并且放到[MockUtils]里面去。
  */

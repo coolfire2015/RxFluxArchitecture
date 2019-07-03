@@ -16,8 +16,6 @@ import org.mockito.Mockito
  * Created by liujunfeng on 2019/4/3.
  */
 class LoginActionCreatorTest : BaseActionCreatorTest() {
-
-
     private var loginStore: LoginStore? = null
     private var githubAppStore: GithubAppStore? = null
     private var loginActivity: LoginActivity? = null
