@@ -25,7 +25,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [MockModule::class])
 interface MockComponent {
+    /**
+     * 提供实际创建的工具对象
+     */
     val retrofit: Retrofit
+    val articleStore: ArticleStore
 }
 
 /**
@@ -35,7 +39,7 @@ interface MockComponent {
  *
  * 2.提供测试代码需要的全局对象
  */
-@Module(includes = [CommonModule::class])
+@Module(includes = [CommonModule::class, WanAppModule::class])
 class MockModule {
     @Singleton
     @Provides

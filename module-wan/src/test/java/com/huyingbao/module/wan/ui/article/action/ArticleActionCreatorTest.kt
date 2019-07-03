@@ -10,10 +10,10 @@ import org.junit.Test
 import org.mockito.Mock
 
 class ArticleActionCreatorTest : BaseActionCreatorTest() {
-    private var articleActionCreator: ArticleActionCreator? = null
-
     @Mock
     lateinit var articleStore: ArticleStore
+
+    private var articleActionCreator: ArticleActionCreator? = null
 
     override fun getSubscriberList(): List<Any> {
         return listOfNotNull(articleStore)
