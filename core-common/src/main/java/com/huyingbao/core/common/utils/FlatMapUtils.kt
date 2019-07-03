@@ -12,7 +12,6 @@ import retrofit2.Response
 /**
  * FlatMap转化工具类
  *
- *
  * Created by liujunfeng on 2019/1/1.
  */
 object FlatMapUtils {
@@ -49,5 +48,14 @@ class FlatMapResponse2Result<T>(private val response: Response<T>) : ObservableS
             //接口调用失败，向下传递异常
             observer.onError(Throwable(response.code().toString(), Throwable(response.errorBody().toString())))
         }
+    }
+}
+
+/**
+ * 将实体数据转化为Response
+ */
+class FlatMapResult2Response<T>(private val t: T) : ObservableSource<Response<T>> {
+    override fun subscribe(observer: Observer<in Response<T>?>) {
+        observer.onNext(Response.success(t))
     }
 }

@@ -63,16 +63,14 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 8bc430e0553b4564ebb1a359ca5d3d878a416a05")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 3f7c26182bf3e939f40d9ef7782860aeb893430f")
                         .url(url)
                 request = requestBuilder.build()
             }
             chain.proceed(request)
         }
-        //初始化OkHttp
+        //初始化OkHttp，单元测试中不添加拦截器PageInfoInterceptor()
         builder.addInterceptor(headInterceptor)
-        //单元测试中不添加该拦截器
-        //.addInterceptor(PageInfoInterceptor())
         //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(GithubContants.Url.BASE_API)

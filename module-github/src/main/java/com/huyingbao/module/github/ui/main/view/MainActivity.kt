@@ -138,7 +138,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
                     0 -> DynamicFragment()
-                    1 -> RecommendFragment()
+                    1 -> TrendFragment()
                     2 -> MineFragment()
                     else -> DynamicFragment()
                 }

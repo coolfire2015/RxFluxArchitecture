@@ -7,6 +7,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import com.huyingbao.module.github.GithubApplication
 import com.huyingbao.module.github.R
 import com.huyingbao.test.utils.FragmentScenarioRule
@@ -19,11 +20,12 @@ import org.robolectric.annotation.Config
 /**
  * Created by liujunfeng on 2019/3/28.
  */
+@LargeTest
 @RunWith(AndroidJUnit4::class)
 @Config(application = GithubApplication::class)
 class LoginFragmentTest {
     @get:Rule
-    var scenarioRule: FragmentScenarioRule<LoginActivity, LoginFragment> = FragmentScenarioRule(
+    var fragmentScenarioRule = FragmentScenarioRule(
             LoginActivity::class.java,
             LoginFragment::class.java,
             null,
@@ -32,28 +34,28 @@ class LoginFragmentTest {
 
     @Before
     fun setUp() {
-        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 
     @After
     fun tearDown() {
-        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test
     fun getLoginActionCreator() {
-        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.loginActionCreator) }
+        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.loginActionCreator) }
     }
 
     @Test
     fun getLayoutId() {
-        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
+        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
     }
 
     @Test
     fun afterCreate() {
-        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        scenarioRule.scenario.onFragment {
+        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        fragmentScenarioRule.scenario.onFragment {
             Espresso.onView(AllOf.allOf(ViewMatchers.isDisplayed(), ViewMatchers.withId(R.id.btn_login)))
                     .check(ViewAssertions.matches(withText(R.string.github_label_login)))
         }
@@ -61,8 +63,8 @@ class LoginFragmentTest {
 
     @Test
     fun onLogin() {
-        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        scenarioRule.scenario.onFragment {
+        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        fragmentScenarioRule.scenario.onFragment {
             Espresso.onView(ViewMatchers.withId(R.id.et_username))
                     .perform(ViewActions.clearText(), ViewActions.typeText("asdf"))
 

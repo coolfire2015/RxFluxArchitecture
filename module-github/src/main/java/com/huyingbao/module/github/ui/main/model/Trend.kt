@@ -5,7 +5,7 @@ package com.huyingbao.module.github.ui.main.model
  * Created by guoshuyu
  * Date: 2018-10-29
  */
-class TrendingRepo {
+class Trend {
     var fullName: String = ""
     var url: String = ""
     var description: String = ""

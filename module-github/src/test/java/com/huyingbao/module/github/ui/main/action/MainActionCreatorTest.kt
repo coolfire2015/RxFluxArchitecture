@@ -10,14 +10,13 @@ import org.junit.Test
 import org.mockito.Mockito
 
 class MainActionCreatorTest : BaseActionCreatorTest() {
-    private var mainActionCreator: MainActionCreator? = null
     private var mainStore: MainStore? = null
+    private var mainActionCreator: MainActionCreator? = null
 
     override fun getSubscriberList(): List<Any> {
         mainStore = Mockito.mock(MainStore::class.java)
         return listOfNotNull(mainStore)
     }
-
 
     @Before
     fun setUp() {
@@ -40,6 +39,6 @@ class MainActionCreatorTest : BaseActionCreatorTest() {
     @Test
     fun getTrendData() {
         mainActionCreator?.getTrendData("Kotlin", "monthly")
-        verify(rxDispatcher).postRxAction(any())
+        verify(mainStore)?.onGetTrend(any())
     }
 }

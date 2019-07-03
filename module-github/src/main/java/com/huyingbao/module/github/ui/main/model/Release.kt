@@ -6,6 +6,10 @@ import com.huyingbao.module.github.ui.login.model.User
 import java.util.*
 
 
+/**
+ * Created by guoshuyu
+ * Date: 2018-10-29
+ */
 class Release {
 
     var id: String? = null

@@ -4,8 +4,11 @@ import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.core.common.utils.FlatMapResponse2Result
+import com.huyingbao.core.common.utils.FlatMapResult2Response
 import com.huyingbao.module.github.app.GithubActionCreator
 import com.huyingbao.module.github.ui.issue.model.Issue
+import com.huyingbao.module.github.ui.main.model.Repos
+import com.huyingbao.module.github.ui.main.model.ReposConversion
 import com.huyingbao.module.github.ui.main.model.TrendConversion
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -42,8 +45,21 @@ class MainActionCreator @Inject constructor(
         val rxAction = newRxAction(MainAction.GET_TREND_DATA)
         val httpObservable = retrofit.create(MainApi::class.java)
                 .getTrendData(true, languageType, since)
+                //response转String
                 .flatMap { FlatMapResponse2Result(it) }
-                .map { TrendConversion.htmlToRepo(it) }
+                //String转ArrayList<Trend>转ArrayList<ReposUIModel>
+                .map {
+                    //String转ArrayList<Trend>
+                    val trendList = TrendConversion.htmlToRepo(it)
+                    //ArrayList<Trend>转ArrayList<ReposUIModel>
+                    val reposList = ArrayList<Repos>()
+                    for (reposUi in trendList) {
+                        reposList.add(ReposConversion.trendToReposUIModel(reposUi))
+                    }
+                    reposList
+                }
+                //List转Response
+                .flatMap { FlatMapResult2Response(it) }
         postHttpAction(rxAction, httpObservable)
     }
 }

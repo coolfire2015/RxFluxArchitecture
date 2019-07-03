@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_repos_user_img"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            tools:srcCompat="@drawable/ic_main" />
+
+        <TextView
+            android:id="@+id/tv_repos_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/iv_repos_user_img"
+            android:singleLine="true"
+            android:textColor="@color/common_text_primary"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            tools:text="RxFluxArchitecture" />
+
+        <TextView
+            android:id="@+id/tv_repos_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_repos_name"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/iv_repos_user_img"
+            android:singleLine="true"
+            android:textColor="@color/common_text_primary"
+            android:textSize="@dimen/sp_16"
+            tools:text="CoolFire2015" />
+
+        <TextView
+            android:id="@+id/tv_repos_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:textColor="@color/common_text_secondary"
+            android:textSize="@dimen/sp_14"
+            tools:text="kotlin" />
+
+        <TextView
+            android:id="@+id/tv_repos_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_repos_user_img"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:maxLines="3"
+            android:textColor="@color/common_text_secondary"
+            android:textSize="@dimen/sp_14"
+            tools:text="基于Flux架构的模块化框架" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_repos_des"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_repos_star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:maxLines="2"
+                android:textColor="@color/common_text_primary"
+                android:textSize="@dimen/sp_14"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/tv_repos_fork"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/common_text_primary"
+                android:textSize="@dimen/sp_14"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/tv_repos_watch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/common_text_primary"
+                android:textSize="@dimen/sp_14"
+                tools:text="100" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

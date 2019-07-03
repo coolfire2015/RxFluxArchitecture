@@ -12,7 +12,7 @@ val TAGS = hashMapOf(
 )
 
 object TrendConversion {
-    fun htmlToRepo(resultData: String): ArrayList<TrendingRepo> {
+    fun htmlToRepo(resultData: String): ArrayList<Trend> {
         mapOf<String, String>()
         var responseData = ""
         try {
@@ -20,12 +20,12 @@ object TrendConversion {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        val repos = ArrayList<TrendingRepo>()
+        val repos = ArrayList<Trend>()
         var splitWithH3 = responseData.split("<article")
         splitWithH3 = splitWithH3.subList(1, splitWithH3.size)
 
         for (i in 0 until splitWithH3.size) {
-            val repo = TrendingRepo()
+            val repo = Trend()
             val html = splitWithH3[i]
 
             parseRepoBaseInfo(repo, html)
@@ -55,7 +55,7 @@ object TrendConversion {
         return content.trim()
     }
 
-    private fun parseRepoBaseInfo(repo: TrendingRepo, htmlBaseInfo: String) {
+    private fun parseRepoBaseInfo(repo: Trend, htmlBaseInfo: String) {
         val urlIndex = htmlBaseInfo.indexOf("<a href=\"") + "<a href=\"".length
         val url = htmlBaseInfo.substring(urlIndex, htmlBaseInfo.indexOf("\">", urlIndex))
         repo.url = url
@@ -78,7 +78,7 @@ object TrendConversion {
         repo.description = description
     }
 
-    private fun parseRepoLabelWithTag(repo: TrendingRepo, noteContent: String, tag: Map<String, String>): String {
+    private fun parseRepoLabelWithTag(repo: Trend, noteContent: String, tag: Map<String, String>): String {
         val startFlag = if (TAGS["starCount"] == tag || TAGS["forkCount"] == tag) {
             tag["start"] + " href=\"/" + repo.fullName + tag["flag"]
         } else {
@@ -93,12 +93,12 @@ object TrendConversion {
         }
     }
 
-    private fun parseRepoLang(repo: TrendingRepo, metaNoteContent: String) {
+    private fun parseRepoLang(repo: Trend, metaNoteContent: String) {
         val content = parseContentWithNote(metaNoteContent, "programmingLanguage\">", "</span>")
         repo.language = content.trim()
     }
 
-    private fun parseRepoContributors(repo: TrendingRepo, htmlContributorsString: String) {
+    private fun parseRepoContributors(repo: Trend, htmlContributorsString: String) {
         val htmlContributors = parseContentWithNote(htmlContributorsString, "Built by", "</a>")
         val splitWitSemicolon = htmlContributors.split("\"")
         if (splitWitSemicolon.size < 2) {
@@ -114,8 +114,6 @@ object TrendConversion {
                 contributors.add(url)
             }
         }
-
         repo.contributors = contributors
     }
-
 }

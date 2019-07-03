@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
-import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.main.action.MainActionCreator
-import com.huyingbao.module.github.ui.main.adapter.EventAdapter
+import com.huyingbao.module.github.ui.main.adapter.ReposAdapter
 import com.huyingbao.module.github.ui.main.store.MainStore
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -18,23 +17,21 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 /**
- * 动态页面
+ * 推荐趋势页面
  *
  * Created by liujunfeng on 2019/6/10.
  */
-class DynamicFragment : BaseRxFragment<MainStore>() {
+class TrendFragment : BaseRxFragment<MainStore>() {
     @Inject
     lateinit var mainActionCreator: MainActionCreator
-    @Inject
-    lateinit var githubAppStore: GithubAppStore
 
-    private var eventAdapter: EventAdapter? = null
+    private var reposAdapter: ReposAdapter? = null
     private var rvContent: RecyclerView? = null
     private var rflContent: SmartRefreshLayout? = null
 
     companion object {
-        fun newInstance(): DynamicFragment {
-            return DynamicFragment()
+        fun newInstance(): TrendFragment {
+            return TrendFragment()
         }
     }
 
@@ -57,11 +54,11 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
         rvContent = view?.find(R.id.rv_content)
         rflContent?.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+                mainActionCreator.getTrendData("Kotlin", "monthly")
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
-                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+                mainActionCreator.getTrendData("Kotlin", "monthly")
             }
         })
         rflContent?.autoRefresh()
@@ -84,17 +81,17 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
      * 初始化adapter
      */
     private fun initAdapter() {
-        eventAdapter = EventAdapter(null)
-        rvContent?.adapter = eventAdapter
+        reposAdapter = ReposAdapter(null)
+        rvContent?.adapter = reposAdapter
     }
 
     /**
      * 显示数据
      */
     private fun showData() {
-        rxStore!!.eventListLiveData.observe(this, Observer { articleArrayList ->
+        rxStore!!.trendListLiveData.observe(this, Observer { articleArrayList ->
             if (articleArrayList != null) {
-                eventAdapter!!.setNewData(articleArrayList)
+                reposAdapter!!.setNewData(articleArrayList)
                 //关闭下拉
                 rflContent?.finishRefresh()
                 rflContent?.finishLoadMore()
