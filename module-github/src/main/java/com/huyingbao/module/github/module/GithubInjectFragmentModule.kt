@@ -7,6 +7,7 @@ import com.huyingbao.module.github.ui.login.view.StartFragment
 import com.huyingbao.module.github.ui.main.view.DynamicFragment
 import com.huyingbao.module.github.ui.main.view.MineFragment
 import com.huyingbao.module.github.ui.main.view.TrendFragment
+import com.huyingbao.module.github.ui.star.view.StarFragment
 import com.huyingbao.module.github.ui.user.view.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -41,4 +42,8 @@ abstract class GithubInjectFragmentModule {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun injectUserFragment(): UserFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun injectStarFragment(): StarFragment
 }

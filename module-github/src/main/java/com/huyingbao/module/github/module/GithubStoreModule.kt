@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.huyingbao.core.arch.store.RxStoreKey
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import com.huyingbao.module.github.ui.main.store.MainStore
+import com.huyingbao.module.github.ui.star.store.StarStore
 import com.huyingbao.module.github.ui.user.store.UserStore
 import dagger.Binds
 import dagger.Module
@@ -34,4 +35,10 @@ abstract class GithubStoreModule {
     @IntoMap
     @RxStoreKey(UserStore::class)
     abstract fun bindUserStore(userStore: UserStore): ViewModel
+
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(StarStore::class)
+    abstract fun bindStarStore(starStore: StarStore): ViewModel
 }

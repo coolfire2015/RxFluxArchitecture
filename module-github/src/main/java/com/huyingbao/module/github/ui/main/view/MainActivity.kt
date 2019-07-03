@@ -45,10 +45,10 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        initDrawerLayout()
-        initNavigationView()
-        initBottomNavigationView()
-        initViewPager()
+//        initDrawerLayout()
+//        initNavigationView()
+//        initBottomNavigationView()
+//        initViewPager()
     }
 
     /**
