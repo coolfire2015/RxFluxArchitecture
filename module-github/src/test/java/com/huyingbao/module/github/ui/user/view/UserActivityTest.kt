@@ -5,10 +5,8 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.huyingbao.module.github.GithubApplication
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import com.huyingbao.module.github.R
+import org.junit.*
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -31,9 +29,9 @@ class UserActivityTest {
 
     @Test
     fun afterCreate() {
-        activityScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
-//        activityScenarioRule.scenario.onActivity {
-//            Assert.assertNotNull(it.supportFragmentManager.findFragmentById(R.id.fl_container))
-//        }
+        activityScenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        activityScenarioRule.scenario.onActivity {
+            Assert.assertNotNull(it.supportFragmentManager.findFragmentById(R.id.fl_container))
+        }
     }
 }

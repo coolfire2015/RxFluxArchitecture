@@ -10,12 +10,12 @@ import org.junit.runners.model.Statement
  * [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]
  * 自动注册订阅和取消订阅
  */
-class BaseActionCreatorRule : MethodRule {
+class BaseSubscriberRule : MethodRule {
     override fun apply(base: Statement?, method: FrameworkMethod?, target: Any?): Statement {
         return object : Statement() {
             @Throws(Throwable::class)
             override fun evaluate() {
-                if (target is BaseActionCreatorTest) {
+                if (target is BaseSubscriberTest) {
                     for (subscriber in target.getSubscriberList()) {
                         if (subscriber is RxStore) {
                             target.rxDispatcher.subscribeRxStore(subscriber)
@@ -25,7 +25,7 @@ class BaseActionCreatorRule : MethodRule {
                     }
                 }
                 base?.evaluate()
-                if (target is BaseActionCreatorTest) {
+                if (target is BaseSubscriberTest) {
                     for (subscriber in target.getSubscriberList()) {
                         if (subscriber is RxStore) {
                             target.rxDispatcher.unsubscribeRxStore(subscriber)

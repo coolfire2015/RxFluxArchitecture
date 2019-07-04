@@ -1,15 +1,16 @@
 package com.huyingbao.module.github.ui.main.action
 
-import com.huyingbao.module.github.module.BaseActionCreatorTest
+import com.huyingbao.module.github.module.BaseSubscriberTest
 import com.huyingbao.module.github.module.MockUtils
 import com.huyingbao.module.github.ui.main.store.MainStore
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mockito
 
-class MainActionCreatorTest : BaseActionCreatorTest() {
+class MainActionCreatorTest : BaseSubscriberTest() {
     private var mainStore: MainStore? = null
     private var mainActionCreator: MainActionCreator? = null
 
@@ -23,6 +24,7 @@ class MainActionCreatorTest : BaseActionCreatorTest() {
         mainActionCreator = MainActionCreator(rxDispatcher, rxActionManager, MockUtils.component!!.retrofit)
     }
 
+    @Ignore
     @Test
     fun feedback() {
         mainActionCreator?.feedback("test")
