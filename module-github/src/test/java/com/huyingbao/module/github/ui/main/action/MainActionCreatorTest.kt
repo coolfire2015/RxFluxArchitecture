@@ -24,7 +24,7 @@ class MainActionCreatorTest : BaseSubscriberTest() {
         mainActionCreator = MainActionCreator(rxDispatcher, rxActionManager, MockUtils.component!!.retrofit)
     }
 
-    @Ignore
+    @Ignore("不需要向仓库中提交issue")
     @Test
     fun feedback() {
         mainActionCreator?.feedback("test")

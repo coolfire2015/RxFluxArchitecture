@@ -35,7 +35,7 @@ class LoginActionCreatorTest : BaseSubscriberTest() {
         loginActionCreator = LoginActionCreator(rxDispatcher, rxActionManager, MockUtils.component!!.retrofit)
     }
 
-    @Ignore
+    @Ignore("此方法会修改Auth Token，需先获取Log中的Token，放到MockModule中")
     @Test
     fun login() {
         //调用错误登录方法
