@@ -56,7 +56,7 @@ class MockModule {
                 //Header中添加Authorization token数据
                 val url = request.url.toString()
                 val requestBuilder = request.newBuilder()
-                        .addHeader(CommonContants.Header.AUTHORIZATION, "token b2a59eb04f677115dec99a7b252c42e7da6b91ff")
+                        .addHeader(CommonContants.Header.AUTHORIZATION, "token 8006a8ae5ed083f2aa8eee59e478e09032bd1ece")
                         .url(url)
                 request = requestBuilder.build()
             }
