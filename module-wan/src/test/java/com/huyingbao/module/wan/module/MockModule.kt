@@ -20,7 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
- * 依赖注入器,为测试代码提供方便测试的全局对象
+ * 依赖注入器,为测试代码提供方便测试的全局对象。
+ *
+ * Created by liujunfeng on 2019/7/1.
  */
 @Singleton
 @Component(modules = [MockModule::class])
@@ -41,16 +43,26 @@ interface MockComponent {
  */
 @Module(includes = [CommonModule::class, WanAppModule::class])
 class MockModule {
+    /**
+     * 返回实际创建的[ArticleStore]实例对象，但是DaggerMock会返回虚拟的Mock对象，参见[mockDaggerRule]方法。
+     * 如果[MockComponent]不定义该对象，该方法不会被调用。
+     *
+     * @param rxStoreFactory 来自[CommonModule]，[ArticleStore]对象来自[WanAppModule]
+     */
     @Singleton
     @Provides
     fun provideArticleStore(rxStoreFactory: ViewModelProvider.Factory): ArticleStore {
         return rxStoreFactory.create(ArticleStore::class.java)
     }
 
+    /**
+     * 初始化Retrofit
+     *
+     * @param builder 来自[CommonModule]
+     */
     @Singleton
     @Provides
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
-        //初始化Retrofit
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(WanContants.Base.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
@@ -68,8 +80,6 @@ class MockModule {
 
     /**
      * 使用RESTMockServer,为需要测试的接口提供mock数据
-     *
-     * @return mock的url
      */
     private fun initMockServer(): String {
         //开启RestMockServer
