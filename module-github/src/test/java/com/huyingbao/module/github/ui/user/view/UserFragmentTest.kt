@@ -15,7 +15,7 @@ import org.robolectric.annotation.Config
 @Config(application = GithubApplication::class)
 class UserFragmentTest {
     @get:Rule
-    var fragmentScenarioRule = FragmentScenarioRule(
+    var scenarioRule = FragmentScenarioRule(
             UserActivity::class.java,
             UserFragment::class.java,
             null,
@@ -25,33 +25,25 @@ class UserFragmentTest {
 
     @Before
     fun setUp() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 
     @After
     fun tearDown() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test
     fun getUserActionCreator() {
-        fragmentScenarioRule.scenario.onFragment {
+        scenarioRule.scenario.onFragment {
             Assert.assertNotNull(it.userActionCreator)
         }
     }
 
     @Test
     fun getGithubAppStore() {
-        fragmentScenarioRule.scenario.onFragment {
+        scenarioRule.scenario.onFragment {
             Assert.assertNotNull(it.githubAppStore)
         }
-    }
-
-    @Test
-    fun getLayoutId() {
-    }
-
-    @Test
-    fun afterCreate() {
     }
 }

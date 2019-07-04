@@ -8,7 +8,7 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 
 /**
- * 所有ActionCreator测试类的父类
+ * 所有Subscriber测试类的父类
  *
  * Created by liujunfeng on 2019/4/3.
  */

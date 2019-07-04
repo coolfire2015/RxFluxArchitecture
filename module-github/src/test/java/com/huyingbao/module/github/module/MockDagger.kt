@@ -3,7 +3,9 @@ package com.huyingbao.module.github.module
 import it.cosenonjaviste.daggermock.DaggerMock
 
 /**
- * 全局静态方法,提供依赖注入器实例对象
+ * 全局静态方法,提供依赖注入器实例对象。
+ *
+ * Created by liujunfeng on 2019/7/1.
  */
 object MockUtils {
     var component: MockComponent? = null

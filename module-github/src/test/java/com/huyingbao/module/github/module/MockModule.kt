@@ -1,8 +1,6 @@
 package com.huyingbao.module.github.module
 
 import android.text.TextUtils
-import com.huyingbao.core.arch.action.RxActionManager
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.github.BuildConfig
@@ -23,7 +21,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 /**
- * 依赖注入器,为测试代码提供方便测试的全局对象
+ * 依赖注入器,为测试代码提供方便测试的全局对象。
+ *
+ * Created by liujunfeng on 2019/7/1.
  */
 @Singleton
 @Component(modules = [MockModule::class])
@@ -40,18 +40,11 @@ interface MockComponent {
  */
 @Module(includes = [CommonModule::class])
 class MockModule {
-    @Singleton
-    @Provides
-    fun provideRxActionManager(): RxActionManager {
-        return RxActionManager()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRxDispatcher(): RxDispatcher {
-        return RxDispatcher()
-    }
-
+    /**
+     * 初始化Retrofit
+     *
+     * @param builder 来自[CommonModule]
+     */
     @Singleton
     @Provides
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
@@ -90,8 +83,6 @@ class MockModule {
 
     /**
      * 使用RESTMockServer,为需要测试的接口提供mock数据
-     *
-     * @return mock的url
      */
     private fun initMockServer(): String {
         //开启RestMockServer

@@ -16,7 +16,7 @@ import org.robolectric.annotation.Config
 @Config(application = GithubApplication::class)
 class TrendFragmentTest {
     @get:Rule
-    var fragmentScenarioRule = FragmentScenarioRule(
+    var scenarioRule = FragmentScenarioRule(
             LoginActivity::class.java,
             TrendFragment::class.java,
             null,
@@ -25,25 +25,21 @@ class TrendFragmentTest {
 
     @Before
     fun setUp() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 
     @After
     fun tearDown() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test
     fun getMainActionCreator() {
-        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.mainActionCreator) }
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.mainActionCreator) }
     }
 
     @Test
     fun getLayoutId() {
-        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
-    }
-
-    @Test
-    fun afterCreate() {
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
     }
 }

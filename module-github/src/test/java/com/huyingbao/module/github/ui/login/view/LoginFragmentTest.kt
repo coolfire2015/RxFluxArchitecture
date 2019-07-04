@@ -29,16 +29,16 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(application = GithubApplication::class)
 class LoginFragmentTest : BaseSubscriberTest() {
-    private var loginStore: LoginStore? = null
-    private var loginActivity: LoginActivity? = null
-
     @get:Rule
-    var fragmentScenarioRule = FragmentScenarioRule(
+    var scenarioRule = FragmentScenarioRule(
             LoginActivity::class.java,
             LoginFragment::class.java,
             null,
             null,
             R.id.fl_container)
+
+    private var loginStore: LoginStore? = null
+    private var loginActivity: LoginActivity? = null
 
     override fun getSubscriberList(): List<Any> {
         loginStore = Mockito.mock(LoginStore::class.java)
@@ -48,28 +48,28 @@ class LoginFragmentTest : BaseSubscriberTest() {
 
     @Before
     fun setUp() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 
     @After
     fun tearDown() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test
     fun getLoginActionCreator() {
-        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.loginActionCreator) }
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.loginActionCreator) }
     }
 
     @Test
     fun getLayoutId() {
-        fragmentScenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
+        scenarioRule.scenario.onFragment { Assert.assertNotNull(it.getLayoutId()) }
     }
 
     @Test
     fun afterCreate() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        fragmentScenarioRule.scenario.onFragment {
+        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        scenarioRule.scenario.onFragment {
             Espresso.onView(AllOf.allOf(ViewMatchers.isDisplayed(), ViewMatchers.withId(R.id.btn_login)))
                     .check(ViewAssertions.matches(withText(R.string.github_label_login)))
         }
@@ -77,8 +77,8 @@ class LoginFragmentTest : BaseSubscriberTest() {
 
     @Test
     fun onLogin() {
-        fragmentScenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
-        fragmentScenarioRule.scenario.onFragment {
+        scenarioRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        scenarioRule.scenario.onFragment {
             //输入用户名
             Espresso.onView(ViewMatchers.withId(R.id.et_username))
                     .perform(ViewActions.clearText(), ViewActions.typeText("coolfire2015"))

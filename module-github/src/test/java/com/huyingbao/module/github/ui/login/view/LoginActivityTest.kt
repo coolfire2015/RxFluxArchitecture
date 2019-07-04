@@ -18,25 +18,25 @@ import org.robolectric.annotation.Config
 @Config(application = GithubApplication::class)
 class LoginActivityTest {
     @get:Rule
-    var activityScenarioRule = ActivityScenarioRule(LoginActivity::class.java)
+    var scenarioRule = ActivityScenarioRule(LoginActivity::class.java)
 
     @Before
     fun setUp() {
-        activityScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
     }
 
     @After
     fun tearDown() {
-        activityScenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
+        scenarioRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test
     fun getGithubAppStore() {
-        activityScenarioRule.scenario.onActivity { Assert.assertNotNull(it.githubAppStore) }
+        scenarioRule.scenario.onActivity { Assert.assertNotNull(it.githubAppStore) }
     }
 
     @Test
     fun getLayoutId() {
-        activityScenarioRule.scenario.onActivity { Assert.assertNotNull(it.getLayoutId()) }
+        scenarioRule.scenario.onActivity { Assert.assertNotNull(it.getLayoutId()) }
     }
 }
