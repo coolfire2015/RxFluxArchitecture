@@ -35,14 +35,20 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
         bannerLiveData.value = null
     }
 
+    /**
+     * 接收BannerList数据
+     */
     @Subscribe(tags = [ArticleAction.GET_BANNER_LIST])
-    fun setBannerLiveData(rxAction: RxAction) {
+    fun onGetBannerLiveData(rxAction: RxAction) {
         val bannerResponse = rxAction.getResponse<WanResponse<ArrayList<Banner>>>()
         bannerLiveData.value = bannerResponse!!.data
     }
 
+    /**
+     * 接收ArticleList数据
+     */
     @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST])
-    fun setArticleLiveData(rxAction: RxAction) {
+    fun onGetArticleLiveData(rxAction: RxAction) {
         val articleResponse = rxAction.getResponse<WanResponse<Page<Article>>>()
         if (articleLiveData.value == null) {
             articleLiveData.setValue(articleResponse!!.data!!.datas)

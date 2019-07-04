@@ -8,11 +8,11 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 
 /**
- * 所有ActionCreator测试类的父类
+ * 所有Subscriber测试类的父类
  *
  * Created by liujunfeng on 2019/4/3.
  */
-abstract class BaseActionCreatorTest {
+abstract class BaseSubscriberTest {
     /**
      * 初始化DaggerMock
      */
@@ -28,7 +28,7 @@ abstract class BaseActionCreatorTest {
      * 自动注册订阅和取消订阅
      */
     @get:Rule
-    var actionCreatorRule = BaseActionCreatorRule()
+    var actionCreatorRule = BaseSubscriberRule()
     /**
      * RxJava调度器异步转为同步
      */
