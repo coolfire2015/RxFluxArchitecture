@@ -1,11 +1,19 @@
 package com.huyingbao.module.github.ui.main.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /**
  * 仓库相关UI类型
  * Created by guoshuyu
  * Date: 2018-10-29
  */
+@Entity(tableName = "repos")
 class Repos {
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val plantId: String = ""
     var ownerName: String = ""
     var ownerPic: String = ""
     var repositoryName: String = "-"
