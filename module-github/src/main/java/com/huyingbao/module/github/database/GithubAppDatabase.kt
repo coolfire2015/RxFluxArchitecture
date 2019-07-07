@@ -27,6 +27,6 @@ import com.huyingbao.module.github.ui.main.model.Repos
  *
  *包含一个具有0个参数的抽象方法，并返回用@Dao注释的类。
  */
-@Database(entities = [Repos::class], version = 1, exportSchema = false)
+@Database(entities = [Repos::class], version = 2, exportSchema = false)
 abstract class GithubAppDatabase : RoomDatabase() {
     abstract fun plantDao(): ReposDao}

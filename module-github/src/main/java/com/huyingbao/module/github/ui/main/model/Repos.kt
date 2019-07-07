@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "repos")
 class Repos {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate=true)
     @ColumnInfo(name = "id")
     var reposId: Int = 0
     var ownerName: String = ""
