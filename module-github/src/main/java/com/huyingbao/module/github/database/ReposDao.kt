@@ -24,16 +24,16 @@ import androidx.room.Query
 import com.huyingbao.module.github.ui.main.model.Repos
 
 /**
- * The Data Access Object for the Plant class.
+ * 包含用于访问数据库的方法。
  */
 @Dao
 interface ReposDao {
-    @Query("SELECT * FROM repos ORDER BY ownerName")
+    @Query("SELECT * FROM repos")
     fun getPlants(): LiveData<List<Repos>>
 
 
-    @Query("SELECT * FROM repos WHERE id = :plantId")
-    fun getPlant(plantId: String): LiveData<Repos>
+    @Query("SELECT * FROM repos WHERE id = :reposId")
+    fun getPlant(reposId: String): LiveData<Repos>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(plants: List<Repos>)

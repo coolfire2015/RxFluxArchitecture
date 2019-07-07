@@ -1,13 +1,16 @@
 package com.huyingbao.module.github.ui.main.store
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
+import com.huyingbao.module.github.database.GithubAppDatabase
 import com.huyingbao.module.github.ui.main.action.MainAction
 import com.huyingbao.module.github.ui.main.model.Event
 import com.huyingbao.module.github.ui.main.model.Repos
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,7 +20,7 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/6/10.
  */
 @Singleton
-class MainStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
+class MainStore @Inject constructor(rxDispatcher: RxDispatcher,private var githubAppDatabase: GithubAppDatabase) : RxActivityStore(rxDispatcher) {
     /**
      * 动态事件数据
      */
@@ -25,7 +28,7 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityStor
     /**
      * 推荐趋势仓库数据
      */
-    val trendListLiveData = MutableLiveData<ArrayList<Repos>>()
+    val trendListLiveData = githubAppDatabase.plantDao().getPlants()
 
     override fun onCleared() {
         super.onCleared()
@@ -37,8 +40,11 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityStor
         eventListLiveData.value = rxAction.getResponse()
     }
 
-    @Subscribe(tags = [MainAction.GET_TREND_DATA])
+    @Subscribe(tags = [MainAction.GET_TREND_DATA], threadMode = ThreadMode.POSTING)
     fun onGetTrend(rxAction: RxAction) {
-        trendListLiveData.value = rxAction.getResponse()
+        val plants = rxAction.getResponse<List<Repos>>()
+        if (plants != null) {
+            githubAppDatabase.plantDao().insertAll(plants)
+        }
     }
 }

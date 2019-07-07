@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
 class Repos {
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val plantId: String = ""
+    var reposId: Int = 0
     var ownerName: String = ""
     var ownerPic: String = ""
     var repositoryName: String = "-"

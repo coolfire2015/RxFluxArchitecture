@@ -1,10 +1,13 @@
 package com.huyingbao.module.github.module
 
+import android.app.Application
 import android.text.TextUtils
+import androidx.room.Room
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.app.GithubContants
+import com.huyingbao.module.github.database.GithubAppDatabase
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -56,5 +59,15 @@ class GithubAppModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
         return retrofitBuilder.build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDataBase(application: Application): GithubAppDatabase {
+        val databaseBuilder = Room.databaseBuilder(
+                application,
+                GithubAppDatabase::class.java,
+                GithubContants.Key.DATABASE_NAME)
+        return databaseBuilder.build()
     }
 }

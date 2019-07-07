@@ -10,4 +10,8 @@ class GithubContants {
     object Url {
         const val BASE_API = "https://api.github.com/"
     }
+
+    object Key {
+        const val DATABASE_NAME = "sunflower-db"
+    }
 }

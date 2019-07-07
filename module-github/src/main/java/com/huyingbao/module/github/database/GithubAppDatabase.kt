@@ -16,53 +16,17 @@
 
 package com.huyingbao.module.github.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import com.huyingbao.module.github.database.GithubAppDatabase.Key.DATABASE_NAME
 import com.huyingbao.module.github.ui.main.model.Repos
 
 /**
- * The Room database for this app
+ *GithubAppDatabase是一个继承[RoomDatabase]的抽象类。
+ *
+ *在[Database]注解中包含与数据库相关联的实体列表。
+ *
+ *包含一个具有0个参数的抽象方法，并返回用@Dao注释的类。
  */
 @Database(entities = [Repos::class], version = 1, exportSchema = false)
 abstract class GithubAppDatabase : RoomDatabase() {
-    abstract fun plantDao(): ReposDao
-
-    object Key {
-        const val DATABASE_NAME = "sunflower-db"
-        const val PLANT_DATA_FILENAME = "plants.json"
-    }
-
-    companion object {
-
-        // For Singleton instantiation
-        @Volatile
-        private var instance: GithubAppDatabase? = null
-
-        fun getInstance(context: Context): GithubAppDatabase {
-            return instance ?: synchronized(this) {
-                instance
-                        ?: buildDatabase(context).also { instance = it }
-            }
-        }
-
-        // Create and pre-populate the database. See this article for more details:
-        // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
-        private fun buildDatabase(context: Context): GithubAppDatabase {
-            return Room.databaseBuilder(context, GithubAppDatabase::class.java, DATABASE_NAME)
-                    .addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    })
-                    .build()
-        }
-    }
-}
+    abstract fun plantDao(): ReposDao}

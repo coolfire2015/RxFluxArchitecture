@@ -78,7 +78,6 @@ android {
     }
     //注解编译参数设置
     kapt {
-        generateStubs = true
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
             arg('eventBusIndex', 'com.huyingbao.module.github.GithubEventBusIndex')
