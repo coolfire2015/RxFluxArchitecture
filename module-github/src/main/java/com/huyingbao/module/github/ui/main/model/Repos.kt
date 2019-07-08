@@ -5,15 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * 仓库相关UI类型
- * Created by guoshuyu
+ * 默认情况下，Room使用类名作为数据库表名，SQLite中的表名不区分大小写。
  * Date: 2018-10-29
  */
-@Entity(tableName = "repos")
+@Entity(tableName = "repos",
+        primaryKeys = ["repositoryName", "ownerName"])
 class Repos {
-    @PrimaryKey(autoGenerate=true)
-    @ColumnInfo(name = "id")
-    var reposId: Int = 0
     var ownerName: String = ""
     var ownerPic: String = ""
     var repositoryName: String = "-"

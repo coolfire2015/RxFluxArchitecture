@@ -12,6 +12,6 @@ class GithubContants {
     }
 
     object Key {
-        const val DATABASE_NAME = "sunflower-db"
+        const val DATABASE_NAME = "rx-flux-arch-db"
     }
 }

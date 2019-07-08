@@ -3,6 +3,7 @@ package com.huyingbao.module.github.module
 import android.app.Application
 import android.text.TextUtils
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.utils.PageInfoInterceptor
 import com.huyingbao.core.utils.LocalStorageUtils
@@ -25,6 +26,9 @@ import javax.inject.Singleton
  */
 @Module(includes = [GithubInjectActivityModule::class, GithubStoreModule::class])
 class GithubAppModule {
+    /**
+     * 提供[Retrofit]单例对象
+     */
     @Singleton
     @Provides
     fun provideRetrofit(localStorageUtils: LocalStorageUtils, builder: OkHttpClient.Builder): Retrofit {
@@ -61,6 +65,9 @@ class GithubAppModule {
         return retrofitBuilder.build()
     }
 
+    /**
+     * 提供[RoomDatabase]单例对象
+     */
     @Singleton
     @Provides
     fun provideDataBase(application: Application): GithubAppDatabase {
@@ -68,6 +75,8 @@ class GithubAppModule {
                 application,
                 GithubAppDatabase::class.java,
                 GithubContants.Key.DATABASE_NAME)
+                //允许Room破坏性地重新创建数据库表。
+                .fallbackToDestructiveMigration()
         return databaseBuilder.build()
     }
 }

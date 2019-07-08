@@ -1,6 +1,5 @@
 package com.huyingbao.module.github.ui.main.store
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
@@ -20,7 +19,10 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/6/10.
  */
 @Singleton
-class MainStore @Inject constructor(rxDispatcher: RxDispatcher,private var githubAppDatabase: GithubAppDatabase) : RxActivityStore(rxDispatcher) {
+class MainStore @Inject constructor(
+        rxDispatcher: RxDispatcher,
+        private var githubAppDatabase: GithubAppDatabase
+) : RxActivityStore(rxDispatcher) {
     /**
      * 动态事件数据
      */
@@ -28,7 +30,7 @@ class MainStore @Inject constructor(rxDispatcher: RxDispatcher,private var githu
     /**
      * 推荐趋势仓库数据
      */
-    val trendListLiveData = githubAppDatabase.plantDao().getPlants()
+    val trendListLiveData = githubAppDatabase.plantDao().getReposListLiveData()
 
     override fun onCleared() {
         super.onCleared()
