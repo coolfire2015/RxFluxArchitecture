@@ -33,7 +33,6 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.github_label_login, false)
         initView()
     }
 

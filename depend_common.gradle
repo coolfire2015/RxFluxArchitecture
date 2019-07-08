@@ -108,6 +108,8 @@ dependencies {
     implementation "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
     //Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$ANKO"
+    //Lottie
+    implementation "com.airbnb.android:lottie:${LOTTIE}"
     //SmartRefreshLayout
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
     //RecyclerView适配器

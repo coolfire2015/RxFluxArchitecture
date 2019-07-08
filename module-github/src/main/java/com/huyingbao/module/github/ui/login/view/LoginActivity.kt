@@ -1,7 +1,9 @@
 package com.huyingbao.module.github.ui.login.view
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -35,6 +37,15 @@ class LoginActivity : BaseRxActivity<LoginStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
+        //全屏
+        supportActionBar?.hide()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or// 应用的主体内容占用系统status bar的空间
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or// 应用的主体内容占用系统status bar的空间
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or // 应用的主体内容占navigation bar的空间,同样占用status bar空间
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or// 隐藏navigation bar
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY// 沉浸式响应
+        // status bar颜色设置为透明
+        window.statusBarColor = Color.TRANSPARENT
         ARouter.getInstance().inject(this)
         if (isToLogin) {
             //登录认证失败，ARouter导航过来
