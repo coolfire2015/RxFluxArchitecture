@@ -11,6 +11,7 @@ import com.huyingbao.core.common.widget.CommonInfoCardView
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.databinding.GithubFragmentUserBinding
+import com.huyingbao.module.github.ui.start.action.StartActionCreator
 import com.huyingbao.module.github.ui.user.action.UserActionCreator
 import com.huyingbao.module.github.ui.user.model.UserInfoRequest
 import com.huyingbao.module.github.ui.user.store.UserStore
@@ -25,6 +26,8 @@ import javax.inject.Inject
 class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() {
     @Inject
     lateinit var userActionCreator: UserActionCreator
+    @Inject
+    lateinit var startActionCreator: StartActionCreator
     @Inject
     lateinit var githubAppStore: GithubAppStore
 
@@ -41,6 +44,7 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.github_label_user, true)
         initView()
+        initRefreshView()
     }
 
     /**
@@ -49,6 +53,7 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
     private fun initView() {
         githubAppStore.userLiveData.observe(this, Observer {
             binding?.userInfo = it
+            rfl_content?.finishRefresh()
         })
         cv_info_bio.setOnClickListener { showUpdateDialog(it, onUpdateContent(it)) }
         cv_info_blog.setOnClickListener { showUpdateDialog(it, onUpdateContent(it)) }
@@ -56,6 +61,12 @@ class UserFragment : BaseRxBindFragment<UserStore, GithubFragmentUserBinding>() 
         cv_info_email.setOnClickListener { showUpdateDialog(it, onUpdateContent(it)) }
         cv_info_name.setOnClickListener { showUpdateDialog(it, onUpdateContent(it)) }
         cv_info_location.setOnClickListener { showUpdateDialog(it, onUpdateContent(it)) }
+    }
+
+    private fun initRefreshView() {
+        rfl_content.setOnRefreshListener {
+            startActionCreator.getLoginUserInfo()
+        }
     }
 
     /**

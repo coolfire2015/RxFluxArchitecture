@@ -39,9 +39,9 @@ class StartFragment : BaseRxFragment<LoginStore>() {
     override fun afterCreate(savedInstanceState: Bundle?) {
         //获取当前登录的员工洗洗
         startActionCreator.getLoginUserInfo()
-        //延迟800mm，跳转
+        //延迟2000mm，跳转
         Observable
-                .timer(800, TimeUnit.MILLISECONDS)
+                .timer(2000, TimeUnit.MILLISECONDS)
                 .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
                 .subscribe {
                     if (TextUtils.isEmpty(githubAppStore.getAccessToken())) {
