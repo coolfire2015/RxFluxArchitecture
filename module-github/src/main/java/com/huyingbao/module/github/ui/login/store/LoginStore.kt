@@ -31,25 +31,4 @@ class LoginStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivitySto
         localStorageUtils.setValue(CommonContants.Key.PASSWORD, password)
         postChange(RxChange.newInstance(rxAction.tag))
     }
-
-    /**
-     * 获取保存的Token
-     */
-    fun getAccessToken(): String? {
-        return localStorageUtils.getValue(CommonContants.Key.ACCESS_TOKEN, "")
-    }
-
-    /**
-     * 获取保存的用户名
-     */
-    fun getUserName(): String? {
-        return localStorageUtils.getValue(CommonContants.Key.USER_NAME, "")
-    }
-
-    /**
-     * 获取保存的密码
-     */
-    fun getPassword(): String? {
-        return localStorageUtils.getValue(CommonContants.Key.PASSWORD, "")
-    }
 }

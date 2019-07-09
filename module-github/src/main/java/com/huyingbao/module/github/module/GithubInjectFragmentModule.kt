@@ -3,11 +3,11 @@ package com.huyingbao.module.github.module
 
 import com.huyingbao.core.arch.scope.FragmentScope
 import com.huyingbao.module.github.ui.login.view.LoginFragment
-import com.huyingbao.module.github.ui.login.view.StartFragment
 import com.huyingbao.module.github.ui.main.view.DynamicFragment
 import com.huyingbao.module.github.ui.main.view.MineFragment
 import com.huyingbao.module.github.ui.main.view.TrendFragment
 import com.huyingbao.module.github.ui.star.view.StarFragment
+import com.huyingbao.module.github.ui.start.view.StartFragment
 import com.huyingbao.module.github.ui.user.view.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -21,11 +21,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class GithubInjectFragmentModule {
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun injectLoginFragment(): LoginFragment
+    abstract fun injectStartFragment(): StartFragment
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun injectStartFragment(): StartFragment
+    abstract fun injectLoginFragment(): LoginFragment
 
     @FragmentScope
     @ContributesAndroidInjector

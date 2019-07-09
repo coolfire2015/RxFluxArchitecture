@@ -5,6 +5,7 @@ import com.huyingbao.core.arch.store.RxStoreKey
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import com.huyingbao.module.github.ui.main.store.MainStore
 import com.huyingbao.module.github.ui.star.store.StarStore
+import com.huyingbao.module.github.ui.start.store.StartStore
 import com.huyingbao.module.github.ui.user.store.UserStore
 import dagger.Binds
 import dagger.Module
@@ -18,6 +19,12 @@ import javax.inject.Singleton
  */
 @Module
 abstract class GithubStoreModule {
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(StartStore::class)
+    abstract fun bindStartStore(startStore: StartStore): ViewModel
+
     @Singleton
     @Binds
     @IntoMap

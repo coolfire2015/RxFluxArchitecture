@@ -1,8 +1,6 @@
 package com.huyingbao.module.github.ui.main.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 /**
  * 默认情况下，Room使用类名作为数据库表名，SQLite中的表名不区分大小写。

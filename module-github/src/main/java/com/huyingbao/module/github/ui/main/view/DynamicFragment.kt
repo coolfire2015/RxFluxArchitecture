@@ -57,11 +57,11 @@ class DynamicFragment : BaseRxFragment<MainStore>() {
         rvContent = view?.find(R.id.rv_content)
         rflContent?.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+                mainActionCreator.getNewsEvent(githubAppStore.getUserName() ?: "", 1)
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
-                mainActionCreator.getNewsEvent(githubAppStore.userLiveData.value?.login ?: "", 1)
+                mainActionCreator.getNewsEvent(githubAppStore.getUserName() ?: "", 1)
             }
         })
         rflContent?.autoRefresh()

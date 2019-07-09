@@ -2,14 +2,12 @@ package com.huyingbao.module.github.ui.login.view
 
 import android.os.Bundle
 import android.text.TextUtils
-import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.module.github.R
-import com.huyingbao.module.github.ui.login.action.LoginAction
+import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.login.action.LoginActionCreator
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import kotlinx.android.synthetic.main.github_fragment_login.*
-import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -21,6 +19,8 @@ import javax.inject.Inject
 class LoginFragment : BaseRxFragment<LoginStore>() {
     @Inject
     lateinit var loginActionCreator: LoginActionCreator
+    @Inject
+    lateinit var githubAppStore: GithubAppStore
 
     companion object {
         fun newInstance(): LoginFragment {
@@ -33,15 +33,8 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        initView()
-    }
-
-    /**
-     * 初始化View
-     */
-    private fun initView() {
-        et_username.setText(rxStore?.getUserName())
-        et_password.setText(rxStore?.getPassword())
+        et_username.setText(githubAppStore.getUserName())
+        et_password.setText(githubAppStore.getPassword())
         btn_login.setOnClickListener { clickLogin() }
     }
 
@@ -56,13 +49,5 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
         } else {
             loginActionCreator.login(username, password)
         }
-    }
-
-    /**
-     * 登录成功，获取当前登录用户信息
-     */
-    @Subscribe(tags = [LoginAction.LOGIN], sticky = true)
-    fun onLogin(rxAction: RxAction) {
-        loginActionCreator.getLoginUserInfo()
     }
 }

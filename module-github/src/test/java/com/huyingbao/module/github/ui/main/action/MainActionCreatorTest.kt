@@ -1,5 +1,6 @@
 package com.huyingbao.module.github.ui.main.action
 
+import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.module.BaseSubscriberTest
 import com.huyingbao.module.github.module.MockUtils
 import com.huyingbao.module.github.ui.main.store.MainStore
@@ -12,10 +13,12 @@ import org.mockito.Mockito
 
 class MainActionCreatorTest : BaseSubscriberTest() {
     private var mainStore: MainStore? = null
+    private var githubAppStore: GithubAppStore? = null
     private var mainActionCreator: MainActionCreator? = null
 
     override fun getSubscriberList(): List<Any> {
         mainStore = Mockito.mock(MainStore::class.java)
+        githubAppStore = Mockito.mock(GithubAppStore::class.java)
         return listOfNotNull(mainStore)
     }
 

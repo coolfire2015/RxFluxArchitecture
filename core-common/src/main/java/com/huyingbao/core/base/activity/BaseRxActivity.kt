@@ -146,10 +146,12 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     private fun handleCommonException(commonException: CommonException) {
         when (commonException.code()) {
             CommonContants.Error.UNAUTHORIZED -> {
-                //登录认证失败，清除旧Token，结束当前页面，跳转登录页面
+                //登录认证失败，清除旧Token
                 localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
+                //结束当前页面
                 finish()
-                ARouter.getInstance().build(CommonContants.Address.LoginActivity).withBoolean(CommonContants.Key.IS_TO_LOGIN, true).navigation()
+                //跳转登录页面
+                ARouter.getInstance().build(CommonContants.Address.LoginActivity).navigation()
             }
             else -> Toast.makeText(this, commonException.message(), Toast.LENGTH_SHORT).show()
         }

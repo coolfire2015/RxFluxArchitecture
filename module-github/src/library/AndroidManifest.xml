@@ -6,14 +6,16 @@
         android:allowBackup="false"
         android:supportsRtl="true">
         <activity
-            android:name="com.huyingbao.module.github.ui.login.view.LoginActivity"
-            android:launchMode="singleTask"
+            android:name=".ui.start.view.StartActivity"
             android:theme="@style/AppTheme.Loading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.login.view.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.person.view.PersonActivity" />
         <activity android:name=".ui.issue.view.IssueActivity" />
         <activity android:name=".ui.code.view.CodeActivity" />
@@ -23,4 +25,5 @@
         <activity android:name=".ui.star.view.StarActivity" />
         <activity android:name=".ui.search.view.SearchActivity" />
     </application>
+
 </manifest>

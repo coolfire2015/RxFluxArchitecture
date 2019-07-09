@@ -36,9 +36,4 @@ class LoginActionCreator @Inject constructor(
                 // 调用接口1：Auth认证，获取登录token
                 .authorizations("Basic $basicCode", LoginRequest.generate()))
     }
-
-    override fun getLoginUserInfo() {
-        val rxAction = newRxAction(LoginAction.GET_LOGIN_USER_INFO)
-        postHttpAction(rxAction, retrofit.create(LoginApi::class.java).getLoginUserInfo())
-    }
 }

@@ -51,13 +51,4 @@ class LoginActionCreatorTest : BaseSubscriberTest() {
         //验证store接收RxAction
         verify(loginStore)?.onLogin(any())
     }
-
-    @Test
-    fun getLoginUserInfo() {
-        loginActionCreator?.getLoginUserInfo()
-        //验证方法调用成功，发送RxAction
-        verify(rxDispatcher).postRxAction(any())
-        //验证store接收RxAction
-        verify(githubAppStore)?.onReceiveUserInfo(any())
-    }
 }
