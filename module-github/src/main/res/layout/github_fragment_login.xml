@@ -6,8 +6,9 @@
     android:orientation="vertical">
 
     <EditText
+        android:drawableLeft="@drawable/c_account"
         android:id="@+id/et_username"
-        android:layout_width="@dimen/dp_100"
+        android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"
         android:hint="@string/github_username" />
 
