@@ -3,6 +3,7 @@ package com.huyingbao.core.common.dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import androidx.annotation.StringRes
 import com.huyingbao.core.base.dialog.BaseCommonDialog
 import com.huyingbao.core.common.R
@@ -35,6 +36,7 @@ class CommonLoadingDialog : BaseCommonDialog() {
             val message = getString(messageInt)
             if (!TextUtils.isEmpty(message)) {
                 tv_loading_notice?.text = message
+                tv_loading_notice?.visibility = View.VISIBLE
             }
         }
         tv_loading_cancel.setOnClickListener {

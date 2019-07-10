@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/bottom_nav_dynamic"
-        android:icon="@android:drawable/ic_menu_call"
+        android:icon="@drawable/ic_event_note"
         android:title="@string/github_label_dynamic" />
 
     <item
         android:id="@+id/bottom_nav_recommend"
-        android:icon="@android:drawable/ic_menu_call"
+        android:icon="@drawable/ic_assessment"
         android:title="@string/github_label_recommend" />
 
     <item
         android:id="@+id/bottom_nav_mine"
-        android:icon="@android:drawable/ic_menu_call"
+        android:icon="@drawable/ic_account"
         android:title="@string/github_label_mine" />
 
 </menu>

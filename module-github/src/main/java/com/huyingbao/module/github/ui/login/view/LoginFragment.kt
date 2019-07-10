@@ -33,6 +33,7 @@ class LoginFragment : BaseRxFragment<LoginStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
+        setTitle(R.string.github_label_login, true)
         et_username.setText(githubAppStore.getUserName())
         et_password.setText(githubAppStore.getPassword())
         btn_login.setOnClickListener { clickLogin() }

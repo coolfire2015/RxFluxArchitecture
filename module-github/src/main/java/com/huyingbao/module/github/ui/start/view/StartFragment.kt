@@ -37,8 +37,10 @@ class StartFragment : BaseRxFragment<LoginStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        //获取当前登录的员工洗洗
-        startActionCreator.getLoginUserInfo()
+        if (!TextUtils.isEmpty(githubAppStore.getAccessToken())) {
+            //获取当前登录用户信息
+            startActionCreator.getLoginUserInfo()
+        }
         //延迟2000mm，跳转
         Observable
                 .timer(2000, TimeUnit.MILLISECONDS)

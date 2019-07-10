@@ -10,7 +10,9 @@ import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.github.ui.login.action.LoginAction
 import com.huyingbao.module.github.ui.login.store.LoginStore
 import com.huyingbao.module.github.ui.main.view.MainActivity
+import com.huyingbao.module.github.ui.start.action.StartActionCreator
 import org.greenrobot.eventbus.Subscribe
+import javax.inject.Inject
 
 /**
  * 登录页面，使用singleTask模式启动，在登录失效，跳转该页面时，清空ActivityTask中的Activity
@@ -19,6 +21,9 @@ import org.greenrobot.eventbus.Subscribe
  */
 @Route(path = CommonContants.Address.LoginActivity)
 class LoginActivity : BaseRxFragActivity<LoginStore>() {
+    @Inject
+    lateinit var startActionCreator: StartActionCreator
+
     override fun createFragment(): Fragment? {
         return LoginFragment.newInstance()
     }
@@ -31,6 +36,7 @@ class LoginActivity : BaseRxFragActivity<LoginStore>() {
      */
     @Subscribe(tags = [LoginAction.LOGIN], sticky = true)
     fun onLogin(rxAction: RxAction) {
+        startActionCreator.getLoginUserInfo()
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

@@ -46,6 +46,12 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/github_nav_header_main"
+        app:itemHorizontalPadding="@dimen/dp_10"
+        app:itemIconPadding="@dimen/dp_16"
+        app:itemIconSize="@dimen/dp_32"
+        app:itemIconTint="@color/common_primary"
+        app:itemTextAppearance="@style/CommonTextAppearance"
+        app:itemTextColor="@color/common_primary"
         app:menu="@menu/github_activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -12,5 +12,5 @@
     <color name="common_divider">#BDBDBD</color>
     <!--系统-->
     <color name="common_accent">#FFC107</color>
-    <color name="common_icons">#FFFFFF</color>
+    <color name="common_white">#FFFFFF</color>
 </resources>

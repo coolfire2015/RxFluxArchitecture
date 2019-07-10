@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/CardWhite">
+    style="@style/CardWhite"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/dp_4"
+    app:cardElevation="@dimen/dp_4"
+    app:contentPadding="@dimen/dp_10">
 
     <RelativeLayout
         android:layout_width="match_parent"

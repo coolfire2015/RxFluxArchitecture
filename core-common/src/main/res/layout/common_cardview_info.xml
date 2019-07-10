@@ -17,15 +17,18 @@
             android:id="@+id/iv_info_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_10"
             tools:src="@android:drawable/ic_menu_call" />
 
         <TextView
             android:id="@+id/tv_info_title"
             android:layout_width="@dimen/dp_40"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
             android:gravity="center"
             android:maxLines="1"
+            android:textColor="@color/common_text_primary"
+            android:textSize="@dimen/sp_16"
             tools:text="@string/common_cancel" />
 
         <TextView
@@ -34,12 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
+            android:textColor="@color/common_text_secondary"
+            android:textSize="@dimen/sp_14"
             tools:text="@string/common_cancel" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:srcCompat="@android:drawable/ic_menu_more" />
+            app:srcCompat="@drawable/ic_more" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
