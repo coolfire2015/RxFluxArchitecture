@@ -108,6 +108,8 @@ dependencies {
     implementation "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
     //Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$ANKO"
+    //Lottie
+    implementation "com.airbnb.android:lottie:${LOTTIE}"
     //SmartRefreshLayout
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
     //RecyclerView适配器
@@ -124,6 +126,7 @@ dependencies {
     testImplementation "androidx.test:rules:${TEST_X_RULES}"
     testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
     testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.room:room-testing:${X_ROOM}"
     //单元测试
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"

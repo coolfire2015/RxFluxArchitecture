@@ -1,7 +1,6 @@
 package com.huyingbao.module.gan.ui.random.view;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -60,8 +59,6 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
         mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        //硬件加速
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     /**

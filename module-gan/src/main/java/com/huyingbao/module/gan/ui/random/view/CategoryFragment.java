@@ -60,8 +60,6 @@ public class CategoryFragment extends BaseRxFragment<RandomStore> {
         mRvContent = getView().findViewById(R.id.rv_content);
         mRvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvContent.setHasFixedSize(true);
-        //硬件加速
-        mRvContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mRvContent.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {

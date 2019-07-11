@@ -18,7 +18,6 @@ class CommonContants {
         const val TITLE = "title"
         const val CONTENT = "content"
         const val INFO = "info"
-        const val IS_TO_LOGIN = "isToLogin"
     }
 
     object Header {
@@ -30,6 +29,7 @@ class CommonContants {
 
         const val ArticleActivity = "/wan/article/ArticleActivity"
 
+        const val StartActivity = "/github/start/StartActivity"
         const val LoginActivity = "/github/login/LoginActivity"
         const val PersonActivity = "/github/person/PersonActivity"
         const val IssueActivity = "/github/issue/IssueActivity"

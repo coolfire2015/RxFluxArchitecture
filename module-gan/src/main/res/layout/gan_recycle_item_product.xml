@@ -2,17 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/dp_10"
-    app:cardCornerRadius="@dimen/dp_4"
-    app:contentPadding="@dimen/dp_16">
+    style="@style/CardWhite">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <ImageView
             android:id="@+id/iv_product_img"
@@ -24,7 +19,7 @@
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/common_accent" />
+            tools:srcCompat="@drawable/ic_archive" />
 
         <TextView
             android:id="@+id/tv_product_name"

@@ -1,7 +1,6 @@
 package com.huyingbao.module.wan.ui.friend.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,8 +53,6 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
         rvContent = view?.findViewById(R.id.rv_content)
         rvContent?.layoutManager = LinearLayoutManager(activity)
         rvContent?.setHasFixedSize(true)
-        //硬件加速
-        rvContent?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         //view设置适配器
         rvContent?.adapter = adapter
     }

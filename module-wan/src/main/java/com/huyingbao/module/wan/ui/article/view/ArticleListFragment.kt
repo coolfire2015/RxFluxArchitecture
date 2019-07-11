@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -96,8 +95,6 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
         rvContent = view?.findViewById(R.id.rv_content)
         rvContent?.layoutManager = LinearLayoutManager(activity)
         rvContent?.setHasFixedSize(true)
-        //硬件加速
-        rvContent?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         //view设置适配器
         rvContent?.adapter = articleAdapter
     }
