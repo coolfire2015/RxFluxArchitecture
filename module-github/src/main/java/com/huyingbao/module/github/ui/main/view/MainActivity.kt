@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -184,11 +185,14 @@ class MainActivity : BaseRxActivity<MainStore>() {
         commonInfoDialog.show(supportFragmentManager, CommonInfoDialog::class.java.simpleName)
     }
 
+    var night = false
     /**
      * 检查更新
      */
     private fun checkUpdate() {
-
+        delegate.localNightMode = if (night) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        night = !night
+        recreate()
     }
 
     /**
