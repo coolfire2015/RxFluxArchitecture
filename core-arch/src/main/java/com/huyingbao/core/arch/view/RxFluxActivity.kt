@@ -50,7 +50,7 @@ abstract class RxFluxActivity<T : RxActivityStore> :
      * 生成对应的注入器，在方法中进行依赖注入操作。
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
     }
 }

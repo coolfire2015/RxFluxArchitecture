@@ -9,6 +9,7 @@ object ClassUtils {
     /**
      * 得到类的泛型类型
      */
+    @JvmStatic
     fun <T> getGenericClass(aClass: Class<*>): Class<T>? {
         var genericClass: Class<T>? = null
         //返回直接继承的父类（包含泛型参数）
