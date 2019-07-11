@@ -29,10 +29,10 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
+                android:layout_height="@dimen/dp_64"
                 android:background="?android:attr/windowBackground"
+                app:itemIconSize="@dimen/dp_32"
+                app:itemTextColor="@color/common_text_tab"
                 app:menu="@menu/github_activity_main_bottom" />
         </LinearLayout>
 
@@ -46,12 +46,11 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/github_nav_header_main"
-        app:itemHorizontalPadding="@dimen/dp_10"
+        app:itemHorizontalPadding="@dimen/dp_16"
         app:itemIconPadding="@dimen/dp_16"
         app:itemIconSize="@dimen/dp_32"
-        app:itemIconTint="@color/common_primary"
-        app:itemTextAppearance="@style/CommonTextAppearance"
-        app:itemTextColor="@color/common_primary"
+        app:itemIconTint="?android:attr/colorPrimary"
+        app:itemTextAppearance="@style/CommonTextAppearanceItem"
         app:menu="@menu/github_activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

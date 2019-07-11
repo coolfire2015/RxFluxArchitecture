@@ -21,7 +21,6 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/iv_repos_user_img"
             android:singleLine="true"
-            android:textColor="@color/common_text_primary"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             tools:text="RxFluxArchitecture" />
@@ -34,7 +33,6 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/iv_repos_user_img"
             android:singleLine="true"
-            android:textColor="@color/common_text_primary"
             android:textSize="@dimen/sp_16"
             tools:text="CoolFire2015" />
 
@@ -44,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:singleLine="true"
-            android:textColor="@color/common_text_secondary"
             android:textSize="@dimen/sp_14"
             tools:text="kotlin" />
 
@@ -57,7 +54,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             android:maxLines="3"
-            android:textColor="@color/common_text_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_14"
             tools:text="基于Flux架构的模块化框架" />
 
@@ -77,7 +74,6 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:maxLines="2"
-                android:textColor="@color/common_text_primary"
                 android:textSize="@dimen/sp_14"
                 tools:text="100" />
 
@@ -88,7 +84,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:maxLines="2"
-                android:textColor="@color/common_text_primary"
                 android:textSize="@dimen/sp_14"
                 tools:text="100" />
 
@@ -99,7 +94,6 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:maxLines="2"
-                android:textColor="@color/common_text_primary"
                 android:textSize="@dimen/sp_14"
                 tools:text="100" />
         </LinearLayout>

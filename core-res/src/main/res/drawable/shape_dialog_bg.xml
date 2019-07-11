@@ -1,5 +1,5 @@
 <!--dialog圆角背景 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/common_primary" />
+    <solid android:color="?android:attr/colorPrimary" />
     <corners android:radius="@dimen/dp_4" />
 </shape>

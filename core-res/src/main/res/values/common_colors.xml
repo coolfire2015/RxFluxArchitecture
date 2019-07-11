@@ -4,7 +4,6 @@
     <color name="common_primary">#009688</color>
     <color name="common_primary_dark">#00796B</color>
     <color name="common_primary_light">#B2DFDB</color>
-    <color name="common_primary_background">#cccccc</color>
     <!--文字颜色-->
     <color name="common_text_primary">#212121</color>
     <color name="common_text_secondary">#757575</color>
@@ -12,5 +11,8 @@
     <color name="common_divider">#BDBDBD</color>
     <!--系统-->
     <color name="common_accent">#FFC107</color>
+    <color name="common_error">#E91E63</color>
     <color name="common_white">#FFFFFF</color>
+
+    <color name="common_background_primary">#FFFFFF</color>
 </resources>

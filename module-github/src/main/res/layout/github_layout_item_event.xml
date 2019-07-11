@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/CardWhite"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="@dimen/dp_4"
-    app:cardElevation="@dimen/dp_4"
-    app:contentPadding="@dimen/dp_10">
+    style="@style/CardWhite">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +22,6 @@
             android:layout_marginStart="@dimen/dp_10"
             android:layout_toEndOf="@+id/iv_event_user_head"
             android:singleLine="true"
-            android:textColor="@color/common_text_primary"
             android:textSize="@dimen/sp_16"
             tools:text="CoolFire2015" />
 
@@ -37,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:singleLine="true"
-            android:textColor="@color/common_text_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_14"
             tools:text="3天前" />
 
@@ -47,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_event_user_head"
             android:layout_margin="@dimen/dp_6"
-            android:textColor="@color/common_text_primary"
             android:textSize="@dimen/sp_14"
             tools:text="stared coolfire2015/RxFluxArchitecture" />
 
@@ -58,7 +51,7 @@
             android:layout_below="@+id/tv_event_action"
             android:layout_margin="@dimen/dp_6"
             android:maxLines="3"
-            android:textColor="@color/common_text_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_14"
             android:visibility="gone"
             tools:text="see"

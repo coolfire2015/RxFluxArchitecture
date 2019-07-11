@@ -1,26 +1,35 @@
 <resources>
-    <!-- Base application theme. -->
     <!--Theme.AppCompat:黑色主题-->
     <!--Theme.AppCompat.Light:浅色主题-->
     <!--Theme.AppCompat.Light.DarkActionBar:带黑色工具栏的浅色主题-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/common_primary</item><!--工具栏颜色 -->
-        <item name="colorPrimaryDark">@color/common_primary_dark</item><!--状态栏颜色 -->
-        <item name="colorAccent">@color/common_accent</item><!--给EditText着色,形成反差色.按钮组件不支持着色-->
-        <item name="android:colorButtonNormal">@color/common_primary</item><!--Button背景颜色-->
-        <item name="android:textColor">@color/common_text_primary</item><!--系统通用字体颜色-->
-        <item name="android:textColorSecondary">@color/common_text_secondary</item><!--系统次要字体颜色-->
-        <item name="android:textAppearance">@style/CommonTextAppearance</item><!--系统通用字体样式-->
-        <item name="buttonStyle">@style/CommonButtonStyle</item><!--系统通用Button样式-->
+        <!--应用的主要色调,actionBar默认使用该颜色,Toolbar导航栏的底色 -->
+        <item name="colorPrimary">@color/common_primary</item>
+        <!--应用的主要暗色调,statusBarColor默认使用该颜色 -->
+        <item name="colorPrimaryDark">@color/common_primary_dark</item>
+        <!--控件按压时的色调-->
+        <item name="colorControlHighlight">@color/common_primary_light</item>
+        <!--给EditText着色,形成反差色.按钮组件不支持着色-->
+        <item name="colorAccent">@color/common_accent</item>
+        <!--错误颜色-->
+        <item name="colorError">@color/common_error</item>
+        <!--系统通用字体颜色-->
+        <item name="android:textColorPrimary">@color/common_text_primary</item>
+        <!--系统次要字体颜色-->
+        <item name="android:textColorSecondary">@color/common_text_secondary</item>
+        <!--窗口背景颜色-->
+        <item name="android:colorBackground">@color/common_background_primary</item>
+        <!--Button,textView的文字颜色-->
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <!--默认按钮的背景颜色-->
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <!--系统通用Button样式-->
+        <item name="buttonStyle">@style/CommonButtonStyle</item>
     </style>
     <!--主题默认Button样式-->
     <style name="CommonButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/common_white</item>
         <item name="android:textSize">@dimen/sp_18</item>
-    </style>
-    <!--主题默认字体样式-->
-    <style name="CommonTextAppearance" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/sp_16</item>
     </style>
     <!--引导页,全屏-->
     <style name="AppTheme.Loading">
@@ -28,14 +37,12 @@
         <item name="android:windowIsTranslucent">true</item><!-- 设置透明 -->
         <item name="android:windowActionBarOverlay">true</item>
     </style>
-
     <!--自定义AppBarLayout样式-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--自定义弹出框样式-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!--自定义CardView样式-->
     <style name="CardWhite">
-        <item name="android:background">@android:color/white</item>
         <item name="android:layout_margin">@dimen/dp_6</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
@@ -52,5 +59,13 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/dp_04</item>
         <item name="android:background">@color/common_divider</item>
+    </style>
+    <!--主题默认字体样式-->
+    <style name="CommonTextAppearance" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="CommonTextAppearanceItem" parent="CommonTextAppearance">
+        <item name="android:textColor">@color/common_text_tab</item>
     </style>
 </resources>

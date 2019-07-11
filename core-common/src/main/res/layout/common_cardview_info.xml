@@ -27,7 +27,6 @@
             android:layout_marginEnd="@dimen/dp_10"
             android:gravity="center"
             android:maxLines="1"
-            android:textColor="@color/common_text_primary"
             android:textSize="@dimen/sp_16"
             tools:text="@string/common_cancel" />
 
@@ -37,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
-            android:textColor="@color/common_text_secondary"
             android:textSize="@dimen/sp_14"
             tools:text="@string/common_cancel" />
 

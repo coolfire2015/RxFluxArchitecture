@@ -1,7 +1,6 @@
 package com.huyingbao.module.github.ui.main.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -73,8 +72,6 @@ class TrendFragment : BaseRxFragment<MainStore>() {
         //并通过Adapter的增删改插方法去刷新RecyclerView，而不是通过notifyDataSetChanged()。
         //（其实可以直接设置为true，当需要改变宽高的时候就用notifyDataSetChanged()去整体刷新一下）
         rvContent?.setHasFixedSize(true)
-        //硬件加速
-        rvContent?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     /**
