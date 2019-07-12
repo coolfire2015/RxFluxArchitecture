@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.base.activity.BaseRxFragActivity
+import com.huyingbao.core.common.fragment.CommonWebFragment
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
@@ -30,5 +31,10 @@ class ArticleActivity : BaseRxFragActivity<ArticleStore>() {
     @Subscribe(tags = [ArticleAction.TO_BANNER], sticky = true)
     fun toBanner(rxChange: RxChange) {
         addFragmentHideExisting(BannerFragment.newInstance())
+    }
+
+    @Subscribe(tags = [ArticleAction.TO_WEB], sticky = true)
+    fun toWeb(rxChange: RxChange) {
+        addFragmentHideExisting(CommonWebFragment.newInstance(rxStore?.url))
     }
 }

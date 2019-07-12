@@ -23,6 +23,12 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
     private var adapter: WebSiteAdapter? = null
     private var rvContent: RecyclerView? = null
 
+    companion object {
+        fun newInstance(): FriendFragment {
+            return FriendFragment()
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.common_fragment_list
     }
@@ -82,12 +88,5 @@ class FriendFragment : BaseRxFragment<FriendStore>() {
      */
     private fun setData(data: List<WebSite>?) {
         adapter?.setNewData(data)
-    }
-
-    companion object {
-
-        fun newInstance(): FriendFragment {
-            return FriendFragment()
-        }
     }
 }

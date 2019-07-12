@@ -18,6 +18,8 @@ buildscript {
         classpath "com.android.tools.build.jetifier:jetifier-processor:${JETIFIER}"
         //Maven支持
         classpath "com.github.dcendents:android-maven-gradle-plugin:${ANDROID_MAVEN_GRADLE_PLUGIN}"
+        //Tinker支持
+        classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:${TINKER}"
     }
 }
 

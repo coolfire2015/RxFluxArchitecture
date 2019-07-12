@@ -15,18 +15,19 @@ import java.util.*
 interface ArticleAction {
 
     companion object {
-        const val TO_BANNER = "to_banner"
-        const val TO_FRIEND = "to_friend"
+        const val TO_WEB = "toWeb"
+        const val TO_BANNER = "toBanner"
+        const val TO_FRIEND = "toFriend"
 
         /**
          * 获取文章列表
          */
-        const val GET_ARTICLE_LIST = "get_article_list"
+        const val GET_ARTICLE_LIST = "getArticleList"
 
         /**
          * 获取Banner列表
          */
-        const val GET_BANNER_LIST = "get_banner_list"
+        const val GET_BANNER_LIST = "getBannerList"
     }
 
     /**
