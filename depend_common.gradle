@@ -116,6 +116,10 @@ dependencies {
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //日志展示
     implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //Bugly
+    implementation "com.tencent.bugly:crashreport:${BUGLY}"
+    //Tinker
+    implementation "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
     //LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
 
@@ -131,7 +135,8 @@ dependencies {
     testImplementation "junit:junit:${TEST_JUNIT}"
     testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
     testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"//解决Mockito any()等返回null的问题
+    //解决Mockito any()等返回null的问题
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
     testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
     testImplementation "com.github.coolfire2015:RxFluxTestUtils:${RX_FLUX_TEST_UTILS}"
     testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"

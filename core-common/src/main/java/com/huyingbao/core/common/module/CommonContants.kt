@@ -18,6 +18,7 @@ class CommonContants {
         const val TITLE = "title"
         const val CONTENT = "content"
         const val INFO = "info"
+        const val URL = "url"
     }
 
     object Header {

@@ -86,6 +86,10 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
         //articleAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         articleAdapter?.setOnLoadMoreListener({ loadMore() }, rvContent)
+        articleAdapter?.setOnItemClickListener { _, _, position ->
+            articleActionCreator.postLocalAction(ArticleAction.TO_WEB,
+                    CommonContants.Key.URL, articleAdapter?.data?.get(position)?.link ?: "")
+        }
     }
 
     /**

@@ -4,17 +4,14 @@
 
     <item
         android:id="@+id/menu_to_friend"
-        android:icon="@android:drawable/ic_menu_search"
         android:title="@string/wan_label_friend"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_to_banner"
-        android:icon="@android:drawable/ic_menu_report_image"
         android:title="@string/wan_label_banner"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_to_gan"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="@string/wan_label_banner"
-        app:showAsAction="ifRoom|withText" />
+        android:title="@string/wan_label_gan"
+        app:showAsAction="never" />
 </menu>

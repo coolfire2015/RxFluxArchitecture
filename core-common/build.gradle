@@ -34,6 +34,9 @@ android {
     }
 }
 dependencies {
+    //引入jar包
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //引入资源aar
     api project(':core-res')
     //Dagger编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
