@@ -1,11 +1,14 @@
 package com.huyingbao.module.github.app
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.huyingbao.core.annotations.RxAppObserver
 import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
+import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.utils.LocalStorageUtils
 import com.huyingbao.module.github.GithubEventBusIndex
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
@@ -23,6 +26,8 @@ class GithubAppLifecycle(application: Application) : RxAppLifecycle(application)
 
     @Inject
     lateinit var githubAppStore: GithubAppStore
+    @Inject
+    lateinit var localStorageUtils: LocalStorageUtils
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
@@ -32,6 +37,9 @@ class GithubAppLifecycle(application: Application) : RxAppLifecycle(application)
                 .eventInheritance(false)
         //全局数据维持AppStore，注册订阅
         githubAppStore.subscribe()
+        //夜间模式切换
+        val nightMode = localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

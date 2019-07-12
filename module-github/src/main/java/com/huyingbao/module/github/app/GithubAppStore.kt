@@ -28,6 +28,9 @@ class GithubAppStore @Inject constructor(
     @Inject
     lateinit var localStorageUtils: LocalStorageUtils
 
+    /**
+     * 用户信息
+     */
     val userLiveData = MutableLiveData<User>()
 
     override fun onCleared() {

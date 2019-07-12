@@ -2,7 +2,12 @@
     <!--Theme.AppCompat:黑色主题-->
     <!--Theme.AppCompat.Light:浅色主题-->
     <!--Theme.AppCompat.Light.DarkActionBar:带黑色工具栏的浅色主题-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!--NoActionBar-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--应用中图标颜色-->
+        <item name="colorIcon">@color/common_icon</item>
         <!--应用的主要色调,actionBar默认使用该颜色,Toolbar导航栏的底色 -->
         <item name="colorPrimary">@color/common_primary</item>
         <!--应用的主要暗色调,statusBarColor默认使用该颜色 -->
@@ -28,7 +33,7 @@
     </style>
     <!--主题默认Button样式-->
     <style name="CommonButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/common_white</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:textSize">@dimen/sp_18</item>
     </style>
     <!--引导页,全屏-->

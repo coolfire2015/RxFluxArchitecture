@@ -185,13 +185,16 @@ class MainActivity : BaseRxActivity<MainStore>() {
         commonInfoDialog.show(supportFragmentManager, CommonInfoDialog::class.java.simpleName)
     }
 
-    var night = false
     /**
-     * 检查更新
+     * 切换夜间模式
      */
     private fun checkUpdate() {
-        delegate.localNightMode = if (night) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        night = !night
+        when (localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)) {
+            AppCompatDelegate.MODE_NIGHT_NO -> localStorageUtils.setValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.MODE_NIGHT_YES -> localStorageUtils.setValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)
+            else -> localStorageUtils.setValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        AppCompatDelegate.setDefaultNightMode(localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO))
         recreate()
     }
 

@@ -32,6 +32,7 @@
                 android:layout_height="@dimen/dp_64"
                 android:background="?android:attr/windowBackground"
                 app:itemIconSize="@dimen/dp_32"
+                app:itemIconTint="@color/common_text_tab"
                 app:itemTextColor="@color/common_text_tab"
                 app:menu="@menu/github_activity_main_bottom" />
         </LinearLayout>
@@ -49,8 +50,8 @@
         app:itemHorizontalPadding="@dimen/dp_16"
         app:itemIconPadding="@dimen/dp_16"
         app:itemIconSize="@dimen/dp_32"
-        app:itemIconTint="?android:attr/colorPrimary"
-        app:itemTextAppearance="@style/CommonTextAppearanceItem"
+        app:itemIconTint="@color/common_text_primary"
+        app:itemTextColor="@color/common_text_primary"
         app:menu="@menu/github_activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
