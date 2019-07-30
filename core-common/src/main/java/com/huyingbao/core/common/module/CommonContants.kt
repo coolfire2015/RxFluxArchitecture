@@ -12,6 +12,19 @@ class CommonContants {
     }
 
     object Key {
+        /**
+         * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO]
+         *
+         * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES]
+         *
+         * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM]
+         *
+         * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_TIME]
+         *
+         * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY]
+         *
+         */
+        const val NIGHT_MODE = "nightMode"
         const val ACCESS_TOKEN = "accessToken"
         const val USER_NAME = "userName"
         const val PASSWORD = "password"

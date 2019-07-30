@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class FriendStore @Inject constructor(rxDispatcher: RxDispatcher) : RxFragmentStore(rxDispatcher) {
     val webSiteListData = MutableLiveData<WanResponse<ArrayList<WebSite>>>()
-    var isCreated: Boolean = false
+    var isCreated = false
         private set
 
     override fun onCleared() {

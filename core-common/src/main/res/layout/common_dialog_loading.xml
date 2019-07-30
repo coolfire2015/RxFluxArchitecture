@@ -14,7 +14,7 @@
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
         android:layout_margin="@dimen/dp_10"
-        android:indeterminateTint="@color/common_white" />
+        android:indeterminateTint="@color/White" />
 
     <TextView
         android:id="@+id/tv_loading_notice"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:textColor="@color/common_white"
+        android:textColor="@color/White"
         android:textSize="@dimen/sp_12"
         android:visibility="gone"
         tools:text="@string/brvah_loading"
@@ -37,6 +37,6 @@
         android:paddingTop="@dimen/dp_6"
         android:paddingBottom="@dimen/dp_6"
         android:text="@string/common_cancel"
-        android:textColor="@color/common_white"
+        android:textColor="@color/White"
         android:textSize="@dimen/sp_16" />
 </LinearLayout>
