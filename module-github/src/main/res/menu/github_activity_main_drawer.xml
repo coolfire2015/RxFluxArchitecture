@@ -2,38 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <item android:title="@null">
+    <item
+        android:id="@+id/nav_main_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/github_menu_feedback" />
+    <item
+        android:id="@+id/nav_main_user_info"
+        android:icon="@drawable/ic_account"
+        android:title="@string/github_menu_user_info" />
+    <item
+        android:id="@+id/nav_main_version"
+        android:icon="@drawable/ic_archive"
+        android:title="@string/github_menu_version" />
+    <item
+        android:id="@+id/nav_main_about"
+        android:icon="@drawable/ic_live_help"
+        android:title="@string/github_menu_about" />
+    <item
+        android:id="@+id/nav_main_logout"
+        android:icon="@drawable/ic_exit_to_app"
+        android:title="@string/github_menu_logout" />
+    <item android:title="@string/github_menu_module">
         <menu>
             <item
-                android:id="@+id/nav_main_feedback"
-                android:icon="@drawable/ic_feedback"
-                android:title="@string/github_menu_feedback" />
-            <item
-                android:id="@+id/nav_main_user_info"
-                android:icon="@drawable/ic_account"
-                android:title="@string/github_menu_user_info" />
-            <item
-                android:id="@+id/nav_main_version"
-                android:icon="@drawable/ic_archive"
-                android:title="@string/github_menu_version" />
-            <item
-                android:id="@+id/nav_main_about"
-                android:icon="@drawable/ic_live_help"
-                android:title="@string/github_menu_about" />
-            <item
                 android:id="@+id/nav_main_wan"
-                android:icon="@drawable/ic_add_box"
+                android:icon="@drawable/ic_wan"
                 android:title="@string/github_menu_wan" />
             <item
                 android:id="@+id/nav_main_gan"
-                android:icon="@drawable/ic_add_box"
+                android:icon="@drawable/ic_gan_huo"
                 android:title="@string/github_menu_gan" />
-            <item
-                android:id="@+id/nav_main_logout"
-                android:icon="@drawable/ic_exit_to_app"
-                android:title="@string/github_menu_logout" />
         </menu>
     </item>
-
 </menu>

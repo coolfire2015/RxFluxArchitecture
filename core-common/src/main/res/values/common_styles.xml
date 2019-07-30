@@ -2,10 +2,7 @@
     <!--Theme.AppCompat:黑色主题-->
     <!--Theme.AppCompat.Light:浅色主题-->
     <!--Theme.AppCompat.Light.DarkActionBar:带黑色工具栏的浅色主题-->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-        <!--NoActionBar-->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!--应用中图标颜色-->
         <item name="colorIcon">@color/common_icon</item>
         <!--应用的主要色调,actionBar默认使用该颜色,Toolbar导航栏的底色 -->
@@ -47,7 +44,7 @@
     <!--自定义弹出框样式-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!--自定义CardView样式-->
-    <style name="CardWhite">
+    <style name="CardWhite" parent="CardView">
         <item name="android:layout_margin">@dimen/dp_6</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
