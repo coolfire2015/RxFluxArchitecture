@@ -2,6 +2,7 @@ package com.huyingbao.module.github.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -18,6 +19,8 @@ import com.huyingbao.core.common.dialog.CommonInfo
 import com.huyingbao.core.common.dialog.CommonInfoDialog
 import com.huyingbao.core.common.dialog.CommonInfoDialogClickListener
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.core.image.ImageLoader
+import com.huyingbao.core.image.ImageLoaderUtils
 import com.huyingbao.module.github.R
 import com.huyingbao.module.github.app.GithubAppStore
 import com.huyingbao.module.github.ui.login.view.LoginActivity
@@ -80,12 +83,31 @@ class MainActivity : BaseRxActivity<MainStore>() {
      * 设置View信息显示。
      */
     private fun initNavigationView() {
+        nav_view_main?.menu?.findItem(R.id.nav_main_night)?.let {
+            //修改日夜模式菜单图标文字
+            when (localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)) {
+                AppCompatDelegate.MODE_NIGHT_YES -> {
+                    it.icon = getDrawable(R.drawable.ic_day)
+                    it.title = getText(R.string.github_menu_day)
+                }
+                AppCompatDelegate.MODE_NIGHT_NO -> {
+                    it.icon = getDrawable(R.drawable.ic_night)
+                    it.title = getText(R.string.github_menu_night)
+                }
+                else -> {
+                    it.icon = getDrawable(R.drawable.ic_night)
+                    it.title = getText(R.string.github_menu_night)
+                }
+            }
+        }
+        //菜单点击事件
         nav_view_main?.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_main_feedback -> showFeedBackDialog()
                 R.id.nav_main_user_info -> startActivity(Intent(this, UserActivity::class.java))
                 R.id.nav_main_about -> showAbout()
                 R.id.nav_main_version -> checkUpdate()
+                R.id.nav_main_night -> changeNight()
                 R.id.nav_main_wan -> ARouter.getInstance().build(CommonContants.Address.ArticleActivity).navigation()
                 R.id.nav_main_gan -> ARouter.getInstance().build(CommonContants.Address.RandomActivity).navigation()
                 R.id.nav_main_logout -> logout()
@@ -93,12 +115,22 @@ class MainActivity : BaseRxActivity<MainStore>() {
             drawer_layout_main?.closeDrawer(GravityCompat.START)
             true
         }
+        //菜单头部当前登录的用户信息更新
         githubAppStore.userLiveData.observe(this, Observer {
             if (it != null) {
                 //当数据变化更新UI
                 val headerView = nav_view_main.getHeaderView(0)
                 if (headerView is LinearLayout) {
+                    //头像
+                    val imageLoader = ImageLoader.Builder<String>()
+                    imageLoader.isCircle = true
+                    imageLoader.resource = it.avatarUrl
+                    imageLoader.errorHolder = R.drawable.ic_main
+                    imageLoader.imgView = headerView.getChildAt(0) as ImageView
+                    ImageLoaderUtils.loadImage(this, imageLoader.build())
+                    //用户名
                     (headerView.getChildAt(1) as TextView).text = it.login
+                    //邮箱
                     (headerView.getChildAt(2) as TextView).text = it.email
                 }
             }
@@ -186,9 +218,16 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     /**
-     * 切换夜间模式
+     * 检查更新
      */
     private fun checkUpdate() {
+
+    }
+
+    /**
+     * 切换夜间模式
+     */
+    private fun changeNight() {
         when (localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)) {
             AppCompatDelegate.MODE_NIGHT_NO -> localStorageUtils.setValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_YES)
             AppCompatDelegate.MODE_NIGHT_YES -> localStorageUtils.setValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)

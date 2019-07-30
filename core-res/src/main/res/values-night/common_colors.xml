@@ -5,8 +5,8 @@
     <color name="common_primary_dark">#212a2f</color>
     <color name="common_primary_light">@color/Grey600</color>
     <!--图标颜色-->
-    <color name="common_icon">@color/White</color>
-    文字颜色
+    <color name="common_icon">@color/Grey300</color>
+    <!--文字颜色-->
     <color name="common_text_primary">@color/Grey300</color>
     <color name="common_text_secondary">@color/Grey500</color>
     <!--分割线颜色-->

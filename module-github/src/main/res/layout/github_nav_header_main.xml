@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_200"
-    android:background="@drawable/shape_side_nav_bar"
+    android:background="?android:attr/colorPrimary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/dp_16"
@@ -19,7 +18,7 @@
         android:layout_height="@dimen/dp_80"
         android:paddingTop="@dimen/dp_10"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_main" />
+        tools:srcCompat="@drawable/ic_main" />
 
     <TextView
         android:id="@+id/tv_user_name"

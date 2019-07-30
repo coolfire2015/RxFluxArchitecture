@@ -25,6 +25,8 @@
     <string name="github_menu_feedback">用户反馈</string>
     <string name="github_menu_user_info">个人信息</string>
     <string name="github_menu_version">版本更新</string>
+    <string name="github_menu_day">日间模式</string>
+    <string name="github_menu_night">夜间模式</string>
     <string name="github_menu_about">应用关于</string>
     <string name="github_menu_wan">玩安卓</string>
     <string name="github_menu_module">组件化</string>
