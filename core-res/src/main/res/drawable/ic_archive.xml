@@ -1,9 +1,11 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="@dimen/dp_32"
     android:height="@dimen/dp_32"
     android:viewportWidth="1024"
     android:viewportHeight="1024">
     <path
         android:fillColor="?attr/colorIcon"
-        android:pathData="M217.98,214.02l587.99,0 -40.02,-43.99 -512,0zM512,745.98l233.98,-233.98 -148.01,0 0,-86.02 -171.99,0 0,86.02 -148.01,0zM875.99,224q20.01,24.02 20.01,54.02l0,532.01q0,34.01 -25.98,59.99t-59.99,25.98l-596.01,0q-34.01,0 -59.99,-25.98t-25.98,-59.99l0,-532.01q0,-29.99 20.01,-54.02l57.98,-72.02q20.01,-24.02 50.01,-24.02l512,0q29.99,0 50.01,24.02z" />
+        android:pathData="M217.98,214.02l587.99,0 -40.02,-43.99 -512,0zM512,745.98l233.98,-233.98 -148.01,0 0,-86.02 -171.99,0 0,86.02 -148.01,0zM875.99,224q20.01,24.02 20.01,54.02l0,532.01q0,34.01 -25.98,59.99t-59.99,25.98l-596.01,0q-34.01,0 -59.99,-25.98t-25.98,-59.99l0,-532.01q0,-29.99 20.01,-54.02l57.98,-72.02q20.01,-24.02 50.01,-24.02l512,0q29.99,0 50.01,24.02z"
+        tools:fillColor="@color/common_primary" />
 </vector>
