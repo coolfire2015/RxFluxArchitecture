@@ -27,7 +27,6 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
      * 列表页数
      */
     var nextRequestPage = 1
-    var url: String? = null
 
     /**
      * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
@@ -60,11 +59,5 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
             articleLiveData.setValue(articleLiveData.value)
         }
         nextRequestPage++
-    }
-
-    @Subscribe(tags = [ArticleAction.TO_WEB])
-    fun toWeb(rxAction: RxAction) {
-        url = rxAction.data[CommonContants.Key.WEB_URL]?.toString()
-        postChange(RxChange.newInstance(rxAction.tag))
     }
 }

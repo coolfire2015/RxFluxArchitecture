@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.huyingbao.core.arch.view.RxFluxFragment
 import com.huyingbao.core.base.BaseView
-import com.huyingbao.core.common.R
+import com.huyingbao.core.base.activity.BaseRxActivity
 import com.huyingbao.core.common.action.CommonActionCreator
 import javax.inject.Inject
 
@@ -59,29 +58,16 @@ abstract class BaseRxFragment<T : ViewModel> : RxFluxFragment<T>(), BaseView {
      * @param backAble true：Home按钮作为返回箭头，false：默认设置
      */
     protected fun setTitle(title: CharSequence?, backAble: Boolean) {
-        if (activity == null) {
-            return
-        }
-        this.backAble = backAble
-        this.title = title
-        val supportActionBar = (activity as AppCompatActivity).supportActionBar
-        if (activity !is AppCompatActivity || supportActionBar == null) {
-            //设置标题
-            activity?.title = this.title
-            return
-        }
-        //显示标题
-        supportActionBar.setDisplayShowTitleEnabled(true)
-        //设置标题
-        supportActionBar.title = this.title
-        //显示右侧返回图标
-        if (backAble) {
-            //显示Home按钮
-            supportActionBar.setDisplayShowHomeEnabled(true)
-            //设置Home按钮作为返回按钮
-            supportActionBar.setDisplayHomeAsUpEnabled(true)
-            //设置Home按钮图标
-            supportActionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material)
+        activity?.let {
+            //宿主Activity中设置标题和返回标志
+            if (it is BaseRxActivity<*>) {
+                it.setTitle(title, backAble)
+            } else {
+                it.title = title
+            }
+            //当前Fragment中暂存标题和返回标志
+            this.backAble = backAble
+            this.title = title
         }
     }
 

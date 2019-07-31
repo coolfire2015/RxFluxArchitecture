@@ -15,7 +15,6 @@ import java.util.*
 interface ArticleAction {
 
     companion object {
-        const val TO_WEB = "toWeb"
         const val TO_BANNER = "toBanner"
         const val TO_FRIEND = "toFriend"
 

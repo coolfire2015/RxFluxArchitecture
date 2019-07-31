@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><!--处于兼容性考虑,AppCompat库需要使用app命名空间-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/wan_menu_share"
+        android:title="@string/wan_menu_share"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/wan_menu_collection"
+        android:title="@string/wan_menu_collection"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/wan_menu_browser"
+        android:title="@string/wan_menu_browser"
+        app:showAsAction="never" />
+</menu>

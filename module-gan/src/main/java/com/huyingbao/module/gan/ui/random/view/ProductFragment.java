@@ -66,8 +66,6 @@ public class ProductFragment extends BaseRxFragment<RandomStore> {
      */
     private void initAdapter() {
         mAdapter = new ProductAdapter(null);
-        //设置更多view
-//        mAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
         mAdapter.setOnLoadMoreListener(() -> loadMore(), mRvContent);
         //view设置适配器

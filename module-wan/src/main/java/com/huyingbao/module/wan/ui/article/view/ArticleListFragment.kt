@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.fragment.BaseRxFragment
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.common.module.CommonContants.Config.PAGE_SIZE
+import com.huyingbao.core.common.web.view.CommonWebActivity
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
@@ -82,15 +83,19 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
      */
     private fun initAdapter() {
         articleAdapter = ArticleAdapter(null)
-        //设置更多view
-        //articleAdapter.setLoadMoreView(new CommonLoadMoreView());
-        //设置加载更多监听器
         articleAdapter?.run {
+            //设置加载更多监听器
             setOnLoadMoreListener({ loadMore() }, rvContent)
-            setOnItemClickListener { _, _, position ->
-                articleActionCreator.postLocalAction(
-                        ArticleAction.TO_WEB,
-                        CommonContants.Key.WEB_URL, articleAdapter?.data?.get(position)?.link ?: "")
+            //设置点击事件
+            context?.let {
+                setOnItemClickListener { _, _, position ->
+                    val intent = CommonWebActivity.newIntent(it,
+                            articleAdapter?.data?.get(position)?.link,
+                            articleAdapter?.data?.get(position)?.title,
+                            articleAdapter?.data?.get(position)?.id?.toString(),
+                            R.menu.wan_web)
+                    startActivity(intent)
+                }
             }
         }
     }

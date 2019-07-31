@@ -53,18 +53,6 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     }
 
     /**
-     * 默认使用[Toolbar]取代ActionBar
-     */
-    private fun initActionBar() {
-        val view = window.decorView
-        val toolbar = view.findViewById<Toolbar>(R.id.tlb_top)
-        if (toolbar != null) {
-            //使用Toolbar取代原本的actionbar
-            setSupportActionBar(toolbar)
-        }
-    }
-
-    /**
      * [Toolbar]Menu点击事件，拦截返回按钮
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -138,6 +126,56 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
             //隐藏进度框
             fragmentByTag.dismiss()
         }
+    }
+
+    /**
+     * 默认使用[Toolbar]取代ActionBar
+     */
+    private fun initActionBar() {
+        val view = window.decorView
+        val toolbar = view.findViewById<Toolbar>(R.id.tlb_top)
+        if (toolbar != null) {
+            //使用Toolbar取代原本的actionbar
+            setSupportActionBar(toolbar)
+        }
+    }
+
+    /**
+     * 设置标题，设置返回图标
+     *
+     * @param title    Toolbar标题
+     * @param backAble true：Home按钮作为返回箭头，false：默认设置
+     */
+    fun setTitle(title: CharSequence?, backAble: Boolean) {
+        if (supportActionBar == null) {
+            setTitle(title)
+        } else {
+            supportActionBar?.run {
+                //显示标题
+                setDisplayShowTitleEnabled(true)
+                //设置标题
+                this.title = title
+                //显示右侧返回图标
+                if (backAble) {
+                    //显示Home按钮
+                    setDisplayShowHomeEnabled(true)
+                    //设置Home按钮作为返回按钮
+                    setDisplayHomeAsUpEnabled(true)
+                    //设置Home按钮图标
+                    setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material)
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置标题，设置返回图标
+     *
+     * @param titleId  Toolbar标题
+     * @param backAble true：Home按钮作为返回箭头，false：默认设置
+     */
+    fun setTitle(titleId: Int, backAble: Boolean) {
+        setTitle(getText(titleId), backAble)
     }
 
     /**
