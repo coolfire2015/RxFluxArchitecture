@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    tools:context=".ui.main.view.MainActivity"
     tools:openDrawer="start">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -31,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_64"
                 android:background="?android:attr/windowBackground"
-                app:itemIconSize="@dimen/dp_32"
+                app:itemIconSize="@dimen/dp_24"
                 app:itemIconTint="@color/common_text_tab"
                 app:itemTextColor="@color/common_text_tab"
                 app:menu="@menu/github_activity_main_bottom" />

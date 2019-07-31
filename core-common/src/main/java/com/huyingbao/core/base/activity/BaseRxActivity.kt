@@ -65,7 +65,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
     }
 
     /**
-     * [Toolbar]菜单点击事件，拦截返回按钮
+     * [Toolbar]Menu点击事件，拦截返回按钮
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

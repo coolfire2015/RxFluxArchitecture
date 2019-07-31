@@ -54,7 +54,7 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        //菜单布局文件名同界面布局文件名
+        //Menu布局文件名同界面布局文件名
         inflater.inflate(R.menu.wan_fragment_article_list, menu)
     }
 

@@ -2,30 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <item
-        android:id="@+id/nav_main_feedback"
-        android:icon="@drawable/ic_feedback"
-        android:title="@string/github_menu_feedback" />
-    <item
-        android:id="@+id/nav_main_user_info"
-        android:icon="@drawable/ic_account"
-        android:title="@string/github_menu_user_info" />
-    <item
-        android:id="@+id/nav_main_version"
-        android:icon="@drawable/ic_archive"
-        android:title="@string/github_menu_version" />
-    <item
-        android:id="@+id/nav_main_about"
-        android:icon="@drawable/ic_live_help"
-        android:title="@string/github_menu_about" />
-    <item
-        android:id="@+id/nav_main_night"
-        android:icon="@drawable/ic_day"
-        android:title="@string/github_menu_night" />
-    <item
-        android:id="@+id/nav_main_logout"
-        android:icon="@drawable/ic_exit_to_app"
-        android:title="@string/github_menu_logout" />
+    <!--单项选中-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main_feedback"
+            android:icon="@drawable/ic_feedback"
+            android:title="@string/github_menu_feedback" />
+        <item
+            android:id="@+id/nav_main_user_info"
+            android:icon="@drawable/ic_account"
+            android:title="@string/github_menu_user_info" />
+        <item
+            android:id="@+id/nav_main_version"
+            android:icon="@drawable/ic_archive"
+            android:title="@string/github_menu_version" />
+        <item
+            android:id="@+id/nav_main_about"
+            android:icon="@drawable/ic_live_help"
+            android:title="@string/github_menu_about" />
+        <item
+            android:id="@+id/nav_main_night"
+            android:icon="@drawable/ic_day"
+            android:title="@string/github_menu_night" />
+        <item
+            android:id="@+id/nav_main_logout"
+            android:icon="@drawable/ic_exit_to_app"
+            android:title="@string/github_menu_logout" />
+    </group>
+    <!-- 为 Item 添加子Menu，实现分组 -->
     <item android:title="@string/github_menu_module">
         <menu>
             <item

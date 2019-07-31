@@ -20,7 +20,7 @@ abstract class BaseCommonFragment : Fragment(), BaseView {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         //告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令.
-        //fragment中创建菜单
+        //fragment中创建Menu
         setHasOptionsMenu(true)
     }
 

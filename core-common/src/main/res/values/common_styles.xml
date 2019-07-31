@@ -43,12 +43,13 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--自定义弹出框样式-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    <!--自定义CardView样式-->
+    <!--自定义CardView样式，继承自CardView-->
     <style name="CardWhite" parent="CardView">
         <item name="android:layout_margin">@dimen/dp_6</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">@dimen/dp_4</item>
     </style>
 
     <style name="ViewDividerHorizontalStyle">

@@ -2,12 +2,14 @@ package com.huyingbao.module.github.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
@@ -49,6 +51,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
+        setTitle(R.string.app_github_name)
         initDrawerLayout()
         initNavigationView()
         initBottomNavigationView()
@@ -70,21 +73,27 @@ class MainActivity : BaseRxActivity<MainStore>() {
      * 初始化左侧抽屉控件
      */
     private fun initDrawerLayout() {
-        //设置DrawerLayout
-        val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawer_layout_main,
-                findViewById(R.id.tlb_top), R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        //使用父类是ActionBarDrawerToggle的匿名内部类，复写抽屉关闭方法
+        val actionBarDrawerToggle = object : ActionBarDrawerToggle(
+                this, drawer_layout_main, findViewById(R.id.tlb_top), R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                //当抽屉关闭时，设置NavigationView中的所有MenuItem为未选中状态
+                nav_view_main?.menu?.forEach { it.isChecked = false }
+            }
+        }
         drawer_layout_main?.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
     }
 
     /**
      * 初始化左侧导航View，
-     * 设置菜单点击事件，
+     * 设置Menu点击事件，
      * 设置View信息显示。
      */
     private fun initNavigationView() {
+        //修改日夜模式Menu图标文字
         nav_view_main?.menu?.findItem(R.id.nav_main_night)?.let {
-            //修改日夜模式菜单图标文字
             when (localStorageUtils.getValue(CommonContants.Key.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)) {
                 AppCompatDelegate.MODE_NIGHT_YES -> {
                     it.icon = getDrawable(R.drawable.ic_day)
@@ -100,7 +109,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
                 }
             }
         }
-        //菜单点击事件
+        //Menu点击事件，在Group中设置checkableBehavior="single"，设置MenuItem选中效果
         nav_view_main?.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_main_feedback -> showFeedBackDialog()
@@ -112,10 +121,10 @@ class MainActivity : BaseRxActivity<MainStore>() {
                 R.id.nav_main_gan -> ARouter.getInstance().build(CommonContants.Address.RandomActivity).navigation()
                 R.id.nav_main_logout -> logout()
             }
-            drawer_layout_main?.closeDrawer(GravityCompat.START)
+            //关闭抽屉 drawer_layout_main?.closeDrawer(GravityCompat.START)
             true
         }
-        //菜单头部当前登录的用户信息更新
+        //NavigationView头部布局View当前登录的用户信息更新
         githubAppStore.userLiveData.observe(this, Observer {
             if (it != null) {
                 //当数据变化更新UI
@@ -139,7 +148,7 @@ class MainActivity : BaseRxActivity<MainStore>() {
 
     /**
      * 初始化底部导航View，
-     * 设置菜单点击事件。
+     * 设置Menu点击事件。
      */
     private fun initBottomNavigationView() {
         bottom_nav_main.setOnNavigationItemSelectedListener {
