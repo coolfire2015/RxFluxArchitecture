@@ -10,8 +10,6 @@ import com.huyingbao.module.wan.ui.article.model.Banner
  */
 class BannerAdapter(data: List<Banner>?) : BaseQuickAdapter<Banner, BaseViewHolder>(R.layout.wan_recycle_item, data) {
     override fun convert(helper: BaseViewHolder, item: Banner) {
-        helper.setText(R.id.tv_item_name, item.title)
-                .setText(R.id.tv_item_description, item.desc)
-                .setText(R.id.tv_item_id, "GithubId" + item.id)
+        helper.setText(R.id.tv_item_title, item.title)
     }
 }

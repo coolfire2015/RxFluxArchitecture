@@ -64,7 +64,7 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
 
     @Subscribe(tags = [ArticleAction.TO_WEB])
     fun toWeb(rxAction: RxAction) {
-        url = rxAction.data[CommonContants.Key.URL]?.toString()
+        url = rxAction.data[CommonContants.Key.WEB_URL]?.toString()
         postChange(RxChange.newInstance(rxAction.tag))
     }
 }

@@ -85,10 +85,13 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
         //设置更多view
         //articleAdapter.setLoadMoreView(new CommonLoadMoreView());
         //设置加载更多监听器
-        articleAdapter?.setOnLoadMoreListener({ loadMore() }, rvContent)
-        articleAdapter?.setOnItemClickListener { _, _, position ->
-            articleActionCreator.postLocalAction(ArticleAction.TO_WEB,
-                    CommonContants.Key.URL, articleAdapter?.data?.get(position)?.link ?: "")
+        articleAdapter?.run {
+            setOnLoadMoreListener({ loadMore() }, rvContent)
+            setOnItemClickListener { _, _, position ->
+                articleActionCreator.postLocalAction(
+                        ArticleAction.TO_WEB,
+                        CommonContants.Key.WEB_URL, articleAdapter?.data?.get(position)?.link ?: "")
+            }
         }
     }
 
@@ -97,10 +100,12 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
      */
     private fun initRecyclerView() {
         rvContent = view?.findViewById(R.id.rv_content)
-        rvContent?.layoutManager = LinearLayoutManager(activity)
-        rvContent?.setHasFixedSize(true)
-        //view设置适配器
-        rvContent?.adapter = articleAdapter
+        rvContent?.run {
+            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+            //view设置适配器
+            adapter = articleAdapter
+        }
     }
 
     /**

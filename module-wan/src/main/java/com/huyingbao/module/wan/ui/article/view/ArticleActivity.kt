@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.base.activity.BaseRxFragActivity
-import com.huyingbao.core.common.fragment.CommonWebFragment
+import com.huyingbao.core.web.CommonWebFragment
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore

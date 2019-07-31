@@ -4,4 +4,6 @@
     <string name="wan_label_friend">常用网站</string>
     <string name="wan_label_banner">横幅</string>
     <string name="wan_label_gan">干货集中营</string>
+    <string name="wan_tag_top">置顶</string>
+    <string name="wan_tag_fresh">新</string>
 </resources>

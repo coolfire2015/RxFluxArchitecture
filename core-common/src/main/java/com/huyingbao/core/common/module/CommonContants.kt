@@ -31,7 +31,10 @@ class CommonContants {
         const val TITLE = "title"
         const val CONTENT = "content"
         const val INFO = "info"
-        const val URL = "url"
+        const val WEB_URL = "webUrl"
+        const val WEB_TITLE = "webTitle"
+        const val WEB_ID = "webId"
+        const val WEB_MENU = "webMenu"
     }
 
     object Header {

@@ -11,8 +11,6 @@ import com.huyingbao.module.wan.ui.friend.model.WebSite
 class WebSiteAdapter(data: List<WebSite>?) : BaseQuickAdapter<WebSite, BaseViewHolder>(R.layout.wan_recycle_item, data) {
 
     override fun convert(helper: BaseViewHolder, item: WebSite) {
-        helper.setText(R.id.tv_item_name, item.name)
-                .setText(R.id.tv_item_description, item.link)
-                .setText(R.id.tv_item_id, "GithubId" + item.id)
+        helper.setText(R.id.tv_item_title, item.name)
     }
 }
