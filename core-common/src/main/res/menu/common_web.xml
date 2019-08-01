@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/wan_menu_share"
-        android:title="@string/wan_menu_share"
+        android:id="@+id/common_web_menu_share"
+        android:title="@string/common_menu_share"
         app:showAsAction="never" />
     <item
-        android:id="@+id/wan_menu_collection"
-        android:title="@string/wan_menu_collection"
+        android:id="@+id/common_web_menu_copy"
+        android:title="@string/common_menu_copy"
         app:showAsAction="never" />
     <item
-        android:id="@+id/wan_menu_browser"
-        android:title="@string/wan_menu_browser"
+        android:id="@+id/common_web_menu_browser"
+        android:title="@string/common_menu_browser"
         app:showAsAction="never" />
 </menu>

@@ -14,6 +14,8 @@ import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.common_fragment_web.*
 
 /**
+ * X5内核WebView展示页面
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 class CommonWebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
@@ -21,7 +23,7 @@ class CommonWebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
         fun newInstance(url: String): CommonWebFragment {
             return CommonWebFragment().apply {
                 arguments = Bundle().apply {
-                    putString(CommonContants.Key.WEB_URL, url)
+                    putString(CommonContants.Key.URL, url)
                 }
             }
         }
@@ -33,8 +35,8 @@ class CommonWebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         arguments?.let {
-            if (it.containsKey(CommonContants.Key.WEB_URL)) {
-                //和系统webview一样
+            if (it.containsKey(CommonContants.Key.URL)) {
+                //和系统WebView一样
                 val settings = web_content.settings
                 //支持Javascript 与js交互
                 settings.setJavaScriptEnabled(true)
@@ -58,6 +60,7 @@ class CommonWebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
                 //缓存模式
                 settings.cacheMode = WebSettings.LOAD_NO_CACHE
                 web_content.webViewClient = WebViewClient()
+                //设置进度条
                 web_content.webChromeClient = object : WebChromeClient() {
                     override fun onProgressChanged(webView: WebView?, progress: Int) {
                         super.onProgressChanged(webView, progress)
@@ -67,7 +70,7 @@ class CommonWebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
                         }
                     }
                 }
-                web_content.loadUrl(it.getString(CommonContants.Key.WEB_URL))
+                web_content.loadUrl(it.getString(CommonContants.Key.URL))
             }
         }
     }

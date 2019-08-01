@@ -91,9 +91,7 @@ class ArticleListFragment : BaseRxFragment<ArticleStore>() {
                 setOnItemClickListener { _, _, position ->
                     val intent = CommonWebActivity.newIntent(it,
                             articleAdapter?.data?.get(position)?.link,
-                            articleAdapter?.data?.get(position)?.title,
-                            articleAdapter?.data?.get(position)?.id?.toString(),
-                            R.menu.wan_web)
+                            articleAdapter?.data?.get(position)?.title)
                     startActivity(intent)
                 }
             }

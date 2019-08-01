@@ -6,8 +6,4 @@
     <string name="wan_label_gan">干货集中营</string>
     <string name="wan_tag_top">置顶</string>
     <string name="wan_tag_fresh">新</string>
-
-    <string name="wan_menu_share">分享</string>
-    <string name="wan_menu_collection">收藏</string>
-    <string name="wan_menu_browser">用浏览器打开</string>
 </resources>

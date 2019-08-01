@@ -6,5 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CommonWebStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
+class CommonWebStore @Inject constructor(
+        rxDispatcher: RxDispatcher
+) : RxActivityStore(rxDispatcher) {
 }

@@ -5,4 +5,11 @@
     <string name="common_ok">确定</string>
     <string name="common_hint_title">请输入标题</string>
     <string name="common_hint_content">请输入内容</string>
+
+    <string name="common_menu_share">分享</string>
+    <string name="common_menu_copy">复制</string>
+    <string name="common_menu_collection">收藏</string>
+    <string name="common_menu_browser">用浏览器打开</string>
+
+    <string name="common_toast_copy">已经复制到粘贴板</string>
 </resources>
