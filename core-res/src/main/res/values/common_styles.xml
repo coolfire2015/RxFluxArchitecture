@@ -44,16 +44,16 @@
     <!--自定义弹出框样式-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!--自定义CardView样式，继承自CardView-->
-    <style name="CardWhite" parent="CardView">
-        <item name="android:layout_marginStart">@dimen/dp_10</item>
-        <item name="android:layout_marginEnd">@dimen/dp_10</item>
-        <item name="android:layout_marginTop">@dimen/dp_6</item>
-        <item name="android:layout_marginBottom">@dimen/dp_6</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    <style name="CommonCardView" parent="CardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_16</item>
+        <item name="android:layout_marginEnd">@dimen/dp_16</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginBottom">@dimen/dp_10</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="cardCornerRadius">@dimen/dp_4</item>
-        <item name="cardElevation">@dimen/dp_4</item>
+        <item name="cardElevation">@dimen/dp_6</item>
         <item name="cardPreventCornerOverlap">false</item>
     </style>
 

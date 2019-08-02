@@ -32,14 +32,16 @@
     <!-- 为 Item 添加子Menu，实现分组 -->
     <item android:title="@string/github_menu_module">
         <menu>
-            <item
-                android:id="@+id/nav_main_wan"
-                android:icon="@drawable/ic_wan"
-                android:title="@string/github_menu_wan" />
-            <item
-                android:id="@+id/nav_main_gan"
-                android:icon="@drawable/ic_gan_huo"
-                android:title="@string/github_menu_gan" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_main_wan"
+                    android:icon="@drawable/ic_wan"
+                    android:title="@string/github_menu_wan" />
+                <item
+                    android:id="@+id/nav_main_gan"
+                    android:icon="@drawable/ic_gan_huo"
+                    android:title="@string/github_menu_gan" />
+            </group>
         </menu>
     </item>
 </menu>

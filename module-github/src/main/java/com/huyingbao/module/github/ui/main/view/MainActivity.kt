@@ -79,7 +79,14 @@ class MainActivity : BaseRxActivity<MainStore>() {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 //当抽屉关闭时，设置NavigationView中的所有MenuItem为未选中状态
-                nav_view_main?.menu?.forEach { it.isChecked = false }
+                nav_view_main?.menu?.forEach {
+                    it.isChecked = false
+                    if (it.hasSubMenu()) {
+                        it.subMenu.forEach { it2 ->
+                            it2.isChecked = false
+                        }
+                    }
+                }
             }
         }
         drawer_layout_main?.addDrawerListener(actionBarDrawerToggle)
@@ -122,6 +129,8 @@ class MainActivity : BaseRxActivity<MainStore>() {
                 R.id.nav_main_logout -> logout()
             }
             //关闭抽屉 drawer_layout_main?.closeDrawer(GravityCompat.START)
+            //点击设置选中效果
+            it.isChecked = true
             true
         }
         //NavigationView头部布局View当前登录的用户信息更新
