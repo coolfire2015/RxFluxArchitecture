@@ -1,8 +1,16 @@
 package com.huyingbao.module.wan.ui.article.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+
 /**
+ * 默认情况下，Room使用类名作为数据库表名，SQLite中的表名不区分大小写。
+ *
  * Created by liujunfeng on 2019/1/1.
  */
+@Entity(tableName = "article")
 class Article {
 
     /**
@@ -30,7 +38,6 @@ class Article {
      * visible : 1
      * zan : 0
      */
-
     var apkLink: String? = null
     var author: String? = null
     var chapterId: Int = 0
@@ -40,11 +47,14 @@ class Article {
     var desc: String? = null
     var envelopePic: String? = null
     var isFresh: Boolean = false
+    @PrimaryKey
     var id: Int = 0
     var link: String? = null
     var niceDate: String? = null
     var origin: String? = null
     var projectLink: String? = null
+    //具有不同的名称
+    @ColumnInfo(name = "publish_time")
     var publishTime: Long = 0
     var superChapterId: Int = 0
     var superChapterName: String? = null
@@ -53,5 +63,6 @@ class Article {
     var userId: Int = 0
     var visible: Int = 0
     var zan: Int = 0
+    @Ignore //不想持久的字段
     var tags: List<Tag>? = null
 }

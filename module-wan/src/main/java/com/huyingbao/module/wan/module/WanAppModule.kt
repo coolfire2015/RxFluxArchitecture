@@ -1,8 +1,12 @@
 package com.huyingbao.module.wan.module
 
+import android.app.Application
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
+import com.huyingbao.module.wan.database.WanAppDatabase
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -27,5 +31,20 @@ class WanAppModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(builder.build())
                 .build()
+    }
+
+    /**
+     * 提供[RoomDatabase]单例对象，获得创建数据库的实例：
+     */
+    @Singleton
+    @Provides
+    fun provideDataBase(application: Application): WanAppDatabase {
+        val databaseBuilder = Room.databaseBuilder(
+                application,
+                WanAppDatabase::class.java,
+                WanContants.Key.DATABASE_NAME)
+                //允许Room破坏性地重新创建数据库表。
+                .fallbackToDestructiveMigration()
+        return databaseBuilder.build()
     }
 }

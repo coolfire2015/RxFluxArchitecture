@@ -66,7 +66,7 @@ class GithubAppModule {
     }
 
     /**
-     * 提供[RoomDatabase]单例对象
+     * 提供[RoomDatabase]单例对象，获得创建数据库的实例：
      */
     @Singleton
     @Provides

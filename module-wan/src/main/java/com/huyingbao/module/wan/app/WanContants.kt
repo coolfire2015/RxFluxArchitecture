@@ -6,15 +6,10 @@ package com.huyingbao.module.wan.app
 class WanContants {
 
     object Key {
-        const val URL = "url"
+        const val DATABASE_NAME = "wan-db"
     }
 
     object Base {
-        /**
-         * 时间间隔
-         */
-        const val INTERVAL = "interval"
-
         /**
          * 接口根路径
          */

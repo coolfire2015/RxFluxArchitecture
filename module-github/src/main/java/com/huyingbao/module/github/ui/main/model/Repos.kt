@@ -4,7 +4,7 @@ import androidx.room.Entity
 
 /**
  * 默认情况下，Room使用类名作为数据库表名，SQLite中的表名不区分大小写。
- * Date: 2018-10-29
+ * 如果实体具有复合主键，则可以使用[Entity.primaryKeys]属性
  */
 @Entity(tableName = "repos",
         primaryKeys = ["repositoryName", "ownerName"])

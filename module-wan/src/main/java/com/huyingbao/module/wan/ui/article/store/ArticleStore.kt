@@ -1,17 +1,18 @@
 package com.huyingbao.module.wan.ui.article.store
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
-import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.store.RxActivityStore
-import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.app.WanResponse
+import com.huyingbao.module.wan.database.WanAppDatabase
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,9 +21,12 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityStore(rxDispatcher) {
-    val articleLiveData = MutableLiveData<ArrayList<Article>>()
-    val bannerLiveData = MutableLiveData<ArrayList<Banner>>()
+class ArticleStore @Inject constructor(
+        rxDispatcher: RxDispatcher,
+        private var wanAppDatabase: WanAppDatabase
+) : RxActivityStore(rxDispatcher) {
+    val articleLiveData: LiveData<List<Article>> by lazy { wanAppDatabase.reposDao().getArticleListLiveData() }
+    val bannerLiveData: MutableLiveData<ArrayList<Banner>> by lazy { MutableLiveData<ArrayList<Banner>>() }
     /**
      * 列表页数
      */
@@ -33,7 +37,6 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
      */
     override fun onCleared() {
         nextRequestPage = 1
-        articleLiveData.value = null
         bannerLiveData.value = null
     }
 
@@ -49,14 +52,10 @@ class ArticleStore @Inject constructor(rxDispatcher: RxDispatcher) : RxActivityS
     /**
      * 接收ArticleList数据
      */
-    @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST])
+    @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST], threadMode = ThreadMode.POSTING)
     fun onGetArticleLiveData(rxAction: RxAction) {
-        val articleResponse = rxAction.getResponse<WanResponse<Page<Article>>>()
-        if (articleLiveData.value == null) {
-            articleLiveData.setValue(articleResponse!!.data!!.datas)
-        } else {
-            articleLiveData.value!!.addAll(articleResponse!!.data!!.datas!!)
-            articleLiveData.setValue(articleLiveData.value)
+        rxAction.getResponse<WanResponse<Page<Article>>>()?.data?.datas?.let {
+            wanAppDatabase.reposDao().insertAll(it)
         }
         nextRequestPage++
     }
