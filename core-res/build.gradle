@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
+apply from: rootProject.file('depend_common.gradle')
 
 android {
-    //编译版本
-    compileSdkVersion COMPILE_SDK_VERSION as int
     //默认配置
     defaultConfig {
         //Sdk版本

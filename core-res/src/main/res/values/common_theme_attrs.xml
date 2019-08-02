@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- 控制app背景色 format:颜色值、资源引用 -->
-    <attr name="colorIcon" format="color|reference" />
-</resources>

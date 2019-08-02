@@ -15,7 +15,7 @@
     <color name="common_accent">#FFC107</color>
     <color name="common_error">#E91E63</color>
     <!--背景颜色-->
-    <color name="common_background_primary">#FFFFFF</color>
+    <color name="common_background_primary">#F5F7FA</color>
 
 
     <color name="White">#FFFFFF</color>
