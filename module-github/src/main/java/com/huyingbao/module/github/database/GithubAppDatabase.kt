@@ -29,5 +29,5 @@ import com.huyingbao.module.github.ui.main.model.Repos
  */
 @Database(entities = [Repos::class], version = 3, exportSchema = false)
 abstract class GithubAppDatabase : RoomDatabase() {
-    abstract fun plantDao(): ReposDao
+    abstract fun reposDao(): ReposDao
 }
