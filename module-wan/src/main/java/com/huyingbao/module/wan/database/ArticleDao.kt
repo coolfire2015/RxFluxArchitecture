@@ -1,7 +1,6 @@
 package com.huyingbao.module.wan.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.huyingbao.module.wan.ui.article.model.Article
 
@@ -16,7 +15,7 @@ import com.huyingbao.module.wan.ui.article.model.Article
  */
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM article")
+    @Query("SELECT * FROM article ORDER BY publish_time DESC")
     fun getArticleListLiveData(): LiveData<List<Article>>
 
     /**
