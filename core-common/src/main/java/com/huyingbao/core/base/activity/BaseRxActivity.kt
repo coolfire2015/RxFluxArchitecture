@@ -77,7 +77,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
      * 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
-    fun onRxError(rxError: RxError) {
+    open fun onRxError(rxError: RxError) {
         when (val throwable = rxError.throwable) {
             is CommonException -> handleCommonException(throwable)
             is retrofit2.HttpException -> Toast.makeText(this, throwable.code().toString() + ":服务器问题", Toast.LENGTH_SHORT).show()
@@ -94,7 +94,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
      * 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
-    fun onRxRetry(rxRetry: RxRetry<*>) {
+    open fun onRxRetry(rxRetry: RxRetry<*>) {
         val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.cdl_content) ?: return
         Snackbar.make(coordinatorLayout, rxRetry.tag, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Retry") { commonActionCreator.postRetryAction(rxRetry) }
@@ -108,7 +108,7 @@ abstract class BaseRxActivity<T : RxActivityStore> : RxFluxActivity<T>(), BaseVi
      * 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
-    fun onRxLoading(rxLoading: RxLoading) {
+    open fun onRxLoading(rxLoading: RxLoading) {
         val fragmentByTag = supportFragmentManager.findFragmentByTag(rxLoading.tag)
         if (fragmentByTag == null && rxLoading.isLoading) {
             //显示进度框

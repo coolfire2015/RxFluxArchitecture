@@ -7,6 +7,7 @@ import androidx.paging.toLiveData
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.app.WanResponse
 import com.huyingbao.module.wan.db.WanAppDb
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
@@ -14,7 +15,6 @@ import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.model.Article
 import com.huyingbao.module.wan.ui.article.model.Banner
 import com.huyingbao.module.wan.ui.article.model.Page
-import com.orhanobut.logger.Logger
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
@@ -33,33 +33,20 @@ class ArticleStore @Inject constructor(
     /**
      * 列表页数
      */
-    private var nextRequestPage = 0
-
-    val articleLiveData = wanAppDb.reposDao().getArticleList().toLiveData(
-            config = Config(pageSize = 30, enablePlaceholders = true, initialLoadSizeHint = 20),
-            initialLoadKey = 0,
-            boundaryCallback = object : PagedList.BoundaryCallback<Article>() {
-                override fun onZeroItemsLoaded() {
-                    super.onZeroItemsLoaded()
-                    nextRequestPage = 0
-                    Logger.e("加载第一次")
-                    articleActionCreator.getArticleList(nextRequestPage)
-                }
-
-                override fun onItemAtEndLoaded(itemAtEnd: Article) {
-                    super.onItemAtEndLoaded(itemAtEnd)
-                    Logger.e("加载第 $nextRequestPage 次")
-                    articleActionCreator.getArticleList(nextRequestPage)
-                }
-
-                override fun onItemAtFrontLoaded(itemAtFront: Article) {
-                    super.onItemAtFrontLoaded(itemAtFront)
-                }
-            }
-    )
+    var nextRequestPage = 0
+        private set
 
     val bannerLiveData: MutableLiveData<ArrayList<Banner>> by lazy { MutableLiveData<ArrayList<Banner>>() }
 
+    val articleLiveData = wanAppDb.reposDao().getArticleList().toLiveData(
+            config = Config(pageSize = 30, enablePlaceholders = true),
+            boundaryCallback = object : PagedList.BoundaryCallback<Article>() {
+                override fun onItemAtEndLoaded(itemAtEnd: Article) {
+                    super.onItemAtEndLoaded(itemAtEnd)
+                    articleActionCreator.getArticleList(nextRequestPage)
+                }
+            }
+    )
 
     /**
      * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
@@ -83,9 +70,17 @@ class ArticleStore @Inject constructor(
      */
     @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST], threadMode = ThreadMode.POSTING)
     fun onGetArticleLiveData(rxAction: RxAction) {
+        //如果是刷新，先清除数据库缓存
+        nextRequestPage = rxAction.get<Int>(CommonContants.Key.INDEX) ?: 0
+        if (nextRequestPage == 0) {
+            wanAppDb.reposDao().deleteAll()
+        }
+        //如果有数据，添加到数据库缓存中
         rxAction.getResponse<WanResponse<Page<Article>>>()?.data?.datas?.let {
             wanAppDb.reposDao().insertAll(it)
         }
+        //更新分页索引
         nextRequestPage++
+
     }
 }

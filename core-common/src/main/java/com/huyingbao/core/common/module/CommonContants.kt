@@ -32,6 +32,10 @@ class CommonContants {
         const val CONTENT = "content"
         const val INFO = "info"
         const val URL = "url"
+        /**
+         * 索引
+         */
+        const val INDEX = "index"
     }
 
     object Header {

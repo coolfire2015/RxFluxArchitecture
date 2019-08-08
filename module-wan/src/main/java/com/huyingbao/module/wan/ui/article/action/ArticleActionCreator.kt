@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.ui.article.action
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanActionCreator
 import io.reactivex.Observable
@@ -25,10 +26,10 @@ class ArticleActionCreator @Inject constructor(
 ) : WanActionCreator(rxDispatcher, rxActionManager), ArticleAction {
 
     override fun getArticleList(page: Int) {
-        val rxAction = newRxAction(ArticleAction.GET_ARTICLE_LIST)
+        val rxAction = newRxAction(ArticleAction.GET_ARTICLE_LIST,
+                CommonContants.Key.INDEX,page)
         //延迟5s调用接口，测试取消操作
         val articleApi = retrofit.create(ArticleApi::class.java)
-        val httpObservable = Observable.timer(5, TimeUnit.SECONDS).flatMap { articleApi.getArticleList(page) }
         postHttpLoadingAction(rxAction, articleApi.getArticleList(page))
     }
 
