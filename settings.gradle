@@ -6,5 +6,6 @@ include ':core-common'
 include ':core-res'
 
 include ':module-app'
+include ':module-loading'
 include ':module-wan'
 include ':module-gan'

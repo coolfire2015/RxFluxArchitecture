@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/github_nav_login"
+    app:startDestination="@id/startFragment"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.huyingbao.module.github.ui.login.view.StartFragment"
+        android:label="@string/github_label_start"
+        tools:layout="@layout/github_fragment_start">
+        <action
+            android:id="@+id/start_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.huyingbao.module.github.ui.login.view.LoginFragment"
+        android:label="@string/github_label_login"
+        tools:layout="@layout/github_fragment_login" />
+</navigation>

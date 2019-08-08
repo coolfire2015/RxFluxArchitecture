@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_nav_dynamic"
+        android:icon="@drawable/ic_event_note"
+        android:title="@string/github_label_dynamic" />
+
+    <item
+        android:id="@+id/bottom_nav_recommend"
+        android:icon="@drawable/ic_assessment"
+        android:title="@string/github_label_recommend" />
+
+    <item
+        android:id="@+id/bottom_nav_mine"
+        android:icon="@drawable/ic_account"
+        android:title="@string/github_label_mine" />
+
+</menu>
