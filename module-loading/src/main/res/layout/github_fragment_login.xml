@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_account"
+        android:drawablePadding="@dimen/dp_10"
+        android:hint="@string/github_username" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:drawableStart="@drawable/ic_keyboard"
+        android:drawablePadding="@dimen/dp_10"
+        android:hint="@string/github_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_100"
+        android:text="@string/github_label_login" />
+</LinearLayout>
