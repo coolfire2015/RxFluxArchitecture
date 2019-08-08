@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     <!--clipChildren是设置子view是否可以超出父view；-->
     <!--clipToPadding是设置是否可以在padding区域内绘制；-->
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -1,10 +1,14 @@
 package com.huyingbao.module.wan.module
 
+import android.app.Application
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
 import com.huyingbao.core.common.module.CommonModule
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
+import com.huyingbao.module.wan.db.WanAppDb
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import dagger.Component
 import dagger.Module
@@ -56,7 +60,7 @@ class MockModule {
     }
 
     /**
-     * 初始化Retrofit
+     * 初始化Retrofit，覆盖[WanAppModule.provideRetrofit]方法
      *
      * @param builder 来自[CommonModule]
      */
@@ -69,6 +73,20 @@ class MockModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(builder.build())
         return retrofitBuilder.build()
+    }
+
+    /**
+     * 提供[RoomDatabase]单例对象，获得创建内存数据库的实例，覆盖[WanAppModule.provideDataBase]方法
+     */
+    @Singleton
+    @Provides
+    fun provideDataBase(application: Application): WanAppDb {
+        val databaseBuilder = Room.inMemoryDatabaseBuilder(
+                application,
+                WanAppDb::class.java)
+                //允许Room破坏性地重新创建数据库表。
+                .fallbackToDestructiveMigration()
+        return databaseBuilder.build()
     }
 
     /**

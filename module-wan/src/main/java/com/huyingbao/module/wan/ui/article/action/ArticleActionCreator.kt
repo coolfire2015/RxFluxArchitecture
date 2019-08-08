@@ -2,7 +2,6 @@ package com.huyingbao.module.wan.ui.article.action
 
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.scope.ActivityScope
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanActionCreator
 import io.reactivex.Observable
@@ -10,6 +9,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Singleton
 
 
 /**
@@ -17,7 +17,7 @@ import javax.inject.Named
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@ActivityScope
+@Singleton
 class ArticleActionCreator @Inject constructor(
         rxDispatcher: RxDispatcher,
         rxActionManager: RxActionManager,

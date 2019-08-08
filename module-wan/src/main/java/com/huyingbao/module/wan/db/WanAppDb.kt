@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.database
+package com.huyingbao.module.wan.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -11,7 +11,11 @@ import com.huyingbao.module.wan.ui.article.model.Article
  *
  *包含一个具有0个参数的抽象方法，并返回用@Dao注释的类。
  */
-@Database(entities = [Article::class], version = 3, exportSchema = false)
-abstract class WanAppDatabase : RoomDatabase() {
+@Database(
+        entities = [Article::class],
+        version = 3,
+        exportSchema = false
+)
+abstract class WanAppDb : RoomDatabase() {
     abstract fun reposDao(): ArticleDao
 }

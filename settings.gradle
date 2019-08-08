@@ -3,5 +3,5 @@ include ':core-res'
 
 //include ':module-app'
 include ':module-wan'
-include ':module-gan'
-include ':module-github'
+//include ':module-gan'
+//include ':module-github'

@@ -1,6 +1,7 @@
-package com.huyingbao.module.wan.database
+package com.huyingbao.module.wan.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.huyingbao.module.wan.ui.article.model.Article
 
@@ -15,13 +16,16 @@ import com.huyingbao.module.wan.ui.article.model.Article
  */
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM article ORDER BY publish_time DESC")
-    fun getArticleListLiveData(): LiveData<List<Article>>
-
     /**
      * SQLite处理@Insert(onConflict = OnConflictStrategy.REPLACE)作为一套REMOVE和REPLACE操作而不是单一的更新操作。
      * 本替换冲突值的方法有可能影响外键约束
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: ArrayList<Article>)
+
+    @Query("SELECT * FROM article ORDER BY publish_time DESC")
+    fun getArticleList(): DataSource.Factory<Int, Article>
+
+    @Query("DELETE FROM article")
+    fun deleteAll()
 }

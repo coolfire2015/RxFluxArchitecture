@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
-import com.huyingbao.module.wan.database.WanAppDatabase
+import com.huyingbao.module.wan.db.WanAppDb
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -21,6 +21,8 @@ import javax.inject.Singleton
  */
 @Module(includes = [WanInjectActivityModule::class, WanStoreModule::class])
 class WanAppModule {
+    //模块化App中，依赖注入仓库中会有多个方法提供Retrofit对象，
+    //使用@Name注解，不同模块使用对应模块内的Retrofit对象提供方法。
     @Singleton
     @Provides
     @Named(BuildConfig.MODULE_NAME)
@@ -38,10 +40,10 @@ class WanAppModule {
      */
     @Singleton
     @Provides
-    fun provideDataBase(application: Application): WanAppDatabase {
+    fun provideDataBase(application: Application): WanAppDb {
         val databaseBuilder = Room.databaseBuilder(
                 application,
-                WanAppDatabase::class.java,
+                WanAppDb::class.java,
                 WanContants.Key.DATABASE_NAME)
                 //允许Room破坏性地重新创建数据库表。
                 .fallbackToDestructiveMigration()
