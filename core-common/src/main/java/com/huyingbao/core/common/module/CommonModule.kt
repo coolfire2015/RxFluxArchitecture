@@ -22,7 +22,11 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Module(includes = [RxFluxModule::class, CommonInjectActivityModule::class, CommonStoreModule::class])
+@Module(includes = [
+    RxFluxModule::class,
+    CommonInjectActivityModule::class,
+    CommonStoreModule::class
+])
 class CommonModule {
     @Singleton
     @Provides

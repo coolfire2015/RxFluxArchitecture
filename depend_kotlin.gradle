@@ -27,7 +27,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kapt "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-    kapt "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+    kapt project(':core-arch-processor')
     //单元测试编译时生成
     kaptTest "androidx.room:room-compiler:${X_ROOM}"
     kaptTest "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
@@ -36,5 +36,5 @@ dependencies {
     kaptTest "com.google.dagger:dagger-android-processor:${DAGGER}"
     kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kaptTest "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-    kaptTest "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
+    kaptTest project(':core-arch-processor')
 }

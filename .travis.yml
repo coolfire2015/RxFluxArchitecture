@@ -49,8 +49,6 @@ before_install:
   #密钥
   - echo -e "CLIENT_ID=\"$CLIENT_ID\"" >> local.properties
   - echo -e "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> local.properties
-  - echo -e "GIT_NAME=\"$GIT_NAME\"" >> local.properties
-  - echo -e "GIT_PWD=\"$GIT_PWD\"" >> local.properties
   - echo -e "STORE_RELEASE_FILE=$STORE_RELEASE_FILE" >> local.properties
   - echo -e "STORE_DEBUG_FILE=$STORE_DEBUG_FILE" >> local.properties
   - echo -e "STORE_PASSWORD=$STORE_PASSWORD" >> local.properties
