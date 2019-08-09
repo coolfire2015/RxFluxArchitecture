@@ -2,10 +2,10 @@ package ${packageName}.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.huyingbao.core.base.activity.BaseRxFragActivity
+import com.huyingbao.core.base.flux.activity.BaseFluxFragActivity
 import ${packageName}.store.${storeClass}
 
-class ${activityClass} : BaseRxFragActivity<${storeClass}>() {
+class ${activityClass} : BaseFluxFragActivity<${storeClass}>() {
     override fun createFragment(): Fragment? {
         return ${fragmentClass}.newInstance()
     }

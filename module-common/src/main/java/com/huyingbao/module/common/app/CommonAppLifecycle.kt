@@ -22,7 +22,7 @@ class CommonAppLifecycle(application: Application) : RxAppLifecycle(application)
     override fun onCreate() {
         //EventBus使用kapt编译生成的索引文件
 //        EventBus.builder()
-//                .addIndex(GithubEventBusIndex())
+//                .addIndex(CommonEventBusIndex())
 //                .eventInheritance(false)
     }
 

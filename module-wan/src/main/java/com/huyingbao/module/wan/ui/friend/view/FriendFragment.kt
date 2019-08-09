@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.huyingbao.core.base.fragment.BaseRxFragment
+import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
@@ -16,7 +16,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class FriendFragment : BaseRxFragment<FriendStore>() {
+class FriendFragment : BaseFluxFragment<FriendStore>() {
     @Inject
     lateinit var actionCreator: FriendActionCreator
 

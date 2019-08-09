@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.huyingbao.core.base.fragment.BaseRxFragment;
+import com.huyingbao.core.base.flux.fragment.BaseFluxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.action.GanConstants;
 import com.huyingbao.module.gan.ui.random.action.RandomAction;
@@ -28,7 +28,7 @@ import javax.inject.Inject;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-public class CategoryFragment extends BaseRxFragment<RandomStore> {
+public class CategoryFragment extends BaseFluxFragment<RandomStore> {
     @Inject
     RandomActionCreator mRandomActionCreator;
 

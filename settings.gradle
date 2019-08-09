@@ -7,5 +7,5 @@ include ':core-res'
 
 //include ':module-app'
 include ':module-common'
-//include ':module-wan'
+include ':module-wan'
 //include ':module-gan'

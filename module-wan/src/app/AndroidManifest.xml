@@ -9,16 +9,11 @@
         android:name="com.huyingbao.module.wan.WanApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
-        android:label="@string/wan_name"
+        android:label="@string/app_label_wan"
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
     </application>
 </manifest>

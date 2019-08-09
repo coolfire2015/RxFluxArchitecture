@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.huyingbao.core.base.R
 import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
 import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.module.common.R
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.share
 import org.jetbrains.anko.toast

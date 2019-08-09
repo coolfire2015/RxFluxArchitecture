@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_label_app">RxFluxArch</string>
+    <string name="app_label_common">引导</string>
+    <string name="app_label_wan">玩安卓</string>
+    <string name="app_label_gan">干货集中营</string>
+    <string name="app_label_github">Github</string>
+</resources>

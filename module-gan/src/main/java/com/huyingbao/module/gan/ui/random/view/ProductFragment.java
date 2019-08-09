@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.huyingbao.core.base.fragment.BaseRxFragment;
+import com.huyingbao.core.base.flux.fragment.BaseFluxFragment;
 import com.huyingbao.module.gan.R;
 import com.huyingbao.module.gan.ui.random.action.RandomActionCreator;
 import com.huyingbao.module.gan.ui.random.adapter.ProductAdapter;
@@ -21,7 +21,7 @@ import javax.inject.Inject;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-public class ProductFragment extends BaseRxFragment<RandomStore> {
+public class ProductFragment extends BaseFluxFragment<RandomStore> {
     private static final int PAGE_SIZE = 20;
     @Inject
     RandomActionCreator mActionCreator;

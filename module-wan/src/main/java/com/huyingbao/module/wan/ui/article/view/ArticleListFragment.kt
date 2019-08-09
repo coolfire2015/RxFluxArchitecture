@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.RxLoading
-import com.huyingbao.core.base.fragment.BaseRxFragment
+import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
 import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
@@ -23,7 +23,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class ArticleListFragment : BaseRxFragment<ArticleStore>() {
+class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 

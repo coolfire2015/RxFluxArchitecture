@@ -13,7 +13,11 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-@Component(modules = [WanAppModule::class, CommonModule::class, AndroidInjectionModule::class])
+@Component(modules = [
+    WanAppModule::class,
+    CommonModule::class,
+    AndroidInjectionModule::class
+])
 interface WanComponent : AndroidInjector<WanApplication> {
     @Component.Builder
     interface Builder {

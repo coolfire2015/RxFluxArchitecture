@@ -1,13 +1,13 @@
 package ${packageName}.view
 
 import android.os.Bundle
-import com.huyingbao.core.base.fragment.BaseRxFragment
+import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
 <#if applicationPackage??>
 import ${applicationPackage}.R
 </#if>
 import ${packageName}.store.${storeClass}
 
-class ${fragmentClass} : BaseRxFragment<${storeClass}>() {
+class ${fragmentClass} : BaseFluxFragment<${storeClass}>() {
     companion object {
         fun newInstance(): ${fragmentClass} {
             return ${fragmentClass}()

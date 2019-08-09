@@ -1,10 +1,11 @@
 package com.huyingbao.core.common.utils
 
+import android.content.Context
 import android.text.TextUtils
-
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
+
 
 object AndroidUtils {
     /**
@@ -33,4 +34,10 @@ object AndroidUtils {
         }
         return null
     }
+
+    /**
+     * 获取当前Application的Label
+     */
+    fun getApplicationLabel(context: Context): String? =
+            context.resources.getString(context.packageManager.getApplicationInfo(context.packageName, 0).labelRes)
 }
