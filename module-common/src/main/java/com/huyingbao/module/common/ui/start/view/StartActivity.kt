@@ -4,19 +4,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.base.activity.BaseRxFragActivity
-import com.huyingbao.core.common.module.CommonContants
-import com.huyingbao.module.common.ui.start.action.StartAction
-import com.huyingbao.module.common.ui.start.store.StartStore
-import org.greenrobot.eventbus.Subscribe
+import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
 
 /**
  * 引导页面，使用standard模式启动
  */
-@Route(path = CommonContants.Address.StartActivity)
-class StartActivity : BaseRxFragActivity<StartStore>() {
+class StartActivity : BaseCommonFragActivity() {
     override fun createFragment(): Fragment? {
         return StartFragment.newInstance()
     }
@@ -32,19 +25,5 @@ class StartActivity : BaseRxFragActivity<StartStore>() {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY// 沉浸式响应
         // status bar颜色设置为透明
         window.statusBarColor = Color.TRANSPARENT
-    }
-
-    /**
-     * 跳转登录页面
-     */
-    @Subscribe(sticky = true, tags = [StartAction.TO_LOGIN])
-    fun toLogin(rxChange: RxChange) {
-    }
-
-    /**
-     * 跳转主页面2
-     */
-    @Subscribe(sticky = true, tags = [StartAction.TO_MAIN])
-    fun toMain(rxChange: RxChange) {
     }
 }

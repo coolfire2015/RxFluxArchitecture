@@ -1,7 +1,7 @@
 package com.huyingbao.core.common.module
 
 import com.huyingbao.core.arch.module.RxFluxModule
-import com.huyingbao.core.common.BuildConfig
+import com.huyingbao.core.base.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

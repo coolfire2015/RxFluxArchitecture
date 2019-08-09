@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.huyingbao.module.loading">
+    package="com.huyingbao.module.common">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.huyingbao.module.common.LoadingApplication"
+        android:name="com.huyingbao.module.common.CommonApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
         android:label="@string/app_github_name"

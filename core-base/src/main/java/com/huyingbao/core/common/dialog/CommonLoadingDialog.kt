@@ -6,7 +6,7 @@ import android.text.TextUtils
 import android.view.View
 import androidx.annotation.StringRes
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.dialog.BaseCommonDialog
+import com.huyingbao.core.base.common.dialog.BaseCommonDialog
 import kotlinx.android.synthetic.main.common_dialog_loading.*
 
 /**

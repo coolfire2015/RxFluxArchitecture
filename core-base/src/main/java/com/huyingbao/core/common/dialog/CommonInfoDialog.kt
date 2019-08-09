@@ -7,7 +7,7 @@ import android.os.Parcelable
 import android.view.View
 import android.widget.TextView
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.dialog.BaseCommonDialog
+import com.huyingbao.core.base.common.dialog.BaseCommonDialog
 import com.huyingbao.core.common.module.CommonContants
 import kotlinx.android.synthetic.main.common_dialog_info.*
 import org.jetbrains.anko.toast
