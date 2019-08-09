@@ -33,10 +33,10 @@ object CommonRouter {
 
     init {
         RxApp.application?.let {
-            routerMap[it.getString(R.string.app_label_app)] = LoginActivity
-            routerMap[it.getString(R.string.app_label_common)] = LoginActivity
-            routerMap[it.getString(R.string.app_label_github)] = LoginActivity
+            routerMap[it.getString(R.string.app_label_app)] = ArticleActivity
+            routerMap[it.getString(R.string.app_label_common)] = ArticleActivity
             routerMap[it.getString(R.string.app_label_wan)] = ArticleActivity
+            routerMap[it.getString(R.string.app_label_github)] = LoginActivity
             routerMap[it.getString(R.string.app_label_gan)] = RandomActivity
         }
     }
@@ -45,7 +45,7 @@ object CommonRouter {
      * 根据不同module manifest文件中 Application label值，获取对应启动Activity路由地址
      */
     fun getAppRouter(label: String?): String {
-        return routerMap[label] ?: LoginActivity
+        return routerMap[label] ?: ArticleActivity
     }
 }
 

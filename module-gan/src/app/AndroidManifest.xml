@@ -9,16 +9,11 @@
         android:name="com.huyingbao.module.gan.GanApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
-        android:label="@string/gan_name"
+        android:label="@string/app_label_gan"
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.gan.ui.random.view.RandomActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.huyingbao.module.gan.ui.random.view.RandomActivity" />
     </application>
 </manifest>

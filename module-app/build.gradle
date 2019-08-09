@@ -42,8 +42,6 @@ android {
         debug {
             //单元测试mockUrl
             buildConfigField "boolean", "MOCK_URL", '' + isUseMockUrl.toBoolean() + ''
-            //替换字符串资源
-            resValue "string", "app_name", "RxFluxArchDebug"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
@@ -55,8 +53,6 @@ android {
         }
         //自定义buildType.name
         release {
-            //替换字符串资源
-            resValue "string", "app_name", "RxFluxArch"
             //混淆开关
             minifyEnabled false
             //Zipalign优化
