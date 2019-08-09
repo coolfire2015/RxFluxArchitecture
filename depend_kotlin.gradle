@@ -18,7 +18,7 @@ android {
 
 dependencies {
     //通用库
-    implementation project(':core-common')
+    implementation project(':core-base')
     //编译时生成
     kapt "androidx.room:room-compiler:${X_ROOM}"
     kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"

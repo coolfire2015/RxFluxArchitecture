@@ -4,7 +4,7 @@ apply from: rootProject.file('depend_common.gradle')
 
 dependencies {
     //通用库
-    implementation project(':core-common')
+    implementation project(':core-base')
     //编译时生成
     annotationProcessor "androidx.room:room-compiler:${X_ROOM}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"

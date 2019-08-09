@@ -1,11 +1,11 @@
+include ':core-arch'
 include ':core-arch-annotations'
 include ':core-arch-processor'
-include ':core-arch'
 
-include ':core-common'
+include ':core-base'
 include ':core-res'
 
-include ':module-app'
-include ':module-loading'
-include ':module-wan'
-include ':module-gan'
+//include ':module-app'
+include ':module-common'
+//include ':module-wan'
+//include ':module-gan'

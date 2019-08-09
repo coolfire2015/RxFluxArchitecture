@@ -29,8 +29,8 @@
 ![效果图](image/效果图/操作重试.gif)
 
 ## Kotlin代码模版
-* 项目可下载 [core-common](core-common)，自定义base代码。
-* 暂时只有依赖[core-common](core-common)的 Kotlin 代码模版 [RxFluxActivity](templates/RxFluxActivity)。
+* 项目可下载 [core-base](core-base)，自定义base代码。
+* 暂时只有依赖[core-base](core-base)的 Kotlin 代码模版 [RxFluxActivity](templates/RxFluxActivity)。
 * 使用代码模版，需手动添加 Activity/Fragment/Store 的 Dagger 依赖注入方法。
 
 ```
