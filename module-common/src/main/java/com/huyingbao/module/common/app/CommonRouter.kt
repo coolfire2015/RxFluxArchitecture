@@ -4,8 +4,15 @@ import com.huyingbao.core.arch.RxApp
 import com.huyingbao.module.common.R
 import java.util.*
 
-object CommonAppStore {
-    private val activityRouterMap: MutableMap<String, String> = HashMap()
+/**
+ * 全局路由地址静态类，可以根据module manifest文件中 Application label 值提供不同的路由地址
+ */
+object CommonRouter {
+    /**
+     * key   ：module manifest文件中 Application label值
+     * value ：module 需要启动的第一个Activity路由地址
+     */
+    private val routerMap: MutableMap<String, String> = HashMap()
 
     const val RandomActivity = "/gan/random/RandomActivity"
 
@@ -26,16 +33,19 @@ object CommonAppStore {
 
     init {
         RxApp.application?.let {
-            activityRouterMap[it.getString(R.string.app_label_app)] = LoginActivity
-            activityRouterMap[it.getString(R.string.app_label_common)] = LoginActivity
-            activityRouterMap[it.getString(R.string.app_label_github)] = LoginActivity
-            activityRouterMap[it.getString(R.string.app_label_wan)] = ArticleActivity
-            activityRouterMap[it.getString(R.string.app_label_gan)] = RandomActivity
+            routerMap[it.getString(R.string.app_label_app)] = LoginActivity
+            routerMap[it.getString(R.string.app_label_common)] = LoginActivity
+            routerMap[it.getString(R.string.app_label_github)] = LoginActivity
+            routerMap[it.getString(R.string.app_label_wan)] = ArticleActivity
+            routerMap[it.getString(R.string.app_label_gan)] = RandomActivity
         }
     }
 
+    /**
+     * 根据不同module manifest文件中 Application label值，获取对应启动Activity路由地址
+     */
     fun getAppRouter(label: String?): String {
-        return activityRouterMap[label] ?: LoginActivity
+        return routerMap[label] ?: LoginActivity
     }
 }
 

@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.core.common.utils.AndroidUtils
 import com.huyingbao.module.common.R
-import com.huyingbao.module.common.app.CommonAppStore
+import com.huyingbao.module.common.app.CommonRouter
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
@@ -32,11 +32,12 @@ class StartFragment : BaseCommonFragment() {
     override fun afterCreate(savedInstanceState: Bundle?) {
         //延迟2000mm，跳转
         Observable
-                .timer(2000, TimeUnit.MILLISECONDS)
+                .timer(1500, TimeUnit.MILLISECONDS)
                 .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
                 .subscribe {
-                    val appRouter = CommonAppStore.getAppRouter(AndroidUtils.getApplicationLabel(context))
+                    val appRouter = CommonRouter.getAppRouter(AndroidUtils.getApplicationLabel(context))
                     ARouter.getInstance().build(appRouter).navigation()
+                    activity?.finish()
                 }
     }
 }
