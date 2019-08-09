@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.base.flux.activity.BaseFluxFragActivity
-import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.module.common.app.CommonAppStore
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment
@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.Subscribe
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Route(path = CommonContants.Address.ArticleActivity)
+@Route(path = CommonAppStore.ArticleActivity)
 class ArticleActivity : BaseFluxFragActivity<ArticleStore>() {
     override fun createFragment(): Fragment? {
         return ArticleListFragment.newInstance()

@@ -10,7 +10,7 @@ import com.huyingbao.core.base.R
 
 
 /**
- * 带有[Toolbar]的Activity父类，不使用依赖注入，不
+ * 带有[Toolbar]的Activity父类
  *
  * Created by liujunfeng on 2019/1/1.
  */

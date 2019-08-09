@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.Subscribe;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Route(path = CommonContants.Address.RandomActivity)
+@Route(path = CommonAppStore.RandomActivity)
 public class RandomActivity extends BaseFluxFragActivity<RandomStore> {
     @Override
     protected Fragment createFragment() {

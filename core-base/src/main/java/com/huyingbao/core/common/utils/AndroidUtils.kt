@@ -38,6 +38,6 @@ object AndroidUtils {
     /**
      * 获取当前Application的Label
      */
-    fun getApplicationLabel(context: Context): String? =
-            context.resources.getString(context.packageManager.getApplicationInfo(context.packageName, 0).labelRes)
+    fun getApplicationLabel(context: Context?): String? =
+            context?.resources?.getString(context.packageManager.getApplicationInfo(context.packageName, 0).labelRes)
 }

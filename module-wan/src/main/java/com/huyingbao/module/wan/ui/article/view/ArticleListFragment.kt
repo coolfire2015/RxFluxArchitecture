@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
-import com.huyingbao.core.common.module.CommonContants
+import com.huyingbao.module.common.app.CommonAppStore
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
@@ -113,7 +113,7 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
             }
             item.itemId == R.id.menu_to_gan -> {
                 //跳转module-gan
-                ARouter.getInstance().build(CommonContants.Address.RandomActivity).navigation()
+                ARouter.getInstance().build(CommonAppStore.RandomActivity).navigation()
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -24,6 +24,10 @@ abstract class RxApp : DaggerApplication() {
 
     private var lifecycleOwner: LifecycleOwner? = null
 
+    companion object {
+        var application: Application? = null
+    }
+
     private val annotationGeneratedRxAppLifecycleOwner: LifecycleOwner?
         get() {
             var result: LifecycleOwner? = null
@@ -56,6 +60,8 @@ abstract class RxApp : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        //静态内部类持有当前Application
+        application = this
         //application创建的时候调用该方法，使RxFlux可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(rxFlux)
         (lifecycleOwner?.lifecycle as LifecycleRegistry).handleLifecycleEvent(Lifecycle.Event.ON_CREATE)

@@ -7,12 +7,20 @@ package com.huyingbao.core.common.module
  */
 class CommonContants {
     object Config {
+        /**
+         * 每页数据条数
+         */
         const val PAGE_SIZE = 20
+        /**
+         * 网络连接超时事件
+         */
         const val HTTP_TIME_OUT = 20L
     }
 
     object Key {
         /**
+         * 黑夜模式
+         *
          * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO]
          *
          * [androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES]
@@ -40,23 +48,6 @@ class CommonContants {
 
     object Header {
         const val AUTHORIZATION = "Authorization"
-    }
-
-    object Address {
-        const val RandomActivity = "/gan/random/RandomActivity"
-
-        const val ArticleActivity = "/wan/article/ArticleActivity"
-
-        const val StartActivity = "/github/start/StartActivity"
-        const val LoginActivity = "/github/login/LoginActivity"
-        const val PersonActivity = "/github/person/PersonActivity"
-        const val IssueActivity = "/github/issue/IssueActivity"
-        const val CodeActivity = "/github/code/CodeActivity"
-        const val ReposActivity = "/github/repos/ReposActivity"
-        const val MainActivity = "/github/main/MainActivity"
-        const val UserActivity = "/github/user/UserActivity"
-        const val StarActivity = "/github/star/StarActivity"
-        const val SearchActivity = "/github/search/SearchActivity"
     }
 
     object Error {

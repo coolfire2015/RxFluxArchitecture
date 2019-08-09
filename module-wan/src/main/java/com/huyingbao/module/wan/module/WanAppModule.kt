@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
-import com.huyingbao.module.common.module.CommonAppModule
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanContants
 import com.huyingbao.module.wan.db.WanAppDb
@@ -21,7 +20,6 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Module(includes = [
-    CommonAppModule::class,
     WanInjectActivityModule::class,
     WanStoreModule::class
 ])

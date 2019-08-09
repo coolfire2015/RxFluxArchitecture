@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.snackbar.Snackbar
 import com.huyingbao.core.arch.model.RxError
 import com.huyingbao.core.arch.model.RxLoading
@@ -190,8 +189,8 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
                 localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
                 //结束当前页面
                 finish()
-                //跳转登录页面
-                ARouter.getInstance().build(CommonContants.Address.LoginActivity).navigation()
+                //TODO 跳转Github登录页面
+                //ARouter.getInstance().build(CommonContants.Address.LoginActivity).navigation()
             }
             else -> Toast.makeText(this, commonException.message(), Toast.LENGTH_SHORT).show()
         }

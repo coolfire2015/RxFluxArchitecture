@@ -2,8 +2,11 @@ package com.huyingbao.module.common.ui.start.view
 
 import android.os.Bundle
 import androidx.lifecycle.Lifecycle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
+import com.huyingbao.core.common.utils.AndroidUtils
 import com.huyingbao.module.common.R
+import com.huyingbao.module.common.app.CommonAppStore
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
@@ -15,6 +18,7 @@ import java.util.concurrent.TimeUnit
  * Created by liujunfeng on 2019/5/31.
  */
 class StartFragment : BaseCommonFragment() {
+
     companion object {
         fun newInstance(): StartFragment {
             return StartFragment()
@@ -31,6 +35,8 @@ class StartFragment : BaseCommonFragment() {
                 .timer(2000, TimeUnit.MILLISECONDS)
                 .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
                 .subscribe {
+                    val appRouter = CommonAppStore.getAppRouter(AndroidUtils.getApplicationLabel(context))
+                    ARouter.getInstance().build(appRouter).navigation()
                 }
     }
 }
