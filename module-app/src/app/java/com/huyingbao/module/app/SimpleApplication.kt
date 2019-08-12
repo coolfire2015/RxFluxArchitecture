@@ -10,7 +10,6 @@ import dagger.android.DaggerApplication
 /**
  * 主Application
  *
- *
  * Created by liujunfeng on 2019/1/1.
  */
 @RxAppOwner
