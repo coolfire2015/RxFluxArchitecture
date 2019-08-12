@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
+import com.huyingbao.core.common.utils.RecyclerItemClickListener
 import com.huyingbao.module.common.app.CommonRouter
+import com.huyingbao.module.common.ui.web.view.WebActivity
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
@@ -27,8 +30,10 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 
-    private var articleAdapter: ArticleAdapter? = null
+    private var recyclerView: RecyclerView? = null
     private var refreshLayout: SmartRefreshLayout? = null
+
+    private var articleAdapter: ArticleAdapter? = null
 
     companion object {
         fun newInstance(): ArticleListFragment {
@@ -50,10 +55,22 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
      * 设置Adapter
      */
     private fun initAdapter() {
-        //实例化adapter
-        articleAdapter = ArticleAdapter()
+        recyclerView = view?.find(R.id.rv_content)
         //RecyclerView设置适配器
-        view?.find<RecyclerView>(R.id.rv_content)?.adapter = articleAdapter
+        recyclerView?.adapter = ArticleAdapter().apply { articleAdapter = this }
+        //RecyclerView设置点击事件
+        recyclerView?.addOnItemTouchListener(RecyclerItemClickListener(context, recyclerView,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        context?.let {
+                            //跳转网页
+                            val intent = WebActivity.newIntent(it,
+                                    articleAdapter?.getItem(position)?.link,
+                                    articleAdapter?.getItem(position)?.title)
+                            startActivity(intent)
+                        }
+                    }
+                }))
         //显示数据
         rxStore?.articleLiveData?.observe(this, Observer {
             articleAdapter?.submitList(it)

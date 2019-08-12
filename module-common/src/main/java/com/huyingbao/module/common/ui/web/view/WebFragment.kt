@@ -59,14 +59,17 @@ class WebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
                 settings.setAppCacheMaxSize(Long.MAX_VALUE)
                 //缓存模式
                 settings.cacheMode = WebSettings.LOAD_NO_CACHE
+                //阻止部分网页跳转到浏览器
                 web_content.webViewClient = WebViewClient()
                 //设置进度条
                 web_content.webChromeClient = object : WebChromeClient() {
                     override fun onProgressChanged(webView: WebView?, progress: Int) {
                         super.onProgressChanged(webView, progress)
-                        progress_bar_web.progress = progress
-                        if (progress == 100) {
-                            progress_bar_web.visibility = View.GONE
+                        if (this@WebFragment.isResumed) {
+                            progress_bar_web.progress = progress
+                            if (progress == 100) {
+                                progress_bar_web.visibility = View.GONE
+                            }
                         }
                     }
                 }

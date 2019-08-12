@@ -47,6 +47,8 @@ class ArticleAdapter : PagedListAdapter<Article, ArticleViewHolder>(diffCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder = ArticleViewHolder(parent)
 
+    public override fun getItem(position: Int): Article? = super.getItem(position)
+
     companion object {
         /**
          * 这个diff回调通知PagedListAdapter如何在新的PagedLists到达时计算列表差异。
