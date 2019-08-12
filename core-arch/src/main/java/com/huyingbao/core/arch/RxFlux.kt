@@ -18,13 +18,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅，必须在Application创建的时候调用该类的实例方法, 并仅调用一次。
+ * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅。
  *
- * Inject 标记用于提供依赖的方法
+ * 必须在Application创建的时候调用该类的实例方法, 并仅调用一次。
+ *
+ * [Inject]标记用于提供依赖的方法
  *
  * 构造器注入的局限：如果有多个构造器，我们只能标注其中一个，无法标注多个
  *
  * 标注在public方法上，Dagger2会在构造器执行之后立即调用这个方法，可以提供this对象
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton

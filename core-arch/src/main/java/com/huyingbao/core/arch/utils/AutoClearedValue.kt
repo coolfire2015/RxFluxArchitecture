@@ -8,13 +8,11 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
- * 绑定[LifecycleOwner]子类生命周期，销毁时自动清理数据
+ * 绑定[LifecycleOwner]子类生命周期，销毁时自动清理数据，一般用于Fragment和Activity内。
  *
- * A lazy property that gets cleaned up when the lifecycleOwner is destroyed.
- *
- * Accessing this variable in a destroyed lifecycleOwner will throw NPE.
+ * Created by liujunfeng on 2019/1/1.
  */
-class AutoClearedValue<T : Any?>(private val lifecycleOwner: LifecycleOwner) : ReadWriteProperty<LifecycleOwner, T?> {
+class AutoClearedValue<T : Any?>(lifecycleOwner: LifecycleOwner) : ReadWriteProperty<LifecycleOwner, T?> {
     private var _value: T? = null
 
     init {

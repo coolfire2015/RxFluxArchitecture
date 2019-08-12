@@ -11,7 +11,9 @@ import java.util.logging.Level
 
 
 /**
- * 实现交互方法，创建[RxAction]，直接发送给[com.huyingbao.core.arch.store.RxStore]。
+ * 实现View中调用的交互方法。
+ *
+ * 创建[RxAction]，直接发送给[com.huyingbao.core.arch.store.RxStore]。
  *
  * 创建[RxChange]、[RxLoading]、[RxError]、[RxRetry]，直接发送给[com.huyingbao.core.arch.view.RxFluxView]。
  *

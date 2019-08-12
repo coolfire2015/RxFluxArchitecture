@@ -23,13 +23,16 @@ import javax.lang.model.element.TypeElement;
  * Created by liujunfeng on 2019/1/1.
  */
 public class RxArchProcessor extends AbstractProcessor {
-    private static final String COMPILER_PACKAGE_NAME = RxArchProcessor.class.getPackage().getName();
     static final boolean DEBUG = false;
+    private static final String COMPILER_PACKAGE_NAME = RxArchProcessor.class.getPackage().getName();
+    /**
+     * 列表中只有一个使用{@link RxAppOwner}注解的RxApp子类
+     */
+    private final List<TypeElement> mRxAppList = new ArrayList<>();
     private boolean mIsGeneratedWritten;
     private ProcessorUtil mProcessorUtil;
     private RxIndexerGenerator mRxIndexerGenerator;
     private RxAppLifecycleOwnerGenerator mRxAppLifecycleOwnerGenerator;
-    private final List<TypeElement> mRxAppList = new ArrayList<>();
 
     /**
      * 可以初始化拿到一些使用的工具
@@ -117,25 +120,34 @@ public class RxArchProcessor extends AbstractProcessor {
      * 生成RxAppLifecycleOwner类
      */
     private boolean processRxAppLifecycleOwner() {
+        //如果没有使用{@link RxAppOwner}注解的RxApp子类，直接返回。
         if (mRxAppList.isEmpty()) {
             return false;
         }
         PackageElement packageElement = processingEnv.getElementUtils().getPackageElement(COMPILER_PACKAGE_NAME);
-        //所有module中的编译生成的索引文件
+        //所有module中的编译生成的RxAppLifecycle索引文件
         Set<String> indexedClassNames = getIndexedClassNames(packageElement);
+        //如果没有RxAppLifecycle索引文件，则返回
+        if (indexedClassNames == null || indexedClassNames.size() == 0) {
+            return false;
+        }
         //生成全局RxLifecycleImpl文件
         TypeSpec generatedRxLifecycleImpl = mRxAppLifecycleOwnerGenerator.generate(indexedClassNames);
-        mProcessorUtil.writeClass(
-                ProcessorUtil.PACKAGE_ROOT,
-                generatedRxLifecycleImpl);
+        mProcessorUtil.writeClass(ProcessorUtil.PACKAGE_ROOT, generatedRxLifecycleImpl);
         return true;
     }
 
     /**
      * 从当前包附加的类中获取到所有编译生成的Index类，再从Index类的{@link RxIndex}注解中取出modules中存储的自定义RxAppLifecycle类名
+     *
+     * @param packageElement 当前的包路径：com.huyingbao.core.processor
      */
     @SuppressWarnings("unchecked")
     private Set<String> getIndexedClassNames(PackageElement packageElement) {
+        //如果不存在当前的包路径返回空
+        if (packageElement == null) {
+            return null;
+        }
         Set<String> rxAppLifecycleSet = new HashSet<>();
         //获取当前包元素附加的所有元素
         List<? extends Element> rxAppLifecycleGeneratedElements = packageElement.getEnclosedElements();

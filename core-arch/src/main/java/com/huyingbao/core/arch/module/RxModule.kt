@@ -13,7 +13,11 @@ import javax.inject.Singleton
 
 
 /**
- * 依赖注入仓库，提供 1.[Application]， 2.[ViewModelProvider.Factory]实现类[RxStoreFactory]
+ * 依赖注入仓库
+ *
+ * 1.提供 [Application]
+ *
+ * 2.提供 [ViewModelProvider.Factory]实现类[RxStoreFactory]
  *
  * Created by liujunfeng on 2019/1/1.
  */

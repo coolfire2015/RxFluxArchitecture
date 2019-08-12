@@ -1,34 +1,25 @@
 package com.huyingbao.core.arch.utils
 
-import android.app.Application
-
-import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
-
 import dagger.internal.Preconditions.checkNotNull
 
 /**
+ * Dagger.Android 中[dagger.android.AndroidInjection.inject]扩展为public
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 object RxAndroidInjection {
     /**
-     * 公用Dagger.Android依赖注入方法
+     * Dagger.Android 中[dagger.android.AndroidInjection.inject]扩展为public
      *
-     * @param any      需要完成依赖注入的类
-     * @param application 实现[HasAndroidInjector]的Application
+     * @param target      需要被依赖注入的类
      */
-    fun inject(any: Any, application: Application) {
-        val injector: AndroidInjector<Any>
-        if (application is HasAndroidInjector) {
-            injector = (application as HasAndroidInjector).androidInjector()
-            checkNotNull(injector, "%s.androidInjector() returned null", application.javaClass)
-        } else {
-            throw RuntimeException(
-                    String.format(
-                            "%s does not implement %s",
-                            application.javaClass.canonicalName,
-                            HasAndroidInjector::class.java.canonicalName))
-        }
-        injector.inject(any)
+    fun inject(target: Any, hasAndroidInjector: HasAndroidInjector) {
+        val androidInjector = hasAndroidInjector.androidInjector()
+        checkNotNull(
+                androidInjector,
+                "%s.androidInjector() returned null",
+                hasAndroidInjector.javaClass)
+        androidInjector.inject(target)
     }
 }

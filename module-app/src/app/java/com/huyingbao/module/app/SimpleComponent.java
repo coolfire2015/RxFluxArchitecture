@@ -3,8 +3,6 @@ package com.huyingbao.module.app;
 import android.app.Application;
 
 import com.huyingbao.core.common.module.CommonModule;
-import com.huyingbao.module.gan.module.GanAppModule;
-import com.huyingbao.module.wan.module.WanAppModule;
 
 import javax.inject.Singleton;
 
@@ -35,8 +33,6 @@ import dagger.android.AndroidInjector;
  */
 @Singleton
 @Component(modules = {
-        GanAppModule.class,//模块module
-        WanAppModule.class,//模块module
         CommonModule.class,//通用module
         AndroidInjectionModule.class})
 public interface SimpleComponent extends AndroidInjector<SimpleApplication> {

@@ -3,6 +3,8 @@ package com.huyingbao.core.arch.utils
 import java.lang.reflect.ParameterizedType
 
 /**
+ * Class工具类
+ *
  * Created by liujunfeng on 2019/1/1.
  */
 object ClassUtils {
@@ -10,6 +12,7 @@ object ClassUtils {
      * 得到类的泛型类型
      */
     @JvmStatic
+    @SuppressWarnings("unchecked")
     fun <T> getGenericClass(aClass: Class<*>): Class<T>? {
         var genericClass: Class<T>? = null
         //返回直接继承的父类（包含泛型参数）

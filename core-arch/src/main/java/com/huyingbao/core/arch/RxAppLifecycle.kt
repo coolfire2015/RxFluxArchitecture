@@ -7,8 +7,9 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
 /**
- * 跟随Application生命周期
+ * Application生命周期观察者，用于子模块中观察Application的生命周期。
  *
+ * 跟随Application生命周期，子类需要使用[com.huyingbao.core.annotations.RxAppObserver]注解标注。
  *
  * Created by liujunfeng on 2019/1/1.
  */
