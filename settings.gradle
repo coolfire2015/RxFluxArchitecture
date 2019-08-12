@@ -1,9 +1,9 @@
-include ':core-arch'
-include ':core-arch-annotations'
-include ':core-arch-processor'
-
-include ':core-base'
-include ':core-res'
+//include ':core-arch'
+//include ':core-arch-annotations'
+//include ':core-arch-processor'
+//
+//include ':core-base'
+//include ':core-res'
 
 include ':module-app'
-include ':module-common'
+//include ':module-common'

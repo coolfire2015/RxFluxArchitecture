@@ -1,11 +1,34 @@
 //Kotlin业务模块通用依赖
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: rootProject.file('depend_common.gradle')
 
 android {
+    //编译版本
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    //lint设置
+    lintOptions {
+        //lint 不被终止
+        abortOnError false
+        //打Release版本时,不进行检测
+        checkReleaseBuilds false
+        //关闭检索的功能
+        disable 'GoogleAppIndexingWarning'
+    }
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+    //Dex分包
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"//增加java堆内存大小
+    }
+    //Java1.8支持
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     //Kotlin Java1.8支持
     kotlinOptions {
         jvmTarget = "1.8"
@@ -14,11 +37,55 @@ android {
     androidExtensions {
         experimental = true
     }
+    //单元测试,Robolectric支持
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+//将源代码打包进aar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.javaDirectories
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
-    //通用库
-    implementation project(':core-base')
+    //通用Base库
+    implementation 'com.github.coolfire2015.RxFluxArchitecture:core-base:common-SNAPSHOT'
+    //测试Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.room:room-testing:${X_ROOM}"
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
+    //解决Mockito any()等返回null的问题
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.coolfire2015:RxFluxTestUtils:${RX_FLUX_TEST_UTILS}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock-kotlin:${TEST_DEAAGE_MOCK}"
+    //测试Api
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
     //编译时生成
     kapt "androidx.room:room-compiler:${X_ROOM}"
     kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
@@ -27,7 +94,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kapt "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-    kapt project(':core-arch-processor')
+    kapt "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
     //单元测试编译时生成
     kaptTest "androidx.room:room-compiler:${X_ROOM}"
     kaptTest "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
@@ -36,5 +103,5 @@ dependencies {
     kaptTest "com.google.dagger:dagger-android-processor:${DAGGER}"
     kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kaptTest "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
-    kaptTest project(':core-arch-processor')
+    kaptTest "com.github.coolfire2015.RxFluxArchitecture:core-arch-processor:${RX_FLUX_ARCHITECTURE}"
 }
