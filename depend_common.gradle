@@ -1,8 +1,4 @@
 //Common模块和业务模块通用依赖
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = "com.github.coolfire2015"
-
 android {
     //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
