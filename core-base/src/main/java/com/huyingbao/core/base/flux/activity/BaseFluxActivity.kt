@@ -2,7 +2,6 @@ package com.huyingbao.core.base.flux.activity
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -12,7 +11,6 @@ import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.arch.model.RxRetry
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.view.RxFluxActivity
-import com.huyingbao.core.base.BaseContants
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.base.R
 import com.huyingbao.core.common.action.CommonActionCreator
@@ -80,12 +78,12 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
     @Subscribe(sticky = true)
     open fun onRxError(rxError: RxError) {
         when (val throwable = rxError.throwable) {
-            is CommonException -> handleCommonException(throwable)
-            is retrofit2.HttpException -> Toast.makeText(this, throwable.code().toString() + ":服务器问题", Toast.LENGTH_SHORT).show()
-            is SocketException -> Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show()
-            is UnknownHostException -> Toast.makeText(this, "网络异常!", Toast.LENGTH_SHORT).show()
-            is SocketTimeoutException -> Toast.makeText(this, "连接超时!", Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(this, throwable.toString(), Toast.LENGTH_SHORT).show()
+            is CommonException -> this.toast(rxError.throwable.message ?: "未知异常")
+            is retrofit2.HttpException -> this.toast(throwable.code().toString() + ":服务器问题")
+            is SocketException -> this.toast("网络异常!")
+            is UnknownHostException -> this.toast("网络异常!")
+            is SocketTimeoutException -> this.toast("连接超时!")
+            else -> this.toast(throwable.toString())
         }
     }
 
@@ -177,22 +175,5 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
      */
     fun setTitle(titleId: Int, backAble: Boolean) {
         setTitle(getText(titleId), backAble)
-    }
-
-    /**
-     * 处理自定义异常
-     */
-    private fun handleCommonException(commonException: CommonException) {
-        when (commonException.code()) {
-            BaseContants.Error.UNAUTHORIZED -> {
-                //登录认证失败，清除旧Token
-                localStorageUtils.setValue(BaseContants.Key.ACCESS_TOKEN, "")
-                //结束当前页面
-                finish()
-                //TODO 跳转Github登录页面
-                //ARouter.getInstance().build(CommonContants.Address.LoginActivity).navigation()
-            }
-            else -> Toast.makeText(this, commonException.message(), Toast.LENGTH_SHORT).show()
-        }
     }
 }
