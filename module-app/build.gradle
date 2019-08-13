@@ -86,5 +86,6 @@ android {
     }
 }
 dependencies {
-    implementation 'com.github.coolfire2015.RxFluxArchitecture:module-common:common-SNAPSHOT'
+    implementation 'com.github.coolfire2015:RxFluxArchitecture:gan-SNAPSHOT'
+    implementation 'com.github.coolfire2015:RxFluxArchitecture:wan-SNAPSHOT'
 }

@@ -8,4 +8,9 @@
 core-arch/build
 core-arch-annotations/build
 core-arch-processor/build
+core-base/build
+core-res/build
+module-common/build
+module-wan/build
+module-gan/build
 module-github/build
