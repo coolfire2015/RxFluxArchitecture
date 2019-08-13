@@ -61,6 +61,11 @@ repositories {
     flatDir { dirs 'libs' }
 }
 
+//Gradle可以缓存SNAPSHOT构建，以确保Gradle始终选择构建的“最新”版本：
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
     //通用Base库
     implementation 'com.github.coolfire2015.RxFluxArchitecture:core-base:common-SNAPSHOT'
