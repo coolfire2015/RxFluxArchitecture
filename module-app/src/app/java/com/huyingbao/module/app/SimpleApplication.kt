@@ -1,6 +1,5 @@
 package com.huyingbao.module.app
 
-
 import com.huyingbao.core.annotations.RxAppOwner
 import com.huyingbao.core.base.BaseApp
 

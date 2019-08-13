@@ -69,7 +69,7 @@ android {
     //代码目录设置
     sourceSets {
         main {
-            if (isModuleAsApp.toBoolean())  {
+            if (isModuleAsApp.toBoolean()) {
                 //作为独立App
                 manifest.srcFile 'src/app/AndroidManifest.xml'
                 java.srcDirs 'src/app/java'

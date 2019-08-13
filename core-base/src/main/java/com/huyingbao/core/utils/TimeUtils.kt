@@ -1,8 +1,11 @@
-package com.huyingbao.core.common.utils
+package com.huyingbao.core.utils
 
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * 时间工具类
+ */
 object TimeUtils {
 
     private const val MILLIS_LIMIT = 1000.0

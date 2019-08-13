@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.utils
+package com.huyingbao.core.utils
 
 import android.app.Activity
 import android.os.Bundle

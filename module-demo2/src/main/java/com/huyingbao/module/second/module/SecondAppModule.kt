@@ -1,6 +1,7 @@
 package com.huyingbao.module.second.module
 
 import com.google.gson.GsonBuilder
+import com.huyingbao.core.base.BaseModule
 import com.huyingbao.module.second.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,8 @@ import javax.inject.Singleton
  */
 @Module(includes = [
     SecondInjectActivityModule::class,
-    SecondStoreModule::class
+    SecondStoreModule::class,
+    BaseModule::class
 ])
 class SecondAppModule {
     //模块化App中，依赖注入仓库中会有多个方法提供Retrofit对象，

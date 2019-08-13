@@ -12,13 +12,13 @@ import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.arch.model.RxRetry
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.view.RxFluxActivity
+import com.huyingbao.core.base.BaseContants
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.base.R
 import com.huyingbao.core.common.action.CommonActionCreator
 import com.huyingbao.core.common.dialog.CommonLoadingDialog
 import com.huyingbao.core.common.dialog.CommonLoadingDialogClickListener
 import com.huyingbao.core.common.model.CommonException
-import com.huyingbao.core.common.module.CommonContants
 import com.huyingbao.core.utils.LocalStorageUtils
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
@@ -184,9 +184,9 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
      */
     private fun handleCommonException(commonException: CommonException) {
         when (commonException.code()) {
-            CommonContants.Error.UNAUTHORIZED -> {
+            BaseContants.Error.UNAUTHORIZED -> {
                 //登录认证失败，清除旧Token
-                localStorageUtils.setValue(CommonContants.Key.ACCESS_TOKEN, "")
+                localStorageUtils.setValue(BaseContants.Key.ACCESS_TOKEN, "")
                 //结束当前页面
                 finish()
                 //TODO 跳转Github登录页面

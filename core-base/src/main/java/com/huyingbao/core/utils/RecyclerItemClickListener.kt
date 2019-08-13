@@ -1,4 +1,4 @@
-package com.huyingbao.core.common.utils
+package com.huyingbao.core.utils
 
 import android.content.Context
 import android.view.GestureDetector

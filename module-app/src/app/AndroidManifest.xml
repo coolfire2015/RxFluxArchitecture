@@ -10,7 +10,7 @@
         android:name="com.huyingbao.module.app.SimpleApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_main"
-        android:label="@string/app_label_app"
+        android:label="ArchDemo"
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"

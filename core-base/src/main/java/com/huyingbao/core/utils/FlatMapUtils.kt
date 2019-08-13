@@ -1,8 +1,7 @@
-package com.huyingbao.core.common.utils
+package com.huyingbao.core.utils
 
+import com.huyingbao.core.base.BaseContants
 import com.huyingbao.core.common.model.CommonException
-import com.huyingbao.core.common.module.CommonContants
-
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
@@ -30,7 +29,7 @@ object FlatMapUtils {
                 }
             } else {
                 //不是Response，传递自定义异常
-                return@Function Observable.error(CommonException(CommonContants.Error.COMMON, "返回数据异常:${it.toString()}"))
+                return@Function Observable.error(CommonException(BaseContants.Error.COMMON, "返回数据异常:${it.toString()}"))
             }
         }
     }
