@@ -1,16 +1,12 @@
 package com.huyingbao.module.app
 
 import android.app.Application
-
 import com.huyingbao.core.common.module.CommonModule
-import com.huyingbao.module.wan.module.WanAppModule
-
-import javax.inject.Singleton
-
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
 /**
  * 主Module
@@ -39,7 +35,6 @@ import dagger.android.AndroidInjector
 @Singleton
 @Component(modules = [
     CommonModule::class, //通用module
-    WanAppModule::class, //通用module
     AndroidInjectionModule::class
 ])
 interface SimpleComponent : AndroidInjector<SimpleApplication> {

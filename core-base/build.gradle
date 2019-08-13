@@ -1,0 +1,160 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = "com.github.coolfire2015"
+
+android {
+    //编译版本
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    //默认配置
+    defaultConfig {
+        //Sdk版本
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        //版本信息
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        release {
+            //混淆开关
+            minifyEnabled false
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //lint设置
+    lintOptions {
+        //lint 不被终止
+        abortOnError false
+        //打Release版本时,不进行检测
+        checkReleaseBuilds false
+        //关闭检索的功能
+        disable 'GoogleAppIndexingWarning'
+    }
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+    //Dex分包
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"//增加java堆内存大小
+    }
+    //Java1.8支持
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    //Kotlin 实验功能
+    androidExtensions {
+        experimental = true
+    }
+}
+
+//将源代码打包进aar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.javaDirectories
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+//仓库
+repositories {
+    //本地仓库,添加aar支持
+    flatDir { dirs 'libs' }
+}
+
+dependencies {
+    //引入jar包
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //引入资源库
+    api project(':core-res')
+    //内核
+    api project(':core-arch')
+    api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
+    api "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
+    //X-Core
+    api "androidx.core:core-ktx:${X_CORE}"
+    //X-Fragment
+    api "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
+    //X-Lifecycle
+    api "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
+    //X-Navigation
+    api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
+    api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
+    //X-Room
+    api "androidx.room:room-runtime:${X_ROOM}"
+    api "androidx.room:room-ktx:${X_ROOM}"
+    api "androidx.room:room-rxjava2:${X_ROOM}"
+    //X_Paging
+    api "androidx.paging:paging-runtime-ktx:${X_PAGING}"
+    api "androidx.paging:paging-rxjava2-ktx:${X_PAGING}"
+    //X-WorkManager
+    api "androidx.work:work-runtime-ktx:${X_WORK}"
+    //X-MultiDex
+    api "androidx.multidex:multidex:${X_MULTIDEX}"
+    //X-CardView
+    api "androidx.cardview:cardview:${X_CARD_VIEW}"
+    //X-RecyclerView
+    api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
+    //X-Material
+    api "com.google.android.material:material:${X_MATERIAL}"
+    //X_ConstraintLayout
+    api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
+    //Kotlin支持
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    //Kotlin Coroutines 支持
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
+    //OkHttp
+    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
+    api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
+    //Retrofit
+    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+    api "com.squareup.retrofit2:converter-scalars:${RETROFIT}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    //Json
+    api "com.google.code.gson:gson:${GSON}"
+    //Mmkv
+    api "com.tencent:mmkv:${MMKV}"
+    //ARouter
+    api "com.alibaba:arouter-api:${AROUTER_API}"
+    //AutoDispose
+    api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
+    //Anko Commons
+    api "org.jetbrains.anko:anko-commons:$ANKO"
+    //Lottie
+    api "com.airbnb.android:lottie:${LOTTIE}"
+    //SmartRefreshLayout
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
+    //RecyclerView适配器
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
+    //日志展示
+    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //Bugly
+    api "com.tencent.bugly:crashreport:${BUGLY}"
+    //Tinker
+    api "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
+    //LeakCanary
+    debugApi "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
+    //Dagger编译时生成
+    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    //AndroidX迁移
+    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+}

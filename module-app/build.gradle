@@ -86,6 +86,10 @@ android {
     }
 }
 dependencies {
-    implementation 'com.github.coolfire2015:RxFluxArchitecture:gan-SNAPSHOT'
-    implementation 'com.github.coolfire2015:RxFluxArchitecture:wan-SNAPSHOT'
+    if (isModuleAsApp.toBoolean() || isUseMaven.toBoolean()) {
+    } else {
+        implementation project(':module-demo1')
+//    implementation project(':module-demo2')
+//    implementation project(':module-demo3')
+    }
 }
