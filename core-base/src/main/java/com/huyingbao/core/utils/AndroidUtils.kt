@@ -6,7 +6,11 @@ import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
 
-
+/**
+ * Android系统相关工具类
+ *
+ * Created by liujunfeng on 2019/1/1.
+ */
 object AndroidUtils {
     /**
      * 获取进程号对应的进程名

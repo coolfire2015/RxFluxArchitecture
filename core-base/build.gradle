@@ -84,7 +84,9 @@ dependencies {
     api project(':core-res')
     //内核
     api project(':core-arch')
+    //工具
     api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
+    //图片解析
     api "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
     api "androidx.core:core-ktx:${X_CORE}"
@@ -130,27 +132,29 @@ dependencies {
     api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     //Json
     api "com.google.code.gson:gson:${GSON}"
-    //Mmkv
-    api "com.tencent:mmkv:${MMKV}"
-    //ARouter
+    //路由器ARouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
-    //AutoDispose
+    //RxJava 生命周期绑定 AutoDispose
     api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
-    //Anko Commons
+    //Kotlin Android 工具类Anko Commons
     api "org.jetbrains.anko:anko-commons:$ANKO"
-    //Lottie
+    //Json动画Lottie
     api "com.airbnb.android:lottie:${LOTTIE}"
-    //SmartRefreshLayout
+    //上下拉刷新SmartRefreshLayout
     api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
     //RecyclerView适配器
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
-    //Bugly
+    //浏览器内核X5
+    api "com.tencent.tbs.tbssdk:sdk:${TBSSDK}"
+    //键值对存储Mmkv
+    api "com.tencent:mmkv:${MMKV}"
+    //Bug统计Bugly
     api "com.tencent.bugly:crashreport:${BUGLY}"
-    //Tinker
+    //热修复Tinker
     api "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
-    //LeakCanary
+    //内存泄露分析 LeakCanary
     debugApi "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
     //Dagger编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"

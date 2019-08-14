@@ -56,6 +56,7 @@
 - 依赖注入 [**Dagger+Dagger.Android**](https://github.com/google/dagger)
 - 函数编程 [**RxJava**](https://github.com/ReactiveX/RxJava)
 +[**RxAndroid**](https://github.com/ReactiveX/RxAndroid)
++[**RxKotlin**](https://github.com/ReactiveX/RxKotlin)
 - AndroidX [**X-Core**](https://mvnrepository.com/artifact/androidx.core/core)
 +[**X-AppCompat**](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
 +[**X-Lifecycle**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions)
@@ -91,11 +92,14 @@
 +[**X-Material**](https://mvnrepository.com/artifact/com.google.android.material/material)
 +[**X-Collection**](https://mvnrepository.com/artifact/androidx.collection/collection)
 +[**X-ConstraintLayout**](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout)
++[**X-DataBinding**](https://mvnrepository.com/artifact/androidx.databinding/databinding-runtime)
++[**X-Annotation**](https://mvnrepository.com/artifact/androidx.annotation/annotation)
 - [移除]View注入 [**ButterKnife**](https://github.com/JakeWharton/butterknife)
 
 ### 测试 
 - [**Junit**](https://github.com/junit-team/junit4)
 - [**Mockito**](https://github.com/mockito/mockito)
+- [**Mockito-Kotlin**](https://github.com/nhaarman/mockito-kotlin)
 - [**RESTMock**](https://github.com/andrzejchm/RESTMock)
 - [**Powermock**](https://github.com/powermock/powermock)
 - [**Robolectric**](https://github.com/robolectric/robolectric)

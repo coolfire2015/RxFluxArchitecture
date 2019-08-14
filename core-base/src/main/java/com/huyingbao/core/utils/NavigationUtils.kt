@@ -8,6 +8,8 @@ import androidx.navigation.Navigation
 
 /**
  * Navigation工具方法
+ *
+ * Created by liujunfeng on 2019/1/1.
  */
 object NavigationUtils {
     /**

@@ -28,7 +28,7 @@ class SecondAppModule {
     @Named(BuildConfig.MODULE_NAME)
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://www.wanandroid.com/")
+                .baseUrl("http://gank.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(builder.build())

@@ -17,5 +17,6 @@ class ThirdFragment : BaseFluxFragment<ThirdStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
+        setTitle(R.string.app_label_third, true)
     }
 }

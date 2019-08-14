@@ -8,6 +8,8 @@ import java.util.*
 
 /**
  * GSON序列化工具类
+ *
+ * Created by liujunfeng on 2019/1/1.
  */
 object GsonUtils {
 

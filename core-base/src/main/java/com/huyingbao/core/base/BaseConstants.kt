@@ -5,7 +5,7 @@ package com.huyingbao.core.base
  *
  * Created by liujunfeng on 2019/5/30.
  */
-class BaseContants {
+class BaseConstants {
     object Config {
         /**
          * 每页数据条数
@@ -33,12 +33,29 @@ class BaseContants {
          *
          */
         const val NIGHT_MODE = "nightMode"
+        /**
+         * 访问令牌
+         */
         const val ACCESS_TOKEN = "accessToken"
-        const val USER_NAME = "userName"
+        /**
+         * 用户名
+         */
+        const val USER_NAME = "username"
+        /**
+         * 密码
+         */
         const val PASSWORD = "password"
+        /**
+         * 标题
+         */
         const val TITLE = "title"
+        /**
+         * 内容
+         */
         const val CONTENT = "content"
-        const val INFO = "info"
+        /**
+         * Url地址
+         */
         const val URL = "url"
         /**
          * 索引
@@ -47,6 +64,9 @@ class BaseContants {
     }
 
     object Header {
+        /**
+         * 表头Auth认证
+         */
         const val AUTHORIZATION = "Authorization"
     }
 

@@ -1,6 +1,6 @@
 package com.huyingbao.core.utils
 
-import com.huyingbao.core.base.BaseContants
+import com.huyingbao.core.base.BaseConstants
 import com.huyingbao.core.common.model.CommonException
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
@@ -17,6 +17,7 @@ object FlatMapUtils {
     /**
      * 验证接口返回数据是正常，取出封装的
      */
+    @SuppressWarnings("unchecked")
     fun <T, R> verifyResponse(): Function<T, Observable<R>> {
         return Function {
             if (it is Response<*>) {
@@ -29,7 +30,7 @@ object FlatMapUtils {
                 }
             } else {
                 //不是Response，传递自定义异常
-                return@Function Observable.error(CommonException(BaseContants.Error.COMMON, "返回数据异常:${it.toString()}"))
+                return@Function Observable.error(CommonException(BaseConstants.Error.COMMON, "返回数据异常:${it.toString()}"))
             }
         }
     }

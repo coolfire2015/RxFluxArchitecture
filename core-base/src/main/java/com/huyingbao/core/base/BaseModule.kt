@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
- * 通用依赖注入仓库
+ * 基础依赖注入仓库，所有子模块中的AppModule中需要包括该类，实现Store注入和Dagger.Android注入
  *
  * Created by liujunfeng on 2019/1/1.
  */
@@ -29,9 +29,9 @@ class BaseModule {
         else
             HttpLoggingInterceptor.Level.NONE
         return OkHttpClient.Builder()
-                .connectTimeout(BaseContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(BaseContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(BaseContants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .connectTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
     }
 }

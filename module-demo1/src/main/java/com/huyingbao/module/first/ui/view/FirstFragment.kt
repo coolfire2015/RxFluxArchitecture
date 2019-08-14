@@ -2,6 +2,7 @@ package com.huyingbao.module.first.ui.view
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
 import com.huyingbao.module.first.R
 import com.huyingbao.module.first.ui.action.FirstActionCreator
@@ -24,7 +25,16 @@ class FirstFragment : BaseFluxFragment<FirstStore>() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
+        setTitle(R.string.app_label_first, false)
         rxStore?.hotKeyLiveData?.observe(this, Observer { tv_hot_key.text = it.toString() })
-        bt_get_hot_key.setOnClickListener { firstActionCreator.getHotKey() }
+        bt_get_hot_key.setOnClickListener {
+            firstActionCreator.getHotKey()
+        }
+        bt_to_demo2.setOnClickListener {
+            ARouter.getInstance().build("/second/SecondActivity").navigation()
+        }
+        bt_to_demo3.setOnClickListener {
+            ARouter.getInstance().build("/third/ThirdActivity").navigation()
+        }
     }
 }

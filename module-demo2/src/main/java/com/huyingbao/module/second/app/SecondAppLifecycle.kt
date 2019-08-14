@@ -8,7 +8,9 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.huyingbao.core.annotations.RxAppObserver
 import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
+import com.huyingbao.module.demo.SecondEventBusIndex
 import dagger.android.HasAndroidInjector
+import org.greenrobot.eventbus.EventBus
 
 import javax.inject.Inject
 
@@ -25,6 +27,9 @@ class SecondAppLifecycle(application: Application) : RxAppLifecycle(application)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
+        EventBus.builder()
+                .addIndex(SecondEventBusIndex())
+                .eventInheritance(false)
         secondAppStore.subscribe()
     }
 
