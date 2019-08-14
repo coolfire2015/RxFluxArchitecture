@@ -29,6 +29,10 @@ android:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
+#指定分支，只有指定的分支提交时才会运行脚本
+branches:
+  only:
+    - master
 #缓存之前
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
