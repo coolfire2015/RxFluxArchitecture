@@ -80,6 +80,7 @@
 - Bug修复 [**Tinker**](http://www.tinkerpatch.com/Docs/SDK)
 - Web内核 [**X5**](https://x5.tencent.com/tbs/index.html)
 - RxJava自动注销 [**AutoDispose**](https://github.com/uber/AutoDispose)
+- 注解生成文件工具类 [**Javapoet**](https://mvnrepository.com/artifact/com.squareup/javapoet)
 - AndroidX [**X-Room**](https://mvnrepository.com/artifact/androidx.room/room-runtime)
 +[**X-Paging**](https://mvnrepository.com/artifact/androidx.paging/paging-runtime-ktx)
 +[**X-Work**](https://mvnrepository.com/artifact/androidx.work/work-runtime-ktx)
