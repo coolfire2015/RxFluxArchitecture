@@ -52,9 +52,9 @@ artifacts {
 dependencies {
     //Application代理注解
     api project(':core-arch-annotations')
-    //版本兼容包
+    //X_APPCOMPAT
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
-    //Arch
+    //X_LIFECYCLE
     api "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
     //RxJava
     api "io.reactivex.rxjava2:rxjava:${RX_JAVA_2}"

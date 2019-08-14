@@ -16,10 +16,10 @@ import com.huyingbao.core.base.R
 import com.huyingbao.core.common.action.CommonActionCreator
 import com.huyingbao.core.common.dialog.CommonLoadingDialog
 import com.huyingbao.core.common.dialog.CommonLoadingDialogClickListener
-import com.huyingbao.core.common.model.CommonException
 import com.huyingbao.core.utils.LocalStorageUtils
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
+import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -78,8 +78,7 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
     @Subscribe(sticky = true)
     open fun onRxError(rxError: RxError) {
         when (val throwable = rxError.throwable) {
-            is CommonException -> this.toast(rxError.throwable.message ?: "未知异常")
-            is retrofit2.HttpException -> this.toast(throwable.code().toString() + ":服务器问题")
+            is HttpException -> this.toast("${throwable.code()}:${throwable.message()}")
             is SocketException -> this.toast("网络异常!")
             is UnknownHostException -> this.toast("网络异常!")
             is SocketTimeoutException -> this.toast("连接超时!")
