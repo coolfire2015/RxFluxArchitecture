@@ -7,6 +7,7 @@ import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.module.first.ui.action.FirstAction
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,7 +19,7 @@ class FirstStore @Inject constructor(
     /**
      * 接收获取目前搜索最多的关键词
      */
-    @Subscribe(tags = [FirstAction.GET_HOT_KEY])
+    @Subscribe(tags = [FirstAction.GET_HOT_KEY], threadMode = ThreadMode.MAIN)
     fun onGetHotKey(rxAction: RxAction) {
         hotKeyLiveData.value = rxAction.getResponse()
     }
