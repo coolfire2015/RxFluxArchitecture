@@ -5,8 +5,9 @@ dist: trusty
 sudo: false
 #Git配置
 git:
-  #将git depth设置相对小的值,加快构建速度
-  depth: 3
+  #Travis CI可以clone存储库最大50次commit，这只有在执行git操作时才真正有用。
+  #将git depth设置的值就是clone commit的次数，设置false取消clone commit次数限制。
+  depth: false
 #下载jdk8
 jdk: oraclejdk8
 #Android配置
