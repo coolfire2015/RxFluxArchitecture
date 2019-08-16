@@ -14,8 +14,9 @@ class RxLoading private constructor(
         val isLoading: Boolean
 ) : EventBusEvent(tag) {
     companion object {
-        fun newInstance(tag: String, isLoading: Boolean): RxLoading {
-            return RxLoading(tag, isLoading)
+        fun newInstance(busEvent: EventBusEvent, isLoading: Boolean): RxLoading {
+            return RxLoading(busEvent.tag, isLoading)
+                    .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }
     }
 }

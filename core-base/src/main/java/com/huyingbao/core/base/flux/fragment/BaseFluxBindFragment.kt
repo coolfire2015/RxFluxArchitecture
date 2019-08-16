@@ -11,6 +11,8 @@ import com.huyingbao.core.arch.utils.autoCleared
 
 
 /**
+ * 使用Dagger.Android，持有ViewModel，自动管理订阅
+ *
  * 使用DataBinding的Fragment
  *
  * Created by liujunfeng on 2019/6/10.

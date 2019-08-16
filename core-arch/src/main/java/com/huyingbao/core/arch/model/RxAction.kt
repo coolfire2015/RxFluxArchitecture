@@ -16,28 +16,37 @@ class RxAction private constructor(
         val data: ArrayMap<String, Any>
 ) : EventBusEvent(tag) {
 
+    /**
+     * 获取ArrayMap中Key对应的Value
+     */
     @Suppress("UNCHECKED_CAST")
     operator fun <T> get(tag: String): T? {
         return data[tag] as T?
     }
 
+    /**
+     * 获取ArrayMap中存储的操作结果
+     */
     fun <T> getResponse(): T? {
-        return get(RESPONSE)
+        return get("response")
     }
 
+    /**
+     * 操作结果存储到ArrayMap中
+     */
     fun <T> setResponse(response: T) {
-        data[RESPONSE] = response
+        data["response"] = response
     }
 
     override fun equals(other: Any?): Boolean {
         return this === other || (other != null
                 && other is RxAction
-                && TextUtils.equals(mTag, other.tag)
+                && TextUtils.equals(tag, other.tag)
                 && data == other.data)
     }
 
     override fun hashCode(): Int {
-        var result = mTag.hashCode()
+        var result = tag.hashCode()
         result = 31 * result + data.hashCode()
         return result
     }
@@ -55,9 +64,5 @@ class RxAction private constructor(
         fun build(): RxAction {
             return RxAction(tag, data)
         }
-    }
-
-    companion object {
-        private const val RESPONSE = "response"
     }
 }

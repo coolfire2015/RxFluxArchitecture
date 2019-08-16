@@ -82,8 +82,6 @@ dependencies {
     api project(':core-arch')
     //工具
     api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
-    //图片解析
-    api "com.github.coolfire2015:RxFluxImage:${RX_FLUX_IMAGE}"
     //X-Core
     api "androidx.core:core:${X_CORE}"
     api "androidx.core:core-ktx:${X_CORE}"
@@ -99,15 +97,6 @@ dependencies {
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X-Room
-    api "androidx.room:room-runtime:${X_ROOM}"
-    api "androidx.room:room-ktx:${X_ROOM}"
-    api "androidx.room:room-rxjava2:${X_ROOM}"
-    //X_Paging
-    api "androidx.paging:paging-runtime-ktx:${X_PAGING}"
-    api "androidx.paging:paging-rxjava2-ktx:${X_PAGING}"
-    //X-WorkManager
-    api "androidx.work:work-runtime-ktx:${X_WORK}"
     //X-MultiDex
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //X-CardView
@@ -120,44 +109,20 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
     //Kotlin支持
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
-    //Kotlin Coroutines 支持
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
+    //Kotlin Android 工具类Anko Commons
+    api "org.jetbrains.anko:anko-commons:$ANKO"
     //OkHttp
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
     api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
     //Retrofit
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    api "com.squareup.retrofit2:converter-scalars:${RETROFIT}"
     api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     //Json解析
     api "com.google.code.gson:gson:${GSON}"
     api "com.alibaba:fastjson:${FAST_JSON}"
     //路由器ARouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
-    //RxJava 生命周期绑定 AutoDispose
-    api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
-    //Kotlin Android 工具类Anko Commons
-    api "org.jetbrains.anko:anko-commons:$ANKO"
-    //Json动画Lottie
-    api "com.airbnb.android:lottie:${LOTTIE}"
-    //上下拉刷新SmartRefreshLayout
-    api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
-    //RecyclerView适配器
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
-    //日志展示
-    api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
-    //浏览器内核X5
-    api "com.tencent.tbs.tbssdk:sdk:${TBSSDK}"
-    //键值对存储Mmkv
-    api "com.tencent:mmkv:${MMKV}"
-    //Bug统计Bugly
-    api "com.tencent.bugly:crashreport:${BUGLY}"
-    //热修复Tinker
-    api "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
-    //内存泄露分析 LeakCanary
-    debugApi "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
     //Dagger编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"

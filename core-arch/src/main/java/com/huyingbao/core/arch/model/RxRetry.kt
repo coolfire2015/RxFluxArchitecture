@@ -12,8 +12,9 @@ class RxRetry<T> private constructor(
         val observable: Observable<T>
 ) : EventBusEvent(tag) {
     companion object {
-        fun <T> newInstance(tag: String, throwable: Throwable, httpObservable: Observable<T>): RxRetry<*> {
-            return RxRetry(tag, throwable, httpObservable)
+        fun <T> newInstance(busEvent: EventBusEvent, throwable: Throwable, httpObservable: Observable<T>): RxRetry<*> {
+            return RxRetry(busEvent.tag, throwable, httpObservable)
+                    .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }
     }
 }

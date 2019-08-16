@@ -10,21 +10,24 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import com.huyingbao.core.base.BaseView
 
 /**
- * 不使用Dagger.Android，不接收订阅回调
+ * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅
+ *
+ * 布局文件值与实际显示一致
  *
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseCommonDialog :
         AppCompatDialogFragment(),
         BaseView {
+    /**
+     * 注意此处android.R.id.content，配合[BaseCommonDialog.onStart]方法，使布局文件中背景值和尺寸值生效
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        //注意此处android.R.id.content，配合onStart()方法，使布局文件中背景值和尺寸值生效
         return inflater.inflate(getLayoutId(), dialog?.window?.findViewById(android.R.id.content), false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // view创建之后的操作
         afterCreate(savedInstanceState)
     }
 
@@ -32,9 +35,8 @@ abstract class BaseCommonDialog :
      * Dialog对应的布局文件中背景值和尺寸值生效
      */
     override fun onStart() {
-        val window = dialog?.window
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         super.onStart()
     }
 }

@@ -1,6 +1,6 @@
 package com.huyingbao.module.third.module
 
-import com.huyingbao.core.base.BaseModule
+import com.huyingbao.module.common.app.BaseModule
 import dagger.Component
 import dagger.Module
 import retrofit2.Retrofit
@@ -24,7 +24,7 @@ interface MockComponent {
  *
  * 2.提供测试代码需要的全局对象
  */
-@Module(includes = [BaseModule::class])
+@Module(includes = [com.huyingbao.module.common.app.BaseModule::class])
 class MockModule {
 
 }

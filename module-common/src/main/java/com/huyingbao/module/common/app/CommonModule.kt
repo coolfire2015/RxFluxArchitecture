@@ -1,9 +1,12 @@
-package com.huyingbao.core.base
+package com.huyingbao.module.common.app
 
 import com.huyingbao.core.arch.module.RxFluxModule
+import com.huyingbao.core.arch.scope.ActivityScope
+import com.huyingbao.core.base.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule
+import dagger.android.ContributesAndroidInjector
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -16,9 +19,10 @@ import javax.inject.Singleton
  */
 @Module(includes = [
     RxFluxModule::class,
-    AndroidInjectionModule::class
+    AndroidInjectionModule::class,
+    CommonInjectModule::class
 ])
-class BaseModule {
+class CommonModule {
     @Singleton
     @Provides
     fun provideClientBuilder(): OkHttpClient.Builder {
@@ -29,9 +33,16 @@ class BaseModule {
         else
             HttpLoggingInterceptor.Level.NONE
         return OkHttpClient.Builder()
-                .connectTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(BaseConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .connectTimeout(CommonConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(CommonConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(CommonConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
     }
+}
+
+@Module
+abstract class CommonInjectModule {
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract fun injectCommonAppLifecycle(): CommonAppLifecycle
 }

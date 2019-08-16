@@ -1,11 +1,11 @@
-package com.huyingbao.core.base
+package com.huyingbao.module.common.app
 
 /**
  * 通用常量类
  *
  * Created by liujunfeng on 2019/5/30.
  */
-class BaseConstants {
+class CommonConstants {
     object Config {
         /**
          * 每页数据条数

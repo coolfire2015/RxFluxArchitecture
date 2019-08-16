@@ -9,7 +9,6 @@ import com.huyingbao.core.annotations.RxAppObserver
 import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
 import com.huyingbao.module.demo.FirstEventBusIndex
-import com.orhanobut.logger.Logger
 import dagger.android.HasAndroidInjector
 import org.greenrobot.eventbus.EventBus
 
@@ -22,7 +21,6 @@ class FirstAppLifecycle(application: Application) : RxAppLifecycle(application) 
 
     init {
         if (application is HasAndroidInjector) {
-            Logger.e("")
             RxAndroidInjection.inject(this, application)
         }
     }

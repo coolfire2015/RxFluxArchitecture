@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huyingbao.module.common">
+
+    <application
+        android:allowBackup="false"
+        android:supportsRtl="true">
+        <activity
+            android:name="com.huyingbao.module.common.ui.start.view.StartActivity"
+            android:theme="@style/AppTheme.Loading">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.huyingbao.module.common.ui.web.view.WebActivity" />
+    </application>
+
+</manifest>

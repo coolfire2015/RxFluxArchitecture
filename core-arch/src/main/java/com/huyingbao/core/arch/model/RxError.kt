@@ -12,8 +12,9 @@ class RxError private constructor(
         val throwable: Throwable
 ) : EventBusEvent(tag) {
     companion object {
-        fun newInstance(tag: String, throwable: Throwable): RxError {
-            return RxError(tag, throwable)
+        fun newInstance(busEvent: EventBusEvent, throwable: Throwable): RxError {
+            return RxError(busEvent.tag, throwable)
+                    .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }
     }
 }
