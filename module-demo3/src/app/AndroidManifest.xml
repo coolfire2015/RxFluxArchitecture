@@ -7,18 +7,13 @@
     <application
         android:name="com.huyingbao.module.third.ThirdApplication"
         android:allowBackup="false"
-        android:icon="@drawable/ic_main"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_label_third"
-        android:roundIcon="@drawable/ic_main"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.third.ui.view.ThirdActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.huyingbao.module.third.ui.view.ThirdActivity" />
     </application>
 
 </manifest>

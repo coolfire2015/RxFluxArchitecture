@@ -22,6 +22,9 @@ import dagger.android.DaggerApplication
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
+/**
+ * Application生命周期方法分发类
+ */
 @RxAppObserver
 class CommonAppLifecycle(application: Application) : RxAppLifecycle(application) {
     @Inject
@@ -29,6 +32,9 @@ class CommonAppLifecycle(application: Application) : RxAppLifecycle(application)
 
     private var tinkerApplicationLike: ApplicationLike? = null
 
+    /**
+     * 如果Application实现[dagger.android.HasAndroidInjector]，进行依赖注入
+     */
     init {
         if (application is HasAndroidInjector) {
             RxAndroidInjection.inject(this, application)

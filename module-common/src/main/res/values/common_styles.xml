@@ -1,4 +1,6 @@
 <resources>
+    <!-- 控制app图标色 format:颜色值、资源引用 -->
+    <attr name="colorIcon" format="color|reference" />
     <!--Theme.AppCompat:黑色主题-->
     <!--Theme.AppCompat.Light:浅色主题-->
     <!--Theme.AppCompat.Light.DarkActionBar:带黑色工具栏的浅色主题-->
@@ -56,13 +58,13 @@
         <item name="cardElevation">@dimen/dp_6</item>
         <item name="cardPreventCornerOverlap">false</item>
     </style>
-
+    <!--横线样式-->
     <style name="ViewDividerHorizontalStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_04</item>
         <item name="android:background">@color/common_divider</item>
     </style>
-
+    <!--竖线样式-->
     <style name="ViewDividerVerticalStyle">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/dp_04</item>
@@ -71,9 +73,5 @@
     <!--主题默认字体样式-->
     <style name="CommonTextAppearance" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/sp_16</item>
-    </style>
-
-    <style name="CommonTextAppearanceItem" parent="CommonTextAppearance">
-        <item name="android:textColor">@color/common_text_tab</item>
     </style>
 </resources>

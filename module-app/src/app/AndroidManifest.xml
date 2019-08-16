@@ -9,9 +9,9 @@
     <application
         android:name="com.huyingbao.module.app.SimpleApplication"
         android:allowBackup="false"
-        android:icon="@drawable/ic_main"
-        android:label="ArchDemo"
-        android:roundIcon="@drawable/ic_main"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_label_app"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"

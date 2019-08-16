@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
+import com.huyingbao.core.base.setTitle
+import com.huyingbao.module.common.app.CommonRouter
 import com.huyingbao.module.first.R
 import com.huyingbao.module.first.ui.action.FirstActionCreator
 import com.huyingbao.module.first.ui.store.FirstStore
@@ -31,10 +33,10 @@ class FirstFragment : BaseFluxFragment<FirstStore>() {
             firstActionCreator.getHotKey()
         }
         bt_to_demo2.setOnClickListener {
-            ARouter.getInstance().build("/second/SecondActivity").navigation()
+            ARouter.getInstance().build(CommonRouter.SecondActivity).navigation()
         }
         bt_to_demo3.setOnClickListener {
-            ARouter.getInstance().build("/third/ThirdActivity").navigation()
+            ARouter.getInstance().build(CommonRouter.ThirdActivity).navigation()
         }
     }
 }

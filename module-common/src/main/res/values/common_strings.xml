@@ -12,4 +12,9 @@
     <string name="common_menu_browser">用浏览器打开</string>
 
     <string name="common_toast_copy">已经复制到粘贴板</string>
+    <string name="app_label_app">ArchDemo</string>
+    <string name="app_label_common">ArchDemoCommon</string>
+    <string name="app_label_first">ArchDemo1</string>
+    <string name="app_label_second">ArchDemo2</string>
+    <string name="app_label_third">ArchDemo3</string>
 </resources>

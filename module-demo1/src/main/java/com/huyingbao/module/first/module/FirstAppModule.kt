@@ -1,6 +1,6 @@
 package com.huyingbao.module.first.module
 
-import com.huyingbao.core.base.BaseModule
+import com.huyingbao.module.common.app.CommonModule
 import com.huyingbao.module.first.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Module(includes = [
     FirstInjectActivityModule::class,
     FirstStoreModule::class,
-    BaseModule::class
+    CommonModule::class
 ])
 class FirstAppModule {
     //模块化App中，依赖注入仓库中会有多个方法提供Retrofit对象，

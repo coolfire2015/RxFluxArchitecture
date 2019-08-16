@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.huyingbao.core.base.BaseConstants
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
+import com.huyingbao.core.base.setTitle
 import com.huyingbao.module.common.R
+import com.huyingbao.module.common.app.CommonConstants
+import com.huyingbao.module.common.app.CommonRouter
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.share
 import org.jetbrains.anko.toast
@@ -17,6 +20,7 @@ import org.jetbrains.anko.toast
 /**
  * 显示网页，Menu中有分享和使用浏览器打开
  */
+@Route(path = CommonRouter.WebActivity)
 class WebActivity : BaseCommonFragActivity() {
 
     private var url: String? = null
@@ -28,15 +32,15 @@ class WebActivity : BaseCommonFragActivity() {
          */
         fun newIntent(context: Context, url: String?, title: String?): Intent {
             return Intent(context, WebActivity::class.java).apply {
-                putExtra(BaseConstants.Key.URL, url)
-                putExtra(BaseConstants.Key.TITLE, title)
+                putExtra(CommonConstants.Key.URL, url)
+                putExtra(CommonConstants.Key.TITLE, title)
             }
         }
     }
 
     override fun createFragment(): Fragment? {
         var fragment: Fragment? = null
-        intent.getStringExtra(BaseConstants.Key.URL)?.let {
+        intent.getStringExtra(CommonConstants.Key.URL)?.let {
             url = it
             fragment = WebFragment.newInstance(it)
         }
@@ -45,7 +49,7 @@ class WebActivity : BaseCommonFragActivity() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         //设置当前网页窗口的标题
-        intent.getStringExtra(BaseConstants.Key.TITLE)?.let {
+        intent.getStringExtra(CommonConstants.Key.TITLE)?.let {
             setTitle(it, true)
         }
     }

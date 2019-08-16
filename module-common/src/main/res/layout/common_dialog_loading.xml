@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dp_120"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_dialog_bg"
+    android:background="?android:attr/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingTop="@dimen/dp_10"
@@ -25,7 +25,7 @@
         android:textColor="@color/White"
         android:textSize="@dimen/sp_12"
         android:visibility="gone"
-        tools:text="@string/brvah_loading"
+        tools:text="loading"
         tools:visibility="visible" />
 
     <TextView

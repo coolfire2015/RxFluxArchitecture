@@ -1,7 +1,0 @@
-<!--输入框描边圆角边框-->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke
-        android:width="@dimen/dp_04"
-        android:color="@color/common_divider" />
-    <corners android:radius="@dimen/dp_4" />
-</shape>

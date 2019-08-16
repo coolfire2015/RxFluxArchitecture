@@ -30,7 +30,7 @@ class StartFragment : BaseCommonFragment() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        //延迟2000mm，跳转
+        //延迟1500mm，跳转
         Observable
                 .timer(1500, TimeUnit.MILLISECONDS)
                 .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
