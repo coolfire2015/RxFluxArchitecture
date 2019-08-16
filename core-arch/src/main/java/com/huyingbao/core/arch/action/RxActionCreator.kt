@@ -4,6 +4,7 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.*
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.greenrobot.eventbus.EventBus
@@ -102,7 +103,9 @@ abstract class RxActionCreator(
                         postRxLoading(rxAction, false)
                     }
                 }
-                // 操作结束,在io线程中接收接收反馈,没有切换线程
+                // 切换到主线程，主线程中接收反馈
+                .observeOn(AndroidSchedulers.mainThread())
+                // 操作结束
                 .subscribe(object : Observer<T> {
                     override fun onComplete() {
                         //操作结束

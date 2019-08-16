@@ -26,8 +26,34 @@ abstract class BaseCommonDialog :
         return inflater.inflate(getLayoutId(), dialog?.window?.findViewById(android.R.id.content), false)
     }
 
+    /**
+     * DialogFragment内存泄露解决方案
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        if (showsDialog) {
+            showsDialog = false
+        }
         super.onActivityCreated(savedInstanceState)
+        showsDialog = true
+
+        val view = view
+        if (view != null) {
+            if (view.parent != null) {
+                throw IllegalStateException(
+                        "DialogFragment can not be attached to a container view")
+            }
+            dialog!!.setContentView(view)
+        }
+        val activity = activity
+        if (activity != null) {
+            dialog!!.setOwnerActivity(activity)
+        }
+        if (savedInstanceState != null) {
+            val dialogState = savedInstanceState.getBundle("android:savedDialogState")
+            if (dialogState != null) {
+                dialog!!.onRestoreInstanceState(dialogState)
+            }
+        }
         afterCreate(savedInstanceState)
     }
 

@@ -19,7 +19,7 @@ class FirstStore @Inject constructor(
     /**
      * 接收获取目前搜索最多的关键词
      */
-    @Subscribe(tags = [FirstAction.GET_HOT_KEY], threadMode = ThreadMode.MAIN)
+    @Subscribe(tags = [FirstAction.GET_HOT_KEY])
     fun onGetHotKey(rxAction: RxAction) {
         hotKeyLiveData.value = rxAction.getResponse()
     }

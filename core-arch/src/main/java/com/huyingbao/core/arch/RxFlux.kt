@@ -42,12 +42,18 @@ class RxFlux @Inject constructor() :
     @Inject
     lateinit var rxActionManager: RxActionManager
 
+    /**
+     * 当前维护的Activity个数
+     */
     private var activityCounter: Int = 0
-    private val activityStack: Stack<Activity> = Stack()
+    /**
+     * 维护的应用内Activity栈
+     */
+    val activityStack: Stack<Activity> = Stack()
 
     override fun onActivityCreated(activity: Activity?, bundle: Bundle?) {
         activityCounter++
-        activityStack.add(activity)
+        activityStack.push(activity)
         if (activity is FragmentActivity) {
             activity.lifecycle.addObserver(RxActivityLifecycleObserver(activity))
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)

@@ -9,6 +9,7 @@ import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
 import com.huyingbao.core.base.BuildConfig
 import com.huyingbao.core.utils.AndroidUtils
+import com.huyingbao.module.common.CommonEventBusIndex
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -20,6 +21,7 @@ import com.tinkerpatch.sdk.loader.TinkerPatchApplicationLike
 import com.tinkerpatch.sdk.server.callback.ConfigRequestCallback
 import dagger.android.DaggerApplication
 import dagger.android.HasAndroidInjector
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 /**
@@ -43,6 +45,10 @@ class CommonAppLifecycle(application: Application) : RxAppLifecycle(application)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
+        //如果子模块中使用EventBus
+        EventBus.builder()
+                .addIndex(CommonEventBusIndex())
+                .eventInheritance(false)
         commonAppStore.subscribe()
         initBugly()
         initTinker()

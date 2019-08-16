@@ -103,5 +103,5 @@ android {
 
 dependencies {
     //通用Base库
-    implementation project(':module-common')
+    api project(':module-common')
 }
