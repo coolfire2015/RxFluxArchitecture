@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.huyingbao.core.arch.store.RxActivityStore
+import com.huyingbao.core.base.FragmentOp
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.initFragment
+import com.huyingbao.core.base.setFragment
 
 /**
  * 使用Dagger.Android，持有ViewModel，自动管理订阅
@@ -30,6 +31,6 @@ abstract class BaseFluxFragActivity<T : RxActivityStore> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initFragment(getFragmentContainerId(), createFragment())
+        setFragment(getFragmentContainerId(), createFragment(), FragmentOp.OP_NULL)
     }
 }

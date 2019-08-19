@@ -3,8 +3,9 @@ package com.huyingbao.core.base.common.activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.huyingbao.core.base.FragmentOp
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.initFragment
+import com.huyingbao.core.base.setFragment
 
 /**
  * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅
@@ -29,6 +30,6 @@ abstract class BaseCommonFragActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initFragment(getFragmentContainerId(), createFragment())
+        setFragment(getFragmentContainerId(), createFragment(), FragmentOp.OP_NULL)
     }
 }

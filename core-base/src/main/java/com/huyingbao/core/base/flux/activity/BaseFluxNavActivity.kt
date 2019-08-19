@@ -5,7 +5,7 @@ import androidx.annotation.NavigationRes
 import androidx.navigation.Navigation
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.initNavigation
+import com.huyingbao.core.base.setNavigation
 
 
 /**
@@ -32,6 +32,6 @@ abstract class BaseFluxNavActivity<T : RxActivityStore> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initNavigation(getFragmentContainerId(), getGraphId())
+        setNavigation(getFragmentContainerId(), getGraphId())
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.annotation.NavigationRes
 import androidx.navigation.Navigation
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.initNavigation
+import com.huyingbao.core.base.setNavigation
 
 
 /**
@@ -31,6 +31,6 @@ abstract class BaseCommonNavActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initNavigation(getFragmentContainerId(), getGraphId())
+        setNavigation(getFragmentContainerId(), getGraphId())
     }
 }
