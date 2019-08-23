@@ -102,6 +102,16 @@ android {
 }
 
 dependencies {
+    //X-CardView
+    api "androidx.cardview:cardview:${X_CARD_VIEW}"
+    //X-RecyclerView
+    api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
+    //X_ConstraintLayout
+    api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
+    //路由器ARouter
+    api "com.alibaba:arouter-api:${AROUTER_API}"
+    //Kotlin Android 工具类Anko Commons
+    api "org.jetbrains.anko:anko-commons:$ANKO"
     //Json动画Lottie
     api "com.airbnb.android:lottie:${LOTTIE}"
     //日志展示

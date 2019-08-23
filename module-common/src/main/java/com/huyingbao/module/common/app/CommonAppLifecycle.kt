@@ -4,12 +4,12 @@ import android.app.Application
 import android.os.Build
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
+import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.annotations.RxAppObserver
 import com.huyingbao.core.arch.RxAppLifecycle
 import com.huyingbao.core.arch.utils.RxAndroidInjection
 import com.huyingbao.core.base.BuildConfig
 import com.huyingbao.core.utils.AndroidUtils
-import com.huyingbao.module.common.CommonEventBusIndex
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -21,7 +21,6 @@ import com.tinkerpatch.sdk.loader.TinkerPatchApplicationLike
 import com.tinkerpatch.sdk.server.callback.ConfigRequestCallback
 import dagger.android.DaggerApplication
 import dagger.android.HasAndroidInjector
-import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 /**
@@ -46,10 +45,8 @@ class CommonAppLifecycle(application: Application) : RxAppLifecycle(application)
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
         //如果子模块中使用EventBus
-        EventBus.builder()
-                .addIndex(CommonEventBusIndex())
-                .eventInheritance(false)
         commonAppStore.subscribe()
+        initARouter()
         initBugly()
         initTinker()
         initDebug()
@@ -64,6 +61,18 @@ class CommonAppLifecycle(application: Application) : RxAppLifecycle(application)
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onTerminate() {
         commonAppStore.unsubscribe()
+    }
+
+    /**
+     * 初始化ARouter
+     */
+    private fun initARouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        // 尽可能早，推荐在Application中初始化
+        ARouter.init(application)
     }
 
     /**
