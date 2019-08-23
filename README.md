@@ -1,5 +1,5 @@
 [![](https://jitpack.io/v/coolfire2015/RxFluxArchitecture.svg)](https://jitpack.io/#coolfire2015/RxFluxArchitecture)
-[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
+[![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e3864a8c7c9b4f768702376e665b1d44)](https://app.codacy.com/app/coolfire2015/RxFluxArchitecture?utm_source=github.com&utm_medium=referral&utm_content=coolfire2015/RxFluxArchitecture&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/coolfire2015/RxFluxArchitecture.svg?branch=master)](https://travis-ci.org/coolfire2015/RxFluxArchitecture)
 
@@ -17,16 +17,6 @@
 
 ## Demo下载地址
 ![下载](image/下载.png)
-
-## 效果图
-![效果图](image/效果图/Fragment切换.gif)
-![效果图](image/效果图/屏幕旋转.gif)
-
-
-![效果图](image/效果图/状态加载-操作成功.gif)
-![效果图](image/效果图/状态加载-取消操作.gif)
-
-![效果图](image/效果图/操作重试.gif)
 
 ## Kotlin代码模版
 * 项目可下载 [core-base](core-base)，自定义base代码。
