@@ -15,7 +15,9 @@ import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 @RxAppObserver
-class SecondAppLifecycle(application: Application) : RxAppLifecycle(application) {
+class SecondAppLifecycle(
+        application: Application
+) : RxAppLifecycle(application) {
     @Inject
     lateinit var secondAppStore: SecondAppStore
 

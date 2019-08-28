@@ -15,7 +15,6 @@ import org.greenrobot.eventbus.EventBus
  * Created by liujunfeng on 2019/1/1.
  */
 class RxDispatcher {
-
     /**
      * [RxStore]注册订阅。
      */

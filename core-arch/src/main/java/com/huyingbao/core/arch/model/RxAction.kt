@@ -15,7 +15,6 @@ class RxAction private constructor(
         tag: String,
         val data: ArrayMap<String, Any>
 ) : EventBusEvent(tag) {
-
     /**
      * 获取ArrayMap中Key对应的Value
      */

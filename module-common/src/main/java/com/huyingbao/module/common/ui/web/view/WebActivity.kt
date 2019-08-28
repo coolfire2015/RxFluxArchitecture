@@ -19,10 +19,11 @@ import org.jetbrains.anko.toast
 
 /**
  * 显示网页，Menu中有分享和使用浏览器打开
+ *
+ * Created by liujunfeng on 2019/5/31.
  */
 @Route(path = CommonRouter.WebActivity)
 class WebActivity : BaseCommonFragActivity() {
-
     private var url: String? = null
 
     companion object {

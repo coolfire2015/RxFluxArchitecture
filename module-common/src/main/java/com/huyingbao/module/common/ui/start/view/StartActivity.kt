@@ -8,6 +8,8 @@ import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
 
 /**
  * 引导页面，使用standard模式启动
+ *
+ * Created by liujunfeng on 2019/5/31.
  */
 class StartActivity : BaseCommonFragActivity() {
     override fun createFragment(): Fragment? {

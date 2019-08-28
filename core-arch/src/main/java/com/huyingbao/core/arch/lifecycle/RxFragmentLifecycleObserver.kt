@@ -12,8 +12,9 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxFragmentLifecycleObserver(private val fragment: Fragment) : LifecycleObserver {
-
+class RxFragmentLifecycleObserver(
+        private val fragment: Fragment
+) : LifecycleObserver {
     /**
      * 在onAttach()完成依赖注入之后调用
      */

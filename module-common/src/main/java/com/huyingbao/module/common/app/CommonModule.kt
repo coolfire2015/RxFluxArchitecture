@@ -2,7 +2,7 @@ package com.huyingbao.module.common.app
 
 import com.huyingbao.core.arch.module.RxFluxModule
 import com.huyingbao.core.arch.scope.ActivityScope
-import com.huyingbao.core.base.BuildConfig
+import com.huyingbao.module.common.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule

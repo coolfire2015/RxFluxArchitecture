@@ -12,7 +12,9 @@ import kotlin.reflect.KProperty
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class AutoClearedValue<T : Any?>(lifecycleOwner: LifecycleOwner) : ReadWriteProperty<LifecycleOwner, T?> {
+class AutoClearedValue<T : Any?>(
+        lifecycleOwner: LifecycleOwner
+) : ReadWriteProperty<LifecycleOwner, T?> {
     private var _value: T? = null
 
     init {

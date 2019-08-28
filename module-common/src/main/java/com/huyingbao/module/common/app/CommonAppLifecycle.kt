@@ -27,7 +27,9 @@ import javax.inject.Inject
  * Application生命周期方法分发类
  */
 @RxAppObserver
-class CommonAppLifecycle(application: Application) : RxAppLifecycle(application) {
+class CommonAppLifecycle(
+        application: Application
+) : RxAppLifecycle(application) {
     @Inject
     lateinit var commonAppStore: CommonAppStore
 

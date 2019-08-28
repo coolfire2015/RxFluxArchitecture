@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit
  * Created by liujunfeng on 2019/5/31.
  */
 class StartFragment : BaseCommonFragment() {
-
     companion object {
         fun newInstance(): StartFragment {
             return StartFragment()

@@ -31,9 +31,7 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-class RxFlux @Inject constructor() :
-        FragmentManager.FragmentLifecycleCallbacks(),
-        Application.ActivityLifecycleCallbacks {
+class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
     /**
      * [Inject] 用来标记需要注入的依赖, 被标注的属性不能使用private修饰，否则无法注入
      */

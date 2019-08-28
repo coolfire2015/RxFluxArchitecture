@@ -13,7 +13,9 @@ import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 @RxAppObserver
-class ThirdAppLifecycle(application: Application) : RxAppLifecycle(application) {
+class ThirdAppLifecycle(
+        application: Application
+) : RxAppLifecycle(application) {
     @Inject
     lateinit var thirdAppStore: ThirdAppStore
 

@@ -26,7 +26,7 @@ final class ProcessorUtil {
     /**
      * 框架包名
      */
-    public static final String PACKAGE_ROOT = "com.huyingbao.core.arch";
+    static final String PACKAGE_ROOT = "com.huyingbao.core.arch";
     /**
      * RxApp类名
      */

@@ -25,8 +25,8 @@ import java.util.logging.Level
  */
 abstract class RxActionCreator(
         private val rxDispatcher: RxDispatcher,
-        private val rxActionManager: RxActionManager) {
-
+        private val rxActionManager: RxActionManager
+) {
     /**
      * 创建新的[RxAction]
      *

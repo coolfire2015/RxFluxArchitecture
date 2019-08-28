@@ -13,8 +13,9 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxActivityLifecycleObserver(private val activity: Activity) : LifecycleObserver {
-
+class RxActivityLifecycleObserver(
+        private val activity: Activity
+) : LifecycleObserver {
     /**
      * 在onCreate(Bundle)完成依赖注入之后调用
      */

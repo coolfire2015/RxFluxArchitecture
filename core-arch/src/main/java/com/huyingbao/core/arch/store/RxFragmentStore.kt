@@ -19,18 +19,20 @@ import com.huyingbao.core.arch.model.RxChange
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxFragmentStore(private val mRxDispatcher: RxDispatcher) : ViewModel(), LifecycleObserver, RxStore {
+abstract class RxFragmentStore(
+        private val rxDispatcher: RxDispatcher
+) : ViewModel(), LifecycleObserver, RxStore {
 
     /**
      * 在所关联对象（Fragment）[Lifecycle.Event.ON_CREATE]时，注册到[RxDispatcher]
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun subscribe() {
-        if (mRxDispatcher.isSubscribe(this)) {
+        if (rxDispatcher.isSubscribe(this)) {
             return
         }
         Log.i(RxFlux.TAG, "Subscribe RxFragmentStore : " + javaClass.simpleName)
-        mRxDispatcher.subscribeRxStore(this)
+        rxDispatcher.subscribeRxStore(this)
     }
 
 
@@ -40,10 +42,10 @@ abstract class RxFragmentStore(private val mRxDispatcher: RxDispatcher) : ViewMo
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun unsubscribe() {
         Log.i(RxFlux.TAG, "Unsubscribe RxFragmentStore : " + javaClass.simpleName)
-        mRxDispatcher.unsubscribeRxStore(this)
+        rxDispatcher.unsubscribeRxStore(this)
     }
 
     override fun postChange(rxChange: RxChange) {
-        mRxDispatcher.postRxChange(rxChange)
+        rxDispatcher.postRxChange(rxChange)
     }
 }
