@@ -97,16 +97,6 @@ dependencies {
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //X-Material
     api "com.google.android.material:material:${X_MATERIAL}"
-    //OkHttp
-    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
-    api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
-    //Retrofit
-    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
-    api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
-    //Json解析
-    api "com.google.code.gson:gson:${GSON}"
-    api "com.alibaba:fastjson:${FAST_JSON}"
     //Dagger编译时生成
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"

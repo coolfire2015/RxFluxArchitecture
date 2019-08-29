@@ -108,6 +108,16 @@ dependencies {
     api "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
     //X_ConstraintLayout
     api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
+    //OkHttp
+    api "com.squareup.okhttp3:okhttp:${OKHTTP}"
+    api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
+    //Retrofit
+    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    //Json解析
+    api "com.google.code.gson:gson:${GSON}"
+    api "com.alibaba:fastjson:${FAST_JSON}"
     //路由器ARouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
     //Kotlin Android 工具类Anko Commons
