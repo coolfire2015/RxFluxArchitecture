@@ -1,4 +1,4 @@
-package com.huyingbao.module.first.ui.action
+package com.huyingbao.module.first.ui.first.action
 
 import com.huyingbao.core.arch.action.RxActionCreator
 import com.huyingbao.core.arch.action.RxActionManager

@@ -86,7 +86,7 @@ android {
             }
         }
     }
-    //修改生成的apk名字
+    //修改生成的apk文件名及路径
     if (isCommonAsApp.toBoolean()) {
         applicationVariants.all { variant ->
             if (variant.buildType.name != "debug") {

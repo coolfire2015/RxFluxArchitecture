@@ -1,13 +1,12 @@
-package com.huyingbao.module.first.ui.store
+package com.huyingbao.module.first.ui.first.store
 
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
-import com.huyingbao.module.first.ui.action.FirstAction
+import com.huyingbao.module.first.ui.first.action.FirstAction
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 import javax.inject.Singleton
 

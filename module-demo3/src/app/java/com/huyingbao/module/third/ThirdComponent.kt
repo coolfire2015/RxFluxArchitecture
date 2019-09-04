@@ -1,7 +1,7 @@
 package com.huyingbao.module.third
 
 import android.app.Application
-import com.huyingbao.module.third.module.ThirdAppModule
+import com.huyingbao.module.third.app.ThirdAppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

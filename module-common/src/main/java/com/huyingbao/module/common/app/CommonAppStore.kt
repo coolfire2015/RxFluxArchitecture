@@ -31,8 +31,6 @@ class CommonAppStore @Inject constructor(
 ) : RxAppStore(application, rxDispatcher) {
     /**
      * 接收[RxError]，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
     fun onRxError(rxError: RxError) {
@@ -48,8 +46,6 @@ class CommonAppStore @Inject constructor(
 
     /**
      * 接收[RxRetry]，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
      */
     @Subscribe(sticky = true)
     fun onRxRetry(rxRetry: RxRetry<*>) {
@@ -63,10 +59,7 @@ class CommonAppStore @Inject constructor(
     }
 
     /**
-     * 显示进度对话框
-     * 接收[RxLoading]，粘性
-     * 该方法不经过RxStore,
-     * 由RxFluxView直接处理
+     * 显示或隐藏进度对话框，接收[RxLoading]，粘性
      */
     @Subscribe(sticky = true)
     fun onRxLoading(rxLoading: RxLoading) {

@@ -11,8 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
 import com.huyingbao.core.base.setTitle
 import com.huyingbao.module.common.R
-import com.huyingbao.module.common.app.CommonConstants
-import com.huyingbao.module.common.app.CommonRouter
+import com.huyingbao.module.common.app.CommonAppConstants
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.share
 import org.jetbrains.anko.toast
@@ -22,7 +21,7 @@ import org.jetbrains.anko.toast
  *
  * Created by liujunfeng on 2019/5/31.
  */
-@Route(path = CommonRouter.WebActivity)
+@Route(path = CommonAppConstants.Router.WebActivity)
 class WebActivity : BaseCommonFragActivity() {
     private var url: String? = null
 
@@ -33,15 +32,15 @@ class WebActivity : BaseCommonFragActivity() {
          */
         fun newIntent(context: Context, url: String?, title: String?): Intent {
             return Intent(context, WebActivity::class.java).apply {
-                putExtra(CommonConstants.Key.URL, url)
-                putExtra(CommonConstants.Key.TITLE, title)
+                putExtra(CommonAppConstants.Key.URL, url)
+                putExtra(CommonAppConstants.Key.TITLE, title)
             }
         }
     }
 
     override fun createFragment(): Fragment? {
         var fragment: Fragment? = null
-        intent.getStringExtra(CommonConstants.Key.URL)?.let {
+        intent.getStringExtra(CommonAppConstants.Key.URL)?.let {
             url = it
             fragment = WebFragment.newInstance(it)
         }
@@ -50,7 +49,7 @@ class WebActivity : BaseCommonFragActivity() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         //设置当前网页窗口的标题
-        intent.getStringExtra(CommonConstants.Key.TITLE)?.let {
+        intent.getStringExtra(CommonAppConstants.Key.TITLE)?.let {
             setTitle(it, true)
         }
     }

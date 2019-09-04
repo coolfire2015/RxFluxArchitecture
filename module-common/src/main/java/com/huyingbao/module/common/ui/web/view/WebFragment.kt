@@ -6,7 +6,7 @@ import com.huyingbao.core.arch.view.RxSubscriberView
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.module.common.R
-import com.huyingbao.module.common.app.CommonConstants
+import com.huyingbao.module.common.app.CommonAppConstants
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
@@ -23,7 +23,7 @@ class WebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
         fun newInstance(url: String): WebFragment {
             return WebFragment().apply {
                 arguments = Bundle().apply {
-                    putString(CommonConstants.Key.URL, url)
+                    putString(CommonAppConstants.Key.URL, url)
                 }
             }
         }
@@ -35,7 +35,7 @@ class WebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         arguments?.let {
-            if (it.containsKey(CommonConstants.Key.URL)) {
+            if (it.containsKey(CommonAppConstants.Key.URL)) {
                 //和系统WebView一样
                 val settings = web_content.settings
                 //支持Javascript 与js交互
@@ -73,7 +73,7 @@ class WebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
                         }
                     }
                 }
-                web_content.loadUrl(it.getString(CommonConstants.Key.URL))
+                web_content.loadUrl(it.getString(CommonAppConstants.Key.URL))
             }
         }
     }

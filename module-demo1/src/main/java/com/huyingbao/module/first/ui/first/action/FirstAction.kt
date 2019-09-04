@@ -1,4 +1,4 @@
-package com.huyingbao.module.first.ui.action
+package com.huyingbao.module.first.ui.first.action
 
 import com.google.gson.JsonObject
 import io.reactivex.Observable

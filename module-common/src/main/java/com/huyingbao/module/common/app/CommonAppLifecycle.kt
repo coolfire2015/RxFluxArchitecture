@@ -25,6 +25,8 @@ import javax.inject.Inject
 
 /**
  * Application生命周期方法分发类
+ *
+ * Created by liujunfeng on 2019/8/1.
  */
 @RxAppObserver
 class CommonAppLifecycle(

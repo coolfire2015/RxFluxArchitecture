@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.first.ui.view.FirstActivity"/>
+        <activity android:name="com.huyingbao.module.first.ui.first.view.FirstActivity" />
     </application>
 
 </manifest>

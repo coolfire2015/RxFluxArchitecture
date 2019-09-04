@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.core.utils.AndroidUtils
 import com.huyingbao.module.common.R
-import com.huyingbao.module.common.app.CommonRouter
+import com.huyingbao.module.common.app.CommonAppConstants
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
@@ -34,7 +34,7 @@ class StartFragment : BaseCommonFragment() {
                 .timer(1500, TimeUnit.MILLISECONDS)
                 .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
                 .subscribe {
-                    val appRouter = CommonRouter.getAppRouter(AndroidUtils.getApplicationLabel(context))
+                    val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
                     ARouter.getInstance().build(appRouter).navigation()
                     activity?.finish()
                 }
