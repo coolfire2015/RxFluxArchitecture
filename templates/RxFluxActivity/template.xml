@@ -44,6 +44,15 @@
         help="The name of the store class to create" />
 
     <parameter
+        id="moduleClass"
+        name="Dagger Module Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${activityClass}Module"
+        default="MainStore"
+        help="The name of the store class to create" />
+
+    <parameter
         id="actionClass"
         name="Action Name"
         type="string"
