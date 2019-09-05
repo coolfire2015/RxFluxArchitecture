@@ -12,8 +12,8 @@
 <instantiate from="root/src/app_package/RxFluxFragment.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/view/${fragmentClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxModule.kt.ftl"
-        to="${escapeXmlAttribute(srcOut)}/module/${moduleClass}.kt" />
+<instantiate from="root/src/app_package/RxFluxActivityModule.kt.ftl"
+    to="${escapeXmlAttribute(srcOut)}/module/${activityModuleClass}.kt" />
 
 <instantiate from="root/src/app_package/RxFluxStore.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/store/${storeClass}.kt" />

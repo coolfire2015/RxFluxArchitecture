@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ${moduleClass} {
+abstract class ${activityModuleClass} {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun inject${fragmentClass}(): ${fragmentClass}

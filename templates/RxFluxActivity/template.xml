@@ -35,20 +35,20 @@
         help="The name of the fragment class to create" />
 
     <parameter
+        id="activityModuleClass"
+        name="Activity Module Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${activityClass}Module"
+        default="MainActivityModule"
+        help="The name of the activity module class to create" />
+
+    <parameter
         id="storeClass"
         name="Store Name"
         type="string"
         constraints="class|unique|nonempty"
         suggest="${underscoreToCamelCase(classToResource(activityClass))}Store"
-        default="MainStore"
-        help="The name of the store class to create" />
-
-    <parameter
-        id="moduleClass"
-        name="Dagger Module Name"
-        type="string"
-        constraints="class|unique|nonempty"
-        suggest="${activityClass}Module"
         default="MainStore"
         help="The name of the store class to create" />
 
