@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.store.RxFragmentStore
 import com.huyingbao.core.arch.utils.ClassUtils
@@ -48,9 +47,9 @@ abstract class RxFluxDialog<T : ViewModel> :
             val storeClass = ClassUtils.getGenericClass<T>(javaClass)
                     ?: throw IllegalArgumentException("No generic class for Class<" + javaClass.canonicalName + ">")
             if (storeClass.superclass == RxActivityStore::class.java) {
-                store = ViewModelProviders.of(activity!!, viewModelFactory).get(storeClass)
+                store = ViewModelProvider(activity!!, viewModelFactory).get(storeClass)
             } else if (storeClass.superclass == RxFragmentStore::class.java) {
-                store = ViewModelProviders.of(this, viewModelFactory).get(storeClass)
+                store = ViewModelProvider(this, viewModelFactory).get(storeClass)
             }
             return store
         }

@@ -3,7 +3,6 @@ package com.huyingbao.core.arch.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.utils.ClassUtils
 import com.huyingbao.core.arch.utils.autoCleared
@@ -46,7 +45,7 @@ abstract class RxFluxActivity<T : RxActivityStore> :
             }
             val storeClass = ClassUtils.getGenericClass<T>(javaClass)
                     ?: throw IllegalArgumentException("No generic class for Class<" + javaClass.canonicalName + ">")
-            store = ViewModelProviders.of(this, viewModelFactory).get(storeClass)
+            store = ViewModelProvider(this, viewModelFactory).get(storeClass)
             return store
         }
 

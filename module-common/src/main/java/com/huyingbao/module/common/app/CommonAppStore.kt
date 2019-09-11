@@ -23,6 +23,13 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * 全局Store，可以接受全局的[RxError]、[RxRetry]、[RxLoading]。
+ *
+ * 通过[RxFlux]持有的Activity栈，来进行对应的操作。
+ *
+ * Created by liujunfeng on 2019/8/1.
+ */
 @Singleton
 class CommonAppStore @Inject constructor(
         application: Application,
