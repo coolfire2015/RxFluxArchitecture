@@ -9,6 +9,7 @@ import com.huyingbao.module.first.ui.first.module.FirstActivityModule
 import com.huyingbao.module.first.ui.first.store.FirstStore
 import com.huyingbao.module.first.ui.first.view.FirstActivity
 import com.huyingbao.module.first.ui.test.module.TestActivityModule
+import com.huyingbao.module.first.ui.test.store.ContentStore
 import com.huyingbao.module.first.ui.test.store.TestStore
 import com.huyingbao.module.first.ui.test.view.TestActivity
 import dagger.Binds
@@ -51,6 +52,12 @@ abstract class FirstAppModule {
     @IntoMap
     @RxStoreKey(TestStore::class)
     abstract fun bindTestStore(testStore: TestStore): ViewModel
+
+    @Singleton
+    @Binds
+    @IntoMap
+    @RxStoreKey(ContentStore::class)
+    abstract fun bindContentStore(contentStore: ContentStore): ViewModel
 
 
     @Module

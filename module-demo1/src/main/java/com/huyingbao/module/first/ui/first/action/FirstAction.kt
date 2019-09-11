@@ -7,14 +7,6 @@ import retrofit2.http.GET
 interface FirstAction {
     companion object {
         /**
-         * 跳转Demo2
-         */
-        const val TO_DEMO2 = "toDemo2"
-        /**
-         * 跳转Demo3
-         */
-        const val TO_DEMO3 = "toDemo3"
-        /**
          * 获取目前搜索最多的关键词
          */
         const val GET_HOT_KEY = "getHotKey"

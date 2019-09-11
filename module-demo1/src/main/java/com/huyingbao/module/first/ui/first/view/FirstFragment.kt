@@ -9,6 +9,7 @@ import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.first.R
 import com.huyingbao.module.first.ui.first.action.FirstActionCreator
 import com.huyingbao.module.first.ui.first.store.FirstStore
+import com.huyingbao.module.first.ui.test.view.TestActivity
 import kotlinx.android.synthetic.main.first_fragment_first.*
 import javax.inject.Inject
 
@@ -36,7 +37,8 @@ class FirstFragment : BaseFluxFragment<FirstStore>() {
             ARouter.getInstance().build(CommonAppConstants.Router.SecondActivity).navigation()
         }
         bt_to_demo3.setOnClickListener {
-            ARouter.getInstance().build(CommonAppConstants.Router.ThirdActivity).navigation()
+            //            ARouter.getInstance().build(CommonAppConstants.Router.ThirdActivity).navigation()
+            context?.let { context -> startActivity(TestActivity.newIntent(context)) }
         }
     }
 }

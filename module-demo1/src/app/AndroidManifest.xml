@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.huyingbao.module.first.FirstApplication"
+        android:name=".FirstApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_label_first"
@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.first.ui.first.view.FirstActivity" />
+        <activity android:name=".ui.test.view.TestActivity" />
+        <activity android:name=".ui.first.view.FirstActivity" />
     </application>
 
 </manifest>
