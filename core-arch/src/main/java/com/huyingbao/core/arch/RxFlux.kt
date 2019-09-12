@@ -61,9 +61,9 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     override fun onActivityStarted(activity: Activity?) {
     }
 
-    override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
-        super.onFragmentAttached(fm, f, context)
-        f.lifecycle.addObserver(RxFragmentLifecycleObserver(f))
+    override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
+        super.onFragmentAttached(fragmentManager, fragment, context)
+        fragment.lifecycle.addObserver(RxFragmentLifecycleObserver(fragment))
     }
 
     /**
@@ -71,7 +71,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
      */
     override fun onActivityResumed(activity: Activity?) {
         if (activity is RxSubscriberView) {
-            if (rxDispatcher.isSubscribe(this)) {
+            if (rxDispatcher.isSubscribe(activity)) {
                 return
             }
             Log.i(TAG, "Subscribe RxFluxActivity : " + activity.javaClass.simpleName)
@@ -82,14 +82,14 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     /**
      * [RxSubscriberView]注册订阅
      */
-    override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
-        super.onFragmentResumed(fm, f)
-        if (f is RxSubscriberView) {
-            if (rxDispatcher.isSubscribe(this)) {
+    override fun onFragmentResumed(fragmentManager: FragmentManager, fragment: Fragment) {
+        super.onFragmentResumed(fragmentManager, fragment)
+        if (fragment is RxSubscriberView) {
+            if (rxDispatcher.isSubscribe(fragment)) {
                 return
             }
-            Log.i(TAG, "Subscribe RxFluxFragment : " + f.javaClass.simpleName)
-            rxDispatcher.subscribeRxView(f as RxSubscriberView)
+            Log.i(TAG, "Subscribe RxFluxFragment : " + fragment.javaClass.simpleName)
+            rxDispatcher.subscribeRxView(fragment as RxSubscriberView)
         }
     }
 
@@ -106,11 +106,11 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     /**
      * [RxSubscriberView]取消订阅
      */
-    override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
-        super.onFragmentPaused(fm, f)
-        if (f is RxSubscriberView) {
-            Log.i(TAG, "Unsubscribe RxFluxFragment : " + f.javaClass.simpleName)
-            rxDispatcher.unsubscribeRxView(f as RxSubscriberView)
+    override fun onFragmentPaused(fragmentManager: FragmentManager, fragment: Fragment) {
+        super.onFragmentPaused(fragmentManager, fragment)
+        if (fragment is RxSubscriberView) {
+            Log.i(TAG, "Unsubscribe RxFluxFragment : " + fragment.javaClass.simpleName)
+            rxDispatcher.unsubscribeRxView(fragment as RxSubscriberView)
         }
     }
 

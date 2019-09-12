@@ -46,8 +46,8 @@ class RxDispatcher {
     /**
      * 判断是否注册订阅。
      */
-    fun <T> isSubscribe(`object`: T): Boolean {
-        return EventBus.getDefault().isRegistered(`object`)
+    fun <T> isSubscribe(t: T): Boolean {
+        return EventBus.getDefault().isRegistered(t)
     }
 
     /**

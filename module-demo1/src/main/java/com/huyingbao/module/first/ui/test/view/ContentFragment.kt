@@ -9,14 +9,15 @@ import com.huyingbao.module.first.R
 import com.huyingbao.module.first.ui.test.action.TestAction
 import com.huyingbao.module.first.ui.test.action.TestActionCreator
 import com.huyingbao.module.first.ui.test.store.ContentStore
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.first_fragment_first.*
 import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
 class ContentFragment : BaseFluxFragment<ContentStore>() {
-    private lateinit var tags: String
     @Inject
     lateinit var testActionCreator: TestActionCreator
+
     private var page: Int = 0
 
     companion object {
@@ -41,11 +42,15 @@ class ContentFragment : BaseFluxFragment<ContentStore>() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Logger.e("当前注册${this}")
+    }
+
     @Subscribe(tags = [TestAction.GET_ARTICLE])
     fun onGetArticle(rxChange: RxChange) {
-        if (rxStore?.page == page){
+        if (rxStore?.page == page) {
             tv_hot_key.text = rxStore?.jsonObject.toString()
-
         }
     }
 }
