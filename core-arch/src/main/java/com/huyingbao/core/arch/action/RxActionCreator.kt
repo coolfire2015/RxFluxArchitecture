@@ -25,8 +25,7 @@ import java.util.logging.Level
  */
 abstract class RxActionCreator(
         private val rxDispatcher: RxDispatcher,
-        private val rxActionManager: RxActionManager
-) {
+        private val rxActionManager: RxActionManager) {
     /**
      * 创建新的[RxAction]
      *
@@ -35,9 +34,7 @@ abstract class RxActionCreator(
      */
     protected fun newRxAction(tag: String,
                               vararg data: Any): RxAction {
-        if (data.size % 2 != 0) {
-            throw IllegalArgumentException("Data must be a valid list of key,value pairs")
-        }
+        require(data.size % 2 == 0) { "Data must be a valid list of key,value pairs" }
         val actionBuilder = RxAction.Builder(tag)
         var i = 0
         while (i < data.size) {

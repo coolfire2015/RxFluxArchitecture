@@ -71,7 +71,6 @@ dependencies {
     implementation project(':core-base')
     //编译时生成
     kapt "androidx.room:room-compiler:${X_ROOM}"
-    kapt "androidx.lifecycle:lifecycle-compiler:${X_LIFECYCLE}"
     kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER}"

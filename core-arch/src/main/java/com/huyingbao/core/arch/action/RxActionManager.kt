@@ -56,9 +56,7 @@ class RxActionManager {
      */
     @Synchronized
     fun clear() {
-        if (arrayMap.isEmpty) {
-            return
-        }
+        if (arrayMap.isEmpty) return
         for (pair in arrayMap.values) {
             if (pair.second != null && !pair.second!!.isDisposed) {
                 pair.second!!.dispose()
