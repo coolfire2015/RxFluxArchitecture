@@ -8,7 +8,7 @@ import com.huyingbao.core.utils.AndroidUtils
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.autoDisposable
+import com.uber.autodispose.autoDispose
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +32,7 @@ class StartFragment : BaseCommonFragment() {
         //延迟1500mm，跳转
         Observable
                 .timer(1500, TimeUnit.MILLISECONDS)
-                .autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
+                .autoDispose(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
                 .subscribe {
                     val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
                     ARouter.getInstance().build(appRouter).navigation()
