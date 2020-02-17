@@ -10,13 +10,6 @@
     <category value="Fragment" />
 
     <parameter
-        id="packageName"
-        name="Package name"
-        type="string"
-        constraints="package|nonempty"
-        default="main" />
-
-    <parameter
         id="fragmentClass"
         name="Fragment Name"
         type="string"
