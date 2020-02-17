@@ -95,7 +95,7 @@
         help="The name of the layout to create for the fragment" />
 
     <thumbs>
-        <thumb>template_blank_activity.png</thumb>
+        <thumb>template_rxflux_activity.png</thumb>
     </thumbs>
 
     <globals file="globals.xml.ftl" />

@@ -32,7 +32,7 @@ abstract class ThirdAppModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [ThirdActivityModule::class])
-    abstract fun injectFristActivity(): ThirdActivity
+    abstract fun injectThirdActivity(): ThirdActivity
 
     @Singleton
     @Binds

@@ -11,4 +11,3 @@ abstract class ${activityModuleClass} {
     @ContributesAndroidInjector
     abstract fun inject${fragmentClass}(): ${fragmentClass}
 }
-
