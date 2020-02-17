@@ -3,7 +3,7 @@
 <recipe>
 
 <instantiate from="root/src/app_package/RxFluxFragment.kt.ftl"
-    to="${escapeXmlAttribute(srcOut)}/view/${fragmentClass}.kt" />
+    to="${escapeXmlAttribute(srcOut)}/${fragmentClass}.kt" />
 
 <#if generateFragmentLayout>
     <instantiate from="root/res/layout/fragment.xml.ftl"
