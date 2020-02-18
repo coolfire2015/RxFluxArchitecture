@@ -19,15 +19,12 @@ fun AppCompatActivity.setTitle(title: CharSequence?, backAble: Boolean) {
             setDisplayShowTitleEnabled(true)
             //设置标题
             this.title = title
-            //显示右侧返回图标
-            if (backAble) {
-                //显示Home按钮
-                setDisplayShowHomeEnabled(true)
-                //设置Home按钮作为返回按钮
-                setDisplayHomeAsUpEnabled(true)
-                //设置Home按钮图标
-                setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material)
-            }
+            //显示Home按钮
+            setDisplayShowHomeEnabled(backAble)
+            //设置Home按钮作为返回按钮
+            setDisplayHomeAsUpEnabled(backAble)
+            //设置Home按钮图标
+            setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material)
         }
     }
 }
