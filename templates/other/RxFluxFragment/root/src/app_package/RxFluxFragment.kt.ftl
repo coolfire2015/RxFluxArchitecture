@@ -1,4 +1,4 @@
-package ${packageName}.view
+package ${packageName}
 
 import android.os.Bundle
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment

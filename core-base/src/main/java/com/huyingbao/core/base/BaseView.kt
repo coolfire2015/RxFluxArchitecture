@@ -25,7 +25,7 @@ interface BaseView {
      * Activity中调用该方法
      */
     @IdRes
-    fun getFragmentContainerId(): Int = R.id.fl_container
+    fun getFragmentContainerId(): Int = R.id.fragment_container
 
     /**
      * 获取对应布局文件ID
