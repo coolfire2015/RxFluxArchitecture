@@ -34,6 +34,7 @@ abstract class RxFluxDialog<T : ViewModel> :
         HasAndroidInjector {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var childAndroidInjector: DispatchingAndroidInjector<Any>
 

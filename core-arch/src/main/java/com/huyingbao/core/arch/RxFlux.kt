@@ -37,6 +37,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
      */
     @Inject
     lateinit var rxDispatcher: RxDispatcher
+
     @Inject
     lateinit var rxActionManager: RxActionManager
 
@@ -44,6 +45,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
      * 当前维护的Activity个数
      */
     private var activityCounter: Int = 0
+
     /**
      * 维护的应用内Activity栈
      */

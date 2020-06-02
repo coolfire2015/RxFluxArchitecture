@@ -3,7 +3,7 @@ package com.huyingbao.core.arch.action
 import androidx.collection.ArrayMap
 import androidx.core.util.Pair
 import com.huyingbao.core.arch.model.RxAction
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 
 /**

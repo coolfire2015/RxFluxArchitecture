@@ -78,11 +78,11 @@ android {
         if (variant.buildType.name != "debug") {
             variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
         }
-        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
-            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
-                    variant.versionName + "-" +
-                    variant.buildType.name + ".apk"
-        }
+//        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+//            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+//                    variant.versionName + "-" +
+//                    variant.buildType.name + ".apk"
+//        }
     }
 }
 dependencies {

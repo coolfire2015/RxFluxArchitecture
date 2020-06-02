@@ -1,7 +1,7 @@
 package com.huyingbao.module.first.ui.test.action
 
 import com.google.gson.JsonObject
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 

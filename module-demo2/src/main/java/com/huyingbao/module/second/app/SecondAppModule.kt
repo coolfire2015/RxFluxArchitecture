@@ -16,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
@@ -53,7 +53,7 @@ abstract class SecondAppModule {
             return Retrofit.Builder()
                     .baseUrl("http://gank.io/api/")
                     .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(builder.build())
                     .build()
         }

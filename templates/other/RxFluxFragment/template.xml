@@ -1,36 +1,18 @@
 <?xml version="1.0"?>
-<template
-    format="5"
-    revision="5"
-    name="RxFlux Fragment"
-    minApi="19"
-    minBuildApi="19"
+<template format="5" revision="5" name="RxFlux Fragment" minApi="19" minBuildApi="19"
     description="Creates a new RxFlux Fragment">
 
     <category value="Fragment" />
 
-    <parameter
-        id="fragmentClass"
-        name="Fragment Name"
-        type="string"
-        constraints="class|unique|nonempty"
-        default="MainFragment"
+    <parameter id="fragmentClass" name="Fragment Name" type="string"
+        constraints="class|unique|nonempty" default="MainFragment"
         help="The name of the fragment class to create" />
 
-    <parameter
-        id="generateFragmentLayout"
-        name="Generate Fragment Layout File"
-        type="boolean"
-        default="true"
-        help="If true, a layout file will be generated" />
+    <parameter id="generateFragmentLayout" name="Generate Fragment Layout File" type="boolean"
+        default="true" help="If true, a layout file will be generated" />
 
-    <parameter
-        id="layoutName"
-        name="Fragment Layout Name"
-        type="string"
-        constraints="layout|unique"
-        default="fragment_main"
-        visibility="generateFragmentLayout"
+    <parameter id="layoutName" name="Fragment Layout Name" type="string" constraints="layout|unique"
+        default="fragment_main" visibility="generateFragmentLayout"
         suggest="fragment_${classToResource(fragmentClass)}"
         help="The name of the layout to create for the fragment" />
 

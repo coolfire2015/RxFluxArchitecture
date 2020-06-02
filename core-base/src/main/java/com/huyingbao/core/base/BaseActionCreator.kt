@@ -6,8 +6,8 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.model.RxChange
 import com.huyingbao.core.arch.model.RxRetry
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
 
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -15,6 +15,7 @@ class FirstStore @Inject constructor(
         rxDispatcher: RxDispatcher
 ) : RxActivityStore(rxDispatcher) {
     val hotKeyLiveData = MutableLiveData<JsonObject>()
+
     /**
      * 接收获取目前搜索最多的关键词
      */

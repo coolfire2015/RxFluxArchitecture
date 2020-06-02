@@ -1,7 +1,7 @@
 package com.huyingbao.module.second.ui.action
 
 import com.google.gson.JsonObject
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 
 interface SecondAction {

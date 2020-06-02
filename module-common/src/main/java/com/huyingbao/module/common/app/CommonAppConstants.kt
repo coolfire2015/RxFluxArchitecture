@@ -28,10 +28,12 @@ class CommonAppConstants {
          * 页码
          */
         const val PAGE = "page"
+
         /**
          * 标题
          */
         const val TITLE = "title"
+
         /**
          * Url地址
          */

@@ -15,6 +15,7 @@ class SecondStore @Inject constructor(
         rxDispatcher: RxDispatcher
 ) : RxActivityStore(rxDispatcher) {
     val categoryLiveData = MutableLiveData<JsonObject>()
+
     /**
      * 接收获取闲读的主分类
      */

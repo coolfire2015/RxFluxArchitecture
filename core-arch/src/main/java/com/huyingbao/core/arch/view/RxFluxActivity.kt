@@ -33,6 +33,7 @@ abstract class RxFluxActivity<T : RxActivityStore> :
         HasAndroidInjector {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var childAndroidInjector: DispatchingAndroidInjector<Any>
 

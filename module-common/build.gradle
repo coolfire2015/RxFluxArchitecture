@@ -116,7 +116,7 @@ dependencies {
     //Retrofit
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    api "com.squareup.retrofit2:adapter-rxjava3:${RETROFIT}"
     //Json解析
     api "com.google.code.gson:gson:${GSON}"
     api "com.alibaba:fastjson:${FAST_JSON}"
@@ -135,7 +135,10 @@ dependencies {
     //热修复Tinker
     api "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
     //RxJava 生命周期绑定 AutoDispose
-    api "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE}"
+    api "com.uber.autodispose2:autodispose:${AUTO_DISPOSE}"
+    api "com.uber.autodispose2:autodispose-android:${AUTO_DISPOSE}"
+    api "com.uber.autodispose2:autodispose-lifecycle:${AUTO_DISPOSE}"
+    api "com.uber.autodispose2:autodispose-androidx-lifecycle:${AUTO_DISPOSE}"
     //内存泄露分析 LeakCanary
     debugApi "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
 }
