@@ -3,6 +3,7 @@ package com.huyingbao.core.arch.module
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
+import com.huyingbao.core.arch.action.FlowActionManager
 import com.huyingbao.core.arch.action.RxActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.store.RxStoreFactory
@@ -56,6 +57,16 @@ abstract class RxFluxModule {
         @Provides
         fun provideRxActionManager(): RxActionManager {
             return RxActionManager()
+        }
+
+        /**
+         * 提供[FlowActionManager]
+         */
+        @JvmStatic
+        @Singleton
+        @Provides
+        fun provideFlowActionManager(): FlowActionManager {
+            return FlowActionManager()
         }
 
         /**

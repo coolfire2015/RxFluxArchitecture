@@ -62,7 +62,12 @@ dependencies {
     api "io.reactivex.rxjava3:rxandroid:${RX_ANDROID_3}"
     api "io.reactivex.rxjava3:rxkotlin:${RX_KOTLIN_3}"
     //Kotlin支持
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KOTLIN_VERSION}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
+    //依赖协程核心库
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
+    //依赖当前平台所对应的平台库
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     //Dagger
     api "com.google.dagger:dagger:${DAGGER}"
     //Dagger-Android
