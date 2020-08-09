@@ -1,15 +1,14 @@
 package com.huyingbao.module.common.app
 
 import android.app.Application
-import android.os.Build
+import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.alibaba.android.arouter.launcher.ARouter
-import com.huyingbao.core.annotations.RxAppObserver
-import com.huyingbao.core.arch.RxAppLifecycle
-import com.huyingbao.core.arch.utils.RxAndroidInjection
-import com.huyingbao.core.base.BuildConfig
+import com.huyingbao.core.annotations.AppLifecycleObserver
+import com.huyingbao.core.arch.lifecycle.RxAppLifecycle
 import com.huyingbao.core.utils.AndroidUtils
+import com.huyingbao.module.common.BuildConfig
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -19,37 +18,24 @@ import com.tencent.tinker.entry.ApplicationLike
 import com.tinkerpatch.sdk.TinkerPatch
 import com.tinkerpatch.sdk.loader.TinkerPatchApplicationLike
 import com.tinkerpatch.sdk.server.callback.ConfigRequestCallback
-import dagger.android.DaggerApplication
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Application生命周期方法分发类
  *
  * Created by liujunfeng on 2019/8/1.
  */
-@RxAppObserver
-class CommonAppLifecycle(
-        application: Application
-) : RxAppLifecycle(application) {
-    @Inject
-    lateinit var commonAppStore: CommonAppStore
-
+@Singleton
+@AppLifecycleObserver
+class CommonAppLifecycle @Inject constructor(
+        @ApplicationContext private val context: Context
+) : RxAppLifecycle() {
     private var tinkerApplicationLike: ApplicationLike? = null
-
-    /**
-     * 如果Application实现[dagger.android.HasAndroidInjector]，进行依赖注入
-     */
-    init {
-        if (application is HasAndroidInjector) {
-            RxAndroidInjection.inject(this, application)
-        }
-    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-        //如果子模块中使用EventBus
-        commonAppStore.subscribe()
         initARouter()
         initBugly()
         initTinker()
@@ -64,7 +50,6 @@ class CommonAppLifecycle(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onTerminate() {
-        commonAppStore.unsubscribe()
     }
 
     /**
@@ -76,7 +61,7 @@ class CommonAppLifecycle(
             ARouter.openDebug()
         }
         // 尽可能早，推荐在Application中初始化
-        ARouter.init(application)
+        ARouter.init(context as Application?)
     }
 
     /**
@@ -84,20 +69,16 @@ class CommonAppLifecycle(
      */
     private fun initBugly() {
         //配置策略
-        val strategy = CrashReport.UserStrategy(application)
+        val strategy = CrashReport.UserStrategy(context)
         // 获取当前进程名
-        val processName = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            DaggerApplication.getProcessName()
-        } else {
-            AndroidUtils.getProcessName(android.os.Process.myPid())
-        }
+        val processName = AndroidUtils.getProcessName(android.os.Process.myPid())
         // 设置是否为上报进程
-        strategy.isUploadProcess = processName == null || processName == application.packageName
+        strategy.isUploadProcess = processName == null || processName == context.packageName
         // X5内核异常上报
         strategy.setCrashHandleCallback(object : CrashReport.CrashHandleCallback() {
             override fun onCrashHandleStart(p0: Int, p1: String?, p2: String?, p3: String?): MutableMap<String, String> {
                 val map = LinkedHashMap<String, String>()
-                val x5CrashInfo = com.tencent.smtt.sdk.WebView.getCrashExtraMessage(application)
+                val x5CrashInfo = com.tencent.smtt.sdk.WebView.getCrashExtraMessage(context)
                 map["x5crashInfo"] = x5CrashInfo
                 return map
             }
@@ -111,9 +92,9 @@ class CommonAppLifecycle(
             }
         })
         //设置开发设备
-        CrashReport.setIsDevelopmentDevice(application, BuildConfig.DEBUG)
+        CrashReport.setIsDevelopmentDevice(context, BuildConfig.DEBUG)
         //初始化Bugly
-        CrashReport.initCrashReport(application, "6da8b7224c", BuildConfig.DEBUG, strategy)
+        CrashReport.initCrashReport(context, "6da8b7224c", BuildConfig.DEBUG, strategy)
     }
 
     /**
@@ -223,6 +204,6 @@ class CommonAppLifecycle(
             }
         }
         //x5内核初始化接口
-        QbSdk.initX5Environment(application, cb)
+        QbSdk.initX5Environment(context, cb)
     }
 }

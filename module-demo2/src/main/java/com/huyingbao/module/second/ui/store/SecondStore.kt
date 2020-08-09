@@ -1,5 +1,6 @@
 package com.huyingbao.module.second.ui.store
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
@@ -7,12 +8,9 @@ import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.module.second.ui.action.SecondAction
 import org.greenrobot.eventbus.Subscribe
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class SecondStore @Inject constructor(
-        rxDispatcher: RxDispatcher
+class SecondStore @ViewModelInject constructor(
+        override var rxDispatcher: RxDispatcher
 ) : RxActivityStore(rxDispatcher) {
     val categoryLiveData = MutableLiveData<JsonObject>()
 

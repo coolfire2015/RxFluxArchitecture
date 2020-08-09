@@ -13,7 +13,7 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxActivityLifecycleObserver(
+class RxActivityLifecycle(
         private val activity: Activity
 ) : LifecycleObserver {
     /**

@@ -1,16 +1,16 @@
 package com.huyingbao.module.third.ui.action
 
-import com.huyingbao.core.arch.action.RxActionCreator
-import com.huyingbao.core.arch.action.RxActionManager
+import com.huyingbao.core.arch.action.FlowActionCreator
+import com.huyingbao.core.arch.action.FlowActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.scope.ActivityScope
+import dagger.hilt.android.scopes.ActivityScoped
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-@ActivityScope
+@ActivityScoped
 class ThirdActionCreator @Inject constructor(
-        rxDispatcher: RxDispatcher,
-        rxActionManager: RxActionManager,
+        private val rxDispatcher: RxDispatcher,
+        private val rxActionManager: FlowActionManager,
         private val retrofit: Retrofit
-) : RxActionCreator(rxDispatcher, rxActionManager), ThirdAction {
+) : FlowActionCreator(rxDispatcher, rxActionManager), ThirdAction {
 }

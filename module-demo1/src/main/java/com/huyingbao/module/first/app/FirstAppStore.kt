@@ -1,15 +1,10 @@
 package com.huyingbao.module.first.app
 
-import android.app.Application
-
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.annotations.AppLifecycleObserver
 import com.huyingbao.core.arch.store.RxAppStore
-
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FirstAppStore @Inject constructor(
-        application: Application,
-        rxDispatcher: RxDispatcher
-) : RxAppStore(application, rxDispatcher)
+@AppLifecycleObserver
+class FirstAppStore @Inject constructor() : RxAppStore()

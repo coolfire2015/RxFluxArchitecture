@@ -12,7 +12,7 @@ import com.huyingbao.core.arch.view.RxFluxView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxFragmentLifecycleObserver(
+class RxFragmentLifecycle(
         private val fragment: Fragment
 ) : LifecycleObserver {
     /**

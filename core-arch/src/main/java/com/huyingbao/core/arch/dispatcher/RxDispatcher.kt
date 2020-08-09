@@ -1,6 +1,9 @@
 package com.huyingbao.core.arch.dispatcher
 
-import com.huyingbao.core.arch.model.*
+import com.huyingbao.core.arch.model.RxAction
+import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.arch.model.RxError
+import com.huyingbao.core.arch.model.RxLoading
 import com.huyingbao.core.arch.store.RxStore
 import com.huyingbao.core.arch.view.RxSubscriberView
 import org.greenrobot.eventbus.EventBus
@@ -8,7 +11,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * 调度核心类：
  *
- * 1.管理[com.huyingbao.core.arch.view.RxFluxView]、[RxStore]订阅。
+ * 1.管理[RxSubscriberView]、[RxStore]订阅。
  *
  * 2.发送[RxAction]、[RxChange]、[RxLoading]、[RxError]、[RxRetry]。
  *
@@ -80,15 +83,6 @@ class RxDispatcher {
      */
     fun postRxError(rxError: RxError) {
         EventBus.getDefault().postSticky(rxError)
-    }
-
-    /**
-     * 发送[RxRetry]到所有订阅的[com.huyingbao.core.arch.view.RxFluxView]，粘性通知。
-     *
-     * 发送：操作完成，异常执行状态，可重试。
-     */
-    fun postRxRetry(rxRetry: RxRetry<*>) {
-        EventBus.getDefault().postSticky(rxRetry)
     }
 
     /**

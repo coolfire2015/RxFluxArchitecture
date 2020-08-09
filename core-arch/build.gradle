@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
@@ -37,6 +38,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    //构建功能
+    buildFeatures {
+        //不生成BuildConfig.java文件
+        buildConfig = false
+    }
 }
 
 //将源代码打包进aar
@@ -52,32 +58,31 @@ artifacts {
 dependencies {
     //Application代理注解
     api project(':core-arch-annotations')
+    //X-Core
+    api "androidx.core:core-ktx:${X_CORE}"
     //X_APPCOMPAT
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
-    //X_LIFECYCLE
+    //X-Fragment
+    api "androidx.fragment:fragment:${X_FRAGMENT}"
+    api "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
+    //X-Lifecycle
+    api "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
     api "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
     api "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
-    //RxJava
-    api "io.reactivex.rxjava3:rxjava:${RX_JAVA_3}"
-    api "io.reactivex.rxjava3:rxandroid:${RX_ANDROID_3}"
-    api "io.reactivex.rxjava3:rxkotlin:${RX_KOTLIN_3}"
-    //Kotlin支持
+    //Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
-    //依赖协程核心库
+    //Kotlin-协程核心库
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
-    //依赖当前平台所对应的平台库
+    //Kotlin-协程平台库
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
-    //Dagger
-    api "com.google.dagger:dagger:${DAGGER}"
-    //Dagger-Android
-    api "com.google.dagger:dagger-android:${DAGGER}"
-    api "com.google.dagger:dagger-android-support:${DAGGER}"
     //带有Tag的EventBus
     api "com.github.coolfire2015.RxFluxEventBus:core-eventbus:${RX_FLUX_EVENTBUS}"
-    //Dagger编译时生成
-    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
-    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
-    //AndroidX迁移
-    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    //Hilt依赖注入
+    api "com.google.dagger:hilt-android:${HILT}"
+    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
+    //Hilt-ViewModel依赖注入
+    api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
+    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
 }

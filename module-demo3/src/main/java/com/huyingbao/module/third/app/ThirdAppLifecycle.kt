@@ -1,33 +1,19 @@
 package com.huyingbao.module.third.app
 
-import android.app.Application
-
+import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
-
-import com.huyingbao.core.annotations.RxAppObserver
-import com.huyingbao.core.arch.RxAppLifecycle
-import com.huyingbao.core.arch.utils.RxAndroidInjection
-import dagger.android.HasAndroidInjector
-
+import com.huyingbao.core.annotations.AppLifecycleObserver
+import com.huyingbao.core.arch.lifecycle.RxAppLifecycle
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-@RxAppObserver
-class ThirdAppLifecycle(
-        application: Application
-) : RxAppLifecycle(application) {
-    @Inject
-    lateinit var thirdAppStore: ThirdAppStore
-
-    init {
-        if (application is HasAndroidInjector) {
-            RxAndroidInjection.inject(this, application)
-        }
-    }
-
+@AppLifecycleObserver
+class ThirdAppLifecycle @Inject constructor(
+        @ApplicationContext private val context: Context
+) : RxAppLifecycle() {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-        thirdAppStore.subscribe()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -37,6 +23,5 @@ class ThirdAppLifecycle(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onTerminate() {
-        thirdAppStore.unsubscribe()
     }
 }

@@ -14,7 +14,8 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
-import static com.huyingbao.core.processor.RxArchProcessor.DEBUG;
+import static com.huyingbao.core.processor.ArchProcessor.COMPILER_PACKAGE_NAME;
+import static com.huyingbao.core.processor.ArchProcessor.DEBUG;
 
 
 /**
@@ -22,7 +23,7 @@ import static com.huyingbao.core.processor.RxArchProcessor.DEBUG;
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-final class ProcessorUtil {
+public final class ProcessorUtil {
     /**
      * 框架包名
      */
@@ -36,34 +37,27 @@ final class ProcessorUtil {
      */
     private static final String QUALIFIED_RX_APP = PACKAGE_ROOT + "." + TYPE_RX_APP;
     /**
-     * App生命周期接口RxAppLifecycle类名
+     * LifecycleObserver规范类名
      */
-    private static final String TYPE_RX_APP_LIFECYCLE = "RxAppLifecycle";
-    /**
-     * App生命周期接口类名RxAppLifecycle,规范类名
-     */
-    private static final String QUALIFIED_RX_APP_LIFECYCLE = PACKAGE_ROOT + "." + TYPE_RX_APP_LIFECYCLE;
-    /**
-     * 编译文件所在包名
-     */
-    private static final String PACKAGE_COMPILER = RxArchProcessor.class.getPackage().getName();
+    private static final String QUALIFIED_LIFECYCLE_OBSERVER = "androidx.lifecycle.LifecycleObserver";
 
     private final ProcessingEnvironment mProcessingEnv;
     /**
-     * RxAppLifecycle类型元素
+     * LifecycleObserver类型元素
      */
-    private final TypeElement mRxAppLifecycleType;
+    private final TypeElement mLifecycleObserverType;
     /**
      * RxApp类型元素
      */
     private final TypeElement mRxAppType;
+
     private int mRound;
 
     ProcessorUtil(ProcessingEnvironment processingEnv) {
         this.mProcessingEnv = processingEnv;
         //返回给定其规范名称的类型元素。
         mRxAppType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_RX_APP);
-        mRxAppLifecycleType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_RX_APP_LIFECYCLE);
+        mLifecycleObserverType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_LIFECYCLE_OBSERVER);
     }
 
     void process() {
@@ -79,15 +73,14 @@ final class ProcessorUtil {
     }
 
     /**
-     * 判断该类是否是RxAppLifecycle的实现类
+     * 判断该类是否是LifecycleObserver的实现类
      */
-    boolean isRxAppLifecycle(TypeElement element) {
-        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
-                mRxAppLifecycleType.asType());
+    public boolean isLifecycleObserver(TypeElement element) {
+        return mProcessingEnv.getTypeUtils().isAssignable(element.asType(), mLifecycleObserverType.asType());
     }
 
     void writeIndexer(TypeSpec indexer) {
-        writeClass(PACKAGE_COMPILER, indexer);
+        writeClass(COMPILER_PACKAGE_NAME, indexer);
     }
 
     void writeClass(String packageName, TypeSpec clazz) {

@@ -6,8 +6,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ${storeClass} @Inject constructor(
-        rxDispatcher: RxDispatcher
-) : RxActivityStore(rxDispatcher) {
+class ${storeClass} @Inject constructor() : RxActivityStore() {
 }
 

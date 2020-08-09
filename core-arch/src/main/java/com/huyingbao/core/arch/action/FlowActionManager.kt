@@ -9,7 +9,7 @@ import kotlinx.coroutines.Job
 /**
  * 订阅管理类：关联并管理[RxAction]与[Job]
  *
- * Created by liujunfeng on 2019/1/1.
+ * Created by liujunfeng on 2020/8/1.
  */
 class FlowActionManager {
     /**

@@ -1,16 +1,11 @@
 package com.huyingbao.module.common.ui.start.view
 
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
-import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider
-import autodispose2.autoDispose
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.core.utils.AndroidUtils
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
-import io.reactivex.rxjava3.core.Observable
-import java.util.concurrent.TimeUnit
 
 /**
  * 引导页面
@@ -29,14 +24,8 @@ class StartFragment : BaseCommonFragment() {
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        //延迟1500mm，跳转
-        Observable
-                .timer(1500, TimeUnit.MILLISECONDS)
-                .autoDispose(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY))
-                .subscribe {
-                    val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
-                    ARouter.getInstance().build(appRouter).navigation()
-                    activity?.finish()
-                }
+        val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
+        ARouter.getInstance().build(appRouter).navigation()
+        activity?.finish()
     }
 }

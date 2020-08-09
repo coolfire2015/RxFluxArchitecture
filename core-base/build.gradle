@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
@@ -37,10 +38,6 @@ android {
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
     }
-    //数据绑定
-    dataBinding {
-        enabled = true
-    }
     //Dex分包
     dexOptions {
         jumboMode = true
@@ -58,6 +55,11 @@ android {
     //Kotlin 实验功能
     androidExtensions {
         experimental = true
+    }
+    //构建功能
+    buildFeatures {
+        //不生成BuildConfig.java文件
+        buildConfig = false
     }
 }
 
@@ -82,14 +84,6 @@ dependencies {
     api project(':core-arch')
     //工具
     api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
-    //X-Core
-    api "androidx.core:core-ktx:${X_CORE}"
-    //X-Fragment
-    api "androidx.fragment:fragment:${X_FRAGMENT}"
-    api "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
-    //X-Lifecycle
-    api "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
@@ -97,9 +91,10 @@ dependencies {
     api "androidx.multidex:multidex:${X_MULTIDEX}"
     //X-Material
     api "com.google.android.material:material:${X_MATERIAL}"
-    //Dagger编译时生成
-    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
-    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
-    //AndroidX迁移
-    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
+    //Hilt依赖注入
+    api "com.google.dagger:hilt-android:${HILT}"
+    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
+    //Hilt-ViewModel依赖注入
+    api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
+    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
 }

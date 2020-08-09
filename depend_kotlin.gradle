@@ -2,6 +2,7 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     //编译版本
@@ -14,10 +15,6 @@ android {
         checkReleaseBuilds false
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
-    }
-    //数据绑定
-    dataBinding {
-        enabled = true
     }
     //Dex分包
     dexOptions {
@@ -71,9 +68,12 @@ dependencies {
     implementation project(':core-base')
     //编译时生成
     kapt "androidx.room:room-compiler:${X_ROOM}"
-    kapt "com.android.tools.build.jetifier:jetifier-core:${JETIFIER}"
-    kapt "com.google.dagger:dagger-compiler:${DAGGER}"
-    kapt "com.google.dagger:dagger-android-processor:${DAGGER}"
+    //Hilt依赖注入
+    api "com.google.dagger:hilt-android:${HILT}"
+    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
+    //Hilt-ViewModel依赖注入
+    api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
+    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
     kapt "com.github.coolfire2015.RxFluxEventBus:core-eventbus-processor:${RX_FLUX_EVENTBUS}"
     kapt project(':core-arch-processor')

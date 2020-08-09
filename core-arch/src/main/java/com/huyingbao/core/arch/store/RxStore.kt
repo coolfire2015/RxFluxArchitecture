@@ -15,6 +15,16 @@ import com.huyingbao.core.arch.model.RxChange
  */
 interface RxStore {
     /**
+     * 注册当前[RxStore]，接收数据
+     */
+    fun subscribe()
+
+    /**
+     * 解除注册当前[RxStore]，接收数据
+     */
+    fun unsubscribe()
+
+    /**
      * 发送[RxChange]给[com.huyingbao.core.arch.view.RxFluxView]
      */
     fun postChange(rxChange: RxChange)

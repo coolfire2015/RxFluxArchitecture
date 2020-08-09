@@ -7,7 +7,7 @@ import org.greenrobot.eventbus.EventBusEvent
 /**
  * 操作结果通知，封装操作返回数据。
  *
- * 由[com.huyingbao.core.arch.action.RxActionCreator]发送到[com.huyingbao.core.arch.store.RxStore]，
+ * 由[com.huyingbao.core.arch.action.FlowActionCreator]发送到[com.huyingbao.core.arch.store.RxStore]，
  *
  * Created by liujunfeng on 2019/1/1.
  */

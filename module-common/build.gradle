@@ -92,11 +92,11 @@ android {
             if (variant.buildType.name != "debug") {
                 variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
             }
-            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
-                apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
-                        variant.versionName + "-" +
-                        variant.buildType.name + ".apk"
-            }
+//            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+//                apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+//                        variant.versionName + "-" +
+//                        variant.buildType.name + ".apk"
+//            }
         }
     }
 }
@@ -116,10 +116,8 @@ dependencies {
     //Retrofit
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     api "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    api "com.squareup.retrofit2:adapter-rxjava3:${RETROFIT}"
     //Json解析
     api "com.google.code.gson:gson:${GSON}"
-    api "com.alibaba:fastjson:${FAST_JSON}"
     //路由器ARouter
     api "com.alibaba:arouter-api:${AROUTER_API}"
     //Kotlin Android 工具类Anko Commons
@@ -134,11 +132,6 @@ dependencies {
     api "com.tencent.bugly:crashreport:${BUGLY}"
     //热修复Tinker
     api "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
-    //RxJava 生命周期绑定 AutoDispose
-    api "com.uber.autodispose2:autodispose:${AUTO_DISPOSE}"
-    api "com.uber.autodispose2:autodispose-android:${AUTO_DISPOSE}"
-    api "com.uber.autodispose2:autodispose-lifecycle:${AUTO_DISPOSE}"
-    api "com.uber.autodispose2:autodispose-androidx-lifecycle:${AUTO_DISPOSE}"
     //内存泄露分析 LeakCanary
     debugApi "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
 }

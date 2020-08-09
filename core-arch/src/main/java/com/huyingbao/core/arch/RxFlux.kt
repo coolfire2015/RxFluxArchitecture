@@ -8,10 +8,10 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.huyingbao.core.arch.action.RxActionManager
+import com.huyingbao.core.arch.action.FlowActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.lifecycle.RxActivityLifecycleObserver
-import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycleObserver
+import com.huyingbao.core.arch.lifecycle.RxActivityLifecycle
+import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycle
 import com.huyingbao.core.arch.view.RxSubscriberView
 import java.util.*
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     lateinit var rxDispatcher: RxDispatcher
 
     @Inject
-    lateinit var rxActionManager: RxActionManager
+    lateinit var flowActionManager: FlowActionManager
 
     /**
      * 当前维护的Activity个数
@@ -51,27 +51,27 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
      */
     val activityStack: Stack<Activity> = Stack()
 
-    override fun onActivityCreated(activity: Activity?, bundle: Bundle?) {
+    override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
         activityCounter++
         activityStack.push(activity)
         if (activity is FragmentActivity) {
-            activity.lifecycle.addObserver(RxActivityLifecycleObserver(activity))
+            activity.lifecycle.addObserver(RxActivityLifecycle(activity))
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
         }
     }
 
-    override fun onActivityStarted(activity: Activity?) {
+    override fun onActivityStarted(activity: Activity) {
     }
 
     override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fragmentManager, fragment, context)
-        fragment.lifecycle.addObserver(RxFragmentLifecycleObserver(fragment))
+        fragment.lifecycle.addObserver(RxFragmentLifecycle(fragment))
     }
 
     /**
      * [RxSubscriberView]注册订阅
      */
-    override fun onActivityResumed(activity: Activity?) {
+    override fun onActivityResumed(activity: Activity) {
         if (activity is RxSubscriberView) {
             if (rxDispatcher.isSubscribe(activity)) {
                 return
@@ -98,7 +98,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     /**
      * [RxSubscriberView]取消订阅
      */
-    override fun onActivityPaused(activity: Activity?) {
+    override fun onActivityPaused(activity: Activity) {
         if (activity is RxSubscriberView) {
             Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.javaClass.simpleName)
             rxDispatcher.unsubscribeRxView(activity as RxSubscriberView)
@@ -116,11 +116,11 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
         }
     }
 
-    override fun onActivityStopped(activity: Activity?) {}
+    override fun onActivityStopped(activity: Activity) {}
 
-    override fun onActivitySaveInstanceState(activity: Activity?, bundle: Bundle?) {}
+    override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
 
-    override fun onActivityDestroyed(activity: Activity?) {
+    override fun onActivityDestroyed(activity: Activity) {
         activityCounter--
         activityStack.remove(activity)
         if (activityCounter == 0 || activityStack.size == 0) {
@@ -139,7 +139,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     }
 
     private fun shutdown() {
-        rxActionManager.clear()
+        flowActionManager.clear()
         rxDispatcher.unsubscribeAll()
     }
 

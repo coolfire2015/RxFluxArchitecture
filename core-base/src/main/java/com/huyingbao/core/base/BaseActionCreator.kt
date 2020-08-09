@@ -1,14 +1,10 @@
 package com.huyingbao.core.base
 
-import com.huyingbao.core.arch.action.RxActionCreator
-import com.huyingbao.core.arch.action.RxActionManager
+import com.huyingbao.core.arch.action.FlowActionCreator
+import com.huyingbao.core.arch.action.FlowActionManager
 import com.huyingbao.core.arch.dispatcher.RxDispatcher
 import com.huyingbao.core.arch.model.RxAction
 import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.arch.model.RxRetry
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.disposables.Disposable
-
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,11 +15,11 @@ import javax.inject.Singleton
  */
 @Singleton
 class BaseActionCreator @Inject constructor(
-        rxDispatcher: RxDispatcher,
-        rxActionManager: RxActionManager
-) : RxActionCreator(rxDispatcher, rxActionManager) {
+        private val rxDispatcher: RxDispatcher,
+        private val rxActionManager: FlowActionManager
+) : FlowActionCreator(rxDispatcher, rxActionManager) {
     /**
-     * [RxActionManager]移除[RxAction]，停止对应的[Disposable]，被观察者[Observable]正在运行的方法会被停止。
+     * [FlowActionManager]移除[RxAction]
      */
     fun removeRxAction(tag: String) {
         removeRxAction(newRxAction(tag))
@@ -35,14 +31,5 @@ class BaseActionCreator @Inject constructor(
     fun postLocalChange(tag: String) {
         val rxChange = RxChange.newInstance(tag)
         postRxChange(rxChange)
-    }
-
-    /**
-     * 异步执行重试操作，发送[RxAction]
-     */
-    fun postRetryAction(rxRetry: RxRetry<*>) {
-        val rxAction = newRxAction(rxRetry.tag)
-        if (hasRxAction(rxAction)) return
-        postHttpRetryAction(rxAction, rxRetry.observable)
     }
 }

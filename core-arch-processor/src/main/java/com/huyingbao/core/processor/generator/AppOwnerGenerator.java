@@ -1,4 +1,4 @@
-package com.huyingbao.core.processor;
+package com.huyingbao.core.processor.generator;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
@@ -15,13 +15,12 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
-
 /**
- * 生成com.huyingbao.core.arch.RxAppLifecycleOwner类
+ * 自动生成com.huyingbao.core.arch.FinalAppLifecycleOwner
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */
-final class RxAppLifecycleOwnerGenerator {
+public final class AppOwnerGenerator {
     private static final String PACKAGE_LIFECYCLE = "androidx.lifecycle";
     private static final String PACKAGE_ANNOTATION = "androidx.annotation";
     private static final String PACKAGE_APPLICATION = "android.app";
@@ -31,22 +30,30 @@ final class RxAppLifecycleOwnerGenerator {
     private static final String TYPE_APPLICATION = "Application";
     private static final String TYPE_LIFECYCLE_OWNER = "LifecycleOwner";
     private static final String TYPE_LIFECYCLE_REGISTRY = "LifecycleRegistry";
-    private static final String TYPE_GENERATED_RX_APP_LIFECYCLE_OWNER = "RxAppLifecycleOwner";
+    private static final String TYPE_GENERATED_APP_LIFECYCLE_OWNER = "FinalAppLifecycleOwner";
+    private static final String TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT = "AppLifecycleOwnerEntryPoint";
 
+    private static final String PACKAGE_HILT = "dagger.hilt";
+    private static final String TYPE_HILT_ENTRY_POINT = "EntryPoint";
+    private static final String TYPE_HILT_ENTRY_POINTS = "EntryPoints";
+    private static final String TYPE_HILT_INSTALL_IN = "InstallIn";
+
+    private static final String PACKAGE_HILT_APPLICATION_COMPONENT = PACKAGE_HILT + ".android.components";
+    private static final String TYPE_HILT_APPLICATION_COMPONENT = "ApplicationComponent";
 
     private static final String FIELD_LIFECYCLE_REGISTRY = "mRegistry";
 
-    RxAppLifecycleOwnerGenerator() {
+    public AppOwnerGenerator() {
 
     }
 
     /**
      * 生成类
      */
-    TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
+    public TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
         List<String> orderedRxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
         Collections.sort(orderedRxAppLifecycleClassNames);
-        TypeSpec.Builder builder = TypeSpec.classBuilder(TYPE_GENERATED_RX_APP_LIFECYCLE_OWNER)
+        TypeSpec.Builder builder = TypeSpec.classBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER)
                 //添加修饰符
                 .addModifiers(Modifier.FINAL)
                 //添加注解
@@ -58,7 +65,9 @@ final class RxAppLifecycleOwnerGenerator {
                 //添加成员变量
                 .addField(generateField())
                 //添加方法
-                .addMethod(generateGetLifecycle());
+                .addMethod(generateGetLifecycle())
+                //添加接口
+                .addType(generateEntryPoint(orderedRxAppLifecycleClassNames));
         return builder.build();
     }
 
@@ -77,6 +86,8 @@ final class RxAppLifecycleOwnerGenerator {
     private MethodSpec generateConstructor(Collection<String> rxAppLifecycleClassNames) {
         //方法入参
         ClassName application = ClassName.get(PACKAGE_APPLICATION, TYPE_APPLICATION);
+        ClassName entryPoints = ClassName.get(PACKAGE_HILT, TYPE_HILT_ENTRY_POINTS);
+        ClassName appLifecycleOwnerEntryPoint = ClassName.get("", TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT);
         ParameterSpec parameterSpec = ParameterSpec.builder(application, "application").build();
         //方法体
         MethodSpec.Builder builder = MethodSpec.constructorBuilder()
@@ -88,7 +99,10 @@ final class RxAppLifecycleOwnerGenerator {
         for (String rxAppLifecycle : rxAppLifecycleClassNames) {
             //获取类名
             ClassName moduleClassName = ClassName.bestGuess(rxAppLifecycle);
-            builder.addStatement(FIELD_LIFECYCLE_REGISTRY + ".addObserver(new $T(application))", moduleClassName);
+            builder.addStatement(FIELD_LIFECYCLE_REGISTRY + ".addObserver($T.get(application, $T.class).get$T())",
+                    entryPoints,
+                    appLifecycleOwnerEntryPoint,
+                    moduleClassName);
         }
         return builder.build();
     }
@@ -116,5 +130,30 @@ final class RxAppLifecycleOwnerGenerator {
                 .addStatement("return " + FIELD_LIFECYCLE_REGISTRY)
                 .returns(ClassName.get(PACKAGE_LIFECYCLE, TYPE_LIFECYCLE));
         return builder.build();
+    }
+
+    /**
+     * 生成EntryPoint接口
+     */
+    private TypeSpec generateEntryPoint(Collection<String> rxAppLifecycleClassNames) {
+        TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT)
+                //添加注解@EntryPoint
+                .addAnnotation(ClassName.get(PACKAGE_HILT, TYPE_HILT_ENTRY_POINT))
+                //添加注解@InstallIn(ApplicationComponent.class)
+                .addAnnotation(AnnotationSpec.builder(ClassName.get(PACKAGE_HILT, TYPE_HILT_INSTALL_IN))
+                        .addMember("value", "$T.class", ClassName.get(PACKAGE_HILT_APPLICATION_COMPONENT, TYPE_HILT_APPLICATION_COMPONENT))
+                        .build());
+        //添加方法内容
+        for (String rxAppLifecycle : rxAppLifecycleClassNames) {
+            //获取类名
+            ClassName moduleClassName = ClassName.bestGuess(rxAppLifecycle);
+            //方法体
+            MethodSpec methodSpec = MethodSpec.methodBuilder("get" + moduleClassName.simpleName())
+                    .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
+                    .returns(moduleClassName)
+                    .build();
+            typeSpecBuilder.addMethod(methodSpec);
+        }
+        return typeSpecBuilder.build();
     }
 }

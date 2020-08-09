@@ -6,36 +6,33 @@ import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import dagger.android.DaggerApplication
 import java.lang.reflect.InvocationTargetException
 import javax.inject.Inject
 
 /**
- * Application实现Dagger.Android依赖注入。
- *
  * 一个Project中只能有一个该类的子类。
  *
- * 如子模块中需要观察主模块的生命周期，需要使用[com.huyingbao.core.annotations.RxAppOwner]注解标注Project中唯一子类实现，
+ * 如子模块中需要观察主模块的生命周期，需要使用[com.huyingbao.core.annotations.AppLifecycleOwner]注解标注Project中唯一子类实现，
  *
- * 并在子模块中创建[com.huyingbao.core.annotations.RxAppObserver]注解标注的Application生命周期观察者[RxAppLifecycle]子类实现。
+ * 并在子模块中创建[com.huyingbao.core.annotations.AppLifecycleObserver]注解标注的Application生命周期观察者[androidx.lifecycle.LifecycleObserver]子类实现。
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxApp : DaggerApplication() {
+abstract class RxApp : Application() {
     @Inject
     lateinit var rxFlux: RxFlux
 
     /**
-     * 通过反射获取编译自动生成的[LifecycleOwner]子类[com.huyingbao.core.arch.RxAppLifecycleOwner]
+     * 通过反射获取壳module中编译自动生成的[LifecycleOwner]子类[com.huyingbao.core.arch.FinalAppLifecycleOwner]
      */
     private val lifecycleOwner: LifecycleOwner? by lazy {
         var result: LifecycleOwner? = null
         try {
-            val clazz = Class.forName("com.huyingbao.core.arch.RxAppLifecycleOwner") as Class<LifecycleOwner>
+            val clazz = Class.forName("com.huyingbao.core.arch.FinalAppLifecycleOwner") as Class<LifecycleOwner>
             result = clazz.getConstructor(Application::class.java).newInstance(this)
         } catch (e: ClassNotFoundException) {
             if (Log.isLoggable(RxFlux.TAG, Log.WARN)) {
-                Log.w(RxFlux.TAG, "Failed to find RxAppLifecycleOwner. You should include an"
+                Log.w(RxFlux.TAG, "Failed to find AppLifecycleOwner. You should include an"
                         + " annotationProcessor compile dependency on com.github.coolfire2015.RxFluxArchitecture:core-arch-processor"
                         + " in your application and a @RxAppObserver annotated RxAppLifecycle subclass"
                         + " and a @RxAppOwner annotated RxApp implementation")
@@ -85,7 +82,7 @@ abstract class RxApp : DaggerApplication() {
     }
 
     private fun throwIncorrectRxAppLifecycle(e: Exception) {
-        throw IllegalStateException("RxAppLifecycleOwner is implemented incorrectly."
+        throw IllegalStateException("AppLifecycleOwner is implemented incorrectly."
                 + " If you've manually implemented this class, remove your implementation. The Annotation"
                 + " processor will generate a correct implementation.", e)
     }
