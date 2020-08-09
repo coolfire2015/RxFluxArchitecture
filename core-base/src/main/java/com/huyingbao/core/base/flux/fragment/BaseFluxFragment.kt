@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.huyingbao.core.arch.view.RxFluxFragment
 import com.huyingbao.core.base.BaseActionCreator
 import com.huyingbao.core.base.BaseView
-import com.huyingbao.core.base.setTitle
+import com.huyingbao.core.utils.setTitle
 import javax.inject.Inject
 
 /**

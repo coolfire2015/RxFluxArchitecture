@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.huyingbao.core.base.BaseView
-import com.huyingbao.core.base.setTitle
+import com.huyingbao.core.utils.setTitle
 
 /**
  * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅

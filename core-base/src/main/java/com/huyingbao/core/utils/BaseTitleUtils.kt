@@ -1,6 +1,7 @@
-package com.huyingbao.core.base
+package com.huyingbao.core.utils
 
 import androidx.appcompat.app.AppCompatActivity
+import com.huyingbao.core.base.R
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
 

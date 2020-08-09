@@ -5,7 +5,7 @@ import androidx.annotation.NavigationRes
 import androidx.navigation.Navigation
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.setNavigation
+import com.huyingbao.core.utils.setNavigation
 
 
 /**

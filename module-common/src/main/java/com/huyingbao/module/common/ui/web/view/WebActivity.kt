@@ -9,7 +9,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
-import com.huyingbao.core.base.setTitle
+import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
 import org.jetbrains.anko.browse

@@ -8,8 +8,10 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = "com.github.coolfire2015"
 
 android {
-    //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
+
+    //编译版本
+    buildToolsVersion BUILD_TOOLS_VERSION
     //默认配置
     defaultConfig {
         //Sdk版本
@@ -60,6 +62,8 @@ android {
     buildFeatures {
         //不生成BuildConfig.java文件
         buildConfig = false
+        //支持 DataBinding
+        dataBinding=true
     }
 }
 
@@ -82,8 +86,6 @@ repositories {
 dependencies {
     //内核
     api project(':core-arch')
-    //工具
-    api "com.github.coolfire2015:RxFluxUtils:${RX_FLUX_UTILS}"
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"

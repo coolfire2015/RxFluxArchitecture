@@ -7,6 +7,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 android {
     //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
     //lint设置
     lintOptions {
         //lint 不被终止

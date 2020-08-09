@@ -5,7 +5,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
-import com.huyingbao.core.base.setTitle
+import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.first.R
 import com.huyingbao.module.first.ui.first.action.FirstActionCreator

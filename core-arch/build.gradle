@@ -10,6 +10,7 @@ group = "com.github.coolfire2015"
 android {
     //编译版本
     compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
     //默认配置
     defaultConfig {
         //Sdk版本
@@ -72,11 +73,9 @@ dependencies {
     api "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
     //Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
-    //Kotlin-协程核心库
+    //Kotlin-协程
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
-    //Kotlin-协程平台库
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     //带有Tag的EventBus
     api "com.github.coolfire2015.RxFluxEventBus:core-eventbus:${RX_FLUX_EVENTBUS}"
     //Hilt依赖注入

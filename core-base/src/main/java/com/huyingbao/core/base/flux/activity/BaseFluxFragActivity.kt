@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.huyingbao.core.arch.store.RxActivityStore
-import com.huyingbao.core.base.FragmentOp
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.setFragment
+import com.huyingbao.core.utils.FragmentOp
+import com.huyingbao.core.utils.setFragment
 
 /**
  * 使用Dagger.Android，持有ViewModel，自动管理订阅

@@ -3,9 +3,9 @@ package com.huyingbao.core.base.common.activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.huyingbao.core.base.FragmentOp
 import com.huyingbao.core.base.R
-import com.huyingbao.core.base.setFragment
+import com.huyingbao.core.utils.FragmentOp
+import com.huyingbao.core.utils.setFragment
 
 /**
  * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅

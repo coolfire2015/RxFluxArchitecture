@@ -7,7 +7,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.annotations.AppLifecycleObserver
 import com.huyingbao.core.arch.lifecycle.RxAppLifecycle
-import com.huyingbao.core.utils.AndroidUtils
+import com.huyingbao.core.uitls.AndroidUtils
 import com.huyingbao.module.common.BuildConfig
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
