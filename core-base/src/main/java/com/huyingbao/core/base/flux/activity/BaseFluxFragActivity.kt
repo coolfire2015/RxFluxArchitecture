@@ -1,6 +1,7 @@
 package com.huyingbao.core.base.flux.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.huyingbao.core.arch.store.RxActivityStore
@@ -32,5 +33,23 @@ abstract class BaseFluxFragActivity<T : RxActivityStore> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragment(getFragmentContainerId(), createFragment(), FragmentOp.OP_NULL)
+    }
+
+    /**
+     * [androidx.appcompat.widget.Toolbar]Menu点击事件，拦截返回按钮，如果Fragment回退栈不为空，先弹出Fragment
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // 点击返回图标事件
+            android.R.id.home -> {
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                    return true
+                }
+                finish()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

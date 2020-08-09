@@ -23,34 +23,12 @@
 * 暂时只有依赖[core-base](core-base)的 Kotlin 代码模版 [RxFluxActivity](templates/RxFluxActivity)。
 * 使用代码模版，需手动添加 Activity/Fragment/Store 的 Dagger 依赖注入方法。
 
-```
-    @ActivityScope
-    @ContributesAndroidInjector(modules = WanInjectFragmentModule.class)
-    abstract ArticleActivity injectArticleActivity();
-```
-```
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract ArticleListFragment injectArticleListFragment();
-```
-```
-    @Singleton
-    @Binds
-    @IntoMap
-    @RxStoreKey(ArticleStore.class)
-    abstract ViewModel bindArticleStore(ArticleStore articleStore);
-```
-
 ## 依赖框架
 ### 核心
 - 依赖注入 [**Dagger+Dagger.Android**](https://github.com/google/dagger)
-- 函数编程 [**RxJava**](https://github.com/ReactiveX/RxJava)
-+[**RxAndroid**](https://github.com/ReactiveX/RxAndroid)
-+[**RxKotlin**](https://github.com/ReactiveX/RxKotlin)
 - AndroidX [**X-Core**](https://mvnrepository.com/artifact/androidx.core/core)
 +[**X-AppCompat**](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
 +[**X-Lifecycle**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions)
-- AndroidX迁移 [**Jetifier**](https://mvnrepository.com/artifact/com.android.tools.build.jetifier/jetifier-core)
 
 ### 通用
 - 模块路由 [**Arouter**](https://github.com/alibaba/ARouter)
@@ -85,7 +63,6 @@
 +[**X-ConstraintLayout**](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout)
 +[**X-DataBinding**](https://mvnrepository.com/artifact/androidx.databinding/databinding-runtime)
 +[**X-Annotation**](https://mvnrepository.com/artifact/androidx.annotation/annotation)
-- [移除]View注入 [**ButterKnife**](https://github.com/JakeWharton/butterknife)
 
 ### 测试 
 - [**Junit**](https://github.com/junit-team/junit4)

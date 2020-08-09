@@ -1,7 +1,6 @@
 package com.huyingbao.core.base.flux.activity
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.huyingbao.core.arch.store.RxActivityStore
 import com.huyingbao.core.arch.view.RxFluxActivity
@@ -28,23 +27,5 @@ abstract class BaseFluxActivity<T : RxActivityStore> :
         //使用Toolbar取代原本的actionbar
         window.decorView.findViewById<Toolbar>(getToolbarId())?.let { setSupportActionBar(it) }
         afterCreate(savedInstanceState)
-    }
-
-    /**
-     * [Toolbar]Menu点击事件，拦截返回按钮，如果Fragment回退栈不为空，先弹出Fragment
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            // 点击返回图标事件
-            android.R.id.home -> {
-                if (supportFragmentManager.backStackEntryCount > 0) {
-                    supportFragmentManager.popBackStack()
-                    return true
-                }
-                finish()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
     }
 }
