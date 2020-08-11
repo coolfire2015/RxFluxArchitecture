@@ -74,15 +74,37 @@ android {
         }
     }
     //修改生成的apk文件名及路径
-    applicationVariants.all { variant ->
-        if (variant.buildType.name != "debug") {
-            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
-        }
+//    applicationVariants.all { variant ->
+//        if (variant.buildType.name != "debug") {
+//            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+//        }
 //        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
 //            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
 //                    variant.versionName + "-" +
+//
 //                    variant.buildType.name + ".apk"
 //        }
+//    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            //编译输出文件
+            def outputFile = output.outputFile
+            //是否是 Release 版本
+            if (outputFile != null && outputFile.name.contains('release')) {
+                //最终 Apk 文件路径
+                def filePath = new File(project.rootDir.absolutePath + "/release/outputs/apk")
+                //最终 Apk 文件名字 "${rootProject.name}${android.defaultConfig.versionName}_${releaseTime()}.apk"
+                def fileName = ((project.name != "app") ? project.name : rootProject.name) + "-" + variant.versionName + "-" + variant.buildType.name + ".apk"
+                assembleRelease.doLast {
+                    project.copy {
+                        from "${output.outputFile}"
+                        into "${filePath}"
+                        rename("${output.outputFile.name}", "${fileName}")
+                        println "copy file from ${output.outputFile.parent} to ${filePath}"
+                    }
+                }
+            }
+        }
     }
 }
 dependencies {
