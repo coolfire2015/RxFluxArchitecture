@@ -128,12 +128,18 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
         }
     }
 
+    /**
+     * 结束所有的 Activity
+     */
     fun finishAllActivity() {
         while (!activityStack.empty()) {
             activityStack.pop().finish()
         }
     }
 
+    /**
+     * 结束指定的 Activity
+     */
     fun finishActivity(cls: Class<*>) {
         finishActivity(getActivity(cls))
     }

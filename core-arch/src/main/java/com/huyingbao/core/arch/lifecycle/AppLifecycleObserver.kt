@@ -13,12 +13,21 @@ import androidx.lifecycle.OnLifecycleEvent
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class AppLifecycleObserver() : LifecycleObserver {
+    /**
+     * Application onCreate()时调用
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     abstract fun onCreate()
 
+    /**
+     * Application onLowMemory()时调用
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     abstract fun onLowMemory()
 
+    /**
+     * Application onTerminate()时调用
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     abstract fun onTerminate()
 }

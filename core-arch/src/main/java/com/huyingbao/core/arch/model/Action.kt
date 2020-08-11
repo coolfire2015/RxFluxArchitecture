@@ -50,9 +50,15 @@ class Action private constructor(
         return result
     }
 
+    /**
+     * 构造器
+     */
     class Builder(private val tag: String) {
         private val data: ArrayMap<String, Any> = ArrayMap()
 
+        /**
+         * 添加数据
+         */
         fun put(key: String, value: Any?): Builder {
             if (value != null) {
                 data[key] = value
@@ -60,6 +66,9 @@ class Action private constructor(
             return this
         }
 
+        /**
+         * 构造对象
+         */
         fun build(): Action {
             return Action(tag, data)
         }

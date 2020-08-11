@@ -68,6 +68,7 @@ class ActionManager {
      * 创建一个新的[Pair]
      *
      * @param action hashcode作为Key
+     * @param job
      */
     private fun getPair(action: Action, job: Job): Pair<Int, Job> {
         return Pair(action.hashCode(), job)

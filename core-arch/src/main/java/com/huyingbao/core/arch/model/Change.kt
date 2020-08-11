@@ -11,6 +11,9 @@ class Change private constructor(
         tag: String
 ) : EventBusEvent(tag) {
     companion object {
+        /**
+         * 生成实例对象
+         */
         fun newInstance(tag: String): Change {
             return Change(tag)
         }
