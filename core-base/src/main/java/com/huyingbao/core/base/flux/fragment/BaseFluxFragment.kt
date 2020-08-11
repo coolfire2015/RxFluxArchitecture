@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
-import com.huyingbao.core.arch.view.RxFluxFragment
+import com.huyingbao.core.arch.view.FluxFragment
 import com.huyingbao.core.base.BaseActionCreator
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.utils.setTitle
@@ -20,7 +20,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseFluxFragment<T : ViewModel> :
-        RxFluxFragment<T>(),
+        FluxFragment<T>(),
         BaseView {
     @Inject
     lateinit var baseActionCreator: BaseActionCreator

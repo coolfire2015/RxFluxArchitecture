@@ -1,24 +1,19 @@
-package com.huyingbao.module.second.app
+package com.huyingbao.module.third.app
 
 import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
-import com.huyingbao.core.annotations.AppLifecycleObserver
-import com.huyingbao.core.arch.lifecycle.RxAppLifecycle
-import com.huyingbao.module.demo.SecondEventBusIndex
+import com.huyingbao.core.annotations.AppObserver
+import com.huyingbao.core.arch.lifecycle.AppLifecycleObserver
 import dagger.hilt.android.qualifiers.ApplicationContext
-import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
-@AppLifecycleObserver
-class SecondAppLifecycle @Inject constructor(
+@AppObserver
+class ThirdAppLifecycleObserver @Inject constructor(
         @ApplicationContext private val context: Context
-) : RxAppLifecycle() {
+) : AppLifecycleObserver() {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-        EventBus.builder()
-                .addIndex(SecondEventBusIndex())
-                .eventInheritance(false)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

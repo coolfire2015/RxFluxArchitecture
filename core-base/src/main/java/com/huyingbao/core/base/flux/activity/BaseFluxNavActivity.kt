@@ -5,7 +5,7 @@ import android.view.MenuItem
 import androidx.annotation.NavigationRes
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.huyingbao.core.arch.store.RxActivityStore
+import com.huyingbao.core.arch.store.ActivityStore
 import com.huyingbao.core.base.R
 import com.huyingbao.core.utils.setNavigation
 
@@ -17,7 +17,7 @@ import com.huyingbao.core.utils.setNavigation
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class BaseFluxNavActivity<T : RxActivityStore> :
+abstract class BaseFluxNavActivity<T : ActivityStore> :
         BaseFluxActivity<T>() {
     /**
      * 使用默认Activity布局，可以覆盖该方法，使用自定义布局

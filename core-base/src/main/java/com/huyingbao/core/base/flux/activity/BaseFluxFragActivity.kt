@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.huyingbao.core.arch.store.RxActivityStore
+import com.huyingbao.core.arch.store.ActivityStore
 import com.huyingbao.core.base.R
 import com.huyingbao.core.utils.FragmentOp
 import com.huyingbao.core.utils.setFragment
@@ -16,7 +16,7 @@ import com.huyingbao.core.utils.setFragment
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class BaseFluxFragActivity<T : RxActivityStore> :
+abstract class BaseFluxFragActivity<T : ActivityStore> :
         BaseFluxActivity<T>() {
     /**
      * 使用默认Activity布局，可以覆盖该方法，使用自定义布局

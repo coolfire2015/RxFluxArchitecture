@@ -1,10 +1,10 @@
 package com.huyingbao.core.arch.action
 
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
-import com.huyingbao.core.arch.model.RxChange
-import com.huyingbao.core.arch.model.RxError
-import com.huyingbao.core.arch.model.RxLoading
+import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.model.Action
+import com.huyingbao.core.arch.model.Change
+import com.huyingbao.core.arch.model.Error
+import com.huyingbao.core.arch.model.Loading
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -17,27 +17,27 @@ import java.util.logging.Level
 /**
  * 实现View中调用的交互方法。
  *
- * 创建[RxAction]，直接发送给[com.huyingbao.core.arch.store.RxStore]。
+ * 创建[Action]，直接发送给[com.huyingbao.core.arch.store.Store]。
  *
- * 创建[RxChange]、[RxLoading]、[RxError]、[RxRetry]，直接发送给[com.huyingbao.core.arch.view.RxFluxView]。
+ * 创建[Change]、[Loading]、[Error]，直接发送给[com.huyingbao.core.arch.view.FluxView]。
  *
  * 类似MVP模式中的Presenter，只是方法执行完成没有回调方法。
  *
  * Created by liujunfeng on 2020/8/1.
  */
-abstract class FlowActionCreator(
-        private val rxDispatcher: RxDispatcher,
-        private val rxActionManager: FlowActionManager) {
+abstract class ActionCreator(
+        private val dispatcher: Dispatcher,
+        private val rxActionManager: ActionManager) {
     /**
-     * 创建新的[RxAction]
+     * 创建新的[Action]
      *
      * @param tag  tag对应具体是什么样的方法
      * @param data 可变长度参数，键值对型的参数pair-value(String-Object))
      */
     protected fun newRxAction(tag: String,
-                              vararg data: Any): RxAction {
+                              vararg data: Any): Action {
         require(data.size % 2 == 0) { "Data must be a valid list of key,value pairs" }
-        val actionBuilder = RxAction.Builder(tag)
+        val actionBuilder = Action.Builder(tag)
         var i = 0
         while (i < data.size) {
             val key = data[i++] as String
@@ -48,38 +48,38 @@ abstract class FlowActionCreator(
     }
 
     /**
-     * [FlowActionManager]是否已存在[RxAction]
+     * [ActionManager]是否已存在[Action]
      */
-    protected fun hasRxAction(rxAction: RxAction): Boolean {
-        return rxActionManager.contains(rxAction)
+    protected fun hasRxAction(action: Action): Boolean {
+        return rxActionManager.contains(action)
     }
 
     /**
-     * [FlowActionManager]添加[RxAction]和[Job]
+     * [ActionManager]添加[Action]和[Job]
      */
-    protected fun addRxAction(rxAction: RxAction,
+    protected fun addRxAction(action: Action,
                               job: Job) {
-        rxActionManager.add(rxAction, job)
+        rxActionManager.add(action, job)
     }
 
     /**
-     * [FlowActionManager]移除[RxAction]，停止对应的[Job]
+     * [ActionManager]移除[Action]，停止对应的[Job]
      */
-    protected fun removeRxAction(rxAction: RxAction) {
-        rxActionManager.remove(rxAction)
+    protected fun removeRxAction(action: Action) {
+        rxActionManager.remove(action)
     }
 
     /**
-     * 关联[RxAction]与[Job]
+     * 关联[Action]与[Job]
      *
      * @param canShowLoading true:有进度显示,false:无进度显示
      * @param canRetry       true:操作异常可重试,false:操作异常抛异常
      */
-    private fun <T> postRxAction(rxAction: RxAction,
+    private fun <T> postRxAction(action: Action,
                                  flow: Flow<T>,
                                  canShowLoading: Boolean,
                                  canRetry: Boolean) {
-        if (hasRxAction(rxAction)) {
+        if (hasRxAction(action)) {
             return
         }
 
@@ -90,22 +90,22 @@ abstract class FlowActionCreator(
                 .onStart {
                     if (canShowLoading) {
                         //发送RxLoading(显示)事件
-                        postRxLoading(rxAction, true)
+                        postRxLoading(action, true)
                     }
                 }
                 // 操作进行中
                 .onEach {
-                    rxAction.setResponse(it)
-                    postRxAction(rxAction)
+                    action.setResponse(it)
+                    postRxAction(action)
                 }
                 // 调用结束
                 .onCompletion {
                     if (canShowLoading) {
                         // 发送RxLoading(消失)事件
-                        postRxLoading(rxAction, false)
+                        postRxLoading(action, false)
                     }
                     // 移除事件
-                    removeRxAction(rxAction)
+                    removeRxAction(action)
                 }
                 // 捕获异常
                 .catch {
@@ -114,81 +114,81 @@ abstract class FlowActionCreator(
                     if (canRetry) {
 //                        postRxRetry(rxAction, t, it)
                     } else {
-                        postRxError(rxAction, it)
+                        postRxError(action, it)
                     }
-                    removeRxAction(rxAction)
+                    removeRxAction(action)
                 }
                 // 指定主线程执行collect操作
                 .launchIn(MainScope())
                 // 添加Job到action
                 .let {
-                    addRxAction(rxAction, it)
+                    addRxAction(action, it)
                 }
     }
 
     /**
-     * [RxDispatcher]发送[RxAction]
+     * [Dispatcher]发送[Action]
      */
-    protected open fun postRxAction(rxAction: RxAction) {
-        rxDispatcher.postRxAction(rxAction)
+    protected open fun postRxAction(action: Action) {
+        dispatcher.postRxAction(action)
     }
 
     /**
-     * [RxDispatcher]发送[RxChange]
+     * [Dispatcher]发送[Change]
      */
-    protected open fun postRxChange(rxChange: RxChange) {
-        rxDispatcher.postRxChange(rxChange)
+    protected open fun postRxChange(change: Change) {
+        dispatcher.postRxChange(change)
     }
 
     /**
-     * [RxDispatcher]发送[RxLoading]
+     * [Dispatcher]发送[Loading]
      *
      * @param isLoading true:显示，false:消失
      */
     protected open fun postRxLoading(busEvent: EventBusEvent,
                                      isLoading: Boolean) {
-        rxDispatcher.postRxLoading(RxLoading.newInstance(busEvent, isLoading))
+        dispatcher.postRxLoading(Loading.newInstance(busEvent, isLoading))
     }
 
     /**
-     * [RxDispatcher]发送[RxError]
+     * [Dispatcher]发送[Error]
      */
     protected open fun postRxError(busEvent: EventBusEvent,
                                    throwable: Throwable) {
-        rxDispatcher.postRxError(RxError.newInstance(busEvent, throwable))
+        dispatcher.postRxError(Error.newInstance(busEvent, throwable))
     }
 
     /**
-     * 异步执行，成功发送[RxAction]，异常发送[RxError]。
+     * 异步执行，成功发送[Action]，异常发送[Error]。
      */
-    protected open fun <T> postHttpAction(rxAction: RxAction,
+    protected open fun <T> postHttpAction(action: Action,
                                           flow: Flow<T>) {
-        postRxAction(rxAction, flow, canShowLoading = false, canRetry = false)
+        postRxAction(action, flow, canShowLoading = false, canRetry = false)
     }
 
     /**
-     * 异步执行，成功发送[RxAction]，异常发送[RxError]。
-     * 开始结束发送[RxLoading]。
+     * 异步执行，成功发送[Action]，异常发送[Error]。
+     * 开始结束发送[Loading]。
      */
-    protected open fun <T> postHttpLoadingAction(rxAction: RxAction,
+    protected open fun <T> postHttpLoadingAction(action: Action,
                                                  flow: Flow<T>) {
-        postRxAction(rxAction, flow, canShowLoading = true, canRetry = false)
+        postRxAction(action, flow, canShowLoading = true, canRetry = false)
     }
 
     /**
-     * 异步执行，成功发送[RxAction]，异常发送[RxRetry]。
+     * 异步执行，成功发送[Action]，异常发送[RxRetry]。
      */
-    protected open fun <T> postHttpRetryAction(rxAction: RxAction,
+    protected open fun <T> postHttpRetryAction(action: Action,
                                                flow: Flow<T>) {
-        postRxAction(rxAction, flow, canShowLoading = false, canRetry = true)
+        postRxAction(action, flow, canShowLoading = false, canRetry = true)
     }
 
     /**
-     * 异步执行，成功发送[RxAction]，异常发送[RxRetry]。
-     * 开始结束发送[RxLoading]。
+     * 异步执行，成功发送[Action]，异常发送[RxRetry]。
+     * 开始结束发送[Loading]。
      */
-    protected open fun <T> postHttpRetryAndLoadingAction(rxAction: RxAction,
+    protected open fun <T> postHttpRetryAndLoadingAction(action: Action,
                                                          flow: Flow<T>) {
-        postRxAction(rxAction, flow, canShowLoading = true, canRetry = true)
+        postRxAction(action, flow, canShowLoading = true, canRetry = true)
     }
 }

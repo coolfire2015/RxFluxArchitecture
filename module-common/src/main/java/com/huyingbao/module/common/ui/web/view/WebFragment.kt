@@ -2,7 +2,7 @@ package com.huyingbao.module.common.ui.web.view
 
 import android.os.Bundle
 import android.view.View
-import com.huyingbao.core.arch.view.RxSubscriberView
+import com.huyingbao.core.arch.view.SubscriberView
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.module.common.R
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.common_fragment_web.*
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class WebFragment : BaseCommonFragment(), BaseView, RxSubscriberView {
+class WebFragment : BaseCommonFragment(), BaseView, SubscriberView {
     companion object {
         fun newInstance(url: String): WebFragment {
             return WebFragment().apply {

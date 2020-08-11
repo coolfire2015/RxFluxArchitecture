@@ -63,7 +63,7 @@ android {
         //不生成BuildConfig.java文件
         buildConfig = false
         //支持 DataBinding
-        dataBinding=true
+        dataBinding = true
     }
 }
 

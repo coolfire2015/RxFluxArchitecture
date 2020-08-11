@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
  *
  * Created by liujunfeng on 2019/1/1.
  */
-interface RxFluxView<T : ViewModel> {
+interface FluxView<T : ViewModel> {
     /**
      * 为实现类提供Store
      */

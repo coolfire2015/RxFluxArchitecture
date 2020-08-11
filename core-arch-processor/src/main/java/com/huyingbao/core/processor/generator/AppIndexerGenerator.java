@@ -33,7 +33,7 @@ public final class AppIndexerGenerator {
      * @return
      */
     public TypeSpec generate(List<TypeElement> types) {
-        //检索所有@AppLifecycleObserver的类是否是androidx.lifecycle.LifecycleObserver的实现类
+        //检索所有@AppObserver的类是否是androidx.lifecycle.LifecycleObserver的实现类
         List<TypeElement> modules = new ArrayList<>();
         for (TypeElement element : types) {
             if (mProcessorUtil.isLifecycleObserver(element)) {

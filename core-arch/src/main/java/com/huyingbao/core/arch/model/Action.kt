@@ -7,11 +7,11 @@ import org.greenrobot.eventbus.EventBusEvent
 /**
  * 操作结果通知，封装操作返回数据。
  *
- * 由[com.huyingbao.core.arch.action.FlowActionCreator]发送到[com.huyingbao.core.arch.store.RxStore]，
+ * 由[com.huyingbao.core.arch.action.ActionCreator]发送到[com.huyingbao.core.arch.store.Store]，
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class RxAction private constructor(
+class Action private constructor(
         tag: String,
         val data: ArrayMap<String, Any>
 ) : EventBusEvent(tag) {
@@ -39,7 +39,7 @@ class RxAction private constructor(
 
     override fun equals(other: Any?): Boolean {
         return this === other || (other != null
-                && other is RxAction
+                && other is Action
                 && TextUtils.equals(tag, other.tag)
                 && data == other.data)
     }
@@ -60,8 +60,8 @@ class RxAction private constructor(
             return this
         }
 
-        fun build(): RxAction {
-            return RxAction(tag, data)
+        fun build(): Action {
+            return Action(tag, data)
         }
     }
 }

@@ -12,15 +12,15 @@ import javax.inject.Inject
 /**
  * 一个Project中只能有一个该类的子类。
  *
- * 如子模块中需要观察主模块的生命周期，需要使用[com.huyingbao.core.annotations.AppLifecycleOwner]注解标注Project中唯一子类实现，
+ * 如子模块中需要观察主模块的生命周期，需要使用[com.huyingbao.core.annotations.AppOwner]注解标注Project中唯一子类实现，
  *
- * 并在子模块中创建[com.huyingbao.core.annotations.AppLifecycleObserver]注解标注的Application生命周期观察者[androidx.lifecycle.LifecycleObserver]子类实现。
+ * 并在子模块中创建[com.huyingbao.core.annotations.AppObserver]注解标注的Application生命周期观察者[androidx.lifecycle.LifecycleObserver]子类实现。
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxApp : Application() {
+abstract class FluxApp : Application() {
     @Inject
-    lateinit var rxFlux: RxFlux
+    lateinit var mFluxLifecycleCallback: FluxLifecycleCallback
 
     /**
      * 通过反射获取壳module中编译自动生成的[LifecycleOwner]子类[com.huyingbao.core.arch.FinalAppLifecycleOwner]
@@ -31,20 +31,20 @@ abstract class RxApp : Application() {
             val clazz = Class.forName("com.huyingbao.core.arch.FinalAppLifecycleOwner") as Class<LifecycleOwner>
             result = clazz.getConstructor(Application::class.java).newInstance(this)
         } catch (e: ClassNotFoundException) {
-            if (Log.isLoggable(RxFlux.TAG, Log.WARN)) {
-                Log.w(RxFlux.TAG, "Failed to find AppLifecycleOwner. You should include an"
+            if (Log.isLoggable(FluxLifecycleCallback.TAG, Log.WARN)) {
+                Log.w(FluxLifecycleCallback.TAG, "Failed to find AppLifecycleOwner. You should include an"
                         + " annotationProcessor compile dependency on com.github.coolfire2015.RxFluxArchitecture:core-arch-processor"
-                        + " in your application and a @RxAppObserver annotated RxAppLifecycle subclass"
-                        + " and a @RxAppOwner annotated RxApp implementation")
+                        + " in your application and a @FluxAppObserver annotated FluxAppLifecycle subclass"
+                        + " and a @FluxAppOwner annotated FluxApp implementation")
             }
         } catch (e: InstantiationException) {
-            throwIncorrectRxAppLifecycle(e)
+            throwIncorrectFluxAppLifecycle(e)
         } catch (e: IllegalAccessException) {
-            throwIncorrectRxAppLifecycle(e)
+            throwIncorrectFluxAppLifecycle(e)
         } catch (e: NoSuchMethodException) {
-            throwIncorrectRxAppLifecycle(e)
+            throwIncorrectFluxAppLifecycle(e)
         } catch (e: InvocationTargetException) {
-            throwIncorrectRxAppLifecycle(e)
+            throwIncorrectFluxAppLifecycle(e)
         }
         result
     }
@@ -58,7 +58,7 @@ abstract class RxApp : Application() {
         //静态内部类持有当前Application
         application = this
         //application创建的时候调用该方法，使RxFlux可以接受Activity生命周期回调
-        registerActivityLifecycleCallbacks(rxFlux)
+        registerActivityLifecycleCallbacks(mFluxLifecycleCallback)
         //分发ON_CREATE状态
         lifecycleOwner?.let {
             (it.lifecycle as LifecycleRegistry).handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -81,7 +81,7 @@ abstract class RxApp : Application() {
         }
     }
 
-    private fun throwIncorrectRxAppLifecycle(e: Exception) {
+    private fun throwIncorrectFluxAppLifecycle(e: Exception) {
         throw IllegalStateException("AppLifecycleOwner is implemented incorrectly."
                 + " If you've manually implemented this class, remove your implementation. The Annotation"
                 + " processor will generate a correct implementation.", e)

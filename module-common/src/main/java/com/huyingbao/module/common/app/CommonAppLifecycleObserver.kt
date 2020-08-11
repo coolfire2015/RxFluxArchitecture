@@ -5,8 +5,8 @@ import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.alibaba.android.arouter.launcher.ARouter
-import com.huyingbao.core.annotations.AppLifecycleObserver
-import com.huyingbao.core.arch.lifecycle.RxAppLifecycle
+import com.huyingbao.core.annotations.AppObserver
+import com.huyingbao.core.arch.lifecycle.AppLifecycleObserver
 import com.huyingbao.core.uitls.AndroidUtils
 import com.huyingbao.module.common.BuildConfig
 import com.orhanobut.logger.AndroidLogAdapter
@@ -28,10 +28,10 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/8/1.
  */
 @Singleton
-@AppLifecycleObserver
-class CommonAppLifecycle @Inject constructor(
+@AppObserver
+class CommonAppLifecycleObserver @Inject constructor(
         @ApplicationContext private val context: Context
-) : RxAppLifecycle() {
+) : AppLifecycleObserver() {
     private var tinkerApplicationLike: ApplicationLike? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

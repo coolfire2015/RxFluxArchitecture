@@ -2,8 +2,8 @@ package com.huyingbao.core.base.flux.activity
 
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import com.huyingbao.core.arch.store.RxActivityStore
-import com.huyingbao.core.arch.view.RxFluxActivity
+import com.huyingbao.core.arch.store.ActivityStore
+import com.huyingbao.core.arch.view.FluxActivity
 import com.huyingbao.core.base.BaseActionCreator
 import com.huyingbao.core.base.BaseView
 import javax.inject.Inject
@@ -15,8 +15,8 @@ import javax.inject.Inject
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class BaseFluxActivity<T : RxActivityStore> :
-        RxFluxActivity<T>(),
+abstract class BaseFluxActivity<T : ActivityStore> :
+        FluxActivity<T>(),
         BaseView {
     @Inject
     lateinit var baseActionCreator: BaseActionCreator

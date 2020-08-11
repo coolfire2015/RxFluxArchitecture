@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
-import com.huyingbao.core.arch.view.RxFluxDialog
+import com.huyingbao.core.arch.view.FluxDialog
 import com.huyingbao.core.base.BaseActionCreator
 import com.huyingbao.core.base.BaseView
 import com.huyingbao.core.base.common.dialog.BaseCommonDialog
@@ -21,7 +21,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseFluxDialog<T : ViewModel> :
-        RxFluxDialog<T>(),
+        FluxDialog<T>(),
         BaseView {
     @Inject
     lateinit var baseActionCreator: BaseActionCreator

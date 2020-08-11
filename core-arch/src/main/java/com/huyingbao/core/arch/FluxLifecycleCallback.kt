@@ -8,11 +8,11 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.huyingbao.core.arch.action.FlowActionManager
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.lifecycle.RxActivityLifecycle
-import com.huyingbao.core.arch.lifecycle.RxFragmentLifecycle
-import com.huyingbao.core.arch.view.RxSubscriberView
+import com.huyingbao.core.arch.action.ActionManager
+import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.lifecycle.ActivityLifecycleObserver
+import com.huyingbao.core.arch.lifecycle.FragmentLifecycleObserver
+import com.huyingbao.core.arch.view.SubscriberView
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,15 +31,15 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Singleton
-class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
+class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
     /**
      * [Inject] 用来标记需要注入的依赖, 被标注的属性不能使用private修饰，否则无法注入
      */
     @Inject
-    lateinit var rxDispatcher: RxDispatcher
+    lateinit var dispatcher: Dispatcher
 
     @Inject
-    lateinit var flowActionManager: FlowActionManager
+    lateinit var mActionManager: ActionManager
 
     /**
      * 当前维护的Activity个数
@@ -55,7 +55,7 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
         activityCounter++
         activityStack.push(activity)
         if (activity is FragmentActivity) {
-            activity.lifecycle.addObserver(RxActivityLifecycle(activity))
+            activity.lifecycle.addObserver(ActivityLifecycleObserver(activity))
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
         }
     }
@@ -65,54 +65,54 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
 
     override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fragmentManager, fragment, context)
-        fragment.lifecycle.addObserver(RxFragmentLifecycle(fragment))
+        fragment.lifecycle.addObserver(FragmentLifecycleObserver(fragment))
     }
 
     /**
-     * [RxSubscriberView]注册订阅
+     * [SubscriberView]注册订阅
      */
     override fun onActivityResumed(activity: Activity) {
-        if (activity is RxSubscriberView) {
-            if (rxDispatcher.isSubscribe(activity)) {
+        if (activity is SubscriberView) {
+            if (dispatcher.isSubscribe(activity)) {
                 return
             }
             Log.i(TAG, "Subscribe RxFluxActivity : " + activity.javaClass.simpleName)
-            rxDispatcher.subscribeRxView(activity as RxSubscriberView)
+            dispatcher.subscribeRxView(activity as SubscriberView)
         }
     }
 
     /**
-     * [RxSubscriberView]注册订阅
+     * [SubscriberView]注册订阅
      */
     override fun onFragmentResumed(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentResumed(fragmentManager, fragment)
-        if (fragment is RxSubscriberView) {
-            if (rxDispatcher.isSubscribe(fragment)) {
+        if (fragment is SubscriberView) {
+            if (dispatcher.isSubscribe(fragment)) {
                 return
             }
             Log.i(TAG, "Subscribe RxFluxFragment : " + fragment.javaClass.simpleName)
-            rxDispatcher.subscribeRxView(fragment as RxSubscriberView)
+            dispatcher.subscribeRxView(fragment as SubscriberView)
         }
     }
 
     /**
-     * [RxSubscriberView]取消订阅
+     * [SubscriberView]取消订阅
      */
     override fun onActivityPaused(activity: Activity) {
-        if (activity is RxSubscriberView) {
+        if (activity is SubscriberView) {
             Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.javaClass.simpleName)
-            rxDispatcher.unsubscribeRxView(activity as RxSubscriberView)
+            dispatcher.unsubscribeRxView(activity as SubscriberView)
         }
     }
 
     /**
-     * [RxSubscriberView]取消订阅
+     * [SubscriberView]取消订阅
      */
     override fun onFragmentPaused(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentPaused(fragmentManager, fragment)
-        if (fragment is RxSubscriberView) {
+        if (fragment is SubscriberView) {
             Log.i(TAG, "Unsubscribe RxFluxFragment : " + fragment.javaClass.simpleName)
-            rxDispatcher.unsubscribeRxView(fragment as RxSubscriberView)
+            dispatcher.unsubscribeRxView(fragment as SubscriberView)
         }
     }
 
@@ -139,8 +139,8 @@ class RxFlux @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(
     }
 
     private fun shutdown() {
-        flowActionManager.clear()
-        rxDispatcher.unsubscribeAll()
+        mActionManager.clear()
+        dispatcher.unsubscribeAll()
     }
 
     private fun finishActivity(activity: Activity?) {

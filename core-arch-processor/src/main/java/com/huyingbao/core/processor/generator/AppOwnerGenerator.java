@@ -51,8 +51,8 @@ public final class AppOwnerGenerator {
      * 生成类
      */
     public TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
-        List<String> orderedRxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
-        Collections.sort(orderedRxAppLifecycleClassNames);
+        List<String> orderedFluxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
+        Collections.sort(orderedFluxAppLifecycleClassNames);
         TypeSpec.Builder builder = TypeSpec.classBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER)
                 //添加修饰符
                 .addModifiers(Modifier.FINAL)
@@ -61,13 +61,13 @@ public final class AppOwnerGenerator {
                 //添加需要实现的接口
                 .addSuperinterface(ClassName.get(PACKAGE_LIFECYCLE, TYPE_LIFECYCLE_OWNER))
                 //添加构造方法
-                .addMethod(generateConstructor(orderedRxAppLifecycleClassNames))
+                .addMethod(generateConstructor(orderedFluxAppLifecycleClassNames))
                 //添加成员变量
                 .addField(generateField())
                 //添加方法
                 .addMethod(generateGetLifecycle())
                 //添加接口
-                .addType(generateEntryPoint(orderedRxAppLifecycleClassNames));
+                .addType(generateEntryPoint(orderedFluxAppLifecycleClassNames));
         return builder.build();
     }
 

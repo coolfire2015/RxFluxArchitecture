@@ -29,13 +29,13 @@ public final class ProcessorUtil {
      */
     static final String PACKAGE_ROOT = "com.huyingbao.core.arch";
     /**
-     * RxApp类名
+     * FluxApp类名
      */
-    private static final String TYPE_RX_APP = "RxApp";
+    private static final String TYPE_FLUX_APP = "FluxApp";
     /**
-     * RxApp规范类名
+     * FluxApp规范类名
      */
-    private static final String QUALIFIED_RX_APP = PACKAGE_ROOT + "." + TYPE_RX_APP;
+    private static final String QUALIFIED_FLUX_APP = PACKAGE_ROOT + "." + TYPE_FLUX_APP;
     /**
      * LifecycleObserver规范类名
      */
@@ -47,16 +47,16 @@ public final class ProcessorUtil {
      */
     private final TypeElement mLifecycleObserverType;
     /**
-     * RxApp类型元素
+     * FluxApp类型元素
      */
-    private final TypeElement mRxAppType;
+    private final TypeElement mFluxAppType;
 
     private int mRound;
 
     ProcessorUtil(ProcessingEnvironment processingEnv) {
         this.mProcessingEnv = processingEnv;
         //返回给定其规范名称的类型元素。
-        mRxAppType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_RX_APP);
+        mFluxAppType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_FLUX_APP);
         mLifecycleObserverType = processingEnv.getElementUtils().getTypeElement(QUALIFIED_LIFECYCLE_OBSERVER);
     }
 
@@ -65,11 +65,11 @@ public final class ProcessorUtil {
     }
 
     /**
-     * 判断该类是否是RxApp的子类
+     * 判断该类是否是FluxApp的子类
      */
-    boolean isRxApp(TypeElement element) {
+    boolean isFluxApp(TypeElement element) {
         return mProcessingEnv.getTypeUtils().isAssignable(element.asType(),
-                mRxAppType.asType());
+                mFluxAppType.asType());
     }
 
     /**

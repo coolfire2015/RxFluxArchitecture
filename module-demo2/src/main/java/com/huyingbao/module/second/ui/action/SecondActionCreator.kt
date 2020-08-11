@@ -1,8 +1,8 @@
 package com.huyingbao.module.second.ui.action
 
-import com.huyingbao.core.arch.action.FlowActionCreator
-import com.huyingbao.core.arch.action.FlowActionManager
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.arch.action.ActionCreator
+import com.huyingbao.core.arch.action.ActionManager
+import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.module.second.BuildConfig
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.flow
@@ -12,10 +12,10 @@ import javax.inject.Named
 
 @ActivityScoped
 class SecondActionCreator @Inject constructor(
-        private val rxDispatcher: RxDispatcher,
-        rxActionManager: FlowActionManager,
+        private val dispatcher: Dispatcher,
+        rxActionManager: ActionManager,
         @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
-) : FlowActionCreator(rxDispatcher, rxActionManager), SecondAction {
+) : ActionCreator(dispatcher, rxActionManager), SecondAction {
     override fun getCategories() {
         val rxAction = newRxAction(SecondAction.GET_CATEGORIES)
         postHttpLoadingAction(rxAction, flow { emit(retrofit.create(SecondApi::class.java).getCategories()) })

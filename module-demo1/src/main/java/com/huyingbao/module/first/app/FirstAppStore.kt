@@ -1,10 +1,10 @@
 package com.huyingbao.module.first.app
 
-import com.huyingbao.core.annotations.AppLifecycleObserver
-import com.huyingbao.core.arch.store.RxAppStore
+import com.huyingbao.core.annotations.AppObserver
+import com.huyingbao.core.arch.store.AppStore
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@AppLifecycleObserver
-class FirstAppStore @Inject constructor() : RxAppStore()
+@AppObserver
+class FirstAppStore @Inject constructor() : AppStore()

@@ -1,6 +1,6 @@
 package com.huyingbao.module.common.app
 
-import com.huyingbao.core.arch.RxApp
+import com.huyingbao.core.arch.FluxApp
 import com.huyingbao.module.common.R
 import java.util.*
 
@@ -59,7 +59,7 @@ class CommonAppConstants {
 
 
         init {
-            RxApp.application?.let {
+            FluxApp.application?.let {
                 routerMap[it.getString(R.string.app_label_common)] = WebActivity
                 routerMap[it.getString(R.string.app_label_app)] = FirstActivity
                 routerMap[it.getString(R.string.app_label_first)] = FirstActivity

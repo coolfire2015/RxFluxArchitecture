@@ -1,6 +1,6 @@
 package com.huyingbao.module.app
 
-import com.huyingbao.core.annotations.AppLifecycleOwner
+import com.huyingbao.core.annotations.AppOwner
 import com.huyingbao.core.base.BaseApp
 
 import dagger.hilt.android.HiltAndroidApp
@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@AppLifecycleOwner
+@AppOwner
 @HiltAndroidApp
 class SimpleApplication : BaseApp() {
 }

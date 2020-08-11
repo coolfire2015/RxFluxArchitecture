@@ -2,51 +2,51 @@ package com.huyingbao.core.arch.action
 
 import androidx.collection.ArrayMap
 import androidx.core.util.Pair
-import com.huyingbao.core.arch.model.RxAction
+import com.huyingbao.core.arch.model.Action
 import kotlinx.coroutines.Job
 
 
 /**
- * 订阅管理类：关联并管理[RxAction]与[Job]
+ * 订阅管理类：关联并管理[Action]与[Job]
  *
  * Created by liujunfeng on 2020/8/1.
  */
-class FlowActionManager {
+class ActionManager {
     /**
-     * 管理订阅的ArrayMap，[RxAction]的tag作为key
+     * 管理订阅的ArrayMap，[Action]的tag作为key
      */
     private val arrayMap: ArrayMap<String, Pair<Int, Job>> = ArrayMap()
 
     /**
-     * 成对添加[RxAction]和[Job]到管理订阅的ArrayMap中。
+     * 成对添加[Action]和[Job]到管理订阅的ArrayMap中。
      * 如果已存在，则取消[Job]中观察者与被观察者订阅关系，
      * 停止被观察者[kotlinx.coroutines.flow.Flow]方法。
      */
-    fun add(rxAction: RxAction, job: Job) {
-        val old = arrayMap.put(rxAction.tag, getPair(rxAction, job))
+    fun add(action: Action, job: Job) {
+        val old = arrayMap.put(action.tag, getPair(action, job))
         if (old?.second != null && !old.second!!.isCompleted) {
             old.second!!.cancel()
         }
     }
 
     /**
-     * 移除[RxAction]，取消[Job]中观察者与被观察者订阅关系，
+     * 移除[Action]，取消[Job]中观察者与被观察者订阅关系，
      * 停止被观察者[io.reactivex.Observable]方法。
      */
-    fun remove(rxAction: RxAction) {
-        val old = arrayMap.remove(rxAction.tag)
+    fun remove(action: Action) {
+        val old = arrayMap.remove(action.tag)
         if (old?.second != null && !old.second!!.isCompleted) {
             old.second!!.cancel()
         }
     }
 
     /**
-     * 检查否已存在[RxAction]
+     * 检查否已存在[Action]
      */
-    operator fun contains(rxAction: RxAction): Boolean {
-        val old = arrayMap[rxAction.tag]
+    operator fun contains(action: Action): Boolean {
+        val old = arrayMap[action.tag]
         return (old?.first != null
-                && old.first == rxAction.hashCode()
+                && old.first == action.hashCode()
                 && old.second != null
                 && !old.second!!.isCompleted)
     }
@@ -67,9 +67,9 @@ class FlowActionManager {
     /**
      * 创建一个新的[Pair]
      *
-     * @param rxAction hashcode作为Key
+     * @param action hashcode作为Key
      */
-    private fun getPair(rxAction: RxAction, job: Job): Pair<Int, Job> {
-        return Pair(rxAction.hashCode(), job)
+    private fun getPair(action: Action, job: Job): Pair<Int, Job> {
+        return Pair(action.hashCode(), job)
     }
 }

@@ -1,10 +1,10 @@
 package com.huyingbao.core.base
 
-import com.huyingbao.core.arch.action.FlowActionCreator
-import com.huyingbao.core.arch.action.FlowActionManager
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
-import com.huyingbao.core.arch.model.RxAction
-import com.huyingbao.core.arch.model.RxChange
+import com.huyingbao.core.arch.action.ActionCreator
+import com.huyingbao.core.arch.action.ActionManager
+import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.model.Action
+import com.huyingbao.core.arch.model.Change
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,21 +15,21 @@ import javax.inject.Singleton
  */
 @Singleton
 class BaseActionCreator @Inject constructor(
-        private val rxDispatcher: RxDispatcher,
-        private val rxActionManager: FlowActionManager
-) : FlowActionCreator(rxDispatcher, rxActionManager) {
+        private val dispatcher: Dispatcher,
+        private val rxActionManager: ActionManager
+) : ActionCreator(dispatcher, rxActionManager) {
     /**
-     * [FlowActionManager]移除[RxAction]
+     * [ActionManager]移除[Action]
      */
     fun removeRxAction(tag: String) {
         removeRxAction(newRxAction(tag))
     }
 
     /**
-     * 不经过[com.huyingbao.core.arch.store.RxStore]，直接发送[RxChange]，用于同一线程（主线程）内的变更消息通知。
+     * 不经过[com.huyingbao.core.arch.store.Store]，直接发送[Change]，用于同一线程（主线程）内的变更消息通知。
      */
     fun postLocalChange(tag: String) {
-        val rxChange = RxChange.newInstance(tag)
+        val rxChange = Change.newInstance(tag)
         postRxChange(rxChange)
     }
 }

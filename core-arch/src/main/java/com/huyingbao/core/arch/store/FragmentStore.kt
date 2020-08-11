@@ -2,7 +2,7 @@ package com.huyingbao.core.arch.store
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import com.huyingbao.core.arch.dispatcher.RxDispatcher
+import com.huyingbao.core.arch.dispatcher.Dispatcher
 
 
 /**
@@ -12,6 +12,6 @@ import com.huyingbao.core.arch.dispatcher.RxDispatcher
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxFragmentStore(
-        override var rxDispatcher: RxDispatcher
-) : RxStoreImpl() {}
+abstract class FragmentStore(
+        override var dispatcher: Dispatcher
+) : StoreImpl() {}

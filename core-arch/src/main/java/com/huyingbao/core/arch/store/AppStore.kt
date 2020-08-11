@@ -6,4 +6,4 @@ package com.huyingbao.core.arch.store
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class RxAppStore() : RxStoreImpl() {}
+abstract class AppStore() : StoreImpl() {}

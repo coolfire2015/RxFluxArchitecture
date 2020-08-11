@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标注编译自动生成的{@link AppLifecycleObserver}的索引类。
+ * 标注编译自动生成的{@link AppObserver}的索引类。
  * <p>
  * Created by liujunfeng on 2019/1/1.
  */

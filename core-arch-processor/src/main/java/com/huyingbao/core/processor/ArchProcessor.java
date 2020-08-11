@@ -1,8 +1,8 @@
 package com.huyingbao.core.processor;
 
 import com.huyingbao.core.annotations.AppIndex;
-import com.huyingbao.core.annotations.AppLifecycleObserver;
-import com.huyingbao.core.annotations.AppLifecycleOwner;
+import com.huyingbao.core.annotations.AppObserver;
+import com.huyingbao.core.annotations.AppOwner;
 import com.huyingbao.core.processor.generator.AppIndexerGenerator;
 import com.huyingbao.core.processor.generator.AppOwnerGenerator;
 import com.squareup.javapoet.TypeSpec;
@@ -46,13 +46,13 @@ public class ArchProcessor extends AbstractProcessor {
      */
     private AppOwnerGenerator mAppOwnerGenerator;
     /**
-     * 列表中只能有一个使用{@link AppLifecycleOwner}注解的RxApp子类
+     * 列表中只能有一个使用{@link AppOwner}注解的FluxApp子类
      */
     private boolean mIsGeneratedWritten;
     /**
-     * 存放{@link AppLifecycleOwner}注解的RxApp的list
+     * 存放{@link AppOwner}注解的FluxApp的list
      */
-    private final List<TypeElement> mRxAppList = new ArrayList<>();
+    private final List<TypeElement> mFluxAppList = new ArrayList<>();
 
     /**
      * 可以初始化拿到一些使用的工具
@@ -69,15 +69,15 @@ public class ArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 只需要处理{@link AppLifecycleOwner}和{@link AppLifecycleObserver}
+     * 只需要处理{@link AppOwner}和{@link AppObserver}
      *
      * @return 返回要处理的注解的集合;
      */
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> result = new HashSet<>();
-        result.add(AppLifecycleOwner.class.getCanonicalName());
-        result.add(AppLifecycleObserver.class.getCanonicalName());
+        result.add(AppOwner.class.getCanonicalName());
+        result.add(AppObserver.class.getCanonicalName());
         return result;
     }
 
@@ -95,10 +95,10 @@ public class ArchProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         mProcessorUtil.process();
-        //编译RxAppObserver注解生成索引RxIndexer_文件
+        //编译FluxAppObserver注解生成索引RxIndexer_文件
         boolean newIndexWritten = processIndex(roundEnvironment);
-        //编译RxAppOwner注解
-        processRxAppOwner(roundEnvironment);
+        //编译FluxAppOwner注解
+        processFluxAppOwner(roundEnvironment);
         if (newIndexWritten) {
             return true;
         }
@@ -110,7 +110,7 @@ public class ArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 检索{@link AppLifecycleObserver}标注的com.huyingbao.core.arch.FinalAppLifecycleOwner实现类。
+     * 检索{@link AppObserver}标注的com.huyingbao.core.arch.FinalAppLifecycleOwner实现类。
      * <p>
      * 生成索引文件。
      *
@@ -118,7 +118,7 @@ public class ArchProcessor extends AbstractProcessor {
      * @return
      */
     private boolean processIndex(RoundEnvironment roundEnvironment) {
-        List<TypeElement> elements = mProcessorUtil.getElementsFor(AppLifecycleObserver.class, roundEnvironment);
+        List<TypeElement> elements = mProcessorUtil.getElementsFor(AppObserver.class, roundEnvironment);
         mProcessorUtil.debugLog("Processing types : " + elements);
         if (elements.isEmpty()) {
             return false;
@@ -129,20 +129,20 @@ public class ArchProcessor extends AbstractProcessor {
     }
 
     /**
-     * 检查使用{@link AppLifecycleOwner}注解的类中是否有RxApp子类，如果有则取出，且RxApp子类只能有一个。
+     * 检查使用{@link AppOwner}注解的类中是否有FluxApp子类，如果有则取出，且FluxApp子类只能有一个。
      *
      * @param roundEnvironment
      */
-    private void processRxAppOwner(RoundEnvironment roundEnvironment) {
-        List<TypeElement> elements = mProcessorUtil.getElementsFor(AppLifecycleOwner.class, roundEnvironment);
+    private void processFluxAppOwner(RoundEnvironment roundEnvironment) {
+        List<TypeElement> elements = mProcessorUtil.getElementsFor(AppOwner.class, roundEnvironment);
         for (TypeElement element : elements) {
-            if (mProcessorUtil.isRxApp(element)) {
-                mRxAppList.add(element);
+            if (mProcessorUtil.isFluxApp(element)) {
+                mFluxAppList.add(element);
             }
         }
-        mProcessorUtil.debugLog("got app modules: " + mRxAppList);
-        if (mRxAppList.size() > 1) {
-            throw new IllegalStateException("You cannot have more than one RxApp, found: " + mRxAppList);
+        mProcessorUtil.debugLog("got app modules: " + mFluxAppList);
+        if (mFluxAppList.size() > 1) {
+            throw new IllegalStateException("You cannot have more than one FluxApp, found: " + mFluxAppList);
         }
     }
 
@@ -152,15 +152,15 @@ public class ArchProcessor extends AbstractProcessor {
      * @return
      */
     private boolean processAppLifecycleOwner() {
-        //如果没有使用{@link RxAppOwner}注解的RxApp子类，直接返回。
-        if (mRxAppList.isEmpty()) {
+        //如果没有使用{@link FluxAppOwner}注解的FluxApp子类，直接返回。
+        if (mFluxAppList.isEmpty()) {
             return false;
         }
         //获取编译自动生成的索引文件的包名，每一个module都有同样的包名。
         PackageElement packageElement = processingEnv.getElementUtils().getPackageElement(COMPILER_PACKAGE_NAME);
-        //所有module中的编译生成的RxAppLifecycle索引文件
+        //所有module中的编译生成的FluxAppLifecycle索引文件
         Set<String> indexedClassNames = getAppLifecycleObserverSet(packageElement);
-        //如果没有RxAppLifecycle索引文件，则返回
+        //如果没有FluxAppLifecycle索引文件，则返回
         if (indexedClassNames == null || indexedClassNames.size() == 0) {
             return false;
         }
