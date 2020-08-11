@@ -26,7 +26,7 @@ class FluxModule {
      */
     @Singleton
     @Provides
-    fun provideFlowActionManager(): ActionManager {
+    fun provideActionManager(): ActionManager {
         return ActionManager()
     }
 

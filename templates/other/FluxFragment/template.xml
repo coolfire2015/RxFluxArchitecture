@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<template format="5" revision="5" name="RxFlux Fragment" minApi="19" minBuildApi="19"
-    description="Creates a new RxFlux Fragment">
+<template format="5" revision="5" name="Flux Fragment" minApi="19" minBuildApi="19"
+    description="Creates a new Flux Fragment">
 
     <category value="Fragment" />
 
@@ -17,7 +17,7 @@
         help="The name of the layout to create for the fragment" />
 
     <thumbs>
-        <thumb>template_rxflux_fragment.png</thumb>
+        <thumb>template_flux_fragment.png</thumb>
     </thumbs>
 
     <globals file="globals.xml.ftl" />

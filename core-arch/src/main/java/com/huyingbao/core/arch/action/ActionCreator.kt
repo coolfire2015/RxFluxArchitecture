@@ -110,7 +110,7 @@ abstract class ActionCreator(
                 // 捕获异常
                 .catch {
                     // 操作异常，打印错误日志
-                    EventBus.getDefault().logger.log(Level.SEVERE, "FlowActionCreator onError:${it.message}")
+                    EventBus.getDefault().logger.log(Level.SEVERE, "ActionCreator onError:${it.message}")
                     if (canRetry) {
 //                        postRetry(action, t, it)
                     } else {

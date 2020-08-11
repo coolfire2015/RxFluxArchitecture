@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<template format="5" revision="5" name="RxFlux Activity" minApi="19" minBuildApi="19"
-    description="Creates a new RxFlux Activity">
+<template format="5" revision="5" name="Flux Activity" minApi="19" minBuildApi="19"
+    description="Creates a new Flux Activity">
 
     <category value="Activity" />
     <formfactor value="Mobile" />
@@ -46,7 +46,7 @@
         help="The name of the layout to create for the fragment" />
 
     <thumbs>
-        <thumb>template_rxflux_activity.png</thumb>
+        <thumb>template_flux_activity.png</thumb>
     </thumbs>
 
     <globals file="globals.xml.ftl" />

@@ -15,13 +15,13 @@
 <instantiate from="root/src/app_package/FluxActivityModule.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/module/${activityModuleClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxStore.kt.ftl"
+<instantiate from="root/src/app_package/FluxStore.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/store/${storeClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxAction.kt.ftl"
+<instantiate from="root/src/app_package/FluxAction.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/action/${actionClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxActionCreator.kt.ftl"
+<instantiate from="root/src/app_package/FluxActionCreator.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/action/${actionCreatorClass}.kt" />
 
 <#if generateFragmentLayout>
