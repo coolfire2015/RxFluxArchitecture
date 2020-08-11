@@ -21,29 +21,29 @@ class Dispatcher {
     /**
      * [Store]注册订阅。
      */
-    fun <T : Store> subscribeRxStore(rxStore: T) {
-        EventBus.getDefault().register(rxStore)
+    fun <T : Store> subscribeStore(store: T) {
+        EventBus.getDefault().register(store)
     }
 
     /**
-     * [com.huyingbao.core.arch.view.FluxView]注册订阅。
+     * [com.huyingbao.core.arch.view.SubscriberView]注册订阅。
      */
-    fun <T : SubscriberView> subscribeRxView(rxView: T) {
-        EventBus.getDefault().register(rxView)
+    fun <T : SubscriberView> subscriberView(subscriberView: T) {
+        EventBus.getDefault().register(subscriberView)
     }
 
     /**
      * [Store]取消订阅。
      */
-    fun <T : Store> unsubscribeRxStore(rxStore: T) {
-        EventBus.getDefault().unregister(rxStore)
+    fun <T : Store> unsubscribeStore(store: T) {
+        EventBus.getDefault().unregister(store)
     }
 
     /**
-     * [com.huyingbao.core.arch.view.FluxView]取消订阅。
+     * [com.huyingbao.core.arch.view.SubscriberView]取消订阅。
      */
-    fun <T : SubscriberView> unsubscribeRxView(rxView: T) {
-        EventBus.getDefault().unregister(rxView)
+    fun <T : SubscriberView> unsubscriberView(subscriberView: T) {
+        EventBus.getDefault().unregister(subscriberView)
     }
 
     /**
@@ -65,14 +65,14 @@ class Dispatcher {
     /**
      * 发送[Action]到所有订阅的[Store]。
      */
-    fun postRxAction(action: Action) {
+    fun postAction(action: Action) {
         EventBus.getDefault().post(action, action.tag)
     }
 
     /**
      * 发送[Change]到所有订阅的[com.huyingbao.core.arch.view.FluxView]，粘性通知。
      */
-    fun postRxChange(change: Change) {
+    fun postChange(change: Change) {
         EventBus.getDefault().postSticky(change, change.tag)
     }
 
@@ -81,7 +81,7 @@ class Dispatcher {
      *
      * 发送：操作完成，异常执行状态。
      */
-    fun postRxError(error: Error) {
+    fun postError(error: Error) {
         EventBus.getDefault().postSticky(error)
     }
 
@@ -90,7 +90,7 @@ class Dispatcher {
      *
      * 发送：操作进度。
      */
-    fun postRxLoading(loading: Loading) {
+    fun postLoading(loading: Loading) {
         EventBus.getDefault().postSticky(loading)
     }
 }

@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = CommonAppConstants.Router.ThirdActivity)
 @AndroidEntryPoint
 class ThirdActivity : BaseFluxFragActivity<ThirdStore>() {
-    override val rxStore: ThirdStore? by viewModels()
+    override val store: ThirdStore? by viewModels()
 
     override fun createFragment(): Fragment? {
         return ThirdFragment.newInstance()

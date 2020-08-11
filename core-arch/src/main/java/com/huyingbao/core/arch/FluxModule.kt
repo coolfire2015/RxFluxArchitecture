@@ -35,7 +35,7 @@ class FluxModule {
      */
     @Singleton
     @Provides
-    fun provideRxDispatcher(): Dispatcher {
+    fun provideDispatcher(): Dispatcher {
         return Dispatcher()
     }
 }

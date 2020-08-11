@@ -34,7 +34,7 @@ class CommonAppStore @Inject constructor(
      * 接收[Error]，粘性
      */
     @Subscribe(sticky = true)
-    fun onRxError(error: Error) {
+    fun onError(error: Error) {
         val activity = fluxLifecycleCallback.activityStack.peek() ?: return
         when (val throwable = error.throwable) {
             is HttpException -> activity.toast("${throwable.code()}:${throwable.message()}")
@@ -49,7 +49,7 @@ class CommonAppStore @Inject constructor(
      * 显示或隐藏进度对话框，接收[Loading]，粘性
      */
     @Subscribe(sticky = true)
-    fun onRxLoading(loading: Loading) {
+    fun onLoading(loading: Loading) {
         val activity = fluxLifecycleCallback.activityStack.peek() ?: return
         if (activity is AppCompatActivity) {
             val fragmentByTag = activity.supportFragmentManager.findFragmentByTag(loading.tag)
@@ -59,7 +59,7 @@ class CommonAppStore @Inject constructor(
                 commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
                     override fun onCancel() {
                         if (activity is BaseFluxActivity<*>) {
-                            activity.baseActionCreator.removeRxAction(tag = loading.tag)
+                            activity.baseActionCreator.removeAction(tag = loading.tag)
                             activity.toast("取消操作${loading.tag}")
                         }
                     }

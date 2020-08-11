@@ -16,7 +16,7 @@ class ThirdFragment : BaseFluxFragment<ThirdStore>() {
         }
     }
 
-    override val rxStore: ThirdStore? by viewModels()
+    override val store: ThirdStore? by viewModels()
 
     override fun getLayoutId(): Int {
         return R.layout.third_fragment_third

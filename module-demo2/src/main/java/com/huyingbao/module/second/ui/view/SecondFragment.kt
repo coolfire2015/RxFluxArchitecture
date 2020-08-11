@@ -16,7 +16,7 @@ class SecondFragment : BaseFluxFragment<SecondStore>() {
         }
     }
 
-    override val rxStore: SecondStore? by viewModels()
+    override val store: SecondStore? by viewModels()
 
     override fun getLayoutId(): Int {
         return R.layout.second_fragment_second

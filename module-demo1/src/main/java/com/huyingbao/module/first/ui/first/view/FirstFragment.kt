@@ -25,7 +25,7 @@ class FirstFragment : BaseFluxFragment<FirstStore>() {
         }
     }
 
-    override val rxStore: FirstStore? by activityViewModels()
+    override val store: FirstStore? by activityViewModels()
 
     override fun getLayoutId(): Int {
         return R.layout.first_fragment_first
@@ -33,7 +33,7 @@ class FirstFragment : BaseFluxFragment<FirstStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         setTitle(R.string.app_label_first, false)
-        rxStore?.hotKeyLiveData?.observe(this, Observer { tv_hot_key.text = it.toString() })
+        store?.hotKeyLiveData?.observe(this, Observer { tv_hot_key.text = it.toString() })
         bt_get_hot_key.setOnClickListener {
             firstActionCreator.getHotKey()
         }

@@ -2,7 +2,7 @@
 <#import "root://activities/common/kotlin_macros.ftl" as kt>
 <recipe>
 
-<instantiate from="root/src/app_package/RxFluxFragment.kt.ftl"
+<instantiate from="root/src/app_package/FluxFragment.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/${fragmentClass}.kt" />
 
 <#if generateFragmentLayout>

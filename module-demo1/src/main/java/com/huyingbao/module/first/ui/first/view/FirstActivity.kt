@@ -13,13 +13,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = CommonAppConstants.Router.FirstActivity)
 @AndroidEntryPoint
 class FirstActivity : BaseFluxFragActivity<FirstStore>() {
-    override val rxStore: FirstStore? by viewModels()
+    override val store: FirstStore? by viewModels()
 
     override fun createFragment(): Fragment? {
         return FirstFragment.newInstance()
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        rxStore?.hotKeyLiveData?.observe(this, Observer { })
+        store?.hotKeyLiveData?.observe(this, Observer { })
     }
 }

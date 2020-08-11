@@ -32,8 +32,8 @@ abstract class StoreImpl() : ViewModel(), LifecycleObserver, Store {
         if (dispatcher.isSubscribe(this)) {
             return
         }
-        Log.i(FluxLifecycleCallback.TAG, "Subscribe RxStore : " + javaClass.simpleName)
-        dispatcher.subscribeRxStore(this)
+        Log.i(FluxLifecycleCallback.TAG, "Subscribe Store : " + javaClass.simpleName)
+        dispatcher.subscribeStore(this)
     }
 
 
@@ -42,11 +42,11 @@ abstract class StoreImpl() : ViewModel(), LifecycleObserver, Store {
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun unsubscribe() {
-        Log.i(FluxLifecycleCallback.TAG, "Unsubscribe RxStore : " + javaClass.simpleName)
-        dispatcher.unsubscribeRxStore(this)
+        Log.i(FluxLifecycleCallback.TAG, "Unsubscribe Store : " + javaClass.simpleName)
+        dispatcher.unsubscribeStore(this)
     }
 
     override fun postChange(change: Change) {
-        dispatcher.postRxChange(change)
+        dispatcher.postChange(change)
     }
 }

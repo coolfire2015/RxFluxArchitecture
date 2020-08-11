@@ -20,7 +20,7 @@
 
 ## Kotlin代码模版
 * 项目可下载 [core-base](core-base)，自定义base代码。
-* 暂时只有依赖[core-base](core-base)的 Kotlin 代码模版 [RxFluxActivity](templates/RxFluxActivity)。
+* 暂时只有依赖[core-base](core-base)的 Kotlin 代码模版 [FluxActivity](templates/FluxActivity)。
 * 使用代码模版，需手动添加 Activity/Fragment/Store 的 Dagger 依赖注入方法。
 
 ## 依赖框架

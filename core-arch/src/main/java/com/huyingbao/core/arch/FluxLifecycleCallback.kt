@@ -76,8 +76,8 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
             if (dispatcher.isSubscribe(activity)) {
                 return
             }
-            Log.i(TAG, "Subscribe RxFluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.subscribeRxView(activity as SubscriberView)
+            Log.i(TAG, "Subscribe FluxActivity : " + activity.javaClass.simpleName)
+            dispatcher.subscriberView(activity as SubscriberView)
         }
     }
 
@@ -90,8 +90,8 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
             if (dispatcher.isSubscribe(fragment)) {
                 return
             }
-            Log.i(TAG, "Subscribe RxFluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.subscribeRxView(fragment as SubscriberView)
+            Log.i(TAG, "Subscribe FluxFragment : " + fragment.javaClass.simpleName)
+            dispatcher.subscriberView(fragment as SubscriberView)
         }
     }
 
@@ -100,8 +100,8 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
      */
     override fun onActivityPaused(activity: Activity) {
         if (activity is SubscriberView) {
-            Log.i(TAG, "Unsubscribe RxFluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.unsubscribeRxView(activity as SubscriberView)
+            Log.i(TAG, "Unsubscribe FluxActivity : " + activity.javaClass.simpleName)
+            dispatcher.unsubscriberView(activity as SubscriberView)
         }
     }
 
@@ -111,8 +111,8 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     override fun onFragmentPaused(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentPaused(fragmentManager, fragment)
         if (fragment is SubscriberView) {
-            Log.i(TAG, "Unsubscribe RxFluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.unsubscribeRxView(fragment as SubscriberView)
+            Log.i(TAG, "Unsubscribe FluxFragment : " + fragment.javaClass.simpleName)
+            dispatcher.unsubscriberView(fragment as SubscriberView)
         }
     }
 
@@ -160,6 +160,6 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     }
 
     companion object {
-        const val TAG = "RxFlux"
+        const val TAG = "Flux"
     }
 }

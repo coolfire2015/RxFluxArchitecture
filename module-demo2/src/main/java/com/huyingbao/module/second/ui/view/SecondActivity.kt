@@ -13,13 +13,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = CommonAppConstants.Router.SecondActivity)
 @AndroidEntryPoint
 class SecondActivity : BaseFluxFragActivity<SecondStore>() {
-    override val rxStore: SecondStore? by viewModels()
+    override val store: SecondStore? by viewModels()
 
     override fun createFragment(): Fragment? {
         return SecondFragment.newInstance()
     }
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        Logger.e("rxStore$rxStore");
+        Logger.e("store$store");
     }
 }

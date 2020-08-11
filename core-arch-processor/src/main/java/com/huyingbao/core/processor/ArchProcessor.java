@@ -40,7 +40,7 @@ public class ArchProcessor extends AbstractProcessor {
     /**
      * 索引生成类
      */
-    private AppIndexerGenerator mRxIndexerGenerator;
+    private AppIndexerGenerator mAppIndexerGenerator;
     /**
      * com.huyingbao.core.arch.FinalAppLifecycleOwner生成类
      */
@@ -64,7 +64,7 @@ public class ArchProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         mProcessorUtil = new ProcessorUtil(processingEnvironment);
-        mRxIndexerGenerator = new AppIndexerGenerator(mProcessorUtil);
+        mAppIndexerGenerator = new AppIndexerGenerator(mProcessorUtil);
         mAppOwnerGenerator = new AppOwnerGenerator();
     }
 
@@ -95,7 +95,7 @@ public class ArchProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         mProcessorUtil.process();
-        //编译FluxAppObserver注解生成索引RxIndexer_文件
+        //编译FluxAppObserver注解生成索引Indexer_文件
         boolean newIndexWritten = processIndex(roundEnvironment);
         //编译FluxAppOwner注解
         processFluxAppOwner(roundEnvironment);
@@ -123,7 +123,7 @@ public class ArchProcessor extends AbstractProcessor {
         if (elements.isEmpty()) {
             return false;
         }
-        TypeSpec typeSpec = mRxIndexerGenerator.generate(elements);
+        TypeSpec typeSpec = mAppIndexerGenerator.generate(elements);
         mProcessorUtil.writeIndexer(typeSpec);
         return true;
     }
@@ -158,14 +158,14 @@ public class ArchProcessor extends AbstractProcessor {
         }
         //获取编译自动生成的索引文件的包名，每一个module都有同样的包名。
         PackageElement packageElement = processingEnv.getElementUtils().getPackageElement(COMPILER_PACKAGE_NAME);
-        //所有module中的编译生成的FluxAppLifecycle索引文件
-        Set<String> indexedClassNames = getAppLifecycleObserverSet(packageElement);
-        //如果没有FluxAppLifecycle索引文件，则返回
-        if (indexedClassNames == null || indexedClassNames.size() == 0) {
+        //所有module中的androidx.lifecycle.LifecycleObserver实现类名
+        Set<String> appLifecycleObserverSet = getAppLifecycleObserverSet(packageElement);
+        //如果没有androidx.lifecycle.LifecycleObserver实现类名，则返回
+        if (appLifecycleObserverSet == null || appLifecycleObserverSet.size() == 0) {
             return false;
         }
         //生成全局com.huyingbao.core.arch.FinalAppLifecycleOwner
-        TypeSpec finalAppLifecycleOwner = mAppOwnerGenerator.generate(indexedClassNames);
+        TypeSpec finalAppLifecycleOwner = mAppOwnerGenerator.generate(appLifecycleObserverSet);
         mProcessorUtil.writeClass(ProcessorUtil.PACKAGE_ROOT, finalAppLifecycleOwner);
         return true;
     }

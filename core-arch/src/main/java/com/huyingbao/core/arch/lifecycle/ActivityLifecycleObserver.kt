@@ -22,10 +22,10 @@ class ActivityLifecycleObserver(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         if (activity is FluxView<*> && activity is FragmentActivity) {
-            val rxStore = activity.rxStore
-            if (rxStore is ActivityStore) {
-                //rxStore关联activity生命周期
-                activity.lifecycle.addObserver(rxStore)
+            val store = activity.store
+            if (store is ActivityStore) {
+                //store关联activity生命周期
+                activity.lifecycle.addObserver(store)
             }
         }
     }

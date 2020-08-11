@@ -16,20 +16,19 @@ import javax.inject.Singleton
 @Singleton
 class BaseActionCreator @Inject constructor(
         private val dispatcher: Dispatcher,
-        private val rxActionManager: ActionManager
-) : ActionCreator(dispatcher, rxActionManager) {
+        private val actionManager: ActionManager
+) : ActionCreator(dispatcher, actionManager) {
     /**
      * [ActionManager]移除[Action]
      */
-    fun removeRxAction(tag: String) {
-        removeRxAction(newRxAction(tag))
+    fun removeAction(tag: String) {
+        removeAction(newAction(tag))
     }
 
     /**
      * 不经过[com.huyingbao.core.arch.store.Store]，直接发送[Change]，用于同一线程（主线程）内的变更消息通知。
      */
     fun postLocalChange(tag: String) {
-        val rxChange = Change.newInstance(tag)
-        postRxChange(rxChange)
+        postChange(Change.newInstance(tag))
     }
 }

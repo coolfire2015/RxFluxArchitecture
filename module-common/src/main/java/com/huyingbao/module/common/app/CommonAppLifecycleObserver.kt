@@ -179,7 +179,7 @@ class CommonAppLifecycleObserver @Inject constructor(
                 // (Optional) How many method line to show. Default 2
                 .methodCount(2)
                 // (Optional) Global tag for every log. Default PRETTY_LOGGER
-                .tag("RxFlux")
+                .tag("Flux")
                 .build()
         Logger.addLogAdapter(object : AndroidLogAdapter(formatStrategy) {
             override fun isLoggable(priority: Int, tag: String?): Boolean {

@@ -57,7 +57,7 @@ abstract class FluxApp : Application() {
         super.onCreate()
         //静态内部类持有当前Application
         application = this
-        //application创建的时候调用该方法，使RxFlux可以接受Activity生命周期回调
+        //application创建的时候调用该方法，使FluxLifecycleCallback可以接受Activity生命周期回调
         registerActivityLifecycleCallbacks(mFluxLifecycleCallback)
         //分发ON_CREATE状态
         lifecycleOwner?.let {

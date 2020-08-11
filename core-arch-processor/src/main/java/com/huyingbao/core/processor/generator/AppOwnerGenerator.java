@@ -50,8 +50,8 @@ public final class AppOwnerGenerator {
     /**
      * 生成类
      */
-    public TypeSpec generate(Set<String> rxAppLifecycleClassNames) {
-        List<String> orderedFluxAppLifecycleClassNames = new ArrayList<>(rxAppLifecycleClassNames);
+    public TypeSpec generate(Set<String> appLifecycleObserverSet) {
+        List<String> orderedFluxAppLifecycleClassNames = new ArrayList<>(appLifecycleObserverSet);
         Collections.sort(orderedFluxAppLifecycleClassNames);
         TypeSpec.Builder builder = TypeSpec.classBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER)
                 //添加修饰符
@@ -83,7 +83,7 @@ public final class AppOwnerGenerator {
     /**
      * 生成构造方法
      */
-    private MethodSpec generateConstructor(Collection<String> rxAppLifecycleClassNames) {
+    private MethodSpec generateConstructor(Collection<String> appLifecycleObserverSet) {
         //方法入参
         ClassName application = ClassName.get(PACKAGE_APPLICATION, TYPE_APPLICATION);
         ClassName entryPoints = ClassName.get(PACKAGE_HILT, TYPE_HILT_ENTRY_POINTS);
@@ -96,9 +96,9 @@ public final class AppOwnerGenerator {
                 //添加入参
                 .addParameter(parameterSpec);
         //添加方法内容
-        for (String rxAppLifecycle : rxAppLifecycleClassNames) {
+        for (String appLifecycleObserver : appLifecycleObserverSet) {
             //获取类名
-            ClassName moduleClassName = ClassName.bestGuess(rxAppLifecycle);
+            ClassName moduleClassName = ClassName.bestGuess(appLifecycleObserver);
             builder.addStatement(FIELD_LIFECYCLE_REGISTRY + ".addObserver($T.get(application, $T.class).get$T())",
                     entryPoints,
                     appLifecycleOwnerEntryPoint,
@@ -135,7 +135,7 @@ public final class AppOwnerGenerator {
     /**
      * 生成EntryPoint接口
      */
-    private TypeSpec generateEntryPoint(Collection<String> rxAppLifecycleClassNames) {
+    private TypeSpec generateEntryPoint(Collection<String> appLifecycleObserverSet) {
         TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT)
                 //添加注解@EntryPoint
                 .addAnnotation(ClassName.get(PACKAGE_HILT, TYPE_HILT_ENTRY_POINT))
@@ -144,9 +144,9 @@ public final class AppOwnerGenerator {
                         .addMember("value", "$T.class", ClassName.get(PACKAGE_HILT_APPLICATION_COMPONENT, TYPE_HILT_APPLICATION_COMPONENT))
                         .build());
         //添加方法内容
-        for (String rxAppLifecycle : rxAppLifecycleClassNames) {
+        for (String appLifecycleObserver : appLifecycleObserverSet) {
             //获取类名
-            ClassName moduleClassName = ClassName.bestGuess(rxAppLifecycle);
+            ClassName moduleClassName = ClassName.bestGuess(appLifecycleObserver);
             //方法体
             MethodSpec methodSpec = MethodSpec.methodBuilder("get" + moduleClassName.simpleName())
                     .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)

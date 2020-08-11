@@ -13,12 +13,12 @@ import javax.inject.Named
 @ActivityScoped
 class FirstActionCreator @Inject constructor(
         dispatcher: Dispatcher,
-        rxActionManager: ActionManager,
+        actionManager: ActionManager,
         @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
-) : ActionCreator(dispatcher, rxActionManager), FirstAction {
+) : ActionCreator(dispatcher, actionManager), FirstAction {
     override fun getHotKey() {
-        val rxAction = newRxAction(FirstAction.GET_HOT_KEY)
-        postHttpLoadingAction(rxAction, flow {
+        val action = newAction(FirstAction.GET_HOT_KEY)
+        postHttpLoadingAction(action, flow {
             emit(retrofit.create(FirstApi::class.java).getHotKey())
         })
     }

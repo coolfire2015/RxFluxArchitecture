@@ -13,5 +13,5 @@ interface FluxView<T : ViewModel> {
     /**
      * 为实现类提供Store
      */
-    val rxStore: T?
+    val store: T?
 }

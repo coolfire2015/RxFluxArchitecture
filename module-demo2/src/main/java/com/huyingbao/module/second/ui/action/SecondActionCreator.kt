@@ -13,11 +13,11 @@ import javax.inject.Named
 @ActivityScoped
 class SecondActionCreator @Inject constructor(
         private val dispatcher: Dispatcher,
-        rxActionManager: ActionManager,
+        actionManager: ActionManager,
         @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
-) : ActionCreator(dispatcher, rxActionManager), SecondAction {
+) : ActionCreator(dispatcher, actionManager), SecondAction {
     override fun getCategories() {
-        val rxAction = newRxAction(SecondAction.GET_CATEGORIES)
-        postHttpLoadingAction(rxAction, flow { emit(retrofit.create(SecondApi::class.java).getCategories()) })
+        val action = newAction(SecondAction.GET_CATEGORIES)
+        postHttpLoadingAction(action, flow { emit(retrofit.create(SecondApi::class.java).getCategories()) })
     }
 }

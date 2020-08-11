@@ -9,6 +9,6 @@ import javax.inject.Inject
 @ActivityScope
 class ${actionCreatorClass} @Inject constructor(
         private val rxDispatcher: RxDispatcher,
-        private val rxActionManager: FlowActionManager
-) : FlowActionCreator(rxDispatcher, rxActionManager), ${actionClass} {
+        private val actionManager: FlowActionManager
+) : FlowActionCreator(rxDispatcher, actionManager), ${actionClass} {
 }

@@ -10,7 +10,7 @@ import javax.inject.Inject
 @ActivityScoped
 class ThirdActionCreator @Inject constructor(
         private val dispatcher: Dispatcher,
-        private val rxActionManager: ActionManager,
+        private val actionManager: ActionManager,
         private val retrofit: Retrofit
-) : ActionCreator(dispatcher, rxActionManager), ThirdAction {
+) : ActionCreator(dispatcher, actionManager), ThirdAction {
 }

@@ -5,14 +5,14 @@
 <merge from="root/AndroidManifest.xml.ftl"
 	to="${escapeXmlAttribute(manifestOut)}/AndroidManifest.xml" />
 
-<instantiate from="root/src/app_package/RxFluxActivity.kt.ftl"
+<instantiate from="root/src/app_package/FluxActivity.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/view/${activityClass}.kt" />
 <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxFragment.kt.ftl"
+<instantiate from="root/src/app_package/FluxFragment.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/view/${fragmentClass}.kt" />
 
-<instantiate from="root/src/app_package/RxFluxActivityModule.kt.ftl"
+<instantiate from="root/src/app_package/FluxActivityModule.kt.ftl"
     to="${escapeXmlAttribute(srcOut)}/module/${activityModuleClass}.kt" />
 
 <instantiate from="root/src/app_package/RxFluxStore.kt.ftl"
