@@ -110,6 +110,15 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
     //X_ViewPager
     api "androidx.viewpager2:viewpager2:${X_VIEWPAGER}"
+    //X-Room
+    api "androidx.room:room-runtime:${X_ROOM}"
+    api "androidx.room:room-ktx:${X_ROOM}"
+    api "androidx.room:room-rxjava2:${X_ROOM}"
+    //X_Paging
+    api "androidx.paging:paging-runtime-ktx:${X_PAGING}"
+    api "androidx.paging:paging-rxjava2-ktx:${X_PAGING}"
+    //X-WorkManager
+    api "androidx.work:work-runtime-ktx:${X_WORK}"
     //OkHttp
     api "com.squareup.okhttp3:okhttp:${OKHTTP}"
     api "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
@@ -124,10 +133,16 @@ dependencies {
     api "org.jetbrains.anko:anko-commons:$ANKO"
     //Json动画Lottie
     api "com.airbnb.android:lottie:${LOTTIE}"
+    //上下拉刷新SmartRefreshLayout
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
+    //RecyclerView适配器
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //日志展示
     api "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //浏览器内核X5
     api "com.tencent.tbs.tbssdk:sdk:${TBSSDK}"
+    //键值对存储Mmkv
+    api "com.tencent:mmkv:${MMKV}"
     //Bug统计Bugly
     api "com.tencent.bugly:crashreport:${BUGLY}"
     //热修复Tinker

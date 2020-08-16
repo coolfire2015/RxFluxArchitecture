@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huyingbao.module.wan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.huyingbao.module.wan.WanApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_label_wan"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
+    </application>
+</manifest>

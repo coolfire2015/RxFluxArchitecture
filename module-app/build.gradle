@@ -110,7 +110,6 @@ android {
 dependencies {
     if (!isModuleAsApp.toBoolean()) {
         implementation project(':module-demo1')
-        implementation project(':module-demo2')
-        implementation project(':module-demo3')
+        implementation project(':module-wan')
     }
 }

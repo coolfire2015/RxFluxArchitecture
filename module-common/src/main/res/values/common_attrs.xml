@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 控制app图标颜色 format:颜色值、资源引用 -->
+    <attr name="colorIcon" format="color|reference" />
+    <!--自定义封装展示信息的View-->
+    <declare-styleable name="CommonInfoCardView">
+        <attr name="infoIcon" format="reference" />
+        <attr name="infoTitle" format="string|reference" />
+        <attr name="infoContent" format="string|reference" />
+    </declare-styleable>
+</resources>

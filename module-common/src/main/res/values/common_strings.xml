@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_label_app">RxFluxApp</string>
+    <string name="app_label_common">引导</string>
+    <string name="app_label_wan">玩安卓</string>
+    <string name="app_label_ncov">疫情查询</string>
+    <string name="app_label_gan">干货集中营</string>
+    <string name="app_label_github">Github</string>
+
     <string name="common_cancel">取消</string>
     <string name="common_retry">重试</string>
     <string name="common_ok">确定</string>
@@ -12,9 +19,4 @@
     <string name="common_menu_browser">用浏览器打开</string>
 
     <string name="common_toast_copy">已经复制到粘贴板</string>
-    <string name="app_label_app">ArchDemo</string>
-    <string name="app_label_common">ArchDemoCommon</string>
-    <string name="app_label_first">ArchDemo1</string>
-    <string name="app_label_second">ArchDemo2</string>
-    <string name="app_label_third">ArchDemo3</string>
 </resources>

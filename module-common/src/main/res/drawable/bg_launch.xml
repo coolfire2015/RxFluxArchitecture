@@ -1,0 +1,15 @@
+<!--Splash页面背景-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:drawable="?android:attr/colorPrimary"
+        tools:drawable="@color/common_primary" />
+    <!-- layer-list中使用vector-->
+    <item
+        android:bottom="@dimen/dp_24"
+        android:drawable="@drawable/ic_flux"
+        android:gravity="center"
+        android:left="@dimen/dp_24"
+        android:right="@dimen/dp_24"
+        android:top="@dimen/dp_24" />
+</layer-list>

@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rfl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ProgressBar
-        android:id="@+id/progress_bar_web"
-        style="?android:attr/progressBarStyleHorizontal"
+    app:srlEnablePreviewInEditMode="true"
+    app:srlPrimaryColor="?android:attr/colorPrimary">
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.tencent.smtt.sdk.WebView
-        android:id="@+id/web_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ProgressBar
+            android:id="@+id/progress_bar_web"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2" />
 
-</LinearLayout>
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/web_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

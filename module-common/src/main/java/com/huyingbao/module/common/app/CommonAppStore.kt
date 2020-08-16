@@ -1,20 +1,22 @@
 package com.huyingbao.module.common.app
 
+import android.app.Application
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.huyingbao.core.annotations.AppObserver
 import com.huyingbao.core.arch.FluxLifecycleCallback
-import com.huyingbao.core.arch.model.Error
-import com.huyingbao.core.arch.model.Loading
+import com.huyingbao.core.arch.model.*
 import com.huyingbao.core.arch.store.AppStore
-import com.huyingbao.core.base.flux.activity.BaseFluxActivity
-import com.huyingbao.module.common.dialog.CommonLoadingDialog
-import com.huyingbao.module.common.dialog.CommonLoadingDialogClickListener
+import com.huyingbao.module.common.ui.update.action.AppAction
+import com.huyingbao.module.common.ui.update.model.AppBean
+import com.huyingbao.module.common.ui.update.model.AppUpdateState
+import com.huyingbao.module.common.ui.update.model.getAppState
+import com.huyingbao.module.common.ui.update.view.CommonUpdateDialog
+import com.huyingbao.module.common.utils.showCommonError
+import com.huyingbao.module.common.utils.showCommonLoading
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
-import retrofit2.HttpException
-import java.net.SocketException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,6 +30,7 @@ import javax.inject.Singleton
 @Singleton
 @AppObserver
 class CommonAppStore @Inject constructor(
+        @ApplicationContext private val context: Context,
         private val fluxLifecycleCallback: FluxLifecycleCallback
 ) : AppStore() {
     /**
@@ -35,42 +38,62 @@ class CommonAppStore @Inject constructor(
      */
     @Subscribe(sticky = true)
     fun onError(error: Error) {
-        val activity = fluxLifecycleCallback.activityStack.peek() ?: return
-        when (val throwable = error.throwable) {
-            is HttpException -> activity.toast("${throwable.code()}:${throwable.message()}")
-            is SocketException -> activity.toast("网络异常!")
-            is UnknownHostException -> activity.toast("网络异常!")
-            is SocketTimeoutException -> activity.toast("连接超时!")
-            else -> activity.toast(throwable.toString())
-        }
+        fluxLifecycleCallback.activityStack.peek()?.let { showCommonError(it, error) }
     }
 
     /**
      * 显示或隐藏进度对话框，接收[Loading]，粘性
      */
     @Subscribe(sticky = true)
-    fun onLoading(loading: Loading) {
-        val activity = fluxLifecycleCallback.activityStack.peek() ?: return
-        if (activity is AppCompatActivity) {
-            val fragmentByTag = activity.supportFragmentManager.findFragmentByTag(loading.tag)
-            if (fragmentByTag == null && loading.isLoading) {
-                //显示进度框
-                val commonLoadingDialog = CommonLoadingDialog.newInstance()
-                commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
-                    override fun onCancel() {
-                        if (activity is BaseFluxActivity<*>) {
-                            activity.baseActionCreator.removeAction(tag = loading.tag)
-                            activity.toast("取消操作${loading.tag}")
-                        }
-                    }
-                }
-                commonLoadingDialog.show(activity.supportFragmentManager, loading.tag)
+    fun onLoading(rxLoading: Loading) {
+        fluxLifecycleCallback.activityStack.peek()?.let { showCommonLoading(it, rxLoading) }
+    }
+
+    /**
+     * 显示更新弹框
+     */
+    @Subscribe(tags = [AppAction.GET_APP_LATEST])
+    fun onGetAppLatest(rxAction: Action) {
+        rxAction.getResponse<AppBean>()?.let {
+            it.appUpdateState = getAppState(
+                    build = it.build,
+                    packageName = context.packageName,
+                    application = context as Application)
+            val activity = fluxLifecycleCallback.activityStack.peek() ?: return
+            if (it.appUpdateState == AppUpdateState.LATEST) {
+                activity.toast("当前已是最新版本")
                 return
             }
-            if (fragmentByTag is CommonLoadingDialog && !loading.isLoading) {
-                //隐藏进度框
-                fragmentByTag.dismiss()
+            if (activity is AppCompatActivity) {
+                val fragmentByTag = activity.supportFragmentManager
+                        .findFragmentByTag(CommonUpdateDialog::class.java.simpleName)
+                if (fragmentByTag == null) {
+                    CommonUpdateDialog
+                            .newInstance(
+                                    apkUrl = it.install_url,
+                                    changelog = it.changelog,
+                                    appUpdateState = it.appUpdateState)
+                            .show(
+                                    activity.supportFragmentManager,
+                                    CommonUpdateDialog::class.java.simpleName)
+                }
             }
         }
+    }
+}
+
+/**
+ * Created by liujunfeng on 2019/1/1.
+ */
+interface CommonAppAction {
+    companion object {
+        /**
+         * 滑动到顶部
+         */
+        const val SCROLL_TO_TOP = "scrollToTop"
+        /**
+         * 需要获取下一页数据
+         */
+        const val GET_NEXT_PAGE = "getNextPage"
     }
 }

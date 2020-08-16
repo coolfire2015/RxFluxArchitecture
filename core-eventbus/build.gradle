@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = "com.github.coolfire2015"
+
+android {
+    //编译版本
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    //默认配置
+    defaultConfig {
+        //Sdk版本
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        //版本信息
+        versionCode rootProject.gitGitVersionCode()
+        versionName rootProject.getGitVersionName()
+    }
+    //构建过程
+    buildTypes {
+        //自定义buildType.name
+        release {
+            //混淆开关
+            minifyEnabled false
+            //混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //Lambda表达式需要
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+//将源代码打包进aar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.javaDirectories
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+dependencies {
+    //EventBus注解
+    api project(':core-eventbus-annotations')
+    //版本兼容包,使用兼容包中的Pair,方便单元测试
+    api "androidx.core:core:${X_CORE}"
+}
