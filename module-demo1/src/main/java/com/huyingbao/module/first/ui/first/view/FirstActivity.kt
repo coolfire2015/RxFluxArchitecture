@@ -10,7 +10,7 @@ import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.first.ui.first.store.FirstStore
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = CommonAppConstants.Router.FirstActivity)
+@Route(path = CommonAppConstants.Router.LoginActivity)
 @AndroidEntryPoint
 class FirstActivity : BaseFluxFragActivity<FirstStore>() {
     override val store: FirstStore? by viewModels()

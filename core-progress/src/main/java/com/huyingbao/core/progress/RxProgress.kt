@@ -5,7 +5,9 @@ import org.greenrobot.eventbus.EventBusEvent
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class RxProgress private constructor(tag: String) : EventBusEvent(tag) {
+class RxProgress private constructor(
+        tag: String
+) : EventBusEvent(tag) {
     /**
      * 当前已上传或下载的总长度
      */
@@ -32,9 +34,7 @@ class RxProgress private constructor(tag: String) : EventBusEvent(tag) {
      * @return
      */
     val percent: Int
-        get() = if (currentLength <= 0 || contentLength <= 0) {
-            0
-        } else (100 * currentLength / contentLength).toInt()
+        get() = if (currentLength <= 0 || contentLength <= 0) 0 else (100 * currentLength / contentLength).toInt()
 
     /**
      * 获取上传或下载网络速度,单位为byte/s
@@ -42,9 +42,7 @@ class RxProgress private constructor(tag: String) : EventBusEvent(tag) {
      * @return
      */
     val speed: Long
-        get() = if (eachLength <= 0 || intervalTime <= 0) {
-            0
-        } else eachLength * 1000 / intervalTime
+        get() = if (eachLength <= 0 || intervalTime <= 0) 0 else eachLength * 1000 / intervalTime
 
     companion object {
         const val TAG = "tag"

@@ -1,8 +1,8 @@
 package com.huyingbao.module.common.app
 
+//import com.huyingbao.module.common.ui.update.view.CommonUpdateDialog
 import android.app.Application
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import com.huyingbao.core.annotations.AppObserver
 import com.huyingbao.core.arch.FluxLifecycleCallback
 import com.huyingbao.core.arch.model.Action
@@ -13,7 +13,6 @@ import com.huyingbao.module.common.ui.update.action.AppAction
 import com.huyingbao.module.common.ui.update.model.AppBean
 import com.huyingbao.module.common.ui.update.model.AppUpdateState
 import com.huyingbao.module.common.ui.update.model.getAppState
-import com.huyingbao.module.common.ui.update.view.CommonUpdateDialog
 import com.huyingbao.module.common.utils.showCommonError
 import com.huyingbao.module.common.utils.showCommonLoading
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -66,20 +65,20 @@ class CommonAppStore @Inject constructor(
                 activity.toast("当前已是最新版本")
                 return
             }
-            if (activity is AppCompatActivity) {
-                val fragmentByTag = activity.supportFragmentManager
-                        .findFragmentByTag(CommonUpdateDialog::class.java.simpleName)
-                if (fragmentByTag == null) {
-                    CommonUpdateDialog
-                            .newInstance(
-                                    apkUrl = it.install_url,
-                                    changelog = it.changelog,
-                                    appUpdateState = it.appUpdateState)
-                            .show(
-                                    activity.supportFragmentManager,
-                                    CommonUpdateDialog::class.java.simpleName)
-                }
-            }
+//            if (activity is AppCompatActivity) {
+//                val fragmentByTag = activity.supportFragmentManager
+//                        .findFragmentByTag(CommonUpdateDialog::class.java.simpleName)
+//                if (fragmentByTag == null) {
+//                    CommonUpdateDialog
+//                            .newInstance(
+//                                    apkUrl = it.install_url,
+//                                    changelog = it.changelog,
+//                                    appUpdateState = it.appUpdateState)
+//                            .show(
+//                                    activity.supportFragmentManager,
+//                                    CommonUpdateDialog::class.java.simpleName)
+//                }
+//            }
         }
     }
 }

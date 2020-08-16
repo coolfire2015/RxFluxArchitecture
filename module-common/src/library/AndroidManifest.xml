@@ -6,14 +6,14 @@
         android:allowBackup="false"
         android:supportsRtl="true">
         <activity
-            android:name="com.huyingbao.module.common.ui.start.view.StartActivity"
+            android:name="com.huyingbao.module.common.ui.start.StartActivity"
             android:theme="@style/AppTheme.Loading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huyingbao.module.common.ui.web.view.WebActivity" />
+        <activity android:name="com.huyingbao.module.common.ui.web.WebActivity" />
     </application>
 
 </manifest>

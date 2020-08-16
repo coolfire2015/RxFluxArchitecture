@@ -9,7 +9,7 @@ import retrofit2.http.Url
 /**
  * Created by liujunfeng on 2019/4/10.
  */
-open interface DownloadApi {
+interface DownloadApi {
     /**
      * 下载文件
      *

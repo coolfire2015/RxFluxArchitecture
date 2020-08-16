@@ -2,15 +2,16 @@ package com.huyingbao.module.wan.ui.article.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
-import com.huyingbao.core.base.setTitle
-import com.huyingbao.core.utils.RecyclerItemClickListener
+import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.app.CommonAppAction
+import com.huyingbao.module.common.utils.RecyclerItemClickListener
 import com.huyingbao.module.common.utils.scrollToTop
 import com.huyingbao.module.common.utils.showCommonError
 import com.huyingbao.module.common.utils.startWebActivity
@@ -46,6 +47,8 @@ class BannerFragment : BaseFluxFragment<ArticleStore>() {
     companion object {
         fun newInstance() = BannerFragment()
     }
+
+    override val store: ArticleStore? by activityViewModels()
 
     override fun getLayoutId() = R.layout.common_fragment_list
 

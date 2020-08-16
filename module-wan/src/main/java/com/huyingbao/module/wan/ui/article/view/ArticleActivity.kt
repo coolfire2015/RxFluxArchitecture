@@ -2,6 +2,7 @@ package com.huyingbao.module.wan.ui.article.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
@@ -26,6 +27,8 @@ import org.jetbrains.anko.find
  */
 @Route(path = CommonAppConstants.Router.ArticleActivity)
 class ArticleActivity : BaseFluxFragActivity<ArticleStore>() {
+    override val store: ArticleStore? by viewModels()
+
     override fun createFragment(): Fragment? {
         return ArticleListFragment.newInstance()
     }

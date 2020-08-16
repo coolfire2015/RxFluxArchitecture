@@ -1,18 +1,16 @@
 package com.huyingbao.module.wan.app
 
+
 import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
-
-
-import com.huyingbao.module.common.app.CommonAppModule
 import com.huyingbao.module.wan.BuildConfig
 import dagger.Module
 import dagger.Provides
-
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
@@ -20,7 +18,8 @@ import javax.inject.Singleton
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Module(includes = [CommonAppModule::class])
+@Module
+@InstallIn(ApplicationComponent::class)
 object WanAppModule {
     /**
      * Api根路径

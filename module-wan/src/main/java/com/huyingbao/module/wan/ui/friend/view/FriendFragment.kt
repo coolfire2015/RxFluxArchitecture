@@ -2,12 +2,14 @@ package com.huyingbao.module.wan.ui.friend.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.huyingbao.core.arch.model.Change
-import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
+import com.huyingbao.core.utils.setTitle
+import com.huyingbao.module.common.utils.RecyclerItemClickListener
+import com.huyingbao.module.common.utils.startWebActivity
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
@@ -40,6 +42,8 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
     companion object {
         fun newInstance() = FriendFragment()
     }
+
+    override val store: FriendStore? by viewModels()
 
     override fun getLayoutId() = R.layout.common_fragment_list
 
@@ -95,27 +99,27 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
         }
     }
 
-    /**
-     * 接收[RxRetry]，粘性
-     */
-    @Subscribe(tags = [FriendAction.GET_FRIEND_LIST], sticky = true)
-    fun onRxRetry(rxRetry: RxRetry<*>) {
-        activity?.let { showCommonRetry(it, rxRetry) }
-    }
-
-    /**
-     * 接收[Error]，粘性
-     */
-    @Subscribe(tags = [FriendAction.GET_FRIEND_LIST], sticky = true)
-    fun onError(error: Error) {
-        activity?.let { showCommonError(it, error) }
-    }
-
-    /**
-     * 滑动到顶部
-     */
-    @Subscribe(tags = [CommonAppAction.SCROLL_TO_TOP], sticky = true)
-    fun scrollToTop(change: Change) {
-        rvContent?.scrollToTop()
-    }
+//    /**
+//     * 接收[RxRetry]，粘性
+//     */
+//    @Subscribe(tags = [FriendAction.GET_FRIEND_LIST], sticky = true)
+//    fun onRxRetry(rxRetry: Retry<*>) {
+//        activity?.let { showCommonRetry(it, rxRetry) }
+//    }
+//
+//    /**
+//     * 接收[Error]，粘性
+//     */
+//    @Subscribe(tags = [FriendAction.GET_FRIEND_LIST], sticky = true)
+//    fun onError(error: Error) {
+//        activity?.let { showCommonError(it, error) }
+//    }
+//
+//    /**
+//     * 滑动到顶部
+//     */
+//    @Subscribe(tags = [CommonAppAction.SCROLL_TO_TOP], sticky = true)
+//    fun scrollToTop(change: Change) {
+//        rvContent?.scrollToTop()
+//    }
 }
