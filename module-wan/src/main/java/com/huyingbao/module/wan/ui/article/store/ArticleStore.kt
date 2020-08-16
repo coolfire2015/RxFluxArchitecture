@@ -45,12 +45,14 @@ class ArticleStore @Inject constructor(
             value = DEFAULT_PAGE
         }
     }
+
     /**
      * 横幅数据
      */
     val bannerLiveData by lazy {
         MutableLiveData<ArrayList<Banner>>()
     }
+
     /**
      * 文章数据
      */

@@ -18,22 +18,26 @@ abstract class BaseSubscriberTest {
      */
     @get:Rule
     var mockitoRule = MockitoJUnit.rule()
+
     /**
      * [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]
      * 自动注册订阅和取消订阅
      */
     @get:Rule
     var actionCreatorRule = BaseSubscriberRule()
+
     /**
      * RxJava调度器异步转为同步
      */
     @get:Rule
     var rxJavaRule = RxJavaRule()
+
     /**
      * 有无参构造函数
      */
     @Spy
     lateinit var rxDispatcher: RxDispatcher
+
     /**
      * 有无参构造函数
      */

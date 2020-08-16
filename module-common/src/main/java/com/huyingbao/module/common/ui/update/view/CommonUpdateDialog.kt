@@ -32,6 +32,7 @@ class CommonUpdateDialog : BaseCommonDialog(), SubscriberView {
 
     companion object {
         const val TAG = "CommonUpdateDialog"
+
         /**
          * @param apkUrl            下载的地址
          * @param archiveFilepath   已经下载在本机的存储路径
@@ -102,7 +103,7 @@ class CommonUpdateDialog : BaseCommonDialog(), SubscriberView {
                         commonUpdateActionCreator.downloadStart(
                                 tag = TAG,
                                 url = it,
-                                local = "${getExternalCacheDir(context!!, "app")}/asd.apk")
+                                local = "${getExternalCacheDir(requireContext(), "app")}/asd.apk")
                     }
                 }
             }

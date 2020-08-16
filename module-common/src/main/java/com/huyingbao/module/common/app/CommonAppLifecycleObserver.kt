@@ -7,8 +7,8 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.annotations.AppObserver
 import com.huyingbao.core.arch.lifecycle.AppLifecycleObserver
-import com.huyingbao.module.common.utils.AndroidUtils
 import com.huyingbao.module.common.BuildConfig
+import com.huyingbao.module.common.utils.AndroidUtils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy

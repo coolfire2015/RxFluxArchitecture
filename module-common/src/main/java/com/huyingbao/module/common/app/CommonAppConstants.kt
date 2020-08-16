@@ -15,6 +15,7 @@ class CommonAppConstants {
          * 每页数据条数
          */
         const val PAGE_SIZE = 20
+
         /**
          * 网络连接超时事件
          */
@@ -37,50 +38,62 @@ class CommonAppConstants {
          *
          */
         const val NIGHT_MODE = "nightMode"
+
         /**
          * 访问令牌
          */
         const val ACCESS_TOKEN = "accessToken"
+
         /**
          * 用户名
          */
         const val USER_NAME = "username"
+
         /**
          * 密码
          */
         const val PASSWORD = "password"
+
         /**
          * 标题
          */
         const val TITLE = "title"
+
         /**
          * 内容
          */
         const val CONTENT = "content"
+
         /**
          * Url地址
          */
         const val URL = "url"
+
         /**
          * 本地路径
          */
         const val FILE_PATH = "filepath"
+
         /**
          * 索引
          */
         const val INDEX = "index"
+
         /**
          * 类别
          */
         const val CATEGORY = "category"
+
         /**
          * 个数
          */
         const val COUNT = "count"
+
         /**
          * 页码
          */
         const val PAGE = "page"
+
         /**
          * true：因登录失效，跳转LoginActivity，需要跳转LoginFragment
          */

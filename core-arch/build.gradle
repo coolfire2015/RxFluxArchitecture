@@ -58,6 +58,7 @@ artifacts {
 
 dependencies {
     //Application代理注解
+    api project(':core-eventbus')
     api project(':core-arch-annotations')
     //X-Core
     api "androidx.core:core-ktx:${X_CORE}"
@@ -76,8 +77,7 @@ dependencies {
     //Kotlin-协程
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
-    //带有Tag的EventBus
-    api "com.github.coolfire2015.RxFluxEventBus:core-eventbus:${RX_FLUX_EVENTBUS}"
+
     //Hilt依赖注入
     api "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"

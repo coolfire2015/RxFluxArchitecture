@@ -17,10 +17,12 @@ enum class FragmentOp {
      * 直接返回，不添加新的Fragment
      */
     OP_NULL,
+
     /**
      * 隐藏旧的Fragment，添加新的Fragment，可回退
      */
     OP_HIDE,
+
     /**
      * 使用新的Fragment替换旧的Fragment
      */

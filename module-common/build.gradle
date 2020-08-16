@@ -102,6 +102,8 @@ android {
 }
 
 dependencies {
+    //进度
+    api project(':core-progress')
     //X-CardView
     api "androidx.cardview:cardview:${X_CARD_VIEW}"
     //X-RecyclerView

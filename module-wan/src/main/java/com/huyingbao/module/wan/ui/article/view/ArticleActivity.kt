@@ -7,13 +7,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.huyingbao.core.arch.model.Change
-import com.huyingbao.module.common.utils.FragmentOp
 import com.huyingbao.core.base.flux.activity.BaseFluxFragActivity
-import com.huyingbao.module.common.utils.setFragment
 import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
+import com.huyingbao.module.common.utils.FragmentOp
 import com.huyingbao.module.common.utils.addFloatingActionButton
 import com.huyingbao.module.common.utils.setAppBarScroll
+import com.huyingbao.module.common.utils.setFragment
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore

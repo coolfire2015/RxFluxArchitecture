@@ -29,14 +29,17 @@ enum class AppUpdateState {
      * App已经安装，并且是最新版本
      */
     LATEST,
+
     /**
      * App已经下载最新的安装包，需要安装
      */
     INSTALL,
+
     /**
      * App没有安装，需要下载
      */
     DOWNLOAD,
+
     /**
      * App已经安装，需要更新
      */

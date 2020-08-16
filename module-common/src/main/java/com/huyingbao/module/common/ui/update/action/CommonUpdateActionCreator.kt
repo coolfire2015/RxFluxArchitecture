@@ -5,8 +5,6 @@ import com.huyingbao.core.arch.action.ActionCreator
 import com.huyingbao.core.arch.action.ActionManager
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.progress.DownloadApi
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import java.io.*
 import javax.inject.Inject
 
@@ -27,11 +25,11 @@ class CommonUpdateActionCreator @Inject constructor(
 //            postError(rxAction, IllegalArgumentException("当前有下载任务，请等待..."))
 //            return false
 //        }
-        val httpObservable = downloadApi.download(tag, url)
-                .map<InputStream> { responseBody -> responseBody.byteStream() }
-                .observeOn(Schedulers.computation())
-                .doOnNext { inputStream -> saveFile(inputStream, File(local)) }
-                .flatMap { Observable.just(true) }
+//        val httpObservable = downloadApi.download(tag, url)
+//                .map<InputStream> { responseBody -> responseBody.byteStream() }
+//                .observeOn(Schedulers.computation())
+//                .doOnNext { inputStream -> saveFile(inputStream, File(local)) }
+//                .flatMap { Observable.just(true) }
 //        postHttpAction(rxAction, httpObservable)
         return true
     }

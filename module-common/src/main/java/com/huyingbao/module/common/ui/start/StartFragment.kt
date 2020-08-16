@@ -1,7 +1,6 @@
 package com.huyingbao.module.common.ui.start
 
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.module.common.R

@@ -33,7 +33,6 @@ class CommonUpdateDialogModule {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://www.debug.com/")
                 .client(client)
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
         return retrofit.create(DownloadApi::class.java)
     }

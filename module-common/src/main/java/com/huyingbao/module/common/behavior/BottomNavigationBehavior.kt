@@ -16,6 +16,7 @@ class BottomNavigationBehavior(
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
     private var outAnimator: ObjectAnimator? = null
     private var inAnimator: ObjectAnimator? = null
+
     /**
      * 垂直滑动
      */

@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = "com.github.coolfire2015"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    //EventBus注解
+    implementation project(':core-eventbus-annotations')
+    //Java工具
+    implementation "de.greenrobot:java-common:${JAVA_COMMON}"
+}

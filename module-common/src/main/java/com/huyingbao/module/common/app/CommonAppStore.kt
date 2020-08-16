@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.huyingbao.core.annotations.AppObserver
 import com.huyingbao.core.arch.FluxLifecycleCallback
-import com.huyingbao.core.arch.model.*
+import com.huyingbao.core.arch.model.Action
+import com.huyingbao.core.arch.model.Error
+import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.arch.store.AppStore
 import com.huyingbao.module.common.ui.update.action.AppAction
 import com.huyingbao.module.common.ui.update.model.AppBean
@@ -91,6 +93,7 @@ interface CommonAppAction {
          * 滑动到顶部
          */
         const val SCROLL_TO_TOP = "scrollToTop"
+
         /**
          * 需要获取下一页数据
          */

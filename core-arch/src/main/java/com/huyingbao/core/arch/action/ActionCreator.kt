@@ -58,7 +58,7 @@ abstract class ActionCreator(
      * [ActionManager]添加[Action]和[Job]
      */
     private fun addAction(action: Action,
-                            job: Job) {
+                          job: Job) {
         actionManager.add(action, job)
     }
 

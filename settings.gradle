@@ -1,3 +1,4 @@
+include ':core-eventbus-processor'
 include ':core-test'
 include ':core-eventbus'
 include ':core-eventbus-annotations'

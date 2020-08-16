@@ -3,13 +3,10 @@ package com.huyingbao.module.common.utils
 import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.snackbar.Snackbar
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.base.flux.activity.BaseFluxActivity
-import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.common.ui.loading.CommonLoadingDialog
 import com.huyingbao.module.common.ui.loading.CommonLoadingDialogClickListener
