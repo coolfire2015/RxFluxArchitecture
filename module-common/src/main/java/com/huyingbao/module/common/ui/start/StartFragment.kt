@@ -23,13 +23,8 @@ class StartFragment : BaseCommonFragment() {
     override fun getLayoutId() = R.layout.common_fragment_start
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        //TODO 延迟1500mm，跳转
-        Observable
-                .timer(1500, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
-                    ARouter.getInstance().build(appRouter).navigation()
-                    activity?.finish()
-                }
+        val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
+        ARouter.getInstance().build(appRouter).navigation()
+        activity?.finish()
     }
 }
