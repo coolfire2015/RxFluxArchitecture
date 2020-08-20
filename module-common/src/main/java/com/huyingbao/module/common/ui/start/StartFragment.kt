@@ -6,8 +6,6 @@ import com.huyingbao.core.base.common.fragment.BaseCommonFragment
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.common.utils.AndroidUtils
-import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 
 
 /**

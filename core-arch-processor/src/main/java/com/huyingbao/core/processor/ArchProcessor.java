@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
@@ -24,6 +25,7 @@ import javax.lang.model.element.TypeElement;
 /**
  * Created by liujunfeng on 2019/1/1.
  */
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ArchProcessor extends AbstractProcessor {
     /**
      * 编译文件所在包名

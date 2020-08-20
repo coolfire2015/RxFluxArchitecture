@@ -1,7 +1,6 @@
 package com.huyingbao.module.common.ui.update.action
 
 import com.huyingbao.module.common.ui.update.model.AppBean
-import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -45,8 +44,8 @@ interface FirApi {
      * 获取App最新版本信息
      */
     @GET("apps/latest/{id}")
-    fun getAppLatest(
+    suspend fun getAppLatest(
             @Path("id") id: String,
             @Query("api_token") token: String
-    ): Observable<Response<AppBean>>
+    ): Response<AppBean>
 }
