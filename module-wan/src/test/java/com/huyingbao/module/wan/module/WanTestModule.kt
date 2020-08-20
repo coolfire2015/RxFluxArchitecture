@@ -77,7 +77,6 @@ class WanTestModule {
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(if (BuildConfig.MOCK_URL) initMockServer() else WanAppModule.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(builder.build())
         return retrofitBuilder.build()
     }

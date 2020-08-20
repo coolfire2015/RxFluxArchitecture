@@ -17,6 +17,11 @@ android {
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
     }
+    //构建功能
+    buildFeatures {
+        //支持 DataBinding
+        dataBinding = true
+    }
     //Dex分包
     dexOptions {
         jumboMode = true
@@ -70,6 +75,9 @@ dependencies {
     kapt project(':core-arch-processor')
     kapt project(':core-eventbus-processor')
 
+    //解决Mockito any()等返回null的问题
+    testImplementation project(':core-test')
+
     //编译时生成
     kapt "androidx.room:room-compiler:${X_ROOM}"
     //Hilt依赖注入
@@ -78,5 +86,37 @@ dependencies {
     //Hilt-ViewModel依赖注入
     api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
     kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
+    //Arouter
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+
+    //测试Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test.espresso:espresso-intents:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.room:room-testing:${X_ROOM}"
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
+
+    //testImplementation project(':core-test')
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock:${TEST_DEAAGE_MOCK}"
+    testImplementation "com.github.fabioCollini.daggermock:daggermock-kotlin:${TEST_DEAAGE_MOCK}"
+    //测试Api
+    testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
+    testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+
+    //单元测试编译时生成
+    kaptTest project(':core-arch-processor')
+    kaptTest project(':core-eventbus-processor')
+    kaptTest "androidx.room:room-compiler:${X_ROOM}"
+    kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+//    kaptTest "org.permissionsdispatcher:permissionsdispatcher-processor:${PERMISSIONS_DISPATCHER}"
 }

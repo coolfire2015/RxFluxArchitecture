@@ -77,7 +77,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
                 return
             }
             Log.i(TAG, "Subscribe FluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.subscriberView(activity as SubscriberView)
+            dispatcher.subscribeView(activity as SubscriberView)
         }
     }
 
@@ -91,7 +91,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
                 return
             }
             Log.i(TAG, "Subscribe FluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.subscriberView(fragment as SubscriberView)
+            dispatcher.subscribeView(fragment as SubscriberView)
         }
     }
 
@@ -101,7 +101,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     override fun onActivityPaused(activity: Activity) {
         if (activity is SubscriberView) {
             Log.i(TAG, "Unsubscribe FluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.unsubscriberView(activity as SubscriberView)
+            dispatcher.unsubscribeView(activity as SubscriberView)
         }
     }
 
@@ -112,7 +112,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
         super.onFragmentPaused(fragmentManager, fragment)
         if (fragment is SubscriberView) {
             Log.i(TAG, "Unsubscribe FluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.unsubscriberView(fragment as SubscriberView)
+            dispatcher.unsubscribeView(fragment as SubscriberView)
         }
     }
 

@@ -26,9 +26,9 @@ class Dispatcher {
     }
 
     /**
-     * [com.huyingbao.core.arch.view.SubscriberView]注册订阅。
+     * [SubscriberView]注册订阅。
      */
-    fun <T : SubscriberView> subscriberView(subscriberView: T) {
+    fun <T : SubscriberView> subscribeView(subscriberView: T) {
         EventBus.getDefault().register(subscriberView)
     }
 
@@ -40,9 +40,9 @@ class Dispatcher {
     }
 
     /**
-     * [com.huyingbao.core.arch.view.SubscriberView]取消订阅。
+     * [SubscriberView]取消订阅。
      */
-    fun <T : SubscriberView> unsubscriberView(subscriberView: T) {
+    fun <T : SubscriberView> unsubscribeView(subscriberView: T) {
         EventBus.getDefault().unregister(subscriberView)
     }
 
@@ -70,14 +70,14 @@ class Dispatcher {
     }
 
     /**
-     * 发送[Change]到所有订阅的[com.huyingbao.core.arch.view.FluxView]，粘性通知。
+     * 发送[Change]到所有订阅的[SubscriberView]，粘性通知。
      */
     fun postChange(change: Change) {
         EventBus.getDefault().postSticky(change, change.tag)
     }
 
     /**
-     * 发送[Error]到所有订阅的[com.huyingbao.core.arch.view.FluxView]，粘性通知。
+     * 发送[Error]到所有订阅的[Store],[SubscriberView]，粘性通知。
      *
      * 发送：操作完成，异常执行状态。
      */
@@ -86,7 +86,7 @@ class Dispatcher {
     }
 
     /**
-     * 发送[Loading]到所有订阅的[com.huyingbao.core.arch.view.FluxView]，粘性通知。
+     * 发送[Loading]到所有订阅的[Store],[SubscriberView]，粘性通知。
      *
      * 发送：操作进度。
      */

@@ -37,9 +37,10 @@ android {
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
     }
-    //数据绑定
-    dataBinding {
-        enabled = true
+    //构建功能
+    buildFeatures {
+        //支持 DataBinding
+        dataBinding = true
     }
     //Dex分包
     dexOptions {
@@ -81,5 +82,5 @@ dependencies {
     //Android
     api "androidx.test:core:${TEST_X_CORE}"
     api "androidx.test:rules:${TEST_X_RULES}"
-    api "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    debugImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
 }
