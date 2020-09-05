@@ -1,9 +1,9 @@
 package com.huyingbao.module.wan.ui.article.action
 
-import com.huyingbao.module.wan.ui.article.model.Article
-import com.huyingbao.module.wan.ui.article.model.Banner
-import com.huyingbao.module.wan.ui.article.model.Page
-import com.huyingbao.module.wan.ui.article.model.WanResponse
+import com.huyingbao.module.wan.model.Article
+import com.huyingbao.module.wan.model.Banner
+import com.huyingbao.module.wan.model.Page
+import com.huyingbao.module.wan.model.WanResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import java.util.*

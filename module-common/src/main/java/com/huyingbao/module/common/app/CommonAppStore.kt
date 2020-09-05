@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import com.huyingbao.core.annotations.AppObserver
 import com.huyingbao.core.arch.FluxLifecycleCallback
+import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
@@ -32,8 +33,9 @@ import javax.inject.Singleton
 @AppObserver
 class CommonAppStore @Inject constructor(
         @ApplicationContext private val context: Context,
-        private val fluxLifecycleCallback: FluxLifecycleCallback
-) : AppStore() {
+        private val fluxLifecycleCallback: FluxLifecycleCallback,
+        private val dispatcher: Dispatcher
+) : AppStore(dispatcher) {
     /**
      * 接收[Error]，粘性
      */

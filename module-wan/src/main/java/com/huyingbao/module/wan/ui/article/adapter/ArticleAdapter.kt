@@ -8,7 +8,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.module.wan.R
-import com.huyingbao.module.wan.ui.article.model.Article
+import com.huyingbao.module.wan.model.Article
 import org.jetbrains.anko.find
 
 /**

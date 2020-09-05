@@ -10,7 +10,7 @@ import com.huyingbao.module.first.ui.first.action.FirstAction
 import org.greenrobot.eventbus.Subscribe
 
 class FirstStore @ViewModelInject constructor(
-        override var dispatcher: Dispatcher
+        private val dispatcher: Dispatcher
 ) : ActivityStore(dispatcher) {
     val hotKeyLiveData = MutableLiveData<JsonObject>()
 

@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.test.view.TestActivity" />
         <activity android:name=".ui.first.view.FirstActivity" />
     </application>
 

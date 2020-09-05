@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.friend.model
+package com.huyingbao.module.wan.model
 
 /**
  * Created by liujunfeng on 2019/1/1.

@@ -3,7 +3,7 @@ package com.huyingbao.module.wan.ui.friend.adapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.huyingbao.module.wan.R
-import com.huyingbao.module.wan.ui.friend.model.WebSite
+import com.huyingbao.module.wan.model.WebSite
 
 /**
  * Created by liujunfeng on 2019/1/1.

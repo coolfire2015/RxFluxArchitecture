@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel
 import com.huyingbao.core.arch.FluxLifecycleCallback
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Change
-import javax.inject.Inject
 
 
 /**
@@ -20,10 +19,9 @@ import javax.inject.Inject
  *
  * Created by liujunfeng on 2020/8/1.
  */
-abstract class StoreImpl() : ViewModel(), LifecycleObserver, Store {
-    @Inject
-    open lateinit var dispatcher: Dispatcher
-
+abstract class StoreImpl(
+        private val dispatcher: Dispatcher
+) : ViewModel(), LifecycleObserver, Store {
     /**
      * 在所关联对象（Fragment）[Lifecycle.Event.ON_CREATE]时，注册到[Dispatcher]
      */

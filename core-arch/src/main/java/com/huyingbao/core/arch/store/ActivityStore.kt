@@ -13,5 +13,5 @@ import com.huyingbao.core.arch.dispatcher.Dispatcher
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class ActivityStore(
-        override var dispatcher: Dispatcher
-) : StoreImpl() {}
+        private val dispatcher: Dispatcher
+) : StoreImpl(dispatcher) {}

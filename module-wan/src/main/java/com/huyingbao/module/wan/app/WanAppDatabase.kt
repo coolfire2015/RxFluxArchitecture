@@ -2,8 +2,8 @@ package com.huyingbao.module.wan.app
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.huyingbao.module.wan.ui.article.model.Article
-import com.huyingbao.module.wan.ui.article.model.ArticleDao
+import com.huyingbao.module.wan.model.Article
+import com.huyingbao.module.wan.model.ArticleDao
 
 /**
  *GithubAppDatabase是一个继承[RoomDatabase]的抽象类。

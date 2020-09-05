@@ -1,5 +1,6 @@
 package com.huyingbao.module.wan.ui.article.store
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Config
 import androidx.paging.PagedList
@@ -12,23 +13,20 @@ import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.wan.app.WanAppDatabase
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
-import com.huyingbao.module.wan.ui.article.model.Article
-import com.huyingbao.module.wan.ui.article.model.Banner
-import com.huyingbao.module.wan.ui.article.model.Page
-import com.huyingbao.module.wan.ui.article.model.WanResponse
+import com.huyingbao.module.wan.model.Article
+import com.huyingbao.module.wan.model.Banner
+import com.huyingbao.module.wan.model.Page
+import com.huyingbao.module.wan.model.WanResponse
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
-class ArticleStore @Inject constructor(
-        dispatcher: Dispatcher,
-        private var wanAppDatabase: WanAppDatabase
+class ArticleStore @ViewModelInject constructor(
+        private val wanAppDatabase: WanAppDatabase,
+        private val dispatcher: Dispatcher
 ) : ActivityStore(dispatcher) {
     /**
      * 默认起始页码

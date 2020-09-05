@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.store.FragmentStore
-import com.huyingbao.module.wan.ui.article.model.WanResponse
+import com.huyingbao.module.wan.model.WanResponse
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
-import com.huyingbao.module.wan.ui.friend.model.WebSite
+import com.huyingbao.module.wan.model.WebSite
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject

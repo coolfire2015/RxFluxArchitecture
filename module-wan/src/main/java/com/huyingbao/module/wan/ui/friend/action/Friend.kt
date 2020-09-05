@@ -1,7 +1,7 @@
 package com.huyingbao.module.wan.ui.friend.action
 
-import com.huyingbao.module.wan.ui.article.model.WanResponse
-import com.huyingbao.module.wan.ui.friend.model.WebSite
+import com.huyingbao.module.wan.model.WanResponse
+import com.huyingbao.module.wan.model.WebSite
 import retrofit2.http.GET
 import java.util.*
 

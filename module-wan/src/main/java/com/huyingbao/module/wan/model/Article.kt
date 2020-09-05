@@ -1,4 +1,4 @@
-package com.huyingbao.module.wan.ui.article.model
+package com.huyingbao.module.wan.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
