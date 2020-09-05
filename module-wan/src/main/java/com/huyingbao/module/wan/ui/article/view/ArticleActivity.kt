@@ -19,6 +19,7 @@ import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 
@@ -26,6 +27,7 @@ import org.jetbrains.anko.find
  * Created by liujunfeng on 2019/1/1.
  */
 @Route(path = CommonAppConstants.Router.ArticleActivity)
+@AndroidEntryPoint
 class ArticleActivity : BaseFluxFragActivity<ArticleStore>() {
     override val store: ArticleStore? by viewModels()
 

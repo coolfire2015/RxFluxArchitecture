@@ -5,6 +5,7 @@ import com.huyingbao.core.arch.action.ActionManager
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.wan.BuildConfig
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -17,7 +18,7 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
+@ActivityRetainedScoped
 class ArticleActionCreator @Inject constructor(
         dispatcher: Dispatcher,
         actionManager: ActionManager,

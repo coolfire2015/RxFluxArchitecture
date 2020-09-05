@@ -26,6 +26,7 @@ import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.adapter.ArticleAdapter
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 import javax.inject.Inject
@@ -33,6 +34,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
+@AndroidEntryPoint
 class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
