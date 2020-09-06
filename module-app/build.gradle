@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: rootProject.file('depend_kotlin.gradle')
+apply from: rootProject.file('depends.gradle')
 
 android {
     //签名配置,自定义,用在defaultConfig中

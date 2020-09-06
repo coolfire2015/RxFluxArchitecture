@@ -46,6 +46,10 @@ android {
             includeAndroidResources = true
         }
     }
+    //在本地单元测试中启用 @AndroidEntryPoint 类的转换
+    hilt {
+        enableTransformForLocalTests = true
+    }
 }
 
 //将源代码打包进aar

@@ -51,20 +51,8 @@ interface WanTestComponent {
  *
  * 2.提供测试代码需要的全局对象
  */
-@Module(includes = [WanAppModule::class])
+@Module
 class WanTestModule {
-    /**
-     * 返回实际创建的[ArticleStore]实例对象，但是DaggerMock会返回虚拟的Mock对象，参见[wanMockDaggerRule]方法。
-     * 如果[WanTestComponent]不定义该对象，该方法不会被调用。
-     *
-     * @param storeFactory 来自[CommonAppModule]，[ArticleStore]对象来自[WanAppModule]
-     */
-    @Singleton
-    @Provides
-    fun provideArticleStore(storeFactory: ViewModelProvider.Factory): ArticleStore {
-        return storeFactory.create(ArticleStore::class.java)
-    }
-
     /**
      * 初始化Retrofit，覆盖[WanAppModule.provideRetrofit]方法
      *
