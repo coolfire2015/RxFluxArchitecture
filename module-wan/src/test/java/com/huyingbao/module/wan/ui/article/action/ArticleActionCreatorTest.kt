@@ -1,15 +1,21 @@
 package com.huyingbao.module.wan.ui.article.action
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.huyingbao.core.test.subscriber.BaseSubscriberTest
 import com.huyingbao.module.wan.module.WanMockUtils
 import com.huyingbao.module.wan.module.wanMockDaggerRule
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.robolectric.annotation.Config
 
 /**
  * 实际调用接口方法，Mock[com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.SubscriberView]，
@@ -17,12 +23,15 @@ import org.mockito.Mockito
  *
  * Created by liujunfeng on 2019/3/28.
  */
+@RunWith(AndroidJUnit4::class)
+@Config(application = HiltTestApplication::class, sdk = [28])
+@HiltAndroidTest
 class ArticleActionCreatorTest : BaseSubscriberTest() {
     /**
      * 初始化DaggerMock
      */
     @get:Rule
-    var mockDaggerRule = wanMockDaggerRule()
+    var hiltRule = HiltAndroidRule(this)
 
     private var articleStore: ArticleStore = Mockito.mock(ArticleStore::class.java)
 

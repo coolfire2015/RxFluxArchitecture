@@ -17,7 +17,6 @@ import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.utils.RequestMatchers
-import it.cosenonjaviste.daggermock.DaggerMock
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
@@ -93,24 +92,6 @@ class WanTestModule {
                 //允许Room破坏性地重新创建数据库表。
                 .fallbackToDestructiveMigration()
         return databaseBuilder.build()
-    }
-}
-
-/**
- * 动态创建 Module 子类的 JUnit 规则，初始化一个测试类里面的所有用@Mock field为mock对象。
- *
- * 完成的操作：要使用哪个Module、要build哪个Component、要把build好的Component放到哪
- *
- * 1.动态创建了一个[WanTestModule]的子类，返回在测试中定义并使用[org.mockito.Mock]和[org.mockito.Spy]标注的虚拟对象 ，而不是真实的对象。
- *
- * 2.Mock [WanTestModule]，通过反射的方式得到[WanTestModule]的所有[dagger.Provides]方法，如果有某个方法的返回值是[org.mockito.Mock]和[org.mockito.Spy]标注的虚拟对象，
- * 那么就使用Mockito，让这个[dagger.Provides]方法被调用时，返回虚拟对象。
- *
- * 3.使用[WanTestModule]来构建一个[WanTestComponent]，并且放到[WanMockUtils]里面去。
- */
-fun wanMockDaggerRule() = DaggerMock.rule<WanTestComponent>(WanTestModule()) {
-    set {
-        WanMockUtils.wanTestComponent = it
     }
 }
 
