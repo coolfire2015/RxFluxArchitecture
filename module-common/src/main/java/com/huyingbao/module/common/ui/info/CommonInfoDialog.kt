@@ -10,7 +10,7 @@ import com.huyingbao.core.base.common.dialog.BaseCommonDialog
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
 import kotlinx.android.synthetic.main.common_dialog_info.*
-import org.jetbrains.anko.toast
+import splitties.toast.toast
 
 /**
  * 内容提交编辑框

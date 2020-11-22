@@ -1,7 +1,6 @@
 package com.huyingbao.module.wan.module
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
@@ -9,40 +8,19 @@ import com.huyingbao.module.common.app.CommonAppModule
 import com.huyingbao.module.wan.BuildConfig
 import com.huyingbao.module.wan.app.WanAppDatabase
 import com.huyingbao.module.wan.app.WanAppModule
-import com.huyingbao.module.wan.ui.article.store.ArticleStore
-import dagger.Component
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.utils.RequestMatchers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
-
-/**
- * 全局静态方法,提供依赖注入器实例对象。
- *
- * Created by liujunfeng on 2019/7/1.
- */
-object WanMockUtils {
-    var wanTestComponent: WanTestComponent? = null
-}
-
-/**
- * 依赖注入器,为测试代码提供方便测试的全局对象。
- */
-@Singleton
-@Component(modules = [WanTestModule::class])
-interface WanTestComponent {
-    /**
-     * 提供实际创建的工具对象
-     */
-    val retrofit: Retrofit
-}
 
 /**
  * 依赖注入仓库
@@ -52,6 +30,7 @@ interface WanTestComponent {
  * 2.提供测试代码需要的全局对象
  */
 @Module
+@InstallIn(ApplicationComponent::class)
 class WanTestModule {
     /**
      * 初始化Retrofit，覆盖[WanAppModule.provideRetrofit]方法
@@ -60,6 +39,7 @@ class WanTestModule {
      */
     @Singleton
     @Provides
+    @Named(BuildConfig.MODULE_NAME)
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         val retrofitBuilder = Retrofit.Builder()
                 .baseUrl(if (BuildConfig.MOCK_URL) initMockServer() else WanAppModule.BASE_API)

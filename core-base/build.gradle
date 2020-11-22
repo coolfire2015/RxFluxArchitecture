@@ -97,6 +97,6 @@ dependencies {
     api "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"
     //Hilt-ViewModel依赖注入
-    api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
-    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
+    api "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
+    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
 }

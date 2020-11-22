@@ -13,7 +13,7 @@
 //import kotlinx.android.synthetic.main.common_dialog_update.*
 //import org.greenrobot.eventbus.Subscribe
 //import org.greenrobot.eventbus.ThreadMode
-//import org.jetbrains.anko.toast
+//import splitties.toast.toast
 //import javax.inject.Inject
 //
 ///**

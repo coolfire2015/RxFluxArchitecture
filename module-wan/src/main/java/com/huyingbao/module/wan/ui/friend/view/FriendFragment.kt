@@ -16,23 +16,25 @@ import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
 import com.huyingbao.module.wan.ui.friend.store.FriendStore
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.find
+
 import java.util.*
 import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
+@AndroidEntryPoint
 class FriendFragment : BaseFluxFragment<FriendStore>() {
     @Inject
     lateinit var friendActionCreator: FriendActionCreator
 
     private val rvContent by lazy {
-        view?.find<RecyclerView>(R.id.rv_content)
+        view?.findViewById<RecyclerView>(R.id.rv_content)
     }
     private val refreshLayout by lazy {
-        view?.find<SmartRefreshLayout>(R.id.rfl_content)
+        view?.findViewById<SmartRefreshLayout>(R.id.rfl_content)
     }
 
     private val webSiteAdapter by lazy {

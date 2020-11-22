@@ -12,13 +12,12 @@ import com.huyingbao.core.arch.store.ActivityStore
 import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.wan.app.WanAppDatabase
-import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.model.Article
 import com.huyingbao.module.wan.model.Banner
 import com.huyingbao.module.wan.model.Page
 import com.huyingbao.module.wan.model.WanResponse
+import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.doAsync
 import java.util.*
 
 /**
@@ -26,7 +25,7 @@ import java.util.*
  */
 class ArticleStore @ViewModelInject constructor(
         private val wanAppDatabase: WanAppDatabase,
-        private val dispatcher: Dispatcher
+        dispatcher: Dispatcher
 ) : ActivityStore(dispatcher) {
     /**
      * 默认起始页码
@@ -94,22 +93,18 @@ class ArticleStore @ViewModelInject constructor(
     /**
      * 接收ArticleList数据，需要在新线程中，更新room数据库数据
      *
-     * 使用[doAsync]方法，数据库操作在IO线程运行，
      * 不对外调用[ActivityStore.postChange]方法。
      */
     @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST])
     fun onGetArticleList(rxAction: Action) {
         val page = rxAction.get<Int>(CommonAppConstants.Key.PAGE) ?: DEFAULT_PAGE
-        //异步线程运行
-        doAsync {
-            //如果是刷新，先清除数据库缓存
-            if (page == DEFAULT_PAGE) {
-                wanAppDatabase.reposDao().deleteAll()
-            }
-            //如果有数据，添加到数据库缓存中
-            rxAction.getResponse<WanResponse<Page<Article>>>()?.data?.datas?.let {
-                wanAppDatabase.reposDao().insertAll(it)
-            }
+        //如果是刷新，先清除数据库缓存
+        if (page == DEFAULT_PAGE) {
+            wanAppDatabase.reposDao().deleteAll()
+        }
+        //如果有数据，添加到数据库缓存中
+        rxAction.getResponse<WanResponse<Page<Article>>>()?.data?.datas?.let {
+            wanAppDatabase.reposDao().insertAll(it)
         }
         //主线程，更新分页索引
         pageLiveData.value = page + 1

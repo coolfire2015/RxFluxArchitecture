@@ -1,5 +1,6 @@
 package com.huyingbao.module.wan.ui.article.adapter
 
+import android.annotation.SuppressLint
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.model.Article
-import org.jetbrains.anko.find
 
 /**
  * 一个简单的PagedListAdapter，它将Article item 绑定到CardView。
@@ -61,13 +61,14 @@ class ArticleViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     /**
      * 如果尚未分页项，则它们可能为空。PagedListAdapter将在加载项时重新绑定ViewHolder。
      */
+    @SuppressLint("SetTextI18n")
     fun bindTo(article: Article?) {
         article?.let {
             itemView.run {
-                find<TextView>(R.id.tv_item_author).text = it.author
-                find<TextView>(R.id.tv_item_title).text = Html.fromHtml(it.title)
-                find<TextView>(R.id.tv_item_time).text = it.niceDate
-                find<TextView>(R.id.tv_item_chapter).text = "${it.chapterName} / ${it.superChapterName}"
+                findViewById<TextView>(R.id.tv_item_author).text = it.author
+                findViewById<TextView>(R.id.tv_item_title).text = Html.fromHtml(it.title)
+                findViewById<TextView>(R.id.tv_item_time).text = it.niceDate
+                findViewById<TextView>(R.id.tv_item_chapter).text = "${it.chapterName} / ${it.superChapterName}"
             }
         }
     }

@@ -18,7 +18,7 @@ import com.huyingbao.module.common.utils.showCommonError
 import com.huyingbao.module.common.utils.showCommonLoading
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.toast
+import splitties.toast.toast
 import javax.inject.Inject
 import javax.inject.Singleton
 

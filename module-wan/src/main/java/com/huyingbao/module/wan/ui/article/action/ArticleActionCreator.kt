@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Singleton
 
 
 /**

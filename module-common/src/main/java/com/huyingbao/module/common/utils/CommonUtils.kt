@@ -11,8 +11,8 @@ import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.common.ui.loading.CommonLoadingDialog
 import com.huyingbao.module.common.ui.loading.CommonLoadingDialogClickListener
 import com.huyingbao.module.common.ui.web.WebActivity
-import org.jetbrains.anko.toast
 import retrofit2.HttpException
+import splitties.toast.toast
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

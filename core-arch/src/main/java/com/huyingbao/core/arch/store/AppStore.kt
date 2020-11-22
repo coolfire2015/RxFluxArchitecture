@@ -9,5 +9,5 @@ import com.huyingbao.core.arch.dispatcher.Dispatcher
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class AppStore(
-        private val dispatcher: Dispatcher
+        dispatcher: Dispatcher
 ) : StoreImpl(dispatcher) {}

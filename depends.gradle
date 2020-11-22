@@ -21,6 +21,8 @@ android {
     buildFeatures {
         //支持 DataBinding
         dataBinding = true
+        //支持 ViewBinding
+        viewBinding = true
     }
     //Dex分包
     dexOptions {
@@ -83,34 +85,40 @@ dependencies {
     testImplementation project(':core-test')
     kaptTest project(':core-arch-processor')
     kaptTest project(':core-eventbus-processor')
-    //X-Core
-    implementation "androidx.core:core-ktx:${X_CORE}"
-    //X_APPCOMPAT
-    implementation "androidx.appcompat:appcompat:${X_APPCOMPAT}"
-    //X-Fragment
-    implementation "androidx.fragment:fragment:${X_FRAGMENT}"
-    implementation "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
-    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
-    //X-Lifecycle
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
-    implementation "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
+
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"
     //Kotlin-协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
-    //X-Navigation
+    //Kotlin-协程_TEST
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${KOTLIN_COROUTINES}"
+    //Kotlin-工具类
+    implementation "com.louiscad.splitties:splitties-toast:${SPLITTIES}"
+
+    //X_Core
+    implementation "androidx.core:core-ktx:${X_CORE}"
+    //X_APPCOMPAT
+    implementation "androidx.appcompat:appcompat:${X_APPCOMPAT}"
+    //X_Fragment
+    implementation "androidx.fragment:fragment:${X_FRAGMENT}"
+    implementation "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
+    testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
+    //X_Lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
+    //X_Navigation
     implementation "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     implementation "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X-MultiDex
+    //X_MultiDex
     implementation "androidx.multidex:multidex:${X_MULTIDEX}"
-    //X-Material
+    //X_Material
     implementation "com.google.android.material:material:${X_MATERIAL}"
-    //X-CardView
+    //X_CardView
     implementation "androidx.cardview:cardview:${X_CARD_VIEW}"
-    //X-RecyclerView
+    //X_RecyclerView
     implementation "androidx.recyclerview:recyclerview:${X_RECYCLE_RVIEW}"
     //X_ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:${X_CONSTRAINT}"
@@ -118,47 +126,65 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:${X_VIEWPAGER}"
     //X_Paging
     implementation "androidx.paging:paging-runtime-ktx:${X_PAGING}"
-    //X-WorkManager
+    //X_WorkManager
     implementation "androidx.work:work-runtime-ktx:${X_WORK}"
-    //X-Room
+    //X_Room
     implementation "androidx.room:room-ktx:${X_ROOM}"
     implementation "androidx.room:room-runtime:${X_ROOM}"
     kapt "androidx.room:room-compiler:${X_ROOM}"
+    //X_Room_TEST
     testImplementation "androidx.room:room-testing:${X_ROOM}"
     kaptTest "androidx.room:room-compiler:${X_ROOM}"
-    //Hilt依赖注入
+    //X_Hilt
+    implementation "androidx.hilt:hilt-work:${X_HILT}"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
+    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
+    //X_Hilt_TEST
+    kaptTest "androidx.hilt:hilt-compiler:${X_HILT}"
+    //Hilt
     implementation "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"
+    //Hilt_TEST
     testImplementation "com.google.dagger:hilt-android-testing:${HILT}"
     kaptTest "com.google.dagger:hilt-android-compiler:${HILT}"
-    //Hilt-ViewModel依赖注入
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
-    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
-    //Hilt-WorkManager依赖注入
-    implementation "androidx.hilt:hilt-work:${HILT_VIEWMODEL}"
-    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
+
 
     //Arouter
     implementation "com.alibaba:arouter-api:${AROUTER_API}"
     kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    //Arouter_TEST
     kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
     implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP}"
+    //OkHttp-TEST
     testImplementation "com.squareup.okhttp3:mockwebserver:${OKHTTP}"
     testImplementation "com.squareup.okhttp3:okhttp-tls:${OKHTTP}"
-    //测试Api
     testImplementation "com.github.andrzejchm.RESTMock:android:${TEST_REST_MOCK}"
+
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${RETROFIT}"
     implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+
+    //单元测试-Android
+    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
+    testImplementation "androidx.test:core:${TEST_X_CORE}"
+    testImplementation "androidx.test:rules:${TEST_X_RULES}"
+    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
+    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
+    testImplementation "androidx.test.espresso:espresso-intents:${TEST_X_ESPRESSO}"
+
+    //单元测试
+    testImplementation "junit:junit:${TEST_JUNIT}"
+    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
+    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
+    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
+    testImplementation "org.powermock:powermock-core:${TEST_POWER_MOCK}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
+
     //Json解析
     implementation "com.google.code.gson:gson:${GSON}"
-    //Kotlin Android 工具类Anko Commons
-    implementation "org.jetbrains.anko:anko-commons:$ANKO"
-
-
-    
     //Json动画Lottie
     implementation "com.airbnb.android:lottie:${LOTTIE}"
     //上下拉刷新SmartRefreshLayout
@@ -177,19 +203,4 @@ dependencies {
     implementation "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
     //内存泄露分析 LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
-
-    //单元测试-Android
-    testImplementation "androidx.test:runner:${TEST_X_RUNNER}"
-    testImplementation "androidx.test:core:${TEST_X_CORE}"
-    testImplementation "androidx.test:rules:${TEST_X_RULES}"
-    testImplementation "androidx.test.ext:junit:${TEST_X_JUNIT}"
-    testImplementation "androidx.test.espresso:espresso-core:${TEST_X_ESPRESSO}"
-    testImplementation "androidx.test.espresso:espresso-intents:${TEST_X_ESPRESSO}"
-
-    //单元测试
-    testImplementation "junit:junit:${TEST_JUNIT}"
-    testImplementation "org.robolectric:robolectric:${TEST_ROBOLECTRIC}"
-    testImplementation "org.mockito:mockito-core:${TEST_MOCKITO}"
-    testImplementation "org.mockito:mockito-inline:${TEST_MOCKITO}"//解决Mockito无法mock final class的问题
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${TEST_MOCKITO_KOTLIN}"
 }

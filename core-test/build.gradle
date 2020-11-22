@@ -82,5 +82,6 @@ dependencies {
     //Android
     api "androidx.test:core:${TEST_X_CORE}"
     api "androidx.test:rules:${TEST_X_RULES}"
+    api "com.google.dagger:hilt-android-testing:${HILT}"
     debugImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
 }

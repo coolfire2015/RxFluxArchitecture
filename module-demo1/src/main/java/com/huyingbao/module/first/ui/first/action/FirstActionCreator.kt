@@ -5,7 +5,6 @@ import com.huyingbao.core.arch.action.ActionManager
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.module.first.BuildConfig
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import javax.inject.Inject

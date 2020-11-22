@@ -65,7 +65,6 @@ dependencies {
     //X_APPCOMPAT
     api "androidx.appcompat:appcompat:${X_APPCOMPAT}"
     //X-Fragment
-    api "androidx.fragment:fragment:${X_FRAGMENT}"
     api "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
     //X-Lifecycle
     api "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
@@ -82,6 +81,6 @@ dependencies {
     api "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"
     //Hilt-ViewModel依赖注入
-    api "androidx.hilt:hilt-lifecycle-viewmodel:${HILT_VIEWMODEL}"
-    kapt "androidx.hilt:hilt-compiler:${HILT_VIEWMODEL}"
+    api "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
+    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
 }

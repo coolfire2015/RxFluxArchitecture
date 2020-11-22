@@ -21,7 +21,6 @@ import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.huyingbao.module.wan.ui.friend.view.FriendFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.find
 
 /**
  * Created by liujunfeng on 2019/1/1.
@@ -37,9 +36,9 @@ class ArticleActivity : BaseFluxFragActivity<ArticleStore>() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         //设置联动
-        find<Toolbar>(R.id.tlb_top).setAppBarScroll()
+        findViewById<Toolbar>(R.id.tlb_top).setAppBarScroll()
         //添加FloatingActionButton
-        find<CoordinatorLayout>(R.id.cdl_content)
+        findViewById<CoordinatorLayout>(R.id.cdl_content)
                 .addFloatingActionButton(this, View.OnClickListener {
                     baseActionCreator.postLocalChange(CommonAppAction.SCROLL_TO_TOP)
                 })

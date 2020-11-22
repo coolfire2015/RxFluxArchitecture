@@ -12,9 +12,7 @@ import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
 import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
-import org.jetbrains.anko.browse
-import org.jetbrains.anko.share
-import org.jetbrains.anko.toast
+import splitties.toast.toast
 
 /**
  * 显示网页，Menu中有分享和使用浏览器打开
@@ -96,7 +94,6 @@ class WebActivity : BaseCommonFragActivity() {
      * 浏览器打开
      */
     private fun actionBrowser(): Boolean {
-        url?.let { browse(it) }
         return true
     }
 
@@ -104,7 +101,6 @@ class WebActivity : BaseCommonFragActivity() {
      * 分享
      */
     private fun actionShare(): Boolean {
-        url?.let { share(it) }
         return true
     }
 }

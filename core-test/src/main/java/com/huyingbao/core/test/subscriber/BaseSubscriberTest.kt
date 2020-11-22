@@ -2,6 +2,7 @@ package com.huyingbao.core.test.subscriber
 
 import com.huyingbao.core.arch.action.ActionManager
 import com.huyingbao.core.arch.dispatcher.Dispatcher
+import dagger.hilt.android.testing.HiltAndroidRule
 import org.junit.Rule
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
@@ -36,6 +37,11 @@ abstract class BaseSubscriberTest {
      */
     @Spy
     lateinit var actionManager: ActionManager
+
+    /**
+     * 初始化[HiltAndroidRule]
+     */
+    abstract var hiltRule: HiltAndroidRule
 
     /**
      * 获取所有需要管理订阅的 [com.huyingbao.core.arch.store.RxStore]和[com.huyingbao.core.arch.view.RxSubscriberView]

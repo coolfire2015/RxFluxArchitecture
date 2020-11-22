@@ -28,7 +28,6 @@ import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.find
 import javax.inject.Inject
 
 /**
@@ -40,10 +39,10 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     lateinit var articleActionCreator: ArticleActionCreator
 
     private val rvContent by lazy {
-        view?.find<RecyclerView>(R.id.rv_content)
+        view?.findViewById<RecyclerView>(R.id.rv_content)
     }
     private val refreshLayout by lazy {
-        view?.find<SmartRefreshLayout>(R.id.rfl_content)
+        view?.findViewById<SmartRefreshLayout>(R.id.rfl_content)
     }
     private val articleAdapter by lazy {
         ArticleAdapter()
@@ -147,18 +146,18 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
      * menu点击事件
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when {
-            item.itemId == R.id.menu_to_banner -> {
+        return when (item.itemId) {
+            R.id.menu_to_banner -> {
                 //跳转BannerFragment
                 baseActionCreator.postLocalChange(ArticleAction.TO_BANNER)
                 true
             }
-            item.itemId == R.id.menu_to_friend -> {
+            R.id.menu_to_friend -> {
                 //跳转FriendFragment
                 baseActionCreator.postLocalChange(ArticleAction.TO_FRIEND)
                 true
             }
-            item.itemId == R.id.menu_to_gan -> {
+            R.id.menu_to_gan -> {
                 //跳转module-gan
                 ARouter.getInstance().build(CommonAppConstants.Router.RandomActivity).navigation()
                 true
