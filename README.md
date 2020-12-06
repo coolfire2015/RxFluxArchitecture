@@ -30,6 +30,10 @@
 +[**X-AppCompat**](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
 +[**X-Lifecycle**](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions)
 
+
+### Kotlin
+- [**splitties**](https://mvnrepository.com/artifact/com.louiscad.splitties/splitties-resources)
+- [**coroutines**](https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core)
 ### 通用
 - 模块路由 [**Arouter**](https://github.com/alibaba/ARouter)
 - 网络框架 [**OkHttp**](https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp)

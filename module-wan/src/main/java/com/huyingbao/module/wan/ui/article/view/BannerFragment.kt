@@ -20,7 +20,7 @@ import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
 

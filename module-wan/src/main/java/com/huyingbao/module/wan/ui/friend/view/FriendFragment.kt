@@ -15,7 +15,7 @@ import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
 import com.huyingbao.module.wan.ui.friend.adapter.WebSiteAdapter
 import com.huyingbao.module.wan.ui.friend.store.FriendStore
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
 

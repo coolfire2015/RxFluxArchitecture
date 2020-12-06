@@ -4,7 +4,7 @@ import com.huyingbao.module.common.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -16,7 +16,7 @@ import javax.inject.Singleton
  * Created by liujunfeng on 2019/1/1.
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class CommonAppModule {
     @Singleton
     @Provides

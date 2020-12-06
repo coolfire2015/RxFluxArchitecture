@@ -38,8 +38,8 @@ public final class AppOwnerGenerator {
     private static final String TYPE_HILT_ENTRY_POINTS = "EntryPoints";
     private static final String TYPE_HILT_INSTALL_IN = "InstallIn";
 
-    private static final String PACKAGE_HILT_APPLICATION_COMPONENT = PACKAGE_HILT + ".android.components";
-    private static final String TYPE_HILT_APPLICATION_COMPONENT = "ApplicationComponent";
+    private static final String PACKAGE_HILT_APPLICATION_COMPONENT = PACKAGE_HILT + ".components";
+    private static final String TYPE_HILT_APPLICATION_COMPONENT = "SingletonComponent";
 
     private static final String FIELD_LIFECYCLE_REGISTRY = "mRegistry";
 
@@ -139,7 +139,7 @@ public final class AppOwnerGenerator {
         TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT)
                 //添加注解@EntryPoint
                 .addAnnotation(ClassName.get(PACKAGE_HILT, TYPE_HILT_ENTRY_POINT))
-                //添加注解@InstallIn(ApplicationComponent.class)
+                //添加注解@InstallIn(SingletonComponent.class)
                 .addAnnotation(AnnotationSpec.builder(ClassName.get(PACKAGE_HILT, TYPE_HILT_INSTALL_IN))
                         .addMember("value", "$T.class", ClassName.get(PACKAGE_HILT_APPLICATION_COMPONENT, TYPE_HILT_APPLICATION_COMPONENT))
                         .build());

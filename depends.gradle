@@ -151,9 +151,9 @@ dependencies {
 
     //Arouter
     implementation "com.alibaba:arouter-api:${AROUTER_API}"
-    kapt "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kapt "com.alibaba:arouter-compiler:${AROUTER_API}"
     //Arouter_TEST
-    kaptTest "com.alibaba:arouter-compiler:${AROUTER_COMPILER}"
+    kaptTest "com.alibaba:arouter-compiler:${AROUTER_API}"
 
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
@@ -188,7 +188,7 @@ dependencies {
     //Json动画Lottie
     implementation "com.airbnb.android:lottie:${LOTTIE}"
     //上下拉刷新SmartRefreshLayout
-    implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMART_REFRESH_LAYOUT}"
+    implementation "com.scwang.smart:refresh-layout-kernel:${SMART_REFRESH_LAYOUT}"
     //RecyclerView适配器
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${BASE_RECYCLERVIEW_ADAPTER_HELPER}"
     //日志展示

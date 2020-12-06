@@ -11,7 +11,7 @@ import com.huyingbao.module.wan.app.WanAppModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -30,7 +30,7 @@ import javax.inject.Singleton
  * 2.提供测试代码需要的全局对象
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class WanTestModule {
     /**
      * 初始化Retrofit，覆盖[WanAppModule.provideRetrofit]方法
