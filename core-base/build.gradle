@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.github.dcendents.android-maven'
@@ -54,16 +53,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    //Kotlin 实验功能
-    androidExtensions {
-        experimental = true
-    }
     //构建功能
     buildFeatures {
         //不生成BuildConfig.java文件
         buildConfig = false
         //支持 DataBinding
         dataBinding = true
+        //支持 ViewBinding
+        viewBinding = true
     }
 }
 

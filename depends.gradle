@@ -1,6 +1,5 @@
 //Kotlin业务模块通用依赖
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
@@ -36,11 +35,7 @@ android {
     }
     //Kotlin Java1.8支持
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    //Kotlin 实验功能
-    androidExtensions {
-        experimental = true
+        jvmTarget = JavaVersion.VERSION_1_8
     }
     //单元测试,Robolectric支持
     testOptions {
@@ -51,6 +46,10 @@ android {
     //在本地单元测试中启用 @AndroidEntryPoint 类的转换
     hilt {
         enableTransformForLocalTests = true
+    }
+    //Hilt需要开启
+    kapt {
+        correctErrorTypes true
     }
 }
 

@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.huyingbao.core.base.common.dialog.BaseCommonDialog
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
-import kotlinx.android.synthetic.main.common_dialog_info.*
 import splitties.toast.toast
 
 /**
