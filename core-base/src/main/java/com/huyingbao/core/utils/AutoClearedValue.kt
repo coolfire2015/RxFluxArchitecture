@@ -1,4 +1,4 @@
-package com.huyingbao.core.arch.utils
+package com.huyingbao.core.utils
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

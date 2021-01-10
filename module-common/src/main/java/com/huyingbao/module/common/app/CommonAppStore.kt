@@ -4,7 +4,7 @@ package com.huyingbao.module.common.app
 import android.app.Application
 import android.content.Context
 import com.huyingbao.core.annotations.AppObserver
-import com.huyingbao.core.arch.FluxLifecycleCallback
+import com.huyingbao.core.arch.FluxLifecycle
 import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.model.Error
@@ -25,7 +25,7 @@ import javax.inject.Singleton
 /**
  * 全局Store，可以接受全局的[Error]、[Loading]。
  *
- * 通过[FluxLifecycleCallback]持有的Activity栈，来进行对应的操作。
+ * 通过[FluxLifecycle]持有的Activity栈，来进行对应的操作。
  *
  * Created by liujunfeng on 2019/8/1.
  */
@@ -33,7 +33,7 @@ import javax.inject.Singleton
 @AppObserver
 class CommonAppStore @Inject constructor(
         @ApplicationContext private val context: Context,
-        private val fluxLifecycleCallback: FluxLifecycleCallback,
+        private val fluxLifecycleCallback: FluxLifecycle,
         private val dispatcher: Dispatcher
 ) : AppStore(dispatcher) {
     /**

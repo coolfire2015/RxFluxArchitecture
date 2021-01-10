@@ -8,14 +8,14 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.huyingbao.core.arch.action.ActionManager
 import com.huyingbao.core.arch.dispatcher.Dispatcher
-import com.huyingbao.core.arch.lifecycle.ActivityLifecycleObserver
-import com.huyingbao.core.arch.lifecycle.FragmentLifecycleObserver
+import com.huyingbao.core.arch.view.FluxView
 import com.huyingbao.core.arch.view.SubscriberView
 import java.util.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅。
@@ -30,16 +30,8 @@ import javax.inject.Singleton
  *
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
-class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
-    /**
-     * [Inject] 用来标记需要注入的依赖, 被标注的属性不能使用private修饰，否则无法注入
-     */
-    @Inject
-    lateinit var dispatcher: Dispatcher
-
-    @Inject
-    lateinit var mActionManager: ActionManager
+object FluxLifecycle : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
+    const val TAG = "Flux"
 
     /**
      * 当前维护的Activity个数
@@ -55,7 +47,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
         activityCounter++
         activityStack.push(activity)
         if (activity is FragmentActivity) {
-            activity.lifecycle.addObserver(ActivityLifecycleObserver(activity))
+            activity.lifecycle.addObserver(FluxLifecycleObserver())
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
         }
     }
@@ -65,7 +57,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
 
     override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fragmentManager, fragment, context)
-        fragment.lifecycle.addObserver(FragmentLifecycleObserver(fragment))
+        fragment.lifecycle.addObserver(FluxLifecycleObserver())
     }
 
     /**
@@ -73,11 +65,11 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
      */
     override fun onActivityResumed(activity: Activity) {
         if (activity is SubscriberView) {
-            if (dispatcher.isSubscribe(activity)) {
+            if (Dispatcher.isSubscribe(activity)) {
                 return
             }
             Log.i(TAG, "Subscribe FluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.subscribeView(activity as SubscriberView)
+            Dispatcher.subscribeView(activity)
         }
     }
 
@@ -87,11 +79,11 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     override fun onFragmentResumed(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentResumed(fragmentManager, fragment)
         if (fragment is SubscriberView) {
-            if (dispatcher.isSubscribe(fragment)) {
+            if (Dispatcher.isSubscribe(fragment)) {
                 return
             }
             Log.i(TAG, "Subscribe FluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.subscribeView(fragment as SubscriberView)
+            Dispatcher.subscribeView(fragment)
         }
     }
 
@@ -101,7 +93,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     override fun onActivityPaused(activity: Activity) {
         if (activity is SubscriberView) {
             Log.i(TAG, "Unsubscribe FluxActivity : " + activity.javaClass.simpleName)
-            dispatcher.unsubscribeView(activity as SubscriberView)
+            Dispatcher.unsubscribeView(activity)
         }
     }
 
@@ -112,7 +104,7 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
         super.onFragmentPaused(fragmentManager, fragment)
         if (fragment is SubscriberView) {
             Log.i(TAG, "Unsubscribe FluxFragment : " + fragment.javaClass.simpleName)
-            dispatcher.unsubscribeView(fragment as SubscriberView)
+            Dispatcher.unsubscribeView(fragment)
         }
     }
 
@@ -145,8 +137,8 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
     }
 
     private fun shutdown() {
-        mActionManager.clear()
-        dispatcher.unsubscribeAll()
+        ActionManager.clear()
+        Dispatcher.unsubscribeAll()
     }
 
     private fun finishActivity(activity: Activity?) {
@@ -164,8 +156,25 @@ class FluxLifecycleCallback @Inject constructor() : FragmentManager.FragmentLife
         }
         return null
     }
+}
 
-    companion object {
-        const val TAG = "Flux"
+/**
+ * Activity/Fragment生命周期观察者，注册订阅[FluxView.store]
+ */
+class FluxLifecycleObserver() : DefaultLifecycleObserver {
+    /**
+     * 在onCreate(Bundle)完成依赖注入之后调用
+     */
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
+        if (owner is FluxView) {
+            val store = owner.store
+            if (Dispatcher.isSubscribe(store)) {
+                return
+            }
+            Log.i(FluxLifecycle.TAG, "Subscribe Store : " + javaClass.simpleName)
+            Dispatcher.subscribeStore(store)
+        }
     }
 }
+

@@ -25,9 +25,7 @@ import java.util.logging.Level
  *
  * Created by liujunfeng on 2020/8/1.
  */
-abstract class ActionCreator(
-        private val dispatcher: Dispatcher,
-        private val actionManager: ActionManager) {
+abstract class ActionCreator() {
     /**
      * 创建新的[Action]
      *
@@ -51,7 +49,7 @@ abstract class ActionCreator(
      * [ActionManager]是否已存在[Action]
      */
     private fun hasAction(action: Action): Boolean {
-        return actionManager.contains(action)
+        return ActionManager.contains(action)
     }
 
     /**
@@ -59,14 +57,14 @@ abstract class ActionCreator(
      */
     private fun addAction(action: Action,
                           job: Job) {
-        actionManager.add(action, job)
+        ActionManager.add(action, job)
     }
 
     /**
      * [ActionManager]移除[Action]，停止对应的[Job]
      */
     protected fun removeAction(action: Action) {
-        actionManager.remove(action)
+        ActionManager.remove(action)
     }
 
     /**
@@ -96,7 +94,7 @@ abstract class ActionCreator(
                 // 操作进行中
                 .onEach {
                     action.setResponse(it)
-                    dispatcher.postAction(action)
+                    Dispatcher.postAction(action)
                 }
                 // 调用结束
                 .onCompletion {
@@ -147,7 +145,7 @@ abstract class ActionCreator(
      * [Dispatcher]发送[Change]
      */
     protected open fun postChange(change: Change) {
-        dispatcher.postChange(change)
+        Dispatcher.postChange(change)
     }
 
     /**
@@ -157,7 +155,7 @@ abstract class ActionCreator(
      */
     protected open fun postLoading(busEvent: EventBusEvent,
                                    isLoading: Boolean) {
-        dispatcher.postLoading(Loading.newInstance(busEvent, isLoading))
+        Dispatcher.postLoading(Loading.newInstance(busEvent, isLoading))
     }
 
     /**
@@ -165,6 +163,6 @@ abstract class ActionCreator(
      */
     protected open fun postError(busEvent: EventBusEvent,
                                  throwable: Throwable) {
-        dispatcher.postError(Error.newInstance(busEvent, throwable))
+        Dispatcher.postError(Error.newInstance(busEvent, throwable))
     }
 }

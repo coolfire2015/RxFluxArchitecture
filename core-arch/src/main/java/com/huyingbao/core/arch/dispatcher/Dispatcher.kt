@@ -1,48 +1,48 @@
 package com.huyingbao.core.arch.dispatcher
 
+import androidx.lifecycle.ViewModel
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.arch.store.Store
 import com.huyingbao.core.arch.view.SubscriberView
 import org.greenrobot.eventbus.EventBus
 
 /**
  * 调度核心类：
  *
- * 1.管理[SubscriberView]、[Store]订阅。
+ * 1.管理[SubscriberView]、[ViewModel]订阅。
  *
  * 2.发送[Action]、[Change]、[Loading]、[Error]。
  *
  * Created by liujunfeng on 2019/1/1.
  */
-class Dispatcher {
+object Dispatcher {
     /**
-     * [Store]注册订阅。
+     * [ViewModel]注册订阅。
      */
-    fun <T : Store> subscribeStore(store: T) {
+    fun <T : ViewModel?> subscribeStore(store: T) {
         EventBus.getDefault().register(store)
     }
 
     /**
      * [SubscriberView]注册订阅。
      */
-    fun <T : SubscriberView> subscribeView(subscriberView: T) {
+    fun <T : SubscriberView?> subscribeView(subscriberView: T) {
         EventBus.getDefault().register(subscriberView)
     }
 
     /**
-     * [Store]取消订阅。
+     * [ViewModel]取消订阅。
      */
-    fun <T : Store> unsubscribeStore(store: T) {
+    fun <T : ViewModel?> unsubscribeStore(store: T) {
         EventBus.getDefault().unregister(store)
     }
 
     /**
      * [SubscriberView]取消订阅。
      */
-    fun <T : SubscriberView> unsubscribeView(subscriberView: T) {
+    fun <T : SubscriberView?> unsubscribeView(subscriberView: T) {
         EventBus.getDefault().unregister(subscriberView)
     }
 
@@ -63,7 +63,7 @@ class Dispatcher {
     }
 
     /**
-     * 发送[Action]到所有订阅的[Store]。
+     * 发送[Action]到所有订阅的[ViewModel]。
      */
     fun postAction(action: Action) {
         EventBus.getDefault().post(action, action.tag)
@@ -77,7 +77,7 @@ class Dispatcher {
     }
 
     /**
-     * 发送[Error]到所有订阅的[Store],[SubscriberView]，粘性通知。
+     * 发送[Error]到所有订阅的[ViewModel],[SubscriberView]，粘性通知。
      *
      * 发送：操作完成，异常执行状态。
      */
@@ -86,7 +86,7 @@ class Dispatcher {
     }
 
     /**
-     * 发送[Loading]到所有订阅的[Store],[SubscriberView]，粘性通知。
+     * 发送[Loading]到所有订阅的[ViewModel],[SubscriberView]，粘性通知。
      *
      * 发送：操作进度。
      */

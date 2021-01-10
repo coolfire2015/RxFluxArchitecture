@@ -11,7 +11,7 @@ import kotlinx.coroutines.Job
  *
  * Created by liujunfeng on 2020/8/1.
  */
-class ActionManager {
+object ActionManager {
     /**
      * 管理订阅的ArrayMap，[Action]的tag作为key
      */

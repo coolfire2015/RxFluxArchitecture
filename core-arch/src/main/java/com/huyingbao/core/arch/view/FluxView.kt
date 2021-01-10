@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModel
  *
  * Created by liujunfeng on 2019/1/1.
  */
-interface FluxView<T : ViewModel> {
+interface FluxView {
     /**
      * 为实现类提供Store
      */
-    val store: T?
+    val store: ViewModel?
 }
