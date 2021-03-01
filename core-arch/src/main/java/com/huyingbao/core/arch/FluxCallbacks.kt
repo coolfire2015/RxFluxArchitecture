@@ -8,14 +8,14 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.huyingbao.core.arch.action.ActionManager
-import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.action.FluxActionManager
+import com.huyingbao.core.arch.dispatcher.FluxDispatcher
+import com.huyingbao.core.arch.dispatcher.FluxSubscriber
 import com.huyingbao.core.arch.view.FluxView
-import com.huyingbao.core.arch.view.SubscriberView
 import java.util.*
 import javax.inject.Inject
+import androidx.lifecycle.DefaultLifecycleObserver as LifecycleDefaultLifecycleObserver
 
 /**
  * 自动跟踪Activity/Fragment的生命周期，管理Activity/Fragment订阅。
@@ -30,7 +30,7 @@ import javax.inject.Inject
  *
  * Created by liujunfeng on 2019/1/1.
  */
-object FluxLifecycle : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
+object FluxCallbacks : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
     const val TAG = "Flux"
 
     /**
@@ -43,68 +43,76 @@ object FluxLifecycle : FragmentManager.FragmentLifecycleCallbacks(), Application
      */
     val activityStack: Stack<Activity> = Stack()
 
+    /**
+     * 注册[Activity]持有的[com.huyingbao.core.arch.store.FluxStore]
+     */
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
         activityCounter++
         activityStack.push(activity)
-        if (activity is FragmentActivity) {
-            activity.lifecycle.addObserver(FluxLifecycleObserver())
-            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
-        }
+        if (activity !is FragmentActivity) return
+        // 注册 fragment 生命周期回调
+        activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
+        // 注册持有的 FluxStore
+        subscribeStore(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {
     }
 
+    /**
+     * 注册[Fragment]持有的[com.huyingbao.core.arch.store.FluxStore]
+     */
     override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fragmentManager, fragment, context)
-        fragment.lifecycle.addObserver(FluxLifecycleObserver())
+        // 注册持有的 FluxStore
+        subscribeStore(fragment)
     }
 
     /**
-     * [SubscriberView]注册订阅
+     * 注册[Activity]订阅
      */
     override fun onActivityResumed(activity: Activity) {
-        if (activity is SubscriberView) {
-            if (Dispatcher.isSubscribe(activity)) {
+        if (activity is FluxSubscriber) {
+            if (FluxDispatcher.isSubscribe(activity)) {
                 return
             }
             Log.i(TAG, "Subscribe FluxActivity : " + activity.javaClass.simpleName)
-            Dispatcher.subscribeView(activity)
+            FluxDispatcher.subscribe(activity)
         }
     }
 
     /**
-     * [SubscriberView]注册订阅
+     * 注册[Fragment]订阅
      */
     override fun onFragmentResumed(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentResumed(fragmentManager, fragment)
-        if (fragment is SubscriberView) {
-            if (Dispatcher.isSubscribe(fragment)) {
+        if (fragment is FluxSubscriber) {
+            if (FluxDispatcher.isSubscribe(fragment)) {
                 return
             }
             Log.i(TAG, "Subscribe FluxFragment : " + fragment.javaClass.simpleName)
-            Dispatcher.subscribeView(fragment)
+            FluxDispatcher.subscribe(fragment)
         }
     }
 
     /**
-     * [SubscriberView]取消订阅
+     * 取消[Activity]订阅
      */
     override fun onActivityPaused(activity: Activity) {
-        if (activity is SubscriberView) {
+        if (activity is FluxSubscriber) {
             Log.i(TAG, "Unsubscribe FluxActivity : " + activity.javaClass.simpleName)
-            Dispatcher.unsubscribeView(activity)
+            FluxDispatcher.unsubscribe(activity)
         }
     }
 
     /**
-     * [SubscriberView]取消订阅
+     * 取消[Fragment]订阅
      */
     override fun onFragmentPaused(fragmentManager: FragmentManager, fragment: Fragment) {
         super.onFragmentPaused(fragmentManager, fragment)
-        if (fragment is SubscriberView) {
+        if (fragment is FluxSubscriber) {
             Log.i(TAG, "Unsubscribe FluxFragment : " + fragment.javaClass.simpleName)
-            Dispatcher.unsubscribeView(fragment)
+            FluxDispatcher.unsubscribe(fragment)
         }
     }
 
@@ -137,8 +145,8 @@ object FluxLifecycle : FragmentManager.FragmentLifecycleCallbacks(), Application
     }
 
     private fun shutdown() {
-        ActionManager.clear()
-        Dispatcher.unsubscribeAll()
+        FluxActionManager.clear()
+        FluxDispatcher.unsubscribeAll()
     }
 
     private fun finishActivity(activity: Activity?) {
@@ -156,25 +164,25 @@ object FluxLifecycle : FragmentManager.FragmentLifecycleCallbacks(), Application
         }
         return null
     }
-}
 
-/**
- * Activity/Fragment生命周期观察者，注册订阅[FluxView.store]
- */
-class FluxLifecycleObserver() : DefaultLifecycleObserver {
     /**
-     * 在onCreate(Bundle)完成依赖注入之后调用
+     * 注册持有的[com.huyingbao.core.arch.store.FluxStore]
      */
-    override fun onCreate(owner: LifecycleOwner) {
-        super.onCreate(owner)
-        if (owner is FluxView) {
-            val store = owner.store
-            if (Dispatcher.isSubscribe(store)) {
-                return
+    private fun subscribeStore(lifecycleOwner: LifecycleOwner) {
+        if (lifecycleOwner !is FluxView) return
+        // 添加生命周期监听器
+        lifecycleOwner.lifecycle.addObserver(object : LifecycleDefaultLifecycleObserver {
+            /**
+             * 在onCreate(Bundle)完成依赖注入之后调用
+             */
+            override fun onCreate(owner: LifecycleOwner) {
+                val store = (owner as FluxView).store
+                if (FluxDispatcher.isSubscribe(store)) return
+                Log.i(TAG, "Subscribe Store : " + javaClass.simpleName)
+                FluxDispatcher.subscribe(store)
             }
-            Log.i(FluxLifecycle.TAG, "Subscribe Store : " + javaClass.simpleName)
-            Dispatcher.subscribeStore(store)
-        }
+        })
+
     }
 }
 

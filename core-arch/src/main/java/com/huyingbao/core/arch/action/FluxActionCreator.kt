@@ -1,6 +1,6 @@
 package com.huyingbao.core.arch.action
 
-import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.dispatcher.FluxDispatcher
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
@@ -15,9 +15,9 @@ import java.util.logging.Level
 
 
 /**
- * 实现View中调用的交互方法。
+ * 实现[com.huyingbao.core.arch.view.FluxView]中调用的交互方法。
  *
- * 创建[Action]，直接发送给[com.huyingbao.core.arch.store.Store]。
+ * 创建[Action]，直接发送给[com.huyingbao.core.arch.store.FluxStore]。
  *
  * 创建[Change]、[Loading]、[Error]，直接发送给[com.huyingbao.core.arch.view.FluxView]。
  *
@@ -25,7 +25,7 @@ import java.util.logging.Level
  *
  * Created by liujunfeng on 2020/8/1.
  */
-abstract class ActionCreator() {
+abstract class FluxActionCreator {
     /**
      * 创建新的[Action]
      *
@@ -46,25 +46,25 @@ abstract class ActionCreator() {
     }
 
     /**
-     * [ActionManager]是否已存在[Action]
+     * [FluxActionManager]是否已存在[Action]
      */
     private fun hasAction(action: Action): Boolean {
-        return ActionManager.contains(action)
+        return FluxActionManager.contains(action)
     }
 
     /**
-     * [ActionManager]添加[Action]和[Job]
+     * [FluxActionManager]添加[Action]和[Job]
      */
     private fun addAction(action: Action,
                           job: Job) {
-        ActionManager.add(action, job)
+        FluxActionManager.add(action, job)
     }
 
     /**
-     * [ActionManager]移除[Action]，停止对应的[Job]
+     * [FluxActionManager]移除[Action]，停止对应的[Job]
      */
     protected fun removeAction(action: Action) {
-        ActionManager.remove(action)
+        FluxActionManager.remove(action)
     }
 
     /**
@@ -94,7 +94,7 @@ abstract class ActionCreator() {
                 // 操作进行中
                 .onEach {
                     action.setResponse(it)
-                    Dispatcher.postAction(action)
+                    FluxDispatcher.postAction(action)
                 }
                 // 调用结束
                 .onCompletion {
@@ -142,27 +142,27 @@ abstract class ActionCreator() {
     }
 
     /**
-     * [Dispatcher]发送[Change]
+     * [FluxDispatcher]发送[Change]
      */
     protected open fun postChange(change: Change) {
-        Dispatcher.postChange(change)
+        FluxDispatcher.postChange(change)
     }
 
     /**
-     * [Dispatcher]发送[Loading]
+     * [FluxDispatcher]发送[Loading]
      *
      * @param isLoading true:显示，false:消失
      */
     protected open fun postLoading(busEvent: EventBusEvent,
                                    isLoading: Boolean) {
-        Dispatcher.postLoading(Loading.newInstance(busEvent, isLoading))
+        FluxDispatcher.postLoading(Loading.newInstance(busEvent, isLoading))
     }
 
     /**
-     * [Dispatcher]发送[Error]
+     * [FluxDispatcher]发送[Error]
      */
     protected open fun postError(busEvent: EventBusEvent,
                                  throwable: Throwable) {
-        Dispatcher.postError(Error.newInstance(busEvent, throwable))
+        FluxDispatcher.postError(Error.newInstance(busEvent, throwable))
     }
 }

@@ -27,8 +27,8 @@ abstract class FluxApp : Application() {
             val clazz = Class.forName("com.huyingbao.core.arch.FinalAppLifecycleOwner") as Class<LifecycleOwner>
             result = clazz.getConstructor(Application::class.java).newInstance(this)
         } catch (e: ClassNotFoundException) {
-            if (Log.isLoggable(FluxLifecycle.TAG, Log.WARN)) {
-                Log.w(FluxLifecycle.TAG, "Failed to find AppLifecycleOwner. You should include an"
+            if (Log.isLoggable(FluxCallbacks.TAG, Log.WARN)) {
+                Log.w(FluxCallbacks.TAG, "Failed to find AppLifecycleOwner. You should include an"
                         + " annotationProcessor compile dependency on com.github.coolfire2015.RxFluxArchitecture:core-arch-processor"
                         + " in your application and a @FluxAppObserver annotated FluxAppLifecycle subclass"
                         + " and a @FluxAppOwner annotated FluxApp implementation")
@@ -54,7 +54,7 @@ abstract class FluxApp : Application() {
         //静态内部类持有当前Application
         application = this
         //application创建的时候调用该方法，使FluxLifecycleCallback可以接受Activity生命周期回调
-        registerActivityLifecycleCallbacks(FluxLifecycle)
+        registerActivityLifecycleCallbacks(FluxCallbacks)
         //分发ON_CREATE状态
         lifecycleOwner?.let {
             (it.lifecycle as LifecycleRegistry).handleLifecycleEvent(Lifecycle.Event.ON_CREATE)

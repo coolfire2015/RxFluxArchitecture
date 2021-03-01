@@ -11,7 +11,7 @@ import kotlinx.coroutines.Job
  *
  * Created by liujunfeng on 2020/8/1.
  */
-object ActionManager {
+object FluxActionManager {
     /**
      * 管理订阅的ArrayMap，[Action]的tag作为key
      */
@@ -31,7 +31,7 @@ object ActionManager {
 
     /**
      * 移除[Action]，取消[Job]中观察者与被观察者订阅关系，
-     * 停止被观察者[io.reactivex.Observable]方法。
+     * 停止被观察者[kotlinx.coroutines.flow.Flow]方法。
      */
     fun remove(action: Action) {
         val old = arrayMap.remove(action.tag)

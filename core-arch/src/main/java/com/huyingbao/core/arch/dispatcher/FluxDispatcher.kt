@@ -5,44 +5,30 @@ import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.arch.view.SubscriberView
 import org.greenrobot.eventbus.EventBus
 
 /**
  * 调度核心类：
  *
- * 1.管理[SubscriberView]、[ViewModel]订阅。
+ * 1.管理[FluxSubscriber]订阅。
  *
  * 2.发送[Action]、[Change]、[Loading]、[Error]。
  *
  * Created by liujunfeng on 2019/1/1.
  */
-object Dispatcher {
-    /**
-     * [ViewModel]注册订阅。
-     */
-    fun <T : ViewModel?> subscribeStore(store: T) {
-        EventBus.getDefault().register(store)
-    }
+object FluxDispatcher {
 
     /**
-     * [SubscriberView]注册订阅。
+     * [FluxSubscriber]注册订阅。
      */
-    fun <T : SubscriberView?> subscribeView(subscriberView: T) {
+    fun <T : FluxSubscriber?> subscribe(subscriberView: T) {
         EventBus.getDefault().register(subscriberView)
     }
 
     /**
-     * [ViewModel]取消订阅。
+     * [FluxSubscriber]取消订阅。
      */
-    fun <T : ViewModel?> unsubscribeStore(store: T) {
-        EventBus.getDefault().unregister(store)
-    }
-
-    /**
-     * [SubscriberView]取消订阅。
-     */
-    fun <T : SubscriberView?> unsubscribeView(subscriberView: T) {
+    fun <T : FluxSubscriber?> unsubscribe(subscriberView: T) {
         EventBus.getDefault().unregister(subscriberView)
     }
 
@@ -70,14 +56,14 @@ object Dispatcher {
     }
 
     /**
-     * 发送[Change]到所有订阅的[SubscriberView]，粘性通知。
+     * 发送[Change]到所有订阅的[FluxSubscriber]，粘性通知。
      */
     fun postChange(change: Change) {
         EventBus.getDefault().postSticky(change, change.tag)
     }
 
     /**
-     * 发送[Error]到所有订阅的[ViewModel],[SubscriberView]，粘性通知。
+     * 发送[Error]到所有订阅的[ViewModel],[FluxSubscriber]，粘性通知。
      *
      * 发送：操作完成，异常执行状态。
      */
@@ -86,7 +72,7 @@ object Dispatcher {
     }
 
     /**
-     * 发送[Loading]到所有订阅的[ViewModel],[SubscriberView]，粘性通知。
+     * 发送[Loading]到所有订阅的[ViewModel],[FluxSubscriber]，粘性通知。
      *
      * 发送：操作进度。
      */

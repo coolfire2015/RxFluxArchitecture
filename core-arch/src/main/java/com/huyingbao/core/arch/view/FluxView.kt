@@ -1,17 +1,20 @@
 package com.huyingbao.core.arch.view
 
-import androidx.lifecycle.ViewModel
+import com.huyingbao.core.arch.dispatcher.FluxSubscriber
+import com.huyingbao.core.arch.store.FluxStore
 
 /**
- * 所有该接口的实现类(Activity/Fragment)，持有跟随自身生命周期的Store。
+ * View层
  *
- * View在destroy时,调用Store的onCleared()方法清理数据并不再持有Store对象。
+ * 持有跟随自身生命周期的[FluxStore]。
+ *
+ * 继承[FluxSubscriber]，接受总线事件。
  *
  * Created by liujunfeng on 2019/1/1.
  */
-interface FluxView {
+interface FluxView : FluxSubscriber {
     /**
      * 为实现类提供Store
      */
-    val store: ViewModel?
+    val store: FluxStore
 }
