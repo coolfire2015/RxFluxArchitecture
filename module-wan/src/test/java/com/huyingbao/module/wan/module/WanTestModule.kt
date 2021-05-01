@@ -42,9 +42,13 @@ class WanTestModule {
     @Named(BuildConfig.MODULE_NAME)
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         val retrofitBuilder = Retrofit.Builder()
-                .baseUrl(if (BuildConfig.MOCK_URL) initMockServer() else WanAppModule.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-                .client(builder.build())
+            .baseUrl(if (BuildConfig.MOCK_URL) initMockServer() else WanAppModule.BASE_API)
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().serializeNulls().create()
+                )
+            )
+            .client(builder.build())
         return retrofitBuilder.build()
     }
 
@@ -55,10 +59,11 @@ class WanTestModule {
     @Provides
     fun provideDataBase(application: Application): WanAppDatabase {
         val databaseBuilder = Room.inMemoryDatabaseBuilder(
-                application,
-                WanAppDatabase::class.java)
-                //允许Room破坏性地重新创建数据库表。
-                .fallbackToDestructiveMigration()
+            application,
+            WanAppDatabase::class.java
+        )
+            //允许Room破坏性地重新创建数据库表。
+            .fallbackToDestructiveMigration()
         return databaseBuilder.build()
     }
 }
@@ -71,16 +76,16 @@ fun initMockServer(): String {
     RESTMockServerStarter.startSync(JVMFileParser())
     //article/list
     RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
-            .thenReturnFile(200, "json/articleList.json")
+        .thenReturnFile(200, "json/articleList.json")
     //banner/json
     RESTMockServer.whenGET(RequestMatchers.pathContains("banner/json"))
-            .thenReturnFile(200, "json/bannerList.json")
+        .thenReturnFile(200, "json/bannerList.json")
     //login
     RESTMockServer.whenPOST(RequestMatchers.pathContains("user/login"))
-            .thenReturnFile(200, "json/login.json")
+        .thenReturnFile(200, "json/login.json")
     //register
     RESTMockServer.whenPOST(RequestMatchers.pathContains("user/register"))
-            .thenReturnFile(200, "json/register.json")
+        .thenReturnFile(200, "json/register.json")
     //返回Mock的Url
     return RESTMockServer.getUrl()
 }

@@ -101,16 +101,16 @@ fun initMockServer(): String {
     RESTMockServerStarter.startSync(JVMFileParser())
     //article/list
     RESTMockServer.whenGET(RequestMatchers.pathContains("article/list"))
-            .thenReturnFile(200, "json/articleList.json")
+        .thenReturnFile(200, "json/articleList.json")
     //banner/json
     RESTMockServer.whenGET(RequestMatchers.pathContains("banner/json"))
-            .thenReturnFile(200, "json/bannerList.json")
+        .thenReturnFile(200, "json/bannerList.json")
     //login
     RESTMockServer.whenPOST(RequestMatchers.pathContains("user/login"))
-            .thenReturnFile(200, "json/login.json")
+        .thenReturnFile(200, "json/login.json")
     //register
     RESTMockServer.whenPOST(RequestMatchers.pathContains("user/register"))
-            .thenReturnFile(200, "json/register.json")
+        .thenReturnFile(200, "json/register.json")
     //返回Mock的Url
     return RESTMockServer.getUrl()
 }
@@ -119,15 +119,15 @@ fun retrofit(): Retrofit {
     val interceptor = HttpLoggingInterceptor()
     interceptor.level = HttpLoggingInterceptor.Level.BODY
     val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-            .writeTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
-            .build()
+        .connectTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+        .readTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+        .writeTimeout(CommonAppConstants.Config.HTTP_TIME_OUT, TimeUnit.SECONDS)
+        .addInterceptor(interceptor)
+        .build()
     val retrofitBuilder = Retrofit.Builder()
-            .baseUrl("www.baidu.com")
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-            .client(okHttpClient)
+        .baseUrl("www.baidu.com")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+        .client(okHttpClient)
     return retrofitBuilder.build()
 }
 

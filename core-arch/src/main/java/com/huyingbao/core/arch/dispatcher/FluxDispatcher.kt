@@ -63,7 +63,7 @@ object FluxDispatcher {
     }
 
     /**
-     * 发送[Error]到所有订阅的[ViewModel],[FluxSubscriber]，粘性通知。
+     * 发送[Error]到所有订阅的[ViewModel]、[FluxSubscriber]，粘性通知。
      *
      * 发送：操作完成，异常执行状态。
      */
@@ -72,7 +72,7 @@ object FluxDispatcher {
     }
 
     /**
-     * 发送[Loading]到所有订阅的[ViewModel],[FluxSubscriber]，粘性通知。
+     * 发送[Loading]到所有订阅的[ViewModel]、[FluxSubscriber]，粘性通知。
      *
      * 发送：操作进度。
      */

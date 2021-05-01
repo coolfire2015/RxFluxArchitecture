@@ -30,20 +30,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //lint设置
-    lintOptions {
-        //lint 不被终止
-        abortOnError false
-        //打Release版本时,不进行检测
-        checkReleaseBuilds false
-        //关闭检索的功能
-        disable 'GoogleAppIndexingWarning'
-    }
-    //Dex分包
-    dexOptions {
-        jumboMode = true
-        javaMaxHeapSize "4g"//增加java堆内存大小
-    }
     //Java1.8支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -51,14 +37,12 @@ android {
     }
     //Kotlin Java1.8支持
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
     }
     //构建功能
     buildFeatures {
         //不生成BuildConfig.java文件
         buildConfig = false
-        //支持 DataBinding
-        dataBinding = true
         //支持 ViewBinding
         viewBinding = true
     }

@@ -13,7 +13,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huyingbao.module.common.ui.web.WebActivity" />
     </application>
 
 </manifest>

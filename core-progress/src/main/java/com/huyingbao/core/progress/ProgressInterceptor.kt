@@ -21,8 +21,8 @@ class ProgressInterceptor @Inject constructor() : Interceptor {
         }
         //获取Header传递过来的参数,并传递到ProgressResponseBody对象中
         var tag: String? = null
-        if (!TextUtils.isEmpty(response.request.header(RxProgress.Companion.TAG))) {
-            tag = response.request.header(RxProgress.Companion.TAG)
+        if (!TextUtils.isEmpty(response.request.header(Progress.Companion.TAG))) {
+            tag = response.request.header(Progress.Companion.TAG)
         }
         val body = ProgressResponseBody(response.body, tag)
         return response.newBuilder().body(body).build()

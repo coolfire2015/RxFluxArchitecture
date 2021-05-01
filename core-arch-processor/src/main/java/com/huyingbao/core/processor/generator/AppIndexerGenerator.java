@@ -39,7 +39,9 @@ public final class AppIndexerGenerator {
             if (mProcessorUtil.isLifecycleObserver(element)) {
                 modules.add(element);
             } else {
-                throw new IllegalArgumentException(element + " is not an androidx.lifecycle.LifecycleObserver interface");
+                IllegalArgumentException illegalArgumentException = new IllegalArgumentException(element + " is not an androidx.lifecycle.LifecycleObserver interface");
+                mProcessorUtil.errorLog(illegalArgumentException.getMessage());
+                throw illegalArgumentException;
             }
         }
         //使用libraryModules的第一个元素的标准名拼接成类名

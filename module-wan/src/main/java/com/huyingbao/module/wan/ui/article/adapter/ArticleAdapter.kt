@@ -43,12 +43,14 @@ class ArticleAdapter : PagedListAdapter<Article, ArticleViewHolder>(diffCallback
          * @see androidx.recyclerview.widget.DiffUtil
          */
         private val diffCallback = object : DiffUtil.ItemCallback<Article>() {
-            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem.id == newItem.id
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem.id == newItem.id
 
             /**
              * 注意，在kotlin中，==检查数据类比较所有内容，但是在java中，通常您将实现object#equals，并使用它来比较对象内容。
              */
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem == newItem
         }
     }
 }
@@ -68,7 +70,8 @@ class ArticleViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 findViewById<TextView>(R.id.tv_item_author).text = it.author
                 findViewById<TextView>(R.id.tv_item_title).text = Html.fromHtml(it.title)
                 findViewById<TextView>(R.id.tv_item_time).text = it.niceDate
-                findViewById<TextView>(R.id.tv_item_chapter).text = "${it.chapterName} / ${it.superChapterName}"
+                findViewById<TextView>(R.id.tv_item_chapter).text =
+                    "${it.chapterName} / ${it.superChapterName}"
             }
         }
     }

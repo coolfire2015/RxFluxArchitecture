@@ -88,7 +88,9 @@ public final class ProcessorUtil {
             debugLog("Writing class:\n" + clazz);
             JavaFile.builder(packageName, clazz).build().writeTo(mProcessingEnv.getFiler());
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            RuntimeException runtimeException = new RuntimeException(e);
+            errorLog(runtimeException.getMessage());
+            throw runtimeException;
         }
     }
 
@@ -98,13 +100,15 @@ public final class ProcessorUtil {
         return ElementFilter.typesIn(annotatedElements);
     }
 
-    void debugLog(String toLog) {
+    public void debugLog(String toLog) {
         if (DEBUG) {
-            infoLog(toLog);
+            mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + mRound + "] Flux >>> " + toLog + "\n ");
         }
     }
 
-    void infoLog(String toLog) {
-        mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "[" + mRound + "] " + toLog);
+    public void errorLog(String toLog) {
+        if (DEBUG) {
+            mProcessingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "[" + mRound + "] Flux >>> " + toLog + "\n ");
+        }
     }
 }

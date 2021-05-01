@@ -121,10 +121,10 @@ public class ArchProcessor extends AbstractProcessor {
      */
     private boolean processIndex(RoundEnvironment roundEnvironment) {
         List<TypeElement> elements = mProcessorUtil.getElementsFor(AppObserver.class, roundEnvironment);
-        mProcessorUtil.debugLog("Processing types : " + elements);
         if (elements.isEmpty()) {
             return false;
         }
+        mProcessorUtil.debugLog("Processing types : " + elements);
         TypeSpec typeSpec = mAppIndexerGenerator.generate(elements);
         mProcessorUtil.writeIndexer(typeSpec);
         return true;
@@ -142,9 +142,11 @@ public class ArchProcessor extends AbstractProcessor {
                 mFluxAppList.add(element);
             }
         }
-        mProcessorUtil.debugLog("got app modules: " + mFluxAppList);
+        mProcessorUtil.debugLog("Got app modules: " + mFluxAppList);
         if (mFluxAppList.size() > 1) {
-            throw new IllegalStateException("You cannot have more than one FluxApp, found: " + mFluxAppList);
+            IllegalStateException illegalStateException = new IllegalStateException("You cannot have more than one FluxApp, found: " + mFluxAppList);
+            mProcessorUtil.errorLog(illegalStateException.getMessage());
+            throw illegalStateException;
         }
     }
 

@@ -49,7 +49,7 @@ class CommonAppStore @Inject constructor(
      */
     @Subscribe(sticky = true)
     fun onLoading(rxLoading: Loading) {
-        fluxLifecycleCallback.activityStack.peek()?.let { showCommonLoading(it, rxLoading) }
+        FluxCallback.activityStack.peek()?.let { showCommonLoading(it, rxLoading) }
     }
 
     /**
@@ -59,10 +59,11 @@ class CommonAppStore @Inject constructor(
     fun onGetAppLatest(rxAction: Action) {
         rxAction.getResponse<AppBean>()?.let {
             it.appUpdateState = getAppState(
-                    build = it.build,
-                    packageName = context.packageName,
-                    application = context as Application)
-            val activity = fluxLifecycleCallback.activityStack.peek() ?: return
+                build = it.build,
+                packageName = getApplication<Application>().packageName,
+                application = getApplication<Application>()
+            )
+            val activity = FluxCallback.activityStack.peek() ?: return
             if (it.appUpdateState == AppUpdateState.LATEST) {
                 activity.toast("当前已是最新版本")
                 return

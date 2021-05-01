@@ -13,7 +13,7 @@ import com.huyingbao.module.common.utils.AndroidUtils
  *
  * Created by liujunfeng on 2019/5/31.
  */
-class StartFragment : BaseCommonFragment() {
+class StartFragment : BaseFragment() {
     companion object {
         fun newInstance() = StartFragment()
     }
@@ -21,7 +21,8 @@ class StartFragment : BaseCommonFragment() {
     override fun getLayoutId() = R.layout.common_fragment_start
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        val appRouter = CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
+        val appRouter =
+            CommonAppConstants.Router.getAppRouter(AndroidUtils.getApplicationLabel(context))
         ARouter.getInstance().build(appRouter).navigation()
         activity?.finish()
     }

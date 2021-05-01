@@ -16,8 +16,6 @@ android {
     }
     //默认配置
     defaultConfig {
-        //支持MultiDex分包
-        multiDexEnabled true
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode rootProject.gitGitVersionCode()

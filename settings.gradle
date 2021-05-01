@@ -1,5 +1,6 @@
-include ':core-eventbus-processor'
-include ':core-test'
+include ':core-arch'
+include ':core-arch-annotations'
+include ':core-arch-processor'
 include ':core-eventbus'
 include ':core-eventbus-annotations'
 include ':core-cookie'

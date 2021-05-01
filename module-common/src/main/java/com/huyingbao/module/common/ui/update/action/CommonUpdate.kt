@@ -45,7 +45,7 @@ interface FirApi {
      */
     @GET("apps/latest/{id}")
     suspend fun getAppLatest(
-            @Path("id") id: String,
-            @Query("api_token") token: String
+        @Path("id") id: String,
+        @Query("api_token") token: String
     ): Response<AppBean>
 }

@@ -11,14 +11,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:${BUILD_GRADLE}"
         //Kotlin支持
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
-        //Kotlin全开放编译器插件
-        classpath "org.jetbrains.kotlin:kotlin-allopen:${KOTLIN_VERSION}"
         //Dagger-Hilt支持
         classpath "com.google.dagger:hilt-android-gradle-plugin:${HILT}"
-        //Tinker支持
-        classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:${TINKER}"
-        //Maven支持
-        classpath "com.github.dcendents:android-maven-gradle-plugin:${ANDROID_MAVEN_GRADLE_PLUGIN}"
     }
 }
 
@@ -56,7 +50,7 @@ def mOutputs = "$rootDir/outputs/build_" + getGitVersionName()
  * release时间
  * @return
  */
-def releaseTime() {
+static def releaseTime() {
     return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
 }
 
@@ -64,7 +58,7 @@ def releaseTime() {
  * 获取local本地配置文件
  * @return
  */
-def getlocalProperty() {
+static def getlocalProperty() {
     Properties buildProps = new Properties()
     buildProps.load(new FileInputStream(file('../local.properties')))
     return buildProps
@@ -74,7 +68,7 @@ def getlocalProperty() {
  * 读取Svn日志
  * @return
  */
-def getSvnVersionInfo() {
+static def getSvnVersionInfo() {
     return 'svn log -r HEAD'.execute().text.trim()
 }
 
@@ -82,7 +76,7 @@ def getSvnVersionInfo() {
  * 读取Svn Revision Number
  * @return
  */
-def getSvnRevisionNumber() {
+static def getSvnRevisionNumber() {
     return 'svn info --show-item revision'.execute().text.trim()
 }
 
@@ -90,7 +84,7 @@ def getSvnRevisionNumber() {
  * 读取Git commit number，作为Version Code
  * @return
  */
-def gitGitVersionCode() {
+static def gitGitVersionCode() {
     try {
         return 'git rev-list HEAD --first-parent --count'.execute().text.trim().toInteger()
     }
@@ -103,7 +97,7 @@ def gitGitVersionCode() {
  * 读取Git Tag，作为Version Name
  * @return
  */
-def getGitVersionName() {
+static def getGitVersionName() {
     try {
         def stdout = new ByteArrayOutputStream()
         exec {
@@ -121,7 +115,7 @@ def getGitVersionName() {
  * 读取Git日志
  * @return
  */
-def getGitVersionInfo() {
+static def getGitVersionInfo() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
 }
 

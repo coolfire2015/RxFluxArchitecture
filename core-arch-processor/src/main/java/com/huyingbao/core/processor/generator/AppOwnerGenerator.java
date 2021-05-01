@@ -133,7 +133,7 @@ public final class AppOwnerGenerator {
     }
 
     /**
-     * 生成EntryPoint接口
+     * 生成EntryPoint接口，实现在 Hilt 不支持的类中注入依赖项
      */
     private TypeSpec generateEntryPoint(Collection<String> appLifecycleObserverSet) {
         TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(TYPE_GENERATED_APP_LIFECYCLE_OWNER_ENTRY_POINT)

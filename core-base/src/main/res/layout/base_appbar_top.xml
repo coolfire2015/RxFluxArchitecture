@@ -9,7 +9,7 @@
     tools:showIn="@layout/base_activity_frag">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tlb_top"
+        android:id="@+id/base_tlb_top"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"

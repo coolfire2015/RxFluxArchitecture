@@ -36,7 +36,7 @@ android {
     }
     //Kotlin Java1.8支持
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
     }
     //构建功能
     buildFeatures {
@@ -75,11 +75,4 @@ dependencies {
     //Kotlin-协程
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${KOTLIN_COROUTINES}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES}"
-
-    //Hilt依赖注入
-    api "com.google.dagger:hilt-android:${HILT}"
-    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
-    //Hilt-ViewModel依赖注入
-    api "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
-    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
 }

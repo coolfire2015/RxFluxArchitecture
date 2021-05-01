@@ -319,14 +319,14 @@ public class EventBus {
     /**
      * 发送事件
      *
-     * @param event 如果是{@link EventBusEvent}子类，根据{@link EventBusEvent#isGlobalCatch()}发送
+     * @param event 如果是{@link BusEvent}子类，根据{@link BusEvent#isGlobalCatch()}发送
      */
     public void post(Object event) {
-        if (event instanceof EventBusEvent) {
-            if (((EventBusEvent) event).isGlobalCatch()) {
+        if (event instanceof BusEvent) {
+            if (((BusEvent) event).isGlobalCatch()) {
                 post(event, "defaultTag");
             } else {
-                post(event, ((EventBusEvent) event).tag);
+                post(event, ((BusEvent) event).tag);
             }
         } else {
             post(event, "defaultTag");
@@ -389,14 +389,14 @@ public class EventBus {
     /**
      * 发送粘性事件
      *
-     * @param event 如果是{@link EventBusEvent}子类，根据{@link EventBusEvent#isGlobalCatch()}发送
+     * @param event 如果是{@link BusEvent}子类，根据{@link BusEvent#isGlobalCatch()}发送
      */
     public void postSticky(Object event) {
-        if (event instanceof EventBusEvent) {
-            if (((EventBusEvent) event).isGlobalCatch()) {
+        if (event instanceof BusEvent) {
+            if (((BusEvent) event).isGlobalCatch()) {
                 postSticky(event, "defaultTag");
             } else {
-                postSticky(event, ((EventBusEvent) event).tag);
+                postSticky(event, ((BusEvent) event).tag);
             }
         } else {
             postSticky(event, "defaultTag");

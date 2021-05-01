@@ -28,17 +28,17 @@ class CommonLoadingDialog : BaseCommonDialog() {
 
     override fun afterCreate(savedInstanceState: Bundle?) {
         dialog?.setCanceledOnTouchOutside(false)
-        if (messageInt != 0) {
-            val message = getString(messageInt)
-            if (!TextUtils.isEmpty(message)) {
-                tv_loading_notice?.text = message
-                tv_loading_notice?.visibility = View.VISIBLE
-            }
-        }
-        tv_loading_cancel.setOnClickListener {
-            clickListener?.onCancel()
-            dismiss()
-        }
+//        if (messageInt != 0) {
+//            val message = getString(messageInt)
+//            if (!TextUtils.isEmpty(message)) {
+//                binding.tvLoadingNotice.text = message
+//                binding.tvLoadingNotice.visibility = View.VISIBLE
+//            }
+//        }
+//        binding.tvLoadingCancel.setOnClickListener {
+//            clickListener?.onCancel()
+//            dismiss()
+//        }
     }
 
     override fun onDismiss(dialog: DialogInterface) {

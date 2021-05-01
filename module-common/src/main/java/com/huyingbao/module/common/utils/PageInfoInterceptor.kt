@@ -1,4 +1,4 @@
-package com.huyingbao.module.common.utils
+package com.huyingbao.core.utils
 
 import android.net.Uri
 import okhttp3.Interceptor
@@ -38,7 +38,8 @@ class PageInfoInterceptor : Interceptor {
                 }
             }
         }
-        return response.newBuilder().addHeader("page_info", GsonUtils.toJsonString(pageInfo)).build()
+        return response.newBuilder().addHeader("page_info", GsonUtils.toJsonString(pageInfo))
+            .build()
     }
 
     private fun parseNumber(item: String?): Int {

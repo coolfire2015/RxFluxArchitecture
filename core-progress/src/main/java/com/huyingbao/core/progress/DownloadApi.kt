@@ -20,6 +20,7 @@ interface DownloadApi {
     @GET
     @Streaming
     suspend fun download(
-            @Header(RxProgress.Companion.TAG) tag: String?,
-            @Url url: String?): ResponseBody?
+        @Header(Progress.TAG) tag: String?,
+        @Url url: String?
+    ): ResponseBody?
 }

@@ -1,21 +1,19 @@
-//package com.huyingbao.module.common.ui.update.action
-//
-//import android.content.Context
-//import com.huyingbao.core.arch.action.ActionCreator
-//import com.huyingbao.core.arch.action.ActionManager
-//import com.huyingbao.core.arch.dispatcher.Dispatcher
-//import com.huyingbao.core.progress.DownloadApi
-//import java.io.*
-//import javax.inject.Inject
-//
-//class CommonUpdateActionCreator @Inject constructor(
-//        dispatcher: Dispatcher,
-//        actionManager: ActionManager
-//) : ActionCreator(dispatcher, actionManager), DownloadAction {
-//    @Inject
-//    lateinit var downloadApi: DownloadApi
-//
-//    override fun downloadStart(
+package com.huyingbao.module.common.ui.update.action
+
+import android.content.Context
+import com.huyingbao.core.arch.action.FluxActionCreator
+import com.huyingbao.core.progress.DownloadApi
+import java.io.*
+import javax.inject.Inject
+
+class CommonUpdateActionCreator() : FluxActionCreator(), DownloadAction {
+    @Inject
+    lateinit var downloadApi: DownloadApi
+    override fun downloadStart(tag: String, url: String, local: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+//    override suspend fun downloadStart(
 //            tag: String,
 //            url: String,
 //            local: String): Boolean {

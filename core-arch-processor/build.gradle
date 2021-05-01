@@ -10,5 +10,7 @@ dependencies {
     //注解
     implementation project(':core-arch-annotations')
     //注解生成文件工具类
-    implementation "com.squareup:javapoet:${JAVAPOET_VERSION}"
+    compileOnly "com.squareup:javapoet:${JAVAPOET_VERSION}"
+    compileOnly "com.google.auto.service:auto-service:${AUTO_SERVICE_VERSION}"
+    annotationProcessor "com.google.auto.service:auto-service:${AUTO_SERVICE_VERSION}"
 }

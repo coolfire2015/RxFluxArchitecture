@@ -25,10 +25,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //Lambda表达式需要
+    //Java1.8支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //Kotlin Java1.8支持
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+    //构建功能
+    buildFeatures {
+        //不生成BuildConfig.java文件
+        buildConfig = false
     }
 }
 
@@ -49,4 +58,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP}"
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    //依赖注入注解
+    implementation "javax.inject:javax.inject:${JAVAX_INJECT}"
 }

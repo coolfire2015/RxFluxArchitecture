@@ -16,13 +16,6 @@ android {
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
     }
-    //构建功能
-    buildFeatures {
-        //支持 DataBinding
-        dataBinding = true
-        //支持 ViewBinding
-        viewBinding = true
-    }
     //Dex分包
     dexOptions {
         jumboMode = true
@@ -37,6 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    //构建功能
+    buildFeatures {
+        //支持 DataBinding
+        dataBinding = true
+        //支持 ViewBinding
+        viewBinding = true
+    }
     //单元测试,Robolectric支持
     testOptions {
         unitTests {
@@ -47,7 +47,7 @@ android {
     hilt {
         enableTransformForLocalTests = true
     }
-    //Hilt需要开启
+    //注解编译参数设置,Hilt需要开启
     kapt {
         correctErrorTypes true
     }
@@ -100,19 +100,15 @@ dependencies {
     //X_APPCOMPAT
     implementation "androidx.appcompat:appcompat:${X_APPCOMPAT}"
     //X_Fragment
-    implementation "androidx.fragment:fragment:${X_FRAGMENT}"
     implementation "androidx.fragment:fragment-ktx:${X_FRAGMENT}"
     testImplementation "androidx.fragment:fragment-testing:${X_FRAGMENT}"
     //X_Lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
     implementation "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
     //X_Navigation
     implementation "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     implementation "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X_MultiDex
-    implementation "androidx.multidex:multidex:${X_MULTIDEX}"
     //X_Material
     implementation "com.google.android.material:material:${X_MATERIAL}"
     //X_CardView
@@ -127,6 +123,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:${X_PAGING}"
     //X_WorkManager
     implementation "androidx.work:work-runtime-ktx:${X_WORK}"
+    //X_START_UP
+    implementation "androidx.startup:startup-runtime:${X_START_UP}"
     //X_Room
     implementation "androidx.room:room-ktx:${X_ROOM}"
     implementation "androidx.room:room-runtime:${X_ROOM}"
@@ -140,7 +138,9 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:${X_HILT}"
     //X_Hilt_TEST
     kaptTest "androidx.hilt:hilt-compiler:${X_HILT}"
+
     //Hilt
+    implementation "com.google.dagger:hilt-core:${HILT}"
     implementation "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"
     //Hilt_TEST
@@ -198,8 +198,6 @@ dependencies {
     implementation "com.tencent:mmkv:${MMKV}"
     //Bug统计Bugly
     implementation "com.tencent.bugly:crashreport:${BUGLY}"
-    //热修复Tinker
-    implementation "com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKER}"
     //内存泄露分析 LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
 }

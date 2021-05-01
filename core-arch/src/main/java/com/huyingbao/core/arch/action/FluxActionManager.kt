@@ -19,7 +19,9 @@ object FluxActionManager {
 
     /**
      * 成对添加[Action]和[Job]到管理订阅的ArrayMap中。
+     *
      * 如果已存在，则取消[Job]中观察者与被观察者订阅关系，
+     *
      * 停止被观察者[kotlinx.coroutines.flow.Flow]方法。
      */
     fun add(action: Action, job: Job) {
@@ -31,6 +33,7 @@ object FluxActionManager {
 
     /**
      * 移除[Action]，取消[Job]中观察者与被观察者订阅关系，
+     *
      * 停止被观察者[kotlinx.coroutines.flow.Flow]方法。
      */
     fun remove(action: Action) {

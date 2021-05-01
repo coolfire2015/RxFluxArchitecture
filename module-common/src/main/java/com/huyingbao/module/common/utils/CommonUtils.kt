@@ -28,8 +28,8 @@ fun showCommonError(activity: Activity, error: Error) {
                 activity.toast("登录失效！")
                 activity.finish()
                 ARouter.getInstance().build(CommonAppConstants.Router.LoginActivity)
-                        .withBoolean(CommonAppConstants.Key.TO_LOGIN, true)
-                        .navigation()
+                    .withBoolean(CommonAppConstants.Key.TO_LOGIN, true)
+                    .navigation()
             } else {
                 activity.toast("${throwable.code()}:${throwable.message()}")
             }
@@ -64,7 +64,7 @@ fun showCommonLoading(activity: Activity, rxLoading: Loading) {
             val commonLoadingDialog = CommonLoadingDialog.newInstance()
             commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
                 override fun onCancel() {
-                    if (activity is BaseFluxActivity<*>) {
+//                    if (activity is BaseFluxActivity<*>) {
 //                        TODO activity.baseActionCreator.removeAction(tag = rxLoading.tag)
 //                        activity.toast("取消操作${rxLoading.tag}")
                     }

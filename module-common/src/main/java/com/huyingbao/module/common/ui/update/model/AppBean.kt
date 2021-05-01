@@ -87,7 +87,11 @@ fun getAppState(
         //未安装包名对应的App
         return if (archivePackageInfo != null) {
             //本地Apk文件是包名对应App的最新版本
-            if (TextUtils.equals(archivePackageInfo.applicationInfo.packageName, packageName) && archivePackageInfo.versionCode >= versionCode) {
+            if (TextUtils.equals(
+                    archivePackageInfo.applicationInfo.packageName,
+                    packageName
+                ) && archivePackageInfo.versionCode >= versionCode
+            ) {
                 //直接安装本地Apk
                 AppUpdateState.INSTALL
             } else {

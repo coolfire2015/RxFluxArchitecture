@@ -55,28 +55,30 @@ class ArticleStore @ViewModelInject constructor(
      */
     val articleLiveData by lazy {
         wanAppDatabase.reposDao().getArticleList().toLiveData(
-                config = Config(
-                        //每次加载多少数据
-                        pageSize = CommonAppConstants.Config.PAGE_SIZE,
-                        //距底部还有几条数据时，加载下一页数据
-                        prefetchDistance = 10,
-                        //第一次加载多少数据
-                        initialLoadSizeHint = 60,
-                        //是否启用占位符，若为true，则视为固定数量的item
-                        enablePlaceholders = true),
-                boundaryCallback = object : PagedList.BoundaryCallback<Article>() {
-                    override fun onItemAtEndLoaded(itemAtEnd: Article) {
-                        super.onItemAtEndLoaded(itemAtEnd)
-                        //Page滑动到底部，通知UI需要获取下一页数据
-                        postChange(Change.newInstance(CommonAppAction.GET_NEXT_PAGE))
-                    }
-                })
+            config = Config(
+                //每次加载多少数据
+                pageSize = CommonAppConstants.Config.PAGE_SIZE,
+                //距底部还有几条数据时，加载下一页数据
+                prefetchDistance = 10,
+                //第一次加载多少数据
+                initialLoadSizeHint = 60,
+                //是否启用占位符，若为true，则视为固定数量的item
+                enablePlaceholders = true
+            ),
+            boundaryCallback = object : PagedList.BoundaryCallback<Article>() {
+                override fun onItemAtEndLoaded(itemAtEnd: Article) {
+                    super.onItemAtEndLoaded(itemAtEnd)
+                    //Page滑动到底部，通知UI需要获取下一页数据
+                    postChange(Change.newInstance(CommonAppAction.GET_NEXT_PAGE))
+                }
+            })
     }
 
     /**
      * 当所有者Activity销毁时,框架调用ViewModel的onCleared（）方法，以便它可以清理资源。
      */
     override fun onCleared() {
+        super.onCleared()
         pageLiveData.value = DEFAULT_PAGE
         bannerLiveData.value = null
     }

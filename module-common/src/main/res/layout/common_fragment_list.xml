@@ -1,21 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:id="@+id/rfl_content"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    app:srlEnablePreviewInEditMode="true"-->
+<!--    app:srlPrimaryColor="?android:attr/colorPrimary">-->
+<!--    <!–srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色–>-->
+<!--    <!–srlEnablePreviewInEditMode 可以开启和关闭预览功能–>-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rv_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:clipChildren="false"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:scrollbars="vertical"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+<!--    <!–clipChildren是设置子view是否可以超出父view；–>-->
+<!--    <!–clipToPadding是设置是否可以在padding区域内绘制；–>-->
+<!--</com.scwang.smart.refresh.layout.SmartRefreshLayout>-->
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rfl_content"
+    android:id="@+id/rv_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:srlEnablePreviewInEditMode="true"
-    app:srlPrimaryColor="?android:attr/colorPrimary">
-    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
-    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    <!--clipChildren是设置子view是否可以超出父view；-->
-    <!--clipToPadding是设置是否可以在padding区域内绘制；-->
-</com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:scrollbars="vertical"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

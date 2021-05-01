@@ -35,6 +35,8 @@ class ArticleActionCreator @Inject constructor(
     override fun getBannerList() {
         val rxAction = newAction(ArticleAction.GET_BANNER_LIST)
         rxAction.isGlobalCatch = false
-        postHttpLoadingAction(rxAction, flow { emit(retrofit.create(ArticleApi::class.java).getBannerList()) })
+        postHttpLoadingAction(
+            rxAction,
+            flow { emit(retrofit.create(ArticleApi::class.java).getBannerList()) })
     }
 }

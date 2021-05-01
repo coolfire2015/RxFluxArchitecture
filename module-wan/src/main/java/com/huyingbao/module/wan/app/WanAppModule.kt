@@ -41,10 +41,10 @@ object WanAppModule {
     @Named(BuildConfig.MODULE_NAME)
     fun provideRetrofit(builder: OkHttpClient.Builder): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(builder.build())
-                .build()
+            .baseUrl(BASE_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(builder.build())
+            .build()
     }
 
     /**
@@ -54,11 +54,12 @@ object WanAppModule {
     @Provides
     fun provideDataBase(application: Application): WanAppDatabase {
         val databaseBuilder = Room.databaseBuilder(
-                application,
-                WanAppDatabase::class.java,
-                DATABASE_NAME)
-                //允许Room破坏性地重新创建数据库表。
-                .fallbackToDestructiveMigration()
+            application,
+            WanAppDatabase::class.java,
+            DATABASE_NAME
+        )
+            //允许Room破坏性地重新创建数据库表。
+            .fallbackToDestructiveMigration()
         return databaseBuilder.build()
     }
 }

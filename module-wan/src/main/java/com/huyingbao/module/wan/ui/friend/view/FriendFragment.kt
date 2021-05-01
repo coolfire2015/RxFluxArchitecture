@@ -63,13 +63,14 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
             //RecyclerView设置适配器
             adapter = webSiteAdapter
             //RecyclerView设置点击事件
-            addOnItemTouchListener(RecyclerItemClickListener(context, this,
+            addOnItemTouchListener(
+                RecyclerItemClickListener(context, this,
                     object : RecyclerItemClickListener.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
-                            context?.startWebActivity(webSiteAdapter.getItem(position)?.link,
-                                    webSiteAdapter.getItem(position)?.name)
+//                            context?.startWebActivity(webSiteAdapter.getItem(position).link, webSiteAdapter.getItem(position).name)
                         }
-                    }))
+                    })
+            )
         }
         //下拉刷新监听器，设置获取最新一页数据
         refreshLayout?.setOnRefreshListener {
@@ -78,7 +79,7 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
         //显示数据
         store?.webSiteListData?.observe(this, Observer { products ->
             if (products != null) {
-                webSiteAdapter.setNewData(products.data)
+                webSiteAdapter.setNewInstance(products.data)
             }
         })
     }
@@ -92,7 +93,7 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
     }
 
     /**
-     * 显示进度对话框，接收[Loading]，粘性，该方法不经过RxStore，由RxFluxView直接处理
+     * 显示进度对话框，接收[Loading]，粘性，该方法不经过RxStore，由FluxView直接处理
      */
     @Subscribe(tags = [FriendAction.GET_FRIEND_LIST], sticky = true)
     fun onLoading(rxLoading: Loading) {

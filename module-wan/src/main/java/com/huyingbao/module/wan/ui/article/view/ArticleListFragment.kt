@@ -70,21 +70,23 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
             //RecyclerView设置适配器
             adapter = articleAdapter
             //RecyclerView设置点击事件
-            addOnItemTouchListener(RecyclerItemClickListener(context, this,
+            addOnItemTouchListener(
+                RecyclerItemClickListener(context, this,
                     object : RecyclerItemClickListener.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
-                            context?.startWebActivity(articleAdapter.getItem(position)?.link,
-                                    articleAdapter.getItem(position)?.title)
+//                            context?.startWebActivity(articleAdapter.getItem(position)?.link,
+//                                    articleAdapter.getItem(position)?.title)
                         }
-                    }))
+                    })
+            )
         }
         //下拉刷新监听器，设置获取最新一页数据
         refreshLayout?.setOnRefreshListener {
-            store?.pageLiveData?.value = ArticleStore.DEFAULT_PAGE
+            store.pageLiveData?.value = ArticleStore.DEFAULT_PAGE
             getData(null)
         }
         //显示数据
-        store?.articleLiveData?.observe(this@ArticleListFragment, Observer {
+        store.articleLiveData?.observe(this@ArticleListFragment, Observer {
             articleAdapter.submitList(it)
         })
     }
@@ -92,13 +94,13 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     override fun onResume() {
         super.onResume()
         //如果是第一页，需要刷新(排除屏幕旋转)
-        if (store?.pageLiveData?.value == ArticleStore.DEFAULT_PAGE) {
+        if (store.pageLiveData?.value == ArticleStore.DEFAULT_PAGE) {
             refreshLayout?.autoRefresh()
         }
     }
 
     /**
-     * 显示进度对话框，接收[Loading]，粘性，该方法不经过RxStore，由RxFluxView直接处理
+     * 显示进度对话框，接收[Loading]，粘性，该方法不经过RxStore，由FluxView直接处理
      */
     @Subscribe(tags = [ArticleAction.GET_ARTICLE_LIST], sticky = true)
     fun onLoading(rxLoading: Loading) {
@@ -149,12 +151,12 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
         return when (item.itemId) {
             R.id.menu_to_banner -> {
                 //跳转BannerFragment
-                baseActionCreator.postLocalChange(ArticleAction.TO_BANNER)
+//                baseActionCreator.postLocalChange(ArticleAction.TO_BANNER)
                 true
             }
             R.id.menu_to_friend -> {
                 //跳转FriendFragment
-                baseActionCreator.postLocalChange(ArticleAction.TO_FRIEND)
+//                baseActionCreator.postLocalChange(ArticleAction.TO_FRIEND)
                 true
             }
             R.id.menu_to_gan -> {

@@ -21,26 +21,29 @@ class BottomNavigationBehavior(
      * 垂直滑动
      */
     override fun onStartNestedScroll(
-            coordinatorLayout: CoordinatorLayout,
-            child: View,
-            directTargetChild: View,
-            target: View,
-            axes: Int,
-            type: Int): Boolean {
+        coordinatorLayout: CoordinatorLayout,
+        child: View,
+        directTargetChild: View,
+        target: View,
+        axes: Int,
+        type: Int
+    ): Boolean {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
     override fun onNestedPreScroll(
-            coordinatorLayout: CoordinatorLayout,
-            child: View,
-            target: View,
-            dx: Int,
-            dy: Int,
-            consumed: IntArray,
-            type: Int) {
+        coordinatorLayout: CoordinatorLayout,
+        child: View,
+        target: View,
+        dx: Int,
+        dy: Int,
+        consumed: IntArray,
+        type: Int
+    ) {
         if (dy > 0) {// 上滑隐藏
             if (outAnimator == null) {
-                outAnimator = ObjectAnimator.ofFloat(child, "translationY", 0f, child.height.toFloat())
+                outAnimator =
+                    ObjectAnimator.ofFloat(child, "translationY", 0f, child.height.toFloat())
                 outAnimator?.duration = 200
             }
             if (!outAnimator!!.isRunning && child.translationY <= 0) {
@@ -48,7 +51,8 @@ class BottomNavigationBehavior(
             }
         } else if (dy < 0) {// 下滑显示
             if (inAnimator == null) {
-                inAnimator = ObjectAnimator.ofFloat(child, "translationY", child.height.toFloat(), 0f)
+                inAnimator =
+                    ObjectAnimator.ofFloat(child, "translationY", child.height.toFloat(), 0f)
                 inAnimator?.duration = 200
             }
             if (!inAnimator!!.isRunning && child.translationY >= child.height) {

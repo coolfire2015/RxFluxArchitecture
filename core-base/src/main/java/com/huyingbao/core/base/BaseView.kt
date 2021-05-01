@@ -17,7 +17,7 @@ interface BaseView {
      * Activity中调用该方法
      */
     @IdRes
-    fun getToolbarId(): Int = R.id.tlb_top
+    fun getToolbarId(): Int = R.id.base_tlb_top
 
     /**
      * 获取可以容纳Fragment的View ID，使用默认布局中的ID，可以覆盖该方法，使用自定义ID
@@ -25,7 +25,7 @@ interface BaseView {
      * Activity中调用该方法
      */
     @IdRes
-    fun getFragmentContainerId(): Int = R.id.fragment_container
+    fun getFragmentContainerId(): Int = R.id.base_fragment_container
 
     /**
      * 获取对应布局文件ID

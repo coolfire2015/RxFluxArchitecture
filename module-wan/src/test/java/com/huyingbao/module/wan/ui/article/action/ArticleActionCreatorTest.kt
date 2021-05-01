@@ -66,7 +66,7 @@ class ArticleActionCreatorTest() : BaseSubscriberTest() {
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
-        articleActionCreator = ArticleActionCreator(dispatcher, actionManager, retrofit)
+        articleActionCreator = ArticleActionCreator(retrofit)
     }
 
     @After

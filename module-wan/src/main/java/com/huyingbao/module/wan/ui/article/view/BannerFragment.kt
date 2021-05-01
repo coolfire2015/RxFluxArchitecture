@@ -68,55 +68,20 @@ class BannerFragment : BaseFluxFragment<ArticleStore>() {
             //RecyclerView设置适配器
             adapter = bannerAdapter
             //RecyclerView设置点击事件
-            addOnItemTouchListener(RecyclerItemClickListener(context, this,
+            addOnItemTouchListener(
+                RecyclerItemClickListener(context, this,
                     object : RecyclerItemClickListener.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
-                            context?.startWebActivity(bannerAdapter.getItem(position)?.url,
-                                    bannerAdapter.getItem(position)?.title)
+//                            context?.startWebActivity(bannerAdapter.getItem(position)?.url,
+//                                    bannerAdapter.getItem(position)?.title)
                         }
-                    }))
-        }
-        //下拉刷新监听器，设置获取最新一页数据
-        refreshLayout?.setOnRefreshListener {
-            articleActionCreator.getBannerList()
+                    })
+            )
         }
         //显示数据
-        store?.bannerLiveData?.observe(this, Observer {
+        store.bannerLiveData.observe(this, {
             bannerAdapter.setNewData(it)
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (store?.bannerLiveData?.value == null) {
-            refreshLayout?.autoRefresh()
-        }
-    }
-
-    /**
-     * 显示进度对话框，接收[Loading]，粘性，该方法不经过RxStore，由RxFluxView直接处理
-     */
-    @Subscribe(tags = [ArticleAction.GET_BANNER_LIST], sticky = true)
-    fun onLoading(rxLoading: Loading) {
-        if (!rxLoading.isLoading) {
-            refreshLayout?.finishRefresh()
-        }
-    }
-
-    /**
-     * 接收[Error]，粘性
-     */
-    @Subscribe(tags = [ArticleAction.GET_BANNER_LIST], sticky = true)
-    fun onError(error: Error) {
-        activity?.let { showCommonError(it, error) }
-    }
-
-    /**
-     * 滑动到顶部
-     */
-    @Subscribe(tags = [CommonAppAction.SCROLL_TO_TOP], sticky = true)
-    fun scrollToTop(change: Change) {
-        rvContent?.scrollToTop()
+        articleActionCreator.getBannerList()
     }
 }

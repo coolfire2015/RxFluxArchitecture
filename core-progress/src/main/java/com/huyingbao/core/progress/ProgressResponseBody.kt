@@ -53,24 +53,24 @@ class ProgressResponseBody(private val mResponseBody: ResponseBody?, tag: String
                     super.read(sink, byteCount)
                 } catch (e: IOException) {
                     //发送异常,带有tag(需要有tag的方法来接)
-                    val rxError: Error = Error.newInstance(mRxProgress, e)
+                    val rxError: Error = Error.newInstance(progress, e)
                     EventBus.getDefault().postSticky(rxError, rxError.tag)
                     throw e
                 }
-                if (mRxProgress.contentLength == 0L) {
+                if (progress.contentLength == 0L) {
                     //避免重复调用 contentLength()
-                    mRxProgress.contentLength = contentLength()
+                    progress.contentLength = contentLength()
                 }
                 // read() returns the number of bytes read, or -1 if this source is exhausted.
                 currentLength += if (bytesRead != -1L) bytesRead else 0
                 val curTime = SystemClock.elapsedRealtime()
-                if (curTime - lastTime >= mRefreshTime || bytesRead == -1L || currentLength == mRxProgress.contentLength) {
-                    mRxProgress.eachLength = bytesRead
-                    mRxProgress.currentLength = currentLength
-                    mRxProgress.intervalTime = curTime - lastTime
+                if (curTime - lastTime >= refreshTime || bytesRead == -1L || currentLength == progress.contentLength) {
+                    progress.eachLength = bytesRead
+                    progress.currentLength = currentLength
+                    progress.intervalTime = curTime - lastTime
                     lastTime = curTime
                     //发送进度信息,带有tag(需要有tag的方法来接)
-                    EventBus.getDefault().postSticky(mRxProgress, mRxProgress.tag)
+                    EventBus.getDefault().postSticky(progress, progress.tag)
                 }
                 return bytesRead
             }

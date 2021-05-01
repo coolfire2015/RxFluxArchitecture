@@ -25,10 +25,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //Lambda表达式需要
+    //Java1.8支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //构建功能
+    buildFeatures {
+        //不生成BuildConfig.java文件
+        buildConfig = false
     }
 }
 
