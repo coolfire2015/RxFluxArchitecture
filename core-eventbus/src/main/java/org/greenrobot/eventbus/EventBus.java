@@ -275,7 +275,7 @@ public class EventBus {
      * poster.
      */
     private boolean isMainThread() {
-        return mainThreadSupport != null ? mainThreadSupport.isMainThread() : true;
+        return mainThreadSupport == null || mainThreadSupport.isMainThread();
     }
 
     public synchronized boolean isRegistered(Object subscriber) {

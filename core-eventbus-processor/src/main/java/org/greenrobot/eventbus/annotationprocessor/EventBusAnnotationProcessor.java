@@ -146,7 +146,7 @@ public class EventBusAnnotationProcessor extends AbstractProcessor {
             return false;
         }
 
-        List<? extends VariableElement> parameters = ((ExecutableElement) element).getParameters();
+        List<? extends VariableElement> parameters = element.getParameters();
         if (parameters.size() != 1) {
             messager.printMessage(Diagnostic.Kind.ERROR, "Subscriber method must have exactly 1 parameter", element);
             return false;

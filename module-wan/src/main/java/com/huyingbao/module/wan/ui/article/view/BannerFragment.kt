@@ -69,7 +69,7 @@ class BannerFragment : FluxView,BaseFragment() {
         }
         //显示数据
         store.bannerLiveData.observe(this, {
-            bannerAdapter.setNewData(it)
+            bannerAdapter.setNewInstance(it)
         })
         articleActionCreator.getBannerList()
     }

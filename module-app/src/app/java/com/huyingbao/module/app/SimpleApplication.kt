@@ -11,5 +11,4 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @AppOwner
 @HiltAndroidApp
-class SimpleApplication : FluxApp() {
-}
+class SimpleApplication : FluxApp()

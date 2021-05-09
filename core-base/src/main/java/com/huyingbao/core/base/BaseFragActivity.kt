@@ -28,10 +28,6 @@ abstract class BaseFragActivity : BaseView,
      */
     protected abstract fun createFragment(): Fragment?
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     /**
      * [androidx.appcompat.widget.Toolbar]Menu点击事件，拦截返回按钮，如果Fragment回退栈不为空，先弹出Fragment
      */

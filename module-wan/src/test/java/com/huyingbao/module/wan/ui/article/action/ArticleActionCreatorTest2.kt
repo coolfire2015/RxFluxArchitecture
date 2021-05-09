@@ -40,7 +40,7 @@ import java.util.logging.Level
  *
  * Created by liujunfeng on 2019/3/28.
  */
-class ArticleActionCreatorTest2() {
+class ArticleActionCreatorTest2 {
     @get:Rule
     var mockitoRule: MockitoRule = MockitoJUnit.rule()
 
@@ -58,7 +58,7 @@ class ArticleActionCreatorTest2() {
         val testCoroutineDispatcher = TestCoroutineDispatcher()
         Dispatchers.setMain(testCoroutineDispatcher)
         val action = Action.Builder("Action").build()
-        runBlockingTest() {
+        runBlockingTest {
             flow {
 //                emit(retrofit().create(ArticleApi::class.java).getArticleList(1))
                 emit(1)

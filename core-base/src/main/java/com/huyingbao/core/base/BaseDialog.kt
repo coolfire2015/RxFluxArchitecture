@@ -16,7 +16,7 @@ import com.huyingbao.core.base.BaseView
  *
  * Created by liujunfeng on 2019/1/1.
  */
-abstract class BaseDialog() :
+abstract class BaseDialog :
     AppCompatDialogFragment(),
     BaseView {
     /**

@@ -64,11 +64,6 @@ class ArticleStore @Inject constructor(
                 enablePlaceholders = true
             ),
             boundaryCallback = object : PagedList.BoundaryCallback<Article>() {
-                override fun onItemAtEndLoaded(itemAtEnd: Article) {
-                    super.onItemAtEndLoaded(itemAtEnd)
-                    //Page滑动到底部，通知UI需要获取下一页数据
-//                    postChange(Change.newInstance(CommonAppAction.GET_NEXT_PAGE))
-                }
             })
     }
 

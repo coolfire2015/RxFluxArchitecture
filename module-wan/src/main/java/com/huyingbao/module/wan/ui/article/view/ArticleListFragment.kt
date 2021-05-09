@@ -78,11 +78,11 @@ class ArticleListFragment : FluxView,BaseFragment() {
         }
         //下拉刷新监听器，设置获取最新一页数据
         refreshLayout?.setOnRefreshListener {
-            store.pageLiveData?.value = ArticleStore.DEFAULT_PAGE
+            store.pageLiveData.value = ArticleStore.DEFAULT_PAGE
 //            getData(null)
         }
         //显示数据
-        store.articleLiveData?.observe(this@ArticleListFragment, Observer {
+        store.articleLiveData.observe(this@ArticleListFragment, Observer {
             articleAdapter.submitList(it)
         })
     }
@@ -90,7 +90,7 @@ class ArticleListFragment : FluxView,BaseFragment() {
     override fun onResume() {
         super.onResume()
         //如果是第一页，需要刷新(排除屏幕旋转)
-        if (store.pageLiveData?.value == ArticleStore.DEFAULT_PAGE) {
+        if (store.pageLiveData.value == ArticleStore.DEFAULT_PAGE) {
             refreshLayout?.autoRefresh()
         }
     }

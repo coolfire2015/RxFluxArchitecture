@@ -40,7 +40,7 @@ import javax.inject.Named
 @HiltAndroidTest
 @UninstallModules(WanAppModule::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-class ArticleActionCreatorTest() : BaseSubscriberTest() {
+class ArticleActionCreatorTest : BaseSubscriberTest() {
     /**
      * 初始化DaggerMock
      */

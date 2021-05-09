@@ -75,7 +75,7 @@ class FriendFragment : FluxView,BaseFragment() {
             friendActionCreator.getFriendList()
         }
         //显示数据
-        store?.webSiteListData?.observe(this, Observer { products ->
+        store.webSiteListData.observe(this, Observer { products ->
             if (products != null) {
                 webSiteAdapter.setNewInstance(products.data)
             }
@@ -85,7 +85,7 @@ class FriendFragment : FluxView,BaseFragment() {
     override fun onResume() {
         super.onResume()
         //如果store已经创建并获取到数据，说明是横屏等操作导致的Fragment重建，不需要重新获取数据
-        if (store?.webSiteListData?.value == null) {
+        if (store.webSiteListData.value == null) {
             refreshLayout?.autoRefresh()
         }
     }

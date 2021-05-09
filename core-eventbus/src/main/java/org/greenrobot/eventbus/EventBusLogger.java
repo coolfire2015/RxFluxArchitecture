@@ -23,7 +23,7 @@ public interface EventBusLogger {
 
     void log(Level level, String msg, Throwable th);
 
-    public static class JavaLogger implements EventBusLogger {
+    class JavaLogger implements EventBusLogger {
         protected final java.util.logging.Logger logger;
 
         public JavaLogger(String tag) {
@@ -44,7 +44,7 @@ public interface EventBusLogger {
 
     }
 
-    public static class SystemOutLogger implements EventBusLogger {
+    class SystemOutLogger implements EventBusLogger {
 
         @Override
         public void log(Level level, String msg) {
