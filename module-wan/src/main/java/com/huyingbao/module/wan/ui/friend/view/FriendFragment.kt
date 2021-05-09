@@ -24,7 +24,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class FriendFragment : FluxView, BaseFragment() {
+class FriendFragment : FluxView,BaseFragment() {
     @Inject
     lateinit var friendActionCreator: FriendActionCreator
 
@@ -43,7 +43,7 @@ class FriendFragment : FluxView, BaseFragment() {
         fun newInstance() = FriendFragment()
     }
 
-    override val store: FriendStore? by viewModels()
+    override val store: FriendStore by viewModels()
 
     override fun getLayoutId() = R.layout.common_fragment_list
 

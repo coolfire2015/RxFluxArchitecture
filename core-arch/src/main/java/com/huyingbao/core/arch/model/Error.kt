@@ -8,13 +8,13 @@ import org.greenrobot.eventbus.BusEvent
  * Created by liujunfeng on 2019/1/1.
  */
 class Error private constructor(
-    tag: String,
-    val throwable: Throwable
+        tag: String,
+        val throwable: Throwable
 ) : BusEvent(tag) {
     companion object {
         fun newInstance(busEvent: BusEvent, throwable: Throwable): Error {
             return Error(busEvent.tag, throwable)
-                .apply { isGlobalCatch = busEvent.isGlobalCatch }
+                    .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }
     }
 }

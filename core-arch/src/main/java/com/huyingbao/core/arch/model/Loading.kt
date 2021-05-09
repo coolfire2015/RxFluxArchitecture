@@ -10,13 +10,13 @@ import org.greenrobot.eventbus.BusEvent
  * Created by liujunfeng on 2019/1/1.
  */
 class Loading private constructor(
-    tag: String,
-    val isLoading: Boolean
+        tag: String,
+        val isLoading: Boolean
 ) : BusEvent(tag) {
     companion object {
         fun newInstance(busEvent: BusEvent, isLoading: Boolean): Loading {
             return Loading(busEvent.tag, isLoading)
-                .apply { isGlobalCatch = busEvent.isGlobalCatch }
+                    .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }
     }
 }

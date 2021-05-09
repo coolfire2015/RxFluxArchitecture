@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.huyingbao.core.base.BaseView
 
 /**
  * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅

@@ -8,7 +8,7 @@ import org.greenrobot.eventbus.BusEvent
  * Created by liujunfeng on 2019/1/1.
  */
 class Change private constructor(
-    tag: String
+        tag: String
 ) : BusEvent(tag) {
     companion object {
         /**

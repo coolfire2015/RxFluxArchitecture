@@ -9,15 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.arch.view.FluxView
 import com.huyingbao.core.base.common.fragment.BaseFragment
-import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.common.utils.RecyclerItemClickListener
-import com.huyingbao.module.common.utils.scrollToTop
 import com.huyingbao.module.common.utils.showCommonError
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
@@ -33,7 +30,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class ArticleListFragment : FluxView, BaseFragment() {
+class ArticleListFragment : FluxView,BaseFragment() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 
@@ -51,7 +48,7 @@ class ArticleListFragment : FluxView, BaseFragment() {
         fun newInstance() = ArticleListFragment()
     }
 
-    override val store: ArticleStore? by activityViewModels()
+    override val store: ArticleStore by activityViewModels()
 
     override fun getLayoutId() = R.layout.common_fragment_list
 
@@ -82,7 +79,7 @@ class ArticleListFragment : FluxView, BaseFragment() {
         //下拉刷新监听器，设置获取最新一页数据
         refreshLayout?.setOnRefreshListener {
             store.pageLiveData?.value = ArticleStore.DEFAULT_PAGE
-            getData(null)
+//            getData(null)
         }
         //显示数据
         store.articleLiveData?.observe(this@ArticleListFragment, Observer {
@@ -116,23 +113,23 @@ class ArticleListFragment : FluxView, BaseFragment() {
         activity?.let { showCommonError(it, error) }
     }
 
-    /**
-     * 获取数据
-     */
-    @Subscribe(tags = [CommonAppAction.GET_NEXT_PAGE], sticky = true)
-    fun getData(change: Change?) {
-        store?.pageLiveData?.value?.let {
-            articleActionCreator.getArticleList(it)
-        }
-    }
-
-    /**
-     * 滑动到顶部
-     */
-    @Subscribe(tags = [CommonAppAction.SCROLL_TO_TOP], sticky = true)
-    fun scrollToTop(change: Change) {
-        rvContent?.scrollToTop()
-    }
+//    /**
+//     * 获取数据
+//     */
+//    @Subscribe(tags = [CommonAppAction.GET_NEXT_PAGE], sticky = true)
+//    fun getData(change: Change?) {
+//        store?.pageLiveData?.value?.let {
+//            articleActionCreator.getArticleList(it)
+//        }
+//    }
+//
+//    /**
+//     * 滑动到顶部
+//     */
+//    @Subscribe(tags = [CommonAppAction.SCROLL_TO_TOP], sticky = true)
+//    fun scrollToTop(change: Change) {
+//        rvContent?.scrollToTop()
+//    }
 
     /**
      * fragment中创建menu

@@ -17,14 +17,12 @@ import javax.inject.Named
  */
 @ActivityRetainedScoped
 class ArticleActionCreator @Inject constructor(
-    @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
+        @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
 ) : FluxActionCreator(), ArticleAction {
 
     override fun getArticleList(page: Int) {
-        val rxAction = newAction(
-            ArticleAction.GET_ARTICLE_LIST,
-            CommonAppConstants.Key.PAGE, page
-        )
+        val rxAction = newAction(ArticleAction.GET_ARTICLE_LIST,
+                CommonAppConstants.Key.PAGE, page)
         rxAction.isGlobalCatch = false
         val articleApi = retrofit.create(ArticleApi::class.java)
         postHttpLoadingAction(rxAction, flow { emit(articleApi.getArticleList(page)) })

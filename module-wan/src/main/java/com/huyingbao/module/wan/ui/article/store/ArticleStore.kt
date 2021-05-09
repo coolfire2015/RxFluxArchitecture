@@ -23,7 +23,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ArticleStore @Inject constructor(
-    private val wanAppDatabase: WanAppDatabase,
+        private val wanAppDatabase: WanAppDatabase,
 ) : FluxStore() {
     /**
      * 默认起始页码

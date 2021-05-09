@@ -11,8 +11,8 @@ import androidx.core.view.ViewCompat
  * [com.google.android.material.bottomnavigation.BottomNavigationView]滑动联动隐藏行为
  */
 class BottomNavigationBehavior(
-    context: Context,
-    attrs: AttributeSet
+        context: Context,
+        attrs: AttributeSet
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
     private var outAnimator: ObjectAnimator? = null
     private var inAnimator: ObjectAnimator? = null

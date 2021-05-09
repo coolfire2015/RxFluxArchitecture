@@ -1,12 +1,12 @@
 package com.huyingbao.module.wan.ui.friend.store
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.huyingbao.core.arch.model.Action
 import com.huyingbao.core.arch.store.FluxStore
 import com.huyingbao.module.wan.model.WanResponse
 import com.huyingbao.module.wan.model.WebSite
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@ViewModelInject
+@HiltViewModel
 class FriendStore @Inject constructor(
 ) : FluxStore() {
     val webSiteListData = MutableLiveData<WanResponse<ArrayList<WebSite>>>()

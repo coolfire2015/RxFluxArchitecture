@@ -1,8 +1,7 @@
 package com.huyingbao.module.app
 
 import com.huyingbao.core.annotations.AppOwner
-import com.huyingbao.core.base.BaseApp
-
+import com.huyingbao.core.arch.FluxApp
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -12,5 +11,5 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @AppOwner
 @HiltAndroidApp
-class SimpleApplication : BaseApp() {
+class SimpleApplication : FluxApp() {
 }

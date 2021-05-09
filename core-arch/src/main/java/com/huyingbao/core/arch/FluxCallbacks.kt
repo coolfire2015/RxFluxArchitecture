@@ -29,8 +29,7 @@ import androidx.lifecycle.DefaultLifecycleObserver as LifecycleDefaultLifecycleO
  *
  * Created by liujunfeng on 2019/1/1.
  */
-object FluxCallbacks : FragmentManager.FragmentLifecycleCallbacks(),
-    Application.ActivityLifecycleCallbacks {
+object FluxCallbacks : FragmentManager.FragmentLifecycleCallbacks(), Application.ActivityLifecycleCallbacks {
     const val TAG = "Flux"
 
     /**
@@ -62,11 +61,7 @@ object FluxCallbacks : FragmentManager.FragmentLifecycleCallbacks(),
     /**
      * 注册[Fragment]持有的[com.huyingbao.core.arch.store.FluxStore]
      */
-    override fun onFragmentAttached(
-        fragmentManager: FragmentManager,
-        fragment: Fragment,
-        context: Context
-    ) {
+    override fun onFragmentAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fragmentManager, fragment, context)
         // 注册持有的 FluxStore
         subscribeStore(fragment)

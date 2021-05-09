@@ -5,23 +5,23 @@ import android.content.pm.PackageManager
 import android.text.TextUtils
 
 data class AppBean(
-    val binary: Binary,
-    val build: String,
-    val changelog: String,
-    val direct_install_url: String,
-    val installUrl: String,
-    val install_url: String,
-    val name: String,
-    val update_url: String,
-    val updated_at: Int,
-    val version: String,
-    val versionShort: String
+        val binary: Binary,
+        val build: String,
+        val changelog: String,
+        val direct_install_url: String,
+        val installUrl: String,
+        val install_url: String,
+        val name: String,
+        val update_url: String,
+        val updated_at: Int,
+        val version: String,
+        val versionShort: String
 ) {
     var appUpdateState: AppUpdateState = AppUpdateState.DOWNLOAD
 }
 
 data class Binary(
-    val fsize: Int
+        val fsize: Int
 )
 
 enum class AppUpdateState {
@@ -55,36 +55,24 @@ enum class AppUpdateState {
  * @param application       当前AppApplication
  */
 fun getAppState(
-    build: String,
-    packageName: String,
-    archiveFilePath: String? = null,
-    application: Application
+        build: String,
+        packageName: String,
+        archiveFilePath: String? = null,
+        application: Application
 ): AppUpdateState {
     try {//最新Apk版本号
         val versionCode = Integer.valueOf(build)
         //本地是否已经有apk
-        val archivePackageInfo = archiveFilePath?.let {
-            application.packageManager.getPackageArchiveInfo(
-                it,
-                PackageManager.GET_ACTIVITIES
-            )
-        }
+        val archivePackageInfo = archiveFilePath?.let { application.packageManager.getPackageArchiveInfo(it, PackageManager.GET_ACTIVITIES) }
         //获取App是否已经安装
-        val packageInfo = application.packageManager.getPackageInfo(
-            packageName,
-            PackageManager.GET_CONFIGURATIONS
-        )
+        val packageInfo = application.packageManager.getPackageInfo(packageName, PackageManager.GET_CONFIGURATIONS)
         //已经安装包名对应的App
         if (packageInfo != null) {
             //已安装是最新版本
             if (packageInfo.versionCode >= versionCode) return AppUpdateState.LATEST
             return if (archivePackageInfo != null) {
                 //本地Apk文件是包名对应App的最新版本
-                if (TextUtils.equals(
-                        archivePackageInfo.applicationInfo.packageName,
-                        packageName
-                    ) && archivePackageInfo.versionCode >= versionCode
-                ) {
+                if (TextUtils.equals(archivePackageInfo.applicationInfo.packageName, packageName) && archivePackageInfo.versionCode >= versionCode) {
                     //直接安装本地Apk
                     AppUpdateState.INSTALL
                 } else {
