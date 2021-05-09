@@ -16,8 +16,8 @@ import com.huyingbao.core.base.BaseView
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseFragment :
-        Fragment(),
-        BaseView {
+    Fragment(),
+    BaseView {
     var backAble: Boolean = false
     var title: CharSequence? = null
 
@@ -29,7 +29,11 @@ abstract class BaseFragment :
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(getLayoutId(), container, false)
     }
 

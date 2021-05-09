@@ -114,24 +114,26 @@ abstract class FluxActionCreator {
                 )
                 if (canRetry) {
 //                        postRetry(action, t, it)
-                    } else {
-                        postError(action, it)
-                    }
-                    removeAction(action)
+                } else {
+                    postError(action, it)
                 }
-                // 指定主线程执行collect操作
-                .launchIn(MainScope())
-                // 添加Job到action
-                .let {
-                    addAction(action, it)
-                }
+                removeAction(action)
+            }
+            // 指定主线程执行collect操作
+            .launchIn(MainScope())
+            // 添加Job到action
+            .let {
+                addAction(action, it)
+            }
     }
 
     /**
      * 异步执行，成功发送[Action]，异常发送[Error]。
      */
-    protected open fun <T> postHttpAction(action: Action,
-                                          flow: Flow<T>) {
+    protected open fun <T> postHttpAction(
+        action: Action,
+        flow: Flow<T>
+    ) {
         postAction(action, flow, canShowLoading = false, canRetry = false)
     }
 

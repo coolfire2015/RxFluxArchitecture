@@ -30,7 +30,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class ArticleListFragment : FluxView,BaseFragment() {
+class ArticleListFragment : FluxView, BaseFragment() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 

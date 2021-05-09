@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.Subscribe
  */
 @Route(path = CommonAppConstants.Router.ArticleActivity)
 @AndroidEntryPoint
-class ArticleActivity : FluxView,BaseFragActivity() {
+class ArticleActivity : FluxView, BaseFragActivity() {
     override val store: ArticleStore by viewModels()
 
     override fun createFragment(): Fragment? {

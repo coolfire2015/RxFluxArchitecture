@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by liujunfeng on 2019/8/12.
  */
 class RecyclerItemClickListener(
-        context: Context?,
-        recyclerView: RecyclerView?,
-        private val itemClickListener: OnItemClickListener
+    context: Context?,
+    recyclerView: RecyclerView?,
+    private val itemClickListener: OnItemClickListener
 ) : RecyclerView.SimpleOnItemTouchListener() {
     private val gestureDetector: GestureDetector
 
@@ -27,22 +27,29 @@ class RecyclerItemClickListener(
     }
 
     init {
-        gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapUp(e: MotionEvent): Boolean {
-                return true
-            }
+        gestureDetector =
+            GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onSingleTapUp(e: MotionEvent): Boolean {
+                    return true
+                }
 
-            override fun onLongPress(motionEvent: MotionEvent) {
-                recyclerView?.findChildViewUnder(motionEvent.x, motionEvent.y)?.let {
-                    if (itemClickListener is OnItemLongClickListener) {
-                        itemClickListener.onItemLongClick(it, recyclerView.getChildAdapterPosition(it))
+                override fun onLongPress(motionEvent: MotionEvent) {
+                    recyclerView?.findChildViewUnder(motionEvent.x, motionEvent.y)?.let {
+                        if (itemClickListener is OnItemLongClickListener) {
+                            itemClickListener.onItemLongClick(
+                                it,
+                                recyclerView.getChildAdapterPosition(it)
+                            )
+                        }
                     }
                 }
-            }
-        })
+            })
     }
 
-    override fun onInterceptTouchEvent(recyclerView: RecyclerView, motionEvent: MotionEvent): Boolean {
+    override fun onInterceptTouchEvent(
+        recyclerView: RecyclerView,
+        motionEvent: MotionEvent
+    ): Boolean {
         recyclerView.findChildViewUnder(motionEvent.x, motionEvent.y)?.let {
             if (gestureDetector.onTouchEvent(motionEvent)) {
                 itemClickListener.onItemClick(it, recyclerView.getChildAdapterPosition(it))

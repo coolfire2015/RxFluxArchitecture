@@ -1,6 +1,5 @@
 package com.huyingbao.core.base
 
-import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -14,7 +13,7 @@ import androidx.fragment.app.FragmentManager
  * Created by liujunfeng on 2019/1/1.
  */
 abstract class BaseFragActivity : BaseView,
-        AppCompatActivity
+    AppCompatActivity
         () {
     /**
      * 使用默认Activity布局，可以覆盖该方法，使用自定义布局

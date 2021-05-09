@@ -3,7 +3,6 @@ package com.huyingbao.module.common.utils
 import android.app.Activity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.Error
-import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.module.common.app.CommonAppConstants
 import retrofit2.HttpException
 import splitties.toast.toast

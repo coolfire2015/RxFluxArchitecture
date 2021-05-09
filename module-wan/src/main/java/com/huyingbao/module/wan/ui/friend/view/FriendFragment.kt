@@ -24,7 +24,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class FriendFragment : FluxView,BaseFragment() {
+class FriendFragment : FluxView, BaseFragment() {
     @Inject
     lateinit var friendActionCreator: FriendActionCreator
 

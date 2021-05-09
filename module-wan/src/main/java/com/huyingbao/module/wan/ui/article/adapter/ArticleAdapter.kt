@@ -30,7 +30,8 @@ class ArticleAdapter : PagedListAdapter<Article, ArticleViewHolder>(diffCallback
         holder.bindTo(getItem(position))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder = ArticleViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder =
+        ArticleViewHolder(parent)
 
     public override fun getItem(position: Int): Article? = super.getItem(position)
 
@@ -59,7 +60,8 @@ class ArticleAdapter : PagedListAdapter<Article, ArticleViewHolder>(diffCallback
  * 一个简单ViewHolder。它还接受null项，因为数据可能在绑定之前没有被获取。
  */
 class ArticleViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.wan_recycle_item_article, parent, false)) {
+    LayoutInflater.from(parent.context).inflate(R.layout.wan_recycle_item_article, parent, false)
+) {
     /**
      * 如果尚未分页项，则它们可能为空。PagedListAdapter将在加载项时重新绑定ViewHolder。
      */
