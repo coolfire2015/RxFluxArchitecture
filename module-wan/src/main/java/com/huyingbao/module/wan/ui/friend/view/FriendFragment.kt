@@ -6,10 +6,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
-import com.huyingbao.core.utils.setTitle
+import com.huyingbao.core.arch.view.FluxView
+import com.huyingbao.core.base.common.fragment.BaseFragment
 import com.huyingbao.module.common.utils.RecyclerItemClickListener
-import com.huyingbao.module.common.utils.startWebActivity
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import com.huyingbao.module.wan.ui.friend.action.FriendActionCreator
@@ -18,7 +17,6 @@ import com.huyingbao.module.wan.ui.friend.store.FriendStore
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
-
 import java.util.*
 import javax.inject.Inject
 
@@ -26,7 +24,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class FriendFragment : BaseFluxFragment<FriendStore>() {
+class FriendFragment : FluxView,BaseFragment() {
     @Inject
     lateinit var friendActionCreator: FriendActionCreator
 
@@ -50,7 +48,7 @@ class FriendFragment : BaseFluxFragment<FriendStore>() {
     override fun getLayoutId() = R.layout.common_fragment_list
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.wan_label_friend, true)
+//        setTitle(R.string.wan_label_friend, true)
         initView()
     }
 

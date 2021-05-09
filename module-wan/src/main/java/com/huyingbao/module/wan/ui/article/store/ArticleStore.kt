@@ -1,15 +1,11 @@
 package com.huyingbao.module.wan.ui.article.store
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Config
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Action
-import com.huyingbao.core.arch.model.Change
-import com.huyingbao.core.arch.store.ActivityStore
-import com.huyingbao.module.common.app.CommonAppAction
+import com.huyingbao.core.arch.store.FluxStore
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.wan.app.WanAppDatabase
 import com.huyingbao.module.wan.model.Article
@@ -17,16 +13,18 @@ import com.huyingbao.module.wan.model.Banner
 import com.huyingbao.module.wan.model.Page
 import com.huyingbao.module.wan.model.WanResponse
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-class ArticleStore @ViewModelInject constructor(
+@HiltViewModel
+class ArticleStore @Inject constructor(
         private val wanAppDatabase: WanAppDatabase,
-        dispatcher: Dispatcher
-) : ActivityStore(dispatcher) {
+) : FluxStore() {
     /**
      * 默认起始页码
      */
@@ -69,7 +67,7 @@ class ArticleStore @ViewModelInject constructor(
                 override fun onItemAtEndLoaded(itemAtEnd: Article) {
                     super.onItemAtEndLoaded(itemAtEnd)
                     //Page滑动到底部，通知UI需要获取下一页数据
-                    postChange(Change.newInstance(CommonAppAction.GET_NEXT_PAGE))
+//                    postChange(Change.newInstance(CommonAppAction.GET_NEXT_PAGE))
                 }
             })
     }

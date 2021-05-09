@@ -1,13 +1,13 @@
 package com.huyingbao.core.progress
 
-import org.greenrobot.eventbus.EventBusEvent
+import org.greenrobot.eventbus.BusEvent
 
 /**
  * Created by liujunfeng on 2019/1/1.
  */
 class RxProgress private constructor(
         tag: String
-) : EventBusEvent(tag) {
+) : BusEvent(tag) {
     /**
      * 当前已上传或下载的总长度
      */

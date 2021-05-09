@@ -1,77 +1,51 @@
-package com.huyingbao.core.base
+package com.huyingbao.core.base.common.fragment
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
-
-import androidx.appcompat.app.AppCompatActivity
-import com.huyingbao.core.base.R
-import com.huyingbao.core.base.common.fragment.BaseCommonFragment
-import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
+import androidx.fragment.app.Fragment
+import com.huyingbao.core.base.BaseView
 
 /**
- * 设置标题，设置返回图标
+ * 不使用Dagger.Android，不持有ViewModel，不自动管理订阅
  *
- * @param title    Toolbar标题
- * @param backAble true：Home按钮作为返回箭头，false：默认设置
+ * Fragment可创建Menu
+ *
+ * Created by liujunfeng on 2019/1/1.
  */
-fun AppCompatActivity.setTitle(title: CharSequence?, backAble: Boolean) {
-    if (supportActionBar == null) {
-        setTitle(title)
-    } else {
-        supportActionBar?.run {
-            //显示标题
-            setDisplayShowTitleEnabled(true)
-            //设置标题
-            this.title = title
-            //显示Home按钮
-            setDisplayShowHomeEnabled(backAble)
-            //设置Home按钮作为返回按钮
-            setDisplayHomeAsUpEnabled(backAble)
-            //设置Home按钮图标
-            setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_material)
+abstract class BaseFragment :
+        Fragment(),
+        BaseView {
+    var backAble: Boolean = false
+    var title: CharSequence? = null
+
+    /**
+     * 告诉FragmentManager:其管理的fragment应接收onCreateOptionsMenu(...)方法的调用指令，fragment中创建Menu。
+     */
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflater.inflate(getLayoutId(), container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        afterCreate(savedInstanceState)
+    }
+
+    /**
+     * 隐藏状态转变，
+     * 从隐藏转为非隐藏的时候调用，当前页面显示时，显示对应的标题
+     */
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+//            setTitle(title, backAble)
         }
     }
-}
-
-/**
- * 设置标题，设置返回图标
- *
- * @param titleId  Toolbar标题
- * @param backAble true：Home按钮作为返回箭头，false：默认设置
- */
-fun AppCompatActivity.setTitle(@StringRes titleId: Int, backAble: Boolean) {
-    setTitle(getText(titleId), backAble)
-}
-
-/**
- * 设置标题，设置返回图标
- *
- * @param title    Toolbar标题
- * @param backAble true：Home按钮作为返回箭头，false：默认设置
- */
-fun BaseFragment.setTitle(title: CharSequence?, backAble: Boolean) {
-    activity?.let {
-        //宿主Activity中设置标题和返回标志
-        if (it is AppCompatActivity) {
-            it.setTitle(title, backAble)
-        } else {
-            it.title = title
-        }
-        //当前Fragment中暂存标题和返回标志
-        this.backAble = backAble
-        this.title = title
-    }
-}
-
-/**
- * 设置标题，设置返回图标
- *
- * @param titleId  Toolbar标题
- * @param backAble true：Home按钮作为返回箭头，false：默认设置
- */
-fun BaseFragment.setTitle(@StringRes titleId: Int, backAble: Boolean) {
-    setTitle(getText(titleId), backAble)
 }

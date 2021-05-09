@@ -1,8 +1,6 @@
 package com.huyingbao.module.wan.ui.friend.action
 
-import com.huyingbao.core.arch.action.ActionCreator
-import com.huyingbao.core.arch.action.ActionManager
-import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.action.FluxActionCreator
 import com.huyingbao.module.wan.BuildConfig
 import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.flow.flow
@@ -15,10 +13,8 @@ import javax.inject.Named
  */
 @FragmentScoped
 class FriendActionCreator @Inject constructor(
-        dispatcher: Dispatcher,
-        actionManager: ActionManager,
         @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
-) : ActionCreator(dispatcher, actionManager), FriendAction {
+) : FluxActionCreator(), FriendAction {
     override fun getFriendList() {
         val rxAction = newAction(FriendAction.GET_FRIEND_LIST)
         rxAction.isGlobalCatch = false

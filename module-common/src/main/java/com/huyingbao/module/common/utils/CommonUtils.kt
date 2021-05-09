@@ -1,16 +1,10 @@
 package com.huyingbao.module.common.utils
 
 import android.app.Activity
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.base.flux.activity.BaseFluxActivity
 import com.huyingbao.module.common.app.CommonAppConstants
-import com.huyingbao.module.common.ui.loading.CommonLoadingDialog
-import com.huyingbao.module.common.ui.loading.CommonLoadingDialogClickListener
-import com.huyingbao.module.common.ui.web.WebActivity
 import retrofit2.HttpException
 import splitties.toast.toast
 import java.net.SocketException
@@ -56,33 +50,33 @@ fun showCommonError(activity: Activity, error: Error) {
 /**
  * 公用显示操作进度
  */
-fun showCommonLoading(activity: Activity, rxLoading: Loading) {
-    if (activity is AppCompatActivity) {
-        val fragmentByTag = activity.supportFragmentManager.findFragmentByTag(rxLoading.tag)
-        if (fragmentByTag == null && rxLoading.isLoading) {
-            //显示进度框
-            val commonLoadingDialog = CommonLoadingDialog.newInstance()
-            commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
-                override fun onCancel() {
-//                    if (activity is BaseFluxActivity<*>) {
-//                        TODO activity.baseActionCreator.removeAction(tag = rxLoading.tag)
-//                        activity.toast("取消操作${rxLoading.tag}")
-                    }
-                }
-            }
-            commonLoadingDialog.show(activity.supportFragmentManager, rxLoading.tag)
-            return
-        }
-        if (fragmentByTag is CommonLoadingDialog && !rxLoading.isLoading) {
-            //隐藏进度框
-            fragmentByTag.dismiss()
-        }
-    }
-}
+//fun showCommonLoading(activity: Activity, rxLoading: Loading) {
+//    if (activity is AppCompatActivity) {
+//        val fragmentByTag = activity.supportFragmentManager.findFragmentByTag(rxLoading.tag)
+//        if (fragmentByTag == null && rxLoading.isLoading) {
+//            //显示进度框
+//            val commonLoadingDialog = CommonLoadingDialog.newInstance()
+//            commonLoadingDialog.clickListener = object : CommonLoadingDialogClickListener {
+//                override fun onCancel() {
+////                    if (activity is BaseFluxActivity<*>) {
+////                        TODO activity.baseActionCreator.removeAction(tag = rxLoading.tag)
+////                        activity.toast("取消操作${rxLoading.tag}")
+//                    }
+//                }
+//            }
+//            commonLoadingDialog.show(activity.supportFragmentManager, rxLoading.tag)
+//            return
+//        }
+//        if (fragmentByTag is CommonLoadingDialog && !rxLoading.isLoading) {
+//            //隐藏进度框
+//            fragmentByTag.dismiss()
+//        }
+//    }
+//}
 
-/**
- * 跳转网页展示页面[WebActivity]
- */
-fun Context.startWebActivity(url: String?, title: String?) {
-    startActivity(WebActivity.newIntent(this, url, title))
-}
+///**
+// * 跳转网页展示页面[WebActivity]
+// */
+//fun Context.startWebActivity(url: String?, title: String?) {
+//    startActivity(WebActivity.newIntent(this, url, title))
+//}

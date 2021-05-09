@@ -76,12 +76,13 @@ configurations.all {
 
 dependencies {
     //arch-base
+    implementation project(':core-arch')
     implementation project(':core-base')
-    implementation project(':core-progress')
+    implementation project(':core-utils')
     kapt project(':core-arch-processor')
     kapt project(':core-eventbus-processor')
     //arch-test
-    testImplementation project(':core-test')
+//    testImplementation project(':core-test')
     kaptTest project(':core-arch-processor')
     kaptTest project(':core-eventbus-processor')
 
@@ -132,15 +133,13 @@ dependencies {
     //X_Room_TEST
     testImplementation "androidx.room:room-testing:${X_ROOM}"
     kaptTest "androidx.room:room-compiler:${X_ROOM}"
-    //X_Hilt
-    implementation "androidx.hilt:hilt-work:${X_HILT}"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
-    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
-    //X_Hilt_TEST
-    kaptTest "androidx.hilt:hilt-compiler:${X_HILT}"
+//    //X_Hilt
+//    implementation "androidx.hilt:hilt-work:${X_HILT}"
+//    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
+//    //X_Hilt_TEST
+//    kaptTest "androidx.hilt:hilt-compiler:${X_HILT}"
 
     //Hilt
-    implementation "com.google.dagger:hilt-core:${HILT}"
     implementation "com.google.dagger:hilt-android:${HILT}"
     kapt "com.google.dagger:hilt-android-compiler:${HILT}"
     //Hilt_TEST

@@ -2,7 +2,7 @@ package com.huyingbao.core.arch.model
 
 import android.text.TextUtils
 import androidx.collection.ArrayMap
-import org.greenrobot.eventbus.EventBusEvent
+import org.greenrobot.eventbus.BusEvent
 
 /**
  * 操作结果通知，封装操作返回数据。
@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.EventBusEvent
 class Action private constructor(
         tag: String,
         val data: ArrayMap<String, Any>
-) : EventBusEvent(tag) {
+) : BusEvent(tag) {
     /**
      * 获取ArrayMap中Key对应的Value
      */

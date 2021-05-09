@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
 
@@ -66,7 +64,7 @@ repositories {
 
 dependencies {
     //内核
-    api project(':core-arch')
+//    api project(':core-arch')
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
@@ -75,9 +73,9 @@ dependencies {
     //X-Material
     api "com.google.android.material:material:${X_MATERIAL}"
     //Hilt依赖注入
-    api "com.google.dagger:hilt-android:${HILT}"
-    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
+//    api "com.google.dagger:hilt-android:${HILT}"
+//    kapt "com.google.dagger:hilt-android-compiler:${HILT}"
     //Hilt-ViewModel依赖注入
-    api "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
-    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
+//    api "androidx.hilt:hilt-lifecycle-viewmodel:${X_HILT}"
+//    kapt "androidx.hilt:hilt-compiler:${X_HILT}"
 }

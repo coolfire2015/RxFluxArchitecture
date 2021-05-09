@@ -107,7 +107,6 @@ android {
 }
 dependencies {
     if (!isModuleAsApp.toBoolean()) {
-        implementation project(':module-demo1')
         implementation project(':module-wan')
     }
 }

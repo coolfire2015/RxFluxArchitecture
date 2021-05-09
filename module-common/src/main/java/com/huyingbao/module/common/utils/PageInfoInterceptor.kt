@@ -1,6 +1,7 @@
 package com.huyingbao.core.utils
 
 import android.net.Uri
+import com.huyingbao.module.common.utils.GsonUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 

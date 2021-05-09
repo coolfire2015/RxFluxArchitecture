@@ -7,7 +7,7 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.huyingbao.core.arch.FluxCallback
+import com.huyingbao.core.arch.FluxCallbacks
 import com.huyingbao.core.arch.dispatcher.FluxDispatcher
 import com.huyingbao.core.arch.dispatcher.FluxSubscriber
 
@@ -24,21 +24,21 @@ abstract class FluxAppStore(
     @CallSuper
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        Log.i(FluxCallback.TAG, "Subscribe Store : " + javaClass.simpleName)
+        Log.i(FluxCallbacks.TAG, "Subscribe Store : " + javaClass.simpleName)
         FluxDispatcher.subscribe(this)
     }
 
     @CallSuper
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
-        Log.i(FluxCallback.TAG, "Unsubscribe Store : " + javaClass.simpleName)
+        Log.i(FluxCallbacks.TAG, "Unsubscribe Store : " + javaClass.simpleName)
         FluxDispatcher.unsubscribe(this)
     }
 
     @CallSuper
     override fun onDestroy(owner: LifecycleOwner) {
         super.onDestroy(owner)
-        Log.i(FluxCallback.TAG, "Unsubscribe Store : " + javaClass.simpleName)
+        Log.i(FluxCallbacks.TAG, "Unsubscribe Store : " + javaClass.simpleName)
         FluxDispatcher.unsubscribe(this)
     }
 }

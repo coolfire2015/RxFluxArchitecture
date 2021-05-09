@@ -12,7 +12,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.huyingbao.core.arch.model.Change
 import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
+import com.huyingbao.core.arch.view.FluxView
+import com.huyingbao.core.base.common.fragment.BaseFragment
+import com.huyingbao.core.base.flux.fragment.BaseFragment
 import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
@@ -34,7 +36,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
+class ArticleListFragment : FluxView,BaseFragment() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 
@@ -57,7 +59,7 @@ class ArticleListFragment : BaseFluxFragment<ArticleStore>() {
     override fun getLayoutId() = R.layout.common_fragment_list
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.app_label_wan, false)
+//        setTitle(R.string.app_label_wan, false)
         initView()
     }
 

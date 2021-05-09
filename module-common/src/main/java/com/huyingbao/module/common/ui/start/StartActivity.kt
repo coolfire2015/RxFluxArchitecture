@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.huyingbao.core.base.common.activity.BaseCommonFragActivity
+import com.huyingbao.core.base.BaseFragActivity
 import com.huyingbao.module.common.app.CommonAppConstants
 
 /**
@@ -14,7 +14,7 @@ import com.huyingbao.module.common.app.CommonAppConstants
  * Created by liujunfeng on 2019/5/31.
  */
 @Route(path = CommonAppConstants.Router.StartActivity)
-class StartActivity : BaseCommonFragActivity() {
+class StartActivity : BaseFragActivity() {
     override fun createFragment(): Fragment? {
         return StartFragment.newInstance()
     }

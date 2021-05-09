@@ -14,7 +14,6 @@ import com.huyingbao.core.arch.dispatcher.FluxDispatcher
 import com.huyingbao.core.arch.dispatcher.FluxSubscriber
 import com.huyingbao.core.arch.view.FluxView
 import java.util.*
-import javax.inject.Inject
 import androidx.lifecycle.DefaultLifecycleObserver as LifecycleDefaultLifecycleObserver
 
 /**

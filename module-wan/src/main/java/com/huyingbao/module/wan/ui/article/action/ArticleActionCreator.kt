@@ -1,8 +1,6 @@
 package com.huyingbao.module.wan.ui.article.action
 
-import com.huyingbao.core.arch.action.ActionCreator
-import com.huyingbao.core.arch.action.ActionManager
-import com.huyingbao.core.arch.dispatcher.Dispatcher
+import com.huyingbao.core.arch.action.FluxActionCreator
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.wan.BuildConfig
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -19,10 +17,8 @@ import javax.inject.Named
  */
 @ActivityRetainedScoped
 class ArticleActionCreator @Inject constructor(
-        dispatcher: Dispatcher,
-        actionManager: ActionManager,
         @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
-) : ActionCreator(dispatcher, actionManager), ArticleAction {
+) : FluxActionCreator(), ArticleAction {
 
     override fun getArticleList(page: Int) {
         val rxAction = newAction(ArticleAction.GET_ARTICLE_LIST,

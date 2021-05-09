@@ -1,9 +1,9 @@
 package com.huyingbao.module.wan.ui.friend.store
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import com.huyingbao.core.arch.dispatcher.Dispatcher
 import com.huyingbao.core.arch.model.Action
-import com.huyingbao.core.arch.store.FragmentStore
+import com.huyingbao.core.arch.store.FluxStore
 import com.huyingbao.module.wan.model.WanResponse
 import com.huyingbao.module.wan.model.WebSite
 import com.huyingbao.module.wan.ui.friend.action.FriendAction
@@ -15,13 +15,13 @@ import javax.inject.Singleton
 /**
  * Created by liujunfeng on 2019/1/1.
  */
-@Singleton
+@ViewModelInject
 class FriendStore @Inject constructor(
-        dispatcher: Dispatcher
-) : FragmentStore(dispatcher) {
+) : FluxStore() {
     val webSiteListData = MutableLiveData<WanResponse<ArrayList<WebSite>>>()
 
     override fun onCleared() {
+        super.onCleared()
         webSiteListData.value = null
     }
 

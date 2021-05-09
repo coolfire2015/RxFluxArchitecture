@@ -1,6 +1,6 @@
 package com.huyingbao.core.arch.model
 
-import org.greenrobot.eventbus.EventBusEvent
+import org.greenrobot.eventbus.BusEvent
 
 /**
  * 操作异常通知，发送到[com.huyingbao.core.arch.view.FluxView]
@@ -10,9 +10,9 @@ import org.greenrobot.eventbus.EventBusEvent
 class Error private constructor(
         tag: String,
         val throwable: Throwable
-) : EventBusEvent(tag) {
+) : BusEvent(tag) {
     companion object {
-        fun newInstance(busEvent: EventBusEvent, throwable: Throwable): Error {
+        fun newInstance(busEvent: BusEvent, throwable: Throwable): Error {
             return Error(busEvent.tag, throwable)
                     .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }

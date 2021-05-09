@@ -1,6 +1,6 @@
 package com.huyingbao.core.arch.model
 
-import org.greenrobot.eventbus.EventBusEvent
+import org.greenrobot.eventbus.BusEvent
 
 /**
  * UI响应通知，发送到[com.huyingbao.core.arch.view.FluxView]
@@ -9,7 +9,7 @@ import org.greenrobot.eventbus.EventBusEvent
  */
 class Change private constructor(
         tag: String
-) : EventBusEvent(tag) {
+) : BusEvent(tag) {
     companion object {
         /**
          * 生成实例对象

@@ -9,8 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.*
+import org.greenrobot.eventbus.BusEvent
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.EventBusEvent
 import java.util.logging.Level
 
 

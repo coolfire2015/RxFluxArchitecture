@@ -1,6 +1,6 @@
 package com.huyingbao.core.arch.model
 
-import org.greenrobot.eventbus.EventBusEvent
+import org.greenrobot.eventbus.BusEvent
 
 /**
  * 操作进度通知，发送到[com.huyingbao.core.arch.view.FluxView]
@@ -12,9 +12,9 @@ import org.greenrobot.eventbus.EventBusEvent
 class Loading private constructor(
         tag: String,
         val isLoading: Boolean
-) : EventBusEvent(tag) {
+) : BusEvent(tag) {
     companion object {
-        fun newInstance(busEvent: EventBusEvent, isLoading: Boolean): Loading {
+        fun newInstance(busEvent: BusEvent, isLoading: Boolean): Loading {
             return Loading(busEvent.tag, isLoading)
                     .apply { isGlobalCatch = busEvent.isGlobalCatch }
         }

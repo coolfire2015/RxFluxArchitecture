@@ -2,10 +2,10 @@ package com.huyingbao.module.common.ui.start
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
-import com.huyingbao.core.base.common.fragment.BaseCommonFragment
+import com.huyingbao.core.base.common.fragment.BaseFragment
+import com.huyingbao.core.utils.AndroidUtils
 import com.huyingbao.module.common.R
 import com.huyingbao.module.common.app.CommonAppConstants
-import com.huyingbao.module.common.utils.AndroidUtils
 
 
 /**

@@ -3,27 +3,16 @@ package com.huyingbao.module.wan.ui.article.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.huyingbao.core.arch.model.Change
-import com.huyingbao.core.arch.model.Error
-import com.huyingbao.core.arch.model.Loading
-import com.huyingbao.core.base.flux.fragment.BaseFluxFragment
-import com.huyingbao.core.utils.setTitle
-import com.huyingbao.module.common.app.CommonAppAction
+import com.huyingbao.core.arch.view.FluxView
+import com.huyingbao.core.base.common.fragment.BaseFragment
 import com.huyingbao.module.common.utils.RecyclerItemClickListener
-import com.huyingbao.module.common.utils.scrollToTop
-import com.huyingbao.module.common.utils.showCommonError
-import com.huyingbao.module.common.utils.startWebActivity
 import com.huyingbao.module.wan.R
-import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
 import com.huyingbao.module.wan.ui.article.adapter.BannerAdapter
 import com.huyingbao.module.wan.ui.article.store.ArticleStore
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.Subscribe
-
 import java.util.*
 import javax.inject.Inject
 
@@ -31,7 +20,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class BannerFragment : BaseFluxFragment<ArticleStore>() {
+class BannerFragment : FluxView,BaseFragment() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 
@@ -50,12 +39,12 @@ class BannerFragment : BaseFluxFragment<ArticleStore>() {
         fun newInstance() = BannerFragment()
     }
 
-    override val store: ArticleStore? by activityViewModels()
+    override val store: ArticleStore by activityViewModels()
 
     override fun getLayoutId() = R.layout.common_fragment_list
 
     override fun afterCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.wan_label_banner, true)
+//        setTitle(R.string.wan_label_banner, true)
         initView()
     }
 
