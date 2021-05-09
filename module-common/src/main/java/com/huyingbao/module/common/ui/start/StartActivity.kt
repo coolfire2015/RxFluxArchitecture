@@ -23,11 +23,12 @@ class StartActivity : BaseFragActivity() {
         //隐藏ActionBar
         supportActionBar?.hide()
         //全屏
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or// 应用的主体内容占用系统status bar的空间
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or// 应用的主体内容占用系统status bar的空间
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or // 应用的主体内容占navigation bar的空间,同样占用status bar空间
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or// 隐藏navigation bar
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY// 沉浸式响应
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or// 应用的主体内容占用系统status bar的空间
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or// 应用的主体内容占用系统status bar的空间
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or // 应用的主体内容占navigation bar的空间,同样占用status bar空间
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or// 隐藏navigation bar
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY// 沉浸式响应
         // status bar颜色设置为透明
         window.statusBarColor = Color.TRANSPARENT
     }

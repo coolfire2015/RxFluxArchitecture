@@ -10,7 +10,6 @@ import com.huyingbao.module.wan.ui.friend.action.FriendAction
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by liujunfeng on 2019/1/1.

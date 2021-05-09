@@ -63,27 +63,30 @@ class ArticleActionCreatorTest2() {
 //                emit(retrofit().create(ArticleApi::class.java).getArticleList(1))
                 emit(1)
             }
-                    .flowOn(Dispatchers.IO)
-                    // 调用开始
-                    .onStart {
-                        dispatcher.postLoading(Loading.newInstance(action, false))
-                    }
+                .flowOn(Dispatchers.IO)
+                // 调用开始
+                .onStart {
+                    dispatcher.postLoading(Loading.newInstance(action, false))
+                }
 //                // 操作进行中
-                    .onEach {
-                        dispatcher.postAction(action)
-                        action.setResponse(it)
-                    }
-                    // 调用结束
-                    .onCompletion {
-                        dispatcher.postLoading(Loading.newInstance(action, true))
-                    }
-                    // 捕获异常
-                    .catch {
-                        // 操作异常，打印错误日志
-                        EventBus.getDefault().logger.log(Level.SEVERE, "ActionCreator onError:${it.message}")
-                    }
-                    // 指定主线程执行collect操作
-                    .launchIn(MainScope())
+                .onEach {
+                    dispatcher.postAction(action)
+                    action.setResponse(it)
+                }
+                // 调用结束
+                .onCompletion {
+                    dispatcher.postLoading(Loading.newInstance(action, true))
+                }
+                // 捕获异常
+                .catch {
+                    // 操作异常，打印错误日志
+                    EventBus.getDefault().logger.log(
+                        Level.SEVERE,
+                        "ActionCreator onError:${it.message}"
+                    )
+                }
+                // 指定主线程执行collect操作
+                .launchIn(MainScope())
             Mockito.verify(dispatcher, times(1)).postAction(any())
             Mockito.verify(dispatcher, times(2)).postLoading(any())
         }

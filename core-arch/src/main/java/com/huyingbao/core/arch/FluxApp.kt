@@ -30,7 +30,7 @@ abstract class FluxApp : Application() {
         } catch (e: ClassNotFoundException) {
             if (Log.isLoggable(FluxCallbacks.TAG, Log.WARN)) {
                 Log.w(
-                        FluxCallbacks.TAG, "Failed to find AppLifecycleOwner. You should include an"
+                    FluxCallbacks.TAG, "Failed to find AppLifecycleOwner. You should include an"
                             + " annotationProcessor compile dependency on com.github.coolfire2015.RxFluxArchitecture:core-arch-processor"
                             + " in your application and a @FluxAppObserver annotated FluxAppLifecycle subclass"
                             + " and a @FluxAppOwner annotated FluxApp implementation"

@@ -12,8 +12,8 @@ import org.greenrobot.eventbus.BusEvent
  * Created by liujunfeng on 2019/1/1.
  */
 class Action private constructor(
-        tag: String,
-        val data: ArrayMap<String, Any>
+    tag: String,
+    val data: ArrayMap<String, Any>
 ) : BusEvent(tag) {
     /**
      * 获取ArrayMap中Key对应的Value

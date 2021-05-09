@@ -19,8 +19,8 @@ class WanAppLifecycle @Inject constructor() : AppLifecycleObserver() {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
         EventBus.builder()
-                .addIndex(WanEventBusIndex())
-                .eventInheritance(false)
+            .addIndex(WanEventBusIndex())
+            .eventInheritance(false)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

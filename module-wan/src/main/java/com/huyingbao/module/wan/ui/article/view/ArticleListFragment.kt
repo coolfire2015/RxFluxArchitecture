@@ -14,14 +14,11 @@ import com.huyingbao.core.arch.model.Error
 import com.huyingbao.core.arch.model.Loading
 import com.huyingbao.core.arch.view.FluxView
 import com.huyingbao.core.base.common.fragment.BaseFragment
-import com.huyingbao.core.base.flux.fragment.BaseFragment
-import com.huyingbao.core.utils.setTitle
 import com.huyingbao.module.common.app.CommonAppAction
 import com.huyingbao.module.common.app.CommonAppConstants
 import com.huyingbao.module.common.utils.RecyclerItemClickListener
 import com.huyingbao.module.common.utils.scrollToTop
 import com.huyingbao.module.common.utils.showCommonError
-import com.huyingbao.module.common.utils.startWebActivity
 import com.huyingbao.module.wan.R
 import com.huyingbao.module.wan.ui.article.action.ArticleAction
 import com.huyingbao.module.wan.ui.article.action.ArticleActionCreator
@@ -36,7 +33,7 @@ import javax.inject.Inject
  * Created by liujunfeng on 2019/1/1.
  */
 @AndroidEntryPoint
-class ArticleListFragment : FluxView,BaseFragment() {
+class ArticleListFragment : FluxView, BaseFragment() {
     @Inject
     lateinit var articleActionCreator: ArticleActionCreator
 

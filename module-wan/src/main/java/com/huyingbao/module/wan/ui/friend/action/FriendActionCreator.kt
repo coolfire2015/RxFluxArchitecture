@@ -13,11 +13,13 @@ import javax.inject.Named
  */
 @FragmentScoped
 class FriendActionCreator @Inject constructor(
-        @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
+    @param:Named(BuildConfig.MODULE_NAME) private val retrofit: Retrofit
 ) : FluxActionCreator(), FriendAction {
     override fun getFriendList() {
         val rxAction = newAction(FriendAction.GET_FRIEND_LIST)
         rxAction.isGlobalCatch = false
-        postHttpLoadingAction(rxAction, flow { emit(retrofit.create(FriendApi::class.java).getFriendList()) })
+        postHttpLoadingAction(
+            rxAction,
+            flow { emit(retrofit.create(FriendApi::class.java).getFriendList()) })
     }
 }

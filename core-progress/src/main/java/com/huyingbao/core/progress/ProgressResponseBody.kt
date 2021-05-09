@@ -11,7 +11,8 @@ import java.io.IOException
 /**
  * 使用EventBus发送进度变化通知
  */
-class ProgressResponseBody(private val mResponseBody: ResponseBody?, tag: String?) : ResponseBody() {
+class ProgressResponseBody(private val mResponseBody: ResponseBody?, tag: String?) :
+    ResponseBody() {
     private val mRefreshTime = 120
     private val mRxProgress: RxProgress
 
