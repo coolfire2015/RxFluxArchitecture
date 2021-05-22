@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_label_article">文章</string>
+    <string name="history_label_friend">常用网站</string>
+    <string name="history_label_banner">横幅</string>
+    <string name="history_label_gan">干货集中营</string>
+    <string name="history_tag_top">置顶</string>
+    <string name="history_tag_fresh">新</string>
+</resources>
