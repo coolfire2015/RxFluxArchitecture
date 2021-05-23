@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
 
@@ -66,7 +67,6 @@ dependencies {
     //X-Lifecycle
     api "androidx.lifecycle:lifecycle-livedata-ktx:${X_LIFECYCLE}"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:${X_LIFECYCLE}"
-    api "androidx.lifecycle:lifecycle-extensions:${X_LIFECYCLE}"
     api "androidx.lifecycle:lifecycle-common-java8:${X_LIFECYCLE}"
     //Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KOTLIN_VERSION}"

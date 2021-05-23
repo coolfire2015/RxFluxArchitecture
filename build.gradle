@@ -13,6 +13,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
         //Dagger-Hilt支持
         classpath "com.google.dagger:hilt-android-gradle-plugin:${HILT}"
+        //Maven支持
+        classpath "com.github.dcendents:android-maven-gradle-plugin:${ANDROID_MAVEN_GRADLE_PLUGIN}"
     }
 }
 
