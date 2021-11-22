@@ -186,6 +186,4 @@ dependencies {
     implementation "com.tencent:mmkv:${MMKV}"
     //Bug统计Bugly
     implementation "com.tencent.bugly:crashreport:${BUGLY}"
-    //内存泄露分析 LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY}"
 }
