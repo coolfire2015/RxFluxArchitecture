@@ -16,11 +16,6 @@ android {
         //关闭检索的功能
         disable 'GoogleAppIndexingWarning'
     }
-    //Dex分包
-    dexOptions {
-        jumboMode = true
-        javaMaxHeapSize "4g"//增加java堆内存大小
-    }
     //Java1.8支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -61,12 +56,6 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives sourcesJar
-}
-
-//仓库
-repositories {
-    //本地仓库,添加aar支持
-    flatDir { dirs 'libs' }
 }
 
 //Gradle可以缓存SNAPSHOT构建，以确保Gradle始终选择构建的“最新”版本：

@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.dcendents.android-maven'
 
 group = "com.github.coolfire2015"
 
@@ -57,18 +56,10 @@ artifacts {
     archives sourcesJar
 }
 
-//仓库
-repositories {
-    //本地仓库,添加aar支持
-    flatDir { dirs 'libs' }
-}
-
 dependencies {
     //X-Navigation
     api "androidx.navigation:navigation-ui-ktx:${X_NAVIGATION}"
     api "androidx.navigation:navigation-fragment-ktx:${X_NAVIGATION}"
-    //X-MultiDex
-    api "androidx.multidex:multidex:${X_MULTIDEX}"
     //X-Material
     api "com.google.android.material:material:${X_MATERIAL}"
 }

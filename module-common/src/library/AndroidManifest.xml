@@ -7,7 +7,8 @@
         android:supportsRtl="true">
         <activity
             android:name="com.huyingbao.module.common.ui.start.StartActivity"
-            android:theme="@style/AppTheme.Loading">
+            android:theme="@style/AppTheme.Loading"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
