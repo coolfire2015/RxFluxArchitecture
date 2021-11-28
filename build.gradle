@@ -11,8 +11,10 @@ buildscript {
         classpath "com.android.tools.build:gradle:${BUILD_GRADLE}"
         //Kotlin支持
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
-        //Dagger-Hilt支持
+        //Hilt支持
         classpath "com.google.dagger:hilt-android-gradle-plugin:${HILT}"
+        //Navigation Safe Args支持
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${X_NAVIGATION}"
     }
 }
 
