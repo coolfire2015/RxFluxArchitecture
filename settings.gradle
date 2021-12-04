@@ -23,6 +23,6 @@ include ':core-base'
 
 include ':module-app'
 include ':module-common'
-//include ':module-wan'
+include ':module-wan'
 include ':module-login'
-//include ':module-history'
+include ':module-history'
