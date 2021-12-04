@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.huyingbao.module.wan.WanApplication"
+        android:name="com.huyingbao.module.login.WanApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_label_wan"
@@ -13,6 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.huyingbao.module.wan.ui.article.view.ArticleActivity" />
+        <activity android:name="com.huyingbao.module.login.ui.article.view.ArticleActivity" />
     </application>
 </manifest>

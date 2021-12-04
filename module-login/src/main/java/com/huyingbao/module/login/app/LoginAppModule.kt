@@ -1,10 +1,6 @@
-package com.huyingbao.module.wan.app
+package com.huyingbao.module.login.app
 
-
-import android.app.Application
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.huyingbao.module.wan.BuildConfig
+import com.huyingbao.module.login.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,20 +12,15 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 /**
- * Created by liujunfeng on 2019/1/1.
+ * Created by liujunfeng on 2021/12/4.
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object WanAppModule {
+object LoginAppModule {
     /**
      * Api根路径
      */
     const val BASE_API = "https://www.wanandroid.com/"
-
-    /**
-     * 需要创建的数据库名字
-     */
-    const val DATABASE_NAME = "wan-db"
 
     /**
      * 提供[Retrofit]单例对象
@@ -45,21 +36,5 @@ object WanAppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(builder.build())
             .build()
-    }
-
-    /**
-     * 提供[RoomDatabase]单例对象，获得创建数据库的实例：
-     */
-    @Singleton
-    @Provides
-    fun provideDataBase(application: Application): WanAppDatabase {
-        val databaseBuilder = Room.databaseBuilder(
-            application,
-            WanAppDatabase::class.java,
-            DATABASE_NAME
-        )
-            //允许Room破坏性地重新创建数据库表。
-            .fallbackToDestructiveMigration()
-        return databaseBuilder.build()
     }
 }

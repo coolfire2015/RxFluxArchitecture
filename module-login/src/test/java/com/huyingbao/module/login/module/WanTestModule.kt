@@ -1,13 +1,13 @@
-package com.huyingbao.module.wan.module
+package com.huyingbao.module.login.module
 
 import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.GsonBuilder
 import com.huyingbao.module.common.app.CommonAppModule
-import com.huyingbao.module.wan.BuildConfig
-import com.huyingbao.module.wan.app.WanAppDatabase
-import com.huyingbao.module.wan.app.WanAppModule
+import com.huyingbao.module.login.BuildConfig
+import com.huyingbao.module.login.app.WanAppDatabase
+import com.huyingbao.module.login.app.WanAppModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
