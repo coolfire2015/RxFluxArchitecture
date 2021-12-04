@@ -1,3 +1,14 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
+
 include ':core-arch'
 include ':core-arch-annotations'
 include ':core-arch-processor'
@@ -12,5 +23,6 @@ include ':core-base'
 
 include ':module-app'
 include ':module-common'
-include ':module-wan'
-include ':module-history'
+//include ':module-wan'
+include ':module-login'
+//include ':module-history'

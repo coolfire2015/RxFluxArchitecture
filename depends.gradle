@@ -24,6 +24,7 @@ android {
     //Kotlin Java1.8支持
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+        useIR = true
     }
     //构建功能
     buildFeatures {
@@ -45,6 +46,16 @@ android {
     //注解编译参数设置,Hilt需要开启
     kapt {
         correctErrorTypes true
+    }
+    //Compose支持
+    composeOptions {
+        kotlinCompilerExtensionVersion X_COMPOSE
+        kotlinCompilerVersion '1.6.0'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
