@@ -211,7 +211,7 @@ dependencies {
     //日志展示
     implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //浏览器内核X5
-    implementation "com.tencent.tbs.tbssdk:sdk:${TBSSDK}"
+    implementation "com.tencent.tbs:tbssdk:${TBSSDK}"
     //键值对存储Mmkv
     implementation "com.tencent:mmkv:${MMKV}"
     //Bug统计Bugly
